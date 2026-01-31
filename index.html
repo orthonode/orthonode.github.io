@@ -9,29 +9,25 @@
     <meta name="description" content="Orthonode™ builds zero-trust hardware gateways for DePIN. Decoupling hardware truth from cloud dependencies using the Nexus Protocol. Engineered in India.">
     <meta name="keywords" content="Orthonode, Nexus Protocol, DePIN, Zero Trust, Edge Computing, Hivemapper Bee, IoTeX, Hardware Verification, Infrastructure Labs, Bhopal, NIC 72900">
     <meta name="author" content="Orthonode Infrastructure Labs Private Limited">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://orthonode.xyz/">
-
     <meta name="geo.region" content="IN-MP">
     <meta name="geo.placename" content="Bhopal">
     <meta name="geo.position" content="23.2599;77.4126">
     <meta name="ICBM" content="23.2599, 77.4126">
+    <link rel="canonical" href="https://orthonode.xyz/">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Orthonode Infrastructure Labs">
     <meta property="og:url" content="https://orthonode.xyz/">
     <meta property="og:title" content="Orthonode™ | Sovereign Hardware Infrastructure">
-    <meta property="og:description" content="R&D Lab building the Zero-Trust execution layer for Decentralized Physical Infrastructure Networks (DePIN).">
+    <meta property="og:description" content="R&D Lab building the Zero-Trust execution layer for DePIN.">
     <meta property="og:image" content="https://orthonode.xyz/orthonode-banner.png">
-    
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@OrthonodeSys">
-    <meta name="twitter:creator" content="@OrthonodeSys">
-    <meta name="twitter:title" content="Orthonode™ | Zero-Trust Edge">
     <meta name="twitter:image" content="https://orthonode.xyz/orthonode-banner.png">
 
     <link rel="icon" type="image/png" href="https://orthonode.xyz/logo.png">
     <link rel="apple-touch-icon" href="https://orthonode.xyz/logo.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -47,34 +43,19 @@
           "alternateName": "Orthonode Systems",
           "url": "https://orthonode.xyz",
           "logo": "https://orthonode.xyz/logo.png",
-          "foundingDate": "2024",
-          "description": "Research and development of zero-trust hardware protocols for DePIN.",
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "Bhopal",
             "addressRegion": "Madhya Pradesh",
             "postalCode": "462001",
             "addressCountry": "IN"
-          },
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "email": "infrastructure@orthonode.xyz",
-            "contactType": "technical support",
-            "areaServed": "Global",
-            "availableLanguage": "English"
-          },
-          "sameAs": [
-            "https://twitter.com/OrthonodeSys",
-            "https://github.com/arhantbarmate",
-            "https://www.reddit.com/user/Automatic_Stick_3881/"
-          ]
+          }
         }
       ]
     }
     </script>
 
     <style>
-        /* --- CORE DESIGN SYSTEM --- */
         :root {
             --bg: #030303;
             --surface: rgba(15, 15, 15, 0.7);
@@ -98,7 +79,7 @@
             line-height: 1.6;
         }
 
-        /* --- DYNAMIC BACKGROUND --- */
+        /* DYNAMIC FX */
         #matrix-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.25; }
         .overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
@@ -106,99 +87,64 @@
             z-index: 0;
         }
 
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3 { color: #fff; font-weight: 800; letter-spacing: -1px; }
-        .mono { font-family: var(--font-code); letter-spacing: -0.5px; }
-        .gradient-text {
-            background: linear-gradient(180deg, #fff 0%, #a1a1aa 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        /* SILVER METAL TEXT */
+        .silver-metal {
+            background: linear-gradient(to bottom, #ffffff 0%, #e2e2e2 25%, #a1a1a1 50%, #cfcfcf 75%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5));
+            font-weight: 800;
         }
-        
+
+        h1, h2, h3 { color: #fff; letter-spacing: -1px; }
+        .mono { font-family: var(--font-code); letter-spacing: -0.5px; }
         .badge { 
             font-family: var(--font-code); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; 
             padding: 4px 8px; border: 1px solid var(--border); border-radius: 4px; display: inline-block; 
             margin-bottom: 1rem; color: var(--accent); background: rgba(59, 130, 246, 0.08);
         }
 
-        /* --- LAYOUT --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
+        .hero { min-height: 85vh; display: flex; flex-direction: column; justify-content: center; padding-top: 4rem; }
+        .hero h1 { font-size: clamp(3.5rem, 9vw, 6.5rem); line-height: 0.9; margin-bottom: 1.5rem; text-transform: uppercase; }
         
-        /* Hero */
-        .hero { 
-            min-height: 85vh; display: flex; flex-direction: column; justify-content: center; 
-            padding-top: 4rem;
-        }
-        .hero h1 {
-            font-size: clamp(3.5rem, 9vw, 6.5rem); line-height: 0.9; margin-bottom: 1.5rem;
-            text-transform: uppercase;
-        }
-        
-        /* Lab Intro Box */
-        .lab-intro {
-            border-left: 2px solid var(--accent);
-            padding-left: 1.5rem;
-            margin-top: 2rem;
-            max-width: 650px;
-        }
+        .lab-intro { border-left: 2px solid var(--accent); padding-left: 1.5rem; margin-top: 2rem; max-width: 650px; }
         .lab-intro p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 0.5rem; }
-        .lab-intro strong { color: #fff; font-weight: 600; }
 
-        /* Grid System */
         .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; margin-bottom: 6rem; }
-        
         .card {
             background: var(--surface); border: 1px solid var(--border);
             padding: 2.5rem; border-radius: 4px; backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
-        .card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.2); background: var(--surface-hover); }
+        .card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.2); }
         .card.full { grid-column: span 12; }
         .card.half { grid-column: span 6; }
         
-        /* Terminal */
         .terminal-window {
             background: #000; border: 1px solid #222; padding: 1.5rem; font-family: var(--font-code);
             font-size: 0.8rem; height: 180px; overflow-y: auto; color: #aaa; margin-top: 1.5rem;
-            border-radius: 2px;
         }
         .log-line { margin-bottom: 6px; display: flex; }
-        .log-ts { color: #444; margin-right: 12px; min-width: 80px; }
-        .log-msg { color: #ccc; }
+        .log-ts { color: #444; margin-right: 12px; }
         .log-success { color: var(--success); }
-        .log-warn { color: #fbbf24; }
 
-        /* Buttons */
         .btn {
             display: inline-flex; align-items: center; justify-content: center;
             padding: 14px 28px; background: #fff; color: #000; font-weight: 700;
-            text-decoration: none; border-radius: 2px; transition: all 0.2s; font-size: 0.9rem;
-            cursor: pointer; border: none; font-family: var(--font-code); text-transform: uppercase; letter-spacing: 0.5px;
+            text-decoration: none; border-radius: 2px; transition: 0.2s; font-family: var(--font-code); text-transform: uppercase;
             width: 100%; margin-top: 1.5rem;
         }
-        .btn:hover { background: #e2e2e2; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(255,255,255,0.1); }
+        .btn:hover { background: #e2e2e2; transform: translateY(-1px); }
         .btn-outline { background: transparent; color: #fff; border: 1px solid var(--border); }
-        .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.05); color: #fff; }
 
-        /* Footer */
-        footer { 
-            border-top: 1px solid var(--border); padding: 4rem 0; margin-top: auto; 
-            background: rgba(0,0,0,0.4);
-        }
+        footer { border-top: 1px solid var(--border); padding: 4rem 0; background: rgba(0,0,0,0.4); }
         .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
         .footer-links a { display: block; color: var(--text-dim); text-decoration: none; margin-bottom: 0.8rem; transition: 0.3s; font-family: var(--font-code); font-size: 0.9rem; }
-        .footer-links a:hover { color: #fff; padding-left: 5px; }
-        
-        .email-display {
-            font-family: var(--font-code); color: #fff; background: #111; padding: 10px 15px; 
-            border: 1px solid var(--border); display: inline-block; margin-top: 10px; font-size: 0.85rem;
-        }
+        .footer-links a:hover { color: #fff; }
+        .email-display { font-family: var(--font-code); color: #fff; background: #111; padding: 10px 15px; border: 1px solid var(--border); display: inline-block; margin-top: 10px; }
 
-        /* Mobile */
-        @media (max-width: 900px) {
-            .card.half { grid-column: span 12; }
-            .hero h1 { font-size: 3.2rem; }
-            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-        }
+        @media (max-width: 900px) { .card.half { grid-column: span 12; } .hero h1 { font-size: 3.2rem; } .footer-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -208,35 +154,25 @@
 
     <div class="container">
         <section class="hero">
-            <img src="https://github.com/arhantbarmate/orthonode/blob/main/logo.png?raw=true" alt="Orthonode Logo" style="width: 100px; opacity: 0.9; margin-bottom: 2rem;">
+            <img src="https://github.com/arhantbarmate/orthonode/blob/main/logo.png?raw=true" alt="Orthonode Logo" style="width: 180px; height: auto; margin-bottom: 2.5rem; filter: drop-shadow(0 0 15px rgba(255,255,255,0.15));">
             
             <div class="mono" style="color: var(--accent); margin-bottom: 1rem;">[ SYSTEM_ONLINE_v1.4.7 ]</div>
-            <h1 class="gradient-text">ORTHONODE<br>SYSTEMS™</h1>
+            <h1 class="silver-metal">ORTHONODE<br>SYSTEMS™</h1>
             
             <div class="lab-intro">
-                <p>
-                    <strong>We are an infrastructure research lab</strong> engineered to solve the "Oracle Problem" for hardware. 
-                </p>
-                <p>
-                    Existing DePIN networks rely on blind trust. Orthonode replaces this with <strong>cryptographic verification at the edge</strong>. We build the "Verify-then-Execute" layer that ensures physical reality matches digital rewards.
-                </p>
+                <p><strong>Infrastructure Research Lab</strong> solving the "Oracle Problem" for hardware.</p>
+                <p>Existing DePIN networks rely on blind trust. Orthonode replaces this with <strong>cryptographic verification at the edge</strong>. We build the "Verify-then-Execute" layer ensuring physical reality matches digital rewards.</p>
             </div>
         </section>
 
         <div class="grid">
-            
             <div class="card full">
                 <span class="badge">CORE_ARCHITECTURE</span>
                 <h2>Nexus Protocol (Prototype)</h2>
-                <p style="margin: 1rem 0; color: var(--text-dim); max-width: 800px;">
-                    The backbone of sovereign ingress. Nexus establishes a persistent <strong>Cloudflare Zero-Trust Tunnel</strong> between edge hardware and the controller, ensuring that no unverified data ever touches the consensus layer.
-                </p>
-                
+                <p style="margin: 1rem 0; color: var(--text-dim);">Nexus establishes a persistent <strong>Cloudflare Zero-Trust Tunnel</strong> between edge hardware and the controller, ensuring unverified data never touches the consensus layer.</p>
                 <div class="terminal-window" id="terminal">
-                    <div class="log-line"><span class="log-ts">[00:00:00]</span><span class="log-msg">Orthonode Daemon initialized...</span></div>
-                    <div class="log-line"><span class="log-ts">[00:00:01]</span><span class="log-msg">Waiting for manual trigger...</span></div>
+                    <div class="log-line"><span class="log-ts">[00:00:00]</span><span class="log-msg">Daemon initialized... Standby.</span></div>
                 </div>
-                
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <button class="btn btn-outline" onclick="runSimulation()">Run Verification Sim</button>
                     <a href="https://github.com/arhantbarmate/nexus-core" class="btn">Access Repository -></a>
@@ -244,137 +180,81 @@
             </div>
 
             <div class="card half">
-                <span class="badge" style="border-color: #fbbf24; color: #fbbf24; background: rgba(251, 191, 36, 0.08);">HARDWARE_TARGET</span>
+                <span class="badge" style="border-color: #fbbf24; color: #fbbf24;">HARDWARE_TARGET</span>
                 <h3>Hivemapper Bee Runtime</h3>
-                <p style="font-size: 0.9rem; margin-top: 1rem; color: var(--text-dim);">
-                    Edge-based vibration entropy filtering for ARMv8 dashcams. Prevents GPS spoofing by correlating accelerometer noise with velocity vectors.
-                </p>
-                <a href="https://github.com/arhantbarmate/nexus-core/blob/main/hivemapper-bee-runtime/BENCHMARKS.md" class="btn btn-outline" style="font-size: 0.8rem; margin-top: 2rem;">View Benchmarks</a>
+                <p style="font-size: 0.9rem; color: var(--text-dim);">Edge-based vibration entropy filtering for ARMv8 dashcams. Correlates IMU noise with velocity to kill GPS spoofing.</p>
+                <a href="https://github.com/arhantbarmate/nexus-core/blob/main/hivemapper-bee-runtime/BENCHMARKS.md" class="btn btn-outline" style="font-size: 0.8rem;">View Benchmarks</a>
             </div>
 
             <div class="card half">
-                <span class="badge" style="border-color: var(--success); color: var(--success); background: rgba(16, 185, 129, 0.08);">NETWORK_INTEGRITY</span>
+                <span class="badge" style="border-color: var(--success); color: var(--success);">INTEGRITY_STATUS</span>
                 <h3>System Status</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
-                    <div>
-                        <div class="mono" style="font-size: 0.7rem; color: #666;">INGRESS LAYER</div>
-                        <div style="color: #fff; font-weight: 600;">Cloudflare ZT</div>
-                    </div>
-                    <div>
-                        <div class="mono" style="font-size: 0.7rem; color: #666;">LATENCY</div>
-                        <div style="color: var(--success);">24ms (Optimized)</div>
-                    </div>
-                    <div>
-                        <div class="mono" style="font-size: 0.7rem; color: #666;">UPTIME</div>
-                        <div style="color: #fff; font-weight: 600;">99.99%</div>
-                    </div>
-                    <div>
-                        <div class="mono" style="font-size: 0.7rem; color: #666;">VERSION</div>
-                        <div style="color: #fff; font-weight: 600;">v1.4.7-Stable</div>
-                    </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                    <div><div class="mono" style="font-size: 0.7rem; color: #666;">INGRESS</div><div style="color: #fff;">Cloudflare ZT</div></div>
+                    <div><div class="mono" style="font-size: 0.7rem; color: #666;">LATENCY</div><div style="color: var(--success);">24ms</div></div>
                 </div>
             </div>
-
         </div>
 
         <footer>
             <div class="footer-grid">
                 <div>
-                    <h4 style="color: #fff; margin-bottom: 1rem;">ORTHONODE SYSTEMS™</h4>
-                    <p style="font-size: 0.85rem; color: var(--text-dim); max-width: 350px; margin-bottom: 1.5rem;">
-                        Orthonode Infrastructure Labs Private Limited (NIC 72900).<br>
-                        Engineered in Madhya Pradesh, India.
-                    </p>
-                    <div style="margin-bottom: 0.5rem; font-size: 0.8rem; color: #666;">DIRECT CONTACT:</div>
+                    <h4 style="color: #fff;">ORTHONODE SYSTEMS™</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-dim); margin: 1rem 0;">Orthonode Infrastructure Labs Private Limited (NIC 72900). Bhopal, MP, India.</p>
                     <div class="email-display">infrastructure@orthonode.xyz</div>
                 </div>
-                
                 <div class="footer-links">
-                    <div style="margin-bottom: 1rem; font-size: 0.8rem; color: #666;">OPERATOR CHANNELS</div>
                     <a href="https://github.com/arhantbarmate">GitHub / arhantbarmate</a>
                     <a href="https://twitter.com/OrthonodeSys">Twitter / @OrthonodeSys</a>
                     <a href="https://www.reddit.com/user/Automatic_Stick_3881/">Reddit / u/Automatic_Stick_3881</a>
-                    <a href="mailto:infrastructure@orthonode.xyz" style="color: var(--accent); margin-top: 1rem;">Email Us -></a>
+                    <a href="privacy.html" style="opacity: 0.5;">Privacy Policy</a>
+                    <a href="terms.html" style="opacity: 0.5;">Terms of Service</a>
                 </div>
-            </div>
-            
-            <div style="margin-top: 3rem; pt: 2rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.75rem; color: #444;" class="mono">
-                [ID: ZERO_TRUST_LAB_A1] // ALL SYSTEMS OPERATIONAL // © 2026
             </div>
         </footer>
     </div>
 
     <script>
-        // --- MATRIX RAIN EFFECT ---
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
-
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
-
-        // Resize listener
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            columns = Math.floor(width / 20);
-            drops = Array(columns).fill(1);
-        });
-
         const chars = "010101XYZ_ORTHONODE_NEXUS";
         let columns = Math.floor(width / 20);
         let drops = Array(columns).fill(1);
 
         function drawMatrix() {
-            ctx.fillStyle = 'rgba(3, 3, 3, 0.05)'; // Fade effect
+            ctx.fillStyle = 'rgba(3, 3, 3, 0.05)'; 
             ctx.fillRect(0, 0, width, height);
-            
-            ctx.fillStyle = '#0f0'; // Text color (overridden below)
             ctx.font = '12px JetBrains Mono';
-
             for (let i = 0; i < drops.length; i++) {
                 const text = chars[Math.floor(Math.random() * chars.length)];
-                
-                // Randomize colors for "glitch" feel
-                const isWhite = Math.random() > 0.98;
-                ctx.fillStyle = isWhite ? '#fff' : 'rgba(59, 130, 246, 0.3)'; // Blue-ish matrix
-
+                ctx.fillStyle = Math.random() > 0.98 ? '#fff' : 'rgba(59, 130, 246, 0.3)'; 
                 ctx.fillText(text, i * 20, drops[i] * 20);
-
-                if (drops[i] * 20 > height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
+                if (drops[i] * 20 > height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
             requestAnimationFrame(drawMatrix);
         }
         drawMatrix();
 
-        // --- TERMINAL SIMULATION ---
-        const term = document.getElementById('terminal');
-        const logs = [
-            { t: 200, m: "> CONNECTING TO CLOUDFLARE EDGE..." },
-            { t: 600, m: "> TUNNEL_ID: 8a9f-4b2c-9d1e established." },
-            { t: 1100, m: "> VERIFYING HARDWARE SIGNATURE...", c: "log-warn" },
-            { t: 1800, m: "> ARMv8 CORTEX-A53 DETECTED." },
-            { t: 2400, m: "> VIBRATION ENTROPY CHECK: PASS", c: "log-success" },
-            { t: 2800, m: "> ZERO-TRUST INGRESS: OPEN", c: "log-success" },
-            { t: 3000, m: "> LISTENING FOR PAYLOADS..." }
-        ];
-
         function runSimulation() {
-            term.innerHTML = ''; 
-            let delay = 0;
+            const term = document.getElementById('terminal');
+            term.innerHTML = '';
+            const logs = [
+                { t: 200, m: "> CONNECTING TO CLOUDFLARE EDGE..." },
+                { t: 800, m: "> ARMv8 CORTEX-A53 DETECTED." },
+                { t: 1500, m: "> VIBRATION ENTROPY: VERIFIED", c: "log-success" },
+                { t: 2000, m: "> INGRESS SECURED." }
+            ];
             logs.forEach(log => {
-                delay += (log.t - (delay * 0.5)); 
                 setTimeout(() => {
-                    const now = new Date();
-                    const ts = now.toISOString().split('T')[1].split('.')[0];
                     const div = document.createElement('div');
                     div.className = 'log-line';
-                    div.innerHTML = `<span class="log-ts">[${ts}]</span><span class="log-msg ${log.c || ''}">${log.m}</span>`;
+                    div.innerHTML = `<span class="log-msg ${log.c || ''}">${log.m}</span>`;
                     term.appendChild(div);
                     term.scrollTop = term.scrollHeight;
-                }, delay);
+                }, log.t);
             });
         }
     </script>
