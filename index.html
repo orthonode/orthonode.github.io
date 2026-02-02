@@ -7,17 +7,18 @@
     
     <title>Orthonode Labs — Physical Verification Infrastructure</title>
     <meta name="description" content="Orthonode Infrastructure Labs builds OAP (Orthonode Assurance Platform) — the deterministic verification layer for logistics and DePIN.">
-    <meta name="note" content="Coreframe Systems (Infrastructure Division) has successfully transitioned to Orthonode Infrastructure Labs. All protocol research and OAP operations have migrated to orthonode.xyz. We are not affiliated with any other entities using the Coreframe name.">
+    <meta name="note" content="Coreframe Systems (Infrastructure Division) has successfully transitioned to Orthonode Infrastructure Labs. All protocol research and OAP operations have migrated to orthonode.xyz.">
     <link rel="prev" href="https://coreframe.systems/">
+    <link rel="canonical" href="https://orthonode.xyz/">
     <meta name="author" content="Orthonode Infrastructure Labs">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orthonode.xyz/">
     <meta property="og:title" content="Orthonode Labs — Physical Verification">
     <meta property="og:description" content="Deterministic verification of physical work for Logistics and DePIN.">
-    <meta property="og:image" content="https://github.com/arhantbarmate/orthonode/blob/main/orthonode-banner.png?raw=true">
+    <meta property="og:image" content="https://github.com/arhantbarmate/orthonode/blob/main/site-logo.png?raw=true">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://github.com/arhantbarmate/orthonode/blob/main/orthonode-banner.png?raw=true">
+    <meta name="twitter:image" content="https://github.com/arhantbarmate/orthonode/blob/main/site-logo.png?raw=true">
     
     <script type="application/ld+json">
     {
@@ -25,7 +26,15 @@
       "@type": "Organization",
       "name": "Orthonode Infrastructure Labs",
       "url": "https://orthonode.xyz",
-      "logo": "https://github.com/arhantbarmate/orthonode/blob/main/logo.png?raw=true",
+      "logo": "https://github.com/arhantbarmate/orthonode/blob/main/site-logo.png?raw=true",
+      "image": "https://github.com/arhantbarmate/orthonode/blob/main/site-logo.png?raw=true",
+      "description": "Deterministic verification of physical work for Logistics and DePIN.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Bhopal",
+        "addressRegion": "MP",
+        "addressCountry": "IN"
+      },
       "sameAs": [
         "https://x.com/OrthonodeSys",
         "https://www.linkedin.com/in/arhant-barmate-5710163aa/",
@@ -34,23 +43,12 @@
       "founder": {
         "@type": "Person",
         "name": "Arhant Barmate",
-        "jobTitle": "Lead Engineer",
-        "url": "https://www.linkedin.com/in/arhant-barmate-5710163aa/",
-        "sameAs": [
-            "https://www.linkedin.com/in/arhant-barmate-5710163aa/"
-        ]
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "email": "infrastructure@orthonode.xyz",
-        "contactType": "technical support",
-        "availableLanguage": "English"
+        "jobTitle": "Lead Engineer"
       }
     }
     </script>
 
     <link rel="icon" type="image/png" href="https://github.com/arhantbarmate/orthonode/blob/main/logo.png?raw=true">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -62,7 +60,7 @@
             --border: #262626;
             --text-main: #ededed;
             --text-dim: #737373;
-            --signal: #22c55e; /* Status Green */
+            --signal: #22c55e;
             --font-ui: 'Inter', sans-serif;
             --font-code: 'JetBrains Mono', monospace;
         }
@@ -80,7 +78,6 @@
         a { color: inherit; text-decoration: none; transition: 0.2s; }
         a:hover { color: #fff; text-decoration: underline; }
 
-        /* HEADER */
         header {
             position: fixed; top: 0; width: 100%; z-index: 100;
             display: flex; justify-content: space-between; align-items: center;
@@ -95,7 +92,6 @@
             margin-right: 8px; box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
         }
 
-        /* LAYOUT */
         .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
         
         .hero {
@@ -103,7 +99,6 @@
             padding-top: 6rem;
         }
         
-        /* BRAND LOCKUP */
         .brand-container {
             display: flex; flex-direction: column; align-items: flex-start;
             margin-bottom: 2.5rem;
@@ -134,14 +129,12 @@
             padding-left: 1rem;
         }
 
-        /* GRID SYSTEM */
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
         .grid-item { background: var(--bg); padding: 2.5rem; position: relative; }
         .grid-full { grid-column: span 2; }
         
         @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .grid-full { grid-column: span 1; } }
 
-        /* TYPOGRAPHY COMPONENTS */
         .mono-label {
             font-family: var(--font-code); font-size: 0.7rem; text-transform: uppercase; 
             letter-spacing: 1px; color: var(--text-dim); margin-bottom: 1.2rem; display: block;
@@ -150,7 +143,6 @@
         h3 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 500; color: #fff; }
         p { color: #888; font-size: 0.9rem; line-height: 1.6; margin: 0; }
 
-        /* TERMINAL FX */
         .terminal {
             background: #000; border: 1px solid #222; padding: 1.5rem;
             font-family: var(--font-code); font-size: 0.75rem; color: #666;
@@ -159,7 +151,6 @@
         .line { margin-bottom: 6px; display: block; }
         .highlight { color: #fff; }
         
-        /* FOOTER */
         footer {
             margin-top: 8rem; padding: 4rem 0; 
             border-top: 1px solid var(--border);
