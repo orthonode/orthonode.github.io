@@ -5,267 +5,1037 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <title>Orthonode Labs — Physical Verification Infrastructure</title>
-    <meta name="description" content="Orthonode Infrastructure Labs builds OAP (Orthonode Assurance Platform) — the deterministic verification layer for logistics and DePIN.">
-    <meta name="note" content="Coreframe Systems (Infrastructure Division) has successfully transitioned to Orthonode Infrastructure Labs. All protocol research and OAP operations have migrated to orthonode.xyz.">
-    <link rel="prev" href="https://coreframe.systems/">
-    <link rel="canonical" href="https://orthonode.xyz/">
+    <!-- Primary Meta Tags -->
+    <title>Orthonode Labs | Stylus Hardware Anchor – Arbitrum DePIN Infrastructure</title>
+    <meta name="title" content="Orthonode Labs | Stylus Hardware Anchor – Arbitrum DePIN Infrastructure">
+    <meta name="description" content="Production-grade hardware verification infrastructure for Arbitrum Stylus. SHA (Stylus Hardware Anchor) delivers 10x gas efficiency with cryptographic device attestation. 45K gas/verification. Testnet live.">
+    <meta name="keywords" content="Arbitrum Stylus, DePIN infrastructure, hardware verification, Rust WASM, blockchain hardware attestation, Sybil resistance, ESP32 eFuse, Arbitrum DePIN, Stylus smart contracts, hardware identity protocol, decentralized infrastructure">
     <meta name="author" content="Orthonode Infrastructure Labs">
-
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://orthonode.xyz/">
+    
+    <!-- Geographic Targeting -->
+    <meta name="geo.region" content="IN-MP">
+    <meta name="geo.placename" content="Bhopal">
+    <meta name="geo.position" content="23.2599;77.4126">
+    <meta name="ICBM" content="23.2599, 77.4126">
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orthonode.xyz/">
-    <meta property="og:title" content="Orthonode Labs — Physical Verification">
-    <meta property="og:description" content="Deterministic verification of physical work for Logistics and DePIN.">
-    <meta property="og:image" content="https://github.com/arhantbarmate/orthonode/blob/main/site-logo.png?raw=true">
+    <meta property="og:title" content="Orthonode Labs | Hardware Trust Infrastructure for Arbitrum Stylus">
+    <meta property="og:description" content="Production-grade hardware verification for DePIN. 45K gas verification on Arbitrum Stylus. 10x efficiency vs Solidity. Testnet deployed.">
+    <meta property="og:image" content="https://orthonode.xyz/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Orthonode Infrastructure Labs">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://github.com/arhantbarmate/orthonode/blob/main/site-logo.png?raw=true">
-
+    <meta name="twitter:url" content="https://orthonode.xyz/">
+    <meta name="twitter:title" content="Orthonode Labs | Stylus Hardware Anchor">
+    <meta name="twitter:description" content="Hardware verification infrastructure for Arbitrum DePIN. 10x gas efficiency. Testnet live.">
+    <meta name="twitter:image" content="https://orthonode.xyz/twitter-card.png">
+    <meta name="twitter:site" content="@OrthonodeSys">
+    <meta name="twitter:creator" content="@OrthonodeSys">
+    
+    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Orthonode Infrastructure Labs",
+      "legalName": "Orthonode Infrastructure Labs",
       "url": "https://orthonode.xyz",
-      "logo": "https://github.com/arhantbarmate/orthonode/blob/main/site-logo.png?raw=true",
-      "image": "https://github.com/arhantbarmate/orthonode/blob/main/site-logo.png?raw=true",
-      "description": "Deterministic verification of physical work for Logistics and DePIN.",
+      "logo": "https://orthonode.xyz/logo-512.png",
+      "foundingDate": "2025",
+      "founders": [{
+        "@type": "Person",
+        "name": "Arhant Barmate",
+        "jobTitle": "Lead Engineer",
+        "sameAs": [
+          "https://www.linkedin.com/in/arhant-barmate-5710163aa/",
+          "https://github.com/orthonode"
+        ]
+      }],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Bhopal",
-        "addressRegion": "MP",
+        "addressRegion": "Madhya Pradesh",
+        "postalCode": "462001",
         "addressCountry": "IN"
       },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "23.2599",
+        "longitude": "77.4126"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Infrastructure Inquiry",
+        "email": "infrastructure@orthonode.xyz"
+      },
       "sameAs": [
-        "https://x.com/OrthonodeSys",
+        "https://twitter.com/OrthonodeSys",
+        "https://github.com/orthonode",
         "https://www.linkedin.com/in/arhant-barmate-5710163aa/",
         "https://www.reddit.com/user/Automatic_Stick_3881/"
       ],
-      "founder": {
-        "@type": "Person",
-        "name": "Arhant Barmate",
-        "jobTitle": "Lead Engineer"
-      }
+      "description": "Production-grade hardware verification infrastructure for Arbitrum Stylus and DePIN protocols. Cryptographic device attestation with 10x gas efficiency.",
+      "knowsAbout": [
+        "Arbitrum Stylus",
+        "DePIN Infrastructure",
+        "Hardware Attestation",
+        "Blockchain Verification",
+        "Rust WASM",
+        "Cryptographic Identity"
+      ]
     }
     </script>
-
-    <link rel="icon" type="image/png" href="https://github.com/arhantbarmate/orthonode/blob/main/logo.png?raw=true">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Stylus Hardware Anchor (SHA)",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Arbitrum Stylus",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Hardware verification protocol for Arbitrum Stylus. Binds ESP32 eFuse identities to smart contracts with 45K gas efficiency.",
+      "softwareVersion": "1.0.0",
+      "releaseNotes": "Milestone 1: Testnet deployment on Arbitrum Sepolia",
+      "programmingLanguage": "Rust",
+      "codeRepository": "https://github.com/orthonode/Stylus-Hardware-Anchor"
+    }
+    </script>
+    
+    <!-- Technical Meta -->
+    <meta name="theme-color" content="#050505">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://github.com/orthonode/orthonode/blob/main/logo.png?raw=true">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://github.com/orthonode/orthonode/blob/main/logo.png?raw=true">
+    <link rel="apple-touch-icon" href="https://github.com/orthonode/orthonode/blob/main/logo.png?raw=true">
+    
+    <!-- Preconnects for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://sepolia.arbiscan.io">
+    <link rel="dns-prefetch" href="https://github.com">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #050505;
-            --surface: #0a0a0a;
-            --border: #262626;
-            --text-main: #ededed;
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --bg-elevated: #111111;
+            --border-subtle: #1a1a1a;
+            --border-primary: #262626;
+            --border-bright: #333333;
+            
+            --text-primary: #ffffff;
+            --text-secondary: #ededed;
+            --text-tertiary: #a3a3a3;
             --text-dim: #737373;
-            --signal: #22c55e;
-            --font-ui: 'Inter', sans-serif;
-            --font-code: 'JetBrains Mono', monospace;
+            --text-muted: #525252;
+            
+            --accent-arbitrum: #28a0f0;
+            --accent-arbitrum-glow: rgba(40, 160, 240, 0.3);
+            --accent-success: #22c55e;
+            --accent-success-glow: rgba(34, 197, 94, 0.3);
+            --accent-warning: #fbbf24;
+            --accent-critical: #ef4444;
+            
+            --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+            --font-display: 'Space Grotesk', sans-serif;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.7);
+            --shadow-glow: 0 0 20px rgba(40, 160, 240, 0.15);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        /* Base Reset & Typography */
+        *, *::before, *::after { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
         
         body { 
-            background: var(--bg); 
-            color: var(--text-main); 
-            font-family: var(--font-ui); 
-            line-height: 1.5;
+            background: var(--bg-primary);
+            color: var(--text-secondary); 
+            font-family: var(--font-ui);
+            font-size: 16px;
+            line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
 
-        a { color: inherit; text-decoration: none; transition: 0.2s; }
-        a:hover { color: #fff; text-decoration: underline; }
+        /* Animated Background Grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--border-subtle) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
 
+        /* Selection Styling */
+        ::selection {
+            background: var(--accent-arbitrum-glow);
+            color: var(--text-primary);
+        }
+
+        /* Link Defaults */
+        a { 
+            color: var(--text-secondary);
+            text-decoration: none; 
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        a:hover { 
+            color: var(--text-primary);
+        }
+
+        /* Header - Fixed Navigation */
         header {
-            position: fixed; top: 0; width: 100%; z-index: 100;
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1rem 2rem;
-            background: rgba(5,5,5,0.9); backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            font-family: var(--font-code); font-size: 0.75rem; color: var(--text-dim);
-        }
-        .status-dot {
-            display: inline-block; width: 6px; height: 6px; 
-            background: var(--signal); border-radius: 50%; 
-            margin-right: 8px; box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(12px) saturate(180%);
+            background: rgba(5, 5, 5, 0.85);
+            border-bottom: 1px solid var(--border-primary);
+            box-shadow: var(--shadow-md);
         }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
-        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.875rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .header-left, .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.025em;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-dim);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-success);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-success-glow);
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .network-badge {
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-primary);
+            border-radius: 4px;
+            color: var(--accent-arbitrum);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* Container */
+        .container { 
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
         .hero {
-            min-height: 85vh; display: flex; flex-direction: column; justify-content: center;
-            padding-top: 6rem;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 8rem;
+            padding-bottom: 4rem;
         }
-        
-        .brand-container {
-            display: flex; flex-direction: column; align-items: flex-start;
-            margin-bottom: 2.5rem;
+
+        .brand-lockup {
+            margin-bottom: 3rem;
         }
+
         .logo-mark {
-            width: 80px; height: auto; margin-bottom: 1.5rem; 
-            filter: drop-shadow(0 0 30px rgba(255,255,255,0.15));
+            width: 72px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.1));
+            transition: filter 0.3s ease;
         }
-        .silver-metal {
-            background: linear-gradient(to bottom, #ffffff 0%, #e2e2e2 25%, #a1a1a1 50%, #cfcfcf 75%, #ffffff 100%);
+
+        .logo-mark:hover {
+            filter: drop-shadow(0 0 60px rgba(40, 160, 240, 0.3));
+        }
+
+        .brand-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(2.25rem, 6vw, 4rem);
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 0%, #d4d4d4 40%, #8a8a8a 60%, #b8b8b8 80%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5));
-            font-weight: 800;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            line-height: 1;
-            letter-spacing: -1px;
-            font-family: var(--font-ui);
+            background-clip: text;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-subtitle {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
             text-transform: uppercase;
         }
 
-        h1 { 
-            font-family: var(--font-ui); font-weight: 400; 
-            font-size: 1.2rem; 
-            color: #fff;
+        .hero-tagline {
+            max-width: 800px;
             margin-bottom: 3rem;
-            border-left: 2px solid var(--text-dim);
-            padding-left: 1rem;
         }
 
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-        .grid-item { background: var(--bg); padding: 2.5rem; position: relative; }
-        .grid-full { grid-column: span 2; }
-        
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } .grid-full { grid-column: span 1; } }
-
-        .mono-label {
-            font-family: var(--font-code); font-size: 0.7rem; text-transform: uppercase; 
-            letter-spacing: 1px; color: var(--text-dim); margin-bottom: 1.2rem; display: block;
+        .hero-tagline h1 {
+            font-family: var(--font-ui);
+            font-weight: 400;
+            font-size: clamp(1.125rem, 2vw, 1.375rem);
+            line-height: 1.5;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--accent-arbitrum);
         }
-        
-        h3 { font-size: 1.4rem; margin-bottom: 1rem; font-weight: 500; color: #fff; }
-        p { color: #888; font-size: 0.9rem; line-height: 1.6; margin: 0; }
 
-        .terminal {
-            background: #000; border: 1px solid #222; padding: 1.5rem;
-            font-family: var(--font-code); font-size: 0.75rem; color: #666;
-            height: 160px; overflow: hidden; position: relative; margin-top: 2rem;
+        .hero-tagline .subline {
+            display: block;
+            color: var(--text-tertiary);
+            font-size: 0.95em;
+            margin-top: 0.75rem;
         }
-        .line { margin-bottom: 6px; display: block; }
-        .highlight { color: #fff; }
-        
+
+        .hero-tagline .status-line {
+            display: block;
+            color: var(--accent-arbitrum);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            letter-spacing: 0.025em;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1px;
+            background: var(--border-primary);
+            border: 1px solid var(--border-primary);
+            margin-bottom: 4rem;
+        }
+
+        .stat-item {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-arbitrum);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Protocol Grid */
+        .protocol-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border-primary);
+            border: 1px solid var(--border-primary);
+            margin-bottom: 4rem;
+        }
+
+        .protocol-card {
+            background: var(--bg-secondary);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+
+        .protocol-card:hover {
+            background: var(--bg-elevated);
+        }
+
+        .protocol-card.featured {
+            grid-column: span 2;
+        }
+
+        .card-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-label::before {
+            content: '//';
+            color: var(--text-dim);
+        }
+
+        .card-label.primary { color: var(--accent-arbitrum); }
+        .card-label.success { color: var(--accent-success); }
+        .card-label.warning { color: var(--accent-warning); }
+
+        .protocol-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .protocol-card p {
+            color: var(--text-tertiary);
+            font-size: 0.9375rem;
+            line-height: 1.65;
+            margin-bottom: 1rem;
+        }
+
+        .protocol-card strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .tech-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .tech-badge {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 0.375rem 0.75rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-bright);
+            border-radius: 4px;
+            color: var(--text-primary);
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .tech-badge:hover {
+            border-color: var(--accent-arbitrum);
+            box-shadow: 0 0 12px var(--accent-arbitrum-glow);
+        }
+
+        /* Live Metrics Section */
+        .metrics-section {
+            margin: 4rem 0;
+        }
+
+        .section-header {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .metric-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            border-color: var(--border-bright);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .metric-title {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        .metric-status {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            color: var(--accent-success);
+        }
+
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-change {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-success);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            margin: 6rem 0;
+            padding: 4rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.125rem;
+            color: var(--text-tertiary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-arbitrum);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            background: #3db0ff;
+            box-shadow: 0 0 20px var(--accent-arbitrum-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-bright);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-elevated);
+            border-color: var(--accent-arbitrum);
+        }
+
+        /* Footer */
         footer {
-            margin-top: 8rem; padding: 4rem 0; 
-            border-top: 1px solid var(--border);
-            font-family: var(--font-code); font-size: 0.8rem; color: var(--text-dim);
+            margin-top: 8rem;
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border-primary);
         }
-        .footer-flex { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; }
-        .contact-pill {
-            background: #111; border: 1px solid #333; color: #fff;
-            padding: 8px 16px; border-radius: 4px; display: inline-block; margin-bottom: 1.5rem;
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
         }
-        .social-links { display: flex; flex-direction: column; gap: 0.5rem; }
-        .legal-links { margin-top: 1.5rem; display: flex; gap: 1rem; }
-        .legal-links a { color: var(--text-dim); font-size: 0.75rem; }
-        .legal-links a:hover { color: #fff; }
+
+        .footer-brand h4 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-dim);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .footer-links h5 {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-arbitrum);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer-brand {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0.75rem 1rem;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            
+            .protocol-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .protocol-card.featured {
+                grid-column: span 1;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-brand {
+                grid-column: span 1;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .cta-section {
+                padding: 2rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Print Styles */
+        @media print {
+            header { position: relative; }
+            .cta-buttons, .metrics-section { display: none; }
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <div>
-        <span class="status-dot"></span>
-        ORTHONODE LABS [ONLINE]
-    </div>
-    <div>
-        ACCESS: RESTRICTED // AUDIT PARTNERS
+<!-- Skip to main content for accessibility -->
+<a href="#main-content" class="sr-only">Skip to main content</a>
+
+<!-- Fixed Header -->
+<header role="banner">
+    <div class="header-content">
+        <div class="header-left">
+            <div class="status-indicator">
+                <span class="status-dot" role="img" aria-label="System operational"></span>
+                <span>ORTHONODE INFRASTRUCTURE [OPERATIONAL]</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="network-badge">ARBITRUM_SEPOLIA</div>
+            <div class="network-badge">STYLUS_v1.0</div>
+        </div>
     </div>
 </header>
 
-<div class="container">
+<!-- Main Content -->
+<main id="main-content" class="container">
+
+<!-- Hero Section -->
 <section class="hero">
-
-<div class="brand-container">
-    <img src="https://github.com/arhantbarmate/orthonode/blob/main/logo.png?raw=true" class="logo-mark" alt="Orthonode Mark">
-    <div class="silver-metal">ORTHONODE SYSTEMS™</div>
-</div>
-
-<h1>
-    Deterministic Verification of Physical Work.<br>
-    <span style="color: var(--text-dim);">The validation layer for Logistics and DePIN.</span><br>
-    <span style="color: var(--text-dim); font-size: 0.85rem; opacity: 0.7; font-weight: 300; display: block; margin-top: 0.5rem;">
-        Read-only audit infrastructure. No production control.
-    </span>
-</h1>
-
-<div class="grid">
-
-<div class="grid-item grid-full">
-    <span class="mono-label" style="color: var(--signal);">// PRIMARY_MODULE</span>
-    <h3>OAP (Orthonode Assurance Platform)</h3>
-    <p>
-        A physics-based validation engine that sits at the ingestion layer.
-        OAP cross-references GPS traces against raw accelerometer noise floors to detect spoofing.
-        Real roads have friction; emulators do not.
-    </p>
-</div>
-
-<div class="grid-item">
-    <span class="mono-label">// DEPLOYMENT_MODEL</span>
-    <h3>Evaluation & Audit Mode</h3>
-    <p>
-        OAP is deployed as a read-only validation layer during evaluations.
-        No production writes, no control-plane access, no disruption to live systems.
-    </p>
-</div>
-
-<div class="grid-item">
-    <span class="mono-label" style="color: #fbbf24;">// PROTOTYPE_ARCH</span>
-    <h3>Nexus Protocol (Research)</h3>
-    <p>
-        Experimental protocol for deterministic hardware attestation and fail-closed execution at the edge.
-        Nexus enforces local verification and execution gating while remaining transport-agnostic to the underlying zero-trust fabric.
-    </p>
-</div>
-
-<div class="grid-item grid-full">
-    <span class="mono-label">// COMPATIBILITY_LAYER</span>
-    <h3>Compatibility Targets</h3>
-    <p style="margin-bottom: 1rem;">
-        Compatible with DePIN and Logistics telemetry standards.
-    </p>
-    <div style="font-family: var(--font-code); font-size: 0.8rem; color: #fff; line-height: 1.8; display: flex; gap: 2rem; flex-wrap: wrap;">
-        <span>> HIVEMAPPER</span>
-        <span>> DIMO</span>
-        <span>> MOTIVE (ELD)</span>
-        <span>> PROJECT44</span>
-        <span>> NATIX</span>
+    <div class="brand-lockup">
+        <img src="https://github.com/orthonode/orthonode/blob/main/logo.png?raw=true" 
+             class="logo-mark" 
+             alt="Orthonode Infrastructure Labs Logo"
+             width="72"
+             height="72">
+        <h1 class="brand-title">ORTHONODE SYSTEMS™</h1>
+        <p class="brand-subtitle">Infrastructure Labs // Physical Verification Layer</p>
     </div>
-</div>
 
-</div>
+    <div class="hero-tagline">
+        <h1>
+            Deterministic Verification of Physical Hardware.
+            <span class="subline">The cryptographic trust layer for DePIN protocols on Arbitrum Stylus.</span>
+            <span class="status-line">// MILESTONE_1_COMPLETE : TESTNET_DEPLOYED : 45K_GAS_VERIFIED</span>
+        </h1>
+    </div>
+
+    <!-- Live Stats Bar -->
+    <div class="stats-bar" role="region" aria-label="Project statistics">
+        <div class="stat-item">
+            <span class="stat-value">45,234</span>
+            <span class="stat-label">Gas / Verification</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-value">10x</span>
+            <span class="stat-label">Efficiency vs Solidity</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-value">$2-5</span>
+            <span class="stat-label">Device Cost (ESP32)</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-value">200K</span>
+            <span class="stat-label">ARB Grant Requested</span>
+        </div>
+    </div>
 </section>
 
-<footer>
-<div class="footer-flex">
-<div>
-    <h4 style="color: #fff; margin-bottom: 0.5rem;">ORTHONODE INFRASTRUCTURE LABS</h4>
-    <p>Bhopal, MP, India (NIC 72900)</p>
-    <p style="margin-top: 0.5rem; opacity: 0.5;">© 2026 All Rights Reserved.</p>
+<!-- Protocol Grid -->
+<section class="protocol-grid" role="region" aria-label="Protocol modules">
+    <!-- Primary: SHA -->
+    <article class="protocol-card featured">
+        <span class="card-label primary">FLAGSHIP_PROTOCOL</span>
+        <h3>SHA (Stylus Hardware Anchor)</h3>
+        <p>
+            Production-grade Rust/WASM attestation protocol that cryptographically binds physical silicon identities (ESP32 eFuses) to Arbitrum smart contracts. Eliminates Sybil attacks in DePIN ecosystems through immutable hardware fingerprinting and on-chain verification.
+        </p>
+        <p>
+            <strong>Architecture:</strong> Four-stage verification pipeline (identity gate, firmware governance, replay protection, cryptographic proof) executing in <strong>45,000 gas</strong> via Stylus WASM optimization.
+        </p>
+        <div class="tech-badges">
+            <span class="tech-badge">RUST_STYLUS</span>
+            <span class="tech-badge">KECCAK-256</span>
+            <span class="tech-badge">ECDSA_SECP256K1</span>
+            <span class="tech-badge">ESP32_eFUSE</span>
+            <span class="tech-badge">WASM_EXECUTION</span>
+        </div>
+    </article>
 
-    <div class="legal-links">
-        <a href="terms.html">TERMS_OF_SERVICE</a>
-        <a href="privacy.html">PRIVACY_POLICY</a>
+    <!-- Research: OAP -->
+    <article class="protocol-card">
+        <span class="card-label success">RESEARCH_MODULE</span>
+        <h3>OAP (Orthonode Assurance Platform)</h3>
+        <p>
+            Physics-based telemetry validation engine. Cross-references GPS trajectories against accelerometer noise-floor signatures to distinguish genuine physical activity from emulated data streams. Real-world friction patterns are impossible to replicate in software.
+        </p>
+    </article>
+
+    <!-- Experimental: Nexus -->
+    <article class="protocol-card">
+        <span class="card-label warning">EXPERIMENTAL_ARCH</span>
+        <h3>Nexus Protocol</h3>
+        <p>
+            Zero-trust fabric for edge compute. Enforces fail-closed execution at hardware gate before consensus layer ingestion. Transport-agnostic deterministic verification with local attestation enforcement.
+        </p>
+    </article>
+
+    <!-- Ecosystem Compatibility -->
+    <article class="protocol-card featured">
+        <span class="card-label">ECOSYSTEM_COMPATIBILITY</span>
+        <h3>Integration Standards & Targets</h3>
+        <p>
+            Designed for seamless integration with Arbitrum DePIN protocols and commodity hardware ecosystems.
+        </p>
+        <div class="tech-badges">
+            <span class="tech-badge">ARBITRUM_ONE</span>
+            <span class="tech-badge">ARBITRUM_NOVA</span>
+            <span class="tech-badge">ORBIT_CHAINS</span>
+            <span class="tech-badge">ESP32-S3</span>
+            <span class="tech-badge">ATECC608</span>
+            <span class="tech-badge">WEB3.JS</span>
+            <span class="tech-badge">ETHERS.JS</span>
+        </div>
+    </article>
+</section>
+
+<!-- Live Metrics Section -->
+<section class="metrics-section" role="region" aria-label="Live metrics">
+    <h2 class="section-header">// LIVE_METRICS : ARBITRUM_SEPOLIA</h2>
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-header">
+                <span class="metric-title">Contract Address</span>
+                <span class="metric-status">VERIFIED</span>
+            </div>
+            <div class="metric-value" style="font-size: 0.875rem; word-break: break-all;">0x3464...3b0d</div>
+            <a href="https://sepolia.arbiscan.io/address/0x34645ff1dd8af86176fe6b28812aaa4d85e33b0d" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               style="color: var(--accent-arbitrum); font-size: 0.8rem; font-family: var(--font-mono);">
+                View on Arbiscan →
+            </a>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-header">
+                <span class="metric-title">Deployment Block</span>
+                <span class="metric-status">CONFIRMED</span>
+            </div>
+            <div class="metric-value">#241058680</div>
+            <span class="metric-change" style="font-size: 0.75rem; color: var(--text-dim);">Testnet Genesis</span>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-header">
+                <span class="metric-title">Network Status</span>
+                <span class="metric-status">ONLINE</span>
+            </div>
+            <div class="metric-value" style="font-size: 1.25rem;">Sepolia L2</div>
+            <span class="metric-change">Mainnet targeting Q2 2026</span>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-header">
+                <span class="metric-title">Grant Status</span>
+                <span class="metric-status">ACTIVE</span>
+            </div>
+            <div class="metric-value" style="font-size: 1.5rem;">Questbook</div>
+            <span class="metric-change" style="color: var(--text-dim);">Milestone 1 Complete</span>
+        </div>
     </div>
-</div>
-<div style="text-align: right;">
-    <div class="contact-pill">infrastructure@orthonode.xyz</div>
-    <div class="social-links">
-        <a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank">LINKEDIN / ARHANT BARMATE</a>
-        <a href="https://x.com/OrthonodeSys" target="_blank">X / ORTHONODE SYSTEMS</a>
-        <a href="https://www.reddit.com/user/Automatic_Stick_3881/" target="_blank">REDDIT / ORTHONODE_LABS</a>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section">
+    <h2>Ready to Verify Hardware on Arbitrum?</h2>
+    <p>
+        Explore the live testnet deployment, review the technical architecture, or watch the demonstration of SHA in action.
+    </p>
+    <div class="cta-buttons">
+        <a href="https://github.com/orthonode/Stylus-Hardware-Anchor" 
+           class="btn btn-primary" 
+           target="_blank" 
+           rel="noopener noreferrer">
+            <span>View Source Code</span>
+            <span>↗</span>
+        </a>
+        <a href="https://www.loom.com/share/6867ea17f56a458dae9375b29b640882" 
+           class="btn btn-secondary" 
+           target="_blank" 
+           rel="noopener noreferrer">
+            <span>Watch Demo</span>
+            <span>↗</span>
+        </a>
+        <a href="https://sepolia.arbiscan.io/address/0x34645ff1dd8af86176fe6b28812aaa4d85e33b0d" 
+           class="btn btn-secondary" 
+           target="_blank" 
+           rel="noopener noreferrer">
+            <span>Verify On-Chain</span>
+            <span>↗</span>
+        </a>
     </div>
-</div>
-</div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer role="contentinfo">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h4>ORTHONODE INFRASTRUCTURE LABS</h4>
+                <p>
+                    Building production-grade hardware verification infrastructure for decentralized physical infrastructure networks (DePIN) on Arbitrum Stylus. Cryptographic attestation with 10x gas efficiency.
+                </p>
+                <p style="margin-top: 1rem;">
+                    <strong>Location:</strong> Bhopal, Madhya Pradesh, India<br>
+                    <strong>Classification:</strong> Infrastructure Research & Development (NIC 72900)
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h5>Technical</h5>
+                <ul>
+                    <li><a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener">GitHub Repository</a></li>
+                    <li><a href="https://github.com/orthonode/Stylus-Hardware-Anchor/blob/main/ARCHITECTURE.md" target="_blank" rel="noopener">Architecture Docs</a></li>
+                    <li><a href="https://sepolia.arbiscan.io/address/0x34645ff1dd8af86176fe6b28812aaa4d85e33b0d" target="_blank" rel="noopener">Testnet Contract</a></li>
+                    <li><a href="https://www.loom.com/share/6867ea17f56a458dae9375b29b640882" target="_blank" rel="noopener">Video Demonstration</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h5>Connect</h5>
+                <ul>
+                    <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X / Twitter</a></li>
+                    <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
+                    <li><a href="https://www.reddit.com/user/Automatic_Stick_3881/" target="_blank" rel="noopener">Reddit</a></li>
+                    <li><a href="mailto:infrastructure@orthonode.xyz">Email Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>© 2026 Orthonode Infrastructure Labs. All Rights Reserved.</div>
+            <div class="footer-legal">
+                <a href="/terms.html">Terms of Service</a>
+                <a href="/privacy.html">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
 </footer>
 
-</div>
+<!-- Structured Data for Search Engines -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Stylus Hardware Anchor: Production Hardware Verification for Arbitrum",
+  "description": "Technical overview of SHA protocol delivering 10x gas efficiency for DePIN hardware attestation on Arbitrum Stylus",
+  "author": {
+    "@type": "Organization",
+    "name": "Orthonode Infrastructure Labs"
+  },
+  "datePublished": "2026-02-01",
+  "inLanguage": "en-US"
+}
+</script>
+
 </body>
 </html>
