@@ -115,7 +115,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <link rel="icon" href="https://orthonode.xyz/site-logo.png">
     <link rel="icon" type="image/png" sizes="96x96" href="https://orthonode.xyz/site-logo.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://orthonode.xyz/site-logo.png">
     <link rel="icon" type="image/png" sizes="16x16" href="https://orthonode.xyz/site-logo.png">
@@ -200,6 +199,46 @@
             z-index: -1;
             pointer-events: none;
         }
+
+        /* --- SECURITY GATE STYLES (Added) --- */
+        #security-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-primary);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        #security-gate h2 {
+            font-family: var(--font-display);
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        #security-gate img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 20px rgba(40, 160, 240, 0.2));
+        }
+
+        /* Main App Hidden by Default */
+        #app-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        /* ------------------------------------ */
 
         /* Selection Styling */
         ::selection {
@@ -770,242 +809,268 @@
 </head>
 <body>
 
-<a href="#main-content" class="sr-only">Skip to main content</a>
+<div id="security-gate">
+    <img src="https://orthonode.xyz/site-logo.png" alt="Orthonode Security">
+    <h2>// ESTABLISHING_SECURE_UPLINK</h2>
+    <div class="cf-turnstile" 
+         data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb" 
+         data-theme="dark" 
+         data-callback="onHumanVerified">
+    </div>
+</div>
 
-<header role="banner">
-    <div class="header-content">
-        <div class="header-left">
-            <div class="status-indicator">
-                <span class="status-dot" role="img" aria-label="System operational"></span>
-                <span>ORTHONODE INFRASTRUCTURE [OPERATIONAL]</span>
+<div id="app-content">
+
+    <header role="banner">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="status-indicator">
+                    <span class="status-dot" role="img" aria-label="System operational"></span>
+                    <span>ORTHONODE INFRASTRUCTURE [OPERATIONAL]</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="network-badge">ARBITRUM_SEPOLIA</div>
+                <div class="network-badge">STYLUS_v1.0</div>
             </div>
         </div>
-        <div class="header-right">
-            <div class="network-badge">ARBITRUM_SEPOLIA</div>
-            <div class="network-badge">STYLUS_v1.0</div>
+    </header>
+
+    <main id="main-content" class="container">
+
+    <section class="hero">
+        <div class="brand-lockup">
+            <img src="https://github.com/orthonode/orthonode/blob/main/logo.png?raw=true" 
+                 class="logo-mark" 
+                 alt="Orthonode Infrastructure Labs Logo"
+                 width="72"
+                 height="72">
+            <h1 class="brand-title">ORTHONODE SYSTEMS™</h1>
+            <p class="brand-subtitle">Infrastructure Labs // Physical Verification Layer</p>
         </div>
-    </div>
-</header>
 
-<main id="main-content" class="container">
-
-<section class="hero">
-    <div class="brand-lockup">
-        <img src="https://github.com/orthonode/orthonode/blob/main/logo.png?raw=true" 
-             class="logo-mark" 
-             alt="Orthonode Infrastructure Labs Logo"
-             width="72"
-             height="72">
-        <h1 class="brand-title">ORTHONODE SYSTEMS™</h1>
-        <p class="brand-subtitle">Infrastructure Labs // Physical Verification Layer</p>
-    </div>
-
-    <div class="hero-tagline">
-        <h1>
-            Deterministic Verification of Physical Hardware.
-            <span class="subline">The cryptographic trust layer for DePIN protocols on Arbitrum Stylus.</span>
-            <span class="status-line">// MILESTONE_1_COMPLETE : TESTNET_DEPLOYED : 45K_GAS_VERIFIED</span>
-        </h1>
-    </div>
-
-    <div class="stats-bar" role="region" aria-label="Project statistics">
-        <div class="stat-item">
-            <span class="stat-value">45,234</span>
-            <span class="stat-label">Gas / Verification</span>
+        <div class="hero-tagline">
+            <h1>
+                Deterministic Verification of Physical Hardware.
+                <span class="subline">The cryptographic trust layer for DePIN protocols on Arbitrum Stylus.</span>
+                <span class="status-line">// MILESTONE_1_COMPLETE : TESTNET_DEPLOYED : 45K_GAS_VERIFIED</span>
+            </h1>
         </div>
-        <div class="stat-item">
-            <span class="stat-value">10x</span>
-            <span class="stat-label">Efficiency vs Solidity</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-value">$2-5</span>
-            <span class="stat-label">Device Cost (ESP32)</span>
-        </div>
-        <div class="stat-item">
-            <span class="stat-value">200K</span>
-            <span class="stat-label">ARB Grant Requested</span>
-        </div>
-    </div>
-</section>
 
-<section class="protocol-grid" role="region" aria-label="Protocol modules">
-    <article class="protocol-card featured">
-        <span class="card-label primary">FLAGSHIP_PROTOCOL</span>
-        <h3>SHA (Stylus Hardware Anchor)</h3>
-        <p>
-            Production-grade Rust/WASM attestation protocol that cryptographically binds physical silicon identities (ESP32 eFuses) to Arbitrum smart contracts. Eliminates Sybil attacks in DePIN ecosystems through immutable hardware fingerprinting and on-chain verification.
-        </p>
-        <p>
-            <strong>Architecture:</strong> Four-stage verification pipeline (identity gate, firmware governance, replay protection, cryptographic proof) executing in <strong>45,000 gas</strong> via Stylus WASM optimization.
-        </p>
-        <div class="tech-badges">
-            <span class="tech-badge">RUST_STYLUS</span>
-            <span class="tech-badge">KECCAK-256</span>
-            <span class="tech-badge">ECDSA_SECP256K1</span>
-            <span class="tech-badge">ESP32_eFUSE</span>
-            <span class="tech-badge">WASM_EXECUTION</span>
-        </div>
-    </article>
-
-    <article class="protocol-card">
-        <span class="card-label success">RESEARCH_MODULE</span>
-        <h3>OAP (Orthonode Assurance Platform)</h3>
-        <p>
-            Physics-based telemetry validation engine. Cross-references GPS trajectories against accelerometer noise-floor signatures to distinguish genuine physical activity from emulated data streams. Real-world friction patterns are impossible to replicate in software.
-        </p>
-    </article>
-
-    <article class="protocol-card">
-        <span class="card-label warning">EXPERIMENTAL_ARCH</span>
-        <h3>Nexus Protocol</h3>
-        <p>
-            Zero-trust fabric for edge compute. Enforces fail-closed execution at hardware gate before consensus layer ingestion. Transport-agnostic deterministic verification with local attestation enforcement.
-        </p>
-    </article>
-
-    <article class="protocol-card featured">
-        <span class="card-label">ECOSYSTEM_COMPATIBILITY</span>
-        <h3>Integration Standards & Targets</h3>
-        <p>
-            Designed for seamless integration with Arbitrum DePIN protocols and commodity hardware ecosystems.
-        </p>
-        <div class="tech-badges">
-            <span class="tech-badge">ARBITRUM_ONE</span>
-            <span class="tech-badge">ARBITRUM_NOVA</span>
-            <span class="tech-badge">ORBIT_CHAINS</span>
-            <span class="tech-badge">ESP32-S3</span>
-            <span class="tech-badge">ATECC608</span>
-            <span class="tech-badge">WEB3.JS</span>
-            <span class="tech-badge">ETHERS.JS</span>
-        </div>
-    </article>
-</section>
-
-<section class="metrics-section" role="region" aria-label="Live metrics">
-    <h2 class="section-header">// LIVE_METRICS : ARBITRUM_SEPOLIA</h2>
-    <div class="metrics-grid">
-        <div class="metric-card">
-            <div class="metric-header">
-                <span class="metric-title">Contract Address</span>
-                <span class="metric-status">VERIFIED</span>
+        <div class="stats-bar" role="region" aria-label="Project statistics">
+            <div class="stat-item">
+                <span class="stat-value">45,234</span>
+                <span class="stat-label">Gas / Verification</span>
             </div>
-            <div class="metric-value" style="font-size: 0.875rem; word-break: break-all;">0x3464...3b0d</div>
-            <a href="https://sepolia.arbiscan.io/address/0x34645ff1dd8af86176fe6b28812aaa4d85e33b0d" 
+            <div class="stat-item">
+                <span class="stat-value">10x</span>
+                <span class="stat-label">Efficiency vs Solidity</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">$2-5</span>
+                <span class="stat-label">Device Cost (ESP32)</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">200K</span>
+                <span class="stat-label">ARB Grant Requested</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="protocol-grid" role="region" aria-label="Protocol modules">
+        <article class="protocol-card featured">
+            <span class="card-label primary">FLAGSHIP_PROTOCOL</span>
+            <h3>SHA (Stylus Hardware Anchor)</h3>
+            <p>
+                Production-grade Rust/WASM attestation protocol that cryptographically binds physical silicon identities (ESP32 eFuses) to Arbitrum smart contracts. Eliminates Sybil attacks in DePIN ecosystems through immutable hardware fingerprinting and on-chain verification.
+            </p>
+            <p>
+                <strong>Architecture:</strong> Four-stage verification pipeline (identity gate, firmware governance, replay protection, cryptographic proof) executing in <strong>45,000 gas</strong> via Stylus WASM optimization.
+            </p>
+            <div class="tech-badges">
+                <span class="tech-badge">RUST_STYLUS</span>
+                <span class="tech-badge">KECCAK-256</span>
+                <span class="tech-badge">ECDSA_SECP256K1</span>
+                <span class="tech-badge">ESP32_eFUSE</span>
+                <span class="tech-badge">WASM_EXECUTION</span>
+            </div>
+        </article>
+
+        <article class="protocol-card">
+            <span class="card-label success">RESEARCH_MODULE</span>
+            <h3>OAP (Orthonode Assurance Platform)</h3>
+            <p>
+                Physics-based telemetry validation engine. Cross-references GPS trajectories against accelerometer noise-floor signatures to distinguish genuine physical activity from emulated data streams. Real-world friction patterns are impossible to replicate in software.
+            </p>
+        </article>
+
+        <article class="protocol-card">
+            <span class="card-label warning">EXPERIMENTAL_ARCH</span>
+            <h3>Nexus Protocol</h3>
+            <p>
+                Zero-trust fabric for edge compute. Enforces fail-closed execution at hardware gate before consensus layer ingestion. Transport-agnostic deterministic verification with local attestation enforcement.
+            </p>
+        </article>
+
+        <article class="protocol-card featured">
+            <span class="card-label">ECOSYSTEM_COMPATIBILITY</span>
+            <h3>Integration Standards & Targets</h3>
+            <p>
+                Designed for seamless integration with Arbitrum DePIN protocols and commodity hardware ecosystems.
+            </p>
+            <div class="tech-badges">
+                <span class="tech-badge">ARBITRUM_ONE</span>
+                <span class="tech-badge">ARBITRUM_NOVA</span>
+                <span class="tech-badge">ORBIT_CHAINS</span>
+                <span class="tech-badge">ESP32-S3</span>
+                <span class="tech-badge">ATECC608</span>
+                <span class="tech-badge">WEB3.JS</span>
+                <span class="tech-badge">ETHERS.JS</span>
+            </div>
+        </article>
+    </section>
+
+    <section class="metrics-section" role="region" aria-label="Live metrics">
+        <h2 class="section-header">// LIVE_METRICS : ARBITRUM_SEPOLIA</h2>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-header">
+                    <span class="metric-title">Contract Address</span>
+                    <span class="metric-status">VERIFIED</span>
+                </div>
+                <div class="metric-value" style="font-size: 0.875rem; word-break: break-all;">0x3464...3b0d</div>
+                <a href="https://sepolia.arbiscan.io/address/0x34645ff1dd8af86176fe6b28812aaa4d85e33b0d" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   style="color: var(--accent-arbitrum); font-size: 0.8rem; font-family: var(--font-mono);">
+                    View on Arbiscan →
+                </a>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <span class="metric-title">Deployment Block</span>
+                    <span class="metric-status">CONFIRMED</span>
+                </div>
+                <div class="metric-value">#241058680</div>
+                <span class="metric-change" style="font-size: 0.75rem; color: var(--text-dim);">Testnet Genesis</span>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <span class="metric-title">Network Status</span>
+                    <span class="metric-status">ONLINE</span>
+                </div>
+                <div class="metric-value" style="font-size: 1.25rem;">Sepolia L2</div>
+                <span class="metric-change">Mainnet targeting Q2 2026</span>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-header">
+                    <span class="metric-title">Grant Status</span>
+                    <span class="metric-status">ACTIVE</span>
+                </div>
+                <div class="metric-value" style="font-size: 1.5rem;">Questbook</div>
+                <span class="metric-change" style="color: var(--text-dim);">Milestone 1 Complete</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Verify Hardware on Arbitrum?</h2>
+        <p>
+            Explore the live testnet deployment, review the technical architecture, or watch the demonstration of SHA in action.
+        </p>
+        <div class="cta-buttons">
+            <a href="https://github.com/orthonode/Stylus-Hardware-Anchor" 
+               class="btn btn-primary" 
                target="_blank" 
-               rel="noopener noreferrer"
-               style="color: var(--accent-arbitrum); font-size: 0.8rem; font-family: var(--font-mono);">
-                View on Arbiscan →
+               rel="noopener noreferrer">
+                <span>View Source Code</span>
+                <span>↗</span>
+            </a>
+            <a href="https://www.loom.com/share/6867ea17f56a458dae9375b29b640882" 
+               class="btn btn-secondary" 
+               target="_blank" 
+               rel="noopener noreferrer">
+                <span>Watch Demo</span>
+                <span>↗</span>
+            </a>
+            <a href="https://sepolia.arbiscan.io/address/0x34645ff1dd8af86176fe6b28812aaa4d85e33b0d" 
+               class="btn btn-secondary" 
+               target="_blank" 
+               rel="noopener noreferrer">
+                <span>Verify On-Chain</span>
+                <span>↗</span>
             </a>
         </div>
+    </section>
 
-        <div class="metric-card">
-            <div class="metric-header">
-                <span class="metric-title">Deployment Block</span>
-                <span class="metric-status">CONFIRMED</span>
-            </div>
-            <div class="metric-value">#241058680</div>
-            <span class="metric-change" style="font-size: 0.75rem; color: var(--text-dim);">Testnet Genesis</span>
-        </div>
+    </main>
 
-        <div class="metric-card">
-            <div class="metric-header">
-                <span class="metric-title">Network Status</span>
-                <span class="metric-status">ONLINE</span>
-            </div>
-            <div class="metric-value" style="font-size: 1.25rem;">Sepolia L2</div>
-            <span class="metric-change">Mainnet targeting Q2 2026</span>
-        </div>
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h4>ORTHONODE INFRASTRUCTURE LABS</h4>
+                    <p>
+                        Building production-grade hardware verification infrastructure for decentralized physical infrastructure networks (DePIN) on Arbitrum Stylus. Cryptographic attestation with 10x gas efficiency.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        <strong>Location:</strong> Bhopal, Madhya Pradesh, India<br>
+                        <strong>Classification:</strong> Infrastructure Research & Development (NIC 72900)
+                    </p>
+                </div>
 
-        <div class="metric-card">
-            <div class="metric-header">
-                <span class="metric-title">Grant Status</span>
-                <span class="metric-status">ACTIVE</span>
-            </div>
-            <div class="metric-value" style="font-size: 1.5rem;">Questbook</div>
-            <span class="metric-change" style="color: var(--text-dim);">Milestone 1 Complete</span>
-        </div>
-    </div>
-</section>
+                <div class="footer-links">
+                    <h5>Technical</h5>
+                    <ul>
+                        <li><a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener">GitHub Repository</a></li>
+                        <li><a href="https://github.com/orthonode/Stylus-Hardware-Anchor/blob/main/docs/ARCHITECTURE.md" target="_blank" rel="noopener">Architecture Docs</a></li>
+                        <li><a href="https://sepolia.arbiscan.io/address/0x34645ff1dd8af86176fe6b28812aaa4d85e33b0d" target="_blank" rel="noopener">Testnet Contract</a></li>
+                        <li><a href="https://www.loom.com/share/6867ea17f56a458dae9375b29b640882" target="_blank" rel="noopener">Video Demonstration</a></li>
+                    </ul>
+                </div>
 
-<section class="cta-section">
-    <h2>Ready to Verify Hardware on Arbitrum?</h2>
-    <p>
-        Explore the live testnet deployment, review the technical architecture, or watch the demonstration of SHA in action.
-    </p>
-    
-    <div class="cf-turnstile" data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb" data-theme="dark" style="margin: 0 auto 2rem auto; width: fit-content;"></div>
-
-    <div class="cta-buttons">
-        <a href="https://github.com/orthonode/Stylus-Hardware-Anchor" 
-           class="btn btn-primary" 
-           target="_blank" 
-           rel="noopener noreferrer">
-            <span>View Source Code</span>
-            <span>↗</span>
-        </a>
-        <a href="https://www.loom.com/share/6867ea17f56a458dae9375b29b640882" 
-           class="btn btn-secondary" 
-           target="_blank" 
-           rel="noopener noreferrer">
-            <span>Watch Demo</span>
-            <span>↗</span>
-        </a>
-        <a href="https://sepolia.arbiscan.io/address/0x34645ff1dd8af86176fe6b28812aaa4d85e33b0d" 
-           class="btn btn-secondary" 
-           target="_blank" 
-           rel="noopener noreferrer">
-            <span>Verify On-Chain</span>
-            <span>↗</span>
-        </a>
-    </div>
-</section>
-
-</main>
-
-<footer role="contentinfo">
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <h4>ORTHONODE INFRASTRUCTURE LABS</h4>
-                <p>
-                    Building production-grade hardware verification infrastructure for decentralized physical infrastructure networks (DePIN) on Arbitrum Stylus. Cryptographic attestation with 10x gas efficiency.
-                </p>
-                <p style="margin-top: 1rem;">
-                    <strong>Location:</strong> Bhopal, Madhya Pradesh, India<br>
-                    <strong>Classification:</strong> Infrastructure Research & Development (NIC 72900)
-                </p>
+                <div class="footer-links">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X / Twitter</a></li>
+                        <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
+                        <li><a href="https://www.reddit.com/user/Automatic_Stick_3881/" target="_blank" rel="noopener">Reddit</a></li>
+                        <li><a href="mailto:infrastructure@orthonode.xyz">Email Contact</a></li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="footer-links">
-                <h5>Technical</h5>
-                <ul>
-                    <li><a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener">GitHub Repository</a></li>
-                    <li><a href="https://github.com/orthonode/Stylus-Hardware-Anchor/blob/main/docs/ARCHITECTURE.md" target="_blank" rel="noopener">Architecture Docs</a></li>
-                    <li><a href="https://sepolia.arbiscan.io/address/0x34645ff1dd8af86176fe6b28812aaa4d85e33b0d" target="_blank" rel="noopener">Testnet Contract</a></li>
-                    <li><a href="https://www.loom.com/share/6867ea17f56a458dae9375b29b640882" target="_blank" rel="noopener">Video Demonstration</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links">
-                <h5>Connect</h5>
-                <ul>
-                    <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X / Twitter</a></li>
-                    <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
-                    <li><a href="https://www.reddit.com/user/Automatic_Stick_3881/" target="_blank" rel="noopener">Reddit</a></li>
-                    <li><a href="mailto:infrastructure@orthonode.xyz">Email Contact</a></li>
-                </ul>
+            <div class="footer-bottom">
+                <div>© 2026 Orthonode Infrastructure Labs. All Rights Reserved.</div>
+                <div class="footer-legal">
+                    <a href="/terms.html">Terms of Service</a>
+                    <a href="/privacy.html">Privacy Policy</a>
+                </div>
             </div>
         </div>
-
-        <div class="footer-bottom">
-            <div>© 2026 Orthonode Infrastructure Labs. All Rights Reserved.</div>
-            <div class="footer-legal">
-                <a href="/terms.html">Terms of Service</a>
-                <a href="/privacy.html">Privacy Policy</a>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
+</div> <script>
+    // This function is called automatically by Cloudflare when the user passes the check
+    function onHumanVerified(token) {
+        console.log("Human verified. Token:", token);
+        
+        const gate = document.getElementById('security-gate');
+        const content = document.getElementById('app-content');
+        
+        // Hide gate
+        gate.style.display = 'none';
+        
+        // Show content with fade-in
+        content.style.display = 'block';
+        // Small timeout to allow display:block to render before changing opacity
+        setTimeout(() => {
+            content.style.opacity = '1';
+        }, 50);
+    }
+</script>
 
 <script type="application/ld+json">
 {
