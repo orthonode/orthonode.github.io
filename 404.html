@@ -3,77 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 | SYSTEM_HALT</title>
-    <meta name="note" content="Coreframe Systems (Infrastructure Division) has successfully transitioned to Orthonode Infrastructure Labs. Some legacy routes may no longer be active.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>404 - Route Not Found | Orthonode Infrastructure Labs</title>
+    <meta name="description" content="The requested resource could not be found on Orthonode Infrastructure Labs servers.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="icon" type="image/png" href="https://github.com/orthonode/orthonode/blob/main/logo.png?raw=true">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg: #050505;
+            --bg-primary: #050505;
+            --text-primary: #ffffff;
+            --text-secondary: #ededed;
             --text-dim: #737373;
-            --signal-err: #fb7185;
-            --font-ui: 'Inter', sans-serif;
-            --font-code: 'JetBrains Mono', monospace;
+            --text-muted: #525252;
+            --accent-error: #ef4444;
+            --accent-error-glow: rgba(239, 68, 68, 0.3);
+            --border-primary: #262626;
+            --border-bright: #333333;
+            
+            --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+            --font-display: 'Space Grotesk', sans-serif;
         }
 
-        body { 
-            background: var(--bg); 
-            color: var(--signal-err); 
-            font-family: var(--font-code); 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            font-family: var(--font-ui);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
             text-align: center;
             overflow: hidden;
+            position: relative;
         }
 
-        /* SILVER METAL TEXT */
-        .silver-metal {
-            background: linear-gradient(to bottom, #ffffff 0%, #e2e2e2 25%, #a1a1a1 50%, #cfcfcf 75%, #ffffff 100%);
+        /* Animated Background Grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(38, 38, 38, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(38, 38, 38, 0.3) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.5;
+            z-index: -1;
+            pointer-events: none;
+            animation: grid-shift 20s linear infinite;
+        }
+
+        @keyframes grid-shift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        ::selection {
+            background: var(--accent-error-glow);
+            color: var(--text-primary);
+        }
+
+        /* Logo */
+        .logo-mark {
+            width: 64px;
+            height: auto;
+            margin-bottom: 2rem;
+            opacity: 0.4;
+            filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.2));
+            animation: fade-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes fade-pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.6; }
+        }
+
+        /* Error Container */
+        .error-container {
+            max-width: 600px;
+            padding: 0 2rem;
+        }
+
+        /* 404 Display */
+        .error-code {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(5rem, 15vw, 8rem);
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            background: linear-gradient(135deg, 
+                var(--accent-error) 0%, 
+                #dc2626 30%, 
+                #b91c1c 60%, 
+                #991b1b 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5));
-            font-weight: 800;
-            font-size: 5rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: -2px;
+            background-clip: text;
+            filter: drop-shadow(0 4px 12px var(--accent-error-glow));
+            margin-bottom: 1.5rem;
+            animation: glow-pulse 2s ease-in-out infinite;
         }
 
-        p { color: var(--text-dim); margin-top: 1rem; line-height: 1.6; font-size: 0.9rem; }
-        
-        .logo-mark {
-            width: 48px; height: auto; margin-bottom: 2rem;
+        @keyframes glow-pulse {
+            0%, 100% { 
+                filter: drop-shadow(0 4px 12px var(--accent-error-glow));
+            }
+            50% { 
+                filter: drop-shadow(0 4px 24px rgba(239, 68, 68, 0.5));
+            }
+        }
+
+        /* Error Messages */
+        .error-title {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+
+        .error-messages {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .error-messages > div {
+            margin-bottom: 0.5rem;
+        }
+
+        .error-messages::before {
+            content: '> ';
+            color: var(--accent-error);
+        }
+
+        .error-note {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 1.5rem;
+            opacity: 0.6;
+        }
+
+        /* Actions */
+        .error-actions {
+            margin-top: 3rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-bright);
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-primary);
+            box-shadow: 0 0 16px rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary::before {
+            content: '←';
+            font-size: 1rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-dim);
+            border: 1px solid var(--border-primary);
+        }
+
+        .btn-secondary:hover {
+            color: var(--text-primary);
+            border-color: var(--border-bright);
+        }
+
+        /* System Info Footer */
+        .system-info {
+            position: fixed;
+            bottom: 2rem;
+            left: 0;
+            right: 0;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
             opacity: 0.5;
         }
 
-        a { 
-            color: #fff; 
-            text-decoration: none; 
-            border: 1px solid #262626; 
-            padding: 10px 20px; 
-            margin-top: 2rem; 
-            display: inline-block; 
-            transition: 0.3s; 
-            font-family: var(--font-code);
-            font-size: 0.75rem;
-            letter-spacing: 1px;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: clamp(4rem, 20vw, 6rem);
+            }
+
+            .error-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .logo-mark {
+                width: 48px;
+            }
         }
 
-        a:hover { background: #fff; color: #000; border-color: #fff; }
+        @media (max-height: 600px) {
+            .logo-mark {
+                display: none;
+            }
+            
+            .error-code {
+                font-size: 4rem;
+                margin-bottom: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <img src="logo.png" class="logo-mark" alt="Orthonode Mark">
-    <div>
-        <h1 class="silver-metal">404</h1>
-        <p>
-            > ROUTE_NOT_FOUND<br>
-            > THE_REQUESTED_SECTOR_DOES_NOT_EXIST<br>
-            <span style="font-size: 0.75rem; opacity: 0.6;">(Legacy Coreframe routes have been decommissioned)</span>
+
+    <img src="https://github.com/orthonode/orthonode/blob/main/logo.png?raw=true" 
+         class="logo-mark" 
+         alt="Orthonode Infrastructure Labs"
+         width="64"
+         height="64">
+
+    <div class="error-container">
+        <h1 class="error-code">404</h1>
+        
+        <div class="error-title">ROUTE_NOT_FOUND</div>
+        
+        <div class="error-messages">
+            <div>> THE_REQUESTED_SECTOR_DOES_NOT_EXIST</div>
+            <div>> RESOURCE_PATH_INVALID</div>
+        </div>
+
+        <p class="error-note">
+            (Legacy Coreframe Systems routes have been decommissioned.)<br>
+            All infrastructure operations have migrated to Orthonode Labs.
         </p>
-        <a href="/">RETURN_TO_CONSOLE</a>
+
+        <div class="error-actions">
+            <a href="/" class="btn btn-primary">RETURN TO CONSOLE</a>
+            <a href="https://github.com/orthonode/Stylus-Hardware-Anchor" 
+               class="btn btn-secondary" 
+               target="_blank" 
+               rel="noopener noreferrer">
+                VIEW REPOSITORY
+            </a>
+        </div>
     </div>
+
+    <div class="system-info">
+        ORTHONODE_INFRASTRUCTURE_LABS // ERROR_HANDLER_v3.0 // STATUS:OPERATIONAL
+    </div>
+
 </body>
 </html>

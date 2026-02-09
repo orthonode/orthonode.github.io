@@ -3,98 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy | Orthonode Labs</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Privacy Policy | Orthonode Infrastructure Labs</title>
+    <meta name="description" content="Privacy policy and data sovereignty guidelines for Orthonode Infrastructure Labs. DPDP Act 2023 compliant. Telemetry processing, data retention, and PII exclusion policies.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://orthonode.xyz/privacy.html">
+    <meta name="author" content="Orthonode Infrastructure Labs">
+    
+    <!-- Geographic Targeting -->
+    <meta name="geo.region" content="IN-MP">
+    <meta name="geo.placename" content="Bhopal">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="https://github.com/orthonode/orthonode/blob/main/logo.png?raw=true">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg: #050505;
-            --surface: #0a0a0a;
-            --border: #262626;
-            --text-main: #ededed;
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --bg-elevated: #111111;
+            --border-subtle: #1a1a1a;
+            --border-primary: #262626;
+            --border-bright: #333333;
+            
+            --text-primary: #ffffff;
+            --text-secondary: #ededed;
+            --text-tertiary: #a3a3a3;
             --text-dim: #737373;
-            --accent: #333;
-            --font-ui: 'Inter', sans-serif;
-            --font-code: 'JetBrains Mono', monospace;
+            --text-muted: #525252;
+            
+            --accent-arbitrum: #28a0f0;
+            --accent-success: #22c55e;
+            
+            --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+            --font-display: 'Space Grotesk', sans-serif;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        *, *::before, *::after { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
         body { 
-            background: var(--bg); 
-            color: var(--text-main); 
-            font-family: var(--font-ui); 
-            line-height: 1.5; 
-            padding: 4rem 2rem;
-            display: flex;
-            justify-content: center;
+            background: var(--bg-primary);
+            color: var(--text-secondary); 
+            font-family: var(--font-ui);
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
         }
-        .container { 
-            max-width: 1000px; 
+
+        /* Animated Background Grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-left: 1px solid var(--border);
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--border-subtle) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        ::selection {
+            background: rgba(40, 160, 240, 0.3);
+            color: var(--text-primary);
+        }
+
+        a { 
+            color: var(--text-secondary);
+            text-decoration: none; 
+            transition: all 0.2s ease;
+        }
+
+        a:hover { 
+            color: var(--text-primary);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(12px) saturate(180%);
+            background: rgba(5, 5, 5, 0.85);
+            border-bottom: 1px solid var(--border-primary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.875rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 0.025em;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-success);
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        /* Document Header */
+        .doc-meta {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .doc-classification {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Page Title */
+        .page-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 0%, #d4d4d4 40%, #8a8a8a 60%, #b8b8b8 80%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+        }
+
+        /* Content Sections */
+        .content-wrapper {
+            border-left: 2px solid var(--border-primary);
             padding-left: 2rem;
         }
-        .silver-metal {
-            background: linear-gradient(to bottom, #ffffff 0%, #e2e2e2 25%, #a1a1a1 50%, #cfcfcf 75%, #ffffff 100%);
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5)); 
-            font-weight: 800; 
-            font-size: clamp(2rem, 5vw, 3rem); 
-            margin-bottom: 2rem; 
+
+        .info-block {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .info-item {
+            font-size: 0.9rem;
+        }
+
+        .info-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
             text-transform: uppercase;
-            font-family: var(--font-ui);
-            letter-spacing: -1px;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
         }
-        h2 { 
-            font-family: var(--font-code); 
-            font-size: 0.9rem; 
-            color: #fff; 
-            margin-top: 3rem; 
-            padding-bottom: 10px; 
-            margin-bottom: 1rem; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--border);
+
+        .info-value {
+            color: var(--text-primary);
+            font-weight: 500;
         }
-        p { color: var(--text-dim); margin-bottom: 1.2rem; font-size: 0.95rem; font-weight: 300; }
-        .mono { font-family: var(--font-code); color: var(--text-dim); font-size: 0.75rem; margin-bottom: 0.5rem; opacity: 0.6; }
-        .back-link { 
-            display: inline-block; 
-            margin-top: 4rem; 
-            font-family: var(--font-code); 
-            color: #fff; 
-            text-decoration: none; 
-            border: 1px solid var(--border); 
-            padding: 10px 20px; 
-            transition: 0.2s; 
-            font-size: 0.75rem; 
-            background: transparent; 
+
+        /* Section Headings */
+        h2 {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-primary);
         }
-        .back-link:hover { border-color: #fff; background: #fff; color: #000; }
+
+        h2::before {
+            content: '// ';
+            color: var(--text-dim);
+        }
+
+        /* Paragraphs */
+        p {
+            color: var(--text-tertiary);
+            font-size: 0.9375rem;
+            line-height: 1.75;
+            margin-bottom: 1.25rem;
+        }
+
+        p strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 4rem;
+            padding: 0.875rem 1.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            background: transparent;
+            border: 1px solid var(--border-bright);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .back-link:hover {
+            background: var(--bg-elevated);
+            border-color: var(--accent-arbitrum);
+            box-shadow: 0 0 12px rgba(40, 160, 240, 0.2);
+        }
+
+        .back-link::before {
+            content: '←';
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .content-wrapper {
+                padding-left: 1rem;
+                border-left-width: 1px;
+            }
+
+            .info-block {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .header-content {
+                padding: 0.75rem 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="mono">DOC_ID: PRIVACY_V2.5 // ORTHONODE_INFRASTRUCTURE_LABS</div>
-        <div class="mono" style="color: var(--text-dim);">ACCESS: RESTRICTED // ENTERPRISE AUDIT USE ONLY</div>
-        
-        <h1 class="silver-metal">Data Sovereignty</h1>
-        
-        <p><strong>Effective Date:</strong> February 2026</p>
-        <p><strong>Jurisdiction:</strong> Orthonode Infrastructure Labs Private Limited (India)</p>
 
-        <h2>1. Data Lifecycle & Retention</h2>
-        <p>Telemetry data provided for verification is processed in volatile memory or isolated compute environments. Raw coordinate data is automatically deleted within a maximum retention window of 30 days, unless a shorter period is contractually agreed. We do not retain historical route maps of Client assets.</p>
-
-        <h2>2. Data Isolation</h2>
-        <p>All verification workloads run in isolated containers. Data from one Client is never cross-referenced or mixed with data from another Client to prevent competitive leakage and ensure integrity of the forensic audit.</p>
-
-        <h2>3. Minimal Input & PII Exclusion</h2>
-        <p>The OAP verification engine requires only telemetric primitives (Time, GPS Lat/Long, Speed, IMU/Accelerometer). We do not require, request, or store PII (Personally Identifiable Information) such as driver names, vehicle license plates, or financial records.</p>
-
-        <h2>4. Regulatory Compliance</h2>
-        <p>Orthonode Infrastructure Labs complies with the Digital Personal Data Protection Act (DPDP) 2023 of India. The Lab does not intentionally process personal data. Any incidental personal data present in telemetry logs is processed solely for fraud detection and integrity verification under legitimate interest exemptions and is not retained.</p>
-        
-        <a href="index.html" class="back-link">&lt; RETURN_TO_CONSOLE</a>
+<!-- Fixed Header -->
+<header role="banner">
+    <div class="header-content">
+        <div class="header-left">
+            <span class="status-dot" role="img" aria-label="System operational"></span>
+            <span>ORTHONODE INFRASTRUCTURE [OPERATIONAL]</span>
+        </div>
     </div>
+</header>
+
+<!-- Main Content -->
+<main class="container">
+    <div class="doc-meta">DOC_ID: PRIVACY_V3.0 // ORTHONODE_INFRASTRUCTURE_LABS</div>
+    <div class="doc-classification">CLASSIFICATION: PUBLIC // LEGAL_DOCUMENT</div>
+    
+    <h1 class="page-title">Privacy Policy</h1>
+
+    <div class="content-wrapper">
+        <div class="info-block">
+            <div class="info-item">
+                <div class="info-label">Effective Date</div>
+                <div class="info-value">February 2026</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Jurisdiction</div>
+                <div class="info-value">Republic of India</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Entity</div>
+                <div class="info-value">Orthonode Infrastructure Labs</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Compliance</div>
+                <div class="info-value">DPDP Act 2023</div>
+            </div>
+        </div>
+
+        <h2>1. Data Collection & Processing</h2>
+        <p>
+            Orthonode Infrastructure Labs operates on a <strong>data minimization principle</strong>. For hardware verification protocols (SHA - Stylus Hardware Anchor), we process only cryptographic attestations derived from device hardware identifiers (eFuse MAC addresses, chip IDs). No personal identifiable information (PII) is collected, stored, or processed during standard protocol operations.
+        </p>
+        <p>
+            For research modules (OAP - Orthonode Assurance Platform), telemetry data submitted for verification analysis is processed in <strong>volatile memory or isolated compute environments</strong>. We require only telemetric primitives: Time, GPS Latitude/Longitude, Speed, IMU/Accelerometer data. We do not require, request, or store driver names, vehicle license plates, financial records, or other PII.
+        </p>
+
+        <h2>2. Data Lifecycle & Retention</h2>
+        <p>
+            <strong>Hardware Verification (SHA):</strong> Cryptographic proofs are recorded on-chain (Arbitrum blockchain) as permanent, immutable records. Off-chain metadata (if any) is retained for a maximum of 90 days for audit purposes, then automatically purged.
+        </p>
+        <p>
+            <strong>Telemetry Analysis (OAP):</strong> Raw coordinate data is automatically deleted within a maximum retention window of <strong>30 days</strong>, unless a shorter period is contractually agreed. We do not retain historical route maps of client assets. Verification results (risk scores, anomaly flags) may be retained for statistical analysis but are anonymized and aggregated.
+        </p>
+
+        <h2>3. Data Isolation & Security</h2>
+        <p>
+            All verification workloads run in <strong>isolated containers with strict access controls</strong>. Data from one client is never cross-referenced or mixed with data from another client to prevent competitive intelligence leakage and ensure forensic integrity.
+        </p>
+        <p>
+            We employ industry-standard security measures including:
+        </p>
+        <p>
+            • End-to-end encryption for data in transit (TLS 1.3)<br>
+            • Encryption at rest for temporary storage (AES-256)<br>
+            • Role-based access control (RBAC) for internal systems<br>
+            • Regular security audits and penetration testing<br>
+            • Zero-trust network architecture
+        </p>
+
+        <h2>4. PII Exclusion Policy</h2>
+        <p>
+            Our protocols are designed to operate <strong>without personal data</strong>. Hardware attestation relies on device-level cryptographic identities, not user identities. Telemetry verification analyzes physical motion patterns, not individual behavior tracking.
+        </p>
+        <p>
+            Any incidental personal data present in submitted telemetry logs (e.g., location data) is processed solely for <strong>fraud detection and integrity verification</strong> under legitimate interest exemptions and is not retained beyond the analysis period.
+        </p>
+
+        <h2>5. Regulatory Compliance</h2>
+        <p>
+            <strong>India - Digital Personal Data Protection Act (DPDP) 2023:</strong> Orthonode Infrastructure Labs complies with the DPDP Act 2023. Our protocols do not intentionally process personal data as defined under Indian law. Where data processing occurs, it is under lawful exemptions for fraud prevention, security research, and technical necessity.
+        </p>
+        <p>
+            <strong>International Operations:</strong> For clients outside India, we adhere to applicable data protection regulations including GDPR (EU), CCPA (California), and equivalent frameworks through contractual data processing agreements.
+        </p>
+
+        <h2>6. Third-Party Services</h2>
+        <p>
+            We utilize the following third-party infrastructure providers:
+        </p>
+        <p>
+            • <strong>Arbitrum Network:</strong> Blockchain infrastructure (decentralized, no PII)<br>
+            • <strong>GitHub:</strong> Code repository hosting (no customer data)<br>
+            • <strong>Cloud Compute Providers:</strong> Isolated verification environments (encrypted, temporary)
+        </p>
+        <p>
+            These providers are bound by their respective privacy policies and data processing agreements. We do not share customer data with third parties for marketing, analytics, or non-essential purposes.
+        </p>
+
+        <h2>7. User Rights</h2>
+        <p>
+            If you have submitted data to Orthonode Infrastructure Labs, you have the right to:
+        </p>
+        <p>
+            • <strong>Access:</strong> Request confirmation of what data we process<br>
+            • <strong>Rectification:</strong> Correct inaccurate data<br>
+            • <strong>Erasure:</strong> Request deletion before automatic purge<br>
+            • <strong>Portability:</strong> Receive your data in machine-readable format<br>
+            • <strong>Objection:</strong> Object to specific processing activities
+        </p>
+        <p>
+            To exercise these rights, contact: <strong>infrastructure@orthonode.xyz</strong>
+        </p>
+
+        <h2>8. Data Breach Notification</h2>
+        <p>
+            In the unlikely event of a data breach affecting customer data, we will notify affected parties within <strong>72 hours</strong> of discovery, in compliance with applicable regulations. Notifications will include the nature of the breach, affected data categories, and remediation steps taken.
+        </p>
+
+        <h2>9. Cookies & Tracking</h2>
+        <p>
+            Our website (orthonode.xyz) does not use cookies, tracking pixels, or analytics scripts. We do not track visitor behavior across sites. Access logs are retained for <strong>7 days</strong> for security monitoring purposes only (IP addresses, timestamps, requested URLs).
+        </p>
+
+        <h2>10. Children's Privacy</h2>
+        <p>
+            Our services are not directed at individuals under 18 years of age. We do not knowingly collect data from minors. If you believe we have inadvertently collected data from a minor, contact us immediately for deletion.
+        </p>
+
+        <h2>11. Changes to This Policy</h2>
+        <p>
+            We may update this privacy policy to reflect changes in our practices or legal requirements. Material changes will be communicated via email to registered contacts or posted prominently on our website 30 days prior to taking effect.
+        </p>
+        <p>
+            <strong>Last Updated:</strong> February 9, 2026<br>
+            <strong>Version:</strong> 3.0
+        </p>
+
+        <h2>12. Contact Information</h2>
+        <p>
+            <strong>Orthonode Infrastructure Labs</strong><br>
+            Bhopal, Madhya Pradesh, India<br>
+            Email: infrastructure@orthonode.xyz<br>
+            Privacy Inquiries: privacy@orthonode.xyz
+        </p>
+
+        <a href="/" class="back-link">RETURN TO CONSOLE</a>
+    </div>
+</main>
+
 </body>
 </html>

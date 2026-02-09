@@ -3,101 +3,533 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service | Orthonode Labs</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Terms of Service | Orthonode Infrastructure Labs</title>
+    <meta name="description" content="Terms of service for Orthonode Infrastructure Labs. Service scope, liability limitations, intellectual property rights, and governing law for SHA and OAP protocols.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://orthonode.xyz/terms.html">
+    <meta name="author" content="Orthonode Infrastructure Labs">
+    
+    <!-- Geographic Targeting -->
+    <meta name="geo.region" content="IN-MP">
+    <meta name="geo.placename" content="Bhopal">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="https://github.com/orthonode/orthonode/blob/main/logo.png?raw=true">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg: #050505;
-            --surface: #0a0a0a;
-            --border: #262626;
-            --text-main: #ededed;
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --bg-elevated: #111111;
+            --border-subtle: #1a1a1a;
+            --border-primary: #262626;
+            --border-bright: #333333;
+            
+            --text-primary: #ffffff;
+            --text-secondary: #ededed;
+            --text-tertiary: #a3a3a3;
             --text-dim: #737373;
-            --accent: #333;
-            --font-ui: 'Inter', sans-serif;
-            --font-code: 'JetBrains Mono', monospace;
+            --text-muted: #525252;
+            
+            --accent-arbitrum: #28a0f0;
+            --accent-success: #22c55e;
+            
+            --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+            --font-display: 'Space Grotesk', sans-serif;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        *, *::before, *::after { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
         body { 
-            background: var(--bg); 
-            color: var(--text-main); 
-            font-family: var(--font-ui); 
-            line-height: 1.5; 
-            padding: 4rem 2rem;
-            display: flex;
-            justify-content: center;
+            background: var(--bg-primary);
+            color: var(--text-secondary); 
+            font-family: var(--font-ui);
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
         }
-        .container { 
-            max-width: 1000px; 
+
+        /* Animated Background Grid */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-left: 1px solid var(--border);
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--border-subtle) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        ::selection {
+            background: rgba(40, 160, 240, 0.3);
+            color: var(--text-primary);
+        }
+
+        a { 
+            color: var(--text-secondary);
+            text-decoration: none; 
+            transition: all 0.2s ease;
+        }
+
+        a:hover { 
+            color: var(--text-primary);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(12px) saturate(180%);
+            background: rgba(5, 5, 5, 0.85);
+            border-bottom: 1px solid var(--border-primary);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.875rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            letter-spacing: 0.025em;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-success);
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+        }
+
+        /* Document Header */
+        .doc-meta {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .doc-classification {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Page Title */
+        .page-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #ffffff 0%, #d4d4d4 40%, #8a8a8a 60%, #b8b8b8 80%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+        }
+
+        /* Content Sections */
+        .content-wrapper {
+            border-left: 2px solid var(--border-primary);
             padding-left: 2rem;
         }
-        .silver-metal {
-            background: linear-gradient(to bottom, #ffffff 0%, #e2e2e2 25%, #a1a1a1 50%, #cfcfcf 75%, #ffffff 100%);
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5)); 
-            font-weight: 800; 
-            font-size: clamp(2rem, 5vw, 3rem); 
-            margin-bottom: 2rem; 
+
+        .info-block {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .info-item {
+            font-size: 0.9rem;
+        }
+
+        .info-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-dim);
             text-transform: uppercase;
-            font-family: var(--font-ui);
-            letter-spacing: -1px;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
         }
-        h2 { 
-            font-family: var(--font-code); 
-            font-size: 0.9rem; 
-            color: #fff; 
-            margin-top: 3rem; 
-            padding-bottom: 10px; 
-            margin-bottom: 1rem; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--border);
+
+        .info-value {
+            color: var(--text-primary);
+            font-weight: 500;
         }
-        p { color: var(--text-dim); margin-bottom: 1.2rem; font-size: 0.95rem; font-weight: 300; }
-        .mono { font-family: var(--font-code); color: var(--text-dim); font-size: 0.75rem; margin-bottom: 0.5rem; opacity: 0.6; }
-        .back-link { 
-            display: inline-block; 
-            margin-top: 4rem; 
-            font-family: var(--font-code); 
-            color: #fff; 
-            text-decoration: none; 
-            border: 1px solid var(--border); 
-            padding: 10px 20px; 
-            transition: 0.2s; 
-            font-size: 0.75rem; 
-            background: transparent; 
+
+        /* Section Headings */
+        h2 {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-primary);
         }
-        .back-link:hover { border-color: #fff; background: #fff; color: #000; }
+
+        h2::before {
+            content: '// ';
+            color: var(--text-dim);
+        }
+
+        /* Paragraphs */
+        p {
+            color: var(--text-tertiary);
+            font-size: 0.9375rem;
+            line-height: 1.75;
+            margin-bottom: 1.25rem;
+        }
+
+        p strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Back Link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 4rem;
+            padding: 0.875rem 1.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            background: transparent;
+            border: 1px solid var(--border-bright);
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            letter-spacing: 0.05em;
+        }
+
+        .back-link:hover {
+            background: var(--bg-elevated);
+            border-color: var(--accent-arbitrum);
+            box-shadow: 0 0 12px rgba(40, 160, 240, 0.2);
+        }
+
+        .back-link::before {
+            content: '←';
+            font-size: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .content-wrapper {
+                padding-left: 1rem;
+                border-left-width: 1px;
+            }
+
+            .info-block {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .header-content {
+                padding: 0.75rem 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="mono">DOC_ID: TERMS_V2.5 // ORTHONODE_INFRASTRUCTURE_LABS</div>
-        <div class="mono" style="color: var(--text-dim);">ACCESS: RESTRICTED // ENTERPRISE AUDIT USE ONLY</div>
-        
-        <h1 class="silver-metal">Service Terms</h1>
 
-        <h2>1. Scope of Audit</h2>
-        <p>By submitting telemetry data, logs, or API credentials to Orthonode Infrastructure Labs ("The Lab"), you engage us to perform a kinematic analysis via the Orthonode Assurance Platform (OAP). This engagement is strictly for verification purposes and does not constitute a freight management or dispatch contract.</p>
-
-        <h2>2. Read-Only Analysis</h2>
-        <p>OAP applies deterministic kinematic constraints and statistical tolerance bounds derived from physical motion models to detect non-physical telemetry patterns. All generated “Risk Scores” are advisory indicators and not automated enforcement actions. During evaluations, OAP operates on a passive, read-only basis.</p>
-
-        <h2>3. Accuracy & Advisory</h2>
-        <p>OAP utilizes deterministic physics models to detect anomalies. While we strive for high deterministic accuracy, "Risk Scores" are advisory. The Lab is not liable for operational decisions (e.g., banning a carrier) made by the Client based on OAP outputs.</p>
-
-        <h2>4. Limitation of Liability</h2>
-        <p>To the maximum extent permitted by law, Orthonode Infrastructure Labs’ aggregate liability arising from any audit engagement shall not exceed the fees paid by the Client for that specific engagement. In no event shall Orthonode be liable for indirect, incidental, or consequential damages, including lost revenue or reputational harm.</p>
-
-        <h2>5. Intellectual Property</h2>
-        <p>The client retains full ownership of their raw input data (GPS/IMU logs). Orthonode retains full ownership of the verification logic, models, and the generated "Risk Score" methodology.</p>
-
-        <h2>6. Governing Law</h2>
-        <p>These terms are governed by the laws of India. Orthonode Infrastructure Labs Private Limited is incorporated under Indian law. Exclusive jurisdiction resides with the courts of Balaghat, Madhya Pradesh.</p>
-
-        <a href="index.html" class="back-link">&lt; RETURN_TO_CONSOLE</a>
+<!-- Fixed Header -->
+<header role="banner">
+    <div class="header-content">
+        <div class="header-left">
+            <span class="status-dot" role="img" aria-label="System operational"></span>
+            <span>ORTHONODE INFRASTRUCTURE [OPERATIONAL]</span>
+        </div>
     </div>
+</header>
+
+<!-- Main Content -->
+<main class="container">
+    <div class="doc-meta">DOC_ID: TERMS_V3.0 // ORTHONODE_INFRASTRUCTURE_LABS</div>
+    <div class="doc-classification">CLASSIFICATION: PUBLIC // LEGAL_DOCUMENT</div>
+    
+    <h1 class="page-title">Terms of Service</h1>
+
+    <div class="content-wrapper">
+        <div class="info-block">
+            <div class="info-item">
+                <div class="info-label">Effective Date</div>
+                <div class="info-value">February 2026</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Jurisdiction</div>
+                <div class="info-value">Republic of India</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Entity</div>
+                <div class="info-value">Orthonode Infrastructure Labs</div>
+            </div>
+            <div class="info-item">
+                <div class="info-label">Governing Law</div>
+                <div class="info-value">Indian Contract Act 1872</div>
+            </div>
+        </div>
+
+        <h2>1. Scope of Services</h2>
+        <p>
+            Orthonode Infrastructure Labs ("the Lab", "we", "our") provides two primary infrastructure services:
+        </p>
+        <p>
+            <strong>SHA (Stylus Hardware Anchor):</strong> A blockchain protocol for cryptographic hardware verification on Arbitrum Stylus. By deploying or integrating SHA smart contracts, you engage with an open-source protocol governed by its MIT license and on-chain rules.
+        </p>
+        <p>
+            <strong>OAP (Orthonode Assurance Platform):</strong> A telemetry verification and fraud detection service. By submitting telemetry data, logs, or API credentials, you engage the Lab to perform kinematic analysis for verification purposes. This engagement does not constitute a freight management, dispatch, or operational control contract.
+        </p>
+
+        <h2>2. Service Delivery Model</h2>
+        <p>
+            <strong>SHA Protocol:</strong> Deployed as immutable smart contracts on Arbitrum blockchain. The Lab provides reference implementations, documentation, and integration support but does not operate or control on-chain deployments once verified and deployed.
+        </p>
+        <p>
+            <strong>OAP Analysis:</strong> Operates in <strong>read-only, passive evaluation mode</strong> during audit engagements. OAP applies deterministic kinematic constraints and statistical tolerance bounds derived from physical motion models to detect non-physical telemetry patterns. No automated enforcement actions are taken; all outputs are advisory.
+        </p>
+
+        <h2>3. Acceptance of Terms</h2>
+        <p>
+            By accessing our website, deploying SHA contracts, integrating our protocols, or submitting data for OAP analysis, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree, discontinue use immediately.
+        </p>
+
+        <h2>4. Advisory Nature of Outputs</h2>
+        <p>
+            <strong>Risk Scores and Verification Results:</strong> All outputs from SHA (hardware verification proofs) and OAP (fraud risk scores, anomaly flags) are <strong>advisory indicators only</strong>. While we employ rigorous cryptographic verification (SHA) and deterministic physics models (OAP), these outputs do not constitute:
+        </p>
+        <p>
+            • Legal determinations of fraud or misconduct<br>
+            • Binding decisions or enforceable actions<br>
+            • Guarantees of accuracy or completeness<br>
+            • Professional legal, financial, or regulatory advice
+        </p>
+        <p>
+            The Lab is <strong>not liable for operational decisions</strong> (e.g., terminating a service provider, blocking a device, withholding payment) made by clients based on our outputs. Clients retain full responsibility for interpreting results and determining appropriate actions.
+        </p>
+
+        <h2>5. Limitation of Liability</h2>
+        <p>
+            To the maximum extent permitted by law:
+        </p>
+        <p>
+            <strong>Aggregate Liability Cap:</strong> Orthonode Infrastructure Labs' total liability arising from any service engagement, contract, or use of our protocols shall not exceed the fees paid by the client for that specific engagement or, for open-source protocol usage, INR 10,000 (ten thousand Indian Rupees).
+        </p>
+        <p>
+            <strong>Exclusion of Consequential Damages:</strong> In no event shall the Lab be liable for indirect, incidental, consequential, special, or punitive damages including but not limited to:
+        </p>
+        <p>
+            • Lost revenue or profits<br>
+            • Business interruption<br>
+            • Reputational harm<br>
+            • Data loss or corruption<br>
+            • Third-party claims<br>
+            • Opportunity costs
+        </p>
+        <p>
+            This limitation applies regardless of the legal theory (contract, tort, negligence, strict liability) and even if the Lab was advised of the possibility of such damages.
+        </p>
+
+        <h2>6. Intellectual Property Rights</h2>
+        <p>
+            <strong>Client Data Ownership:</strong> Clients retain full ownership of their raw input data (telemetry logs, GPS/IMU data, API credentials). We claim no ownership rights over client-submitted data.
+        </p>
+        <p>
+            <strong>Lab IP Ownership:</strong> Orthonode Infrastructure Labs retains full ownership of:
+        </p>
+        <p>
+            • Verification algorithms, models, and methodologies<br>
+            • Risk scoring logic and statistical models<br>
+            • Software code, firmware, and smart contracts (unless open-sourced under MIT license)<br>
+            • Documentation, technical specifications, and research outputs<br>
+            • The "Orthonode", "SHA", "OAP", and "Nexus" trademarks and branding
+        </p>
+        <p>
+            <strong>Open Source Licenses:</strong> SHA smart contracts and related tooling are released under the MIT License. See repository LICENSE files for specific terms. Open-source contributions are subject to contributor license agreements.
+        </p>
+
+        <h2>7. Acceptable Use Policy</h2>
+        <p>
+            You agree not to:
+        </p>
+        <p>
+            • Reverse engineer proprietary verification algorithms<br>
+            • Attempt to manipulate or game risk scoring systems<br>
+            • Submit fabricated or intentionally misleading data<br>
+            • Use our services for unlawful purposes or regulatory evasion<br>
+            • Resell or redistribute our services without written authorization<br>
+            • Overload or attack our infrastructure (DDoS, brute force, etc.)<br>
+            • Violate third-party intellectual property rights using our tools
+        </p>
+        <p>
+            Violations may result in immediate service termination and legal action.
+        </p>
+
+        <h2>8. Service Availability & Support</h2>
+        <p>
+            <strong>Uptime:</strong> We strive for high availability but do not guarantee 100% uptime. Blockchain dependencies (Arbitrum network status) are outside our control.
+        </p>
+        <p>
+            <strong>Maintenance Windows:</strong> Scheduled maintenance will be communicated 48 hours in advance when possible. Emergency maintenance may occur without notice.
+        </p>
+        <p>
+            <strong>Support Channels:</strong> Technical support is available via email (infrastructure@orthonode.xyz) with target response times of 24-48 business hours. Priority support may be available under separate commercial agreements.
+        </p>
+
+        <h2>9. Payment Terms</h2>
+        <p>
+            <strong>Open-Source Protocols (SHA):</strong> No fees for protocol usage. Grant-funded development.
+        </p>
+        <p>
+            <strong>Commercial Services (OAP):</strong> Pricing is based on data volume, analysis complexity, and engagement scope. Payment terms are Net 30 days from invoice date unless otherwise agreed in writing. Late payments accrue interest at 1.5% per month (18% annually) or the maximum legal rate, whichever is lower.
+        </p>
+
+        <h2>10. Confidentiality</h2>
+        <p>
+            Both parties agree to maintain confidentiality of proprietary information disclosed during service engagements. This obligation survives termination for 3 years. Public information, independently developed information, and legally compelled disclosures are excluded.
+        </p>
+
+        <h2>11. Indemnification</h2>
+        <p>
+            Clients agree to indemnify and hold harmless Orthonode Infrastructure Labs, its officers, employees, and contractors from any claims, damages, or expenses (including reasonable legal fees) arising from:
+        </p>
+        <p>
+            • Client's breach of these Terms<br>
+            • Client's violation of applicable laws or regulations<br>
+            • Client's operational decisions based on our advisory outputs<br>
+            • Third-party claims related to client-submitted data
+        </p>
+
+        <h2>12. Force Majeure</h2>
+        <p>
+            Neither party shall be liable for failures or delays caused by circumstances beyond reasonable control, including: natural disasters, war, terrorism, pandemics, government actions, labor disputes, blockchain network failures, or internet outages. Obligations are suspended during force majeure events and resume when practicable.
+        </p>
+
+        <h2>13. Termination</h2>
+        <p>
+            <strong>By Client:</strong> May terminate service engagements with 30 days written notice. Fees for services rendered prior to termination remain due.
+        </p>
+        <p>
+            <strong>By Lab:</strong> May terminate immediately for material breach, non-payment, or Acceptable Use Policy violations. Will provide 30 days notice for non-cause terminations of ongoing engagements.
+        </p>
+        <p>
+            <strong>Effect of Termination:</strong> Client data will be deleted per our Privacy Policy. Outstanding fees become immediately due. Sections 5 (Liability), 6 (IP), 10 (Confidentiality), and 11 (Indemnification) survive termination.
+        </p>
+
+        <h2>14. Governing Law & Dispute Resolution</h2>
+        <p>
+            <strong>Governing Law:</strong> These Terms are governed by the laws of India, specifically the Indian Contract Act 1872, Information Technology Act 2000, and Digital Personal Data Protection Act 2023.
+        </p>
+        <p>
+            <strong>Jurisdiction:</strong> Orthonode Infrastructure Labs is incorporated under Indian law with registered operations in Madhya Pradesh. Exclusive jurisdiction for disputes resides with the courts of <strong>Bhopal, Madhya Pradesh, India</strong>.
+        </p>
+        <p>
+            <strong>Arbitration:</strong> Parties may agree to arbitration under the Arbitration and Conciliation Act 1996 (India). Arbitration shall be conducted in English in Bhopal, Madhya Pradesh.
+        </p>
+
+        <h2>15. Modifications to Terms</h2>
+        <p>
+            We reserve the right to modify these Terms at any time. Material changes will be communicated via email to registered contacts or posted prominently on our website at least <strong>30 days prior to taking effect</strong>. Continued use after the effective date constitutes acceptance of modified Terms.
+        </p>
+        <p>
+            <strong>Version History:</strong> Previous versions available upon request.
+        </p>
+
+        <h2>16. Severability</h2>
+        <p>
+            If any provision of these Terms is found unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect.
+        </p>
+
+        <h2>17. Entire Agreement</h2>
+        <p>
+            These Terms, together with any executed service agreements, constitute the entire agreement between parties and supersede all prior communications, understandings, or agreements (oral or written) regarding the subject matter.
+        </p>
+
+        <h2>18. Contact Information</h2>
+        <p>
+            <strong>Orthonode Infrastructure Labs</strong><br>
+            Bhopal, Madhya Pradesh, India<br>
+            Email: infrastructure@orthonode.xyz<br>
+            Legal Inquiries: legal@orthonode.xyz
+        </p>
+        <p>
+            <strong>Last Updated:</strong> February 9, 2026<br>
+            <strong>Version:</strong> 3.0
+        </p>
+
+        <a href="/" class="back-link">RETURN TO CONSOLE</a>
+    </div>
+</main>
+
 </body>
 </html>
