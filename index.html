@@ -200,7 +200,7 @@
             pointer-events: none;
         }
 
-        /* --- SECURITY GATE STYLES (Added) --- */
+        /* --- SECURITY GATE STYLES (Fixed Logo) --- */
         #security-gate {
             position: fixed;
             top: 0;
@@ -603,6 +603,26 @@
             color: var(--accent-success);
         }
 
+        /* Updates / Social Section (Added) */
+        .updates-section {
+            margin: 4rem 0;
+        }
+
+        .updates-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .updates-container:hover {
+             border-color: var(--border-bright);
+             box-shadow: var(--shadow-glow);
+        }
+
         /* CTA Section */
         .cta-section {
             margin: 6rem 0;
@@ -803,14 +823,14 @@
         /* Print Styles */
         @media print {
             header { position: relative; }
-            .cta-buttons, .metrics-section { display: none; }
+            .cta-buttons, .metrics-section, .updates-section { display: none; }
         }
     </style>
 </head>
 <body>
 
 <div id="security-gate">
-    <img src="https://orthonode.xyz/site-logo.png" alt="Orthonode Security">
+    <img src="https://orthonode.xyz/logo.png" alt="Orthonode Security">
     <h2>// ESTABLISHING_SECURE_UPLINK</h2>
     <div class="cf-turnstile" 
          data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb" 
@@ -973,6 +993,20 @@
                 <div class="metric-value" style="font-size: 1.5rem;">Questbook</div>
                 <span class="metric-change" style="color: var(--text-dim);">Milestone 1 Complete</span>
             </div>
+        </div>
+    </section>
+
+    <section class="updates-section" role="region" aria-label="Communication Uplink">
+        <h2 class="section-header">// COMMUNICATION_UPLINK : @OrthonodeSys</h2>
+        <div class="updates-container">
+            <a class="twitter-timeline" 
+               data-theme="dark" 
+               data-chrome="noheader nofooter noborders transparent"
+               data-height="600"
+               href="https://twitter.com/OrthonodeSys?ref_src=twsrc%5Etfw">
+               Loading Secure Feed...
+            </a> 
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
     </section>
 
