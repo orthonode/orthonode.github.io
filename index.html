@@ -603,7 +603,7 @@
             color: var(--accent-success);
         }
 
-        /* Updates / Social Section (Added) */
+        /* Updates / Social Section (Modified for Terminal Style) */
         .updates-section {
             margin: 4rem 0;
         }
@@ -621,6 +621,85 @@
         .updates-container:hover {
              border-color: var(--border-bright);
              box-shadow: var(--shadow-glow);
+        }
+
+        /* --- TERMINAL LOG STYLES (ADDED) --- */
+        .terminal-style {
+            background: #050505;
+            border: 1px solid #333;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 0;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .terminal-header {
+            background: #111;
+            padding: 0.75rem 1.5rem;
+            border-bottom: 1px solid #333;
+            font-size: 0.85rem;
+            color: #737373;
+            display: flex;
+            align-items: center;
+        }
+
+        .cmd-prompt {
+            color: var(--accent-success);
+            margin-right: 0.75rem;
+            font-weight: 600;
+        }
+
+        .terminal-entry {
+            padding: 2rem;
+        }
+
+        .entry-meta {
+            color: #525252;
+            font-size: 0.75rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            font-family: var(--font-mono);
+        }
+
+        .entry-content {
+            color: #d4d4d4;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-family: var(--font-mono);
+        }
+
+        .entry-content ul li {
+            margin-bottom: 0.5rem;
+            color: #a3a3a3;
+        }
+
+        .highlight-text {
+            color: var(--accent-arbitrum);
+            margin-top: 1.5rem;
+            font-style: italic;
+            border-left: 2px solid var(--accent-arbitrum);
+            padding-left: 1rem;
+            opacity: 0.9;
+        }
+
+        .entry-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #333;
+        }
+
+        .terminal-link {
+            font-size: 0.8rem;
+            color: #737373;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-family: var(--font-mono);
+            display: inline-block;
+        }
+
+        .terminal-link:hover {
+            color: var(--accent-arbitrum);
         }
 
         /* CTA Section */
@@ -997,16 +1076,34 @@
     </section>
 
     <section class="updates-section" role="region" aria-label="Communication Uplink">
-        <h2 class="section-header">// COMMUNICATION_UPLINK : @OrthonodeSys</h2>
-        <div class="updates-container">
-            <a class="twitter-timeline" 
-               data-theme="dark" 
-               data-chrome="noheader nofooter noborders transparent"
-               data-height="600"
-               href="https://twitter.com/OrthonodeSys?ref_src=twsrc%5Etfw">
-               Loading Secure Feed...
-            </a> 
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <h2 class="section-header">// SYSTEM_LOG : LATEST_TRANSMISSION</h2>
+        
+        <div class="updates-container terminal-style">
+            <div class="terminal-header">
+                <span class="cmd-prompt">root@orthonode:~#</span> cat /var/logs/system_update.txt
+            </div>
+            
+            <article class="terminal-entry">
+                <div class="entry-meta">
+                    <span class="entry-date">[2026-02-10 14:30 UTC]</span>
+                    <span class="entry-id">ID: SEC_GATE_DEPLOY</span>
+                </div>
+                <div class="entry-content">
+                    <p style="color: #fff; font-weight: 700; margin-bottom: 0.5rem;">INFRASTRUCTURE UPDATE: SECURITY GATE ACTIVE</p>
+                    <p>We have implemented a cryptographic pre-clearance layer on orthonode.xyz.</p>
+                    <ul style="list-style: none; padding-left: 0; margin: 1rem 0;">
+                        <li>> 🛡️ Anti-Sybil Verification [ONLINE]</li>
+                        <li>> ⚡ Zero-Friction Handshake [OPTIMIZED]</li>
+                        <li>> 🔒 Cloudflare Turnstile [INTEGRATED]</li>
+                    </ul>
+                    <p class="highlight-text">"If we can't verify the human at the gate, we can't verify the hardware on-chain."</p>
+                </div>
+                <div class="entry-footer">
+                    <a href="https://twitter.com/OrthonodeSys" target="_blank" class="terminal-link">
+                        [VIEW_ORIGINAL_TRANSMISSION] ↗
+                    </a>
+                </div>
+            </article>
         </div>
     </section>
 
