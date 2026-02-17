@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Site Index | Orthonode Infrastructure Labs</title>
+    <meta name="description" content="Complete directory of Orthonode Infrastructure Labs — product pages, technical documentation, legal documents, and on-chain evidence for SHA, OAP, and Nexus Protocol.">
+    <link rel="canonical" href="https://orthonode.xyz/site-index.html">
+    <meta name="robots" content="index, follow">
+
+    <meta name="theme-color" content="#050505">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://orthonode.xyz/site-logo.png">
+    <link rel="apple-touch-icon" href="https://orthonode.xyz/site-logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --bg-elevated: #111111;
+            --border-subtle: #1a1a1a;
+            --border-primary: #262626;
+            --border-bright: #333333;
+
+            --text-primary: #ffffff;
+            --text-secondary: #ededed;
+            --text-tertiary: #a3a3a3;
+            --text-dim: #737373;
+            --text-muted: #525252;
+
+            --accent-blue: #28a0f0;
+            --accent-blue-glow: rgba(40, 160, 240, 0.15);
+            --accent-amber: #fbbf24;
+            --accent-amber-glow: rgba(251, 191, 36, 0.15);
+            --accent-green: #00d084;
+            --accent-green-glow: rgba(0, 208, 132, 0.15);
+            --accent-success: #22c55e;
+            --accent-success-glow: rgba(34, 197, 94, 0.3);
+
+            --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+            --font-display: 'Space Grotesk', sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            font-family: var(--font-ui);
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                linear-gradient(var(--border-subtle) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        ::selection { background: rgba(40,160,240,0.3); color: var(--text-primary); }
+        a { color: var(--text-secondary); text-decoration: none; transition: all 0.2s ease; }
+        a:hover { color: var(--text-primary); }
+
+        /* Header */
+        header {
+            position: fixed; top: 0; width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(12px) saturate(180%);
+            background: rgba(5,5,5,0.85);
+            border-bottom: 1px solid var(--border-primary);
+        }
+        .header-content {
+            max-width: 1400px; margin: 0 auto;
+            padding: 0.875rem 2rem;
+            display: flex; justify-content: space-between; align-items: center; gap: 2rem;
+        }
+        .header-left, .header-right {
+            display: flex; align-items: center; gap: 1rem;
+            font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.025em;
+        }
+        .status-indicator { display: flex; align-items: center; gap: 0.5rem; color: var(--text-dim); }
+        .status-dot {
+            width: 6px; height: 6px;
+            background: var(--accent-success);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-success-glow);
+            animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .nav-back {
+            color: var(--text-dim);
+            font-family: var(--font-mono); font-size: 0.75rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            transition: color 0.2s;
+        }
+        .nav-back:hover { color: var(--accent-blue); }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+
+        /* Page Hero */
+        .page-hero { padding-top: 8rem; padding-bottom: 3rem; }
+
+        .breadcrumb {
+            font-family: var(--font-mono); font-size: 0.75rem;
+            color: var(--text-muted); margin-bottom: 2rem; letter-spacing: 0.05em;
+        }
+        .breadcrumb span { color: var(--accent-blue); }
+
+        .page-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        .page-subtitle {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 3rem;
+        }
+
+        /* Section headers */
+        .section-header {
+            font-family: var(--font-mono); font-size: 0.78rem;
+            color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em;
+            margin-bottom: 1.25rem; padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-primary);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .section-count {
+            font-family: var(--font-mono); font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* Index group */
+        .index-group { margin-bottom: 4rem; }
+
+        /* Index entries */
+        .index-list {
+            display: grid; grid-template-columns: 1fr;
+            gap: 1px; background: var(--border-primary);
+            border: 1px solid var(--border-primary);
+        }
+
+        .index-entry {
+            background: var(--bg-secondary);
+            display: grid;
+            grid-template-columns: 280px 1fr auto;
+            gap: 0;
+            transition: background 0.2s ease;
+            text-decoration: none;
+        }
+        .index-entry:hover { background: var(--bg-elevated); }
+        .index-entry:hover .entry-path { color: var(--text-primary); }
+
+        .entry-path-col {
+            padding: 1.25rem 1.5rem;
+            border-right: 1px solid var(--border-primary);
+            display: flex; flex-direction: column; justify-content: center; gap: 0.35rem;
+        }
+        .entry-path {
+            font-family: var(--font-mono); font-size: 0.8rem;
+            color: var(--accent-blue); transition: color 0.2s;
+            word-break: break-all;
+        }
+        .entry-path.amber { color: var(--accent-amber); }
+        .entry-path.green { color: var(--accent-green); }
+        .entry-path.dim { color: var(--text-dim); }
+
+        .entry-type {
+            font-family: var(--font-mono); font-size: 0.65rem;
+            color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em;
+        }
+
+        .entry-body-col {
+            padding: 1.25rem 1.75rem;
+            display: flex; flex-direction: column; justify-content: center; gap: 0.4rem;
+        }
+        .entry-title {
+            font-family: var(--font-display); font-size: 0.95rem;
+            color: var(--text-primary); font-weight: 600;
+        }
+        .entry-desc {
+            font-size: 0.85rem; color: var(--text-tertiary);
+            line-height: 1.5;
+        }
+
+        .entry-meta-col {
+            padding: 1.25rem 1.5rem;
+            border-left: 1px solid var(--border-primary);
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: flex-end; gap: 0.4rem;
+            min-width: 140px;
+        }
+        .entry-status {
+            font-family: var(--font-mono); font-size: 0.68rem;
+            text-transform: uppercase; letter-spacing: 0.08em;
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-bright);
+            white-space: nowrap;
+        }
+        .entry-status.live { color: var(--accent-success); border-color: rgba(34,197,94,0.3); }
+        .entry-status.active { color: var(--accent-green); border-color: rgba(0,208,132,0.3); }
+        .entry-status.pending { color: var(--accent-amber); border-color: rgba(251,191,36,0.3); }
+        .entry-status.legal { color: var(--text-dim); border-color: var(--border-primary); }
+        .entry-status.external { color: var(--accent-blue); border-color: rgba(40,160,240,0.3); }
+
+        .entry-lastmod {
+            font-family: var(--font-mono); font-size: 0.68rem;
+            color: var(--text-muted);
+        }
+
+        /* On-chain evidence block */
+        .evidence-group { margin-bottom: 4rem; }
+
+        .evidence-list {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1px; background: var(--border-primary);
+            border: 1px solid var(--border-primary);
+        }
+        .evidence-card {
+            background: var(--bg-secondary); padding: 1.5rem 2rem;
+            transition: background 0.2s ease;
+        }
+        .evidence-card:hover { background: var(--bg-elevated); }
+        .evidence-label {
+            font-family: var(--font-mono); font-size: 0.68rem;
+            color: var(--text-muted); text-transform: uppercase;
+            letter-spacing: 0.08em; margin-bottom: 0.6rem;
+        }
+        .evidence-value {
+            font-family: var(--font-mono); font-size: 0.8rem;
+            color: var(--text-primary); word-break: break-all; margin-bottom: 0.6rem;
+            line-height: 1.5;
+        }
+        .evidence-link {
+            font-family: var(--font-mono); font-size: 0.78rem;
+            color: var(--accent-blue);
+        }
+        .evidence-link:hover { text-decoration: underline; }
+
+        /* Summary strip */
+        .summary-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1px; background: var(--border-primary);
+            border: 1px solid var(--border-primary);
+            margin-bottom: 4rem;
+        }
+        .summary-item { background: var(--bg-secondary); padding: 1.25rem 1.5rem; }
+        .summary-val {
+            font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700;
+            color: var(--text-primary); display: block; margin-bottom: 0.2rem;
+        }
+        .summary-label {
+            font-family: var(--font-mono); font-size: 0.65rem;
+            color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em;
+        }
+
+        /* Footer */
+        footer { margin-top: 6rem; padding: 3rem 0 2rem; border-top: 1px solid var(--border-primary); }
+        .footer-bottom {
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);
+        }
+        .footer-legal { display: flex; gap: 1.5rem; }
+        .footer-legal a { color: var(--text-muted); }
+        .footer-legal a:hover { color: var(--accent-blue); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .index-entry { grid-template-columns: 220px 1fr auto; }
+        }
+        @media (max-width: 768px) {
+            .index-entry { grid-template-columns: 1fr; }
+            .entry-path-col { border-right: none; border-bottom: 1px solid var(--border-primary); }
+            .entry-meta-col { border-left: none; border-top: 1px solid var(--border-primary); align-items: flex-start; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header role="banner">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="/" class="nav-back">← orthonode.xyz</a>
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span>SITE_INDEX [CURRENT]</span>
+                </div>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted);">
+                Last updated: 2026-02-18
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="page-hero">
+            <p class="breadcrumb">ORTHONODE SYSTEMS / <span>SITE INDEX</span></p>
+            <h1 class="page-title">Site Directory</h1>
+            <p class="page-subtitle">// Complete index of all pages, protocols, documentation, and external resources</p>
+        </section>
+
+        <!-- Summary -->
+        <div class="summary-strip">
+            <div class="summary-item">
+                <span class="summary-val">9</span>
+                <span class="summary-label">Total Pages</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-val">3</span>
+                <span class="summary-label">Product Pages</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-val">2</span>
+                <span class="summary-label">Legal Documents</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-val">1</span>
+                <span class="summary-label">Testnet Live (SHA)</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-val">2026-02-18</span>
+                <span class="summary-label">Index Updated</span>
+            </div>
+        </div>
+
+        <!-- Core Pages -->
+        <div class="index-group">
+            <div class="section-header">
+                <span>// CORE_PAGES : MAIN_SITE</span>
+                <span class="section-count">4 pages</span>
+            </div>
+            <div class="index-list">
+                <a href="/" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path">orthonode.xyz/</div>
+                        <div class="entry-type">Homepage</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">Orthonode Infrastructure Labs</div>
+                        <div class="entry-desc">Main homepage. Multi-product overview — SHA, OAP, Nexus. Doctrine, problem statement, application domains, and on-chain metrics for SHA Sepolia deployment.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status live">Live</span>
+                        <span class="entry-lastmod">2026-02-18</span>
+                    </div>
+                </a>
+
+                <a href="/site-index.html" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path dim">orthonode.xyz/site-index.html</div>
+                        <div class="entry-type">Directory</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">Site Index (This Page)</div>
+                        <div class="entry-desc">Complete directory of all pages, documents, external repositories, and on-chain evidence. Human-readable counterpart to sitemap.xml.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status live">Live</span>
+                        <span class="entry-lastmod">2026-02-18</span>
+                    </div>
+                </a>
+
+                <a href="/terms.html" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path dim">orthonode.xyz/terms.html</div>
+                        <div class="entry-type">Legal Document</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">Terms of Service</div>
+                        <div class="entry-desc">Service scope, liability limitations, IP rights, acceptable use policy, and governing law for all Orthonode protocols (SHA, OAP, Nexus). Governed by Indian law, jurisdiction: Bhopal, MP.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status legal">Legal</span>
+                        <span class="entry-lastmod">2026-02-18</span>
+                    </div>
+                </a>
+
+                <a href="/privacy.html" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path dim">orthonode.xyz/privacy.html</div>
+                        <div class="entry-type">Legal Document</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">Privacy Policy</div>
+                        <div class="entry-desc">Data minimization principles, DPDP Act 2023 compliance, telemetry retention policy, PII exclusion guarantees, and third-party provider disclosures. v3.1.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status legal">Legal</span>
+                        <span class="entry-lastmod">2026-02-18</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Product Pages -->
+        <div class="index-group">
+            <div class="section-header">
+                <span>// PRODUCT_PAGES : PROTOCOL_DOCUMENTATION</span>
+                <span class="section-count">3 pages</span>
+            </div>
+            <div class="index-list">
+                <a href="/sha.html" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path">orthonode.xyz/sha.html</div>
+                        <div class="entry-type">Product — On-Chain</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">SHA — Stylus Hardware Anchor</div>
+                        <div class="entry-desc">Hardware identity verification primitive for Arbitrum Stylus. ESP32-S3 eFuse binding, replay-safe receipts, firmware governance. Prototype deployed on Arbitrum Sepolia. Gas benchmarks, architecture, grant roadmap, and on-chain evidence.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status live">Testnet Live</span>
+                        <span class="entry-lastmod">2026-02-18</span>
+                    </div>
+                </a>
+
+                <a href="/oap.html" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path amber">orthonode.xyz/oap.html</div>
+                        <div class="entry-type">Product — In Development</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">OAP — Integrity Governance Engine</div>
+                        <div class="entry-desc">Deterministic motion validation and lifecycle trust governance for mobility, robotics, and DePIN systems. Physics envelope enforcement, trust lifecycle, identity containment, adaptive anchoring. Design architecture published.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status pending">In Development</span>
+                        <span class="entry-lastmod">2026-02-18</span>
+                    </div>
+                </a>
+
+                <a href="/nexus.html" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path green">orthonode.xyz/nexus.html</div>
+                        <div class="entry-type">Product — Active Research</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">Nexus Protocol — Sovereign Edge Gateway</div>
+                        <div class="entry-desc">Zero-trust edge execution layer for DePIN hardware. Verify-then-Execute model, Cloudflare Zero Trust ingress, fail-closed Sentry, 60/30/10 economic invariant. Phase 1.4.0 active. 1M TX stress test validated.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status active">Phase 1.4.0</span>
+                        <span class="entry-lastmod">2026-02-18</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- External Technical Resources -->
+        <div class="index-group">
+            <div class="section-header">
+                <span>// EXTERNAL_RESOURCES : GITHUB_REPOSITORIES</span>
+                <span class="section-count">3 repositories</span>
+            </div>
+            <div class="index-list">
+                <a href="https://github.com/arhantbarmate/stylus-hardware-anchor" target="_blank" rel="noopener" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path">github.com/arhantbarmate/<br>stylus-hardware-anchor</div>
+                        <div class="entry-type">Repository — SHA</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">SHA — Source Repository</div>
+                        <div class="entry-desc">Rust/WASM Stylus contract, ESP32-S3 firmware, Python SDK (anchor-verifier), BENCHMARKS.md, ARCHITECTURE.md, SETUP_GUIDE.md. MIT License. v1.0.0 prototype release tagged.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status external">GitHub ↗</span>
+                        <span class="entry-lastmod">MIT License</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/arhantbarmate/nexus-core" target="_blank" rel="noopener" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path green">github.com/arhantbarmate/<br>nexus-core</div>
+                        <div class="entry-type">Repository — Nexus</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">Nexus Protocol — Source Repository</div>
+                        <div class="entry-desc">Sovereign edge gateway source. Includes Hivemapper Bee Runtime (ARMv8 dashcam reference), ARCHITECTURE.md, THREAT_MODEL.md, GOVERNANCE.md, ROADMAP.md. Phase 1.4.0.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status external">GitHub ↗</span>
+                        <span class="entry-lastmod">Apache 2.0</span>
+                    </div>
+                </a>
+
+                <a href="https://github.com/orthonode" target="_blank" rel="noopener" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path dim">github.com/orthonode</div>
+                        <div class="entry-type">Organisation</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">Orthonode — GitHub Organisation</div>
+                        <div class="entry-desc">Orthonode Infrastructure Labs organisation profile. Contains brand assets, organisation-level documentation, and supplementary repositories.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status external">GitHub ↗</span>
+                        <span class="entry-lastmod">—</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- On-Chain Evidence -->
+        <div class="evidence-group">
+            <div class="section-header">
+                <span>// ON_CHAIN_EVIDENCE : ARBITRUM_SEPOLIA [SHA]</span>
+                <span class="section-count">4 artifacts</span>
+            </div>
+            <div class="evidence-list">
+                <div class="evidence-card">
+                    <div class="evidence-label">SHA Contract — Benchmark Suite</div>
+                    <div class="evidence-value">0xd661a1ab8cefaacd78f4b968670c3bc438415615</div>
+                    <a href="https://sepolia.arbiscan.io/address/0xd661a1ab8cefaacd78f4b968670c3bc438415615" class="evidence-link" target="_blank" rel="noopener">View on Arbiscan →</a>
+                </div>
+                <div class="evidence-card">
+                    <div class="evidence-label">Deploy Transaction</div>
+                    <div class="evidence-value" style="font-size: 0.72rem;">0x1a9eaa02f816d86a71f9bf234425e83b5c090d1f3e4f3691851964b71747a489</div>
+                    <a href="https://sepolia.arbiscan.io/tx/0x1a9eaa02f816d86a71f9bf234425e83b5c090d1f3e4f3691851964b71747a489" class="evidence-link" target="_blank" rel="noopener">View TX →</a>
+                </div>
+                <div class="evidence-card">
+                    <div class="evidence-label">Activate Transaction</div>
+                    <div class="evidence-value" style="font-size: 0.72rem;">0x353d26f4dea36a4410454b7b081cc41610f691dfea7ce29d5c9b1e9aa968f955</div>
+                    <a href="https://sepolia.arbiscan.io/tx/0x353d26f4dea36a4410454b7b081cc41610f691dfea7ce29d5c9b1e9aa968f955" class="evidence-link" target="_blank" rel="noopener">View TX →</a>
+                </div>
+                <div class="evidence-card">
+                    <div class="evidence-label">v1.0.0 Prototype Release</div>
+                    <div class="evidence-value">GitHub Release · Tagged · Sepolia deployment included</div>
+                    <a href="https://github.com/arhantbarmate/stylus-hardware-anchor/releases/tag/v1.0.0" class="evidence-link" target="_blank" rel="noopener">View Release →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- External Profiles -->
+        <div class="index-group">
+            <div class="section-header">
+                <span>// EXTERNAL_PROFILES : SOCIAL_CONNECT</span>
+                <span class="section-count">4 channels</span>
+            </div>
+            <div class="index-list">
+                <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path">twitter.com/OrthonodeSys</div>
+                        <div class="entry-type">Social</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">X / Twitter — @OrthonodeSys</div>
+                        <div class="entry-desc">Technical announcements, protocol updates, and ecosystem engagement.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status external">External ↗</span>
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path dim">linkedin.com/in/arhant-barmate</div>
+                        <div class="entry-type">Professional</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">LinkedIn — Arhant Barmate</div>
+                        <div class="entry-desc">Founder & Lead Engineer, Orthonode Infrastructure Labs. Professional profile and research background.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status external">External ↗</span>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/arhantofficial/" target="_blank" rel="noopener" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path dim">instagram.com/arhantofficial</div>
+                        <div class="entry-type">Social</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">Instagram — @arhantofficial</div>
+                        <div class="entry-desc">Personal profile of Arhant Barmate, Founder.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status external">External ↗</span>
+                    </div>
+                </a>
+                <a href="https://www.reddit.com/user/Automatic_Stick_3881/" target="_blank" rel="noopener" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path dim">reddit.com/u/Automatic_Stick_3881</div>
+                        <div class="entry-type">Community</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">Reddit — u/Automatic_Stick_3881</div>
+                        <div class="entry-desc">Community engagement and ecosystem discussions.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status external">External ↗</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- XML / technical -->
+        <div class="index-group">
+            <div class="section-header">
+                <span>// TECHNICAL_FILES : SEO_CRAWL</span>
+                <span class="section-count">1 file</span>
+            </div>
+            <div class="index-list">
+                <a href="/sitemap.xml" class="index-entry">
+                    <div class="entry-path-col">
+                        <div class="entry-path dim">orthonode.xyz/sitemap.xml</div>
+                        <div class="entry-type">XML Sitemap</div>
+                    </div>
+                    <div class="entry-body-col">
+                        <div class="entry-title">Sitemap — XML</div>
+                        <div class="entry-desc">Machine-readable sitemap for search engine crawlers. Lists all indexable pages with priority, changefreq, and lastmod. Submitted to Google Search Console.</div>
+                    </div>
+                    <div class="entry-meta-col">
+                        <span class="entry-status live">Current</span>
+                        <span class="entry-lastmod">2026-02-18</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-bottom">
+                <div>© 2026 Orthonode Infrastructure Labs™. All Rights Reserved. — Bhopal, Madhya Pradesh, India (NIC 72900)</div>
+                <div class="footer-legal">
+                    <a href="/terms.html">Terms</a>
+                    <a href="/privacy.html">Privacy</a>
+                    <a href="/sitemap.xml">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
