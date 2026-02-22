@@ -1147,13 +1147,37 @@
     </section>
 
     <section class="updates-section" role="region" aria-label="Communication Uplink">
-        <h2 class="section-header">// SYSTEM_LOG : LATEST_TRANSMISSION</h2>
+        <h2 class="section-header">// SYSTEM_LOG : LATEST_TRANSMISSIONS</h2>
         
         <div class="updates-container terminal-style">
             <div class="terminal-header">
-                <span class="cmd-prompt">root@orthonode:~#</span> cat /var/logs/system_update.txt
+                <span class="cmd-prompt">root@orthonode:~#</span> cat /var/logs/system_update.txt | tail -2
             </div>
-            
+
+            <article class="terminal-entry" style="border-bottom: 1px dashed #222;">
+                <div class="entry-meta">
+                    <span class="entry-date">[2026-02-22 09:00 UTC]</span>
+                    <span class="entry-id" style="color: #ef4444;">ID: IOTEX_EXPLOIT_ANALYSIS</span>
+                </div>
+                <div class="entry-content">
+                    <p style="color: #fff; font-weight: 700; margin-bottom: 0.5rem;">RESEARCH PUBLISHED: IoTeX Exploit Forensic Breakdown</p>
+                    <p style="margin-bottom: 1rem;">IoTeX lost $2M–$8.8M on February 21 to a private key compromise planned 6–18 months in advance. We published a full forensic analysis — gate-by-gate — of how SHA-gated execution would have stopped it.</p>
+                    <ul style="list-style: none; padding-left: 0; margin: 1rem 0;">
+                        <li>> Formal threat model (8 attacker assumptions, 5 out-of-scope vectors)</li>
+                        <li>> Gate 1–4 forensic analysis with conditional verdicts</li>
+                        <li>> Comparative analysis: SHA vs HSM / MPC / TSS / multi-sig</li>
+                        <li>> OAP structural model applied to 18-month dwell window</li>
+                        <li>> Full adversarial counter-analysis</li>
+                    </ul>
+                    <p class="highlight-text">"You can copy a key. You cannot copy silicon."</p>
+                </div>
+                <div class="entry-footer">
+                    <a href="/iotex-research.html" class="terminal-link">
+                        [READ_FULL_PAPER → orthonode.xyz/iotex-research.html] ↗
+                    </a>
+                </div>
+            </article>
+
             <article class="terminal-entry">
                 <div class="entry-meta">
                     <span class="entry-date">[2026-02-10 14:30 UTC]</span>
@@ -1182,7 +1206,8 @@
     <section style="margin: 4rem 0;" role="region" aria-label="Research publications">
         <h2 class="section-header">// RESEARCH_LOG : PUBLISHED_ANALYSIS</h2>
         <div style="background:var(--bg-secondary);border:1px solid var(--border-primary);overflow:hidden;">
-            <!-- Featured paper -->
+
+            <!-- Paper 1 — IoTeX forensic -->
             <div style="display:grid;grid-template-columns:1fr auto;gap:2rem;padding:2.5rem;align-items:start;border-bottom:1px solid var(--border-primary);" onmouseover="this.style.background='var(--bg-elevated)'" onmouseout="this.style.background='transparent'">
                 <div>
                     <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;flex-wrap:wrap;">
@@ -1190,36 +1215,68 @@
                         <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);">22 FEB 2026</span>
                         <span style="font-family:var(--font-mono);font-size:0.68rem;padding:0.2rem 0.5rem;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:3px;color:var(--accent-success);">PEER REVIEWED DRAFT</span>
                     </div>
-                    <h3 style="font-family:var(--font-display);font-size:1.35rem;font-weight:700;color:var(--text-primary);margin-bottom:0.875rem;line-height:1.2;">
+                    <h3 style="font-family:var(--font-display);font-size:1.25rem;font-weight:700;color:var(--text-primary);margin-bottom:0.875rem;line-height:1.2;">
                         The IoTeX Exploit of February 2026: Silicon-Level Identity as a Mitigation Primitive
                     </h3>
-                    <p style="color:var(--text-tertiary);font-size:0.9375rem;line-height:1.65;margin-bottom:1.25rem;max-width:680px;">
-                        A forensic case study of the $2M–$8.8M IoTeX private key compromise, analysed gate-by-gate through the SHA (Stylus Hardware Anchor) framework. Includes formal threat model, comparative analysis against HSM/MPC/TSS, OAP structural model, and full adversarial counter-analysis. Under the stated threat model, SHA-gated execution would be expected to prevent the attack at Gate 1.
+                    <p style="color:var(--text-tertiary);font-size:0.9rem;line-height:1.65;margin-bottom:1.25rem;max-width:640px;">
+                        Forensic case study of the $2M–$8.8M IoTeX private key compromise. Gate-by-gate SHA analysis, formal threat model, comparative breakdown vs HSM/MPC/TSS, OAP behavioral model, and full adversarial counter-analysis.
                     </p>
-                    <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.5rem;">
-                        <span style="font-family:var(--font-mono);font-size:0.72rem;padding:0.25rem 0.6rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">PRIVATE_KEY_COMPROMISE</span>
-                        <span style="font-family:var(--font-mono);font-size:0.72rem;padding:0.25rem 0.6rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">SHA_FORENSICS</span>
-                        <span style="font-family:var(--font-mono);font-size:0.72rem;padding:0.25rem 0.6rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">DEPIN_SECURITY</span>
-                        <span style="font-family:var(--font-mono);font-size:0.72rem;padding:0.25rem 0.6rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">OAP_BEHAVIORAL_MODEL</span>
-                        <span style="font-family:var(--font-mono);font-size:0.72rem;padding:0.25rem 0.6rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">ARBITRUM_STYLUS</span>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;">
+                        <span style="font-family:var(--font-mono);font-size:0.7rem;padding:0.2rem 0.55rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">PRIVATE_KEY_COMPROMISE</span>
+                        <span style="font-family:var(--font-mono);font-size:0.7rem;padding:0.2rem 0.55rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">SHA_FORENSICS</span>
+                        <span style="font-family:var(--font-mono);font-size:0.7rem;padding:0.2rem 0.55rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">DEPIN_SECURITY</span>
+                        <span style="font-family:var(--font-mono);font-size:0.7rem;padding:0.2rem 0.55rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">OAP_MODEL</span>
                     </div>
-                    <a href="/iotex-research.html" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.82rem;font-weight:600;color:var(--accent-arbitrum);padding:0.7rem 1.4rem;border:1px solid rgba(40,160,240,0.35);border-radius:4px;background:rgba(40,160,240,0.06);text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='rgba(40,160,240,0.12)';this.style.borderColor='var(--accent-arbitrum)'" onmouseout="this.style.background='rgba(40,160,240,0.06)';this.style.borderColor='rgba(40,160,240,0.35)'">
+                    <a href="/iotex-research.html" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.8rem;font-weight:600;color:var(--accent-arbitrum);padding:0.65rem 1.25rem;border:1px solid rgba(40,160,240,0.35);border-radius:4px;background:rgba(40,160,240,0.06);text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='rgba(40,160,240,0.12)'" onmouseout="this.style.background='rgba(40,160,240,0.06)'">
                         Read Full Paper →
                     </a>
                 </div>
-                <div style="min-width:180px;background:var(--bg-primary);border:1px solid var(--border-primary);padding:1.25rem;font-family:var(--font-mono);font-size:0.75rem;display:flex;flex-direction:column;gap:0.75rem;">
-                    <div style="color:var(--text-muted);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.25rem;">// PAPER_STATS</div>
+                <div style="min-width:160px;background:var(--bg-primary);border:1px solid var(--border-primary);padding:1.25rem;font-family:var(--font-mono);font-size:0.75rem;display:flex;flex-direction:column;gap:0.7rem;">
+                    <div style="color:var(--text-muted);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.15rem;">// STATS</div>
                     <div style="display:flex;justify-content:space-between;gap:0.5rem;"><span style="color:var(--text-muted);">Loss</span><span style="color:#f87171;font-weight:600;">$2M–$8.8M</span></div>
-                    <div style="display:flex;justify-content:space-between;gap:0.5rem;"><span style="color:var(--text-muted);">SHA Gates</span><span style="color:var(--text-secondary);">4</span></div>
-                    <div style="display:flex;justify-content:space-between;gap:0.5rem;"><span style="color:var(--text-muted);">Dwell</span><span style="color:#f87171;">6–18 months</span></div>
-                    <div style="display:flex;justify-content:space-between;gap:0.5rem;"><span style="color:var(--text-muted);">Attack stops</span><span style="color:var(--accent-success);">Gate 1</span></div>
-                    <div style="border-top:1px solid var(--border-subtle);padding-top:0.75rem;display:flex;justify-content:space-between;gap:0.5rem;"><span style="color:var(--text-muted);">Grant score</span><span style="color:var(--accent-success);">9.5/10</span></div>
+                    <div style="display:flex;justify-content:space-between;gap:0.5rem;"><span style="color:var(--text-muted);">Gates</span><span style="color:var(--text-secondary);">4</span></div>
+                    <div style="display:flex;justify-content:space-between;gap:0.5rem;"><span style="color:var(--text-muted);">Stops at</span><span style="color:var(--accent-success);">Gate 1</span></div>
+                    <div style="display:flex;justify-content:space-between;gap:0.5rem;"><span style="color:var(--text-muted);">Grant score</span><span style="color:var(--accent-success);">9.5/10</span></div>
                 </div>
             </div>
+
+            <!-- Paper 2 — SHA DePIN article -->
+            <div style="display:grid;grid-template-columns:1fr auto;gap:2rem;padding:2.5rem;align-items:start;" onmouseover="this.style.background='var(--bg-elevated)'" onmouseout="this.style.background='transparent'">
+                <div>
+                    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;flex-wrap:wrap;">
+                        <span style="font-family:var(--font-mono);font-size:0.68rem;padding:0.25rem 0.6rem;background:rgba(40,160,240,0.1);border:1px solid rgba(40,160,240,0.3);border-radius:3px;color:var(--accent-arbitrum);font-weight:600;">TECHNICAL DEEP-DIVE</span>
+                        <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);">FEB 2026</span>
+                        <span style="font-family:var(--font-mono);font-size:0.68rem;padding:0.2rem 0.5rem;background:rgba(40,160,240,0.06);border:1px solid rgba(40,160,240,0.2);border-radius:3px;color:var(--accent-arbitrum);">PUBLISHED</span>
+                    </div>
+                    <h3 style="font-family:var(--font-display);font-size:1.25rem;font-weight:700;color:var(--text-primary);margin-bottom:0.875rem;line-height:1.2;">
+                        SHA: The Hardware Trust Layer DePIN Has Been Missing
+                    </h3>
+                    <p style="color:var(--text-tertiary);font-size:0.9rem;line-height:1.65;margin-bottom:1.25rem;max-width:640px;">
+                        Full technical breakdown of SHA — how eFuse silicon identity binds to on-chain execution, the four-guarantee architecture, Stylus gas benchmarks (12,564 gas/receipt at N=50), and why this is only possible on Arbitrum Stylus.
+                    </p>
+                    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;">
+                        <span style="font-family:var(--font-mono);font-size:0.7rem;padding:0.2rem 0.55rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">HARDWARE_IDENTITY</span>
+                        <span style="font-family:var(--font-mono);font-size:0.7rem;padding:0.2rem 0.55rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">EFUSE_SILICON</span>
+                        <span style="font-family:var(--font-mono);font-size:0.7rem;padding:0.2rem 0.55rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">ARBITRUM_STYLUS</span>
+                        <span style="font-family:var(--font-mono);font-size:0.7rem;padding:0.2rem 0.55rem;background:var(--bg-primary);border:1px solid var(--border-bright);border-radius:3px;color:var(--text-dim);">SYBIL_RESISTANCE</span>
+                    </div>
+                    <a href="/sha.html" style="display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--font-mono);font-size:0.8rem;font-weight:600;color:var(--accent-arbitrum);padding:0.65rem 1.25rem;border:1px solid rgba(40,160,240,0.35);border-radius:4px;background:rgba(40,160,240,0.06);text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='rgba(40,160,240,0.12)'" onmouseout="this.style.background='rgba(40,160,240,0.06)'">
+                        Read Article →
+                    </a>
+                </div>
+                <div style="min-width:160px;background:var(--bg-primary);border:1px solid var(--border-primary);padding:1.25rem;font-family:var(--font-mono);font-size:0.75rem;display:flex;flex-direction:column;gap:0.7rem;">
+                    <div style="color:var(--text-muted);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.15rem;">// STATS</div>
+                    <div style="display:flex;justify-content:space-between;gap:0.5rem;"><span style="color:var(--text-muted);">Gas/receipt</span><span style="color:var(--accent-success);">12,564</span></div>
+                    <div style="display:flex;justify-content:space-between;gap:0.5rem;"><span style="color:var(--text-muted);">Test vectors</span><span style="color:var(--text-secondary);">10,000+</span></div>
+                    <div style="display:flex;justify-content:space-between;gap:0.5rem;"><span style="color:var(--text-muted);">License</span><span style="color:var(--accent-arbitrum);">MIT</span></div>
+                    <div style="display:flex;justify-content:space-between;gap:0.5rem;"><span style="color:var(--text-muted);">Network</span><span style="color:var(--accent-arbitrum);">Arbitrum</span></div>
+                </div>
+            </div>
+
             <!-- Footer row -->
-            <div style="padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);flex-wrap:wrap;gap:0.75rem;">
-                <span>Orthonode Infrastructure Labs · Security Research Division · orthonode.xyz/iotex-research.html</span>
-                <a href="/iotex-research.html" style="color:var(--accent-arbitrum);text-decoration:none;">Read →</a>
+            <div style="padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:0.72rem;color:var(--text-muted);flex-wrap:wrap;gap:0.75rem;border-top:1px solid var(--border-primary);">
+                <span>Orthonode Infrastructure Labs · Security Research Division · orthonode.xyz</span>
+                <a href="/iotex-research.html" style="color:var(--accent-arbitrum);text-decoration:none;">Latest Paper →</a>
             </div>
         </div>
     </section>
