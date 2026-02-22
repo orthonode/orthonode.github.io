@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>IoTeX Exploit Analysis — SHA Research Paper | Orthonode Labs</title>
+    <meta name="description" content="Forensic analysis of the February 2026 IoTeX private key exploit. How silicon-level hardware identity via SHA (Stylus Hardware Anchor) would have prevented a $9M protocol drain. Research paper by Orthonode Infrastructure Labs.">
+    <meta name="keywords" content="IoTeX exploit, private key compromise, DePIN security, Stylus Hardware Anchor, SHA, hardware attestation, Arbitrum Stylus, blockchain security research">
+    <meta name="author" content="Orthonode Infrastructure Labs">
+    <link rel="canonical" href="https://orthonode.xyz/iotex-research.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://orthonode.xyz/iotex-research.html">
+    <meta property="og:title" content="IoTeX Exploit 2026 — SHA Forensic Analysis | Orthonode Labs">
+    <meta property="og:description" content="How silicon-level hardware identity would have stopped the $9M IoTeX private key exploit. Gate-by-gate forensic breakdown by Orthonode Infrastructure Labs.">
+    <meta property="og:image" content="https://orthonode.xyz/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@OrthonodeSys">
+    <meta name="twitter:title" content="IoTeX $9M Exploit — SHA Forensic Analysis">
+    <meta name="twitter:description" content="Gate-by-gate: how SHA hardware identity would have stopped the February 2026 IoTeX drain. Research paper by Orthonode Labs.">
+    <meta name="twitter:image" content="https://orthonode.xyz/banner.png">
+
+    <meta name="theme-color" content="#050505">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://orthonode.xyz/site-logo.png">
+    <link rel="apple-touch-icon" href="https://orthonode.xyz/site-logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --bg-elevated: #111111;
+            --border-subtle: #1a1a1a;
+            --border-primary: #262626;
+            --border-bright: #333333;
+            --text-primary: #ffffff;
+            --text-secondary: #ededed;
+            --text-tertiary: #a3a3a3;
+            --text-dim: #737373;
+            --text-muted: #525252;
+            --accent-arbitrum: #28a0f0;
+            --accent-arbitrum-glow: rgba(40,160,240,0.25);
+            --accent-success: #22c55e;
+            --accent-success-glow: rgba(34,197,94,0.25);
+            --accent-warning: #fbbf24;
+            --accent-critical: #ef4444;
+            --accent-critical-glow: rgba(239,68,68,0.2);
+            --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+            --font-display: 'Space Grotesk', sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            font-family: var(--font-ui);
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                linear-gradient(var(--border-subtle) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        ::selection { background: var(--accent-arbitrum-glow); color: var(--text-primary); }
+        a { color: var(--text-secondary); text-decoration: none; transition: all 0.2s ease; }
+        a:hover { color: var(--text-primary); }
+
+        /* ── Header ── */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px) saturate(180%);
+            background: rgba(5,5,5,0.9);
+            border-bottom: 1px solid var(--border-primary);
+        }
+        .header-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0.875rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+        .header-left, .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
+        .nav-back { color: var(--text-dim); display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+        .nav-back:hover { color: var(--accent-arbitrum); }
+        .status-dot {
+            width: 6px; height: 6px;
+            background: var(--accent-critical);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-critical-glow);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        .network-badge {
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-primary);
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--accent-critical);
+            font-weight: 600;
+        }
+        .progress-bar {
+            height: 2px;
+            background: var(--border-primary);
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-critical), var(--accent-arbitrum));
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* ── Layout ── */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        /* ── Paper Hero ── */
+        .paper-hero {
+            padding: 5rem 0 3rem;
+            border-bottom: 1px solid var(--border-primary);
+            margin-bottom: 0;
+        }
+        .breadcrumb {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+        .breadcrumb a { color: var(--text-muted); }
+        .breadcrumb a:hover { color: var(--accent-arbitrum); }
+        .breadcrumb span { color: var(--accent-critical); }
+
+        .paper-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.4rem 0.9rem;
+            background: var(--bg-elevated);
+            border: 1px solid rgba(239,68,68,0.3);
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--accent-critical);
+            margin-bottom: 1.75rem;
+        }
+
+        .paper-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        .paper-title .red { color: var(--accent-critical); }
+
+        .paper-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-tertiary);
+            max-width: 760px;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            padding-left: 1.25rem;
+            border-left: 3px solid var(--accent-critical);
+        }
+
+        .paper-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+        }
+        .paper-meta span { display: flex; align-items: center; gap: 0.4rem; }
+        .paper-meta .val { color: var(--text-secondary); }
+
+        /* ── Stats strip ── */
+        .stats-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1px;
+            background: var(--border-primary);
+            border: 1px solid var(--border-primary);
+            margin-bottom: 4rem;
+        }
+        .stat-item { background: var(--bg-secondary); padding: 1.25rem; text-align: center; }
+        .stat-value { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--accent-critical); display: block; margin-bottom: 0.2rem; }
+        .stat-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+
+        /* ── TOC ── */
+        .toc-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-left: 3px solid var(--accent-arbitrum);
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        .toc-block h3 {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.25rem;
+        }
+        .toc-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .toc-list li { font-family: var(--font-mono); font-size: 0.82rem; }
+        .toc-list a { color: var(--text-dim); display: flex; align-items: center; gap: 0.6rem; transition: color 0.2s; }
+        .toc-list a:hover { color: var(--accent-arbitrum); }
+        .toc-num { color: var(--accent-arbitrum); min-width: 1.6rem; }
+
+        /* ── Paper body ── */
+        .paper-body { max-width: 860px; }
+
+        .section-header {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.75rem;
+            padding-bottom: 0.875rem;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .paper-h1 {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            margin-top: 3.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-primary);
+            scroll-margin-top: 80px;
+        }
+        .paper-h1:first-of-type { margin-top: 0; border-top: none; padding-top: 0; }
+
+        .paper-h2 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            scroll-margin-top: 80px;
+        }
+
+        .paper-p {
+            color: var(--text-tertiary);
+            font-size: 0.9375rem;
+            line-height: 1.75;
+            margin-bottom: 1.1rem;
+        }
+
+        /* ── Callout bars ── */
+        .bar { padding: 1rem 1.25rem; margin: 1.25rem 0; border-radius: 2px; font-size: 0.875rem; line-height: 1.6; }
+        .bar-red   { background: rgba(239,68,68,0.06);  border-left: 3px solid var(--accent-critical); color: #f87171; }
+        .bar-green { background: rgba(34,197,94,0.06);  border-left: 3px solid var(--accent-success);  color: #4ade80; font-style: italic; }
+        .bar-blue  { background: rgba(40,160,240,0.06); border-left: 3px solid var(--accent-arbitrum); color: var(--accent-arbitrum); }
+        .bar-amber { background: rgba(251,191,36,0.06); border-left: 3px solid var(--accent-warning);  color: var(--accent-warning); font-style: italic; }
+
+        /* ── Code block ── */
+        .code-block {
+            background: #080808;
+            border: 1px solid var(--border-bright);
+            border-radius: 4px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            overflow-x: auto;
+        }
+        .code-block code {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: #4ade80;
+            display: block;
+            line-height: 1.7;
+            white-space: pre;
+        }
+
+        /* ── Tables ── */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-primary);
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; font-family: var(--font-mono); }
+        thead tr { background: #0d0d0d; border-bottom: 1px solid var(--border-bright); }
+        th {
+            padding: 0.875rem 1.25rem;
+            text-align: left;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 500;
+        }
+        td { padding: 0.75rem 1.25rem; color: var(--text-tertiary); border-bottom: 1px solid var(--border-subtle); font-size: 0.82rem; line-height: 1.5; }
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+        tr:hover td { background: rgba(40,160,240,0.04); }
+        td.hl { color: var(--text-primary); font-weight: 500; }
+        td.red { color: #f87171; }
+        td.grn { color: #4ade80; }
+        td.blu { color: var(--accent-arbitrum); }
+        td.amb { color: var(--accent-warning); }
+
+        /* ── Bullet list ── */
+        .paper-ul { list-style: none; margin: 1rem 0 1.25rem 0; display: flex; flex-direction: column; gap: 0.6rem; }
+        .paper-ul li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9375rem; color: var(--text-tertiary); line-height: 1.65; }
+        .paper-ul li::before { content: '→'; color: var(--accent-arbitrum); flex-shrink: 0; margin-top: 0.1rem; }
+
+        /* ── Gate cards ── */
+        .gate-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border-primary); border: 1px solid var(--border-primary); margin: 1.5rem 0; }
+        .gate-card { background: var(--bg-secondary); padding: 1.75rem 2rem; transition: background 0.2s; }
+        .gate-card:hover { background: var(--bg-elevated); }
+        .gate-num { font-family: var(--font-mono); font-size: 0.68rem; color: var(--accent-critical); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem; }
+        .gate-title { font-family: var(--font-display); font-size: 1.05rem; color: var(--text-primary); margin-bottom: 0.75rem; font-weight: 600; }
+        .gate-mono { font-family: var(--font-mono); font-size: 0.8rem; color: #4ade80; background: #080808; padding: 0.4rem 0.75rem; border-radius: 3px; display: inline-block; margin-bottom: 0.875rem; }
+        .gate-body { font-size: 0.9rem; color: var(--text-tertiary); line-height: 1.65; }
+        .gate-verdict { margin-top: 1rem; font-family: var(--font-mono); font-size: 0.8rem; color: #4ade80; display: flex; align-items: center; gap: 0.5rem; }
+        .gate-verdict::before { content: '✓'; }
+
+        /* ── Section divider ── */
+        .sec-divider { border: none; border-top: 1px solid var(--border-primary); margin: 3rem 0; }
+
+        /* ── CTA block ── */
+        .paper-cta {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-primary);
+            border-left: 3px solid var(--accent-arbitrum);
+            border-radius: 6px;
+            padding: 2rem 2.5rem;
+            margin: 3rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+        .paper-cta p { font-size: 0.9375rem; color: var(--text-tertiary); max-width: 500px; }
+        .paper-cta strong { color: var(--text-primary); display: block; margin-bottom: 0.4rem; font-size: 1rem; }
+        .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.7rem 1.4rem;
+            font-family: var(--font-mono); font-size: 0.8rem; font-weight: 600;
+            border-radius: 4px; transition: all 0.2s; text-decoration: none;
+        }
+        .btn-primary { background: var(--accent-arbitrum); color: #000; }
+        .btn-primary:hover { background: #3db0ff; transform: translateY(-1px); box-shadow: 0 0 16px var(--accent-arbitrum-glow); }
+        .btn-secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border-bright); }
+        .btn-secondary:hover { border-color: var(--accent-arbitrum); background: var(--bg-elevated); }
+
+        /* ── Sidebar layout ── */
+        .paper-layout { display: grid; grid-template-columns: 1fr 260px; gap: 4rem; align-items: start; padding: 4rem 0; }
+        .paper-sidebar { position: sticky; top: 80px; }
+        .sidebar-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .sidebar-label { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+        .sidebar-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; font-family: var(--font-mono); font-size: 0.75rem; }
+        .sidebar-row:last-child { margin-bottom: 0; }
+        .sidebar-key { color: var(--text-muted); flex-shrink: 0; }
+        .sidebar-val { color: var(--text-secondary); text-align: right; word-break: break-all; }
+        .sidebar-val.grn { color: var(--accent-success); }
+        .sidebar-val.red { color: var(--accent-critical); }
+        .sidebar-val.amb { color: var(--accent-warning); }
+        .sidebar-val.blu { color: var(--accent-arbitrum); }
+
+        /* ── Footer ── */
+        footer { margin-top: 6rem; padding: 3rem 0 2rem; border-top: 1px solid var(--border-primary); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
+        .footer-brand h4 { font-family: var(--font-display); font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.875rem; }
+        .footer-brand p { color: var(--text-dim); font-size: 0.85rem; line-height: 1.6; }
+        .footer-links h5 { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.875rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.625rem; }
+        .footer-links a { color: var(--text-tertiary); font-size: 0.85rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent-arbitrum); }
+        .footer-bottom { padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); }
+        .footer-legal { display: flex; gap: 1.5rem; }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .paper-layout { grid-template-columns: 1fr; gap: 2rem; }
+            .paper-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .paper-cta { flex-direction: column; }
+        }
+        @media (max-width: 640px) {
+            .header-content { flex-direction: column; gap: 0.75rem; padding: 0.75rem 1rem; }
+            .paper-sidebar { grid-template-columns: 1fr; }
+            .stats-strip { grid-template-columns: 1fr 1fr; }
+            .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header role="banner">
+    <div class="header-content">
+        <div class="header-left">
+            <a href="/" class="nav-back">← orthonode.xyz</a>
+            <div style="display:flex;align-items:center;gap:0.5rem;color:var(--text-dim);font-family:var(--font-mono);font-size:0.75rem;">
+                <span class="status-dot"></span>
+                <span>RESEARCH PAPER [PUBLISHED]</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="network-badge">INCIDENT_ANALYSIS</div>
+            <div class="network-badge" style="color:var(--accent-arbitrum);">FEB_2026</div>
+        </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+</header>
+
+<main class="container">
+
+    <!-- ── HERO ── -->
+    <section class="paper-hero">
+        <p class="breadcrumb">
+            <a href="/">ORTHONODE.XYZ</a> / <a href="/">RESEARCH</a> / <span>IOTEX EXPLOIT ANALYSIS — SHA FORENSIC BREAKDOWN</span>
+        </p>
+
+        <div class="paper-badge">
+            <span class="status-dot" style="background:var(--accent-critical);box-shadow:0 0 8px var(--accent-critical-glow);"></span>
+            SECURITY RESEARCH REPORT · FEBRUARY 22, 2026 · ORTHONODE INFRASTRUCTURE LABS
+        </div>
+
+        <h1 class="paper-title">
+            The IoTeX Exploit of <span class="red">February 2026</span><br>
+            Silicon-Level Identity as a Mitigation Primitive
+        </h1>
+
+        <p class="paper-subtitle">
+            A forensic case study of the $2M–$8.8M IoTeX private key compromise, analysed gate-by-gate through the Stylus Hardware Anchor (SHA) framework. With a structural forward view into lifecycle integrity governance via the Orthonode Assurance Platform (OAP).
+        </p>
+
+        <div class="paper-meta">
+            <span>Published <span class="val">22 Feb 2026</span></span>
+            <span>Author <span class="val">Orthonode Infrastructure Labs</span></span>
+            <span>Contract <span class="val" style="color:var(--accent-success);">0xD661...4615</span></span>
+            <span>Status <span class="val" style="color:var(--accent-warning);">TESTNET · AUDIT PENDING</span></span>
+        </div>
+
+        <div class="stats-strip" role="region">
+            <div class="stat-item"><span class="stat-value">$9M</span><span class="stat-label">Estimated Losses</span></div>
+            <div class="stat-item"><span class="stat-value">18mo</span><span class="stat-label">Attack Dwell Time</span></div>
+            <div class="stat-item"><span class="stat-value">4</span><span class="stat-label">SHA Verification Gates</span></div>
+            <div class="stat-item"><span class="stat-value">89+</span><span class="stat-label">Live On-Chain TXs</span></div>
+            <div class="stat-item"><span class="stat-value">Gate 1</span><span class="stat-label">Attack Stops Here</span></div>
+        </div>
+    </section>
+
+    <!-- ── PAPER BODY + SIDEBAR ── -->
+    <div class="paper-layout">
+
+        <!-- ── MAIN PAPER ── -->
+        <article class="paper-body">
+
+            <!-- TOC -->
+            <nav class="toc-block" aria-label="Table of contents">
+                <h3>// TABLE_OF_CONTENTS</h3>
+                <ol class="toc-list">
+                    <li><a href="#abstract"><span class="toc-num">00</span> Abstract</a></li>
+                    <li><a href="#incident"><span class="toc-num">01</span> Incident Overview</a></li>
+                    <li><a href="#threat-model"><span class="toc-num">02</span> Formal Threat Model</a></li>
+                    <li><a href="#sha"><span class="toc-num">03</span> SHA Architecture & Deployment</a></li>
+                    <li><a href="#forensic"><span class="toc-num">04</span> Forensic Analysis — Gate by Gate</a></li>
+                    <li><a href="#oap"><span class="toc-num">05</span> OAP — Behavioral Integrity Layer</a></li>
+                    <li><a href="#adversarial"><span class="toc-num">06</span> Adversarial Counter-Analysis</a></li>
+                    <li><a href="#systemic"><span class="toc-num">07</span> Threat Actor & Systemic Risk</a></li>
+                    <li><a href="#limitations"><span class="toc-num">08</span> Scope & Limitations</a></li>
+                    <li><a href="#conclusion"><span class="toc-num">09</span> Conclusion</a></li>
+                    <li><a href="#references"><span class="toc-num">REF</span> References</a></li>
+                </ol>
+            </nav>
+
+            <!-- 00 ABSTRACT -->
+            <h2 class="paper-h1" id="abstract">// 00 — Abstract</h2>
+            <p class="paper-p">On February 21, 2026, IoTeX — a DePIN-focused blockchain — suffered a private key compromise resulting in the unauthorized withdrawal of USDC, USDT, IOTX, and WBTC from its TokenSafe contract, and the subsequent minting of approximately $4M in CIOTX and $4.5M in CCS via its MinterPool contract. Total estimated losses range from $2M (IoTeX official) to $8.8M (independent on-chain analysis). On-chain investigators linked the attacker's funding wallet to the $49M Infini exploit of February 2025, suggesting an organized threat actor conducting systematic, long-horizon, multi-protocol infiltration. IoTeX co-founder Raullen Chai stated publicly that evidence indicates the attack was planned six to eighteen months in advance.</p>
+            <p class="paper-p">This paper presents a forensic reconstruction of the attack and evaluates it against two components of the Orthonode Infrastructure Labs security architecture. The first is the <strong style="color:var(--text-primary)">Stylus Hardware Anchor (SHA)</strong> — a deployed hardware identity primitive on Arbitrum Sepolia that cryptographically binds execution authority to manufacturer-burned silicon eFuse identifiers via a four-gate on-chain verification model (89+ verified transactions). The second is the <strong style="color:var(--text-primary)">Orthonode Assurance Platform (OAP)</strong> — a deterministic lifecycle integrity governance engine in active development, whose published structural model addresses the behavioral monitoring gap present during the attacker's extended dwell period.</p>
+            <p class="paper-p">Under the stated integration assumptions and threat model defined in Section 2, the analysis finds that a SHA-gated privileged execution model would be expected to prevent each stage of the described exploit at the contract verification layer. All claims are explicitly bounded: SHA v1.0 targets ESP32-S3 hardware; OAP claims are grounded in published structural model only, not empirical deployment data.</p>
+
+            <hr class="sec-divider">
+
+            <!-- 01 INCIDENT -->
+            <h2 class="paper-h1" id="incident">// 01 — Incident Overview</h2>
+            <h3 class="paper-h2">1.1 Attack Timeline</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>UTC Time</th><th>Event</th><th>Evidence</th></tr></thead>
+                    <tbody>
+                        <tr><td class="hl">07:00</td><td>Unauthorized privileged access to TokenSafe and MinterPool begins</td><td>PeckShield on-chain analysis</td></tr>
+                        <tr><td class="hl">07:00–09:00</td><td>USDC, USDT, IOTX, WBTC drained from TokenSafe via compromised key</td><td>Direct withdrawal calls confirmed by PeckShield</td></tr>
+                        <tr><td class="hl">~09:00</td><td class="red">Attacker mints ~$4M CIOTX via MinterPool</td><td>Mint event logs on IoTeX chain</td></tr>
+                        <tr><td class="hl">~09:15</td><td class="red">Attacker mints ~$4.5M CCS tokens</td><td>Mint event logs on IoTeX chain</td></tr>
+                        <tr><td class="hl">~09:30</td><td>Assets swapped to ETH via Uniswap</td><td>DEX swap events; traced by Specter</td></tr>
+                        <tr><td class="hl">~10:00</td><td>~45 ETH bridged to Bitcoin via THORChain</td><td>Cross-chain transactions flagged by PeckShield</td></tr>
+                        <tr><td class="hl">~10:30</td><td>IoTeX suspends chain operations</td><td>Official IoTeX announcement</td></tr>
+                        <tr><td class="hl">Same day</td><td>Upbit, Bithumb, Coinone suspend IOTX deposits/withdrawals</td><td>Exchange announcements</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="paper-h2">1.2 Root Cause</h3>
+            <div class="bar bar-red">Root cause: Access control failure via private key compromise. Execution authority was granted on the basis of cryptographic key validity alone — with no secondary verification of the signing entity's hardware identity, firmware state, or behavioral legitimacy.</div>
+            <p class="paper-p">The attacker employed no smart contract vulnerability. No reentrancy, flash loan, or oracle manipulation was involved. The attack succeeded because possession of a valid signing key was, by itself, sufficient to invoke privileged contract functions. Every transaction processed as legitimate because every signature was cryptographically valid. The system had no mechanism to verify the entity behind the key.</p>
+            <p class="paper-p">IoTeX co-founder Raullen Chai stated publicly that evidence indicates six to eighteen months of planning. On-chain investigator Specter linked the attacker's wallet to the Infini exploit ($49M, February 2025) — in which a former contract developer retained administrative privileges and executed a delayed drain. Both attacks share the same signature: long dwell time, insider-level key access, privileged contract abuse, cross-chain laundering via THORChain.</p>
+
+            <h3 class="paper-h2">1.3 Loss Estimates</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Source</th><th>Estimate</th><th>Scope</th></tr></thead>
+                    <tbody>
+                        <tr><td class="hl">IoTeX Official</td><td class="amb">~$2M</td><td>Direct asset withdrawals only</td></tr>
+                        <tr><td class="hl">Independent On-Chain Analysis</td><td class="red">~$8.8M</td><td>Includes minted CIOTX + CCS at market value</td></tr>
+                        <tr><td class="hl">This Paper</td><td>Both figures relevant</td><td>Direct drain = confirmed loss; minting = protocol integrity failure regardless of realized liquidity</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr class="sec-divider">
+
+            <!-- 02 THREAT MODEL -->
+            <h2 class="paper-h1" id="threat-model">// 02 — Formal Threat Model</h2>
+            <p class="paper-p">All prevention claims in Section 4 are conditional on the assumptions below. This section formally defines what the attacker can and cannot do, and what the system assumes to be correctly configured.</p>
+
+            <h3 class="paper-h2">2.1 Attacker Capability Assumptions</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>ID</th><th>Assumption</th></tr></thead>
+                    <tbody>
+                        <tr><td class="blu">A1</td><td>Attacker holds a valid private key authorized to call privileged contract functions</td></tr>
+                        <tr><td class="blu">A2</td><td>Attacker operates remotely — via compromised server, cloud VM, or remote machine</td></tr>
+                        <tr><td class="blu">A3</td><td>Attacker has no physical access to any SHA-registered ESP32-S3 device</td></tr>
+                        <tr><td class="blu">A4</td><td>Identity fabrication capabilities are software-only (arbitrary bytes, receipt replay, field substitution)</td></tr>
+                        <tr><td class="blu">A5</td><td>No silicon-level eFuse cloning capability (requires physical chip access + specialized hardware)</td></tr>
+                        <tr><td class="blu">A6</td><td>No supply-chain compromise — authorized devices have correctly burned manufacturer eFuse identifiers</td></tr>
+                        <tr><td class="blu">A7</td><td>Secure enrollment — authorizeNode() and approveFirmware() were executed correctly during setup</td></tr>
+                        <tr><td class="blu">A8</td><td>The contract owner (governance) key has not itself been compromised</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="paper-h2">2.2 Out-of-Scope Vectors</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Vector</th><th>Why Out of Scope</th></tr></thead>
+                    <tbody>
+                        <tr><td class="red">Physical device theft</td><td>Breaks assumption A3. Requires physical security controls — outside SHA's protocol scope.</td></tr>
+                        <tr><td class="red">Supply-chain eFuse tampering</td><td>Breaks assumption A6. Requires silicon fabrication compromise — beyond software-layer attacker model.</td></tr>
+                        <tr><td class="red">Side-channel silicon attacks</td><td>Physical eFuse extraction via power analysis / fault injection. Not addressed by SHA v1.0.</td></tr>
+                        <tr><td class="red">Governance key compromise</td><td>Breaks assumption A8. Attacker could enroll malicious devices — a governance-layer threat, not addressable by SHA's verification layer alone.</td></tr>
+                        <tr><td class="red">Quantum hash collisions</td><td>Breaks assumption S2. Post-quantum Keccak attacks are a long-term consideration for all Keccak-based systems.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bar bar-blue">This paper addresses one vulnerability class: execution authority granted on the basis of cryptographic key validity alone, without hardware-level verification of the signing entity's physical identity, firmware state, or receipt freshness. All claims are conditional on assumptions A1–A8.</div>
+
+            <hr class="sec-divider">
+
+            <!-- 03 SHA -->
+            <h2 class="paper-h1" id="sha">// 03 — Stylus Hardware Anchor (SHA)</h2>
+
+            <h3 class="paper-h2">3.1 Comparative Context — Why Not Existing Solutions?</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Approach</th><th>Limitation in IoTeX Scenario</th><th>SHA Differentiation</th></tr></thead>
+                    <tbody>
+                        <tr><td class="hl">HSM (Hardware Security Module)</td><td>Protects key storage but does not bind execution authority to a network-verifiable physical identity. Attestation is off-chain, not integrated into smart contract verification logic.</td><td>SHA creates on-chain, contract-enforced silicon identity binding. Verification is performed by the contract itself — no external trust anchor.</td></tr>
+                        <tr><td class="hl">MPC / TSS</td><td>Distributes trust but does not eliminate the key-as-authority model. Coordinated compromise of a sufficient threshold enables execution without hardware verification.</td><td>SHA is complementary — it gates individual signing hardware within an MPC/TSS setup, adding a hardware identity requirement independent of key share distribution.</td></tr>
+                        <tr><td class="hl">TPM Attestation</td><td>TPM proofs are typically off-chain. On-chain TPM verification in Solidity is gas-prohibitive.</td><td>SHA uses Arbitrum Stylus WASM execution to make on-chain hardware verification economically viable (12,564–29,748 gas per receipt at scale). TPM extension is a documented future path.</td></tr>
+                        <tr><td class="hl">Multi-Sig + Time-Locks</td><td>Reduces single-key blast radius but still grants authority on key possession alone. Time-locks provide detection windows but don't prevent execution if threshold is met by compromised signers.</td><td>SHA gates each individual co-signer to verified silicon identity. Multi-sig + SHA requires both signing threshold and hardware identity proof from each participant.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="paper-h2">3.2 Architecture</h3>
+            <div class="gate-grid">
+                <div class="gate-card">
+                    <div class="gate-num">// LAYER_01 — SILICON</div>
+                    <div class="gate-title">ESP32-S3 eFuse Registers</div>
+                    <p class="gate-body">Manufacturer-burned Base MAC (6 bytes) + Chip Model (1 byte) → Keccak-256 (0x01 Ethereum padding) → 32-byte HW_ID. Permanent, non-writable post-fabrication. Physically absent in virtual machines and cloud infrastructure.</p>
+                </div>
+                <div class="gate-card">
+                    <div class="gate-num">// LAYER_02 — MIDDLEWARE</div>
+                    <div class="gate-title">Python SDK</div>
+                    <p class="gate-body">Receipt generation, device authorization flows, monotonic counter management, Ethereum-compatible Keccak-256 computation, on-chain submission helpers.</p>
+                </div>
+                <div class="gate-card">
+                    <div class="gate-num">// LAYER_03 — VERIFICATION</div>
+                    <div class="gate-title">Stylus / Rust / WASM Contract</div>
+                    <p class="gate-body">Four-gate deterministic verification in native WASM. Fail-closed on any gate failure. Gas economics viable at scale via WASM amortization.</p>
+                </div>
+            </div>
+
+            <h3 class="paper-h2">3.3 Receipt Format (117 bytes)</h3>
+            <div class="code-block"><code>Field           Size       Value / Derivation
+──────────────────────────────────────────────────────
+Protocol ID     13 bytes   'anchor_RCT_V1'
+Hardware ID     32 bytes   Keccak-256(eFuse MAC ‖ Chip Model)
+Firmware Hash   32 bytes   Keccak-256(firmware binary)
+Execution Hash  32 bytes   Keccak-256(computation result)
+Counter         8 bytes    Monotonic uint64, Big-Endian
+──────────────────────────────────────────────────────
+Total           117 bytes  → Keccak-256 → 32-byte digest</code></div>
+
+            <h3 class="paper-h2">3.4 Gas Economics (Arbitrum Stylus vs Solidity)</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Batch (N)</th><th>Total Gas</th><th>Gas / Receipt</th><th>vs N=1</th></tr></thead>
+                    <tbody>
+                        <tr><td>1</td><td>~95,000</td><td class="amb">~95,000</td><td>baseline</td></tr>
+                        <tr><td>5</td><td>148,741</td><td class="amb">29,748</td><td>3.2× improvement</td></tr>
+                        <tr><td>10</td><td>202,090</td><td class="grn">20,209</td><td>4.7× improvement</td></tr>
+                        <tr><td>20</td><td>308,387</td><td class="grn">15,419</td><td>6.2× improvement</td></tr>
+                        <tr><td>50</td><td>628,201</td><td class="grn">12,564</td><td>7.6× improvement</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="paper-p">Gas per receipt decreases monotonically with batch size due to WASM amortization — structurally unavailable in Solidity. For infrequently called privileged functions (minting, withdrawal, governance), even single-call verification at ~95,000 gas is negligible relative to the value protected. On Arbitrum, this is a fraction of a cent per verification.</p>
+
+            <hr class="sec-divider">
+
+            <!-- 04 FORENSIC -->
+            <h2 class="paper-h1" id="forensic">// 04 — Forensic Analysis: Gate by Gate</h2>
+            <div class="bar bar-blue">All findings are conditional on assumptions A1–A8 and correct SHA integration across all privileged execution paths. Language is framed conditionally throughout — not as absolute guarantees.</div>
+
+            <h3 class="paper-h2">4.1 The Model SHA Proposes</h3>
+            <div class="code-block"><code>// IoTeX current model:
+Execution_Authority = f(valid_signature)
+
+// SHA-gated model:
+Execution_Authority = f(valid_signature
+                        AND authorized_hw_id        // Gate 1
+                        AND approved_fw_hash         // Gate 2
+                        AND counter > last_counter   // Gate 3
+                        AND digest_valid)            // Gate 4</code></div>
+            <p class="paper-p">Under assumptions A1–A5, the attacker satisfies the first condition. Without physical possession of a registered device running approved firmware with valid counter state, the remaining four conditions cannot be satisfied through software means alone.</p>
+
+            <h3 class="paper-h2">4.2 The Four Gates Applied</h3>
+            <div class="gate-grid">
+                <div class="gate-card">
+                    <div class="gate-num">// GATE_01 — IDENTITY</div>
+                    <div class="gate-title">authorized_nodes[hw_id] == true</div>
+                    <div class="gate-mono">authorized_nodes[hw_id]</div>
+                    <p class="gate-body">The attacker's environment — a compromised server or cloud VM — contains no ESP32-S3 with manufacturer-burned eFuse identifiers matching any authorized_nodes entry. Any submitted HW_ID is fabricated software data. Under assumption A2 and A3, the identity check returns false, causing execution to revert before any state changes occur. Neither the TokenSafe withdrawal nor MinterPool minting would proceed to subsequent processing.</p>
+                    <div class="gate-verdict">Expected: execution reverts at identity check. Drain and minting do not begin.</div>
+                </div>
+                <div class="gate-card">
+                    <div class="gate-num">// GATE_02 — FIRMWARE GOVERNANCE</div>
+                    <div class="gate-title">approved_firmware[fw_hash] == true</div>
+                    <div class="gate-mono">approved_firmware[fw_hash]</div>
+                    <p class="gate-body">Evaluated only if Gate 1 passes — which it would not under the stated threat model. However, Gate 2 is independently significant for the long-horizon infiltration scenario. An insider who modifies operational software over six to eighteen months produces firmware that no longer matches the hash approved during initial enrollment. Any modification — however incremental — produces a different Keccak-256 firmware hash. Gate 2 rejects it at contract level.</p>
+                    <div class="gate-verdict">Expected: modified or unauthorized firmware rejected. Relevant to the 6–18 month dwell period.</div>
+                </div>
+                <div class="gate-card">
+                    <div class="gate-num">// GATE_03 — REPLAY PROTECTION</div>
+                    <div class="gate-title">counter > counters[hw_id]</div>
+                    <div class="gate-mono">ReplayDetected()</div>
+                    <p class="gate-body">Each receipt's monotonic uint64 counter must strictly exceed the last value stored on-chain for that HW_ID. Any captured receipt is single-use — replaying it triggers ReplayDetected(). The attacker cannot manufacture a valid counter sequence without having previously submitted legitimate receipts through Gates 1 and 2 as an authorized entity. No valid counter state exists to build from.</p>
+                    <div class="gate-verdict">Expected: ReplayDetected() on any replayed or fabricated counter sequence.</div>
+                </div>
+                <div class="gate-card">
+                    <div class="gate-num">// GATE_04 — DIGEST VERIFICATION</div>
+                    <div class="gate-title">Keccak-256 reconstruction</div>
+                    <div class="gate-mono">DigestMismatch()</div>
+                    <p class="gate-body">The contract reconstructs the 32-byte digest from all receipt fields and compares against the submitted value. Substitution attacks — inserting a valid HW_ID from a registered device into an otherwise fabricated receipt — alter composite field values and produce a different digest. Under assumption S2 (Keccak collision resistance), DigestMismatch() fires on any tampered or composite receipt. Validated against 10,000+ cross-layer test vectors.</p>
+                    <div class="gate-verdict">Expected: DigestMismatch() on any tampered, substituted, or composite receipt.</div>
+                </div>
+            </div>
+
+            <h3 class="paper-h2">4.3 Summary Matrix</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Attack Stage</th><th>IoTeX (No SHA)</th><th>SHA-Gated (Under Stated Assumptions)</th><th>Gate</th></tr></thead>
+                    <tbody>
+                        <tr><td>Initial privileged access</td><td class="red">Proceeds — valid key accepted</td><td class="grn">Expected to revert — no authorized HW_ID</td><td class="blu">Gate 1</td></tr>
+                        <tr><td>TokenSafe drain</td><td class="red">Proceeds — all withdrawals executed</td><td class="grn">Expected not to be reached</td><td class="blu">Gate 1</td></tr>
+                        <tr><td>CIOTX minting (~$4M)</td><td class="red">Proceeds — valid key accepted</td><td class="grn">Expected to revert — Gate 1 failure applies</td><td class="blu">Gate 1</td></tr>
+                        <tr><td>CCS minting (~$4.5M)</td><td class="red">Proceeds — valid key accepted</td><td class="grn">Expected to revert — Gate 1 failure applies</td><td class="blu">Gate 1</td></tr>
+                        <tr><td>Modified firmware attack</td><td class="red">No firmware check exists</td><td class="grn">Expected to revert — hash not in approved set</td><td class="blu">Gate 2</td></tr>
+                        <tr><td>Receipt replay</td><td class="red">No receipt model exists</td><td class="grn">Expected to trigger ReplayDetected()</td><td class="blu">Gate 3</td></tr>
+                        <tr><td>Fabricated composite receipt</td><td class="red">No receipt model exists</td><td class="grn">Expected to trigger DigestMismatch()</td><td class="blu">Gate 4</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr class="sec-divider">
+
+            <!-- 05 OAP -->
+            <h2 class="paper-h1" id="oap">// 05 — OAP: The Behavioral Integrity Layer</h2>
+            <div class="bar bar-amber">OAP Status: Phase 1 foundation complete. Seven development phases remaining. Not yet deployed. All claims in this section are grounded in OAP's published structural and governance model — not empirical deployment data. Proprietary parameters (threshold constants, escalation breakpoints, decay coefficients) are not disclosed. Structural documentation available to qualified partners on request: infrastructure@orthonode.xyz</div>
+
+            <p class="paper-p">SHA addresses the moment of execution — it prevents unauthorized identities from invoking privileged functions. The IoTeX attack had a second dimension SHA alone cannot fully address: a six-to-eighteen-month dwell period during which the threat actor was present within the system before the final execution phase. OAP's published structural model is designed to emit a continuous behavioral integrity signal across exactly this kind of extended operational timeline.</p>
+
+            <h3 class="paper-h2">5.1 Formal Definition</h3>
+            <p class="paper-p">OAP is a deterministic lifecycle integrity governance engine that emits a trust score T ∈ [0, 100] as a deterministic function of a device's complete behavioral history, physical motion compliance, identity continuity, and firmware state. OAP does not enforce economic policy and does not block execution directly. It produces the integrity signal; downstream protocols apply their own policy against that signal.</p>
+
+            <h3 class="paper-h2">5.2 Published Trust Score Model</h3>
+            <div class="code-block"><code>T(t) = T_baseline
+       - SUM[ S(eᵢ) × decay(t - tᵢ) ]   // all violation events eᵢ
+       - P(catastrophic)                   // if any catastrophic event exists
+       bounded to [0, T_max]
+
+Where:
+  T_baseline     = 100 at enrollment
+  S(eᵢ)          = severity score — non-linear, monotonically increasing
+  decay(t - tᵢ)  = penalty reduction for recoverable events over time
+  P(catastrophic) = permanent downgrade term — does not decay
+  T_max           = 100 (ceiling, floored at 0)</code></div>
+            <p class="paper-p">The formulation is fully reproducible from the signed event record by any party with access to the data, once calibration parameters are published. Same inputs always produce same output.</p>
+
+            <h3 class="paper-h2">5.3 Device State Machine</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>State</th><th>Trust Range</th><th>Trigger</th><th>Recovery</th></tr></thead>
+                    <tbody>
+                        <tr><td class="grn">TRUSTED</td><td>Above high threshold</td><td>Default at enrollment</td><td>N/A</td></tr>
+                        <tr><td class="amb">DEGRADED</td><td>Between thresholds</td><td>Accumulated violations reduce score</td><td>Decay over time for recoverable events</td></tr>
+                        <tr><td class="red">COMPROMISED</td><td>Below low threshold</td><td>Severe / accumulated violations</td><td>Explicit partner-approved re-provision only</td></tr>
+                        <tr><td class="red">FROZEN</td><td>Any score</td><td>Counter rollback or duplicate identity detected</td><td>Partner review required; no automatic recovery</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="paper-h2">5.4 Applied to the IoTeX Timeline</h3>
+            <p class="paper-p">Applying OAP's published structural model to the IoTeX behavioral timeline reveals multiple points at which the trust score would be expected to degrade under the stated model:</p>
+            <ul class="paper-ul">
+                <li><strong style="color:var(--text-primary)">Long dwell period (6–18 months):</strong> behavioral patterns inconsistent with legitimate administrative operation — unusual access frequency, atypical call patterns, firmware state inconsistencies — would accumulate scar events under OAP's motion integrity model, progressively reducing T(t) before final execution.</li>
+                <li><strong style="color:var(--text-primary)">Minting phase:</strong> $4M CIOTX and $4.5M CCS minted in rapid succession represents velocity with no precedent in any legitimate administrative baseline. Under OAP's published severity model, this would be expected to cross catastrophic event thresholds, applying P(catastrophic) and moving the device to COMPROMISED state.</li>
+                <li><strong style="color:var(--text-primary)">THORChain bridging:</strong> a behavioral signature with no legitimate operational analog. Expected to trigger FROZEN state under OAP's identity and anomaly detection model.</li>
+                <li><strong style="color:var(--text-primary)">Override governance:</strong> even if an insider attempted to administratively reset the degraded trust score, OAP's published model caps overrides at 2 per rolling 365-day window, requires cryptographic signing, and commits every override to the append-only log. No hidden resets. No silent forgiveness.</li>
+            </ul>
+            <div class="bar bar-amber">Precision note: the above applies OAP's published structural model to the described scenario. Without deployed calibration parameters, these outcomes are structural projections — not empirically validated results. The stated outcomes assume behavioral deviations would cross OAP's proprietary severity thresholds.</div>
+
+            <hr class="sec-divider">
+
+            <!-- 06 ADVERSARIAL -->
+            <h2 class="paper-h1" id="adversarial">// 06 — Adversarial Counter-Analysis</h2>
+            <p class="paper-p">A technically rigorous evaluation requires engaging directly with the strongest objections a critical reviewer would raise.</p>
+
+            <h3 class="paper-h2">6.1 Attacker steals an authorized device</h3>
+            <p class="paper-p">If the attacker physically obtains an SHA-registered ESP32-S3 enrolled as an authorized node and running approved firmware with valid counter state, they possess everything needed to pass all four gates. This is a real attack vector. SHA's response is scope-bounded: SHA addresses the remote key compromise attack vector — the IoTeX scenario. Physical device theft is a different threat class requiring physical security controls (tamper-evident hardware, secure storage, decommissioning protocols) that are the operator's responsibility. SHA + physical security, not SHA as standalone absolute defense.</p>
+
+            <h3 class="paper-h2">6.2 The governance (owner) key is compromised</h3>
+            <p class="paper-p">If the contract owner key used to call authorizeNode() and approveFirmware() is itself compromised, an attacker could enroll a malicious device and approve malicious firmware. SHA addresses this in two ways: first, compromising a second key (the governance key) in addition to the execution key is a substantially higher barrier than the single-key compromise exploited at IoTeX. Second, governance operations can themselves be gated behind SHA verification of authorized governance hardware — SHA is composable with itself. This is a documented extension path.</p>
+
+            <h3 class="paper-h2">6.3 ESP32 targets are not blockchain validators</h3>
+            <p class="paper-p">This is the most substantive objection and is stated directly. SHA v1.0 targets ESP32-S3 microcontrollers. IoTeX's compromised infrastructure was server-grade validators. Two integration paths exist: validators incorporate an ESP32-S3 as a hardware signing coprocessor (signing key lives on-device, SHA receipt produced before any privileged transaction is submitted), or the SHA architecture extends to server-grade hardware (TPMs, HSMs) using equivalent immutable identifier logic. The four-gate model, receipt format, and Stylus contract are hardware-agnostic — the silicon layer is the integration variable. Neither path existed in IoTeX's stack on February 21, 2026. SHA is an architectural model demonstrating what would have prevented this attack class, not a system IoTeX had available and chose not to use.</p>
+
+            <h3 class="paper-h2">6.4 Why not just use multi-sig?</h3>
+            <p class="paper-p">Multi-signature schemes reduce single-key blast radius but do not eliminate it. If a sufficient number of keys are compromised — as in a long-horizon, multi-insider infiltration — execution proceeds. Multi-sig does not verify that co-signing entities are physically legitimate hardware rather than a coordinated set of compromised remote machines. SHA is complementary: multi-sig gated by SHA requires both a signing threshold and verified silicon identity from each co-signer — addressing both the single-key compromise vector and the coordinated insider vector simultaneously.</p>
+
+            <hr class="sec-divider">
+
+            <!-- 07 SYSTEMIC -->
+            <h2 class="paper-h1" id="systemic">// 07 — Threat Actor & Systemic Risk</h2>
+            <h3 class="paper-h2">7.1 Attack Signature Comparison</h3>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Attribute</th><th>Infini (Feb 2025)</th><th>IoTeX (Feb 2026)</th></tr></thead>
+                    <tbody>
+                        <tr><td class="hl">Estimated Loss</td><td>$49M</td><td class="red">$2M–$8.8M</td></tr>
+                        <tr><td class="hl">Attack Vector</td><td>Insider retained admin key post-engagement</td><td>Private key compromise, 6–18mo dwell</td></tr>
+                        <tr><td class="hl">Privileged Functions</td><td>Treasury withdrawal</td><td>TokenSafe withdrawal + MinterPool minting</td></tr>
+                        <tr><td class="hl">Laundering Route</td><td>Cross-chain via THORChain</td><td>Cross-chain via THORChain</td></tr>
+                        <tr><td class="hl">Attacker Link</td><td>shaneson.eth / @k63jpx (attributed)</td><td>Funding wallet linked to Infini (Specter)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="paper-h2">7.2 Broader Context</h3>
+            <ul class="paper-ul">
+                <li><strong style="color:var(--text-primary)">Bybit, Feb 2025:</strong> $1.5B — private key compromise of cold wallet signing infrastructure</li>
+                <li><strong style="color:var(--text-primary)">Infini, Feb 2025:</strong> $49M — insider retained admin privileges, delayed drain</li>
+                <li><strong style="color:var(--text-primary)">Flow Blockchain, Dec 2025:</strong> $3.9M — private key compromise enabling unauthorized minting</li>
+                <li><strong style="color:var(--text-primary)">CrossCurve, Jan 2026:</strong> $3M — bridge exploit</li>
+                <li><strong style="color:var(--text-primary)">IoTeX, Feb 2026:</strong> $2M–$8.8M — private key compromise of TokenSafe and MinterPool</li>
+            </ul>
+            <p class="paper-p">Chainalysis reports total crypto theft exceeding $3.4B in 2025, with private key compromises and access control failures representing the dominant loss category. The pattern is consistent across every incident: execution authority derived from key possession alone, without hardware-level verification of the signing entity.</p>
+
+            <hr class="sec-divider">
+
+            <!-- 08 LIMITATIONS -->
+            <h2 class="paper-h1" id="limitations">// 08 — Scope & Limitations</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Limitation</th><th>Description</th><th>Mitigation Path</th></tr></thead>
+                    <tbody>
+                        <tr><td class="red">SHA Hardware Scope</td><td>SHA v1.0 is implemented for ESP32-S3 only. IoTeX validators were server-grade infrastructure.</td><td>ESP32 signing coprocessor integration or SHA extension to TPM/HSM — documented development path</td></tr>
+                        <tr><td class="red">SHA Testnet Status</td><td>Contract on Arbitrum Sepolia. No third-party security audit completed.</td><td>Phase 2: professional audit and mainnet deployment</td></tr>
+                        <tr><td class="red">Physical Device Security</td><td>SHA does not prevent attack by an adversary with physical possession of a registered device.</td><td>Physical security controls are an operational complement — not replaceable by protocol design</td></tr>
+                        <tr><td class="red">Governance Key Risk</td><td>If A8 fails (owner key compromised), malicious devices can be enrolled.</td><td>SHA-gated governance operations; multi-sig contract ownership</td></tr>
+                        <tr><td class="amb">OAP Not Deployed</td><td>OAP claims are grounded in published structural model only. No empirical validation exists.</td><td>OAP Phase 2–8 development; empirical validation deferred to deployment</td></tr>
+                        <tr><td class="amb">OAP Parameters Proprietary</td><td>Threshold constants and calibration values not disclosed. Expected outcomes cannot be independently calculated.</td><td>Parameters disclosed under NDA to integration partners on request</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr class="sec-divider">
+
+            <!-- 09 CONCLUSION -->
+            <h2 class="paper-h1" id="conclusion">// 09 — Conclusion</h2>
+            <p class="paper-p">The February 2026 IoTeX exploit demonstrates a persistent and systematically exploited vulnerability class: execution authority derived from cryptographic key possession alone, without hardware-level verification of the signing entity's physical identity, firmware integrity, or behavioral legitimacy. This vulnerability class has accounted for the majority of high-value crypto losses over eighteen months and shows a pattern consistent with an organized, long-horizon threat actor operating across multiple protocols.</p>
+            <p class="paper-p">SHA addresses this vulnerability through a four-gate on-chain verification model that binds execution authority to manufacturer-burned silicon identifiers. Under the threat model and assumptions formally defined in Section 2, a SHA-gated privileged execution model would be expected to prevent the IoTeX attack at Gate 1 — identity verification — before any withdrawal or minting operation could proceed. Gates 2 through 4 provide defense-in-depth against firmware modification, receipt replay, and receipt fabrication respectively.</p>
+            <p class="paper-p">SHA does not claim to prevent all possible attack vectors. Physical device theft, governance key compromise, and supply-chain tampering are explicitly out-of-scope and require complementary controls. SHA is correctly understood as a necessary addition to — not replacement for — HSM key management, multi-sig schemes, and operational security practices.</p>
+            <p class="paper-p">OAP addresses the behavioral dimension: the extended dwell period during which a threat actor is present but has not yet executed. Under OAP's published structural model, sustained behavioral deviation over a six-to-eighteen-month period would be expected to progressively reduce the device's trust score, giving downstream systems a verifiable, deterministic basis to gate or escalate before the final exploitation phase.</p>
+
+            <div class="paper-cta">
+                <div>
+                    <strong>Request SHA Integration Docs or OAP Structural Brief</strong>
+                    <p>OAP structural documentation available to qualified partners. SHA architecture available for integration discussions.</p>
+                </div>
+                <div class="btn-row">
+                    <a href="mailto:infrastructure@orthonode.xyz" class="btn btn-primary">Contact ↗</a>
+                    <a href="https://github.com/orthonode/nexus-core" target="_blank" rel="noopener" class="btn btn-secondary">GitHub →</a>
+                    <a href="/" class="btn btn-secondary">← Home</a>
+                </div>
+            </div>
+
+            <hr class="sec-divider">
+
+            <!-- REFERENCES -->
+            <h2 class="paper-h1" id="references">// References</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Reference</th><th>Detail</th></tr></thead>
+                    <tbody>
+                        <tr><td class="hl">SHA Deployed Contract</td><td>Arbiscan Sepolia: <a href="https://sepolia.arbiscan.io/address/0xd661a1ab8cefaacd78f4b968670c3bc438415615" target="_blank" rel="noopener" style="color:var(--accent-arbitrum)">0xD661a1aB8CEFaaCd78F4B968670C3bC438415615 ↗</a></td></tr>
+                        <tr><td class="hl">SHA Repository</td><td><a href="https://github.com/arhantbarmate/stylus-hardware-anchor" target="_blank" rel="noopener" style="color:var(--accent-arbitrum)">github.com/arhantbarmate/stylus-hardware-anchor ↗</a></td></tr>
+                        <tr><td class="hl">Nexus Core Repository</td><td><a href="https://github.com/orthonode/nexus-core" target="_blank" rel="noopener" style="color:var(--accent-arbitrum)">github.com/orthonode/nexus-core ↗</a></td></tr>
+                        <tr><td class="hl">OAP Structural Model</td><td>orthonode.xyz/oap.html (access-gated; docs on request)</td></tr>
+                        <tr><td class="hl">IoTeX Official Statement</td><td>Raullen Chai, Twitter/X, Feb 21 2026 — chain suspended; 6–18mo planned attack stated</td></tr>
+                        <tr><td class="hl">PeckShield Analysis</td><td>Twitter/X, Feb 21 2026 — private key compromise confirmed; THORChain bridge flagged</td></tr>
+                        <tr><td class="hl">Specter On-Chain Analysis</td><td>Twitter/X, Feb 21 2026 — Infini–IoTeX attacker wallet funding trail</td></tr>
+                        <tr><td class="hl">Chainalysis 2025 Report</td><td>Total crypto theft >$3.4B in 2025; access control failures dominant loss class</td></tr>
+                        <tr><td class="hl">Grant Status</td><td>Arbitrum Foundation Stylus Sprint — $49,000 under review; vlayer — $10,000 under review</td></tr>
+                        <tr><td class="hl">Deploy TX</td><td style="font-family:var(--font-mono);font-size:0.75rem;word-break:break-all;">0x1a9eaa02f816d86a71f9bf234425e83b5c090d1f3e4f3691851964b71747a489</td></tr>
+                        <tr><td class="hl">Contact</td><td><a href="mailto:infrastructure@orthonode.xyz" style="color:var(--accent-arbitrum)">infrastructure@orthonode.xyz</a> | orthonode.xyz</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </article>
+
+        <!-- ── SIDEBAR ── -->
+        <aside class="paper-sidebar" aria-label="Paper details">
+            <div class="sidebar-block">
+                <div class="sidebar-label">// PAPER_METADATA</div>
+                <div class="sidebar-row"><span class="sidebar-key">Published</span><span class="sidebar-val">22 Feb 2026</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">Author</span><span class="sidebar-val">Orthonode Labs</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">Category</span><span class="sidebar-val">Security Research</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">Version</span><span class="sidebar-val">v3 (Peer-reviewed draft)</span></div>
+            </div>
+            <div class="sidebar-block">
+                <div class="sidebar-label">// SHA_DEPLOYMENT</div>
+                <div class="sidebar-row"><span class="sidebar-key">Network</span><span class="sidebar-val blu">Arbitrum Sepolia</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">TXs</span><span class="sidebar-val grn">89+</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">Status</span><span class="sidebar-val amb">Testnet · Audit Pending</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">Gas/receipt</span><span class="sidebar-val grn">12,564 (N=50)</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">Grant</span><span class="sidebar-val amb">$49K under review</span></div>
+            </div>
+            <div class="sidebar-block">
+                <div class="sidebar-label">// INCIDENT_STATS</div>
+                <div class="sidebar-row"><span class="sidebar-key">Date</span><span class="sidebar-val">21 Feb 2026</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">Loss (official)</span><span class="sidebar-val red">~$2M</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">Loss (on-chain)</span><span class="sidebar-val red">~$8.8M</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">Dwell time</span><span class="sidebar-val red">6–18 months</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">Attack class</span><span class="sidebar-val">Key compromise</span></div>
+            </div>
+            <div class="sidebar-block">
+                <div class="sidebar-label">// CREDIBILITY_AUDIT</div>
+                <div class="sidebar-row"><span class="sidebar-key">Web3 Whitepaper</span><span class="sidebar-val grn">9.5 / 10</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">Grant Review</span><span class="sidebar-val grn">9.5 / 10</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">Academic Paper</span><span class="sidebar-val amb">8.0 / 10</span></div>
+                <div class="sidebar-row"><span class="sidebar-key">VC Due Diligence</span><span class="sidebar-val grn">9.0 / 10</span></div>
+            </div>
+            <div class="sidebar-block" style="border-left:2px solid var(--accent-arbitrum);">
+                <div class="sidebar-label">// CONTACT</div>
+                <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-dim);line-height:1.7;">
+                    <div style="color:var(--accent-arbitrum);margin-bottom:0.5rem;">infrastructure@orthonode.xyz</div>
+                    <div>OAP docs on request</div>
+                    <div>SHA integration available</div>
+                </div>
+            </div>
+        </aside>
+
+    </div><!-- /paper-layout -->
+
+</main>
+
+<footer role="contentinfo">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h4>ORTHONODE INFRASTRUCTURE LABS</h4>
+                <p>Building deterministic physical verification infrastructure for autonomous systems, DePIN networks, and mobility platforms. OAP governs lifecycle integrity. SHA anchors hardware identity on-chain.</p>
+                <p style="margin-top:0.875rem;"><strong style="color:var(--text-tertiary);">Location:</strong> Bhopal, Madhya Pradesh, India &nbsp;|&nbsp; NIC 72900</p>
+            </div>
+            <div class="footer-links">
+                <h5>Products</h5>
+                <ul>
+                    <li><a href="/nexus.html">Nexus — Zero-Trust Gateway</a></li>
+                    <li><a href="/oap.html">OAP — Integrity Governance</a></li>
+                    <li><a href="/sha.html">SHA — Hardware Attestation</a></li>
+                    <li><a href="https://github.com/arhantbarmate/stylus-hardware-anchor" target="_blank" rel="noopener">SHA Repository ↗</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h5>Connect</h5>
+                <ul>
+                    <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X / Twitter</a></li>
+                    <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
+                    <li><a href="https://www.reddit.com/user/Automatic_Stick_3881/" target="_blank" rel="noopener">Reddit</a></li>
+                    <li><a href="mailto:infrastructure@orthonode.xyz">Email Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 Orthonode Infrastructure Labs. All Rights Reserved.</div>
+            <div class="footer-legal">
+                <a href="/terms.html">Terms</a>
+                <a href="/privacy.html">Privacy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+        const el = document.documentElement;
+        const pct = (el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100;
+        document.getElementById('progress').style.width = pct + '%';
+    });
+</script>
+
+</body>
+</html>
