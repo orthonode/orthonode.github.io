@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TON-SHA | Agent Trust Layer — Orthonode Infrastructure Labs</title>
+    <meta name="description" content="TON-SHA: Cryptographic trust primitive for TON agents. Four-gate verification: device authorization, firmware approval, replay protection, SHA-256 integrity. 0.03 TON per operation. Live on testnet.">
+    <meta name="keywords" content="TON agent trust, TON-SHA, agent identity, SHA-256 verification, TON blockchain, DePIN, Tact smart contract, agent marketplace, cryptographic trust, replay protection">
+    <meta name="author" content="Orthonode Infrastructure Labs">
+    <link rel="canonical" href="https://orthonode.xyz/ton-sha.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orthonode.xyz/ton-sha.html">
+    <meta property="og:title" content="TON-SHA | Agent Trust Layer">
+    <meta property="og:description" content="Cryptographic trust primitive for TON agents. Four-gate verification live on testnet. 0.03 TON per op.">
+    <meta property="og:image" content="https://orthonode.xyz/banner.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@OrthonodeSys">
+    <meta name="theme-color" content="#03060d">
+    <link rel="icon" type="image/png" href="https://orthonode.xyz/site-logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+    --void:   #03060d;
+    --deep:   #060e1c;
+    --surface:#0a1628;
+    --raised: #0e1f38;
+    --card:   #111f35;
+    --lift:   #152440;
+
+    --ton:     #0098ea;
+    --ton-hi:  #38b6ff;
+    --ton-lo:  rgba(0,152,234,.18);
+    --ton-line:rgba(0,152,234,.22);
+    --ton-glow:rgba(0,152,234,.35);
+
+    --green:  #22c55e;
+    --amber:  #f59e0b;
+    --violet: #a78bfa;
+    --red:    #ef4444;
+
+    --t0: #f0f7ff;
+    --t1: #c2d8f0;
+    --t2: #7aa4c8;
+    --t3: #3d6484;
+    --t4: #1e3a52;
+    --t5: #0d2035;
+
+    --mono: 'Geist Mono', monospace;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans:  'Geist', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+    background: var(--void);
+    color: var(--t1);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ocean depth grid */
+body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+        linear-gradient(rgba(0,152,234,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,152,234,.03) 1px, transparent 1px);
+    background-size: 64px 64px;
+    pointer-events: none; z-index: 0;
+}
+
+/* top radial bloom */
+body::after {
+    content: '';
+    position: fixed;
+    top: -30vh; left: 50%; transform: translateX(-50%);
+    width: 100vw; height: 70vh;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,152,234,.09) 0%, transparent 65%);
+    pointer-events: none; z-index: 0;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ─── NAV ────────────────────────────────────────────────── */
+nav {
+    position: fixed; top: 0; width: 100%; z-index: 200;
+    background: rgba(3,6,13,.82);
+    backdrop-filter: blur(20px) saturate(160%);
+    border-bottom: 1px solid var(--ton-line);
+}
+.nav-inner {
+    max-width: 1280px; margin: 0 auto;
+    padding: .75rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.nav-home {
+    font-family: var(--mono); font-size: .7rem;
+    color: var(--t3); letter-spacing: .1em;
+    transition: color .2s;
+}
+.nav-home:hover { color: var(--ton); }
+.nav-home strong { color: var(--ton); font-weight: 500; }
+
+.nav-right {
+    display: flex; align-items: center; gap: 1.25rem;
+    font-family: var(--mono); font-size: .7rem;
+}
+.nav-right a { color: var(--t3); letter-spacing: .05em; transition: color .2s; }
+.nav-right a:hover { color: var(--t1); }
+
+.badge-live {
+    display: flex; align-items: center; gap: .4rem;
+    padding: .28rem .75rem;
+    background: rgba(34,197,94,.07);
+    border: 1px solid rgba(34,197,94,.22);
+    border-radius: 3px;
+    color: var(--green) !important;
+}
+.dot-live {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 7px rgba(34,197,94,.7);
+    animation: pulse 2s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+.section { padding: 5.5rem 0; position: relative; z-index: 1; }
+.eyebrow {
+    font-family: var(--mono); font-size: .68rem;
+    color: var(--t4); letter-spacing: .14em; text-transform: uppercase;
+    margin-bottom: .875rem;
+}
+.eyebrow::before { content: '// '; color: var(--ton); opacity: .7; }
+
+/* ─── HERO ───────────────────────────────────────────────── */
+.hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 9rem 0 5rem;
+}
+.hero-inner { max-width: 860px; }
+
+.hero-kicker {
+    font-family: var(--mono); font-size: .72rem;
+    color: var(--ton); letter-spacing: .14em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: .75rem;
+}
+.hero-kicker::after {
+    content: '';
+    display: block; flex: 1; max-width: 120px;
+    height: 1px; background: var(--ton-line);
+}
+
+.hero-wordmark {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(4.5rem, 10vw, 8.5rem);
+    line-height: .88; letter-spacing: -.04em;
+    color: var(--t0); margin-bottom: .4rem;
+}
+.hero-wordmark span {
+    background: linear-gradient(125deg, var(--ton) 0%, var(--ton-hi) 55%, rgba(0,152,234,.5) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-descriptor {
+    font-family: var(--mono); font-size: .82rem;
+    color: var(--t4); letter-spacing: .1em; text-transform: uppercase;
+    margin-bottom: 2.5rem;
+}
+
+.hero-lede {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+    color: var(--t2); line-height: 1.5; max-width: 680px;
+    margin-bottom: 2.75rem;
+    border-left: 2px solid var(--ton-line); padding-left: 1.5rem;
+}
+.hero-lede strong { font-style: normal; color: var(--t0); font-family: var(--sans); font-weight: 500; }
+
+.hero-actions { display: flex; gap: .875rem; flex-wrap: wrap; margin-bottom: 4rem; }
+
+.btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-family: var(--mono); font-size: .78rem; letter-spacing: .04em;
+    padding: .75rem 1.5rem; border-radius: 4px;
+    transition: all .2s; cursor: pointer;
+}
+.btn-fill {
+    background: var(--ton); color: #fff;
+    border: 1px solid transparent;
+}
+.btn-fill:hover {
+    background: var(--ton-hi);
+    box-shadow: 0 0 28px var(--ton-glow); transform: translateY(-2px);
+}
+.btn-outline {
+    background: transparent; color: var(--t2);
+    border: 1px solid var(--ton-line);
+}
+.btn-outline:hover { border-color: var(--ton); color: var(--ton); }
+
+/* stats strip */
+.stats-strip {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    border: 1px solid var(--ton-line);
+    border-radius: 4px; overflow: hidden;
+}
+.stat-cell {
+    background: var(--deep); padding: 1.25rem;
+    text-align: center; border-right: 1px solid var(--ton-line);
+}
+.stat-cell:last-child { border-right: none; }
+.stat-v {
+    display: block; font-family: var(--mono); font-weight: 600;
+    font-size: 1.35rem; color: var(--ton); margin-bottom: .2rem;
+}
+.stat-l {
+    font-family: var(--mono); font-size: .62rem;
+    color: var(--t4); letter-spacing: .08em; text-transform: uppercase;
+}
+
+/* ─── SECTION HEADERS ────────────────────────────────────── */
+h2.sh {
+    font-family: var(--serif);
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    color: var(--t0); line-height: 1.1;
+    letter-spacing: -.01em; margin-bottom: 1rem;
+    font-weight: 400;
+}
+h2.sh em { font-style: italic; color: var(--ton); }
+
+.section-intro {
+    color: var(--t2); font-size: 1rem;
+    line-height: 1.75; max-width: 580px;
+    font-weight: 300; margin-bottom: 3rem;
+}
+
+hr.div {
+    border: none; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ton-line), transparent);
+    margin: 0;
+}
+
+/* ─── CANONICAL CALL ─────────────────────────────────────── */
+.call-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+.code-frame {
+    background: var(--deep);
+    border: 1px solid var(--ton-line); border-radius: 6px; overflow: hidden;
+}
+.cf-bar {
+    background: var(--surface);
+    padding: .625rem 1.1rem;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--ton-line);
+}
+.cf-dots { display: flex; gap: .35rem; }
+.cf-dots i {
+    display: block; width: 9px; height: 9px;
+    border-radius: 50%; opacity: .65;
+}
+.cf-dots i:nth-child(1){background:#ef4444}
+.cf-dots i:nth-child(2){background:#f59e0b}
+.cf-dots i:nth-child(3){background:#22c55e}
+.cf-fname {
+    font-family: var(--mono); font-size: .68rem; color: var(--t3);
+}
+.cf-body {
+    padding: 1.5rem 1.5rem; font-family: var(--mono);
+    font-size: .82rem; line-height: 1.9; overflow-x: auto;
+}
+.cf-body .cm { color: var(--t4); font-style: italic; }
+.cf-body .kw { color: var(--violet); }
+.cf-body .fn { color: var(--ton-hi); }
+.cf-body .st { color: #86efac; }
+.cf-body .nu { color: var(--amber); }
+.cf-body .hl {
+    display: block;
+    background: rgba(0,152,234,.1); border-left: 2px solid var(--ton);
+    padding: .2rem .75rem; margin: .15rem -.1rem;
+}
+.cf-body .ok { color: var(--green); }
+.cf-body .er { color: var(--red); }
+
+/* what this guarantees panel */
+.guarantees {
+    background: var(--surface);
+    border: 1px solid var(--ton-line);
+    border-radius: 6px; padding: 1.75rem;
+    display: flex; flex-direction: column; gap: .6rem;
+}
+.g-row {
+    display: flex; align-items: flex-start; gap: .75rem;
+    font-family: var(--mono); font-size: .8rem; color: var(--t2); line-height: 1.5;
+}
+.g-row .tick { color: var(--green); flex-shrink: 0; font-weight: 600; }
+.g-row .label { color: var(--t1); }
+.g-row .sub { color: var(--t3); font-size: .72rem; margin-top: .15rem; display: block; }
+
+/* ─── FOUR GATES ─────────────────────────────────────────── */
+.gates-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1px; background: var(--ton-line);
+    border: 1px solid var(--ton-line); border-radius: 6px; overflow: hidden;
+    margin-top: 2.5rem;
+}
+.gate {
+    background: var(--deep); padding: 2.25rem;
+    position: relative; overflow: hidden;
+    transition: background .25s;
+}
+.gate:hover { background: var(--surface); }
+.gate::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; width: 100%; height: 3px;
+}
+.gate.g1::before { background: var(--amber); }
+.gate.g2::before { background: var(--violet); }
+.gate.g3::before { background: var(--red); }
+.gate.g4::before { background: var(--green); }
+
+.gate-number {
+    font-family: var(--mono); font-size: 3.5rem;
+    font-weight: 600; line-height: 1;
+    margin-bottom: .875rem; opacity: .15;
+    color: var(--t0);
+}
+.gate h3 {
+    font-family: var(--sans); font-weight: 600;
+    font-size: 1.05rem; color: var(--t0);
+    margin-bottom: .6rem; letter-spacing: -.01em;
+}
+.gate p {
+    font-size: .875rem; color: var(--t2);
+    line-height: 1.7; margin-bottom: 1.1rem; font-weight: 300;
+}
+.gate-check {
+    font-family: var(--mono); font-size: .75rem;
+    padding: .5rem .875rem;
+    background: var(--void); border: 1px solid rgba(255,255,255,.07);
+    border-radius: 3px; color: var(--t1);
+    display: block; margin-bottom: .75rem;
+}
+.gate-fail {
+    font-family: var(--mono); font-size: .68rem; color: var(--t4);
+}
+.gate-fail em { color: var(--red); font-style: normal; }
+
+/* ─── ARCHITECTURE FLOW ──────────────────────────────────── */
+.arch-flow {
+    margin-top: 2.5rem;
+    background: var(--deep); border: 1px solid var(--ton-line);
+    border-radius: 6px; overflow: hidden;
+}
+.arch-layer {
+    display: grid; grid-template-columns: 170px 1fr;
+    border-bottom: 1px solid var(--ton-line);
+    transition: background .2s;
+}
+.arch-layer:last-child { border-bottom: none; }
+.arch-layer:hover { background: var(--surface); }
+.arch-layer-id {
+    padding: 1.75rem 1.5rem;
+    border-right: 1px solid var(--ton-line);
+    display: flex; flex-direction: column; justify-content: center;
+}
+.arch-layer-num {
+    font-family: var(--mono); font-size: 2.5rem;
+    font-weight: 600; color: var(--ton); opacity: .35; line-height: 1;
+    margin-bottom: .25rem;
+}
+.arch-layer-name {
+    font-family: var(--mono); font-size: .65rem;
+    color: var(--t4); letter-spacing: .1em; text-transform: uppercase;
+}
+.arch-layer-content {
+    padding: 1.5rem;
+    display: flex; flex-wrap: wrap; gap: .5rem; align-content: flex-start;
+}
+.chip {
+    font-family: var(--mono); font-size: .72rem;
+    padding: .35rem .7rem;
+    border-radius: 3px; white-space: nowrap;
+    border: 1px solid;
+}
+.chip-default { background: var(--surface); border-color: rgba(255,255,255,.07); color: var(--t2); }
+.chip-ton     { background: var(--ton-lo); border-color: var(--ton-line); color: var(--ton); }
+.chip-green   { background: rgba(34,197,94,.07); border-color: rgba(34,197,94,.2); color: var(--green); }
+.chip-red     { background: rgba(239,68,68,.07); border-color: rgba(239,68,68,.2); color: var(--red); }
+
+/* ─── RECEIPT FIELDS ─────────────────────────────────────── */
+.receipt-strip {
+    display: flex; border: 1px solid var(--ton-line);
+    border-radius: 6px; overflow: hidden; margin-top: 2.5rem;
+}
+.rf {
+    flex: 1; padding: 1.25rem; text-align: center;
+    border-right: 1px solid var(--ton-line);
+    background: var(--deep);
+}
+.rf:last-child { border-right: none; background: var(--surface); border: 1px solid var(--ton); border-left: none;}
+.rf-name  { font-family: var(--mono); font-size: .78rem; color: var(--ton); display: block; font-weight: 500; margin-bottom: .3rem; }
+.rf:last-child .rf-name { color: var(--green); }
+.rf-bits  { font-family: var(--mono); font-size: .62rem; color: var(--t4); display: block; margin-bottom: .2rem; }
+.rf-desc  { font-family: var(--mono); font-size: .62rem; color: var(--t3); }
+
+/* ─── LIVE CONTRACT ──────────────────────────────────────── */
+.live-panel {
+    background: var(--deep); border: 1px solid var(--ton-line);
+    border-radius: 6px; overflow: hidden; margin-top: 2.5rem;
+}
+.live-panel-top {
+    padding: 2rem 2.25rem;
+    border-bottom: 1px solid var(--ton-line);
+    display: grid; grid-template-columns: 1fr 260px; gap: 2.5rem;
+}
+.lp-address {
+    font-family: var(--mono); font-size: .75rem;
+    color: var(--ton); background: var(--ton-lo);
+    border: 1px solid var(--ton-line); border-radius: 3px;
+    padding: .6rem 1rem; display: block; margin-bottom: 1.25rem;
+    word-break: break-all;
+}
+.lp-title {
+    font-family: var(--sans); font-weight: 600;
+    font-size: 1rem; color: var(--t0); margin-bottom: .875rem;
+}
+.lp-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.25rem; }
+.lp-actions { display: flex; gap: .75rem; flex-wrap: wrap; }
+.live-stat-list {
+    background: var(--surface); border: 1px solid var(--ton-line);
+    border-radius: 4px; overflow: hidden;
+}
+.lsl-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: .65rem 1rem; border-bottom: 1px solid rgba(0,152,234,.08);
+    font-family: var(--mono); font-size: .72rem;
+}
+.lsl-row:last-child { border-bottom: none; }
+.lsl-k { color: var(--t4); }
+.lsl-v { color: var(--t1); }
+.lsl-v.ok { color: var(--green); }
+.lsl-v.hi { color: var(--ton); }
+
+/* gates verified bar */
+.live-panel-gates {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--ton-line);
+}
+.lpg {
+    padding: 1rem 1.25rem; border-right: 1px solid var(--ton-line);
+    text-align: center;
+}
+.lpg:last-child { border-right: none; }
+.lpg-num { font-family: var(--mono); font-size: .65rem; color: var(--t4); margin-bottom: .35rem; }
+.lpg-status {
+    font-family: var(--mono); font-size: .78rem;
+    font-weight: 500; color: var(--green);
+}
+
+/* ─── USE CASES ──────────────────────────────────────────── */
+.uc-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--ton-line);
+    border: 1px solid var(--ton-line); border-radius: 6px; overflow: hidden;
+    margin-top: 2.5rem;
+}
+.uc-card {
+    background: var(--deep); padding: 1.875rem;
+    transition: background .25s;
+}
+.uc-card:hover { background: var(--surface); }
+.uc-icon { font-size: 1.4rem; margin-bottom: .875rem; display: block; }
+.uc-title { font-weight: 600; font-size: .95rem; color: var(--t0); margin-bottom: .5rem; }
+.uc-body  { font-size: .85rem; color: var(--t2); line-height: 1.65; font-weight: 300; margin-bottom: 1rem; }
+.uc-snippet {
+    font-family: var(--mono); font-size: .7rem; line-height: 1.7;
+    background: var(--void); border: 1px solid rgba(255,255,255,.05);
+    border-radius: 3px; padding: .75rem;
+    color: var(--t3);
+}
+.uc-snippet .hi  { color: var(--ton-hi); }
+.uc-snippet .ok  { color: var(--green); }
+
+/* ─── TECH CHALLENGES ────────────────────────────────────── */
+.challenges-list {
+    display: flex; flex-direction: column; gap: 1px;
+    background: var(--ton-line); border: 1px solid var(--ton-line);
+    border-radius: 6px; overflow: hidden; margin-top: 2.5rem;
+}
+.challenge {
+    background: var(--deep); padding: 1.75rem 2rem;
+    display: grid; grid-template-columns: 280px 1fr;
+    gap: 2rem; align-items: start;
+    transition: background .2s;
+}
+.challenge:hover { background: var(--surface); }
+.ch-problem {
+    font-family: var(--mono); font-size: .78rem;
+    font-weight: 500; color: var(--t0);
+    line-height: 1.4;
+}
+.ch-tag {
+    font-size: .65rem; padding: .18rem .5rem;
+    border-radius: 2px; margin-top: .5rem; display: inline-block;
+    font-family: var(--mono);
+}
+.ch-tag.fixed { background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.2); color: var(--green); }
+.ch-body { font-size: .85rem; color: var(--t2); line-height: 1.7; font-weight: 300; }
+.ch-body code {
+    font-family: var(--mono); font-size: .78rem;
+    background: var(--void); border: 1px solid var(--ton-line);
+    border-radius: 2px; padding: .1rem .35rem; color: var(--ton-hi);
+}
+
+/* ─── QUICK START ────────────────────────────────────────── */
+.qs-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+.prereq-table {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--mono); font-size: .78rem;
+    margin-top: 2.5rem;
+}
+.prereq-table th {
+    text-align: left; padding: .65rem 1rem;
+    font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--t4); background: var(--surface);
+    border: 1px solid var(--ton-line);
+}
+.prereq-table td {
+    padding: .65rem 1rem; border: 1px solid var(--ton-line);
+    background: var(--deep); color: var(--t2);
+}
+.prereq-table td:first-child { color: var(--t0); font-weight: 500; }
+
+/* ─── ROADMAP ─────────────────────────────────────────────── */
+.roadmap-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--ton-line);
+    border: 1px solid var(--ton-line); border-radius: 6px; overflow: hidden;
+    margin-top: 2.5rem;
+}
+.rm-card { background: var(--deep); padding: 2rem; }
+.rm-phase {
+    font-family: var(--mono); font-size: .65rem;
+    color: var(--t4); letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: .4rem;
+}
+.rm-title {
+    font-family: var(--sans); font-weight: 600;
+    font-size: .95rem; color: var(--t0); margin-bottom: 1rem;
+}
+.rm-items { list-style: none; display: flex; flex-direction: column; gap: .4rem; }
+.rm-items li {
+    font-size: .82rem; color: var(--t2); font-weight: 300;
+    display: flex; align-items: flex-start; gap: .5rem; line-height: 1.45;
+}
+.rm-items li::before { content: '—'; color: var(--t4); flex-shrink: 0; }
+.rm-items li.done::before { content: '✓'; color: var(--green); }
+.rm-items li.done { color: var(--t3); }
+
+/* ─── COMPARISON ─────────────────────────────────────────── */
+.compare-tbl {
+    width: 100%; border-collapse: collapse;
+    font-family: var(--mono); font-size: .8rem;
+    margin-top: 2.5rem;
+}
+.compare-tbl th {
+    padding: .75rem 1.25rem; text-align: left;
+    font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--t4); background: var(--surface);
+    border: 1px solid var(--ton-line);
+}
+.compare-tbl td {
+    padding: .75rem 1.25rem; border: 1px solid var(--ton-line);
+    background: var(--deep); color: var(--t2);
+}
+.compare-tbl tr.us td { background: var(--surface); }
+.compare-tbl tr.us td:first-child { color: var(--ton); font-weight: 500; }
+.compare-tbl .yes { color: var(--green); font-weight: 500; }
+.compare-tbl .no  { color: var(--t4); }
+.compare-tbl tr:hover td { background: var(--raised); }
+.compare-tbl tr.us:hover td { background: var(--raised); }
+
+/* ─── THREAT MODEL ───────────────────────────────────────── */
+.threats-list {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--ton-line); border: 1px solid var(--ton-line);
+    border-radius: 6px; overflow: hidden; margin-top: 2.5rem;
+}
+.threat-card { background: var(--deep); padding: 1.75rem; transition: background .2s; }
+.threat-card:hover { background: var(--surface); }
+.threat-name {
+    font-family: var(--sans); font-weight: 600;
+    font-size: .9rem; color: var(--t0); margin-bottom: .5rem;
+}
+.threat-body {
+    font-size: .82rem; color: var(--t2); line-height: 1.65;
+    font-weight: 300; margin-bottom: .75rem;
+}
+.threat-mit {
+    font-family: var(--mono); font-size: .72rem;
+    color: var(--green); display: flex; align-items: flex-start; gap: .4rem;
+}
+.threat-mit::before { content: 'MITIGATION:'; color: var(--t4); }
+
+/* ─── SECURITY TRUST TABLE ───────────────────────────────── */
+.trust-table {
+    width: 100%; border-collapse: collapse;
+    font-size: .85rem; margin-top: 2rem;
+}
+.trust-table th {
+    text-align: left; padding: .65rem 1.25rem;
+    font-family: var(--mono); font-size: .65rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--t4);
+    background: var(--surface); border: 1px solid var(--ton-line);
+}
+.trust-table td {
+    padding: .65rem 1.25rem; border: 1px solid var(--ton-line);
+    background: var(--deep); color: var(--t2); font-family: var(--mono); font-size: .78rem;
+}
+.trust-table td:first-child { color: var(--t0); font-weight: 500; }
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+footer {
+    padding: 3rem 0; margin-top: 5rem;
+    border-top: 1px solid var(--ton-line);
+    position: relative; z-index: 1;
+}
+.footer-inner {
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 1.25rem;
+}
+.footer-brand { font-family: var(--mono); font-size: .7rem; color: var(--t4); }
+.footer-brand strong { color: var(--ton); }
+.footer-links { display: flex; gap: 1.5rem; font-family: var(--mono); font-size: .7rem; }
+.footer-links a { color: var(--t4); transition: color .2s; }
+.footer-links a:hover { color: var(--ton); }
+.footer-contract {
+    margin-top: 1.75rem; padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,152,234,.06);
+    font-family: var(--mono); font-size: .65rem;
+    color: var(--t5); text-align: center;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
+    .call-grid { grid-template-columns: 1fr; }
+    .uc-grid { grid-template-columns: repeat(2, 1fr); }
+    .roadmap-grid { grid-template-columns: 1fr; }
+    .threats-list { grid-template-columns: 1fr; }
+    .live-panel-top { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    .stats-strip { grid-template-columns: repeat(3, 1fr); }
+    .stats-strip .stat-cell:nth-child(4), .stats-strip .stat-cell:nth-child(5) {
+        border-top: 1px solid var(--ton-line);
+    }
+    .gates-grid { grid-template-columns: 1fr; }
+    .uc-grid { grid-template-columns: 1fr; }
+    .qs-grid { grid-template-columns: 1fr; }
+    .arch-layer { grid-template-columns: 1fr; }
+    .arch-layer-id { border-right: none; border-bottom: 1px solid var(--ton-line); padding: 1.25rem; flex-direction: row; align-items: center; gap: .75rem; }
+    .challenge { grid-template-columns: 1fr; }
+    .receipt-strip { flex-direction: column; }
+    .rf { border-right: none; border-bottom: 1px solid var(--ton-line); }
+    .rf:last-child { border-bottom: none; border-left: none; border: 1px solid var(--ton); }
+    .live-panel-gates { grid-template-columns: repeat(2, 1fr); }
+    .nav-right { display: none; }
+}
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="/" class="nav-home">ORTHONODE<strong> // </strong>INFRASTRUCTURE LABS</a>
+        <div class="nav-right">
+            <a href="/sha.html">SHA (Arbitrum)</a>
+            <a href="/oap.html">OAP</a>
+            <a href="/nexus.html">Nexus</a>
+            <a href="https://github.com/orthonode/ton-sha" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://testnet.tonscan.org/address/kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S" target="_blank" rel="noopener" class="badge-live">
+                <span class="dot-live"></span> TESTNET LIVE
+            </a>
+        </div>
+    </div>
+</nav>
+
+<main>
+
+<!-- ═══ HERO ═══════════════════════════════════════════════ -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-inner">
+            <p class="hero-kicker">TON Blockchain · Tact 1.6 · Agent Identity Protocol</p>
+            <div class="hero-wordmark">TON<span>-SHA</span></div>
+            <p class="hero-descriptor">Agent Trust Layer for the TON Ecosystem</p>
+            <p class="hero-lede">
+                TON agents have no verifiable identity and no proof that their execution hasn't been tampered with.
+                TON-SHA is the <strong>cryptographic primitive</strong> that changes that —
+                four gates, one contract, zero trusted intermediaries.
+            </p>
+            <div class="hero-actions">
+                <a href="https://youtu.be/a3MKPu_0Duk" target="_blank" rel="noopener" class="btn btn-fill">▶ Watch Demo</a>
+                <a href="https://testnet.tonscan.org/address/kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S" target="_blank" rel="noopener" class="btn btn-outline">Explorer ↗</a>
+                <a href="https://github.com/orthonode/ton-sha" target="_blank" rel="noopener" class="btn btn-outline">Source ↗</a>
+            </div>
+            <div class="stats-strip">
+                <div class="stat-cell">
+                    <span class="stat-v">4</span>
+                    <span class="stat-l">Security Gates</span>
+                </div>
+                <div class="stat-cell">
+                    <span class="stat-v">0.03</span>
+                    <span class="stat-l">TON / Op</span>
+                </div>
+                <div class="stat-cell">
+                    <span class="stat-v">640</span>
+                    <span class="stat-l">Bits / Receipt</span>
+                </div>
+                <div class="stat-cell">
+                    <span class="stat-v">100+</span>
+                    <span class="stat-l">On-Chain Txns</span>
+                </div>
+                <div class="stat-cell">
+                    <span class="stat-v">MIT</span>
+                    <span class="stat-l">License</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="div">
+
+<!-- ═══ CANONICAL CALL ═══════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">The Integration</p>
+        <h2 class="sh">One call. <em>Complete trust.</em></h2>
+        <p class="section-intro">
+            This is the call every agent, oracle, marketplace, and DeFi protocol makes before proceeding with any interaction.
+            A single boolean from the contract — backed by four sequential cryptographic gates — tells you whether to proceed or abort.
+        </p>
+
+        <div class="call-grid">
+            <div class="code-frame">
+                <div class="cf-bar">
+                    <div class="cf-dots"><i></i><i></i><i></i></div>
+                    <span class="cf-fname">agent-integration.ts</span>
+                </div>
+                <div class="cf-body">
+<span class="cm">// ─── THE CANONICAL AGENT LOOP ───────────────────────</span>
+<span class="cm">// Used by marketplaces, oracles, DeFi, DAOs, DePIN</span>
+<span class="kw">import</span> { createAgentTrust } <span class="kw">from</span> <span class="st">'@orthonode/ton-sha'</span>;
+
+<span class="kw">const</span> agentTrust = <span class="fn">createAgentTrust</span>(contractAddress, provider);
+
+<span class="cm">// Verify before any collaboration ↓</span>
+<span class="hl"><span class="kw">if</span> (!(<span class="kw">await</span> agentTrust.<span class="fn">verifyAgent</span>(agentId))) {
+  <span class="kw">throw new</span> <span class="fn">Error</span>(<span class="st">"Untrusted agent — aborting"</span>);
+}</span>
+<span class="ok">await collaborate();</span>  <span class="cm">// ← proceeds only if trusted</span>
+                </div>
+            </div>
+
+            <div class="guarantees">
+                <p style="font-family:var(--mono);font-size:.65rem;color:var(--t4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem;">// WHAT THIS CALL GUARANTEES</p>
+                <div class="g-row">
+                    <span class="tick">✓</span>
+                    <div><span class="label">Device identity verified</span><span class="sub">authorized_devices[agentId] == true (Gate 1)</span></div>
+                </div>
+                <div class="g-row">
+                    <span class="tick">✓</span>
+                    <div><span class="label">Firmware approved</span><span class="sub">approved_firmware[fw_hash] == true (Gate 2)</span></div>
+                </div>
+                <div class="g-row">
+                    <span class="tick">✓</span>
+                    <div><span class="label">No replay attack</span><span class="sub">counter strictly greater than last seen (Gate 3)</span></div>
+                </div>
+                <div class="g-row">
+                    <span class="tick">✓</span>
+                    <div><span class="label">Cryptographic integrity</span><span class="sub">sha256(packed receipt) == submitted digest (Gate 4)</span></div>
+                </div>
+                <div class="g-row">
+                    <span class="tick">✓</span>
+                    <div><span class="label">Public verifiability</span><span class="sub">Anyone can query contract state — no oracle required</span></div>
+                </div>
+                <div class="g-row">
+                    <span class="tick">✓</span>
+                    <div><span class="label">0.03 TON per operation</span><span class="sub">70% cheaper than default — enables agent micro-interactions</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="div">
+
+<!-- ═══ FOUR GATES ═══════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">The Security Model</p>
+        <h2 class="sh">Four gates. <em>No exceptions.</em></h2>
+        <p class="section-intro">
+            Every <code style="font-family:var(--mono);font-size:.85em;color:var(--ton-hi)">VerifyReceipt</code> message
+            passes through all four gates in sequence. Failure at any gate emits a specific on-chain failure code
+            and aborts immediately. There is no partial success, no bypass path, no fallback.
+        </p>
+
+        <div class="gates-grid">
+            <div class="gate g1">
+                <div class="gate-number">01</div>
+                <h3>Device Authorization</h3>
+                <p>The contract owner explicitly authorizes each agent ID before it can submit any receipt.
+                Unknown agents are rejected at first check — before any hash computation or storage access runs.</p>
+                <code class="gate-check">authorized_devices[hw_id] == true</code>
+                <p class="gate-fail">Emits: <em>VerificationFailed { hw_id, reason: 1 }</em></p>
+            </div>
+
+            <div class="gate g2">
+                <div class="gate-number">02</div>
+                <h3>Firmware Approval</h3>
+                <p>The SHA-256 hash of the agent's running firmware must be in the owner-curated approved set.
+                An agent running modified, unrecognized, or injected code fails here regardless of its device identity.</p>
+                <code class="gate-check">approved_firmware[fw_hash] == true</code>
+                <p class="gate-fail">Emits: <em>VerificationFailed { hw_id, reason: 2 }</em></p>
+            </div>
+
+            <div class="gate g3">
+                <div class="gate-number">03</div>
+                <h3>Replay Protection</h3>
+                <p>Each receipt carries a monotonic counter that must strictly exceed the last accepted counter for that device.
+                Captured receipts can never be replayed. Each successful verification permanently advances the counter on-chain.</p>
+                <code class="gate-check">counter &gt; counters[hw_id]</code>
+                <p class="gate-fail">Emits: <em>VerificationFailed { hw_id, reason: 3 }</em></p>
+            </div>
+
+            <div class="gate g4">
+                <div class="gate-number">04</div>
+                <h3>SHA-256 Integrity</h3>
+                <p>The contract independently packs the submitted fields into a cell and computes sha256 — the same way
+                the hardware does. If even one bit of any field was modified in transit, the digest won't match and this gate fires.</p>
+                <code class="gate-check">sha256(hw_id‖fw_hash‖ex_hash‖counter) == digest</code>
+                <p class="gate-fail">Emits: <em>VerificationFailed { hw_id, reason: 4 }</em></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="div">
+
+<!-- ═══ ARCHITECTURE ══════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">Architecture</p>
+        <h2 class="sh">Three layers. <em>No trusted intermediary.</em></h2>
+        <p class="section-intro">
+            No oracle. No attester. No bridge. The contract reconstructs and verifies everything from first principles
+            using TON VM's native <code style="font-family:var(--mono);font-size:.85em;color:var(--ton-hi)">sha256</code> opcode
+            — the same instruction the hardware uses off-chain.
+        </p>
+
+        <div class="arch-flow">
+            <div class="arch-layer">
+                <div class="arch-layer-id">
+                    <div class="arch-layer-num">01</div>
+                    <div class="arch-layer-name">Hardware Device</div>
+                </div>
+                <div class="arch-layer-content">
+                    <span class="chip chip-default">hw_id — 64-bit eFuse identifier</span>
+                    <span class="chip chip-default">fw_hash — SHA-256 of firmware binary</span>
+                    <span class="chip chip-default">ex_hash — SHA-256 of execution result</span>
+                    <span class="chip chip-default">counter — monotonic, never resets, NVS-backed</span>
+                    <span class="chip chip-ton">digest = sha256(hw_id‖fw_hash‖ex_hash‖counter)</span>
+                </div>
+            </div>
+            <div class="arch-layer">
+                <div class="arch-layer-id">
+                    <div class="arch-layer-num">02</div>
+                    <div class="arch-layer-name">Client SDK</div>
+                </div>
+                <div class="arch-layer-content">
+                    <span class="chip chip-default">storeUint(hw_id, 64)</span>
+                    <span class="chip chip-default">storeUint(fw_hash, 256)</span>
+                    <span class="chip chip-default">storeUint(ex_hash, 256)</span>
+                    <span class="chip chip-default">storeUint(counter, 64)</span>
+                    <span class="chip chip-ton">640-bit cell → sha256(raw bits) → int257 signed</span>
+                    <span class="chip chip-default">VerifyReceipt message → TON RPC</span>
+                </div>
+            </div>
+            <div class="arch-layer">
+                <div class="arch-layer-id">
+                    <div class="arch-layer-num">03</div>
+                    <div class="arch-layer-name">Tact Contract</div>
+                </div>
+                <div class="arch-layer-content">
+                    <span class="chip chip-default">Gate 1 → authorized_devices map lookup</span>
+                    <span class="chip chip-default">Gate 2 → approved_firmware map lookup</span>
+                    <span class="chip chip-default">Gate 3 → counters[hw_id] compare</span>
+                    <span class="chip chip-default">Gate 4 → sha256(rebuilt cell) == digest</span>
+                    <span class="chip chip-green">→ VerificationPassed { hw_id, counter }</span>
+                    <span class="chip chip-red">→ VerificationFailed { hw_id, reason: 1–4 }</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:2.5rem;">
+            <p class="eyebrow" style="margin-bottom:1rem;">Contract Storage</p>
+            <div class="code-frame">
+                <div class="cf-bar">
+                    <div class="cf-dots"><i></i><i></i><i></i></div>
+                    <span class="cf-fname">contracts/ton_sha.tact</span>
+                </div>
+                <div class="cf-body">
+<span class="cm">// O(1) map-based storage — no iteration, low and predictable gas</span>
+<span class="kw">contract</span> TonSha {
+  owner:               Address;
+  authorized_devices:  map&lt;Int, Bool&gt;;  <span class="cm">// hw_id → authorized</span>
+  approved_firmware:   map&lt;Int, Bool&gt;;  <span class="cm">// fw_hash → approved</span>
+  counters:            map&lt;Int, Int&gt;;   <span class="cm">// hw_id → last counter seen</span>
+}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="div">
+
+<!-- ═══ RECEIPT FORMAT ════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">Receipt Format</p>
+        <h2 class="sh">640 bits. <em>Exactly.</em></h2>
+        <p class="section-intro">
+            The receipt is a packed TON cell containing exactly 640 data bits. The contract rebuilds the identical cell
+            before running Gate 4 — field order, bit widths, and encoding must match exactly. Any deviation produces
+            a different digest and fails verification.
+        </p>
+
+        <div class="receipt-strip">
+            <div class="rf">
+                <span class="rf-name">hw_id</span>
+                <span class="rf-bits">64 bits</span>
+                <span class="rf-desc">uint64 · eFuse identifier</span>
+            </div>
+            <div class="rf">
+                <span class="rf-name">fw_hash</span>
+                <span class="rf-bits">256 bits</span>
+                <span class="rf-desc">uint256 · firmware SHA-256</span>
+            </div>
+            <div class="rf">
+                <span class="rf-name">ex_hash</span>
+                <span class="rf-bits">256 bits</span>
+                <span class="rf-desc">uint256 · execution SHA-256</span>
+            </div>
+            <div class="rf">
+                <span class="rf-name">counter</span>
+                <span class="rf-bits">64 bits</span>
+                <span class="rf-desc">uint64 · monotonic, BE</span>
+            </div>
+            <div class="rf">
+                <span class="rf-name">digest</span>
+                <span class="rf-bits">256 bits</span>
+                <span class="rf-desc">int257 · sha256(above, packed)</span>
+            </div>
+        </div>
+
+        <div style="margin-top:1.5rem;">
+            <div class="code-frame">
+                <div class="cf-bar">
+                    <div class="cf-dots"><i></i><i></i><i></i></div>
+                    <span class="cf-fname">digest-computation.ts — off-chain must match on-chain exactly</span>
+                </div>
+                <div class="cf-body">
+<span class="cm">// Build the exact 80-byte (640-bit) buffer the contract will reconstruct</span>
+<span class="kw">const</span> buf = Buffer.<span class="fn">alloc</span>(<span class="nu">80</span>);
+<span class="kw">let</span> o = <span class="nu">0</span>;
+buf.<span class="fn">writeBigUInt64BE</span>(hw_id, o); o += <span class="nu">8</span>;
+<span class="kw">for</span> (<span class="kw">let</span> i=<span class="nu">0</span>; i&lt;<span class="nu">32</span>; i++) buf[o+i] = Number((fw_hash >> BigInt((<span class="nu">31</span>-i)*<span class="nu">8</span>)) & <span class="nu">0xffn</span>); o+=<span class="nu">32</span>;
+<span class="kw">for</span> (<span class="kw">let</span> i=<span class="nu">0</span>; i&lt;<span class="nu">32</span>; i++) buf[o+i] = Number((ex_hash >> BigInt((<span class="nu">31</span>-i)*<span class="nu">8</span>)) & <span class="nu">0xffn</span>); o+=<span class="nu">32</span>;
+buf.<span class="fn">writeBigUInt64BE</span>(counter, o);
+
+<span class="kw">const</span> raw = BigInt(<span class="st">'0x'</span> + (<span class="kw">await</span> <span class="fn">sha256</span>(buf)).<span class="fn">toString</span>(<span class="st">'hex'</span>));
+<span class="cm">// Tact sha256() returns signed Int (int257). Normalize for high-bit hashes.</span>
+<span class="kw">const</span> digest = raw >= (<span class="nu">1n</span> &lt;&lt; <span class="nu">255n</span>) ? raw - (<span class="nu">1n</span> &lt;&lt; <span class="nu">256n</span>) : raw;
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="div">
+
+<!-- ═══ LIVE CONTRACT ═════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">Live Deployment</p>
+        <h2 class="sh">On-chain. <em>Right now.</em></h2>
+        <p class="section-intro">
+            Deployed on TON testnet with all four gates verified. Counter live and incrementing.
+            Every transaction is publicly inspectable on the explorer.
+        </p>
+
+        <div class="live-panel">
+            <div class="live-panel-top">
+                <div>
+                    <div class="lp-title">TON Testnet Contract</div>
+                    <code class="lp-address">kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S</code>
+                    <div class="lp-tags">
+                        <span class="chip chip-green">✓ ALL 4 GATES VERIFIED</span>
+                        <span class="chip chip-ton">TON TESTNET</span>
+                        <span class="chip chip-ton">TACT 1.6.13</span>
+                        <span class="chip chip-default">MIT LICENSE</span>
+                        <span class="chip chip-default">100+ TRANSACTIONS</span>
+                    </div>
+                    <p style="font-family:var(--mono);font-size:.72rem;color:var(--t3);margin-bottom:1.25rem;line-height:1.7;">
+                        Build hash: <span style="color:var(--ton);">6d48028a7e3fecd0174dabbbf9f2ef39dc6562d7b468dfdfbc968f613e2bd54f</span><br>
+                        Owner: <span style="color:var(--t1);">EQC4J5GXJfu-a1zegwbILPPhQ6xZozsgP8CDSSrv5TlWXnVs</span>
+                    </p>
+                    <div class="lp-actions">
+                        <a href="https://testnet.tonscan.org/address/kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S" target="_blank" rel="noopener" class="btn btn-fill" style="font-size:.72rem;padding:.6rem 1.25rem;">View on TONScan ↗</a>
+                        <a href="https://github.com/orthonode/ton-sha" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:.72rem;padding:.6rem 1.25rem;">View Source ↗</a>
+                    </div>
+                </div>
+                <div class="live-stat-list">
+                    <div class="lsl-row"><span class="lsl-k">Network</span><span class="lsl-v hi">TON Testnet</span></div>
+                    <div class="lsl-row"><span class="lsl-k">Language</span><span class="lsl-v">Tact 1.6.13</span></div>
+                    <div class="lsl-row"><span class="lsl-k">Gas / op</span><span class="lsl-v">0.03 TON</span></div>
+                    <div class="lsl-row"><span class="lsl-k">Receipt bits</span><span class="lsl-v">640</span></div>
+                    <div class="lsl-row"><span class="lsl-k">Hash function</span><span class="lsl-v">SHA-256 (native)</span></div>
+                    <div class="lsl-row"><span class="lsl-k">Storage</span><span class="lsl-v">map&lt;Int,Bool/Int&gt;</span></div>
+                    <div class="lsl-row"><span class="lsl-k">Ownership transfer</span><span class="lsl-v">Immutable (v0.1)</span></div>
+                    <div class="lsl-row"><span class="lsl-k">Status</span><span class="lsl-v ok">✓ Production Ready</span></div>
+                </div>
+            </div>
+            <div class="live-panel-gates">
+                <div class="lpg">
+                    <div class="lpg-num">GATE 1 · DEVICE_AUTH</div>
+                    <div class="lpg-status">✓ Verified</div>
+                </div>
+                <div class="lpg">
+                    <div class="lpg-num">GATE 2 · FIRMWARE_APPROVAL</div>
+                    <div class="lpg-status">✓ Verified</div>
+                </div>
+                <div class="lpg">
+                    <div class="lpg-num">GATE 3 · REPLAY_PROTECT</div>
+                    <div class="lpg-status">✓ Verified</div>
+                </div>
+                <div class="lpg">
+                    <div class="lpg-num">GATE 4 · SHA256_INTEGRITY</div>
+                    <div class="lpg-status">✓ Verified</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="div">
+
+<!-- ═══ USE CASES ════════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">Integration Patterns</p>
+        <h2 class="sh">Built to <em>compose.</em></h2>
+        <p class="section-intro">
+            TON-SHA doesn't replace agent SDKs — it provides the trust primitive they're all missing.
+            Think of it as the identity and integrity layer that sits below coordination, payment, and analytics.
+        </p>
+
+        <div class="uc-grid">
+            <div class="uc-card">
+                <span class="uc-icon">🤝</span>
+                <div class="uc-title">Agent Marketplaces</div>
+                <p class="uc-body">Service providers prove execution integrity before listing. Clients verify before payment. Trust is earned on-chain, not assumed from reputation.</p>
+                <div class="uc-snippet"><span class="hi">if (await trust.verifyAgent(id))</span>
+  marketplace.<span class="ok">listProvider</span>(id);</div>
+            </div>
+            <div class="uc-card">
+                <span class="uc-icon">🔮</span>
+                <div class="uc-title">Oracle Networks</div>
+                <p class="uc-body">Data providers prove hardware and code haven't been tampered with. Consumers verify oracle identity before accepting any data feed.</p>
+                <div class="uc-snippet"><span class="hi">if (await trust.verifyAgent(oracleId))</span>
+  <span class="ok">return</span> oracle.getData();</div>
+            </div>
+            <div class="uc-card">
+                <span class="uc-icon">⚡</span>
+                <div class="uc-title">DeFi Protocols</div>
+                <p class="uc-body">Trading bots submit execution proofs. Protocols verify bot integrity before accepting any trade instruction — not just authentication, but execution proof.</p>
+                <div class="uc-snippet"><span class="hi">if (await trust.verifyAgent(botId))</span>
+  protocol.<span class="ok">executeTrade</span>(botId);</div>
+            </div>
+            <div class="uc-card">
+                <span class="uc-icon">🌐</span>
+                <div class="uc-title">Multi-Agent Swarms</div>
+                <p class="uc-body">Swarms filter for trusted members before any joint operation. Only verified agents with intact execution history participate in coordination tasks.</p>
+                <div class="uc-snippet">const trusted = swarm.<span class="ok">filter</span>(
+  a <span class="hi">=&gt; trust.verifyAgent(a)</span>);</div>
+            </div>
+            <div class="uc-card">
+                <span class="uc-icon">🗳️</span>
+                <div class="uc-title">DAO Governance</div>
+                <p class="uc-body">Proposal executors prove identity and code integrity on-chain before executing governance decisions with real financial consequences.</p>
+                <div class="uc-snippet"><span class="hi">if (await trust.verifyAgent(executor))</span>
+  dao.<span class="ok">executeProposal</span>(id);</div>
+            </div>
+            <div class="uc-card">
+                <span class="uc-icon">📡</span>
+                <div class="uc-title">DePIN Infrastructure</div>
+                <p class="uc-body">Physical nodes prove hardware identity and firmware state before claiming rewards. Sybil resistance at the silicon layer — not the reputation layer.</p>
+                <div class="uc-snippet"><span class="hi">if (await trust.verifyAgent(nodeId))</span>
+  rewards.<span class="ok">distribute</span>(nodeId);</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="div">
+
+<!-- ═══ QUICK START ═══════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">Quick Start</p>
+        <h2 class="sh">Running in <em>minutes.</em></h2>
+        <p class="section-intro">
+            Node.js 22+ required — Tact compiler constraint. Testnet TON from @testgiver_ton_bot on Telegram.
+            All four demo scenarios run against the live contract automatically.
+        </p>
+
+        <table class="prereq-table">
+            <thead>
+                <tr><th>Requirement</th><th>Version</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Node.js</td><td>22+</td><td>Required by Tact compiler — nvm install 22 recommended</td></tr>
+                <tr><td>npm</td><td>10+</td><td>Bundled with Node 22</td></tr>
+                <tr><td>Tonkeeper</td><td>Latest</td><td>Mobile wallet — enable testnet mode in Dev Tools</td></tr>
+                <tr><td>Testnet TON</td><td>1 TON</td><td>From @testgiver_ton_bot on Telegram — arrives in seconds</td></tr>
+            </tbody>
+        </table>
+
+        <div class="qs-grid" style="margin-top:1.5rem;">
+            <div class="code-frame">
+                <div class="cf-bar">
+                    <div class="cf-dots"><i></i><i></i><i></i></div>
+                    <span class="cf-fname">terminal</span>
+                </div>
+                <div class="cf-body">
+<span class="cm"># Clone and install</span>
+git clone https://github.com/orthonode/ton-sha
+<span class="kw">cd</span> ton-sha && npm install
+
+<span class="cm"># Build contract</span>
+npx blueprint build
+
+<span class="cm"># Run four-scenario demo against live contract</span>
+npx blueprint run agentDemo <span class="st">--testnet</span>
+
+<span class="cm"># Check live contract state (no wallet needed)</span>
+npx blueprint run checkState <span class="st">--testnet</span>
+
+<span class="cm"># Deploy your own instance</span>
+npx blueprint run deployTonSha <span class="st">--testnet</span>
+                </div>
+            </div>
+
+            <div class="code-frame">
+                <div class="cf-bar">
+                    <div class="cf-dots"><i></i><i></i><i></i></div>
+                    <span class="cf-fname">agentDemo output — four scenarios</span>
+                </div>
+                <div class="cf-body">
+<span class="cm">// Scenario 1 — Rogue agent (not registered)</span>
+<span class="er">Gate 1 fired → reason: 1 — device not authorized</span>
+
+<span class="cm">// Scenario 2 — Owner registers device + approves firmware</span>
+<span class="ok">AuthorizeDevice → confirmed (15s wait)</span>
+<span class="ok">ApproveFirmware → confirmed (15s wait)</span>
+
+<span class="cm">// Scenario 3 — Legitimate agent submits receipt</span>
+<span class="ok">Gate 1 PASS — authorized_devices: true</span>
+<span class="ok">Gate 2 PASS — approved_firmware: true</span>
+<span class="ok">Gate 3 PASS — counter N → N+1 (permanent)</span>
+<span class="ok">Gate 4 PASS — sha256 digest verified</span>
+<span class="ok">VerificationPassed emitted ✓</span>
+
+<span class="cm">// Scenario 4 — Replay attack (same receipt again)</span>
+<span class="er">Gate 3 fired → reason: 3 — stale counter</span>
+<span class="cm">// Permanently blocked — counter is on-chain</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="div">
+
+<!-- ═══ TECH CHALLENGES ═══════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">Engineering Notes</p>
+        <h2 class="sh">Problems solved <em>building this.</em></h2>
+        <p class="section-intro">
+            TON-SHA required solving several non-obvious problems across Tact, TON's address system, and cross-layer digest computation.
+            Documented so the next builder doesn't spend days on the same issues.
+        </p>
+
+        <div class="challenges-list">
+            <div class="challenge">
+                <div>
+                    <div class="ch-problem">Tact 1.6 contract parameter syntax incompatibility</div>
+                    <span class="ch-tag fixed">FIXED</span>
+                </div>
+                <div class="ch-body">
+                    Tact v1.6 introduced <code>contract Foo(param: Type)</code> parameter syntax but it's incompatible with
+                    declaring additional storage fields in the contract body. The compiler rejects any field declarations when parameters are used.
+                    Fix: revert to the classic <code>init(owner: Address)</code> pattern with explicit field declarations.
+                </div>
+            </div>
+            <div class="challenge">
+                <div>
+                    <div class="ch-problem">SHA-256 signed vs unsigned: Gate 4 failing for ~50% of counter values</div>
+                    <span class="ch-tag fixed">FIXED</span>
+                </div>
+                <div class="ch-body">
+                    Tact's <code>sha256(slice)</code> returns <code>Int</code> — a signed 257-bit integer. When the hash high bit is set
+                    (value ≥ 2^255), TVM interprets it as negative. But <code>msg.digest</code> was declared <code>Int as uint256</code> —
+                    always positive. They never matched for ~50% of all sha256 outputs, causing deterministic Gate 4 failures
+                    for specific counter values. Fix: declare <code>digest</code> as <code>Int as int257</code> and normalize the off-chain
+                    digest with <code>raw >= 2^255 ? raw - 2^256 : raw</code>.
+                </div>
+            </div>
+            <div class="challenge">
+                <div>
+                    <div class="ch-problem">subbuffer() returning null for specific cell bit alignments</div>
+                    <span class="ch-tag fixed">FIXED</span>
+                </div>
+                <div class="ch-body">
+                    <code>cell.bits.subbuffer(0, totalBits)</code> returns null for certain bit counts.
+                    Passing null to sha256 hashes an empty buffer silently — producing a completely wrong digest with no error.
+                    This caused Gate 4 failures that only appeared at specific counter values.
+                    Fix: explicit null check with a <code>slice.loadUint</code> fallback loop.
+                </div>
+            </div>
+            <div class="challenge">
+                <div>
+                    <div class="ch-problem">EQ vs kQ address format checksum mismatch</div>
+                    <span class="ch-tag fixed">FIXED</span>
+                </div>
+                <div class="ch-body">
+                    TON addresses exist in two forms — <code>EQ...</code> (non-bounceable) and <code>kQ...</code> (bounceable).
+                    Both point to the same contract but have different checksums. <code>Address.parse()</code> validates strictly
+                    and throws <code>Invalid checksum</code> for any mismatch. Always copy addresses verbatim from deploy output.
+                    Added <code>checkOwner.ts</code> as a diagnostic to confirm the target contract before any value transactions.
+                </div>
+            </div>
+            <div class="challenge">
+                <div>
+                    <div class="ch-problem">Transaction deduplication — counter not incrementing</div>
+                    <span class="ch-tag fixed">FIXED</span>
+                </div>
+                <div class="ch-body">
+                    TON deduplicates transactions with identical <code>valid_until</code> timestamps submitted in rapid succession.
+                    Two quick sends in the same second were collapsed into one on-chain. Fix: 1-second enforced delay between
+                    scenarios in the demo scripts, plus 15-second post-transaction wait before reading getters (TON ~5s block time).
+                </div>
+            </div>
+            <div class="challenge">
+                <div>
+                    <div class="ch-problem">1 &lt;&lt; 256 overflow in Tact constant evaluator</div>
+                    <span class="ch-tag fixed">FIXED</span>
+                </div>
+                <div class="ch-body">
+                    TVM Int max is 2^256 - 1. Using <code>1 &lt;&lt; 256</code> or <code>pow2(256)</code> to normalize the sha256 output
+                    causes the Tact constant evaluator to reject it at compile time — even in non-constant expressions.
+                    Fix: change the message field type to <code>Int as int257</code> (native signed Tact Int) and handle normalization
+                    entirely off-chain before sending. No large literal needed in contract code.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="div">
+
+<!-- ═══ THREAT MODEL ══════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">Security</p>
+        <h2 class="sh">Trust model and <em>attack surface.</em></h2>
+        <p class="section-intro">
+            TON-SHA's security rests on SHA-256 preimage resistance and correct TON VM execution.
+            The contract does not trust the caller beyond what the gates enforce.
+        </p>
+
+        <div class="threats-list">
+            <div class="threat-card">
+                <div class="threat-name">Receipt Replay</div>
+                <p class="threat-body">Attacker captures a valid receipt and resubmits it to gain spurious verification credit.</p>
+                <div class="threat-mit">Gate 3: counters[hw_id] must be strictly exceeded. Counter is updated atomically on success and is permanent.</div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-name">Receipt Forgery</div>
+                <p class="threat-body">Attacker constructs a receipt for an agent they don't control and forges a valid digest.</p>
+                <div class="threat-mit">Gate 4: requires sha256 preimage knowledge. Without knowing the exact hw_id + fw_hash + ex_hash + counter, no valid digest is computable.</div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-name">Unauthorized Device Registration</div>
+                <p class="threat-body">Attacker calls AuthorizeDevice to register their own rogue agent identity.</p>
+                <div class="threat-mit">AuthorizeDevice checks sender() == self.owner. Transaction reverts on any other caller.</div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-name">Firmware Substitution</div>
+                <p class="threat-body">Agent runs modified or injected firmware but passes Gate 2 anyway.</p>
+                <div class="threat-mit">Gate 2: the firmware SHA-256 hash must be in the owner-approved set. Unrecognized hashes fail unconditionally.</div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-name">Counter Front-Running</div>
+                <p class="threat-body">Validator reorders a VerifyReceipt to advance the counter before the legitimate device can.</p>
+                <div class="threat-mit">TON has no public mempool. Even if front-run succeeds, only the counter advances — no impersonation occurs. Device generates next counter to resume.</div>
+            </div>
+            <div class="threat-card">
+                <div class="threat-name">Owner Key Compromise</div>
+                <p class="threat-body">Owner private key is stolen, enabling rogue device authorization and firmware approval.</p>
+                <div class="threat-mit">Residual risk. Recommended mitigation: use a multisig wallet as the contract owner. Planned for Phase 3.</div>
+            </div>
+        </div>
+
+        <div style="margin-top:2.5rem;">
+            <p class="eyebrow" style="margin-bottom:1rem;">Trust Assumptions</p>
+            <table class="trust-table">
+                <thead><tr><th>Actor</th><th>Trusted For</th></tr></thead>
+                <tbody>
+                    <tr><td>TON VM</td><td>Correct execution of Tact/FunC bytecode — standard blockchain assumption</td></tr>
+                    <tr><td>Contract owner</td><td>Authorizing only legitimate hardware and approving only genuine firmware</td></tr>
+                    <tr><td>Hardware device</td><td>Generating correct receipts from real eFuse data — hardware security assumption</td></tr>
+                    <tr><td>Client SDK</td><td>Correct digest computation and cell packing — verify SDK integrity before use</td></tr>
+                    <tr><td>SHA-256</td><td>Collision resistance and preimage resistance — no practical attack known as of 2026</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<hr class="div">
+
+<!-- ═══ COMPARISON ════════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">Ecosystem Position</p>
+        <h2 class="sh">The <em>missing primitive.</em></h2>
+        <p class="section-intro">
+            TON-SHA doesn't replace Veritas, TAK, or ton402 — it gives them the trust layer they can all depend on.
+            Coordination, analytics, and payments all benefit from knowing the agent on the other side is who it claims to be.
+        </p>
+
+        <table class="compare-tbl">
+            <thead>
+                <tr>
+                    <th>Protocol</th><th>Category</th>
+                    <th>Agent Identity</th><th>Firmware Proof</th>
+                    <th>Replay Safe</th><th>On-Chain Digest</th>
+                    <th>Composable</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="us">
+                    <td>TON-SHA</td><td>Trust Primitive</td>
+                    <td class="yes">✓</td><td class="yes">✓</td>
+                    <td class="yes">✓</td><td class="yes">✓</td>
+                    <td class="yes">✓</td>
+                </tr>
+                <tr>
+                    <td>Veritas</td><td>Analytics</td>
+                    <td class="no">—</td><td class="no">—</td>
+                    <td class="no">—</td><td class="no">—</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>TAK</td><td>Coordination</td>
+                    <td class="no">—</td><td class="no">—</td>
+                    <td class="no">—</td><td class="no">—</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>ton402</td><td>Payments</td>
+                    <td class="no">—</td><td class="no">—</td>
+                    <td class="no">—</td><td class="no">—</td>
+                    <td>—</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<hr class="div">
+
+<!-- ═══ CONNECTION TO SHA ARBITRUM ═══════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">Lineage</p>
+        <h2 class="sh">Ported from SHA on <em>Arbitrum.</em></h2>
+        <p class="section-intro" style="max-width:680px;">
+            TON-SHA ports the SHA (Silicon Hardware Anchor) four-gate model — already live on Arbitrum Sepolia
+            with 89+ verified transactions — to TON. One deliberate difference: SHA on Arbitrum uses Keccak-256
+            (Ethereum's native hash). TON-SHA uses SHA-256 because it is TON VM's native opcode, accessed as a
+            single Tact builtin — no implementation risk, lower gas cost.
+            The receipt format is designed to be compatible across chains with a future hash translation layer.
+        </p>
+        <div style="display:flex;gap:.875rem;flex-wrap:wrap;margin-top:1.5rem;">
+            <a href="/sha.html" class="btn btn-outline">SHA on Arbitrum →</a>
+            <a href="https://github.com/arhantbarmate/stylus-hardware-anchor" target="_blank" rel="noopener" class="btn btn-outline">Stylus Repo ↗</a>
+        </div>
+    </div>
+</section>
+
+<hr class="div">
+
+<!-- ═══ ROADMAP ═══════════════════════════════════════════════ -->
+<section class="section">
+    <div class="container">
+        <p class="eyebrow">Roadmap</p>
+        <h2 class="sh">Three phases to <em>mainnet.</em></h2>
+        <p class="section-intro">
+            Phase 0 complete. Grant application submitted to TON Fast Grants (Feb 2026).
+            Phases 1–3 cover SDK hardening, ESP32-S3 hardware integration, third-party audit, and mainnet deployment.
+        </p>
+
+        <div class="roadmap-grid">
+            <div class="rm-card">
+                <div class="rm-phase">Phase 0 · Complete</div>
+                <div class="rm-title">Prototype ✓</div>
+                <ul class="rm-items">
+                    <li class="done">Four-gate Tact contract, live on testnet</li>
+                    <li class="done">TypeScript SDK for all operations</li>
+                    <li class="done">All four gates verified on-chain</li>
+                    <li class="done">100+ on-chain transactions</li>
+                    <li class="done">Gas optimized to 0.03 TON / op</li>
+                    <li class="done">Full documentation suite</li>
+                    <li class="done">TON Fast Grants application submitted</li>
+                </ul>
+            </div>
+            <div class="rm-card">
+                <div class="rm-phase">Phase 1 · 3 months</div>
+                <div class="rm-title">SDK + Contract Hardening</div>
+                <ul class="rm-items">
+                    <li>npm SDK publication (@orthonode/ton-sha)</li>
+                    <li>Integration tests (@ton/sandbox)</li>
+                    <li>Ownership transfer (two-step confirm)</li>
+                    <li>Device expiry TTL</li>
+                    <li>Batch verification</li>
+                    <li>Emergency pause mechanism</li>
+                    <li>3 reference integration templates</li>
+                </ul>
+            </div>
+            <div class="rm-card">
+                <div class="rm-phase">Phase 2–3 · 6 months</div>
+                <div class="rm-title">Hardware + Mainnet</div>
+                <ul class="rm-items">
+                    <li>ESP32-S3 firmware port (SHA-256 + NVS counter)</li>
+                    <li>Receipt pipeline: device → SDK → TON RPC</li>
+                    <li>Third-party security audit</li>
+                    <li>Mainnet deployment (post-audit, multisig owner)</li>
+                    <li>On-chain agent registry</li>
+                    <li>Cross-chain receipt format (SHA-256 ↔ Keccak)</li>
+                    <li>Ecosystem case study with first DePIN partner</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <strong>ORTHONODE INFRASTRUCTURE LABS</strong><br>
+                TON-SHA · Agent Trust Layer · Built on TON · MIT License
+            </div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/sha.html">SHA (Arbitrum)</a>
+                <a href="/oap.html">OAP</a>
+                <a href="https://github.com/orthonode/ton-sha" target="_blank" rel="noopener">GitHub</a>
+                <a href="https://testnet.tonscan.org/address/kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S" target="_blank" rel="noopener">Explorer</a>
+                <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X/Twitter</a>
+            </div>
+        </div>
+        <div class="footer-contract">
+            © 2026 Orthonode Infrastructure Labs ·
+            Contract: kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S · TON Testnet ·
+            Build: 6d48028a7e3fecd017...e2bd54f
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

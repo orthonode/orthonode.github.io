@@ -935,6 +935,7 @@
                 </a>
                 <div class="network-badge">ARBITRUM_SEPOLIA</div>
                 <div class="network-badge">STYLUS_v1.0</div>
+                <div class="network-badge" style="color:#0098ea;border-color:rgba(0,152,234,0.3);">TON_TESTNET</div>
             </div>
         </div>
     </header>
@@ -956,7 +957,7 @@
             <h1>
                 Verification of Physical Reality for Autonomous Systems.
                 <span class="subline">Deterministic verification infrastructure that reconciles digital telemetry with physical truth across mobility, robotics, and decentralized networks.</span>
-                <span class="status-line">// SHA_PROTOTYPE_LIVE : OAP_IN_DEVELOPMENT : GRANT_APPLICATION_SUBMITTED</span>
+                <span class="status-line">// SHA_ARBITRUM_LIVE : TON_SHA_LIVE : OAP_IN_DEVELOPMENT : TON_FAST_GRANTS_SUBMITTED</span>
             </h1>
         </div>
 
@@ -1072,6 +1073,64 @@
                 <span class="tech-badge">MAPPING_&_SENSORS</span>
                 <span class="tech-badge">ARBITRUM_ONE</span>
                 <span class="tech-badge">ORBIT_CHAINS</span>
+            </div>
+        </article>
+    </section>
+
+    <!-- TON-SHA PRODUCT CARD -->
+    <section class="protocol-grid" role="region" aria-label="TON-SHA product" style="margin-top: 1px;">
+        <article class="protocol-card featured" style="background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(0,152,234,0.04) 100%); border-left: 3px solid rgba(0,152,234,0.4);">
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+                <span class="card-label" style="color:#0098ea;margin-bottom:0;">TON_AGENT_TRUST_LAYER</span>
+                <span style="font-family:var(--font-mono);font-size:0.65rem;padding:0.18rem 0.5rem;background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:2px;color:#22c55e;">✓ TESTNET LIVE</span>
+                <span style="font-family:var(--font-mono);font-size:0.65rem;padding:0.18rem 0.5rem;background:rgba(0,152,234,0.07);border:1px solid rgba(0,152,234,0.2);border-radius:2px;color:#0098ea;">TON FAST GRANTS</span>
+            </div>
+            <h3 style="font-family:var(--font-display);font-size:1.5rem;font-weight:600;color:var(--text-primary);margin-bottom:1rem;line-height:1.2;">TON-SHA — Agent Trust Primitive for the TON Ecosystem</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
+                <div>
+                    <p>
+                        TON agents currently have no verifiable identity and no proof of execution integrity. TON-SHA is the cryptographic primitive that changes that: four sequential gates — device authorization, firmware approval, replay protection, and SHA-256 digest verification — enforced by a single Tact contract on TON with no trusted intermediary.
+                    </p>
+                    <p style="margin-top:0.875rem;">
+                        <strong>The canonical agent loop:</strong> one call tells any protocol whether the agent on the other side should be trusted. Composable with agent marketplaces, oracle networks, DeFi protocols, DAOs, and DePIN reward systems.
+                    </p>
+                    <div style="font-family:var(--font-mono);font-size:0.78rem;background:var(--bg-primary);border:1px solid var(--border-primary);border-left:2px solid rgba(0,152,234,0.5);border-radius:4px;padding:0.875rem 1.1rem;margin:1.25rem 0;line-height:1.8;overflow-x:auto;">
+                        <span style="color:#525252;font-style:italic;">// THE canonical agent check</span><br>
+                        <span style="color:#c084fc;">if</span> (!(<span style="color:#60c8ff;">await</span> agentTrust.<span style="color:#0098ea;">verifyAgent</span>(agentId))) {<br>
+                        &nbsp;&nbsp;<span style="color:#c084fc;">throw new</span> Error(<span style="color:#86efac;">"Untrusted agent"</span>);<br>
+                        }<br>
+                        <span style="color:#22c55e;">await collaborate();</span>
+                    </div>
+                    <div class="tech-badges">
+                        <span class="tech-badge" style="border-color:rgba(0,152,234,0.3);color:#0098ea;">TON_BLOCKCHAIN</span>
+                        <span class="tech-badge">TACT_1.6</span>
+                        <span class="tech-badge">SHA256_NATIVE</span>
+                        <span class="tech-badge">FOUR_GATE_SECURITY</span>
+                        <span class="tech-badge">REPLAY_PROTECTION</span>
+                        <span class="tech-badge">0.03_TON_PER_OP</span>
+                        <span class="tech-badge">AGENT_IDENTITY</span>
+                    </div>
+                </div>
+                <div>
+                    <div style="background:var(--bg-primary);border:1px solid var(--border-primary);border-radius:4px;overflow:hidden;">
+                        <div style="background:var(--bg-elevated);padding:0.75rem 1rem;border-bottom:1px solid var(--border-primary);font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);letter-spacing:0.08em;text-transform:uppercase;">// CONTRACT STATS</div>
+                        <div style="padding:0;font-family:var(--font-mono);font-size:0.75rem;">
+                            <div style="display:flex;justify-content:space-between;padding:0.6rem 1rem;border-bottom:1px solid var(--border-subtle);"><span style="color:var(--text-muted);">Network</span><span style="color:#0098ea;">TON Testnet</span></div>
+                            <div style="display:flex;justify-content:space-between;padding:0.6rem 1rem;border-bottom:1px solid var(--border-subtle);"><span style="color:var(--text-muted);">Security gates</span><span style="color:var(--accent-success);">4 / 4 verified</span></div>
+                            <div style="display:flex;justify-content:space-between;padding:0.6rem 1rem;border-bottom:1px solid var(--border-subtle);"><span style="color:var(--text-muted);">Gas / operation</span><span style="color:var(--text-secondary);">0.03 TON</span></div>
+                            <div style="display:flex;justify-content:space-between;padding:0.6rem 1rem;border-bottom:1px solid var(--border-subtle);"><span style="color:var(--text-muted);">Language</span><span style="color:var(--text-secondary);">Tact 1.6</span></div>
+                            <div style="display:flex;justify-content:space-between;padding:0.6rem 1rem;border-bottom:1px solid var(--border-subtle);"><span style="color:var(--text-muted);">On-chain txns</span><span style="color:var(--text-secondary);">100+</span></div>
+                            <div style="display:flex;justify-content:space-between;padding:0.6rem 1rem;border-bottom:1px solid var(--border-subtle);"><span style="color:var(--text-muted);">Receipt size</span><span style="color:var(--text-secondary);">640 bits</span></div>
+                            <div style="display:flex;justify-content:space-between;padding:0.6rem 1rem;"><span style="color:var(--text-muted);">License</span><span style="color:#0098ea;">MIT</span></div>
+                        </div>
+                    </div>
+                    <div style="margin-top:1rem;font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);word-break:break-all;line-height:1.5;">
+                        Contract: <a href="https://testnet.tonscan.org/address/kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S" target="_blank" rel="noopener" style="color:#0098ea;">kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S ↗</a>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:1.75rem;">
+                <a href="/ton-sha.html" style="font-family:var(--font-mono);font-size:0.8rem;color:#0098ea;display:inline-flex;align-items:center;gap:0.5rem;">Explore TON-SHA → <span style="opacity:0.6;">/ton-sha.html</span></a>
             </div>
         </article>
     </section>
@@ -1299,6 +1358,9 @@
             <a href="/oap.html" class="btn btn-secondary">
                 <span>Explore OAP</span><span>↗</span>
             </a>
+            <a href="/ton-sha.html" class="btn btn-secondary" style="border-color:rgba(0,152,234,0.4);color:#0098ea;">
+                    <span>Explore TON-SHA</span><span>↗</span>
+                </a>
             <a href="/sha.html" class="btn btn-primary">
                 <span>Explore SHA</span><span>↗</span>
             </a>
@@ -1316,7 +1378,7 @@
                 <div class="footer-brand">
                     <h4>ORTHONODE INFRASTRUCTURE LABS</h4>
                     <p>
-                        Building deterministic physical verification infrastructure for autonomous systems, DePIN networks, and mobility platforms. OAP governs lifecycle integrity. SHA anchors hardware identity on-chain.
+                        Building deterministic physical verification infrastructure for autonomous systems, DePIN networks, and mobility platforms. OAP governs lifecycle integrity. SHA anchors hardware identity on Arbitrum. TON-SHA brings agent trust to the TON ecosystem.
                     </p>
                     <p style="margin-top: 1rem;">
                         <strong>Location:</strong> Bhopal, Madhya Pradesh, India<br>
@@ -1330,6 +1392,7 @@
                         <li><a href="/nexus.html">Nexus — Zero-Trust Gateway</a></li>
                         <li><a href="/oap.html">OAP — Integrity Governance</a></li>
                         <li><a href="/sha.html">SHA — Hardware Attestation</a></li>
+                        <li><a href="/ton-sha.html" style="color:#0098ea;">TON-SHA — Agent Trust Layer</a></li>
                         <li><a href="https://github.com/arhantbarmate/stylus-hardware-anchor" target="_blank" rel="noopener">SHA Repository</a></li>
                         <li><a href="/iotex-research.html" style="color:#f87171;">IoTeX Research Paper ↗</a></li>
                     </ul>
