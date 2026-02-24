@@ -1001,7 +1001,7 @@
             <h2>Request a Technical Brief</h2>
             <p>OAP is in active development. If you're building a mobility, robotics, or DePIN system that requires deterministic physical integrity, reach out to discuss integration architecture.</p>
             <div class="cta-buttons">
-                <a href="mailto:infrastructure@orthonode.xyz" class="btn btn-primary">
+                <a href="/cdn-cgi/l/email-protection#7c15121a0e1d0f080e091f08090e193c130e0814131213181952040506" class="btn btn-primary">
                     <span>Request Technical Brief</span><span>↗</span>
                 </a>
                 <a href="/sha.html" class="btn btn-secondary">
@@ -1057,13 +1057,63 @@
 
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     function onHumanVerified(token) {
         const gate = document.getElementById('security-gate');
         const content = document.getElementById('app-content');
         gate.style.display = 'none';
         content.style.display = 'block';
-        setTimeout(() => { content.style.opacity = '1'; }, 50);
+        setTimeout(() => {
+            content.style.opacity = '1';
+            initOAPAnimations();
+        }, 50);
+    }
+
+    function initOAPAnimations() {
+        // Scroll-reveal cards
+        const cards = document.querySelectorAll('.arch-layer, .stat-item, .guarantee-card, .milestone-card, .evidence-card, .two-col-card');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, (i % 4) * 90);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        cards.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(14px)';
+            el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+            obs.observe(el);
+        });
+
+        // Animate stat values counting up
+        document.querySelectorAll('.stat-value').forEach(el => {
+            const text = el.textContent.trim();
+            const numMatch = text.match(/[\d,]+/);
+            if (!numMatch || parseInt(numMatch[0].replace(/,/g,'')) < 100) return;
+            const target = parseInt(numMatch[0].replace(/,/g,''));
+            const prefix = text.slice(0, text.search(/\d/));
+            const suffix = text.slice(text.search(/[\d,]+/) + numMatch[0].length);
+            const startTime = performance.now();
+            const dur = 1000;
+            const obsCount = new IntersectionObserver(entries => {
+                if (!entries[0].isIntersecting) return;
+                obsCount.disconnect();
+                function tick(now) {
+                    const p = Math.min((now - startTime) / dur, 1);
+                    const ease = 1 - Math.pow(1-p, 3);
+                    el.textContent = prefix + Math.round(ease * target).toLocaleString() + suffix;
+                    if (p < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            }, { threshold: 0.5 });
+            obsCount.observe(el);
+        });
     }
 </script>
 

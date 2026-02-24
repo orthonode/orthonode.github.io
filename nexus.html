@@ -1137,7 +1137,47 @@
         const content = document.getElementById('app-content');
         gate.style.display = 'none';
         content.style.display = 'block';
-        setTimeout(() => { content.style.opacity = '1'; }, 50);
+        setTimeout(() => {
+            content.style.opacity = '1';
+            initNexusAnimations();
+        }, 50);
+    }
+
+    function initNexusAnimations() {
+        // Scroll-reveal for all major cards/sections
+        const revealEls = document.querySelectorAll('.arch-layer, .guarantee-card, .stat-item, .evidence-card, .flow-step, .milestone-card');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, (i % 4) * 80);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealEls.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(16px)';
+            el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+            obs.observe(el);
+        });
+
+        // Live status blinking sequence for any status rows/indicators
+        const statusRows = document.querySelectorAll('tr[class*="status"], .status-row, .log-line, .metric-row');
+        let idx = 0;
+        if (statusRows.length > 0) {
+            setInterval(() => {
+                statusRows.forEach(r => r.style.background = '');
+                if (statusRows[idx]) {
+                    statusRows[idx].style.background = 'rgba(0,208,132,0.04)';
+                    statusRows[idx].style.transition = 'background 0.3s';
+                }
+                idx = (idx + 1) % statusRows.length;
+            }, 800);
+        }
     }
 </script>
 

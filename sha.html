@@ -5,9 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <title>Stylus Hardware Anchor (SHA) | Orthonode Labs</title>
-    <meta name="description" content="Stylus Hardware Anchor (SHA) — reusable hardware identity verification primitive for Arbitrum Stylus. Binds ESP32 eFuse silicon identifiers to on-chain execution. Testnet live on Arbitrum Sepolia.">
+    <title>Stylus Hardware Anchor (SHA) | Hardware Sybil Resistance for Arbitrum DePIN | Orthonode Labs</title>
+    <meta name="description" content="SHA (Stylus Hardware Anchor) — the first on-chain hardware Sybil resistance primitive for Arbitrum Stylus. Binds ESP32-S3 eFuse silicon to smart contracts. 12,564 gas/receipt at N=50. 10,000+ test vectors. Live on Arbitrum Sepolia. $25K grant under review.">
+    <meta name="keywords" content="Arbitrum Stylus hardware verification, DePIN Sybil resistance, ESP32 eFuse blockchain, hardware identity smart contract, Rust WASM Arbitrum, hardware attestation DePIN, Keccak-256 device binding, Stylus Hardware Anchor, on-chain device identity, replay protection smart contract, firmware governance blockchain, Orthonode Labs, Bhopal India blockchain">
+    <meta name="author" content="Orthonode Infrastructure Labs — Bhopal, Madhya Pradesh, India">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://orthonode.xyz/sha.html">
+
+    <meta name="geo.region" content="IN-MP">
+    <meta name="geo.placename" content="Bhopal, Madhya Pradesh, India">
+    <meta name="geo.position" content="23.2599;77.4126">
+    <meta name="ICBM" content="23.2599, 77.4126">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orthonode.xyz/sha.html">
+    <meta property="og:title" content="Stylus Hardware Anchor (SHA) — Hardware Sybil Resistance for Arbitrum DePIN">
+    <meta property="og:description" content="First on-chain hardware Sybil resistance primitive for Arbitrum Stylus. ESP32-S3 eFuse silicon binding, 12,564 gas/receipt, 10,000+ validated test vectors. Live on Sepolia.">
+    <meta property="og:image" content="https://orthonode.xyz/banner.png">
+    <meta property="og:site_name" content="Orthonode Infrastructure Labs">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@OrthonodeSys">
+    <meta name="twitter:title" content="Stylus Hardware Anchor (SHA) | Orthonode Labs">
+    <meta name="twitter:description" content="First hardware Sybil resistance primitive for Arbitrum Stylus. 12,564 gas/receipt. ESP32-S3 eFuse binding. Testnet live.">
+    <meta name="twitter:image" content="https://orthonode.xyz/banner.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Stylus Hardware Anchor (SHA)",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Arbitrum Stylus",
+      "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" },
+      "description": "First on-chain hardware Sybil resistance primitive for Arbitrum Stylus. Binds ESP32-S3 eFuse silicon identifiers to smart contracts. 12,564 gas/receipt at N=50 batch. 10,000+ cross-layer Keccak-256 test vectors validated.",
+      "softwareVersion": "1.0.0",
+      "programmingLanguage": "Rust",
+      "codeRepository": "https://github.com/arhantbarmate/stylus-hardware-anchor",
+      "author": {
+        "@type": "Organization",
+        "name": "Orthonode Infrastructure Labs",
+        "url": "https://orthonode.xyz",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bhopal",
+          "addressRegion": "Madhya Pradesh",
+          "addressCountry": "IN"
+        }
+      }
+    }
+    </script>
     
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
@@ -543,7 +589,7 @@
 
         .milestone-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 1px;
             background: var(--border-primary);
             border: 1px solid var(--border-primary);
@@ -1060,18 +1106,25 @@
             <div class="bench-note">
                 <strong style="color:var(--text-primary);">Interpretation:</strong> Batch verification shows strong amortization — gas per receipt drops from 29.7k at N=5 to 12.6k at N=50, demonstrating the advantage of native-compiled WASM logic vs. per-transaction Solidity dispatch. Contract: <code style="color:var(--accent-arbitrum);">0xd661a1ab8cefaacd78f4b968670c3bc438415615</code> (Arbitrum Sepolia). Deploy tx: <code style="color:var(--text-dim);">0x1a9eaa...489</code>. These are preliminary benchmarks; final validated benchmarks will be published as part of Milestone 1 deliverables.
             </div>
+
+            <!-- Interactive Gas Chart -->
+            <div style="background:var(--bg-secondary);border:1px solid var(--border-primary);margin-top:1.5rem;padding:1.5rem;">
+                <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem;">// GAS_AMORTIZATION_CURVE · WASM_BATCH_VERIFICATION</div>
+                <canvas id="gasChart" style="width:100%;height:220px;display:block;"></canvas>
+                <div style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);margin-top:0.75rem;text-align:center;">Gas per receipt vs batch size — WASM amortization advantage. Impossible to replicate at this cost in Solidity.</div>
+            </div>
         </section>
 
         <!-- Grant & Roadmap -->
         <section class="grant-section">
-            <h2 class="section-header">// GRANT_APPLICATION : ARBITRUM_STYLUS_SPRINT · FEB 2026</h2>
+            <h2 class="section-header">// GRANT_APPLICATION : ARBITRUM_FOUNDATION_ESP · FEB 2026</h2>
 
             <div class="milestone-grid">
                 <div class="milestone-card">
-                    <div class="milestone-tag">MILESTONE_01 · MONTHS 1–3</div>
-                    <h3>Production Security Hardening</h3>
+                    <div class="milestone-tag">MILESTONE_01 · MONTHS 1–6 · FULL GRANT SCOPE</div>
+                    <h3>Security Hardening & Developer Release</h3>
                     <div class="milestone-budget">$25,000 USD</div>
-                    <div class="milestone-timeline">February 2026 – May 2026</div>
+                    <div class="milestone-timeline">February 2026 – August 2026</div>
                     <ul class="deliverable-list">
                         <li>Hardened Stylus verification contract with input validation, DoS protection, and deterministic replay enforcement</li>
                         <li>Coverage-guided fuzzing suite (≥1,000,000 executions via cargo-fuzz)</li>
@@ -1081,25 +1134,12 @@
                         <li>Public tagged GitHub release — all artifacts independently verifiable</li>
                     </ul>
                 </div>
-                <div class="milestone-card">
-                    <div class="milestone-tag">MILESTONE_02 · MONTHS 4–6</div>
-                    <h3>Developer SDK & Integration Tooling</h3>
-                    <div class="milestone-budget">$24,000 USD</div>
-                    <div class="milestone-timeline">May 2026 – August 2026</div>
-                    <ul class="deliverable-list">
-                        <li>Python SDK (<code style="color:var(--accent-arbitrum);">anchor-verifier</code>) published to PyPI with async interface and quickstart docs</li>
-                        <li>Rust crate (<code style="color:var(--accent-arbitrum);">stylus-hardware-primitives</code>) published to crates.io with modular traits</li>
-                        <li>Three reference integration templates: DePIN sensor, hardware-bound access control, firmware governance — all testnet-deployable</li>
-                        <li>Minimal developer dashboard with event visibility, gas analytics, and ≥100 simulated device load test</li>
-                        <li>Optional independent SDK integration safety review (post-M1, not a milestone blocker)</li>
-                    </ul>
-                </div>
             </div>
 
             <div class="kpi-strip">
                 <div class="kpi-item">
                     <div class="kpi-label">Total Grant Ask</div>
-                    <div class="kpi-val">$49,000 USD</div>
+                    <div class="kpi-val">$25,000 USD</div>
                 </div>
                 <div class="kpi-item">
                     <div class="kpi-label">Fuzz Executions (M1 KPI)</div>
@@ -1110,8 +1150,8 @@
                     <div class="kpi-val">≥10,000</div>
                 </div>
                 <div class="kpi-item">
-                    <div class="kpi-label">Testnet Deployments (M2 KPI)</div>
-                    <div class="kpi-val">3+</div>
+                    <div class="kpi-label">Phase 2 Scope</div>
+                    <div class="kpi-val">SDK + Audit</div>
                 </div>
                 <div class="kpi-item">
                     <div class="kpi-label">Network Scope</div>
@@ -1232,6 +1272,181 @@
         gate.style.display = 'none';
         content.style.display = 'block';
         setTimeout(() => { content.style.opacity = '1'; }, 50);
+        initGasChart();
+        initVerifyFlow();
+        initCounterAnim();
+    }
+
+    /* ── Gas Amortization Chart ─────────────────────────────── */
+    function initGasChart() {
+        const canvas = document.getElementById('gasChart');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width = canvas.offsetWidth;
+        const H = canvas.height = canvas.offsetHeight;
+
+        const data = [
+            { n: 1,  gas: 118935 },
+            { n: 5,  gas: 29748  },
+            { n: 10, gas: 20209  },
+            { n: 20, gas: 15419  },
+            { n: 50, gas: 12564  },
+        ];
+
+        const PAD = { t: 30, r: 20, b: 50, l: 72 };
+        const chartW = W - PAD.l - PAD.r;
+        const chartH = H - PAD.t - PAD.b;
+        const maxGas = 130000;
+        const accent = '#28a0f0';
+        const dim = '#373737';
+        const textDim = '#525252';
+        const textPrimary = '#ededed';
+
+        let progress = 0;
+        let animFrame;
+
+        function xPos(i) { return PAD.l + (i / (data.length - 1)) * chartW; }
+        function yPos(gas) { return PAD.t + chartH - (gas / maxGas) * chartH; }
+
+        function draw(p) {
+            ctx.clearRect(0, 0, W, H);
+
+            // Grid lines
+            ctx.strokeStyle = dim;
+            ctx.lineWidth = 0.5;
+            [0, 30000, 60000, 90000, 120000].forEach(g => {
+                const y = yPos(g);
+                ctx.beginPath(); ctx.moveTo(PAD.l, y); ctx.lineTo(W - PAD.r, y);
+                ctx.stroke();
+                ctx.fillStyle = textDim;
+                ctx.font = '10px JetBrains Mono, monospace';
+                ctx.textAlign = 'right';
+                ctx.fillText((g/1000).toFixed(0) + 'k', PAD.l - 8, y + 4);
+            });
+
+            // X axis labels
+            ctx.fillStyle = textDim;
+            ctx.font = '10px JetBrains Mono, monospace';
+            ctx.textAlign = 'center';
+            data.forEach((d, i) => {
+                ctx.fillText('N=' + d.n, xPos(i), H - 12);
+            });
+
+            // Axis label
+            ctx.save();
+            ctx.translate(14, PAD.t + chartH / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillStyle = textDim;
+            ctx.font = '9px JetBrains Mono, monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText('GAS / RECEIPT', 0, 0);
+            ctx.restore();
+
+            // Gradient fill under curve
+            const totalPoints = data.length - 1;
+            const currentIdx = Math.min(Math.floor(p * totalPoints), totalPoints - 1);
+            const frac = (p * totalPoints) - currentIdx;
+
+            const grad = ctx.createLinearGradient(0, PAD.t, 0, PAD.t + chartH);
+            grad.addColorStop(0, 'rgba(40,160,240,0.18)');
+            grad.addColorStop(1, 'rgba(40,160,240,0.0)');
+
+            ctx.beginPath();
+            ctx.moveTo(xPos(0), yPos(0));
+            ctx.lineTo(xPos(0), yPos(data[0].gas));
+            for (let i = 1; i <= currentIdx; i++) {
+                ctx.lineTo(xPos(i), yPos(data[i].gas));
+            }
+            if (currentIdx < totalPoints) {
+                const cx = xPos(currentIdx) + frac * (xPos(currentIdx + 1) - xPos(currentIdx));
+                const cy = yPos(data[currentIdx].gas) + frac * (yPos(data[currentIdx + 1].gas) - yPos(data[currentIdx].gas));
+                ctx.lineTo(cx, cy);
+                ctx.lineTo(cx, yPos(0));
+            } else {
+                ctx.lineTo(xPos(currentIdx), yPos(0));
+            }
+            ctx.closePath();
+            ctx.fillStyle = grad;
+            ctx.fill();
+
+            // Curve line
+            ctx.beginPath();
+            ctx.strokeStyle = accent;
+            ctx.lineWidth = 2.5;
+            ctx.lineJoin = 'round';
+            ctx.moveTo(xPos(0), yPos(data[0].gas));
+            for (let i = 1; i <= currentIdx; i++) {
+                ctx.lineTo(xPos(i), yPos(data[i].gas));
+            }
+            if (currentIdx < totalPoints) {
+                const cx = xPos(currentIdx) + frac * (xPos(currentIdx + 1) - xPos(currentIdx));
+                const cy = yPos(data[currentIdx].gas) + frac * (yPos(data[currentIdx + 1].gas) - yPos(data[currentIdx].gas));
+                ctx.lineTo(cx, cy);
+            }
+            ctx.stroke();
+
+            // Dots for completed points
+            for (let i = 0; i <= currentIdx; i++) {
+                ctx.beginPath();
+                ctx.arc(xPos(i), yPos(data[i].gas), 5, 0, Math.PI * 2);
+                ctx.fillStyle = accent;
+                ctx.fill();
+                ctx.strokeStyle = '#050505';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Value label
+                ctx.fillStyle = textPrimary;
+                ctx.font = 'bold 10px JetBrains Mono, monospace';
+                ctx.textAlign = 'center';
+                ctx.fillText(data[i].gas.toLocaleString(), xPos(i), yPos(data[i].gas) - 12);
+            }
+        }
+
+        function animate() {
+            progress = Math.min(progress + 0.018, 1);
+            draw(progress);
+            if (progress < 1) animFrame = requestAnimationFrame(animate);
+        }
+
+        // Observe visibility
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting && progress === 0) animate();
+        }, { threshold: 0.3 });
+        observer.observe(canvas);
+    }
+
+    /* ── Live Verification Flow ─────────────────────────────── */
+    function initVerifyFlow() {
+        const steps = document.querySelectorAll('.flow-step');
+        if (!steps.length) return;
+
+        let active = -1;
+        function pulse() {
+            steps.forEach((s, i) => {
+                s.style.borderTop = i === active ? '2px solid #28a0f0' : '2px solid transparent';
+                s.style.background = i === active ? 'var(--bg-elevated)' : 'var(--bg-secondary)';
+            });
+            active = (active + 1) % steps.length;
+        }
+        pulse();
+        setInterval(pulse, 1400);
+    }
+
+    /* ── Counter Animation on guarantee cards ───────────────── */
+    function initCounterAnim() {
+        const cards = document.querySelectorAll('.guarantee-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.borderLeft = '3px solid #28a0f0';
+                card.style.transform = 'translateX(4px)';
+                card.style.transition = 'all 0.2s ease';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.borderLeft = '';
+                card.style.transform = '';
+            });
+        });
     }
 </script>
 

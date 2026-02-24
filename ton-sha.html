@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TON-SHA | Agent Trust Layer — Orthonode Infrastructure Labs</title>
-    <meta name="description" content="TON-SHA: Cryptographic trust primitive for TON agents. Four-gate verification: device authorization, firmware approval, replay protection, SHA-256 integrity. 0.03 TON per operation. Live on testnet.">
-    <meta name="keywords" content="TON agent trust, TON-SHA, agent identity, SHA-256 verification, TON blockchain, DePIN, Tact smart contract, agent marketplace, cryptographic trust, replay protection">
-    <meta name="author" content="Orthonode Infrastructure Labs">
+    <title>TON-SHA | Agent Trust Primitive for TON Blockchain — Orthonode Infrastructure Labs</title>
+    <meta name="description" content="TON-SHA: cryptographic trust primitive for TON agents and DePIN. Four-gate verification — device authorization, firmware approval, replay protection, SHA-256 digest. 0.03 TON/op. Testnet live. Built by Orthonode Infrastructure Labs, Bhopal, India.">
+    <meta name="keywords" content="TON-SHA agent trust, TON blockchain DePIN, agent identity verification TON, SHA-256 TON smart contract, Tact contract agent trust, TON hardware verification, replay protection TON, firmware governance TON, Orthonode Labs TON, autonomous agent trust layer, TON Fast Grants">
+    <meta name="author" content="Orthonode Infrastructure Labs — Bhopal, Madhya Pradesh, India">
     <link rel="canonical" href="https://orthonode.xyz/ton-sha.html">
+    <meta name="geo.region" content="IN-MP">
+    <meta name="geo.placename" content="Bhopal, Madhya Pradesh, India">
+    <meta name="geo.position" content="23.2599;77.4126">
+    <meta name="ICBM" content="23.2599, 77.4126">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orthonode.xyz/ton-sha.html">
-    <meta property="og:title" content="TON-SHA | Agent Trust Layer">
-    <meta property="og:description" content="Cryptographic trust primitive for TON agents. Four-gate verification live on testnet. 0.03 TON per op.">
+    <meta property="og:title" content="TON-SHA | Agent Trust Layer — Orthonode Infrastructure Labs">
+    <meta property="og:description" content="Cryptographic trust primitive for TON agents. Four-gate verification live on testnet. 0.03 TON per op. SHA-256 native opcode. No TEE required.">
     <meta property="og:image" content="https://orthonode.xyz/banner.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@OrthonodeSys">
-    <meta name="theme-color" content="#03060d">
+    <meta name="twitter:title" content="TON-SHA — Agent Trust Primitive for TON">
+    <meta name="twitter:description" content="Four-gate cryptographic trust for TON agents. Device auth, firmware approval, replay protection, digest verify. 0.03 TON/op. Testnet live.">
+    <meta name="twitter:image" content="https://orthonode.xyz/banner.png">
     <link rel="icon" type="image/png" href="https://orthonode.xyz/site-logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1515,6 +1521,69 @@ npx blueprint run deployTonSha <span class="st">--testnet</span>
         </div>
     </div>
 </footer>
+
+<script>
+/* ── Four Gate Live Pulse ───────────────────────────────────── */
+(function() {
+    const gates = [
+        { id: 'gate-1', label: 'DEVICE_AUTH', color: '#0098ea' },
+        { id: 'gate-2', label: 'FIRMWARE_HASH', color: '#22c55e' },
+        { id: 'gate-3', label: 'REPLAY_GUARD', color: '#a78bfa' },
+        { id: 'gate-4', label: 'DIGEST_VERIFY', color: '#f59e0b' },
+    ];
+
+    // Find any gate-badge elements or table rows referencing the four gates
+    // and animate them sequentially to simulate a live verification run
+    let step = 0;
+    const gateEls = document.querySelectorAll('.gate-card, [class*="gate"], td:first-child');
+
+    function highlightNext() {
+        gateEls.forEach((el, i) => {
+            if (i === step % gateEls.length && gateEls.length <= 8) {
+                el.style.transition = 'box-shadow 0.3s ease, border-color 0.3s ease';
+                el.style.boxShadow = '0 0 12px rgba(0,152,234,0.3)';
+                el.style.borderColor = 'rgba(0,152,234,0.5)';
+            } else {
+                el.style.boxShadow = '';
+                el.style.borderColor = '';
+            }
+        });
+        step++;
+    }
+    if (gateEls.length > 0 && gateEls.length <= 8) {
+        setInterval(highlightNext, 1200);
+    }
+
+    // Animate roadmap cards entrance
+    const rmCards = document.querySelectorAll('.rm-card');
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, i * 120);
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2 });
+
+    rmCards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        obs.observe(card);
+    });
+
+    // Comparison table row hover enhancement
+    const rows = document.querySelectorAll('.compare-tbl tbody tr');
+    rows.forEach(row => {
+        row.style.transition = 'background 0.2s ease';
+        row.addEventListener('mouseenter', () => row.style.background = 'rgba(0,152,234,0.04)');
+        row.addEventListener('mouseleave', () => row.style.background = '');
+    });
+})();
+</script>
 
 </body>
 </html>
