@@ -1,19 +1,29 @@
 # Robots.txt for Orthonode Infrastructure Labs
 # Domain: https://orthonode.xyz
-# Last Updated: 2026-02-09
+# Last Updated: 2026-03-01
 
 User-agent: *
 Allow: /
 Allow: /index.html
+Allow: /sha.html
+Allow: /oap.html
+Allow: /nexus.html
+Allow: /ton-sha.html
+Allow: /invariant.html
+Allow: /tix-dao.html
+Allow: /iotex-research.html
+Allow: /site-index.html
 Allow: /terms.html
 Allow: /privacy.html
 
 # Allow all media assets
 Allow: /logo.png
+Allow: /banner.png
 Allow: /orthonode-banner.png
 Allow: /og-image.png
 Allow: /twitter-card.png
 Allow: /logo-512.png
+Allow: /site-logo.png
 
 # Block admin/development areas if they exist
 Disallow: /portal/

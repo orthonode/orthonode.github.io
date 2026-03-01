@@ -1,38 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-   
+
+   <!-- ═══════════════════════════════════════════════════
+        ORTHONODE INFRASTRUCTURE LABS — SITEMAP
+        Domain: https://orthonode.xyz
+        Last Updated: 2026-03-01
+        ═══════════════════════════════════════════════════ -->
+
    <!-- Main Homepage -->
    <url>
       <loc>https://orthonode.xyz/</loc>
-      <lastmod>2026-02-09</lastmod>
+      <lastmod>2026-03-01</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
       <image:image>
          <image:loc>https://orthonode.xyz/logo.png</image:loc>
-         <image:title>Orthonode Infrastructure Labs - Hardware Verification Protocol</image:title>
-         <image:caption>SHA protocol logo for Arbitrum Stylus DePIN infrastructure</image:caption>
+         <image:title>Orthonode Infrastructure Labs — Hardware Verification Protocol</image:title>
+         <image:caption>SHA, TON-SHA, OAP, INVARIANT, TIX-DAO — hardware and governance verification infrastructure</image:caption>
       </image:image>
       <image:image>
-         <image:loc>https://orthonode.xyz/orthonode-banner.png</image:loc>
-         <image:title>Stylus Hardware Anchor - Production DePIN Infrastructure</image:title>
-         <image:caption>Hardware attestation infrastructure built on Arbitrum Stylus</image:caption>
-      </image:image>
-      <image:image>
-         <image:loc>https://orthonode.xyz/og-image.png</image:loc>
-         <image:title>Orthonode Labs - Open Graph Preview</image:title>
-      </image:image>
-      <image:image>
-         <image:loc>https://orthonode.xyz/twitter-card.png</image:loc>
-         <image:title>Orthonode Labs - Twitter Card</image:title>
+         <image:loc>https://orthonode.xyz/banner.png</image:loc>
+         <image:title>Orthonode Labs — Physical Verification Layer</image:title>
+         <image:caption>Hardware attestation infrastructure built on Arbitrum Stylus, TON, Bittensor, and Solana</image:caption>
       </image:image>
       <image:image>
          <image:loc>https://orthonode.xyz/logo-512.png</image:loc>
-         <image:title>Orthonode Labs - High Resolution Logo</image:title>
+         <image:title>Orthonode Labs — High Resolution Logo</image:title>
       </image:image>
    </url>
 
-   <!-- Legal Pages -->
+   <!-- ═══════════════════════════════════════════════════
+        PRODUCT PAGES
+        ═══════════════════════════════════════════════════ -->
+
+   <!-- SHA — Stylus Hardware Anchor (flagship product) -->
+   <url>
+      <loc>https://orthonode.xyz/sha.html</loc>
+      <lastmod>2026-03-01</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.95</priority>
+      <image:image>
+         <image:loc>https://orthonode.xyz/banner.png</image:loc>
+         <image:title>Stylus Hardware Anchor (SHA) — Hardware Sybil Resistance for Arbitrum DePIN</image:title>
+         <image:caption>ESP32-S3 eFuse silicon binding to Arbitrum Stylus smart contracts. 12,564 gas/receipt. Live on Sepolia.</image:caption>
+      </image:image>
+   </url>
+
+   <!-- INVARIANT — Bittensor Trust Subnet -->
+   <url>
+      <loc>https://orthonode.xyz/invariant.html</loc>
+      <lastmod>2026-03-01</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.9</priority>
+      <image:image>
+         <image:loc>https://orthonode.xyz/banner.png</image:loc>
+         <image:title>INVARIANT — Deterministic Trust Infrastructure for Bittensor</image:title>
+         <image:caption>Four-gate verifier for Bittensor miners. INVARIANT Trust Score (NTS) weights TAO emissions permanently.</image:caption>
+      </image:image>
+   </url>
+
+   <!-- IoTeX Research Paper — Featured publication -->
+   <url>
+      <loc>https://orthonode.xyz/iotex-research.html</loc>
+      <lastmod>2026-02-22</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.85</priority>
+      <image:image>
+         <image:loc>https://orthonode.xyz/banner.png</image:loc>
+         <image:title>IoTeX Exploit 2026 — SHA Forensic Analysis by Orthonode Labs</image:title>
+         <image:caption>Gate-by-gate analysis of the $2M–$8.8M IoTeX private key compromise. SHA stops it at Gate 1.</image:caption>
+      </image:image>
+   </url>
+
+   <!-- OAP — Orthonode Assurance Platform -->
+   <url>
+      <loc>https://orthonode.xyz/oap.html</loc>
+      <lastmod>2026-03-01</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+      <image:image>
+         <image:loc>https://orthonode.xyz/banner.png</image:loc>
+         <image:title>OAP — Integrity Governance Engine for Mobility &amp; DePIN</image:title>
+         <image:caption>Deterministic motion validation and lifecycle trust governance for autonomous systems.</image:caption>
+      </image:image>
+   </url>
+
+   <!-- Nexus Protocol — Zero-Trust Edge Gateway -->
+   <url>
+      <loc>https://orthonode.xyz/nexus.html</loc>
+      <lastmod>2026-03-01</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+      <image:image>
+         <image:loc>https://orthonode.xyz/banner.png</image:loc>
+         <image:title>Nexus Protocol — Sovereign Zero-Trust Edge Gateway for DePIN Hardware</image:title>
+         <image:caption>1M transaction stress test validated. 0% corruption. 50–60 TPS. Fail-closed Sentry operational.</image:caption>
+      </image:image>
+   </url>
+
+   <!-- TON-SHA — Agent Trust Layer for TON Ecosystem -->
+   <url>
+      <loc>https://orthonode.xyz/ton-sha.html</loc>
+      <lastmod>2026-03-01</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+      <image:image>
+         <image:loc>https://orthonode.xyz/banner.png</image:loc>
+         <image:title>TON-SHA — Cryptographic Agent Trust Primitive for the TON Ecosystem</image:title>
+         <image:caption>Four-gate SHA-256 verification for TON agents. 0.03 TON per operation. Testnet live.</image:caption>
+      </image:image>
+   </url>
+
+   <!-- TIX-DAO — Venue Governance On-Chain -->
+   <url>
+      <loc>https://orthonode.xyz/tix-dao.html</loc>
+      <lastmod>2026-03-01</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+      <image:image>
+         <image:loc>https://orthonode.xyz/banner.png</image:loc>
+         <image:title>TIX-DAO — On-Chain Venue Governance for Live Events on Solana</image:title>
+         <image:caption>SPL-Governance (Realms) built ticketing governance. Flash-loan proof. Solana Graveyard Hackathon 2026.</image:caption>
+      </image:image>
+   </url>
+
+   <!-- ═══════════════════════════════════════════════════
+        SITE INDEX / RESEARCH LOG
+        ═══════════════════════════════════════════════════ -->
+
+   <url>
+      <loc>https://orthonode.xyz/site-index.html</loc>
+      <lastmod>2026-03-01</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.7</priority>
+   </url>
+
+   <!-- ═══════════════════════════════════════════════════
+        LEGAL PAGES
+        ═══════════════════════════════════════════════════ -->
+
    <url>
       <loc>https://orthonode.xyz/terms.html</loc>
       <lastmod>2026-02-01</lastmod>
