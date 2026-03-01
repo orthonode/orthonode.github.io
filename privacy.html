@@ -269,7 +269,7 @@
         }
 
         .back-link:hover {
-            background: var(--bg-elevated);
+            background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
             border-color: var(--accent-arbitrum);
             box-shadow: 0 0 12px rgba(40, 160, 240, 0.2);
         }
@@ -299,7 +299,11 @@
                 padding: 0.75rem 1rem;
             }
         }
-    </style>
+    
+/* ── glass depth injection ─────────────────────────── */
+.back-link{box-shadow:0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.07);transition:all .35s}
+.back-link:hover{box-shadow:0 12px 40px rgba(0,0,0,.6),0 0 30px rgba(40,160,240,.1),inset 0 1px 0 rgba(255,255,255,.12)!important}
+</style>
 </head>
 <body>
 

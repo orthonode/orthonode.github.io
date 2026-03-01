@@ -295,15 +295,16 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 1px;
-            background: var(--border-primary);
-            border: 1px solid var(--border-primary);
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09);
             margin-bottom: 5rem;
         }
 
         .stat-item {
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             padding: 1.5rem;
             text-align: center;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
         }
 
         .stat-value {
@@ -342,14 +343,15 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1px;
-            background: var(--border-primary);
-            border: 1px solid var(--border-primary);
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09);
             margin-bottom: 2rem;
         }
 
         .two-col-card {
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             padding: 2.5rem;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
         }
 
         .two-col-card h3 {
@@ -372,21 +374,23 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 1px;
-            background: var(--border-primary);
-            border: 1px solid var(--border-primary);
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09);
         }
 
         .arch-layer {
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             padding: 2rem 2.5rem;
             display: grid;
             grid-template-columns: auto 1fr;
             gap: 2rem;
             align-items: start;
-            transition: background 0.3s ease;
+            transition: background .35s,box-shadow .35s,border-color .35s;
         }
 
-        .arch-layer:hover { background: var(--bg-elevated); }
+        .arch-layer:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
+            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(40,160,240,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        }
 
         .layer-num {
             font-family: var(--font-mono);
@@ -437,15 +441,16 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1px;
-            background: var(--border-primary);
-            border: 1px solid var(--border-primary);
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09);
             margin-bottom: 2rem;
         }
 
         .flow-step {
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             padding: 2rem;
             position: relative;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
         }
 
         .flow-step::after {
@@ -489,17 +494,19 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 1px;
-            background: var(--border-primary);
-            border: 1px solid var(--border-primary);
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09);
         }
 
         .guarantee-card {
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             padding: 2.5rem;
-            transition: background 0.3s ease;
+            transition: background .35s,box-shadow .35s,border-color .35s;
         }
 
-        .guarantee-card:hover { background: var(--bg-elevated); }
+        .guarantee-card:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
+            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(40,160,240,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        }
 
         .guarantee-icon {
             font-family: var(--font-mono);
@@ -532,10 +539,11 @@
         .bench-section { margin-bottom: 5rem; }
 
         .bench-table-wrap {
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             border: 1px solid var(--border-primary);
             overflow-x: auto;
             margin-bottom: 1.5rem;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
         }
 
         table {
@@ -575,13 +583,14 @@
         .td-fail { color: var(--accent-critical); }
 
         .bench-note {
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             border: 1px solid var(--border-primary);
             border-left: 3px solid var(--accent-arbitrum);
             padding: 1.25rem 1.5rem;
             font-size: 0.875rem;
             color: var(--text-tertiary);
             line-height: 1.6;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
         }
 
         /* Grant / Roadmap */
@@ -591,14 +600,15 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 1px;
-            background: var(--border-primary);
-            border: 1px solid var(--border-primary);
+            background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09);
             margin-bottom: 2rem;
         }
 
         .milestone-card {
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             padding: 2.5rem;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
         }
 
         .milestone-tag {
@@ -691,11 +701,11 @@
         }
 
         .evidence-card {
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             border: 1px solid var(--border-primary);
             border-radius: 8px;
             padding: 1.5rem;
-            transition: all 0.3s ease;
+            transition: background .35s,box-shadow .35s,border-color .35s;
         }
 
         .evidence-card:hover {
@@ -774,7 +784,9 @@
         .btn-primary { background: var(--accent-arbitrum); color: var(--bg-primary); }
         .btn-primary:hover { background: #3db0ff; box-shadow: 0 0 20px var(--accent-arbitrum-glow); transform: translateY(-2px); }
         .btn-secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border-bright); }
-        .btn-secondary:hover { background: var(--bg-elevated); border-color: var(--accent-arbitrum); }
+        .btn-secondary:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated); border-color: var(--accent-arbitrum);
+            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(40,160,240,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        }
 
         /* Footer */
         footer { margin-top: 8rem; padding: 4rem 0 2rem; border-top: 1px solid var(--border-primary); }
@@ -824,7 +836,11 @@
             .arch-layer { grid-template-columns: 1fr; gap: 0.75rem; }
             .layer-num { text-align: left; font-size: 1.25rem; }
         }
-    </style>
+    
+/* ── glass card depth injection ───────────────────── */
+.stat-item,.feature-card,.spec-card,.metric-card,.evidence-card,.gate-card,.layer-card,.module-card{box-shadow:0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);transition:background .35s,box-shadow .35s,border-color .35s!important}
+.stat-item:hover,.feature-card:hover,.spec-card:hover,.metric-card:hover,.evidence-card:hover,.gate-card:hover,.layer-card:hover{box-shadow:0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(40,160,240,.07),inset 0 1px 0 rgba(255,255,255,.1)!important}
+</style>
 </head>
 <body>
 

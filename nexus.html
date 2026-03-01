@@ -209,11 +209,13 @@
         .stats-strip {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1px; background: var(--border-primary);
-            border: 1px solid var(--border-primary);
+            gap: 1px; background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09);
             margin-bottom: 5rem;
         }
-        .stat-item { background: var(--bg-secondary); padding: 1.5rem; text-align: center; }
+        .stat-item { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 1.5rem; text-align: center;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
+        }
         .stat-value {
             font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700;
             color: var(--nexus); display: block; margin-bottom: 0.25rem;
@@ -234,10 +236,12 @@
         /* Two col */
         .two-col {
             display: grid; grid-template-columns: 1fr 1fr;
-            gap: 1px; background: var(--border-primary);
-            border: 1px solid var(--border-primary); margin-bottom: 2rem;
+            gap: 1px; background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09); margin-bottom: 2rem;
         }
-        .two-col-card { background: var(--bg-secondary); padding: 2.5rem; }
+        .two-col-card { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 2.5rem;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
+        }
         .two-col-card h3 {
             font-family: var(--font-display); font-size: 1.25rem;
             color: var(--text-primary); margin-bottom: 1rem;
@@ -250,15 +254,17 @@
 
         .arch-stack {
             display: grid; grid-template-columns: 1fr;
-            gap: 1px; background: var(--border-primary);
-            border: 1px solid var(--border-primary);
+            gap: 1px; background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09);
         }
         .arch-row {
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             display: grid; grid-template-columns: 260px 1fr;
-            gap: 0; transition: background 0.3s ease;
+            gap: 0; transition: background .35s,box-shadow .35s,border-color .35s;
         }
-        .arch-row:hover { background: var(--bg-elevated); }
+        .arch-row:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
+            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(0,208,132,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        }
 
         .arch-label {
             padding: 2rem 2.5rem;
@@ -310,21 +316,23 @@
 
         .flow-pipeline {
             display: grid; grid-template-columns: repeat(5, 1fr);
-            gap: 1px; background: var(--border-primary);
-            border: 1px solid var(--border-primary);
+            gap: 1px; background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09);
             margin-bottom: 1.5rem;
         }
         .flow-node {
-            background: var(--bg-secondary); padding: 1.75rem;
-            position: relative; transition: background 0.3s ease;
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 1.75rem;
+            position: relative; transition: background .35s,box-shadow .35s,border-color .35s;
         }
-        .flow-node:hover { background: var(--bg-elevated); }
+        .flow-node:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
+            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(0,208,132,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        }
         .flow-node::after {
             content: '→';
             position: absolute; right: -14px; top: 50%;
             transform: translateY(-50%);
             color: var(--nexus); font-size: 1.2rem;
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             padding: 0.25rem 0;
             z-index: 2;
         }
@@ -369,15 +377,17 @@
 
         .threat-grid {
             display: grid; grid-template-columns: 1fr 1fr;
-            gap: 1px; background: var(--border-primary);
-            border: 1px solid var(--border-primary);
+            gap: 1px; background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09);
             margin-bottom: 1.5rem;
         }
         .threat-card {
-            background: var(--bg-secondary); padding: 2rem 2.5rem;
-            transition: background 0.3s ease;
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 2rem 2.5rem;
+            transition: background .35s,box-shadow .35s,border-color .35s;
         }
-        .threat-card:hover { background: var(--bg-elevated); }
+        .threat-card:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
+            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(0,208,132,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        }
         .threat-id {
             font-family: var(--font-mono); font-size: 0.68rem;
             color: var(--accent-critical); text-transform: uppercase;
@@ -400,9 +410,10 @@
         }
 
         .security-props {
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             border: 1px solid var(--border-primary);
             overflow-x: auto;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
         }
         table {
             width: 100%; border-collapse: collapse;
@@ -427,10 +438,12 @@
 
         .gov-grid {
             display: grid; grid-template-columns: 1fr 1fr;
-            gap: 1px; background: var(--border-primary);
-            border: 1px solid var(--border-primary); margin-bottom: 1.5rem;
+            gap: 1px; background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09); margin-bottom: 1.5rem;
         }
-        .gov-card { background: var(--bg-secondary); padding: 2.5rem; }
+        .gov-card { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 2.5rem;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
+        }
         .gov-label {
             font-family: var(--font-mono); font-size: 0.68rem;
             color: var(--nexus); text-transform: uppercase;
@@ -444,7 +457,9 @@
         }
         .gov-card p { color: var(--text-tertiary); font-size: 0.9rem; line-height: 1.65; }
 
-        .gov-table { overflow-x: auto; background: var(--bg-secondary); border: 1px solid var(--border-primary); margin-bottom: 1.5rem; }
+        .gov-table { overflow-x: auto; background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); border: 1px solid var(--border-primary); margin-bottom: 1.5rem;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
+        }
 
         .invariant-bar {
             background: var(--bg-elevated);
@@ -468,13 +483,14 @@
 
         .phase-stack {
             display: grid; grid-template-columns: 1fr;
-            gap: 1px; background: var(--border-primary);
-            border: 1px solid var(--border-primary);
+            gap: 1px; background: rgba(255,255,255,.07);
+            border: 1px solid rgba(255,255,255,.09);
         }
         .phase-row {
-            background: var(--bg-secondary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
             display: grid; grid-template-columns: 220px 1fr;
             gap: 0;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
         }
         .phase-label {
             padding: 2rem 2.5rem;
@@ -567,7 +583,9 @@
         .btn-primary { background: var(--nexus); color: var(--bg-primary); }
         .btn-primary:hover { background: #00e896; box-shadow: 0 0 20px var(--nexus-glow); transform: translateY(-2px); }
         .btn-secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border-bright); }
-        .btn-secondary:hover { background: var(--bg-elevated); border-color: var(--nexus); color: var(--nexus); }
+        .btn-secondary:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated); border-color: var(--nexus); color: var(--nexus);
+            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(0,208,132,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        }
 
         /* Footer */
         footer { margin-top: 8rem; padding: 4rem 0 2rem; border-top: 1px solid var(--border-primary); }
@@ -606,7 +624,11 @@
             .cta-section { padding: 2rem; }
             .invariant-bar { flex-direction: column; align-items: flex-start; }
         }
-    </style>
+    
+/* ── glass card depth injection ───────────────────── */
+.layer-card,.perf-card,.security-card,.stat-item,.feature-card,.module-card{box-shadow:0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);transition:background .35s,box-shadow .35s,border-color .35s!important}
+.layer-card:hover,.perf-card:hover,.security-card:hover,.stat-item:hover,.feature-card:hover,.module-card:hover{box-shadow:0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(0,208,132,.07),inset 0 1px 0 rgba(255,255,255,.1)!important}
+</style>
 </head>
 <body>
 

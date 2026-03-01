@@ -135,14 +135,18 @@
         .btn-primary { background: var(--accent-gold); color: #000; border-color: var(--accent-gold); }
         .btn-primary:hover { background: #fde047; transform: translateY(-2px); box-shadow: 0 6px 24px var(--accent-gold-glow); }
         .btn-secondary { background: transparent; color: var(--text-primary); border-color: var(--border-bright); }
-        .btn-secondary:hover { background: var(--bg-elevated); border-color: var(--accent-gold); color: var(--accent-gold); }
+        .btn-secondary:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated); border-color: var(--accent-gold); color: var(--accent-gold);
+            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        }
 
         /* STATS BAR */
         .stats-bar {
             display: grid; grid-template-columns: repeat(4, 1fr);
             border: 1px solid var(--border-primary); gap: 1px; background: var(--border-primary);
         }
-        .stat-item { background: var(--bg-secondary); padding: 1.4rem 1.5rem; text-align: center; }
+        .stat-item { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 1.4rem 1.5rem; text-align: center;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
+        }
         .stat-value { font-family: var(--font-mono); font-size: 1.65rem; font-weight: 700; color: var(--accent-gold); display: block; margin-bottom: 0.2rem; }
         .stat-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
 
@@ -157,12 +161,14 @@
         /* THREE LAYERS */
         .layers-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border-primary); border: 1px solid var(--border-primary); }
         .layer-row {
-            background: var(--bg-secondary); padding: 2.25rem 2.5rem;
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 2.25rem 2.5rem;
             display: grid; grid-template-columns: 140px 1fr auto;
             gap: 2rem; align-items: start;
-            transition: background 0.2s;
+            transition: background .35s,box-shadow .35s,border-color .35s;
         }
-        .layer-row:hover { background: var(--bg-elevated); }
+        .layer-row:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
+            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        }
         .layer-num { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; padding-top: 0.1rem; }
         .layer-name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.4rem; }
         .layer-tech { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.75rem; }
@@ -171,8 +177,10 @@
 
         /* FOUR GATES */
         .gates-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border-primary); border: 1px solid var(--border-primary); }
-        .gate-card { background: var(--bg-secondary); padding: 1.75rem; transition: background 0.2s; }
-        .gate-card:hover { background: var(--bg-elevated); }
+        .gate-card { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 1.75rem; transition: background .35s,box-shadow .35s,border-color .35s; }
+        .gate-card:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
+            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        }
         .gate-num { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
         .gate-title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
         .gate-desc { font-size: 0.83rem; color: var(--text-tertiary); line-height: 1.6; margin-bottom: 0.875rem; }
@@ -180,8 +188,9 @@
 
         /* FORMULA */
         .formula-block {
-            background: var(--bg-secondary); border: 1px solid var(--border-primary);
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); border: 1px solid var(--border-primary);
             border-left: 3px solid var(--accent-gold); padding: 2rem 2.5rem; margin: 2rem 0;
+            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
         }
         .formula-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1rem; }
         .formula-eq { font-family: var(--font-display); font-size: clamp(1rem, 2.5vw, 1.5rem); color: var(--text-primary); font-weight: 600; letter-spacing: -0.02em; margin-bottom: 1rem; }
@@ -211,12 +220,14 @@
         /* ROADMAP PHASES */
         .phases { display: flex; flex-direction: column; gap: 1px; background: var(--border-primary); border: 1px solid var(--border-primary); }
         .phase-row {
-            background: var(--bg-secondary); padding: 1.6rem 2rem;
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 1.6rem 2rem;
             display: grid; grid-template-columns: 80px 180px 1fr auto;
             gap: 1.5rem; align-items: center;
-            transition: background 0.2s;
+            transition: background .35s,box-shadow .35s,border-color .35s;
         }
-        .phase-row:hover { background: var(--bg-elevated); }
+        .phase-row:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
+            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        }
         .phase-num { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text-muted); }
         .phase-name { font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
         .phase-target { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); margin-top: 0.2rem; }
@@ -224,8 +235,10 @@
 
         /* METRICS */
         .metrics-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border-primary); border: 1px solid var(--border-primary); border-radius: 4px; overflow: hidden; }
-        .metric-card { background: var(--bg-secondary); padding: 1.5rem; transition: background 0.2s; }
-        .metric-card:hover { background: var(--bg-elevated); }
+        .metric-card { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 1.5rem; transition: background .35s,box-shadow .35s,border-color .35s; }
+        .metric-card:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
+            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        }
         .metric-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
         .metric-value { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; }
         .metric-sub { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); }
@@ -270,7 +283,11 @@
             .cta-section { padding: 2rem; }
             .footer-grid { grid-template-columns: 1fr; }
         }
-    </style>
+    
+/* ── glass card depth injection ───────────────────── */
+.layer-row,.gate-card,.metric-card,.phase-row,.stat-item,.formula-block{box-shadow:0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);transition:background .35s,box-shadow .35s,border-color .35s!important}
+.layer-row:hover,.gate-card:hover,.metric-card:hover,.phase-row:hover,.stat-item:hover{box-shadow:0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.1)!important}
+</style>
 </head>
 <body>
 

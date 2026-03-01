@@ -224,7 +224,7 @@ nav {
     border-radius: 4px; overflow: hidden;
 }
 .stat-cell {
-    background: var(--deep); padding: 1.25rem;
+    background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep); padding: 1.25rem;
     text-align: center; border-right: 1px solid var(--ton-line);
 }
 .stat-cell:last-child { border-right: none; }
@@ -265,7 +265,7 @@ hr.div {
     margin-top: 2.5rem;
 }
 .code-frame {
-    background: var(--deep);
+    background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep);
     border: 1px solid var(--ton-line); border-radius: 6px; overflow: hidden;
 }
 .cf-bar {
@@ -320,16 +320,19 @@ hr.div {
 /* ─── FOUR GATES ─────────────────────────────────────────── */
 .gates-grid {
     display: grid; grid-template-columns: repeat(2, 1fr);
-    gap: 1px; background: var(--ton-line);
-    border: 1px solid var(--ton-line); border-radius: 6px; overflow: hidden;
+    gap: 1px; background: rgba(255,255,255,.06);
+    border: 1px solid rgba(0,152,234,.18); border-radius: 6px; overflow: hidden;
     margin-top: 2.5rem;
 }
 .gate {
-    background: var(--deep); padding: 2.25rem;
+    background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep); padding: 2.25rem;
     position: relative; overflow: hidden;
-    transition: background .25s;
+    transition: background .35s,box-shadow .35s;
+    box-shadow: 0 2px 16px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.07);
 }
-.gate:hover { background: var(--surface); }
+.gate:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--surface);
+    box-shadow: 0 20px 60px rgba(0,0,0,.7),0 0 50px rgba(0,152,234,.08),inset 0 1px 0 rgba(255,255,255,.1);
+}
 .gate::before {
     content: ''; position: absolute;
     top: 0; left: 0; width: 100%; height: 3px;
@@ -369,7 +372,7 @@ hr.div {
 /* ─── ARCHITECTURE FLOW ──────────────────────────────────── */
 .arch-flow {
     margin-top: 2.5rem;
-    background: var(--deep); border: 1px solid var(--ton-line);
+    background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep); border: 1px solid var(--ton-line);
     border-radius: 6px; overflow: hidden;
 }
 .arch-layer {
@@ -416,7 +419,7 @@ hr.div {
 .rf {
     flex: 1; padding: 1.25rem; text-align: center;
     border-right: 1px solid var(--ton-line);
-    background: var(--deep);
+    background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep);
 }
 .rf:last-child { border-right: none; background: var(--surface); border: 1px solid var(--ton); border-left: none;}
 .rf-name  { font-family: var(--mono); font-size: .78rem; color: var(--ton); display: block; font-weight: 500; margin-bottom: .3rem; }
@@ -426,7 +429,7 @@ hr.div {
 
 /* ─── LIVE CONTRACT ──────────────────────────────────────── */
 .live-panel {
-    background: var(--deep); border: 1px solid var(--ton-line);
+    background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep); border: 1px solid var(--ton-line);
     border-radius: 6px; overflow: hidden; margin-top: 2.5rem;
 }
 .live-panel-top {
@@ -481,15 +484,18 @@ hr.div {
 /* ─── USE CASES ──────────────────────────────────────────── */
 .uc-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: var(--ton-line);
-    border: 1px solid var(--ton-line); border-radius: 6px; overflow: hidden;
+    gap: 1px; background: rgba(255,255,255,.06);
+    border: 1px solid rgba(0,152,234,.18); border-radius: 6px; overflow: hidden;
     margin-top: 2.5rem;
 }
 .uc-card {
-    background: var(--deep); padding: 1.875rem;
-    transition: background .25s;
+    background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep); padding: 1.875rem;
+    transition: background .35s,box-shadow .35s;
+    box-shadow: 0 2px 16px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.07);
 }
-.uc-card:hover { background: var(--surface); }
+.uc-card:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--surface);
+    box-shadow: 0 20px 60px rgba(0,0,0,.7),0 0 50px rgba(0,152,234,.08),inset 0 1px 0 rgba(255,255,255,.1);
+}
 .uc-icon { font-size: 1.4rem; margin-bottom: .875rem; display: block; }
 .uc-title { font-weight: 600; font-size: .95rem; color: var(--t0); margin-bottom: .5rem; }
 .uc-body  { font-size: .85rem; color: var(--t2); line-height: 1.65; font-weight: 300; margin-bottom: 1rem; }
@@ -509,12 +515,15 @@ hr.div {
     border-radius: 6px; overflow: hidden; margin-top: 2.5rem;
 }
 .challenge {
-    background: var(--deep); padding: 1.75rem 2rem;
+    background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep); padding: 1.75rem 2rem;
     display: grid; grid-template-columns: 280px 1fr;
     gap: 2rem; align-items: start;
-    transition: background .2s;
+    transition: background .35s,box-shadow .35s;
+    box-shadow: 0 2px 16px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.07);
 }
-.challenge:hover { background: var(--surface); }
+.challenge:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--surface);
+    box-shadow: 0 20px 60px rgba(0,0,0,.7),0 0 50px rgba(0,152,234,.08),inset 0 1px 0 rgba(255,255,255,.1);
+}
 .ch-problem {
     font-family: var(--mono); font-size: .78rem;
     font-weight: 500; color: var(--t0);
@@ -551,18 +560,18 @@ hr.div {
 }
 .prereq-table td {
     padding: .65rem 1rem; border: 1px solid var(--ton-line);
-    background: var(--deep); color: var(--t2);
+    background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep); color: var(--t2);
 }
 .prereq-table td:first-child { color: var(--t0); font-weight: 500; }
 
 /* ─── ROADMAP ─────────────────────────────────────────────── */
 .roadmap-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: var(--ton-line);
-    border: 1px solid var(--ton-line); border-radius: 6px; overflow: hidden;
+    gap: 1px; background: rgba(255,255,255,.06);
+    border: 1px solid rgba(0,152,234,.18); border-radius: 6px; overflow: hidden;
     margin-top: 2.5rem;
 }
-.rm-card { background: var(--deep); padding: 2rem; }
+.rm-card { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep); padding: 2rem; }
 .rm-phase {
     font-family: var(--mono); font-size: .65rem;
     color: var(--t4); letter-spacing: .12em; text-transform: uppercase;
@@ -595,7 +604,7 @@ hr.div {
 }
 .compare-tbl td {
     padding: .75rem 1.25rem; border: 1px solid var(--ton-line);
-    background: var(--deep); color: var(--t2);
+    background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep); color: var(--t2);
 }
 .compare-tbl tr.us td { background: var(--surface); }
 .compare-tbl tr.us td:first-child { color: var(--ton); font-weight: 500; }
@@ -610,8 +619,11 @@ hr.div {
     background: var(--ton-line); border: 1px solid var(--ton-line);
     border-radius: 6px; overflow: hidden; margin-top: 2.5rem;
 }
-.threat-card { background: var(--deep); padding: 1.75rem; transition: background .2s; }
-.threat-card:hover { background: var(--surface); }
+.threat-card { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep); padding: 1.75rem; transition: background .35s,box-shadow .35s;
+    box-shadow: 0 2px 16px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.07); }
+.threat-card:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--surface);
+    box-shadow: 0 20px 60px rgba(0,0,0,.7),0 0 50px rgba(0,152,234,.08),inset 0 1px 0 rgba(255,255,255,.1);
+}
 .threat-name {
     font-family: var(--sans); font-weight: 600;
     font-size: .9rem; color: var(--t0); margin-bottom: .5rem;
@@ -639,7 +651,7 @@ hr.div {
 }
 .trust-table td {
     padding: .65rem 1.25rem; border: 1px solid var(--ton-line);
-    background: var(--deep); color: var(--t2); font-family: var(--mono); font-size: .78rem;
+    background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--deep); color: var(--t2); font-family: var(--mono); font-size: .78rem;
 }
 .trust-table td:first-child { color: var(--t0); font-weight: 500; }
 
@@ -690,7 +702,11 @@ footer {
     .live-panel-gates { grid-template-columns: repeat(2, 1fr); }
     .nav-right { display: none; }
 }
-    </style>
+    
+/* ── glass card depth injection ───────────────────── */
+.gate,.uc-card,.challenge,.rm-card,.threat-card,.guarantees,.live-panel,.stat-cell{box-shadow:0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);transition:background .35s,box-shadow .35s,border-color .35s!important}
+.gate:hover,.uc-card:hover,.challenge:hover,.threat-card:hover{box-shadow:0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(0,152,234,.08),inset 0 1px 0 rgba(255,255,255,.1)!important}
+</style>
 </head>
 <body>
 
