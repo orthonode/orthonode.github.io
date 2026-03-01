@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Orthonode — Verification of Physical Reality</title>
+<meta name="description" content="Orthonode Infrastructure Labs. INVARIANT Bittensor subnet. Hardware attestation, zero-trust execution, lifecycle trust governance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=DM+Sans:ital,opsz,wght@0,9..40,200..700;1,9..40,200..400&family=JetBrains+Mono:wght@300..700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --void:#000;--bg:#050505;--s1:#0d0d0d;--s2:#141414;--s3:#1c1c1c;
+  --b1:#222;--b2:#333;--b3:#555;
+  --t0:#fff;--t1:#e8e8e8;--t2:#a3a3a3;--t3:#666;--t4:#333;
+  --gold:#f5c518;--gold2:#fde047;--gold-dim:rgba(245,197,24,.11);--gold-glow:rgba(245,197,24,.22);--gold-line:rgba(245,197,24,.18);
+  --green:#16c47f;--red:#f04438;--blue:#3b82f6;
+  --r:3px;
+  --mono:'JetBrains Mono',monospace;
+  --sans:'DM Sans',sans-serif;
+  --disp:'Syne',sans-serif;
+}
+
+/* ═══════════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none}
+::selection{background:var(--gold-dim);color:var(--t0)}
+a{color:inherit;text-decoration:none}
+
+/* ═══════════════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════════════ */
+#cd{position:fixed;top:0;left:0;z-index:9999;width:8px;height:8px;border-radius:50%;background:var(--gold);pointer-events:none;transform:translate(-50%,-50%);transition:width .15s,height .15s;mix-blend-mode:difference}
+#cr{position:fixed;top:0;left:0;z-index:9998;width:36px;height:36px;border-radius:50%;border:1px solid rgba(245,197,24,.35);pointer-events:none;transform:translate(-50%,-50%);transition:width .18s,height .18s,border-color .18s}
+body.ch #cd{width:14px;height:14px}
+body.ch #cr{width:58px;height:58px;border-color:rgba(245,197,24,.65)}
+
+/* ═══════════════════════════════════════════════
+   NOISE GRAIN
+═══════════════════════════════════════════════ */
+#grain{position:fixed;inset:-50%;z-index:9990;width:200%;height:200%;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:gr .7s steps(1) infinite}
+@keyframes gr{0%{transform:translate(0,0)}20%{transform:translate(-2%,-3%)}40%{transform:translate(3%,1%)}60%{transform:translate(-1%,4%)}80%{transform:translate(2%,-2%)}100%{transform:translate(-3%,2%)}}
+
+/* ═══════════════════════════════════════════════
+   GRID BG
+═══════════════════════════════════════════════ */
+#gbg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.016) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.016) 1px,transparent 1px);background-size:72px 72px}
+
+/* ═══════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════ */
+.w{max-width:1360px;margin:0 auto;padding:0 2rem;position:relative;z-index:2}
+section{padding:5.5rem 0;position:relative;z-index:2}
+.sl{font-family:var(--mono);font-size:.62rem;color:var(--t4);text-transform:uppercase;letter-spacing:.16em;border-bottom:1px solid var(--b1);padding-bottom:.9rem;margin-bottom:2rem;display:flex;align-items:center;gap:.45rem}
+.sl::before{content:'//';color:var(--gold);opacity:.45}
+
+/* ═══════════════════════════════════════════════
+   REVEAL
+═══════════════════════════════════════════════ */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════ */
+@keyframes su{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes wr{from{transform:translateY(108%);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes gs{0%,100%{background-position:0% center}to{background-position:200% center}}
+@keyframes gd{from{transform:translate(0,0) scale(1)}to{transform:translate(28px,-18px) scale(1.1)}}
+@keyframes gd2{from{transform:translate(0,0)}to{transform:translate(-20px,15px)}}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 currentColor}50%{opacity:.4;box-shadow:0 0 0 4px transparent}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes sp{0%,100%{opacity:.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(.6)}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:800;border-bottom:1px solid transparent;transition:background .4s,border-color .4s,backdrop-filter .4s}
+#nav.sc{background:rgba(5,5,5,.9);backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);border-bottom-color:var(--b1)}
+.ni{max-width:1360px;margin:0 auto;padding:.85rem 2rem;display:flex;align-items:center;justify-content:space-between}
+
+/* Logo */
+.ll{display:flex;align-items:center;gap:.65rem;font-family:var(--disp);font-weight:800;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;color:var(--t0)}
+.lm{width:32px;height:32px;flex-shrink:0}
+.lm svg{width:100%;height:100%}
+.lw{display:flex;flex-direction:column;gap:0}
+.ln{line-height:1}
+.ls{font-family:var(--mono);font-size:.48rem;font-weight:400;color:var(--t3);letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
+
+.nc{display:flex;gap:2rem;font-family:var(--mono);font-size:.63rem;text-transform:uppercase;letter-spacing:.1em;color:var(--t3)}
+.nc a{transition:color .2s}.nc a:hover{color:var(--t0)}
+.nr{display:flex;align-items:center;gap:.45rem}
+
+.tg{display:inline-flex;align-items:center;gap:.28rem;font-family:var(--mono);font-size:.6rem;padding:.2rem .55rem;border:1px solid;border-radius:var(--r);letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
+.tl{color:var(--green);border-color:rgba(22,196,127,.28);background:rgba(22,196,127,.06)}
+.ta{color:var(--red);border-color:rgba(240,68,56,.28);background:rgba(240,68,56,.06)}
+.ta:hover{background:rgba(240,68,56,.12)}
+.td{color:var(--t3);border-color:var(--b1)}.td:hover{color:var(--t0);border-color:var(--b2)}
+.dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
+
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:7rem 0 4rem;position:relative;overflow:hidden}
+
+.hg{position:absolute;pointer-events:none;border-radius:50%;filter:blur(120px);z-index:1}
+.hg1{width:700px;height:450px;top:0;left:-12%;background:radial-gradient(ellipse,rgba(245,197,24,.055) 0%,transparent 70%);animation:gd 14s ease-in-out infinite alternate}
+.hg2{width:450px;height:300px;top:35%;right:-5%;background:radial-gradient(ellipse,rgba(59,130,246,.045) 0%,transparent 70%);animation:gd2 18s ease-in-out infinite alternate}
+
+.hl{font-family:var(--mono);font-size:.67rem;color:var(--t3);text-transform:uppercase;letter-spacing:.18em;margin-bottom:1.5rem;position:relative;z-index:2;animation:su .8s cubic-bezier(.16,1,.3,1) .1s both;display:flex;align-items:center;gap:.55rem}
+.hl::before{content:'//';color:var(--gold);opacity:.55}
+
+/* Kinetic headline */
+.hh{font-family:var(--disp);font-weight:800;font-size:clamp(3.6rem,11vw,9.2rem);line-height:.88;letter-spacing:-.04em;text-transform:uppercase;position:relative;z-index:2;margin-bottom:1.5rem;overflow:hidden}
+.hw{display:block;overflow:hidden}
+.hwi{display:block;animation:wr 1s cubic-bezier(.16,1,.3,1) var(--d,0s) both}
+.hsolid{background:linear-gradient(135deg,#fff 0%,#d0d0d0 40%,#888 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hout{-webkit-text-stroke:1.5px rgba(255,255,255,.15);-webkit-text-fill-color:transparent;color:transparent}
+.hgold{background:linear-gradient(90deg,var(--gold) 0%,var(--gold2) 50%,var(--gold) 100%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gs 3.5s linear infinite}
+
+.hsub{max-width:580px;position:relative;z-index:2;border-left:2px solid var(--gold-line);padding-left:1.25rem;margin-bottom:2.25rem;animation:su .8s cubic-bezier(.16,1,.3,1) .5s both}
+.hsub p{font-size:1.0625rem;color:var(--t1);line-height:1.65;margin-bottom:.4rem}
+.hsub .s2{font-family:var(--mono);font-size:.68rem;color:var(--t3);letter-spacing:.04em}
+
+.hctas{display:flex;gap:.75rem;flex-wrap:wrap;position:relative;z-index:2;animation:su .8s cubic-bezier(.16,1,.3,1) .6s both}
+
+.btn{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.73rem;font-weight:600;padding:.78rem 1.45rem;border-radius:var(--r);letter-spacing:.06em;text-transform:uppercase;border:1px solid transparent;transition:all .2s;cursor:none}
+.bp{background:var(--gold);color:#000;border-color:var(--gold)}.bp:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 28px var(--gold-glow)}
+.bo{background:transparent;color:var(--t1);border-color:var(--b2)}.bo:hover{border-color:var(--b3);color:var(--t0);background:rgba(255,255,255,.03)}
+.br{background:transparent;color:var(--red);border-color:rgba(240,68,56,.28)}.br:hover{background:rgba(240,68,56,.06)}
+
+/* scroll cue */
+.sc-cue{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.56rem;color:var(--t4);letter-spacing:.14em;text-transform:uppercase;z-index:2;animation:fi 1s .9s both}
+.scl{width:1px;height:38px;background:linear-gradient(to bottom,var(--b2),transparent);animation:sp 2s ease-in-out infinite}
+
+/* stats bar */
+.hstats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--b1);margin-top:3.5rem;position:relative;z-index:2;animation:su .8s cubic-bezier(.16,1,.3,1) .7s both}
+.sc2{padding:1.2rem 1.5rem;border-right:1px solid var(--b1);background:rgba(13,13,13,.65);backdrop-filter:blur(8px);position:relative;overflow:hidden}
+.sc2:last-child{border-right:none}
+.sc2::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-line),transparent)}
+.sn{font-family:var(--disp);font-weight:800;font-size:clamp(1.3rem,2.2vw,1.9rem);color:var(--gold);letter-spacing:-.03em;display:block;margin-bottom:.2rem}
+.sk{font-family:var(--mono);font-size:.58rem;color:var(--t3);text-transform:uppercase;letter-spacing:.1em}
+
+/* ═══════════════════════════════════════════════
+   MARQUEE
+═══════════════════════════════════════════════ */
+.mw{border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);overflow:hidden;padding:.82rem 0;background:var(--s1);position:relative;z-index:2}
+.mt{display:flex;gap:2.5rem;width:max-content;animation:marquee 55s linear infinite}
+.mi{font-family:var(--mono);font-size:.6rem;color:var(--t4);text-transform:uppercase;letter-spacing:.14em;white-space:nowrap;display:flex;align-items:center;gap:.55rem}
+.md{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.5;flex-shrink:0}
+
+/* ═══════════════════════════════════════════════
+   BENTO PRODUCTS
+═══════════════════════════════════════════════ */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:auto;gap:10px}
+.bc{background:var(--s1);border:1px solid var(--b1);border-radius:6px;padding:1.9rem;position:relative;overflow:hidden;transition:background .25s,border-color .25s,transform .25s,box-shadow .25s}
+.bc:hover{background:var(--s2);transform:translateY(-3px);box-shadow:0 14px 44px rgba(0,0,0,.55)}
+.bca{position:absolute;top:0;left:0;right:0;height:2px;opacity:.35;transition:opacity .25s}
+.bc:hover .bca{opacity:1}
+.bcl{font-family:var(--mono);font-size:.58rem;text-transform:uppercase;letter-spacing:.14em;margin-bottom:.9rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+.bcn{font-family:var(--disp);font-weight:800;font-size:clamp(1.3rem,2.2vw,1.8rem);letter-spacing:-.025em;color:var(--t0);line-height:1;margin-bottom:.5rem}
+.bcd{font-size:.82rem;color:var(--t2);line-height:1.7;margin-bottom:1.1rem}
+.bcs{font-family:var(--mono);font-size:.7rem;margin-bottom:.9rem}
+.bct{display:flex;flex-wrap:wrap;gap:.3rem}
+.bt{font-family:var(--mono);font-size:.57rem;padding:.16rem .45rem;border:1px solid var(--b1);border-radius:2px;color:var(--t4);background:rgba(0,0,0,.3)}
+.bclink{position:absolute;bottom:1.4rem;right:1.6rem;font-family:var(--mono);font-size:.65rem;transition:color .2s,opacity .2s;opacity:.6}
+.bc:hover .bclink{opacity:1}
+
+/* grid placement */
+.bc-sha  {grid-column:1/7;grid-row:1}
+.bc-oap  {grid-column:7/13;grid-row:1}
+.bc-ton  {grid-column:1/5;grid-row:2}
+.bc-nex  {grid-column:5/9;grid-row:2}
+.bc-inv  {grid-column:9/13;grid-row:2}
+.bc-inv  {background:linear-gradient(135deg,rgba(245,197,24,.07) 0%,var(--s1) 60%);border-color:var(--gold-line)}
+.bc-inv:hover{border-color:rgba(245,197,24,.38)}
+
+/* badge */
+.bdg{font-family:var(--mono);font-size:.57rem;padding:.16rem .48rem;border:1px solid;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.28rem}
+.blv{color:var(--green);border-color:rgba(22,196,127,.28);background:rgba(22,196,127,.07)}
+.bdev{color:var(--gold);border-color:var(--gold-line);background:var(--gold-dim)}
+.bbt{color:var(--blue);border-color:rgba(59,130,246,.28);background:rgba(59,130,246,.07)}
+
+/* ═══════════════════════════════════════════════
+   DOCTRINE
+═══════════════════════════════════════════════ */
+#doctrine{background:var(--s1);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1)}
+.dg{display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start}
+.dt{font-family:var(--disp);font-weight:800;font-size:clamp(1.9rem,3.5vw,3rem);line-height:1.05;letter-spacing:-.03em;color:var(--t0);margin-bottom:1.1rem}
+.di{font-size:.9375rem;color:var(--t2);line-height:1.75}
+.dl{list-style:none}
+.ditem{display:grid;grid-template-columns:28px 1fr;gap:1.25rem;align-items:start;padding:1.15rem 0;border-bottom:1px solid var(--b1)}
+.ditem:first-child{border-top:1px solid var(--b1)}
+.dn{font-family:var(--mono);font-size:.58rem;color:var(--t4);padding-top:.14rem}
+.dtit{font-family:var(--disp);font-weight:700;font-size:.9rem;color:var(--t0);margin-bottom:.2rem}
+.dsub{font-family:var(--mono);font-size:.68rem;color:var(--t3);line-height:1.6}
+
+/* ═══════════════════════════════════════════════
+   NTS VISUALIZER
+═══════════════════════════════════════════════ */
+#nts{background:var(--void)}
+.nl{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.nb{display:flex;flex-direction:column;gap:.7rem}
+.nr2{display:flex;align-items:center;gap:.9rem}
+.nsn{font-family:var(--mono);font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;width:88px;flex-shrink:0;color:var(--t3)}
+.ntr{flex:1;height:26px;background:var(--s1);border:1px solid var(--b1);border-radius:2px;overflow:hidden}
+.nf{height:100%;border-radius:2px;width:0;transition:width 1.3s cubic-bezier(.16,1,.3,1);display:flex;align-items:center;padding-left:.7rem;font-family:var(--mono);font-size:.58rem;font-weight:600;color:rgba(0,0,0,.75);white-space:nowrap}
+.nsl{font-family:var(--mono);font-size:.6rem;color:var(--t4);width:46px;flex-shrink:0;text-align:right}
+.ne{padding-left:2rem;border-left:1px solid var(--b1)}
+.nft{font-family:var(--mono);font-size:.58rem;color:var(--t4);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.4rem}
+.nfeq{font-family:var(--disp);font-weight:700;font-size:clamp(.95rem,1.8vw,1.35rem);color:var(--t1);line-height:1.5;letter-spacing:-.02em;margin-bottom:1.4rem}
+.nfeq .v{color:var(--gold)}.nfeq .o{color:var(--t3)}
+.nfc{font-family:var(--mono);font-size:.68rem;color:var(--t3);line-height:1.9}
+.nfc span{color:var(--t2)}
+
+/* ═══════════════════════════════════════════════
+   TERMINAL
+═══════════════════════════════════════════════ */
+.term{background:#000;border:1px solid var(--b1);border-radius:6px;overflow:hidden}
+.tb{background:var(--s2);padding:.62rem 1.2rem;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:.45rem}
+.tdot{width:10px;height:10px;border-radius:50%}
+.tt{font-family:var(--mono);font-size:.65rem;color:var(--t3);margin-left:.4rem}
+.te{padding:1.7rem 2.2rem;border-bottom:1px solid rgba(255,255,255,.04);transition:background .2s}
+.te:hover{background:rgba(245,197,24,.014)}
+.te:last-of-type{border-bottom:none}
+.tem{display:flex;align-items:center;gap:.9rem;font-family:var(--mono);font-size:.62rem;color:var(--t4);margin-bottom:.85rem}
+.tid{padding:.12rem .38rem;border:1px solid;border-radius:2px;font-size:.57rem}
+.trd{color:var(--red);border-color:rgba(240,68,56,.22)}
+.tgo{color:var(--gold);border-color:var(--gold-line)}
+.th{font-weight:600;font-size:.93rem;color:var(--t0);margin-bottom:.55rem}
+.tbody{font-size:.84rem;color:var(--t2);line-height:1.75;margin-bottom:.85rem}
+.tq{border-left:2px solid var(--gold);padding-left:.95rem;font-family:var(--mono);font-size:.72rem;color:var(--gold);font-style:italic;margin:.75rem 0;opacity:.88;line-height:1.6}
+.tls{display:flex;gap:1.4rem;padding-top:.7rem;border-top:1px dashed var(--b1)}
+.tlk{font-family:var(--mono);font-size:.64rem;color:var(--t4);transition:color .2s}.tlk:hover{color:var(--gold)}
+.tp{padding:.62rem 2.2rem;display:flex;align-items:center;gap:.22rem;font-family:var(--mono);font-size:.68rem;color:var(--green);border-top:1px solid var(--b1)}
+.cb{display:inline-block;width:7px;height:13px;background:var(--green);vertical-align:middle;animation:blink 1.1s step-start infinite}
+
+/* ═══════════════════════════════════════════════
+   METRICS
+═══════════════════════════════════════════════ */
+.mb{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--b1);border-radius:6px;overflow:hidden}
+.mc{padding:1.55rem 1.7rem;background:var(--s1);border-right:1px solid var(--b1);transition:background .2s}
+.mc:last-child{border-right:none}
+.mc:hover{background:var(--s2)}
+.mct{display:flex;justify-content:space-between;align-items:center;margin-bottom:.85rem}
+.mcl{font-family:var(--mono);font-size:.57rem;color:var(--t4);text-transform:uppercase;letter-spacing:.1em}
+.mcv{font-family:var(--disp);font-weight:800;font-size:1.55rem;letter-spacing:-.03em;color:var(--t0);margin-bottom:.28rem;word-break:break-all}
+.mcv.mm{font-family:var(--mono);font-size:.9rem}
+.mcs{font-family:var(--mono);font-size:.63rem;color:var(--t3)}
+.mca{color:var(--gold);transition:opacity .2s}.mca:hover{opacity:.75}
+
+/* ═══════════════════════════════════════════════
+   CODE BLOCK
+═══════════════════════════════════════════════ */
+.cs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b1);border-radius:6px;overflow:hidden;border:1px solid var(--b1)}
+.cp{background:#000}
+.cph{padding:.62rem 1.2rem;background:var(--s2);font-family:var(--mono);font-size:.58rem;border-bottom:1px solid var(--b1);color:var(--t3);display:flex;justify-content:space-between;align-items:center}
+.cpb{padding:1.4rem 1.65rem;overflow-x:auto}
+pre{font-family:var(--mono);font-size:.76rem;color:var(--t2);line-height:1.95;white-space:pre}
+.cg{color:var(--green)}.cgo{color:var(--gold)}.cd{color:var(--t4)}.cb2{color:#60a5fa}
+
+/* ═══════════════════════════════════════════════
+   CTA
+═══════════════════════════════════════════════ */
+.ctab{background:var(--s1);border:1px solid var(--b1);border-radius:8px;padding:4.5rem;text-align:center;position:relative;overflow:hidden}
+.ctab::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:55%;height:1px;background:linear-gradient(90deg,transparent,var(--gold-line),transparent)}
+.ctaglow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 55% at 50% 110%,rgba(245,197,24,.05),transparent 70%)}
+.ctaey{font-family:var(--mono);font-size:.6rem;color:var(--t4);text-transform:uppercase;letter-spacing:.16em;margin-bottom:1.4rem}
+.ctat{font-family:var(--disp);font-weight:800;font-size:clamp(1.7rem,3.8vw,2.7rem);letter-spacing:-.03em;color:var(--t0);margin-bottom:.9rem}
+.ctas{font-size:.9375rem;color:var(--t2);line-height:1.7;max-width:490px;margin:0 auto 2.4rem}
+.ctabs{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer{border-top:1px solid var(--b1);padding:3.75rem 0 2rem;position:relative;z-index:2}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:2.25rem}
+.fbn{font-family:var(--disp);font-weight:800;font-size:.9rem;color:var(--t0);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.7rem}
+.fbd{font-size:.82rem;color:var(--t3);line-height:1.7;margin-bottom:.9rem}
+.fbm{font-family:var(--mono);font-size:.63rem;color:var(--t4);line-height:1.8}
+.fct{font-family:var(--mono);font-size:.57rem;color:var(--t4);text-transform:uppercase;letter-spacing:.14em;margin-bottom:.9rem}
+.fl{list-style:none;display:flex;flex-direction:column;gap:.52rem}
+.fl a{font-size:.8rem;color:var(--t3);transition:color .2s}.fl a:hover{color:var(--t0)}
+.fb{padding-top:1.4rem;border-top:1px solid var(--b1);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.62rem;color:var(--t4)}
+.fleg{display:flex;gap:1.4rem}
+.fleg a{color:var(--t4);transition:color .2s}.fleg a:hover{color:var(--t2)}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:1100px){
+  .bc-sha{grid-column:1/13}.bc-oap{grid-column:1/13;grid-row:2}
+  .bc-ton{grid-column:1/7;grid-row:3}.bc-nex{grid-column:7/13;grid-row:3}
+  .bc-inv{grid-column:1/13;grid-row:4}
+  .dg{grid-template-columns:1fr;gap:2rem}
+  .nl{grid-template-columns:1fr}
+  .mb{grid-template-columns:1fr 1fr}
+  .mb .mc:nth-child(2){border-right:none}
+  .cs{grid-template-columns:1fr}
+  .fg{grid-template-columns:1fr;gap:2rem}
+}
+@media(max-width:768px){
+  .w{padding:0 1.25rem}
+  .ni{padding:.8rem 1.25rem}
+  .nc,.nr{display:none}
+  .hstats{grid-template-columns:1fr 1fr}
+  .hstats .sc2:nth-child(2){border-right:none}
+  .mb{grid-template-columns:1fr}
+  .mb .mc{border-right:none;border-bottom:1px solid var(--b1)}
+  .ctab{padding:2.5rem 1.4rem}
+  body{cursor:auto}
+  #cd,#cr{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="cd"></div>
+<div id="cr"></div>
+<div id="grain" aria-hidden="true"></div>
+<div id="gbg" aria-hidden="true"></div>
+
+<!-- ══════════════════════════════
+     NAV
+══════════════════════════════ -->
+<nav id="nav">
+  <div class="ni">
+    <a href="/" class="ll" data-h>
+      <div class="lm">
+        <!-- Real Orthonode logo: hexagonal network node -->
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2L29 9V23L16 30L3 23V9L16 2Z" stroke="#F5C518" stroke-width="1.1" fill="none"/>
+          <circle cx="16" cy="16" r="2.8" fill="#F5C518"/>
+          <!-- node spokes -->
+          <line x1="16" y1="9" x2="16" y2="13" stroke="#F5C518" stroke-width=".9" opacity=".45"/>
+          <line x1="16" y1="19" x2="16" y2="23" stroke="#F5C518" stroke-width=".9" opacity=".45"/>
+          <line x1="9.5" y1="12.5" x2="12.8" y2="14.4" stroke="#F5C518" stroke-width=".9" opacity=".45"/>
+          <line x1="19.2" y1="17.6" x2="22.5" y2="19.5" stroke="#F5C518" stroke-width=".9" opacity=".45"/>
+          <line x1="22.5" y1="12.5" x2="19.2" y2="14.4" stroke="#F5C518" stroke-width=".9" opacity=".45"/>
+          <line x1="12.8" y1="17.6" x2="9.5" y2="19.5" stroke="#F5C518" stroke-width=".9" opacity=".45"/>
+          <!-- outer node dots -->
+          <circle cx="16" cy="8" r="1.2" fill="#F5C518" opacity=".5"/>
+          <circle cx="16" cy="24" r="1.2" fill="#F5C518" opacity=".5"/>
+          <circle cx="8.5" cy="12" r="1.2" fill="#F5C518" opacity=".5"/>
+          <circle cx="23.5" cy="20" r="1.2" fill="#F5C518" opacity=".5"/>
+          <circle cx="23.5" cy="12" r="1.2" fill="#F5C518" opacity=".5"/>
+          <circle cx="8.5" cy="20" r="1.2" fill="#F5C518" opacity=".5"/>
+        </svg>
+      </div>
+      <div class="lw">
+        <span class="ln">Orthonode</span>
+        <span class="ls">Infrastructure Labs</span>
+      </div>
+    </a>
+
+    <div class="nc">
+      <a href="/sha.html" data-h>SHA</a>
+      <a href="/ton-sha.html" data-h>TON-SHA</a>
+      <a href="/oap.html" data-h>OAP</a>
+      <a href="/nexus.html" data-h>Nexus</a>
+      <a href="/iotex-research.html" data-h>Research</a>
+    </div>
+
+    <div class="nr">
+      <div class="tg tl"><span class="dot"></span>SHA Live</div>
+      <a href="/iotex-research.html" class="tg ta" data-h><span class="dot"></span>IoTeX Research</a>
+      <a href="https://github.com/orthonode" target="_blank" rel="noopener" class="tg td" data-h>GitHub ↗</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<section id="hero">
+  <div class="hg hg1"></div>
+  <div class="hg hg2"></div>
+  <div class="w">
+    <p class="hl">Verification of Physical Reality — INVARIANT Bittensor Subnet</p>
+
+    <h1 class="hh" id="kh" aria-label="Deterministic Trust Infrastructure">
+      <span class="hw"><span class="hwi hsolid" style="--d:.1s">DETERMINISTIC</span></span>
+      <span class="hw">
+        <span class="hwi hout" style="--d:.22s">TRUST&nbsp;</span><span class="hwi hgold" style="--d:.32s">INFRA</span><span class="hwi hout" style="--d:.32s">STRUCTURE</span>
+      </span>
+    </h1>
+
+    <div class="hsub">
+      <p>Execution is the claim. Proof is INVARIANT.</p>
+      <p class="s2">SHA_ARBITRUM_LIVE &nbsp;·&nbsp; TON-SHA_TESTNET &nbsp;·&nbsp; OAP_PUBLISHED &nbsp;·&nbsp; BITTENSOR_PHASE1</p>
+    </div>
+
+    <div class="hctas">
+      <a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" class="btn bp" data-h>View on GitHub ↗</a>
+      <a href="/sha.html" class="btn bo" data-h>Explore SHA</a>
+      <a href="/iotex-research.html" class="btn br" data-h>IoTeX Research</a>
+    </div>
+
+    <div class="hstats" id="sbar">
+      <div class="sc2"><span class="sn" data-c="3">0</span><span class="sk">Protocol Layers</span></div>
+      <div class="sc2"><span class="sn" data-c="21">0</span><span class="sk">Tests Passing</span></div>
+      <div class="sc2"><span class="sn" data-c="10000" data-s="+">0</span><span class="sk">Test Vectors</span></div>
+      <div class="sc2"><span class="sn" data-c="9000" data-s="/s">0</span><span class="sk">Rust Receipts/sec</span></div>
+    </div>
+  </div>
+
+  <div class="sc-cue">
+    <div class="scl"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="mw" aria-hidden="true"><div class="mt" id="mq"></div></div>
+
+<!-- ══════════════════════════════
+     PRODUCTS BENTO
+══════════════════════════════ -->
+<section id="products">
+  <div class="w">
+    <div class="sl">Products &amp; Protocol Layers</div>
+    <div class="bento rv">
+
+      <!-- SHA -->
+      <div class="bc bc-sha" data-h>
+        <div class="bca" style="background:#3b82f6"></div>
+        <div class="bcl"><span style="color:#3b82f6">// L1 — HARDWARE IDENTITY</span><span class="bdg blv"><span class="dot"></span>Arbitrum Live</span></div>
+        <div class="bcn">SHA — Stylus Hardware Anchor</div>
+        <div class="bcd">Cryptographic device identity binding for Arbitrum Stylus. ESP32-S3 eFuse identifiers bound to smart contracts — hardware-anchored agent IDs for DePIN miners and Bittensor nodes. Replay-safe receipts via monotonic counters. Gate-closed against Sybil, clone, and replay attacks.</div>
+        <div class="bcs" style="color:#3b82f6">→ 12,564 gas/receipt (N=50) &nbsp; 10,000+ Keccak-256 vectors &nbsp; Block #241,058,680</div>
+        <div class="bct"><span class="bt">RUST_STYLUS</span><span class="bt">ESP32_eFUSE</span><span class="bt">KECCAK-256</span><span class="bt">WASM</span><span class="bt">REPLAY_SAFE</span><span class="bt">$25K_GRANT</span></div>
+        <a href="/sha.html" class="bclink" style="color:#3b82f6" data-h>Explore SHA →</a>
+      </div>
+
+      <!-- OAP -->
+      <div class="bc bc-oap" data-h>
+        <div class="bca" style="background:#f59e0b"></div>
+        <div class="bcl"><span style="color:#f59e0b">// L3 — LIFECYCLE GOVERNANCE</span><span class="bdg bdev">In Development</span></div>
+        <div class="bcn">OAP — Integrity Governance Engine</div>
+        <div class="bcd">Deterministic motion validation and lifecycle trust governance for mobility, robotics, and Bittensor miners. Physics compliance, clone containment, adaptive anchoring. Append-only behavioral history produces NTS scores that weight Bittensor emissions permanently.</div>
+        <div class="bcs" style="color:#f59e0b">→ NTS ∈ [0,100] &nbsp; Catastrophic flag: cap @40 &nbsp; Max 2 overrides/year</div>
+        <div class="bct"><span class="bt">PHYSICS_PROFILES</span><span class="bt">TRUST_LIFECYCLE</span><span class="bt">CLONE_CONTAINMENT</span><span class="bt">ADAPTIVE_ANCHORING</span></div>
+        <a href="/oap.html" class="bclink" style="color:#f59e0b" data-h>Explore OAP →</a>
+      </div>
+
+      <!-- TON-SHA -->
+      <div class="bc bc-ton" data-h>
+        <div class="bca" style="background:#0098ea"></div>
+        <div class="bcl"><span style="color:#0098ea">// L2 — RECEIPT</span><span class="bdg blv"><span class="dot"></span>TON Live</span></div>
+        <div class="bcn">TON-SHA</div>
+        <div class="bcd">Four-gate agent trust primitive on TON. One call. Device → firmware → replay → digest. 100+ txns.</div>
+        <div class="bcs" style="color:#0098ea">→ 0.03 TON/op · Tact 1.6</div>
+        <div class="bct"><span class="bt">TACT_1.6</span><span class="bt">SHA-256</span><span class="bt">4_GATES</span></div>
+        <a href="/ton-sha.html" class="bclink" style="color:#0098ea" data-h>→</a>
+      </div>
+
+      <!-- Nexus -->
+      <div class="bc bc-nex" data-h>
+        <div class="bca" style="background:var(--green)"></div>
+        <div class="bcl"><span style="color:var(--green)">// EDGE GATEWAY</span><span class="bdg bbt">Phase 1.4.0</span></div>
+        <div class="bcn">Nexus</div>
+        <div class="bcd">Universal zero-trust edge execution. Fail-closed Sentry. 1M tx, 0% corruption, 50–60 TPS.</div>
+        <div class="bcs" style="color:var(--green)">→ SQLite WAL · ARMv8</div>
+        <div class="bct"><span class="bt">FAIL_CLOSED</span><span class="bt">CLOUDFLARE_ZT</span><span class="bt">SQLITE_WAL</span></div>
+        <a href="/nexus.html" class="bclink" style="color:var(--green)" data-h>→</a>
+      </div>
+
+      <!-- INVARIANT -->
+      <div class="bc bc-inv" data-h>
+        <div class="bca" style="background:var(--gold)"></div>
+        <div class="bcl"><span style="color:var(--gold)">// BITTENSOR SUBNET — FLAGSHIP</span><span class="bdg bdev">Phase 1 Ready</span></div>
+        <div class="bcn" style="color:var(--gold)">INVARIANT</div>
+        <div class="bcd">Produces a cryptographically-verified NTS per miner. Where every subnet scores outputs — INVARIANT proves how they were produced.</div>
+        <div class="bcs" style="color:var(--gold)">weight = quality × (NTS/100) × freshness</div>
+        <div class="bct"><span class="bt">BITTENSOR_SN</span><span class="bt">NTS_0_100</span><span class="bt">21_TESTS</span><span class="bt">RUST+PY</span></div>
+        <a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" class="bclink" style="color:var(--gold)" data-h>GitHub ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     DOCTRINE
+══════════════════════════════ -->
+<section id="doctrine">
+  <div class="w">
+    <div class="dg">
+      <div class="rv">
+        <div class="sl">Core Doctrine</div>
+        <h2 class="dt">Six laws<br>no system<br>can override.</h2>
+        <p class="di">Not design principles. Axioms. Every component of Orthonode infrastructure derives from them — and every attack we block traces to a violation of one.</p>
+      </div>
+      <ul class="dl rv d1">
+        <li class="ditem"><span class="dn">01</span><div><div class="dtit">Physics is invariant.</div><div class="dsub">Reality cannot be overridden by software.</div></div></li>
+        <li class="ditem"><span class="dn">02</span><div><div class="dtit">Identity must be device-bound.</div><div class="dsub">Silicon cannot be cloned. Software can.</div></div></li>
+        <li class="ditem"><span class="dn">03</span><div><div class="dtit">Trust must be lifecycle-governed.</div><div class="dsub">Devices degrade. Trust models must adapt.</div></div></li>
+        <li class="ditem"><span class="dn">04</span><div><div class="dtit">Integrity must be append-only.</div><div class="dsub">History cannot be rewritten.</div></div></li>
+        <li class="ditem"><span class="dn">05</span><div><div class="dtit">Redemption must be bounded.</div><div class="dsub">Unbounded reward loops create unbounded fraud.</div></div></li>
+        <li class="ditem"><span class="dn">06</span><div><div class="dtit">Verification must be deterministic.</div><div class="dsub">Probabilistic trust is not trust.</div></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     NTS VISUALIZER
+══════════════════════════════ -->
+<section id="nts">
+  <div class="w">
+    <div class="sl rv">INVARIANT Trust Score — NTS Lifecycle</div>
+    <div class="nl">
+      <div class="nb rv" id="nbars">
+        <div class="nr2"><span class="nsn" style="color:var(--t4)">Unregistered</span><div class="ntr"><div class="nf" data-w="0" style="background:var(--b2)"></div></div><span class="nsl" style="color:var(--t4)">—</span></div>
+        <div class="nr2"><span class="nsn" style="color:#60a5fa">Probation</span><div class="ntr"><div class="nf" data-w="50" style="background:#3b82f6">50.0</div></div><span class="nsl" style="color:#60a5fa">50.0</span></div>
+        <div class="nr2"><span class="nsn" style="color:var(--green)">Trusted</span><div class="ntr"><div class="nf" data-w="75" style="background:var(--green)">75.0</div></div><span class="nsl" style="color:var(--green)">70+</span></div>
+        <div class="nr2"><span class="nsn" style="color:var(--gold)">Elite</span><div class="ntr"><div class="nf" data-w="93" style="background:var(--gold)">93.0</div></div><span class="nsl" style="color:var(--gold)">90+</span></div>
+        <div class="nr2"><span class="nsn" style="color:var(--red)">Critical ⚠</span><div class="ntr"><div class="nf" data-w="38" style="background:var(--red)">≤40</div></div><span class="nsl" style="color:var(--red)">≤40 ∞</span></div>
+      </div>
+      <div class="ne rv d1">
+        <div class="nft">// emission_weight_formula</div>
+        <div class="nfeq">
+          <span class="v">weight</span> <span class="o">=</span>
+          <span class="v"> quality</span> <span class="o">×</span>
+          <span class="o">(</span><span class="v">NTS</span><span class="o">/100)</span>
+          <span class="o"> × </span><span class="v">freshness</span>
+        </div>
+        <div class="nfc">
+          NTS 90 + perfect output = <span>weight 0.90</span><br>
+          NTS 40 + perfect output = <span>weight 0.40</span><br>
+          Past behavior permanently shapes future earnings.<br><br>
+          <span>Catastrophic flag</span>: 3+ Gate-3 (replay) violations<br>
+          → Permanent NTS cap at 40.0<br>
+          → Max 2 overrides/year, logged immutably<br>
+          → Cannot be cleared programmatically
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     TERMINAL
+══════════════════════════════ -->
+<section id="research">
+  <div class="w">
+    <div class="sl rv">System Log — Latest Transmissions</div>
+    <div class="term rv d1">
+      <div class="tb">
+        <span class="tdot" style="background:var(--red);opacity:.8"></span>
+        <span class="tdot" style="background:#f59e0b;opacity:.8"></span>
+        <span class="tdot" style="background:var(--green);opacity:.8"></span>
+        <span class="tt">root@orthonode:~# cat /var/log/transmissions.log | tail -n 50</span>
+      </div>
+      <div class="te">
+        <div class="tem"><span>[2026-02-22 09:00 UTC]</span><span class="tid trd">IOTEX_EXPLOIT_ANALYSIS</span></div>
+        <p class="th">RESEARCH PUBLISHED — IoTeX Exploit: SHA Forensic Breakdown</p>
+        <p class="tbody">IoTeX lost $2M–$8.8M on Feb 21 to a private key compromise planned 6–18 months in advance. Full forensic analysis — gate-by-gate — of how SHA-gated execution stops the attack at Gate 1 before a single dollar moves.</p>
+        <div class="tq">"You can copy a key. You cannot copy silicon."</div>
+        <div class="tls"><a href="/iotex-research.html" class="tlk" data-h>Read Full Paper ↗</a></div>
+      </div>
+      <div class="te">
+        <div class="tem"><span>[2026-02-00 UTC]</span><span class="tid tgo">INVARIANT_BITTENSOR_SUBNET</span></div>
+        <p class="th">PUBLISHED — INVARIANT: Deterministic Trust Infrastructure for Bittensor</p>
+        <p class="tbody">Three-layer trust stack. Cryptographically-verified NTS per miner. 21 tests passing. Python + Rust bridge (~9,000 receipts/sec). SHA live on Arbitrum Sepolia. TON-SHA live on TON testnet. Phase 1 Bittensor complete.</p>
+        <div class="tq">"Don't trust the output. Verify the execution."</div>
+        <div class="tls">
+          <a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" class="tlk" data-h>View Repository ↗</a>
+          <a href="/sha.html" class="tlk" data-h>SHA Article ↗</a>
+        </div>
+      </div>
+      <div class="tp">root@orthonode:~#&nbsp;<span class="cb"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     METRICS
+══════════════════════════════ -->
+<section style="padding-top:0">
+  <div class="w">
+    <div class="mb rv">
+      <div class="mc">
+        <div class="mct"><span class="mcl">SHA Contract</span><span class="bdg blv">Verified</span></div>
+        <div class="mcv mm">0xd661…4615</div>
+        <div class="mcs"><a href="https://sepolia.arbiscan.io/address/0xd661a1ab8cefaacd78f4b968670c3bc438415615" target="_blank" rel="noopener" class="mca" data-h>Arbiscan ↗</a> &nbsp; Block #241M</div>
+      </div>
+      <div class="mc">
+        <div class="mct"><span class="mcl">Rust Performance</span><span class="bdg bdev">Benchmarked</span></div>
+        <div class="mcv">9,000<span style="font-size:.9rem;color:var(--t2)">/s</span></div>
+        <div class="mcs" style="font-family:var(--mono);font-size:.62rem">50–100× Python · &lt;50µs/receipt</div>
+      </div>
+      <div class="mc">
+        <div class="mct"><span class="mcl">TON-SHA</span><span class="bdg blv">Live</span></div>
+        <div class="mcv mm" style="font-size:.85rem">kQBqWso0…be6S</div>
+        <div class="mcs"><a href="https://testnet.tonscan.org/address/kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S" target="_blank" rel="noopener" class="mca" data-h>TONScan ↗</a> &nbsp; 0.03 TON/op</div>
+      </div>
+      <div class="mc">
+        <div class="mct"><span class="mcl">Grant Status</span><span class="bdg bdev">Pending</span></div>
+        <div class="mcv">$25K</div>
+        <div class="mcs" style="font-family:var(--mono);font-size:.62rem">Stylus Sprint · Feb 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     QUICKSTART
+══════════════════════════════ -->
+<section>
+  <div class="w">
+    <div class="sl rv">Quickstart — Zero Friction</div>
+    <div class="cs rv d1">
+      <div class="cp">
+        <div class="cph"><span>// Option A — Python only</span><span class="bdg blv">Works now</span></div>
+        <div class="cpb">
+<pre><span class="cd"># Zero setup — works immediately</span>
+<span class="cg">git clone</span> https://github.com/orthonode/invariant
+<span class="cg">cd</span> invariant
+<span class="cg">pip install</span> -r requirements.txt
+
+<span class="cd"># Full local test suite — no node required</span>
+<span class="cg">python</span> scripts/test_locally.py
+
+<span class="cg">pytest</span> invariant/invariant/tests/ -v
+<span class="cd"># 21 passing</span></pre>
+        </div>
+      </div>
+      <div class="cp">
+        <div class="cph" style="color:var(--gold)"><span>// Option B — Rust + Python (~100× speed)</span><span class="bdg bdev">9,000/s</span></div>
+        <div class="cpb">
+<pre><span class="cd"># Install Rust toolchain</span>
+<span class="cgo">curl</span> --proto '=https' --tlsv1.2 \
+  -sSf https://sh.rustup.rs | sh
+
+<span class="cd"># Build PyO3 extension</span>
+<span class="cgo">pip install</span> maturin
+<span class="cgo">cd</span> invariant/invariant-gates
+<span class="cgo">maturin develop</span> --features python-ext
+
+<span class="cd"># Same API. Same tests. Same zero-changes.</span>
+<span class="cgo">python</span> scripts/test_locally.py</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     CTA
+══════════════════════════════ -->
+<section style="padding-top:0">
+  <div class="w">
+    <div class="ctab rv">
+      <div class="ctaglow"></div>
+      <p class="ctaey">// orthonode_infrastructure_labs — bhopal, india — est. 2025</p>
+      <h2 class="ctat">Don't trust the output.<br>Verify the execution.</h2>
+      <p class="ctas">Three layers. One trust score. Deterministic, cryptographic, append-only. The trust infrastructure Bittensor has never had.</p>
+      <div class="ctabs">
+        <a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" class="btn bp" data-h>GitHub Repository ↗</a>
+        <a href="/sha.html" class="btn bo" data-h>SHA</a>
+        <a href="/ton-sha.html" class="btn bo" data-h>TON-SHA</a>
+        <a href="/nexus.html" class="btn bo" data-h>Nexus</a>
+        <a href="/iotex-research.html" class="btn br" data-h>IoTeX Research</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer>
+  <div class="w">
+    <div class="fg">
+      <div>
+        <div class="fbn">Orthonode Infrastructure Labs</div>
+        <p class="fbd">Building deterministic verification infrastructure for Bittensor, DePIN networks, and autonomous systems. INVARIANT is the trust layer Bittensor has never had.</p>
+        <div class="fbm">Bhopal, Madhya Pradesh, India<br>Infrastructure R&amp;D (NIC 72900) · est. 2025</div>
+      </div>
+      <div>
+        <div class="fct">Products</div>
+        <ul class="fl">
+          <li><a href="/sha.html" data-h>SHA — Hardware Attestation</a></li>
+          <li><a href="/ton-sha.html" style="color:#0098ea" data-h>TON-SHA — Agent Trust</a></li>
+          <li><a href="/oap.html" style="color:#f59e0b" data-h>OAP — Integrity Governance</a></li>
+          <li><a href="/nexus.html" style="color:var(--green)" data-h>Nexus — Edge Gateway</a></li>
+          <li><a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" style="color:var(--gold)" data-h>INVARIANT Subnet ↗</a></li>
+          <li><a href="/iotex-research.html" style="color:var(--red)" data-h>IoTeX Research ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fct">Connect</div>
+        <ul class="fl">
+          <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" data-h>X / Twitter</a></li>
+          <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener" data-h>LinkedIn</a></li>
+          <li><a href="https://github.com/orthonode" target="_blank" rel="noopener" data-h>GitHub</a></li>
+          <li><a href="https://www.reddit.com/user/Automatic_Stick_3881/" target="_blank" rel="noopener" data-h>Reddit</a></li>
+          <li><a href="mailto:infrastructure@orthonode.xyz" data-h>infrastructure@orthonode.xyz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fb">
+      <span>© 2026 Orthonode Infrastructure Labs. All Rights Reserved.</span>
+      <div class="fleg">
+        <a href="/terms.html">Terms</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/site-index.html">Site Index</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ─────────────────────────── */
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+const lerp=(a,b,t)=>a+(b-a)*t;
+(function loop(){
+  rx=lerp(rx,mx,.18);ry=lerp(ry,my,.18);
+  cd.style.cssText=`left:${mx}px;top:${my}px`;
+  cr.style.cssText=`left:${rx}px;top:${ry}px`;
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('[data-h],a,button,.bc,.mc').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));
+});
+document.addEventListener('mouseleave',()=>{cd.style.opacity=0;cr.style.opacity=0});
+document.addEventListener('mouseenter',()=>{cd.style.opacity=1;cr.style.opacity=1});
+
+/* ── NAV ────────────────────────────── */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('sc',scrollY>50),{passive:true});
+
+/* ── REVEAL ─────────────────────────── */
+const ro=new IntersectionObserver((entries,obs)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}});
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+/* ── COUNTERS ───────────────────────── */
+function cnt(el){
+  const target=+el.dataset.c,suffix=el.dataset.s||'';
+  const dur=target>1000?1600:850;
+  let t0=null;
+  (function tick(ts){
+    if(!t0)t0=ts;
+    const p=Math.min((ts-t0)/dur,1);
+    const ease=1-Math.pow(1-p,3);
+    el.textContent=Math.round(ease*target).toLocaleString()+suffix;
+    if(p<1)requestAnimationFrame(tick);
+  })(performance.now());
+}
+new IntersectionObserver(([e],obs)=>{
+  if(e.isIntersecting){document.querySelectorAll('[data-c]').forEach(cnt);obs.disconnect()}
+},{threshold:.5}).observe(document.getElementById('sbar'));
+
+/* ── NTS BARS ───────────────────────── */
+new IntersectionObserver(([e],obs)=>{
+  if(e.isIntersecting){
+    document.querySelectorAll('.nf[data-w]').forEach(el=>{
+      setTimeout(()=>el.style.width=el.dataset.w+'%',200);
+    });obs.disconnect();
+  }
+},{threshold:.3}).observe(document.getElementById('nbars'));
+
+/* ── MARQUEE ────────────────────────── */
+const items=['INVARIANT','BITTENSOR SUBNET','LAYER-1 IDENTITY','FOUR-GATE RECEIPT','OAP ENGINE','SHA-256','KECCAK-256','RUST + PYTHON','ARBITRUM STYLUS','TON BLOCKCHAIN','NTS SCORE 0–100','EMISSION WEIGHTING','SYBIL RESISTANCE','REPLAY PROTECTION','DETERMINISTIC VERIFICATION','APPEND-ONLY LEDGER','ZERO TRUST','DEPIN NODES'];
+const mq=document.getElementById('mq');
+[...items,...items].forEach(t=>{const s=document.createElement('span');s.className='mi';s.innerHTML=`<span class="md"></span>${t}`;mq.appendChild(s)});
+
+/* ── KINETIC HEADLINE PARALLAX ─────── */
+const kh=document.getElementById('kh');
+window.addEventListener('scroll',()=>{
+  const p=Math.min(scrollY/350,1);
+  kh.style.opacity=1-p*.3;
+  kh.style.transform=`translateY(${p*-18}px)`;
+},{passive:true});
+</script>
+</body>
+</html>

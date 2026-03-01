@@ -424,6 +424,7 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:5rem 0 2.5rem
   .hh{font-size:clamp(2.8rem,8vw,4.5rem)}
   .fb{flex-direction:column;gap:1rem;text-align:center}
 }
+.nav-logo-img{width:28px;height:28px;border-radius:5px;object-fit:cover;flex-shrink:0;display:block}
 </style>
 </head>
 <body>
@@ -445,10 +446,7 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:5rem 0 2.5rem
   <div class="sg-ring sg-ring-2"></div>
   <div class="sg-ring sg-ring-3"></div>
   <img class="sg-logo"
-       src="https://github.com/orthonode/orthonode/blob/main/logo.png?raw=true"
-       alt="Orthonode"
-       width="64" height="64"
-       onerror="this.style.display='none'">
+       src="/site-logo.png" alt="Orthonode" width="64" height="64">
   <div class="sg-title">Orthonode Infrastructure Labs</div>
   <div class="sg-status" id="sg-status">// ESTABLISHING_SECURE_UPLINK</div>
   <div class="cf-turnstile"
@@ -472,11 +470,7 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:5rem 0 2.5rem
 <nav id="nav">
   <div class="ni">
     <a href="/" class="ll" data-h>
-      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="6" y="6" width="28" height="28" fill="currentColor" opacity=".75"/>
-        <rect x="14" y="10" width="3" height="20" fill="var(--gold)"/>
-        <rect x="23" y="10" width="3" height="20" fill="var(--gold)"/>
-      </svg>
+      <img src="/site-logo.png" alt="Orthonode" class="nav-logo-img" width="28" height="28">
       <div class="lw">
         <div>Orthonode</div>
         <div class="ls">Infrastructure Labs</div>
