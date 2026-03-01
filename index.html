@@ -1,1379 +1,1646 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<!-- ══ SEO ══════════════════════════════════════════ -->
-<title>Orthonode Infrastructure Labs | Hardware Verification Primitives for DePIN &amp; Arbitrum Stylus | Bhopal, India</title>
-<meta name="title" content="Orthonode Infrastructure Labs | SHA, TON-SHA, OAP — Physical Verification Infrastructure">
-<meta name="description" content="Orthonode Infrastructure Labs builds hardware verification primitives for DePIN and autonomous systems. SHA: first Sybil resistance primitive for Arbitrum Stylus (12,564 gas/receipt). TON-SHA: agent trust layer for TON. OAP: deterministic telemetry governance. Based in Bhopal, MP, India.">
-<meta name="keywords" content="Orthonode Infrastructure Labs, Arbitrum Stylus DePIN, hardware Sybil resistance, ESP32 eFuse blockchain, SHA hardware anchor, TON-SHA agent trust, OAP telemetry governance, Rust WASM smart contract, hardware identity verification, DePIN infrastructure India, blockchain hardware attestation, Bhopal India blockchain startup, Arhant Barmate, INVARIANT Bittensor subnet">
-<meta name="author" content="Orthonode Infrastructure Labs — Bhopal, Madhya Pradesh, India">
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<link rel="canonical" href="https://orthonode.xyz/">
+    <title>Orthonode Infrastructure Labs | Hardware Verification Primitives for DePIN &amp; Arbitrum Stylus | Bhopal, India</title>
+    <meta name="description" content="Orthonode Infrastructure Labs builds hardware verification primitives for DePIN and autonomous systems. SHA: first Sybil resistance primitive for Arbitrum Stylus (12,564 gas/receipt). TON-SHA: agent trust layer for TON. OAP: deterministic telemetry governance. Based in Bhopal, MP, India.">
+    <meta name="keywords" content="Orthonode Infrastructure Labs, Arbitrum Stylus DePIN, hardware Sybil resistance, ESP32 eFuse blockchain, SHA hardware anchor, TON-SHA agent trust, OAP telemetry governance, Rust WASM smart contract, hardware identity verification, DePIN infrastructure India, blockchain hardware attestation, Bhopal India blockchain startup, Arhant Barmate, INVARIANT Bittensor subnet">
+    <meta name="author" content="Orthonode Infrastructure Labs — Bhopal, Madhya Pradesh, India">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://orthonode.xyz/">
 
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
-<meta name="geo.region" content="IN-MP">
-<meta name="geo.placename" content="Bhopal">
-<meta name="geo.position" content="23.2599;77.4126">
-<meta name="ICBM" content="23.2599, 77.4126">
+    <meta name="geo.region" content="IN-MP">
+    <meta name="geo.placename" content="Bhopal">
+    <meta name="geo.position" content="23.2599;77.4126">
+    <meta name="ICBM" content="23.2599, 77.4126">
 
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://orthonode.xyz/">
-<meta property="og:title" content="Orthonode Labs | Hardware Trust Infrastructure for Arbitrum Stylus">
-<meta property="og:description" content="Production-grade hardware verification for DePIN. 12,564 gas verification on Arbitrum Stylus. 10x efficiency vs Solidity. Testnet deployed.">
-<meta property="og:image" content="https://orthonode.xyz/banner.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:site_name" content="Orthonode Infrastructure Labs">
-<meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orthonode.xyz/">
+    <meta property="og:title" content="Orthonode Infrastructure Labs | Hardware Trust Infrastructure">
+    <meta property="og:description" content="Production-grade hardware verification for DePIN. 12,564 gas on Arbitrum Stylus. SHA · OAP · Nexus · TON-SHA · INVARIANT · TIX-DAO.">
+    <meta property="og:image" content="https://orthonode.xyz/banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Orthonode Infrastructure Labs">
+    <meta property="og:locale" content="en_US">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://orthonode.xyz/">
-<meta name="twitter:title" content="Orthonode Labs | Stylus Hardware Anchor">
-<meta name="twitter:description" content="Hardware verification infrastructure for Arbitrum DePIN. 10x gas efficiency. Testnet live.">
-<meta name="twitter:image" content="https://orthonode.xyz/banner.png">
-<meta name="twitter:site" content="@OrthonodeSys">
-<meta name="twitter:creator" content="@OrthonodeSys">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://orthonode.xyz/">
+    <meta name="twitter:title" content="Orthonode Infrastructure Labs">
+    <meta name="twitter:description" content="Hardware verification infrastructure for DePIN. SHA · TON-SHA · INVARIANT · OAP · Nexus · TIX-DAO.">
+    <meta name="twitter:image" content="https://orthonode.xyz/banner.png">
+    <meta name="twitter:site" content="@OrthonodeSys">
+    <meta name="twitter:creator" content="@OrthonodeSys">
 
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Orthonode Infrastructure Labs","legalName":"Orthonode Infrastructure Labs","url":"https://orthonode.xyz","logo":"https://orthonode.xyz/logo-512.png","foundingDate":"2025","founders":[{"@type":"Person","name":"Arhant Barmate","jobTitle":"Lead Engineer","sameAs":["https://www.linkedin.com/in/arhant-barmate-5710163aa/","https://github.com/orthonode"]}],"address":{"@type":"PostalAddress","addressLocality":"Bhopal","addressRegion":"Madhya Pradesh","postalCode":"462001","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":23.2599,"longitude":77.4126},"contactPoint":{"@type":"ContactPoint","contactType":"Infrastructure Inquiry","email":"infrastructure@orthonode.xyz"},"sameAs":["https://twitter.com/OrthonodeSys","https://github.com/orthonode","https://www.linkedin.com/in/arhant-barmate-5710163aa/","https://www.reddit.com/user/Automatic_Stick_3881/"]}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Stylus Hardware Anchor (SHA)","applicationCategory":"DeveloperApplication","operatingSystem":"Arbitrum Stylus","offers":{"@type":"Offer","price":0,"priceCurrency":"USD"},"description":"Hardware verification protocol for Arbitrum Stylus. Binds ESP32 eFuse identities to smart contracts with 12,564 gas efficiency.","softwareVersion":"1.0.0","programmingLanguage":"Rust","codeRepository":"https://github.com/orthonode/Stylus-Hardware-Anchor"}
-</script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Orthonode Infrastructure Labs",
+        "url": "https://orthonode.xyz",
+        "logo": "https://orthonode.xyz/site-logo.png",
+        "foundingDate": "2025",
+        "founders": [{ "@type": "Person", "name": "Arhant Barmate", "jobTitle": "Lead Engineer" }],
+        "address": { "@type": "PostalAddress", "addressLocality": "Bhopal", "addressRegion": "Madhya Pradesh", "addressCountry": "IN" },
+        "sameAs": ["https://twitter.com/OrthonodeSys", "https://github.com/orthonode"]
+    }
+    </script>
 
-<meta name="theme-color" content="#050505">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#050505">
+    <link rel="icon" type="image/png" sizes="96x96" href="/site-logo.png">
+    <link rel="apple-touch-icon" href="/site-logo.png">
+    <link rel="shortcut icon" href="/site-logo.png">
 
-<link rel="icon" type="image/png" sizes="96x96" href="https://orthonode.xyz/site-logo.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://orthonode.xyz/site-logo.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://orthonode.xyz/site-logo.png">
-<link rel="apple-touch-icon" href="https://orthonode.xyz/site-logo.png">
-<link rel="shortcut icon" href="https://orthonode.xyz/site-logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=DM+Sans:ital,opsz,wght@0,9..40,200..700;1,9..40,200..400&family=JetBrains+Mono:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #050505;
+            --bg-secondary: #0a0a0a;
+            --bg-elevated: #111111;
+            --border-subtle: #1a1a1a;
+            --border-primary: #262626;
+            --border-bright: #333333;
 
-<style>
-/* ══════════════════════════════════════════════════════
-   ORTHONODE — 2026 DESIGN SYSTEM
-   Award-Winning Dark Luxury + Hardware Infrastructure
-══════════════════════════════════════════════════════ */
-:root {
-  --void:#000;--bg:#050505;--s1:#0d0d0d;--s2:#141414;--s3:#1c1c1c;
-  --b1:rgba(255,255,255,.06);--b2:rgba(255,255,255,.1);--b3:rgba(255,255,255,.16);
-  --t0:#fff;--t1:#e8e8e8;--t2:#a3a3a3;--t3:#555;--t4:#2a2a2a;
-  --gold:#f5c518;--gold2:#fde047;--gold3:#b8960e;
-  --gold-dim:rgba(245,197,24,.09);--gold-glow:rgba(245,197,24,.22);--gold-line:rgba(245,197,24,.18);
-  --blue:#28a0f0;--blue-dim:rgba(40,160,240,.08);--blue-line:rgba(40,160,240,.2);
-  --teal:#0ecfb1;--ton:#0098ea;--green:#16c47f;--red:#f04438;--purple:#9945ff;
-  --r:3px;--r2:6px;--r3:12px;--r4:20px;
-  --mono:'JetBrains Mono',monospace;--sans:'DM Sans',sans-serif;--disp:'Syne',sans-serif;
-  --ease-spring:cubic-bezier(.16,1,.3,1);--ease-out:cubic-bezier(.22,1,.36,1);
-}
+            --text-primary: #ffffff;
+            --text-secondary: #ededed;
+            --text-tertiary: #a3a3a3;
+            --text-dim: #737373;
+            --text-muted: #525252;
 
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--t1);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none}
-::selection{background:var(--gold-dim);color:var(--t0)}
-a{color:inherit;text-decoration:none}
+            --accent-gold: #f5c518;
+            --accent-gold-glow: rgba(245, 197, 24, 0.25);
+            --accent-gold-dim: rgba(245, 197, 24, 0.08);
+            --accent-gold-line: rgba(245, 197, 24, 0.2);
 
-/* ══ CUSTOM CURSOR ═══════════════════════════════════ */
-#cd{position:fixed;top:0;left:0;z-index:9999;width:8px;height:8px;border-radius:50%;background:var(--gold);pointer-events:none;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .15s,height .15s}
-#cr{position:fixed;top:0;left:0;z-index:9998;width:36px;height:36px;border-radius:50%;border:1px solid rgba(245,197,24,.4);pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s,opacity .3s}
-body.ch #cd{width:16px;height:16px}
-body.ch #cr{width:60px;height:60px;border-color:rgba(245,197,24,.65)}
-body.click #cd{width:6px;height:6px}
+            --accent-blue: #28a0f0;
+            --accent-green: #22c55e;
+            --accent-amber: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-purple: #9945ff;
+            --accent-ton: #0098ea;
+            --accent-teal: #00d084;
 
-/* ══ ATMOSPHERE ══════════════════════════════════════ */
-#grain{position:fixed;inset:-50%;z-index:9990;width:200%;height:200%;pointer-events:none;opacity:.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain .7s steps(1) infinite}
-@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-2%,-3%)}40%{transform:translate(3%,1%)}60%{transform:translate(-1%,4%)}80%{transform:translate(2%,-2%)}to{transform:translate(-3%,2%)}}
+            --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+            --font-display: 'Space Grotesk', sans-serif;
 
-#gbg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);background-size:80px 80px}
+            --shadow-glow-gold: 0 0 20px rgba(245, 197, 24, 0.15);
+        }
 
-/* ══ PARTICLE CANVAS ═════════════════════════════════ */
-#cnvs{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.7}
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ══ SECURITY GATE ═══════════════════════════════════ */
-#sg{position:fixed;inset:0;z-index:9997;background:var(--void);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;transition:opacity .8s var(--ease-out),transform .8s var(--ease-out)}
-#sg.out{opacity:0;transform:scale(.97);pointer-events:none}
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
-.sg-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:320px;height:320px;border-radius:50%;border:1px solid rgba(245,197,24,.06);animation:ring-pulse 4s ease-in-out infinite}
-.sg-ring-2{width:480px;height:480px;border-color:rgba(245,197,24,.03);animation-delay:1s;animation-duration:5s}
-.sg-ring-3{width:640px;height:640px;border-color:rgba(245,197,24,.015);animation-delay:2s;animation-duration:6s}
-@keyframes ring-pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1}50%{transform:translate(-50%,-50%) scale(1.06);opacity:.5}}
+        body {
+            background: var(--bg-primary);
+            color: var(--text-secondary);
+            font-family: var(--font-ui);
+            font-size: 16px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-.sg-logo{width:64px;height:64px;margin-bottom:1.75rem;position:relative;z-index:1;filter:drop-shadow(0 0 30px rgba(245,197,24,.3));animation:logo-float 4s ease-in-out infinite}
-@keyframes logo-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image:
+                linear-gradient(var(--border-subtle) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-.sg-title{font-family:var(--mono);font-size:.65rem;color:var(--t3);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.5rem;position:relative;z-index:1;animation:fadein .8s var(--ease-spring) .2s both}
-.sg-status{font-family:var(--mono);font-size:.75rem;color:var(--gold);letter-spacing:.08em;margin-bottom:2rem;position:relative;z-index:1;animation:fadein .8s var(--ease-spring) .4s both}
-.sg-dots{display:flex;gap:6px;justify-content:center;margin-top:.75rem;position:relative;z-index:1}
-.sg-dot{width:4px;height:4px;border-radius:50%;background:var(--t4);animation:dot-seq 1.4s ease-in-out infinite}
-.sg-dot:nth-child(2){animation-delay:.2s}.sg-dot:nth-child(3){animation-delay:.4s}
-@keyframes dot-seq{0%,80%,100%{background:var(--t4)}40%{background:var(--gold)}}
+        a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: var(--text-primary); }
 
-.cf-turnstile{position:relative;z-index:1;animation:fadein .8s var(--ease-spring) .6s both}
+        ::selection { background: var(--accent-gold-glow); color: var(--text-primary); }
 
-/* ══ LAYOUT ══════════════════════════════════════════ */
-#app-content{display:none;opacity:0;transition:opacity .8s var(--ease-out)}
-.w{max-width:1360px;margin:0 auto;padding:0 2rem;position:relative;z-index:2}
-section{padding:6rem 0;position:relative;z-index:2}
-.sl{font-family:var(--mono);font-size:.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:.18em;border-bottom:1px solid var(--b1);padding-bottom:.9rem;margin-bottom:2.5rem;display:flex;align-items:center;gap:.45rem}
-.sl::before{content:'//';color:var(--gold);opacity:.5}
+        /* ── Security Gate ─────────────────────────────────── */
+        #security-gate {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: var(--bg-primary);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
 
-/* ══ REVEAL ══════════════════════════════════════════ */
-.rv{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease-spring),transform .75s var(--ease-spring)}
-.rv.in{opacity:1;transform:none}
-.d1{transition-delay:.08s}.d2{transition-delay:.18s}.d3{transition-delay:.28s}.d4{transition-delay:.38s}
+        #security-gate img {
+            width: 72px;
+            height: 72px;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            filter: drop-shadow(0 0 20px rgba(245, 197, 24, 0.2));
+        }
 
-/* ══ NAV ═════════════════════════════════════════════ */
-#nav{position:fixed;top:0;left:0;right:0;z-index:800;transition:background .4s,border-color .4s}
-#nav.sc{background:rgba(5,5,5,.88);backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%);border-bottom:1px solid var(--b1)}
-#nav.sc::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,197,24,.35),rgba(40,160,240,.25),transparent)}
-.ni{max-width:1360px;margin:0 auto;padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between}
+        #security-gate h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
 
-.ll{display:flex;align-items:center;gap:.6rem;font-family:var(--disp);font-weight:800;font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;color:var(--t0)}
-.ll svg{width:28px;height:28px;flex-shrink:0}
-.lw{display:flex;flex-direction:column;gap:0;line-height:1}
-.ls{font-family:var(--mono);font-size:.44rem;font-weight:400;color:var(--t3);letter-spacing:.16em;text-transform:uppercase;margin-top:2px}
+        #security-gate p {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            letter-spacing: 0.08em;
+            margin-bottom: 2rem;
+        }
 
-.nc{display:flex;gap:2rem;font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--t3)}
-.nc a{transition:color .2s}.nc a:hover{color:var(--t0)}
-.nr{display:flex;align-items:center;gap:.5rem}
+        #app-content { display: none; opacity: 0; transition: opacity 0.5s ease-in; }
 
-.tg{display:inline-flex;align-items:center;gap:.3rem;font-family:var(--mono);font-size:.58rem;padding:.2rem .55rem;border:1px solid;border-radius:var(--r);letter-spacing:.06em;text-transform:uppercase;transition:all .2s;cursor:none}
-.tl{color:var(--green);border-color:rgba(22,196,127,.25);background:rgba(22,196,127,.05)}
-.tgold{color:var(--gold);border-color:var(--gold-line);background:var(--gold-dim)}
-.td{color:var(--t3);border-color:var(--b1)}.td:hover{color:var(--t1);border-color:var(--b2)}
-.dot-live{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+        /* ── Header ────────────────────────────────────────── */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(12px) saturate(180%);
+            background: rgba(5, 5, 5, 0.88);
+            border-bottom: 1px solid var(--border-primary);
+        }
 
-/* ══ HERO ════════════════════════════════════════════ */
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:7rem 0 5rem;position:relative;overflow:hidden}
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0.875rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
 
-/* Aurora background blobs */
-.aurora{position:absolute;pointer-events:none;border-radius:50%;filter:blur(100px);z-index:1;will-change:transform}
-.aurora-1{width:800px;height:500px;top:-5%;left:-10%;background:radial-gradient(ellipse,rgba(245,197,24,.04) 0%,transparent 70%);animation:aurora-drift-1 18s ease-in-out infinite alternate}
-.aurora-2{width:500px;height:350px;top:30%;right:-8%;background:radial-gradient(ellipse,rgba(40,160,240,.045) 0%,transparent 70%);animation:aurora-drift-2 22s ease-in-out infinite alternate}
-.aurora-3{width:400px;height:300px;bottom:5%;left:20%;background:radial-gradient(ellipse,rgba(14,207,177,.03) 0%,transparent 70%);animation:aurora-drift-3 15s ease-in-out infinite alternate}
-@keyframes aurora-drift-1{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,-25px) scale(1.12)}}
-@keyframes aurora-drift-2{from{transform:translate(0,0)}to{transform:translate(-30px,20px) scale(.92)}}
-@keyframes aurora-drift-3{from{transform:translate(0,0)}to{transform:translate(20px,-15px) scale(1.08)}}
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
 
-.hl{font-family:var(--mono);font-size:.65rem;color:var(--t3);text-transform:uppercase;letter-spacing:.18em;margin-bottom:1.75rem;position:relative;z-index:2;animation:fadein .8s var(--ease-spring) .1s both;display:flex;align-items:center;gap:.5rem}
-.hl::before{content:'//';color:var(--gold);opacity:.55}
-@keyframes fadein{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-primary);
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: -0.01em;
+        }
 
-/* ── Kinetic headline ─────────────────── */
-.hh{font-family:var(--disp);font-weight:800;font-size:clamp(2.8rem,8vw,7.5rem);line-height:.86;letter-spacing:-.045em;text-transform:uppercase;position:relative;z-index:2;margin-bottom:2rem}
-.hw{display:block;overflow:hidden}
-.hwi{display:block;animation:word-up 1s var(--ease-spring) var(--d,0s) both}
-@keyframes word-up{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+        .nav-brand img {
+            width: 26px;
+            height: 26px;
+            border-radius: 5px;
+        }
 
-/* text styles for headline words */
-.hsolid{background:linear-gradient(135deg,#fff 0%,#c8c8c8 45%,#888 85%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hout{-webkit-text-stroke:2px rgba(255,255,255,.38);-webkit-text-fill-color:rgba(255,255,255,.06);color:rgba(255,255,255,.06)}
-.hgold{background:linear-gradient(90deg,var(--gold) 0%,var(--gold2) 40%,var(--gold) 80%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gold-shimmer 3.5s linear infinite}
-@keyframes gold-shimmer{0%{background-position:0% center}to{background-position:200% center}}
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+        }
 
-/* ── Subline ───────────────────────────── */
-.hsub{max-width:600px;position:relative;z-index:2;border-left:2px solid var(--gold-line);padding-left:1.25rem;margin-bottom:2.5rem;animation:fadein .8s var(--ease-spring) .5s both}
-.hsub p{font-size:1.0625rem;color:var(--t1);line-height:1.65;margin-bottom:.35rem}
-.hsub .s2{font-family:var(--mono);font-size:.66rem;color:var(--t3);letter-spacing:.04em}
+        .nav-center a {
+            padding: 0.4rem 0.75rem;
+            color: var(--text-dim);
+            border-radius: 4px;
+            transition: color 0.2s, background 0.2s;
+            letter-spacing: 0.04em;
+        }
 
-/* ── Hero CTAs ─────────────────────────── */
-.hctas{display:flex;gap:.75rem;flex-wrap:wrap;position:relative;z-index:2;animation:fadein .8s var(--ease-spring) .65s both}
+        .nav-center a:hover { color: var(--text-primary); background: var(--bg-elevated); }
 
-/* ── Scroll cue ─────────────────────────── */
-.sc-cue{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.54rem;color:var(--t3);letter-spacing:.14em;text-transform:uppercase;z-index:2;animation:fadein 1s .9s both}
-.sc-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(245,197,24,.5),transparent);animation:sc-breathe 2s ease-in-out infinite}
-@keyframes sc-breathe{0%,100%{opacity:.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(.65)}}
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+        }
 
-/* ── Stats bar ──────────────────────────── */
-.hstats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--b1);margin-top:4rem;position:relative;z-index:2;animation:fadein .8s var(--ease-spring) .75s both;background:rgba(5,5,5,.7);backdrop-filter:blur(12px)}
-.hsc{padding:1.3rem 1.6rem;border-right:1px solid var(--b1);position:relative;overflow:hidden;transition:background .25s}
-.hsc:last-child{border-right:none}
-.hsc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-line),transparent)}
-.hsc:hover{background:rgba(245,197,24,.025)}
-.sn{font-family:var(--disp);font-weight:800;font-size:clamp(1.4rem,2.2vw,2rem);color:var(--gold);letter-spacing:-.04em;display:block;margin-bottom:.2rem}
-.sk{font-family:var(--mono);font-size:.56rem;color:var(--t3);text-transform:uppercase;letter-spacing:.1em}
+        .status-live {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-dim);
+            padding: 0.35rem 0.65rem;
+            border: 1px solid var(--border-primary);
+            border-radius: 4px;
+        }
 
-/* ══ BUTTONS ══════════════════════════════════════════ */
-.btn{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.72rem;font-weight:600;padding:.8rem 1.5rem;border-radius:var(--r);letter-spacing:.06em;text-transform:uppercase;border:1px solid transparent;transition:all .2s var(--ease-out);cursor:none;position:relative;overflow:hidden}
-.btn::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.06),transparent);opacity:0;transition:opacity .2s}
-.btn:hover::after{opacity:1}
+        .status-dot {
+            width: 6px; height: 6px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+            animation: pulse-dot 2s ease infinite;
+        }
 
-.btn-gold{background:var(--gold);color:#000;border-color:var(--gold)}
-.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 30px var(--gold-glow)}
-.btn-outline{background:transparent;color:var(--t1);border-color:var(--b2)}
-.btn-outline:hover{border-color:var(--b3);color:var(--t0);transform:translateY(-2px)}
-.btn-danger{background:transparent;color:var(--red);border-color:rgba(240,68,56,.25)}
-.btn-danger:hover{background:rgba(240,68,56,.06)}
-.btn-blue{background:rgba(40,160,240,.1);color:var(--blue);border-color:var(--blue-line)}
-.btn-blue:hover{background:rgba(40,160,240,.18);transform:translateY(-2px)}
+        @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-/* ══ MARQUEE ══════════════════════════════════════════ */
-.mw{border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);overflow:hidden;padding:.85rem 0;background:var(--s1);position:relative;z-index:2}
-.mt{display:flex;gap:2.5rem;width:max-content;animation:marquee 60s linear infinite}
-.mt:hover{animation-play-state:paused}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.mi{font-family:var(--mono);font-size:.58rem;color:var(--t3);text-transform:uppercase;letter-spacing:.14em;white-space:nowrap;display:flex;align-items:center;gap:.5rem}
-.md{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.55;flex-shrink:0}
+        .nav-alert {
+            padding: 0.35rem 0.65rem;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 4px;
+            color: var(--accent-red);
+            transition: background 0.2s;
+        }
 
-/* ══ BENTO GRID ══════════════════════════════════════ */
-#products{padding-top:5rem}
-.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:auto;gap:10px}
-.bc{background:linear-gradient(155deg,rgba(255,255,255,.045) 0%,rgba(255,255,255,.008) 100%),var(--s1);border:1px solid rgba(255,255,255,.1);border-radius:var(--r2);padding:2.25rem;position:relative;overflow:hidden;transition:background .35s,border-color .35s,box-shadow .35s;transform-style:preserve-3d;will-change:transform;box-shadow:0 2px 24px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.1)}
-.bc::before{content:'';position:absolute;top:0;left:0;width:62%;height:58%;background:radial-gradient(ellipse at 0% 0%,rgba(255,255,255,.07),transparent 70%);pointer-events:none}
-.bc:hover{background:linear-gradient(155deg,rgba(255,255,255,.065) 0%,rgba(255,255,255,.013) 100%),var(--s2);border-color:rgba(255,255,255,.19);box-shadow:0 30px 76px rgba(0,0,0,.72),0 0 80px rgba(245,197,24,.08),inset 0 1px 0 rgba(255,255,255,.16)}
-.bca{position:absolute;top:0;left:0;right:0;height:2px;opacity:.6;transition:opacity .35s;z-index:1}
-.bc:hover .bca{opacity:1}
+        .nav-alert:hover { background: rgba(239, 68, 68, 0.06); color: var(--accent-red); }
 
-.bc-sha{grid-column:1/7}
-.bc-oap{grid-column:7/13}
-.bc-ton{grid-column:1/5}
-.bc-nex{grid-column:5/9}
-.bc-inv{grid-column:9/13;border-color:rgba(245,197,24,.22)}
-.bc-inv:hover{border-color:rgba(245,197,24,.42);box-shadow:0 30px 76px rgba(0,0,0,.72),0 0 90px rgba(245,197,24,.14),inset 0 1px 0 rgba(255,255,255,.16)}
-.bc-tix{grid-column:1/6}
-.bc-iotex{grid-column:6/13}
+        .nav-gh {
+            padding: 0.35rem 0.65rem;
+            border: 1px solid var(--border-primary);
+            border-radius: 4px;
+            color: var(--text-dim);
+        }
 
-.bcl{font-family:var(--mono);font-size:.56rem;text-transform:uppercase;letter-spacing:.14em;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:.5rem}
-.bcn{font-family:var(--disp);font-weight:800;font-size:clamp(1.4rem,2.2vw,1.9rem);letter-spacing:-.03em;color:var(--t0);line-height:1;margin-bottom:.5rem}
-.bcd{font-size:.82rem;color:var(--t2);line-height:1.7;margin-bottom:1.1rem}
-.bct{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.75rem}
-.bt{font-family:var(--mono);font-size:.55rem;padding:.2rem .52rem;border:1px solid rgba(255,255,255,.1);border-radius:3px;color:rgba(255,255,255,.44);background:rgba(255,255,255,.045)}
-.bclink{position:absolute;bottom:1.4rem;right:1.6rem;font-family:var(--mono);font-size:.63rem;opacity:.5;transition:opacity .2s}
-.bc:hover .bclink{opacity:1}
+        .nav-gh:hover { color: var(--text-primary); border-color: var(--border-bright); }
 
-/* ── Badges ── */
-.bdg{font-family:var(--mono);font-size:.55rem;padding:.15rem .45rem;border:1px solid;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.25rem}
-.blv{color:var(--green);border-color:rgba(22,196,127,.25);background:rgba(22,196,127,.06)}
-.bdev{color:var(--gold);border-color:var(--gold-line);background:var(--gold-dim)}
-.bbt{color:var(--blue);border-color:rgba(40,160,240,.25);background:rgba(40,160,240,.06)}
-.bton{color:var(--ton);border-color:rgba(0,152,234,.25);background:rgba(0,152,234,.06)}
-.bpur{color:var(--purple);border-color:rgba(153,69,255,.25);background:rgba(153,69,255,.06)}
-.brd{color:var(--red);border-color:rgba(240,68,56,.25);background:rgba(240,68,56,.06)}
+        /* ── Container ─────────────────────────────────────── */
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
 
-/* ══ DOCTRINE ════════════════════════════════════════ */
-#doctrine{background:var(--s1);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1)}
-.dg{display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start}
-.dt{font-family:var(--disp);font-weight:800;font-size:clamp(2rem,3.5vw,3.2rem);line-height:1.05;letter-spacing:-.035em;color:var(--t0);margin-bottom:1rem}
-.di{font-size:.9375rem;color:var(--t2);line-height:1.75;margin-bottom:2rem}
-.dl{list-style:none}
-.dl li{padding:.5rem 0;border-bottom:1px solid var(--b1);display:flex;align-items:flex-start;gap:.65rem;font-size:.875rem;color:var(--t2)}
-.dl li::before{content:'→';color:var(--gold);opacity:.6;flex-shrink:0;margin-top:.1rem}
-.dl li:last-child{border-bottom:none}
-.dl strong{color:var(--t0)}
+        /* ── Section Header ────────────────────────────────── */
+        .section-header {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-primary);
+        }
 
-/* ══ SYSTEMS ═════════════════════════════════════════ */
-.rg{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:3rem}
-.rs{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r2);padding:2.4rem;display:flex;flex-direction:column;gap:1.1rem;transition:border-color .3s}
-.rs:hover{border-color:var(--b2)}
-.rh{font-family:var(--mono);font-size:.63rem;text-transform:uppercase;letter-spacing:.12em;color:var(--t3);display:flex;align-items:center;gap:.35rem}
-.rh::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.7}
-.ri{border:1px solid var(--b1);border-radius:var(--r);padding:1.4rem;background:rgba(0,0,0,.35);font-family:var(--mono);font-size:.67rem;color:var(--t2);line-height:1.65;word-break:break-all}
-.nf{height:5px;background:var(--gold);border-radius:2px;width:0;transition:width .8s var(--ease-spring);opacity:.8}
+        section { padding: 5rem 0; }
 
-/* ══ METRICS ══════════════════════════════════════════ */
-#mbar{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;margin-top:3rem}
-.mc{background:var(--s2);border:1px solid var(--b1);border-radius:var(--r2);padding:1.85rem;display:flex;flex-direction:column;position:relative;overflow:hidden;cursor:none;transition:all .25s var(--ease-out)}
-.mc:hover{background:var(--s3);border-color:var(--b2);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.5)}
-.mc::before{content:'';position:absolute;top:-1px;left:-1px;right:-1px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-line),transparent);opacity:.4;transition:opacity .25s}
-.mc:hover::before{opacity:1}
-.mct{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.65rem}
-.mcl{font-family:var(--mono);font-size:.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:.1em}
-.mcv{font-family:var(--disp);font-weight:800;font-size:clamp(1.5rem,2.5vw,2.2rem);color:var(--t0);letter-spacing:-.04em;line-height:1;margin-bottom:.3rem}
-.mcv.mm{font-family:var(--mono);font-size:.8rem;font-weight:400;color:var(--t2);letter-spacing:.02em}
-.mcs{font-size:.72rem;color:var(--t3);line-height:1.5;border-top:1px solid var(--b1);padding-top:.65rem;font-family:var(--mono)}
-.mca{color:var(--gold);transition:color .2s}.mca:hover{color:var(--gold2)}
+        /* ── Hero ──────────────────────────────────────────── */
+        .hero {
+            padding-top: 9rem;
+            padding-bottom: 5rem;
+            border-bottom: 1px solid var(--border-primary);
+        }
 
-/* ══ TERMINAL ════════════════════════════════════════ */
-.term{background:#040404;border:1px solid var(--b1);border-radius:var(--r2);overflow:hidden;max-width:860px;margin:0 auto;transition:border-color .3s,box-shadow .3s}
-.term:hover{border-color:var(--b2);box-shadow:0 0 60px rgba(245,197,24,.03)}
-.term-hdr{background:#0c0c0c;padding:.9rem 1.5rem;border-bottom:1px solid rgba(255,255,255,.04);font-family:var(--mono);font-size:.72rem;color:var(--t3);display:flex;align-items:center;gap:.75rem}
-.term-hdr::before{content:'';display:inline-flex;width:10px;height:10px;background:#ef4444;border-radius:50%;box-shadow:16px 0 0 #fbbf24,32px 0 0 #22c55e;flex-shrink:0;margin-right:2.5rem}
-.cmd{color:var(--green);font-weight:600}
-.term-entry{padding:2rem;border-bottom:1px solid rgba(255,255,255,.03)}
-.term-entry:last-child{border-bottom:none}
-.em{color:var(--t3);font-size:.7rem;margin-bottom:1.25rem;display:flex;gap:1rem;font-family:var(--mono)}
-.ec{color:#c0c0c0;font-size:.875rem;line-height:1.7;font-family:var(--mono)}
-.ec p{margin-bottom:.75rem}
-.ec ul{list-style:none;padding:0;margin:.75rem 0}
-.ec ul li{color:#888;margin-bottom:.4rem}
-.ec strong{color:#fff}
-.hl-quote{color:var(--blue);margin-top:1.25rem;font-style:italic;border-left:2px solid rgba(40,160,240,.35);padding-left:1rem}
-.term-link{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--mono);font-size:.72rem;color:var(--t3);margin-top:1.5rem;transition:color .2s}
-.term-link:hover{color:var(--gold)}
+        .hero-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
 
-/* ══ RESEARCH LOG ════════════════════════════════════ */
-.rlog{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r2);overflow:hidden}
-.rrow{display:grid;grid-template-columns:1fr auto;gap:2rem;padding:2.5rem;align-items:start;border-bottom:1px solid rgba(255,255,255,.03);transition:background .2s}
-.rrow:last-child{border-bottom:none}
-.rrow:hover{background:rgba(255,255,255,.012)}
-.rtag{font-family:var(--mono);font-size:.58rem;padding:.15rem .45rem;border:1px solid;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;display:inline-flex;align-items:center}
-.rtitle{font-family:var(--disp);font-weight:700;font-size:1.1rem;color:var(--t0);margin:1rem 0 .75rem;line-height:1.25}
-.rdesc{color:var(--t2);font-size:.875rem;line-height:1.65;margin-bottom:1.25rem;max-width:640px}
-.rtags{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.25rem}
-.rtag2{font-family:var(--mono);font-size:.58rem;padding:.15rem .45rem;background:var(--bg);border:1px solid var(--b1);border-radius:2px;color:var(--t3)}
-.rstat{min-width:180px;background:var(--bg);border:1px solid var(--b1);border-radius:var(--r2);padding:1.5rem;font-family:var(--mono);font-size:.7rem;display:flex;flex-direction:column;gap:.65rem}
-.rstat-label{color:var(--t3);font-size:.58rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.1rem}
-.rstat-row{display:flex;justify-content:space-between;gap:.5rem;padding-top:.55rem;border-top:1px solid rgba(255,255,255,.03)}
+        .hero-eyebrow span { color: var(--accent-gold); }
 
-/* ══ CTA ═════════════════════════════════════════════ */
-.ctab{position:relative;background:linear-gradient(135deg,rgba(245,197,24,.07) 0%,var(--s1) 45%);border:1px solid var(--gold-line);border-radius:var(--r3);padding:4rem 3.5rem;text-align:center;overflow:hidden}
-.cta-glow{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:500px;height:300px;background:radial-gradient(ellipse,rgba(245,197,24,.12),transparent);border-radius:50%;pointer-events:none}
-.cta-eye{font-family:var(--mono);font-size:.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:.65rem;position:relative;z-index:1}
-.cta-title{font-family:var(--disp);font-weight:800;font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.05;letter-spacing:-.04em;color:var(--t0);margin-bottom:.9rem;position:relative;z-index:1}
-.cta-sub{max-width:660px;margin:0 auto 2.5rem;color:var(--t2);font-size:.9375rem;line-height:1.7;position:relative;z-index:1}
-.cta-btns{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.45rem 1rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-bright);
+            border-radius: 5px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
 
-/* ══ FOOTER ══════════════════════════════════════════ */
-footer{background:var(--s1);border-top:1px solid var(--b1);padding:5rem 0 2.5rem;position:relative;z-index:2}
-.fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3.5rem}
-.fbn{font-family:var(--disp);font-weight:800;font-size:1.5rem;letter-spacing:-.025em;color:var(--t0);margin-bottom:.5rem}
-.fbd{font-size:.875rem;color:var(--t2);line-height:1.75;margin-bottom:1.25rem}
-.fbm{font-family:var(--mono);font-size:.62rem;color:var(--t3);text-transform:uppercase;letter-spacing:.08em;line-height:1.75}
-.fct{font-family:var(--disp);font-weight:800;font-size:.9rem;letter-spacing:-.02em;color:var(--t0);margin-bottom:1rem;text-transform:uppercase}
-.fl{list-style:none}
-.fl li{margin-bottom:.55rem}
-.fl a{color:var(--t2);transition:color .2s;font-size:.875rem}.fl a:hover{color:var(--t0)}
-.fb{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid var(--b1);font-family:var(--mono);font-size:.6rem;color:var(--t3)}
-.fleg{display:flex;gap:1.5rem}
-.fleg a{color:var(--t3);transition:color .2s}.fleg a:hover{color:var(--t0)}
+        .hero-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(2.75rem, 6.5vw, 5.5rem);
+            line-height: 0.96;
+            letter-spacing: -0.035em;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
 
-/* ══ CORE SYSTEMS GRID ═══════════════════════════════ */
-#core-systems{background:var(--s1);border-top:1px solid var(--b1);border-bottom:1px solid var(--b1)}
-.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);border:1px solid var(--b1);border-radius:var(--r2);overflow:hidden;margin-top:2.5rem}
-.cs-card{background:linear-gradient(155deg,rgba(255,255,255,.04) 0%,rgba(255,255,255,.007) 100%),var(--s1);padding:2.25rem 2rem;position:relative;overflow:hidden;transition:background .35s,box-shadow .35s;display:flex;flex-direction:column;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
-.cs-card::before{content:'';position:absolute;top:0;left:0;width:58%;height:52%;background:radial-gradient(ellipse at 0% 0%,rgba(255,255,255,.06),transparent 70%);pointer-events:none}
-.cs-card:hover{background:linear-gradient(155deg,rgba(255,255,255,.058) 0%,rgba(255,255,255,.011) 100%),var(--s2);box-shadow:0 18px 52px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.12)}
-.cs-top{position:absolute;top:0;left:0;right:0;height:2px;opacity:.6;transition:opacity .35s;z-index:1}
-.cs-card:hover .cs-top{opacity:1}
-.cs-label{font-family:var(--mono);font-size:.56rem;color:var(--t3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:.85rem;display:flex;align-items:center;justify-content:space-between}
-.cs-name{font-family:var(--disp);font-weight:800;font-size:1.75rem;letter-spacing:-.035em;color:var(--t0);line-height:1;margin-bottom:.6rem}
-.cs-desc{font-size:.82rem;color:var(--t2);line-height:1.7;margin-bottom:1.25rem;flex:1}
-.cs-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1.25rem}
-.cs-link{font-family:var(--mono);font-size:.65rem;align-self:flex-start;transition:color .2s,opacity .2s;opacity:.6}
-.cs-card:hover .cs-link{opacity:1}
+        .hero-title span { color: var(--accent-gold); }
 
-/* ══ X / TWITTER SECTION ═════════════════════════════ */
-#x-section{padding:5rem 0}
-.x-container{display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:start}
-.x-sidebar{}
-.x-logo{display:flex;align-items:center;gap:.65rem;margin-bottom:1.5rem}
-.x-logo svg{width:28px;height:28px;fill:var(--t0)}
-.x-logo-text{font-family:var(--disp);font-weight:800;font-size:1.3rem;letter-spacing:-.02em;color:var(--t0)}
-.x-handle{font-family:var(--mono);font-size:.65rem;color:var(--gold);letter-spacing:.08em;margin-bottom:1.25rem}
-.x-bio{font-size:.875rem;color:var(--t2);line-height:1.7;margin-bottom:2rem}
-.x-follow{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--mono);font-size:.68rem;font-weight:600;padding:.65rem 1.25rem;border-radius:var(--r);background:var(--t0);color:var(--void);letter-spacing:.06em;text-transform:uppercase;transition:all .2s;cursor:none}
-.x-follow:hover{background:var(--gold);transform:translateY(-2px);box-shadow:0 8px 24px var(--gold-glow)}
-.x-follow svg{width:14px;height:14px;fill:currentColor}
-.x-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b1);border:1px solid var(--b1);border-radius:var(--r2);overflow:hidden;margin-top:2rem}
-.x-stat{background:var(--s1);padding:1.1rem 1.25rem}
-.x-stat-n{font-family:var(--disp);font-weight:800;font-size:1.5rem;color:var(--gold);letter-spacing:-.04em;line-height:1;display:block;margin-bottom:.2rem}
-.x-stat-l{font-family:var(--mono);font-size:.55rem;color:var(--t3);text-transform:uppercase;letter-spacing:.1em}
+        .hero-sub {
+            font-size: 1.0625rem;
+            color: var(--text-tertiary);
+            line-height: 1.75;
+            max-width: 580px;
+            margin-bottom: 0.75rem;
+        }
 
-/* Tweet feed widget wrapper */
-.x-feed-wrap{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r2);overflow:hidden;position:relative;min-height:300px}
-.x-feed-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-line),transparent);z-index:1}
-.x-feed-hdr{padding:.9rem 1.5rem;background:var(--s2);border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:.62rem;color:var(--t3);text-transform:uppercase;letter-spacing:.1em}
-.x-feed-hdr-left{display:flex;align-items:center;gap:.5rem}
-.x-loading{padding:3rem;text-align:center;font-family:var(--mono);font-size:.65rem;color:var(--t3)}
+        .hero-chain-list {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+            margin-bottom: 2.5rem;
+        }
 
-/* Override Twitter iframe border-radius trick */
-.twitter-timeline.twitter-timeline-rendered{border-radius:0!important}
+        .hero-ctas {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 4rem;
+        }
 
-@media(max-width:1100px){
-  .cs-grid{grid-template-columns:1fr}
-  .x-container{grid-template-columns:1fr}
-}
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.8rem 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border-radius: 5px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
 
-/* ══ CODE BLOCK ═══════════════════════════════════════ */
-.cblk{font-family:var(--mono);font-size:.74rem;background:var(--bg);border:1px solid var(--b1);border-left:2px solid rgba(40,160,240,.35);border-radius:var(--r);padding:.9rem 1.1rem;margin:1rem 0;line-height:1.9;overflow-x:auto;color:var(--t2)}
-.ct{color:var(--t3)}.cg{color:var(--green);font-weight:600}.cgold{color:var(--gold);font-weight:600}.cb{color:var(--blue)}.cp2{color:#c084fc}
+        .btn-gold {
+            background: var(--accent-gold);
+            color: #000;
+            border-color: var(--accent-gold);
+        }
+        .btn-gold:hover { background: #fde047; color: #000; box-shadow: 0 6px 24px var(--accent-gold-glow); }
 
-/* ══ RESPONSIVE ═══════════════════════════════════════ */
-@media(max-width:1100px){
-  .bento{gap:8px}
-  .bento .bc{grid-column:1/-1!important}
-  .cs-grid{grid-template-columns:1fr}
-  #mbar{grid-template-columns:repeat(2,1fr)}
-  .dg{grid-template-columns:1fr}
-  .rg{grid-template-columns:1fr}
-  .fg{grid-template-columns:1fr}
-}
-@media(max-width:768px){
-  .hstats{grid-template-columns:1fr 1fr}
-  .nc{display:none}
-  .ctab{padding:2.5rem 1.75rem}
-  section{padding:4rem 0}
-  .rrow{grid-template-columns:1fr}
-  .rstat{display:none}
-}
-@media(max-width:560px){
-  #mbar{grid-template-columns:1fr}
-  .hstats{grid-template-columns:1fr 1fr}
-  .cta-btns{flex-direction:column;align-items:center}
-  .hh{font-size:clamp(2.8rem,8vw,4.5rem)}
-  .fb{flex-direction:column;gap:1rem;text-align:center}
-}
-.nav-logo-img{width:28px;height:28px;border-radius:5px;object-fit:cover;flex-shrink:0;display:block}
-</style>
+        .btn-outline {
+            background: transparent;
+            color: var(--text-secondary);
+            border-color: var(--border-bright);
+        }
+        .btn-outline:hover { border-color: var(--text-muted); color: var(--text-primary); }
+
+        .btn-danger {
+            background: transparent;
+            color: var(--accent-red);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        .btn-danger:hover { background: rgba(239, 68, 68, 0.06); color: var(--accent-red); }
+
+        /* ── Stats bar ─────────────────────────────────────── */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 1px solid var(--border-primary);
+            gap: 1px;
+            background: var(--border-primary);
+        }
+
+        .stat-item {
+            background: var(--bg-secondary);
+            padding: 1.5rem 1.75rem;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.4rem, 2.5vw, 2rem);
+            color: var(--accent-gold);
+            letter-spacing: -0.04em;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .stat-label {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* ── Projects Grid ─────────────────────────────────── */
+        #projects { background: var(--bg-primary); }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border-primary);
+            border: 1px solid var(--border-primary);
+        }
+
+        .project-card {
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
+            padding: 2.25rem;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.25s, box-shadow 0.25s;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+        }
+
+        .project-card:hover {
+            background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
+        }
+
+        .card-accent-line {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+        .project-card:hover .card-accent-line { opacity: 1; }
+
+        .card-label {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .card-name {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: 0.65rem;
+        }
+
+        .card-desc {
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            padding: 0.2rem 0.5rem;
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 3px;
+            color: var(--text-muted);
+            background: rgba(255,255,255,.04);
+            letter-spacing: 0.04em;
+        }
+
+        .card-links {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .card-link {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            transition: color 0.2s;
+            letter-spacing: 0.04em;
+        }
+        .card-link:hover { color: var(--text-primary); }
+
+        /* ── Badge Pills ───────────────────────────────────── */
+        .badge {
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            padding: 0.18rem 0.5rem;
+            border: 1px solid;
+            border-radius: 3px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .badge-live   { color: var(--accent-green);  border-color: rgba(34,197,94,.25);  background: rgba(34,197,94,.07);  }
+        .badge-dev    { color: var(--accent-gold);   border-color: rgba(245,197,24,.25); background: rgba(245,197,24,.07); }
+        .badge-blue   { color: var(--accent-blue);   border-color: rgba(40,160,240,.25); background: rgba(40,160,240,.07); }
+        .badge-ton    { color: var(--accent-ton);    border-color: rgba(0,152,234,.25);  background: rgba(0,152,234,.07);  }
+        .badge-purple { color: var(--accent-purple); border-color: rgba(153,69,255,.25); background: rgba(153,69,255,.07); }
+        .badge-red    { color: var(--accent-red);    border-color: rgba(239,68,68,.25);  background: rgba(239,68,68,.07);  }
+
+        /* ── Core Systems ──────────────────────────────────── */
+        #core { background: var(--bg-secondary); border-top: 1px solid var(--border-primary); border-bottom: 1px solid var(--border-primary); }
+
+        .systems-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border-primary);
+            border: 1px solid var(--border-primary);
+            margin-top: 2.5rem;
+        }
+
+        .system-card {
+            background: linear-gradient(155deg,rgba(255,255,255,.04) 0%,rgba(255,255,255,.007) 100%),var(--bg-primary);
+            padding: 2.25rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.25s;
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.07);
+        }
+
+        .system-card:hover {
+            background: linear-gradient(155deg,rgba(255,255,255,.058) 0%,rgba(255,255,255,.011) 100%),var(--bg-elevated);
+        }
+
+        .system-accent {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            opacity: 0.55;
+            transition: opacity 0.2s;
+        }
+        .system-card:hover .system-accent { opacity: 1; }
+
+        .system-label {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .system-name {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.85rem;
+            letter-spacing: -0.035em;
+            line-height: 1;
+            margin-bottom: 0.75rem;
+        }
+
+        .system-desc {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+            flex: 1;
+        }
+
+        .system-link {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.04em;
+            transition: opacity 0.2s;
+            opacity: 0.55;
+            align-self: flex-start;
+        }
+        .system-card:hover .system-link { opacity: 1; }
+
+        /* ── Doctrine ──────────────────────────────────────── */
+        #doctrine { background: var(--bg-primary); }
+
+        .doctrine-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.8fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .doctrine-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            line-height: 1.05;
+            letter-spacing: -0.035em;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .doctrine-intro {
+            font-size: 0.9375rem;
+            color: var(--text-tertiary);
+            line-height: 1.75;
+        }
+
+        .doctrine-list {
+            list-style: none;
+            border: 1px solid var(--border-primary);
+        }
+
+        .doctrine-list li {
+            padding: 0.9rem 1.5rem;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+            line-height: 1.6;
+            transition: background 0.15s;
+        }
+
+        .doctrine-list li:last-child { border-bottom: none; }
+        .doctrine-list li:hover { background: var(--bg-elevated); }
+
+        .doctrine-list li::before {
+            content: '→';
+            color: var(--accent-gold);
+            opacity: 0.7;
+            flex-shrink: 0;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            margin-top: 0.15rem;
+        }
+
+        .doctrine-list strong { color: var(--text-primary); }
+
+        /* ── Systems Technical ─────────────────────────────── */
+        #technical { background: var(--bg-secondary); border-top: 1px solid var(--border-primary); border-bottom: 1px solid var(--border-primary); }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tech-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-primary);
+            padding: 1.75rem;
+        }
+
+        .tech-card-header {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .tech-card-header::before {
+            content: '';
+            display: inline-block;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--accent-gold);
+            opacity: 0.7;
+            flex-shrink: 0;
+        }
+
+        .code-block {
+            border: 1px solid var(--border-primary);
+            background: rgba(0,0,0,.35);
+            padding: 1.25rem;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--text-tertiary);
+            line-height: 1.7;
+            word-break: break-all;
+            border-radius: 2px;
+        }
+
+        .code-note {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            color: var(--accent-gold);
+            margin-top: 0.75rem;
+            opacity: 0.75;
+        }
+
+        /* ── NTS bars ──────────────────────────────────────── */
+        .nts-section { margin-top: 2.5rem; }
+
+        .nts-header {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+        }
+
+        .nts-bar-row { margin-bottom: 1rem; }
+
+        .nts-bar-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.35rem;
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            color: var(--text-muted);
+        }
+
+        .nts-bar-track {
+            height: 4px;
+            background: var(--border-primary);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .nts-bar-fill {
+            height: 100%;
+            width: 0;
+            border-radius: 2px;
+            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ── Metrics ───────────────────────────────────────── */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border-primary);
+            border: 1px solid var(--border-primary);
+            margin-top: 2.5rem;
+        }
+
+        .metric-card {
+            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
+            padding: 1.75rem;
+            transition: background 0.2s;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+        }
+        .metric-card:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated); }
+
+        .metric-label {
+            font-family: var(--font-mono);
+            font-size: 0.62rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .metric-value {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: clamp(1.3rem, 2vw, 1.75rem);
+            color: var(--text-primary);
+            letter-spacing: -0.04em;
+            margin-bottom: 0.3rem;
+        }
+
+        .metric-value.mono {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            font-weight: 400;
+            color: var(--text-tertiary);
+            letter-spacing: 0;
+        }
+
+        .metric-sub {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .metric-sub a { color: var(--accent-gold); }
+        .metric-sub a:hover { color: var(--text-primary); }
+
+        /* ── Live on X ─────────────────────────────────────── */
+        #live { background: var(--bg-primary); }
+
+        .x-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .x-sidebar {
+            position: sticky;
+            top: 6rem;
+        }
+
+        .x-account {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .x-icon {
+            width: 40px; height: 40px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .x-handle {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .x-bio {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            line-height: 1.65;
+            margin-bottom: 1.25rem;
+        }
+
+        .x-follow-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.1rem;
+            background: #1d9bf0;
+            color: #fff;
+            border-radius: 5px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            transition: background 0.2s;
+            margin-bottom: 1.5rem;
+        }
+
+        .x-follow-btn:hover { background: #1a8cd8; color: #fff; }
+
+        .x-alert {
+            padding: 1.1rem 1.25rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-primary);
+            border-left: 2px solid var(--accent-red);
+        }
+
+        .x-alert-label {
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.5rem;
+        }
+
+        .x-alert-text {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0.65rem;
+        }
+
+        .x-alert a {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--accent-red);
+        }
+
+        .x-feed {
+            border: 1px solid var(--border-primary);
+            min-height: 400px;
+            background: var(--bg-secondary);
+        }
+
+        .x-feed-header {
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid var(--border-primary);
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-elevated);
+        }
+
+        .x-loading {
+            padding: 3rem;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* ── Research Log ──────────────────────────────────── */
+        #research { background: var(--bg-secondary); border-top: 1px solid var(--border-primary); border-bottom: 1px solid var(--border-primary); }
+
+        .research-entry {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            padding: 2.5rem 0;
+            border-bottom: 1px solid var(--border-subtle);
+            align-items: start;
+        }
+
+        .research-entry:last-child { border-bottom: none; }
+
+        .research-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+        }
+
+        .research-title {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.25;
+        }
+
+        .research-desc {
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+            line-height: 1.65;
+            margin-bottom: 1.25rem;
+            max-width: 660px;
+        }
+
+        .research-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+        .research-tag {
+            font-family: var(--font-mono);
+            font-size: 0.58rem;
+            padding: 0.15rem 0.45rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-primary);
+            color: var(--text-muted);
+        }
+
+        .research-stat-box {
+            min-width: 180px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-primary);
+            padding: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .research-stat-label {
+            font-size: 0.58rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* ── Footer ────────────────────────────────────────── */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-primary);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand h4 {
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            line-height: 1.65;
+        }
+
+        .footer-links h5 {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.6rem; }
+        .footer-links a { font-size: 0.875rem; color: var(--text-dim); }
+        .footer-links a:hover { color: var(--text-primary); }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .footer-legal { display: flex; gap: 1.5rem; }
+        .footer-legal a { color: var(--text-muted); }
+        .footer-legal a:hover { color: var(--text-primary); }
+
+        /* ── Responsive ────────────────────────────────────── */
+        @media (max-width: 1100px) {
+            .projects-grid { grid-template-columns: 1fr; }
+            .systems-grid { grid-template-columns: 1fr; }
+            .doctrine-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .tech-grid { grid-template-columns: 1fr; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .x-layout { grid-template-columns: 1fr; }
+            .x-sidebar { position: static; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .header-content { padding: 0.75rem 1rem; flex-wrap: wrap; }
+            .nav-center { display: none; }
+            .container { padding: 0 1rem; }
+            section { padding: 3rem 0; }
+            .hero { padding-top: 7rem; padding-bottom: 3rem; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .stats-bar { grid-template-columns: 1fr 1fr; }
+            .research-entry { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+
+        /* ── glass card depth injection (matches other pages) */
+        .project-card,.system-card,.metric-card,.stat-item{box-shadow:0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);transition:background .35s,box-shadow .35s!important}
+        .project-card:hover,.system-card:hover,.metric-card:hover{box-shadow:0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.12)!important}
+    </style>
 </head>
 <body>
 
-<!-- ══ CURSOR ══════════════════════════════════════════ -->
-<div id="cd"></div>
-<div id="cr"></div>
-
-<!-- ══ ATMOSPHERE ══════════════════════════════════════ -->
-<div id="grain"></div>
-<div id="gbg"></div>
-<canvas id="cnvs"></canvas>
-
-<!-- ══════════════════════════════════════════
-     SECURITY GATE — Cloudflare Turnstile
-══════════════════════════════════════════ -->
-<div id="sg">
-  <div class="sg-ring"></div>
-  <div class="sg-ring sg-ring-2"></div>
-  <div class="sg-ring sg-ring-3"></div>
-  <img class="sg-logo"
-       src="/site-logo.png" alt="Orthonode" width="64" height="64">
-  <div class="sg-title">Orthonode Infrastructure Labs</div>
-  <div class="sg-status" id="sg-status">// ESTABLISHING_SECURE_UPLINK</div>
-  <div class="cf-turnstile"
-       data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb"
-       data-theme="dark"
-       data-callback="onHumanVerified">
-  </div>
-  <div class="sg-dots">
-    <div class="sg-dot"></div>
-    <div class="sg-dot"></div>
-    <div class="sg-dot"></div>
-  </div>
+<!-- ── Security Gate ──────────────────────────────────────── -->
+<div id="security-gate">
+    <img src="/site-logo.png" alt="Orthonode">
+    <h2>Orthonode Infrastructure Labs</h2>
+    <p>// ESTABLISHING_SECURE_UPLINK</p>
+    <div class="cf-turnstile"
+         data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb"
+         data-theme="dark"
+         data-callback="onHumanVerified">
+    </div>
 </div>
 
-<!-- ══════════════════════════════════════════
-     APP CONTENT
-══════════════════════════════════════════ -->
+<!-- ── App Content ────────────────────────────────────────── -->
 <div id="app-content">
 
-<!-- ══ NAV ══════════════════════════════════════════════ -->
-<nav id="nav">
-  <div class="ni">
-    <a href="/" class="ll" data-h>
-      <img src="/site-logo.png" alt="Orthonode" class="nav-logo-img" width="28" height="28">
-      <div class="lw">
-        <div>Orthonode</div>
-        <div class="ls">Infrastructure Labs</div>
-      </div>
-    </a>
-    <div class="nc">
-      <a href="#products" data-h>Projects</a>
-      <a href="#core-systems" data-h>Core</a>
-      <a href="#doctrine" data-h>Doctrine</a>
-      <a href="#x-section" data-h>Live on X</a>
+<header role="banner">
+    <div class="header-content">
+        <div class="header-left">
+            <a href="/" class="nav-brand">
+                <img src="/site-logo.png" alt="Orthonode">
+                Orthonode
+            </a>
+            <div class="status-live">
+                <span class="status-dot"></span>
+                Infrastructure Labs
+            </div>
+        </div>
+        <nav class="nav-center">
+            <a href="#projects">Projects</a>
+            <a href="#core">Core Systems</a>
+            <a href="#doctrine">Doctrine</a>
+            <a href="#live">Live on X</a>
+        </nav>
+        <div class="header-right">
+            <a href="/iotex-research.html" class="nav-alert">⚠ IoTeX Research</a>
+            <a href="https://github.com/orthonode" target="_blank" rel="noopener" class="nav-gh">GitHub ↗</a>
+        </div>
     </div>
-    <div class="nr">
-      <span class="tg tl"><span class="dot-live"></span>Live</span>
-      <a href="/iotex-research.html" class="tg brd" style="cursor:none" data-h>⚠ IoTeX Research</a>
-      <a href="https://github.com/orthonode" target="_blank" rel="noopener" class="tg td" data-h>GitHub</a>
+</header>
+
+<main>
+
+<!-- ── Hero ──────────────────────────────────────────────── -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-eyebrow">orthonode.xyz / <span>Infrastructure Labs</span></div>
+
+        <div class="hero-badge">
+            <span class="status-dot"></span>
+            5 Products Live — 3 Chains — March 2026
+        </div>
+
+        <h1 class="hero-title">
+            Hardware Trust<br>
+            <span>Infrastructure.</span>
+        </h1>
+
+        <p class="hero-sub">
+            Five trust layers. One cryptographic receipt. Deterministic, append-only, zero-trust verification for Bittensor and DePIN.
+        </p>
+
+        <p class="hero-chain-list">SHA (Arbitrum) · TON-SHA (TON) · INVARIANT (Bittensor) · OAP · Nexus · TIX-DAO (Solana)</p>
+
+        <div class="hero-ctas">
+            <a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" class="btn btn-gold">GitHub Repository ↗</a>
+            <a href="#projects" class="btn btn-outline">Explore Stack ↓</a>
+            <a href="/iotex-research.html" class="btn btn-danger">⚠ IoTeX Research</a>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-value">5</span>
+                <span class="stat-label">Live Products</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value">3</span>
+                <span class="stat-label">Chains Deployed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="receipts-counter">9,000+</span>
+                <span class="stat-label">Rust Receipts / sec</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" style="font-family:var(--font-mono);font-size:1rem;letter-spacing:0">0xd661</span>
+                <span class="stat-label">SHA Contract (Arbitrum)</span>
+            </div>
+        </div>
     </div>
-  </div>
-</nav>
-
-<!-- ══ HERO ══════════════════════════════════════════════ -->
-<section id="hero">
-  <div class="aurora aurora-1"></div>
-  <div class="aurora aurora-2"></div>
-  <div class="aurora aurora-3"></div>
-
-  <div class="w">
-    <div class="hl">// INVARIANT — Layer-1 Trust for Bittensor &amp; DePIN</div>
-
-    <div class="hh" id="kh">
-      <div class="hw"><span class="hwi" style="--d:0s"><span class="hgold">Don't</span></span></div>
-      <div class="hw"><span class="hwi" style="--d:.08s"><span class="hsolid">trust</span></span></div>
-      <div class="hw"><span class="hwi" style="--d:.16s"><span class="hout">the</span></span></div>
-      <div class="hw"><span class="hwi" style="--d:.24s"><span class="hgold">output.</span></span></div>
-      <div class="hw"><span class="hwi" style="--d:.32s"><span class="hsolid">Verify</span></span></div>
-      <div class="hw"><span class="hwi" style="--d:.4s"><span class="hout">the</span></span></div>
-      <div class="hw"><span class="hwi" style="--d:.48s"><span class="hgold">execution.</span></span></div>
-    </div>
-
-    <div class="hsub">
-      <p id="scramble-text">Five trust layers. One cryptographic receipt. Deterministic, append-only, zero-trust verification infrastructure for Bittensor and DePIN.</p>
-      <div class="s2">SHA (Arbitrum) · TON-SHA · INVARIANT (Bittensor) · OAP · Nexus · TIX-DAO (Solana)</div>
-    </div>
-
-    <div class="hctas">
-      <a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" class="btn btn-gold" data-h data-magnetic>GitHub Repository ↗</a>
-      <a href="#products" class="btn btn-outline" data-h data-magnetic>Explore Stack ↓</a>
-      <a href="/iotex-research.html" class="btn btn-danger" data-h>IoTeX Research ↗</a>
-    </div>
-
-    <div class="sc-cue">
-      <span>Scroll to explore</span>
-      <div class="sc-line"></div>
-    </div>
-
-    <div class="hstats">
-      <div class="hsc">
-        <span class="sn">5</span>
-        <span class="sk">Live Products</span>
-      </div>
-      <div class="hsc">
-        <span class="sn">3</span>
-        <span class="sk">Chains Deployed</span>
-      </div>
-      <div class="hsc">
-        <span class="sn" data-count="9000" data-suffix="+/s">9,000+/s</span>
-        <span class="sk">Rust Receipts/sec</span>
-      </div>
-      <div class="hsc">
-        <span class="sn">0xd661</span>
-        <span class="sk">SHA Contract (Arbitrum)</span>
-      </div>
-    </div>
-  </div>
 </section>
 
-<!-- ══ MARQUEE ═══════════════════════════════════════════ -->
-<div class="mw">
-  <div class="mt" id="mq"></div>
-</div>
+<!-- ── Latest Projects ────────────────────────────────────── -->
+<section id="projects">
+    <div class="container">
+        <div class="section-header">// LATEST_PROJECTS — What We Ship</div>
 
-<!-- ══ LATEST PROJECTS ════════════════════════════════════ -->
-<section id="products">
-  <div class="w">
-    <div class="sl rv">Latest Projects — What We Ship</div>
+        <div class="projects-grid">
 
-    <div class="bento rv d1">
+            <!-- TIX-DAO -->
+            <div class="project-card">
+                <div class="card-accent-line" style="background:linear-gradient(90deg,var(--accent-purple),transparent)"></div>
+                <div class="card-label">
+                    <span>TIX-DAO — Solana Venue Governance</span>
+                    <div style="display:flex;gap:.35rem">
+                        <span class="badge badge-purple">Graveyard Hack 2026</span>
+                        <span class="badge badge-live">Live Demo</span>
+                    </div>
+                </div>
+                <div class="card-name" style="color:var(--accent-purple)">TIX-DAO</div>
+                <div class="card-desc">On-chain venue governance on Solana using SPL-Governance (Realms). Token holders vote on resale caps, royalties, and refund windows. Flash-loan proof by design: 30-day minimum lock + 7-day cooloff + council veto. The $182M Beanstalk exploit is architecturally impossible here.</div>
+                <div class="tag-row">
+                    <span class="tag">Solana</span>
+                    <span class="tag">SPL-Governance</span>
+                    <span class="tag">Realms</span>
+                    <span class="tag">Next.js 16</span>
+                    <span class="tag">veTICK Model</span>
+                    <span class="tag">0 Custom Programs</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://tix-dao.vercel.app" target="_blank" rel="noopener" class="card-link" style="color:var(--accent-purple)">Live Demo ↗</a>
+                    <a href="https://github.com/orthonode/TIX-DAO" target="_blank" rel="noopener" class="card-link">GitHub ↗</a>
+                    <a href="/tix-dao.html" class="card-link">Details ↗</a>
+                </div>
+            </div>
 
-      <!-- TIX-DAO — newest, featured left -->
-      <div class="bc" style="grid-column:1/7" data-tilt>
-        <div style="position:absolute;inset:0;background:rgba(153,69,255,.05);z-index:-1;border-radius:var(--r2)"></div>
-        <div class="bca" style="background:linear-gradient(90deg,var(--purple),transparent)"></div>
-        <div class="bcl">
-          <span>TIX-DAO — Solana Venue Governance</span>
-          <div style="display:flex;gap:.4rem">
-            <span class="bdg bpur">Graveyard Hack 2026</span>
-            <span class="bdg blv">Live Demo</span>
-          </div>
-        </div>
-        <div class="bcn">TIX-DAO</div>
-        <div class="bcd">On-chain venue governance on Solana using SPL-Governance (Realms). Token holders vote on resale caps, royalties, and refund windows. Flash-loan proof by design: 30-day minimum lock + 7-day cooloff + council veto. The $182M Beanstalk exploit is architecturally impossible here.</div>
-        <div class="bct">
-          <span class="bt">Solana</span><span class="bt">SPL-Governance</span><span class="bt">Realms</span><span class="bt">Next.js 16</span><span class="bt">veTICK Model</span><span class="bt">0 Custom Programs</span>
-        </div>
-        <div style="display:flex;gap:1.25rem;margin-top:1.25rem;align-items:center">
-          <a href="https://tix-dao.vercel.app" target="_blank" rel="noopener" class="bclink" data-h style="position:static;opacity:1;color:var(--purple)">Live Demo ↗</a>
-          <a href="https://github.com/orthonode/TIX-DAO" target="_blank" rel="noopener" class="bclink" data-h style="position:static;opacity:.5">GitHub ↗</a>
-          <a href="/tix-dao.html" class="bclink" data-h style="position:static;opacity:.5">Details ↗</a>
-        </div>
-      </div>
+            <!-- INVARIANT -->
+            <div class="project-card" style="border-left:2px solid rgba(245,197,24,.2)">
+                <div class="card-accent-line" style="background:linear-gradient(90deg,var(--accent-gold),transparent)"></div>
+                <div class="card-label">
+                    <span>INVARIANT — Bittensor Subnet</span>
+                    <div style="display:flex;gap:.35rem">
+                        <span class="badge badge-live">Phase 1 Done</span>
+                        <span class="badge badge-blue">Testnet Mar 2026</span>
+                    </div>
+                </div>
+                <div class="card-name" style="color:var(--accent-gold)">INVARIANT</div>
+                <div class="card-desc">Layer-1 Bittensor subnet (TAO-incentivized). Miners register hardware and prove execution. Validators verify receipts, compute NTS. Metagraph authority on deterministic computation trust. Rust: 9,000+ receipts/sec.</div>
+                <div class="tag-row">
+                    <span class="tag">Bittensor v10</span>
+                    <span class="tag">TAO</span>
+                    <span class="tag">Rust + Python</span>
+                    <span class="tag">21 Tests Passing</span>
+                    <span class="tag">Four-Gate Verifier</span>
+                </div>
+                <div class="card-links">
+                    <a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" class="card-link" style="color:var(--accent-gold)">GitHub ↗</a>
+                    <a href="/invariant.html" class="card-link">Details ↗</a>
+                </div>
+            </div>
 
-      <!-- INVARIANT — featured right -->
-      <div class="bc bc-inv" style="grid-column:7/13" data-tilt>
-        <div class="bca" style="background:linear-gradient(90deg,var(--gold),transparent)"></div>
-        <div class="bcl">
-          <span>INVARIANT — Bittensor Subnet</span>
-          <div style="display:flex;gap:.4rem">
-            <span class="bdg blv">Phase 1 Done</span>
-            <span class="bdg bbt">Testnet Mar 2026</span>
-          </div>
-        </div>
-        <div class="bcn" style="color:var(--gold)">INVARIANT</div>
-        <div class="bcd">Layer-1 Bittensor subnet (TAO-incentivized). Miners register hardware and prove execution. Validators verify receipts, compute NTS. Metagraph authority on deterministic computation trust. Rust: 9,000+ receipts/sec.</div>
-        <div class="bct">
-          <span class="bt">Bittensor v10</span><span class="bt">TAO</span><span class="bt">Rust + Python</span><span class="bt">21 Tests Passing</span><span class="bt">Four-Gate Verifier</span>
-        </div>
-        <div style="display:flex;gap:1.25rem;margin-top:1.25rem;align-items:center">
-          <a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" class="bclink" data-h style="position:static;opacity:1;color:var(--gold)">GitHub ↗</a>
-          <a href="/invariant.html" class="bclink" data-h style="position:static;opacity:.5">Details ↗</a>
-        </div>
-      </div>
+            <!-- TON-SHA -->
+            <div class="project-card">
+                <div class="card-accent-line" style="background:linear-gradient(90deg,var(--accent-ton),transparent)"></div>
+                <div class="card-label">
+                    <span>TON-SHA — Agent Trust Layer</span>
+                    <span class="badge badge-ton">Testnet Live</span>
+                </div>
+                <div class="card-name" style="color:var(--accent-ton)">TON-SHA</div>
+                <div class="card-desc">ICP-compatible agent trust primitive on TON. Four sequential gates — device authorization, firmware approval, replay protection, SHA-256 digest — enforced by a single Tact contract. The canonical agent check: one call, no intermediary. kQBqWso0…be6S</div>
+                <div class="tag-row">
+                    <span class="tag">TON Blockchain</span>
+                    <span class="tag">Tact 1.6</span>
+                    <span class="tag">ZK-Ready</span>
+                    <span class="tag">0.03 TON/op</span>
+                    <span class="tag">100+ Txns</span>
+                </div>
+                <div class="card-links">
+                    <a href="/ton-sha.html" class="card-link" style="color:var(--accent-ton)">Explore TON-SHA ↗</a>
+                </div>
+            </div>
 
-      <!-- TON-SHA -->
-      <div class="bc" style="grid-column:1/7" data-tilt>
-        <div style="position:absolute;inset:0;background:rgba(0,152,234,.04);z-index:-1;border-radius:var(--r2)"></div>
-        <div class="bca" style="background:linear-gradient(90deg,var(--ton),transparent)"></div>
-        <div class="bcl">
-          <span>TON-SHA — Agent Trust Layer</span>
-          <span class="bdg bton">Testnet Live</span>
-        </div>
-        <div class="bcn">TON-SHA</div>
-        <div class="bcd">ICP-compatible agent trust primitive on TON. Four sequential gates — device authorization, firmware approval, replay protection, SHA-256 digest — enforced by a single Tact contract. The canonical agent check: one call, no intermediary. kQBqWso0…be6S</div>
-        <div class="bct">
-          <span class="bt">TON Blockchain</span><span class="bt">Tact 1.6</span><span class="bt">ZK-Ready</span><span class="bt">0.03 TON/op</span><span class="bt">100+ Txns</span>
-        </div>
-        <a href="/ton-sha.html" class="bclink" data-h style="color:var(--ton)">Explore TON-SHA ↗</a>
-      </div>
+            <!-- IoTeX Research -->
+            <div class="project-card" style="border-left:2px solid rgba(239,68,68,.2)">
+                <div class="card-accent-line" style="background:linear-gradient(90deg,var(--accent-red),transparent)"></div>
+                <div class="card-label">
+                    <span>IoTeX Exploit — Forensic Research</span>
+                    <span class="badge badge-red">⚠ Published</span>
+                </div>
+                <div class="card-name" style="color:var(--accent-red)">Forensic Breakdown</div>
+                <div class="card-desc">$2M–$8.8M private key compromise of February 2026. Gate-by-gate SHA analysis proves silicon-level identity stops the attack at Gate 1 before a single dollar moves. Formal threat model, OAP structural analysis, adversarial counter-analysis.</div>
+                <div class="tag-row">
+                    <span class="tag">SHA Forensics</span>
+                    <span class="tag">DePIN Security</span>
+                    <span class="tag">OAP Model</span>
+                    <span class="tag">Peer Reviewed Draft</span>
+                </div>
+                <div class="card-links">
+                    <a href="/iotex-research.html" class="card-link" style="color:var(--accent-red)">Read Paper ↗</a>
+                </div>
+            </div>
 
-      <!-- IoTeX Research -->
-      <div class="bc" style="grid-column:7/13;border-color:rgba(240,68,56,.18)" data-tilt>
-        <div style="position:absolute;inset:0;background:rgba(240,68,56,.04);z-index:-1;border-radius:var(--r2)"></div>
-        <div class="bca" style="background:linear-gradient(90deg,var(--red),transparent)"></div>
-        <div class="bcl">
-          <span>IoTeX Exploit — Forensic Research</span>
-          <span class="bdg brd">⚠ Published</span>
         </div>
-        <div class="bcn" style="font-size:clamp(1.15rem,1.9vw,1.6rem);color:var(--red)">Forensic Breakdown</div>
-        <div class="bcd">$2M–$8.8M private key compromise of February 2026. Gate-by-gate SHA analysis proves silicon-level identity stops the attack at Gate 1 before a single dollar moves. Formal threat model, OAP structural analysis, adversarial counter-analysis.</div>
-        <div class="bct">
-          <span class="bt">SHA Forensics</span><span class="bt">DePIN Security</span><span class="bt">OAP Model</span><span class="bt">Peer Reviewed Draft</span>
-        </div>
-        <a href="/iotex-research.html" class="bclink" data-h style="color:var(--red)">Read Paper ↗</a>
-      </div>
-
     </div>
-  </div>
 </section>
 
-<!-- ══ CORE INFRASTRUCTURE ════════════════════════════════ -->
-<section id="core-systems">
-  <div class="w">
-    <div class="sl rv">Core Infrastructure — The Foundational Primitives</div>
-    <p class="rv d1" style="font-size:.875rem;color:var(--t2);max-width:680px;margin-bottom:0;line-height:1.7">The three primitives everything else composes with. SHA provides silicon identity. OAP provides lifecycle trust governance. Nexus provides zero-trust execution at the edge.</p>
+<!-- ── Core Infrastructure ────────────────────────────────── -->
+<section id="core">
+    <div class="container">
+        <div class="section-header">// CORE_INFRASTRUCTURE — The Foundational Primitives</div>
+        <p style="font-size:.875rem;color:var(--text-tertiary);max-width:640px;line-height:1.7">The three primitives everything else composes with. SHA provides silicon identity. OAP provides lifecycle trust governance. Nexus provides zero-trust execution at the edge.</p>
 
-    <div class="cs-grid rv d2">
+        <div class="systems-grid">
 
-      <!-- SHA -->
-      <div class="cs-card">
-        <div class="cs-top" style="background:linear-gradient(90deg,var(--blue),transparent)"></div>
-        <div class="cs-label">
-          <span style="color:var(--blue)">Hardware Attestation</span>
-          <span class="bdg blv"><span class="dot-live"></span>Live — Arbitrum Sepolia</span>
-        </div>
-        <div class="cs-name" style="color:var(--blue)">SHA</div>
-        <div class="cs-desc">Arbitrum Stylus smart contract. Cryptographically binds ESP32 eFuse silicon identities to on-chain receipts. 12,564 gas/receipt at N=50 — only possible via Stylus WASM. The Sybil resistance primitive DePIN has been missing.</div>
-        <div class="cs-tags">
-          <span class="bt">Arbitrum</span><span class="bt">Stylus v1.0</span><span class="bt">Rust WASM</span><span class="bt">ESP32 eFuse</span><span class="bt">Keccak-256</span><span class="bt">Replay Protection</span>
-        </div>
-        <a href="/sha.html" class="cs-link" data-h style="color:var(--blue)">Explore SHA ↗</a>
-      </div>
+            <!-- SHA -->
+            <div class="system-card">
+                <div class="system-accent" style="background:linear-gradient(90deg,var(--accent-blue),transparent)"></div>
+                <div class="system-label">
+                    <span style="color:var(--accent-blue)">Hardware Attestation</span>
+                    <span class="badge badge-live"><span class="status-dot" style="width:5px;height:5px;margin-right:3px"></span>Arbitrum Sepolia</span>
+                </div>
+                <div class="system-name" style="color:var(--accent-blue)">SHA</div>
+                <div class="system-desc">Arbitrum Stylus smart contract. Cryptographically binds ESP32 eFuse silicon identities to on-chain receipts. 12,564 gas/receipt at N=50 — only possible via Stylus WASM. The Sybil resistance primitive DePIN has been missing.</div>
+                <div class="tag-row">
+                    <span class="tag">Arbitrum</span>
+                    <span class="tag">Stylus v1.0</span>
+                    <span class="tag">Rust WASM</span>
+                    <span class="tag">ESP32 eFuse</span>
+                    <span class="tag">Keccak-256</span>
+                </div>
+                <a href="/sha.html" class="system-link" style="color:var(--accent-blue)">Explore SHA ↗</a>
+            </div>
 
-      <!-- OAP -->
-      <div class="cs-card">
-        <div class="cs-top" style="background:linear-gradient(90deg,#f59e0b,transparent)"></div>
-        <div class="cs-label">
-          <span style="color:#f59e0b">Integrity Governance</span>
-          <span class="bdg bdev">Development</span>
-        </div>
-        <div class="cs-name" style="color:#f59e0b">OAP</div>
-        <div class="cs-desc">Orthonode Assurance Platform. Deterministic motion validation and lifecycle trust governance. NTS (Neuron Trust Score) computed per-neuron across 4 operational metrics. Emission weighting, sybil resistance, validator reputation.</div>
-        <div class="cs-tags">
-          <span class="bt">NTS Score</span><span class="bt">Lifecycle Trust</span><span class="bt">Clone Containment</span><span class="bt">Adaptive Anchoring</span><span class="bt">Override Governance</span>
-        </div>
-        <a href="/oap.html" class="cs-link" data-h style="color:#f59e0b">Explore OAP ↗</a>
-      </div>
+            <!-- OAP -->
+            <div class="system-card">
+                <div class="system-accent" style="background:linear-gradient(90deg,var(--accent-amber),transparent)"></div>
+                <div class="system-label">
+                    <span style="color:var(--accent-amber)">Integrity Governance</span>
+                    <span class="badge badge-dev">Development</span>
+                </div>
+                <div class="system-name" style="color:var(--accent-amber)">OAP</div>
+                <div class="system-desc">Orthonode Assurance Platform. Deterministic motion validation and lifecycle trust governance. NTS (Neuron Trust Score) computed per-neuron across 4 operational metrics. Emission weighting, Sybil resistance, validator reputation.</div>
+                <div class="tag-row">
+                    <span class="tag">NTS Score</span>
+                    <span class="tag">Lifecycle Trust</span>
+                    <span class="tag">Clone Containment</span>
+                    <span class="tag">Adaptive Anchoring</span>
+                </div>
+                <a href="/oap.html" class="system-link" style="color:var(--accent-amber)">Explore OAP ↗</a>
+            </div>
 
-      <!-- Nexus -->
-      <div class="cs-card">
-        <div class="cs-top" style="background:linear-gradient(90deg,var(--teal),transparent)"></div>
-        <div class="cs-label">
-          <span style="color:var(--teal)">Zero-Trust Gateway</span>
-          <span class="bdg" style="color:#f59e0b;border-color:rgba(245,158,11,.25);background:rgba(245,158,11,.06)">Phase 1.4.0</span>
-        </div>
-        <div class="cs-name" style="color:var(--teal)">Nexus</div>
-        <div class="cs-desc">Sovereign edge gateway for DePIN hardware. Moves the "Moment of Truth" to the edge. Fail-closed Sentry Bridge: if verification fails, execution halts — no exceptions. 1M transaction stress test validated at 50–60 TPS with 0% corruption.</div>
-        <div class="cs-tags">
-          <span class="bt">Verify-Then-Execute</span><span class="bt">Cloudflare Zero Trust</span><span class="bt">SQLite WAL</span><span class="bt">ARMv8</span><span class="bt">Fail-Closed</span>
-        </div>
-        <a href="/nexus.html" class="cs-link" data-h style="color:var(--teal)">Explore Nexus ↗</a>
-      </div>
+            <!-- Nexus -->
+            <div class="system-card">
+                <div class="system-accent" style="background:linear-gradient(90deg,var(--accent-teal),transparent)"></div>
+                <div class="system-label">
+                    <span style="color:var(--accent-teal)">Zero-Trust Gateway</span>
+                    <span class="badge" style="color:var(--accent-amber);border-color:rgba(245,158,11,.25);background:rgba(245,158,11,.06)">Phase 1.4.0</span>
+                </div>
+                <div class="system-name" style="color:var(--accent-teal)">Nexus</div>
+                <div class="system-desc">Sovereign edge gateway for DePIN hardware. Moves the "Moment of Truth" to the edge. Fail-closed Sentry Bridge: if verification fails, execution halts — no exceptions. 1M transaction stress test validated at 50–60 TPS with 0% corruption.</div>
+                <div class="tag-row">
+                    <span class="tag">Verify-Then-Execute</span>
+                    <span class="tag">Cloudflare ZT</span>
+                    <span class="tag">SQLite WAL</span>
+                    <span class="tag">ARMv8</span>
+                    <span class="tag">Fail-Closed</span>
+                </div>
+                <a href="/nexus.html" class="system-link" style="color:var(--accent-teal)">Explore Nexus ↗</a>
+            </div>
 
+        </div>
     </div>
-  </div>
 </section>
 
-<!-- ══ DOCTRINE ═══════════════════════════════════════════ -->
+<!-- ── Doctrine ────────────────────────────────────────────── -->
 <section id="doctrine">
-  <div class="w">
-    <div class="sl rv">Doctrine — First Principles</div>
-    <div class="dg">
-      <div>
-        <h2 class="dt rv d1">Trust through<br><span style="color:var(--gold)">verification.</span></h2>
-        <p class="di rv d2">Not claims. Not models. Not probabilities.<br>Only execution truth — cryptographically proven, silicon-anchored.</p>
-      </div>
-      <ul class="dl rv d3">
-        <li><strong>Deterministic computation</strong> is verifiable; non-determinism is not.</li>
-        <li><strong>Cryptographic proofs</strong> are trustworthy; oral testimony is not.</li>
-        <li><strong>Append-only logs</strong> prevent data-tampering; mutable records do not.</li>
-        <li><strong>Zero-trust</strong> assumes compromise; trust-by-default assumes benevolence — usually wrong.</li>
-        <li><strong>Hardware attestation</strong> proves execution locality; software alone cannot.</li>
-        <li><strong>Four-layer receipts</strong> prevent single-point-of-failure audit.</li>
-        <li><strong>One NTS per neuron, per epoch</strong>; emission weight correlates with trust score.</li>
-        <li><strong>Sybil resistance</strong> via silicon uniqueness (SHA), execution cryptography (TON-SHA), reputation (NTS).</li>
-        <li>Physics is invariant. <strong>Verification is deterministic. Trust is earned.</strong></li>
-      </ul>
-    </div>
-  </div>
-</section>
+    <div class="container">
+        <div class="section-header">// DOCTRINE — First Principles</div>
 
-<!-- ══ SYSTEMS ═════════════════════════════════════════════ -->
-<section id="systems">
-  <div class="w">
-    <div class="sl rv">Systems — Cryptographic Receipt Architecture</div>
-
-    <div class="rg rv d1">
-      <div class="rs">
-        <div class="rh">Four-Gate Receipt</div>
-        <div class="ri">gate_1_entry ▸ node_public_key ▸ execution_payload ▸ hardware_attestation | gate_2_proof ▸ sha_contract ▸ arbitrum_block ▸ timestamp | gate_3_receipt ▸ ton_sha ▸ ton_cell_hash ▸ agent_signature | gate_4_nts ▸ validator_set ▸ reputation_score ▸ emission_weighting</div>
-      </div>
-      <div class="rs">
-        <div class="rh">Neuron Trust Score (NTS) Formula</div>
-        <div class="ri">nts = (accuracy(0-100) + consistency(0-100) + uptime(0-100) + hardware_diversity(0-100)) / 4</div>
-        <div style="font-family:var(--mono);font-size:.65rem;color:var(--t3);padding:.75rem;border:1px solid var(--b1);border-radius:var(--r);margin-top:.75rem">
-          emission_weight = output_quality × (nts / 100) × freshness
-          <div style="color:var(--gold);margin-top:.35rem;font-size:.6rem">// A NTS-40 miner earns 40% of what an honest miner earns — even with a perfect output.</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="nbars" class="rv d2" style="margin-top:3rem">
-      <p class="sl" style="border-bottom:none;padding-bottom:0;margin-bottom:1.75rem">NTS Distribution — 1,000-Neuron Testnet Simulation</p>
-      <div style="display:grid;gap:1.4rem">
-        <div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:.35rem">
-            <span style="font-family:var(--mono);font-size:.63rem;color:var(--t3)">Tier A — NTS ≥90</span>
-            <span style="font-family:var(--mono);font-size:.63rem;color:var(--gold)">184 neurons</span>
-          </div>
-          <div class="nf" data-w="18.4" style="background:var(--gold)"></div>
-        </div>
-        <div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:.35rem">
-            <span style="font-family:var(--mono);font-size:.63rem;color:var(--t3)">Tier B — NTS 75–89</span>
-            <span style="font-family:var(--mono);font-size:.63rem;color:var(--gold)">271 neurons</span>
-          </div>
-          <div class="nf" data-w="27.1" style="background:linear-gradient(90deg,var(--gold),var(--teal))"></div>
-        </div>
-        <div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:.35rem">
-            <span style="font-family:var(--mono);font-size:.63rem;color:var(--t3)">Tier C — NTS 50–74</span>
-            <span style="font-family:var(--mono);font-size:.63rem;color:var(--gold)">312 neurons</span>
-          </div>
-          <div class="nf" data-w="31.2" style="background:var(--teal)"></div>
-        </div>
-        <div>
-          <div style="display:flex;justify-content:space-between;margin-bottom:.35rem">
-            <span style="font-family:var(--mono);font-size:.63rem;color:var(--t3)">Tier D — NTS 0–49</span>
-            <span style="font-family:var(--mono);font-size:.63rem;color:var(--t3)">233 neurons</span>
-          </div>
-          <div class="nf" data-w="23.3" style="background:var(--t3)"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Live metrics -->
-    <div id="sbar" class="rv d3">
-      <p class="sl" style="border-bottom:none;padding-bottom:0;margin-bottom:2rem;margin-top:3rem">Live Metrics — Mar 2026</p>
-      <div id="mbar">
-        <div class="mc">
-          <div class="mct"><span class="mcl">INVARIANT Metagraph</span><span class="bdg blv">Active</span></div>
-          <div class="mcv" data-c="1024">1024</div>
-          <div class="mcs">Registered neurons · 64 validators</div>
-        </div>
-        <div class="mc">
-          <div class="mct"><span class="mcl">SHA Contract</span><span class="bdg blv">Verified</span></div>
-          <div class="mcv mm">0xd661…4615</div>
-          <div class="mcs"><a href="https://sepolia.arbiscan.io/address/0xd661a1ab8cefaacd78f4b968670c3bc438415615" target="_blank" rel="noopener" class="mca" data-h>Arbiscan ↗</a> &nbsp;Block #241M</div>
-        </div>
-        <div class="mc">
-          <div class="mct"><span class="mcl">Rust Throughput</span><span class="bdg bdev">Benchmarked</span></div>
-          <div class="mcv" data-c="9000" data-suffix="/s">9,000/s</div>
-          <div class="mcs">50–100× Python · &lt;50µs/receipt</div>
-        </div>
-        <div class="mc">
-          <div class="mct"><span class="mcl">TON-SHA</span><span class="bdg bton">Live</span></div>
-          <div class="mcv mm" style="font-size:.8rem">kQBqWso0…be6S</div>
-          <div class="mcs"><a href="https://testnet.tonscan.org/address/kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S" target="_blank" rel="noopener" class="mca" data-h>TONScan ↗</a> &nbsp;0.03 TON/op</div>
-        </div>
-        <div class="mc">
-          <div class="mct"><span class="mcl">Stylus Sprint Grant</span><span class="bdg bdev">Pending</span></div>
-          <div class="mcv">$25K</div>
-          <div class="mcs">Applied Feb 2026 · Decision Q1</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ LIVE ON X ════════════════════════════════════════ -->
-<section id="x-section">
-  <div class="w">
-    <div class="sl rv">Live on X — @OrthonodeSys</div>
-
-    <div class="x-container rv d1">
-
-      <!-- Sidebar: account info -->
-      <div class="x-sidebar">
-        <div class="x-logo">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-          </svg>
-          <span class="x-logo-text">Orthonode</span>
-        </div>
-        <div class="x-handle">@OrthonodeSys</div>
-        <p class="x-bio">Building deterministic verification infrastructure for Bittensor, DePIN, and autonomous systems. Hardware attestation. Zero-trust execution. Silicon-level identity.</p>
-        <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" class="x-follow" data-h>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          Follow on X
-        </a>
-        <div class="x-stats">
-          <div class="x-stat">
-            <span class="x-stat-n" id="x-following">–</span>
-            <span class="x-stat-l">Following</span>
-          </div>
-          <div class="x-stat">
-            <span class="x-stat-n" id="x-followers">–</span>
-            <span class="x-stat-l">Followers</span>
-          </div>
-        </div>
-        <div style="margin-top:1.5rem;padding:1.1rem 1.25rem;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r2)">
-          <div style="font-family:var(--mono);font-size:.58rem;color:var(--t3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.5rem">// Research Alert</div>
-          <div style="font-size:.82rem;color:var(--t1);line-height:1.6">IoTeX forensic paper is live. Gate-by-gate SHA analysis of the $2M–$8.8M exploit.</div>
-          <a href="/iotex-research.html" style="font-family:var(--mono);font-size:.65rem;color:var(--red);display:inline-block;margin-top:.65rem;transition:opacity .2s" data-h>Read Paper ↗</a>
-        </div>
-      </div>
-
-      <!-- Tweet feed widget -->
-      <div class="x-feed-wrap">
-        <div class="x-feed-hdr">
-          <div class="x-feed-hdr-left">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--gold)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            <span>Latest posts</span>
-          </div>
-          <span style="color:var(--t3)">auto-updating</span>
-        </div>
-        <div id="x-widget-area">
-          <div class="x-loading" id="x-loading">
-            <div style="margin-bottom:.75rem;color:var(--gold)">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </div>
-            Loading latest posts from @OrthonodeSys…
-          </div>
-          <a class="twitter-timeline"
-             data-theme="dark"
-             data-tweet-limit="4"
-             data-chrome="noheader nofooter noborders transparent"
-             data-link-color="#f5c518"
-             data-dnt="true"
-             href="https://twitter.com/OrthonodeSys"
-             style="display:none">
-            Tweets by OrthonodeSys
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ RESEARCH LOG ═══════════════════════════════════════ -->
-<section>
-  <div class="w">
-    <div class="sl rv">Research Log — Published Analysis</div>
-    <div class="rlog rv d1">
-      <div class="rrow">
-        <div>
-          <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:1rem">
-            <span class="rtag" style="color:var(--red);border-color:rgba(240,68,56,.3);background:rgba(240,68,56,.08)">Incident Analysis</span>
-            <span style="font-family:var(--mono);font-size:.6rem;color:var(--t3)">22 FEB 2026</span>
-            <span class="rtag" style="color:var(--green);border-color:rgba(22,196,127,.2);background:rgba(22,196,127,.06)">Peer Reviewed Draft</span>
-          </div>
-          <h3 class="rtitle">The IoTeX Exploit of February 2026: Silicon-Level Identity as a Mitigation Primitive</h3>
-          <p class="rdesc">Forensic case study of the $2M–$8.8M IoTeX private key compromise. Gate-by-gate SHA analysis, formal threat model, comparative breakdown vs HSM/MPC/TSS, OAP behavioral model, and full adversarial counter-analysis.</p>
-          <div class="rtags">
-            <span class="rtag2">PRIVATE_KEY_COMPROMISE</span>
-            <span class="rtag2">SHA_FORENSICS</span>
-            <span class="rtag2">DEPIN_SECURITY</span>
-            <span class="rtag2">OAP_MODEL</span>
-          </div>
-          <a href="/iotex-research.html" class="btn btn-blue" style="font-size:.68rem;padding:.55rem 1.1rem" data-h>Read Full Paper ↗</a>
-        </div>
-        <div class="rstat">
-          <div>
-            <div class="rstat-label">Type</div>
-            <div style="color:var(--t1);font-size:.72rem">Incident Analysis</div>
-          </div>
-          <div class="rstat-row">
+        <div class="doctrine-grid">
             <div>
-              <div class="rstat-label">Subject</div>
-              <div style="color:var(--t1);font-size:.72rem">IoTeX $2M–$8.8M exploit</div>
+                <h2 class="doctrine-title">Trust through<br><span style="color:var(--accent-gold)">verification.</span></h2>
+                <p class="doctrine-intro">Not claims. Not models. Not probabilities.<br>Only execution truth — cryptographically proven, silicon-anchored.</p>
             </div>
-          </div>
-          <div class="rstat-row">
-            <div>
-              <div class="rstat-label">Method</div>
-              <div style="color:var(--t1);font-size:.72rem">SHA Gate-by-Gate Forensics</div>
-            </div>
-          </div>
-          <div class="rstat-row">
-            <div>
-              <div class="rstat-label">Status</div>
-              <div style="color:var(--green);font-size:.72rem">Published ✓</div>
-            </div>
-          </div>
+            <ul class="doctrine-list">
+                <li><strong>Deterministic computation</strong> is verifiable; non-determinism is not.</li>
+                <li><strong>Cryptographic proofs</strong> are trustworthy; oral testimony is not.</li>
+                <li><strong>Append-only logs</strong> prevent data-tampering; mutable records do not.</li>
+                <li><strong>Zero-trust</strong> assumes compromise; trust-by-default assumes benevolence — usually wrong.</li>
+                <li><strong>Hardware attestation</strong> proves execution locality; software alone cannot.</li>
+                <li><strong>Four-layer receipts</strong> prevent single-point-of-failure audit.</li>
+                <li><strong>One NTS per neuron, per epoch</strong>; emission weight correlates with trust score.</li>
+                <li><strong>Sybil resistance</strong> via silicon uniqueness (SHA), execution cryptography (TON-SHA), reputation (NTS).</li>
+                <li>Physics is invariant. <strong>Verification is deterministic. Trust is earned.</strong></li>
+            </ul>
         </div>
-      </div>
-      <div style="padding:1rem 2.5rem;border-top:1px solid var(--b1);font-family:var(--mono);font-size:.62rem;color:var(--t3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem">
-        <span>1 publication · ongoing research</span>
-        <a href="/site-index.html" style="color:var(--t3);transition:color .2s" data-h onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--t3)'">Site Index ↗</a>
-      </div>
     </div>
-  </div>
 </section>
 
-<!-- ══ CTA ════════════════════════════════════════════════ -->
-<section style="padding-top:0">
-  <div class="w">
-    <div class="ctab rv">
-      <div class="cta-glow"></div>
-      <p class="cta-eye">// orthonode_infrastructure_labs — bhopal, madhya pradesh, india — est. 2025</p>
-      <h2 class="cta-title">Don't trust the output.<br>Verify the execution.</h2>
-      <p class="cta-sub">Five layers. One trust score. Deterministic, cryptographic, append-only. The verification infrastructure decentralized systems cannot assume but absolutely require.</p>
-      <div class="cta-btns">
-        <a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" class="btn btn-gold" data-h data-magnetic>GitHub Repository ↗</a>
-        <a href="/sha.html" class="btn btn-outline" data-h>SHA</a>
-        <a href="/ton-sha.html" class="btn btn-outline" data-h>TON-SHA</a>
-        <a href="/nexus.html" class="btn btn-outline" data-h>Nexus</a>
-        <a href="/oap.html" class="btn btn-outline" data-h>OAP</a>
-        <a href="/iotex-research.html" class="btn btn-danger" data-h>IoTeX Research</a>
-      </div>
+<!-- ── Technical Architecture ─────────────────────────────── -->
+<section id="technical">
+    <div class="container">
+        <div class="section-header">// ARCHITECTURE — Cryptographic Receipt System</div>
+
+        <div class="tech-grid">
+            <div class="tech-card">
+                <div class="tech-card-header">Four-Gate Receipt Format</div>
+                <div class="code-block">gate_1_entry ▸ node_public_key ▸ execution_payload ▸ hardware_attestation<br>
+gate_2_proof ▸ sha_contract ▸ arbitrum_block ▸ timestamp<br>
+gate_3_receipt ▸ ton_sha ▸ ton_cell_hash ▸ agent_signature<br>
+gate_4_nts ▸ validator_set ▸ reputation_score ▸ emission_weighting</div>
+            </div>
+            <div class="tech-card">
+                <div class="tech-card-header">Neuron Trust Score (NTS) Formula</div>
+                <div class="code-block">nts = (accuracy + consistency + uptime + hardware_diversity) / 4</div>
+                <div class="code-block" style="margin-top:.75rem">emission_weight = output_quality × (nts / 100) × freshness</div>
+                <div class="code-note">// A NTS-40 miner earns 40% of what an honest miner earns — even with a perfect output.</div>
+            </div>
+        </div>
+
+        <div class="nts-section">
+            <div class="nts-header">NTS Distribution — 1,000-Neuron Testnet Simulation</div>
+            <div class="nts-bar-row">
+                <div class="nts-bar-label"><span>Tier A — NTS ≥90</span><span style="color:var(--accent-gold)">184 neurons</span></div>
+                <div class="nts-bar-track"><div class="nts-bar-fill" data-width="18.4" style="background:var(--accent-gold)"></div></div>
+            </div>
+            <div class="nts-bar-row">
+                <div class="nts-bar-label"><span>Tier B — NTS 75–89</span><span style="color:var(--accent-gold)">271 neurons</span></div>
+                <div class="nts-bar-track"><div class="nts-bar-fill" data-width="27.1" style="background:linear-gradient(90deg,var(--accent-gold),var(--accent-teal))"></div></div>
+            </div>
+            <div class="nts-bar-row">
+                <div class="nts-bar-label"><span>Tier C — NTS 50–74</span><span style="color:var(--accent-gold)">312 neurons</span></div>
+                <div class="nts-bar-track"><div class="nts-bar-fill" data-width="31.2" style="background:var(--accent-teal)"></div></div>
+            </div>
+            <div class="nts-bar-row">
+                <div class="nts-bar-label"><span>Tier D — NTS 0–49</span><span style="color:var(--text-muted)">233 neurons</span></div>
+                <div class="nts-bar-track"><div class="nts-bar-fill" data-width="23.3" style="background:var(--border-bright)"></div></div>
+            </div>
+        </div>
+
+        <div class="metrics-grid" style="margin-top:3rem">
+            <div class="metric-card">
+                <div class="metric-label">INVARIANT Metagraph <span class="badge badge-live" style="font-size:.55rem">Active</span></div>
+                <div class="metric-value" id="neuron-count">1024</div>
+                <div class="metric-sub">Registered neurons · 64 validators</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">SHA Contract <span class="badge badge-live" style="font-size:.55rem">Verified</span></div>
+                <div class="metric-value mono">0xd661…4615</div>
+                <div class="metric-sub"><a href="https://sepolia.arbiscan.io/address/0xd661a1ab8cefaacd78f4b968670c3bc438415615" target="_blank" rel="noopener">Arbiscan ↗</a> · Block #241M</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Rust Throughput <span class="badge badge-dev" style="font-size:.55rem">Benchmarked</span></div>
+                <div class="metric-value" id="rust-counter">9,000</div>
+                <div class="metric-sub">receipts/sec · 50–100× Python · &lt;50µs/receipt</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">TON-SHA <span class="badge badge-ton" style="font-size:.55rem">Live</span></div>
+                <div class="metric-value mono" style="font-size:.8rem">kQBqWso0…be6S</div>
+                <div class="metric-sub"><a href="https://testnet.tonscan.org/address/kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S" target="_blank" rel="noopener">TONScan ↗</a> · 0.03 TON/op</div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
-<!-- ══ FOOTER ══════════════════════════════════════════════ -->
-<footer>
-  <div class="w">
-    <div class="fg">
-      <div>
-        <div class="fbn">Orthonode Infrastructure Labs</div>
-        <p class="fbd">Building deterministic verification infrastructure for Bittensor, DePIN networks, and autonomous systems. INVARIANT is the trust layer Bittensor has never had. SHA is the identity primitive DePIN has been missing.</p>
-        <div class="fbm">Bhopal, Madhya Pradesh, India · Infrastructure R&amp;D (NIC 72900) · est. 2025<br>infrastructure@orthonode.xyz</div>
-      </div>
-      <div>
-        <div class="fct">Products</div>
-        <ul class="fl">
-          <li><a href="/sha.html" style="color:var(--blue)" data-h>SHA — Hardware Attestation</a></li>
-          <li><a href="/ton-sha.html" style="color:var(--ton)" data-h>TON-SHA — Agent Trust</a></li>
-          <li><a href="/oap.html" style="color:#f59e0b" data-h>OAP — Integrity Governance</a></li>
-          <li><a href="/nexus.html" style="color:var(--teal)" data-h>Nexus — Edge Gateway</a></li>
-          <li><a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" style="color:var(--gold)" data-h>INVARIANT Subnet ↗</a></li>
-          <li><a href="/iotex-research.html" style="color:var(--red)" data-h>IoTeX Research ↗</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="fct">Connect</div>
-        <ul class="fl">
-          <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" data-h>X / Twitter</a></li>
-          <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener" data-h>LinkedIn</a></li>
-          <li><a href="https://github.com/orthonode" target="_blank" rel="noopener" data-h>GitHub</a></li>
-          <li><a href="https://www.reddit.com/user/Automatic_Stick_3881/" target="_blank" rel="noopener" data-h>Reddit</a></li>
-          <li><a href="mailto:infrastructure@orthonode.xyz" data-h>infrastructure@orthonode.xyz</a></li>
-        </ul>
-      </div>
+<!-- ── Live on X ──────────────────────────────────────────── -->
+<section id="live">
+    <div class="container">
+        <div class="section-header">// LIVE_ON_X — @OrthonodeSys</div>
+
+        <div class="x-layout">
+            <div class="x-sidebar">
+                <div class="x-account">
+                    <div class="x-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--text-secondary)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </div>
+                    <div>
+                        <div class="x-handle">@OrthonodeSys</div>
+                    </div>
+                </div>
+                <p class="x-bio">Building deterministic verification infrastructure for Bittensor, DePIN, and autonomous systems. Hardware attestation. Zero-trust execution. Silicon-level identity.</p>
+                <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" class="x-follow-btn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    Follow on X
+                </a>
+                <div class="x-alert">
+                    <div class="x-alert-label">// Research Alert</div>
+                    <div class="x-alert-text">IoTeX forensic paper is live. Gate-by-gate SHA analysis of the $2M–$8.8M exploit.</div>
+                    <a href="/iotex-research.html">Read Paper ↗</a>
+                </div>
+            </div>
+
+            <div>
+                <div class="x-feed">
+                    <div class="x-feed-header">
+                        <span>Latest posts</span>
+                        <span>auto-updating</span>
+                    </div>
+                    <div id="x-widget-area">
+                        <div class="x-loading" id="x-loading">Loading posts from @OrthonodeSys…</div>
+                        <a class="twitter-timeline"
+                           data-theme="dark"
+                           data-tweet-limit="4"
+                           data-chrome="noheader nofooter noborders transparent"
+                           data-link-color="#f5c518"
+                           data-dnt="true"
+                           href="https://twitter.com/OrthonodeSys"
+                           style="display:none">
+                            Tweets by OrthonodeSys
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="fb">
-      <span>© 2026 Orthonode Infrastructure Labs. All Rights Reserved.</span>
-      <div class="fleg">
-        <a href="/terms.html">Terms</a>
-        <a href="/privacy.html">Privacy</a>
-        <a href="/site-index.html">Site Index</a>
-      </div>
+</section>
+
+<!-- ── Research Log ───────────────────────────────────────── -->
+<section id="research">
+    <div class="container">
+        <div class="section-header">// RESEARCH_LOG — Published Analysis</div>
+
+        <div class="research-entry">
+            <div>
+                <div class="research-meta">
+                    <span class="badge badge-red">Incident Analysis</span>
+                    <span>22 FEB 2026</span>
+                    <span class="badge badge-live">Peer Reviewed Draft</span>
+                </div>
+                <h3 class="research-title">The IoTeX Exploit of February 2026: Silicon-Level Identity as a Mitigation Primitive</h3>
+                <p class="research-desc">Forensic case study of the $2M–$8.8M IoTeX private key compromise. Gate-by-gate SHA analysis, formal threat model, comparative breakdown vs HSM/MPC/TSS, OAP behavioral model, and full adversarial counter-analysis.</p>
+                <div class="research-tags">
+                    <span class="research-tag">PRIVATE_KEY_COMPROMISE</span>
+                    <span class="research-tag">SHA_FORENSICS</span>
+                    <span class="research-tag">DEPIN_SECURITY</span>
+                    <span class="research-tag">OAP_MODEL</span>
+                    <span class="research-tag">PEER_REVIEWED_DRAFT</span>
+                </div>
+            </div>
+            <div class="research-stat-box">
+                <div>
+                    <div class="research-stat-label">Scope</div>
+                    <div style="color:var(--text-secondary)">$2M – $8.8M</div>
+                </div>
+                <div>
+                    <div class="research-stat-label">Date</div>
+                    <div style="color:var(--text-secondary)">Feb 22, 2026</div>
+                </div>
+                <div>
+                    <div class="research-stat-label">Mitigation</div>
+                    <div style="color:var(--accent-green)">SHA — Gate 1</div>
+                </div>
+                <a href="/iotex-research.html" style="color:var(--accent-red);font-size:.65rem">Read Paper ↗</a>
+            </div>
+        </div>
+
     </div>
-  </div>
+</section>
+
+</main>
+
+<footer role="contentinfo">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h4>ORTHONODE INFRASTRUCTURE LABS</h4>
+                <p>Building reusable hardware verification infrastructure for decentralized physical infrastructure networks (DePIN). SHA, TON-SHA, INVARIANT, OAP, Nexus, and TIX-DAO are research prototypes in active development.</p>
+                <p style="margin-top:1rem">
+                    <strong style="color:var(--text-tertiary)">Location:</strong> Bhopal, Madhya Pradesh, India<br>
+                    <strong style="color:var(--text-tertiary)">Classification:</strong> Infrastructure Research &amp; Development
+                </p>
+            </div>
+            <div class="footer-links">
+                <h5>Products</h5>
+                <ul>
+                    <li><a href="/sha.html">SHA — Hardware Anchor</a></li>
+                    <li><a href="/oap.html">OAP — Assurance Platform</a></li>
+                    <li><a href="/nexus.html">Nexus Protocol</a></li>
+                    <li><a href="/ton-sha.html">TON-SHA</a></li>
+                    <li><a href="/invariant.html">INVARIANT</a></li>
+                    <li><a href="/tix-dao.html">TIX-DAO</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h5>Connect</h5>
+                <ul>
+                    <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X / Twitter</a></li>
+                    <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub (Org)</a></li>
+                    <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
+                    <li><a href="/iotex-research.html">IoTeX Research</a></li>
+                    <li><a href="/site-index.html">Site Index</a></li>
+                    <li><a href="mailto:infrastructure@orthonode.xyz">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 Orthonode Infrastructure Labs. All Rights Reserved.</div>
+            <div class="footer-legal">
+                <a href="/terms.html">Terms of Service</a>
+                <a href="/privacy.html">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
 </footer>
 
-</div><!-- /app-content -->
+</div><!-- end #app-content -->
 
 <script>
-/* ══════════════════════════════════════════════════════
-   ORTHONODE — INTERACTION ENGINE 2026
-══════════════════════════════════════════════════════ */
-
-/* ── TURNSTILE CALLBACK ─────────────────────────────── */
-function onHumanVerified() {
-  const gate = document.getElementById('sg');
-  const app  = document.getElementById('app-content');
-  gate.classList.add('out');
-  setTimeout(() => {
-    gate.style.display = 'none';
-    app.style.display  = 'block';
-    requestAnimationFrame(() => { app.style.opacity = '1'; });
-    initAll();
-  }, 850);
-}
-
-/* ── INIT ─────────────────────────────────────────────── */
-function initAll() {
-  initCursor();
-  initNav();
-  initParticles();
-  initReveal();
-  initTextScramble();
-  initCardTilt();
-  initMagnetic();
-  initCounters();
-  initNTSBars();
-  initMarquee();
-  initHeroParallax();
-  initTwitterWidget();
-}
-
-/* ── CURSOR ──────────────────────────────────────────── */
-function initCursor() {
-  const cd = document.getElementById('cd');
-  const cr = document.getElementById('cr');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  document.addEventListener('mousedown', () => document.body.classList.add('click'));
-  document.addEventListener('mouseup',   () => document.body.classList.remove('click'));
-  document.addEventListener('mouseleave', () => { cd.style.opacity='0'; cr.style.opacity='0'; });
-  document.addEventListener('mouseenter', () => { cd.style.opacity='1'; cr.style.opacity='1'; });
-
-  const lerp = (a, b, t) => a + (b - a) * t;
-  (function loop() {
-    rx = lerp(rx, mx, .14);
-    ry = lerp(ry, my, .14);
-    cd.style.cssText += `left:${mx}px;top:${my}px;`;
-    cr.style.cssText += `left:${rx}px;top:${ry}px;`;
-    requestAnimationFrame(loop);
-  })();
-
-  document.querySelectorAll('[data-h],a,button,.bc,.mc,.btn,.hsc').forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('ch'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('ch'));
-  });
-}
-
-/* ── NAV ─────────────────────────────────────────────── */
-function initNav() {
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () =>
-    nav.classList.toggle('sc', scrollY > 60), { passive: true });
-}
-
-/* ══ PARTICLE NETWORK (Canvas 3D) ═══════════════════════
-   3D perspective-projected particle field.
-   Gold + white particles. Mouse repulsion. Connection lines.
-══════════════════════════════════════════════════════ */
-function initParticles() {
-  const canvas = document.getElementById('cnvs');
-  const ctx    = canvas.getContext('2d');
-  let W, H;
-
-  function resize() {
-    W = canvas.width  = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', resize, { passive: true });
-
-  const N    = 110;
-  const DIST = 160;
-  const FOV  = 900;
-  let mouse  = { x: W / 2, y: H / 2 };
-
-  document.addEventListener('mousemove', e => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  }, { passive: true });
-
-  class P {
-    constructor() { this.init(); }
-    init() {
-      this.x  = (Math.random() - .5) * 1400;
-      this.y  = (Math.random() - .5) * 900;
-      this.z  = Math.random() * 600 + 50;
-      this.vx = (Math.random() - .5) * .35;
-      this.vy = (Math.random() - .5) * .3;
-      this.vz = (Math.random() - .5) * .2;
-      this.r  = Math.random() * 1.8 + .4;
-      this.gold = Math.random() < .18;
+    function onHumanVerified() {
+        const gate = document.getElementById('security-gate');
+        const content = document.getElementById('app-content');
+        gate.style.display = 'none';
+        content.style.display = 'block';
+        setTimeout(() => { content.style.opacity = '1'; }, 50);
+        initNTSBars();
+        initTwitterWidget();
     }
-    proj() {
-      const s = FOV / (FOV + this.z);
-      return { x: this.x * s + W / 2, y: this.y * s + H / 2, s };
+
+    function initNTSBars() {
+        document.querySelectorAll('.nts-bar-fill').forEach(bar => {
+            const w = parseFloat(bar.dataset.width);
+            setTimeout(() => { bar.style.width = w + '%'; }, 200);
+        });
     }
-    update() {
-      this.x += this.vx; this.y += this.vy; this.z += this.vz;
-      if (Math.abs(this.x) > 800) this.vx *= -1;
-      if (Math.abs(this.y) > 600) this.vy *= -1;
-      if (this.z < 50 || this.z > 750) this.vz *= -1;
+
+    function initTwitterWidget() {
+        const tl = document.querySelector('.twitter-timeline');
+        if (!tl) return;
+        const s = document.createElement('script');
+        s.src = 'https://platform.twitter.com/widgets.js';
+        s.async = true;
+        s.onload = () => {
+            document.getElementById('x-loading').style.display = 'none';
+            tl.style.display = 'block';
+        };
+        s.onerror = () => {
+            document.getElementById('x-loading').textContent = 'Open @OrthonodeSys on X ↗';
+        };
+        document.head.appendChild(s);
     }
-    draw() {
-      const { x, y, s } = this.proj();
-      const a = s * (this.gold ? .9 : .55);
-      const r = this.r * s * 2;
-      ctx.beginPath();
-      ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.fillStyle = this.gold
-        ? `rgba(245,197,24,${a})`
-        : `rgba(255,255,255,${a})`;
-      ctx.fill();
-      if (this.gold) {
-        ctx.beginPath();
-        ctx.arc(x, y, r * 4, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(245,197,24,${s * .035})`;
-        ctx.fill();
-      }
-    }
-  }
-
-  const particles = Array.from({ length: N }, () => new P());
-
-  function drawLines() {
-    for (let i = 0; i < particles.length; i++) {
-      const a  = particles[i];
-      const pa = a.proj();
-      for (let j = i + 1; j < particles.length; j++) {
-        const b  = particles[j];
-        const pb = b.proj();
-        const dx = pa.x - pb.x, dy = pa.y - pb.y;
-        const d  = Math.sqrt(dx * dx + dy * dy);
-        if (d < DIST) {
-          const alpha = (1 - d / DIST) * .2 * Math.min(pa.s, pb.s);
-          ctx.beginPath();
-          ctx.moveTo(pa.x, pa.y);
-          ctx.lineTo(pb.x, pb.y);
-          ctx.strokeStyle = (a.gold || b.gold)
-            ? `rgba(245,197,24,${alpha})`
-            : `rgba(200,200,200,${alpha * .55})`;
-          ctx.lineWidth = .5;
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  let raf;
-  function animate() {
-    raf = requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => { p.update(); p.draw(); });
-    drawLines();
-  }
-  animate();
-}
-
-/* ── REVEAL ON SCROLL ─────────────────────────────── */
-function initReveal() {
-  const io = new IntersectionObserver((entries, obs) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
-    });
-  }, { threshold: .07, rootMargin: '0px 0px -30px 0px' });
-  document.querySelectorAll('.rv').forEach(el => io.observe(el));
-}
-
-/* ── TEXT SCRAMBLE ─────────────────────────────────── */
-function initTextScramble() {
-  const el = document.getElementById('scramble-text');
-  if (!el) return;
-  const final   = el.textContent;
-  const chars   = '!<>-_\\/[]{}—=+*^?#░▒▓';
-  const len     = final.length;
-  let   frame   = 0;
-  let   queue   = [];
-
-  final.split('').forEach((c, i) => {
-    queue.push({ from: randomChar(), to: c, start: Math.floor(i * .6), end: Math.floor(i * .6) + 8 });
-  });
-
-  function randomChar() { return chars[Math.floor(Math.random() * chars.length)]; }
-
-  function update() {
-    let out = '';
-    let done = 0;
-    queue.forEach(({ from, to, start, end }, i) => {
-      if (frame >= end) { done++; out += `<span style="color:var(--t1)">${to}</span>`; }
-      else if (frame >= start) { out += `<span style="color:var(--gold);opacity:.7">${randomChar()}</span>`; }
-      else { out += `<span style="color:var(--t4)">${from}</span>`; }
-    });
-    el.innerHTML = out;
-    if (done < len) { frame++; requestAnimationFrame(update); }
-    else { el.innerHTML = final; }
-  }
-
-  setTimeout(() => { frame = 0; requestAnimationFrame(update); }, 800);
-}
-
-/* ── 3D CARD TILT ──────────────────────────────────── */
-function initCardTilt() {
-  document.querySelectorAll('[data-tilt]').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const r  = card.getBoundingClientRect();
-      const x  = e.clientX - r.left;
-      const y  = e.clientY - r.top;
-      const cx = r.width  / 2;
-      const cy = r.height / 2;
-      const rx = ((y - cy) / cy) * -7;
-      const ry = ((x - cx) / cx) * 7;
-      card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
-      card.style.transition = 'none';
-    });
-    card.addEventListener('mouseleave', () => {
-      card.style.transition = 'transform .6s cubic-bezier(.16,1,.3,1)';
-      card.style.transform  = '';
-    });
-  });
-}
-
-/* ── MAGNETIC BUTTONS ──────────────────────────────── */
-function initMagnetic() {
-  document.querySelectorAll('[data-magnetic]').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-      const r  = btn.getBoundingClientRect();
-      const x  = e.clientX - r.left - r.width  / 2;
-      const y  = e.clientY - r.top  - r.height / 2;
-      btn.style.transform  = `translate(${x * .28}px, ${y * .28}px)`;
-      btn.style.transition = 'none';
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transition = 'transform .55s cubic-bezier(.16,1,.3,1)';
-      btn.style.transform  = '';
-    });
-  });
-}
-
-/* ── COUNTERS ─────────────────────────────────────── */
-function initCounters() {
-  function animCount(el) {
-    const target = +(el.dataset.c);
-    const suffix = el.dataset.suffix || '';
-    const dur    = target > 1000 ? 1800 : 900;
-    let t0 = null;
-    (function tick(ts) {
-      if (!t0) t0 = ts;
-      const p    = Math.min((ts - t0) / dur, 1);
-      const ease = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(ease * target).toLocaleString() + suffix;
-      if (p < 1) requestAnimationFrame(tick);
-    })(performance.now());
-  }
-
-  new IntersectionObserver(([e], obs) => {
-    if (e.isIntersecting) {
-      document.querySelectorAll('[data-c]').forEach(animCount);
-      obs.disconnect();
-    }
-  }, { threshold: .4 }).observe(document.getElementById('sbar'));
-}
-
-/* ── NTS BARS ──────────────────────────────────────── */
-function initNTSBars() {
-  new IntersectionObserver(([e], obs) => {
-    if (e.isIntersecting) {
-      document.querySelectorAll('.nf[data-w]').forEach(el =>
-        setTimeout(() => el.style.width = el.dataset.w + '%', 250));
-      obs.disconnect();
-    }
-  }, { threshold: .3 }).observe(document.getElementById('nbars'));
-}
-
-/* ── MARQUEE ─────────────────────────────────────── */
-function initMarquee() {
-  const items = [
-    'INVARIANT','BITTENSOR SUBNET','LAYER-1 IDENTITY','FOUR-GATE RECEIPT',
-    'OAP ENGINE','SHA-256','KECCAK-256','RUST + PYTHON','ARBITRUM STYLUS',
-    'TON BLOCKCHAIN','NTS SCORE 0–100','EMISSION WEIGHTING','SYBIL RESISTANCE',
-    'REPLAY PROTECTION','DETERMINISTIC VERIFICATION','APPEND-ONLY LEDGER',
-    'ZERO TRUST','DEPIN NODES','ESP32 eFUSE','SILICON IDENTITY',
-    'TIX-DAO','SOLANA GOVERNANCE','GRAVEYARD HACK 2026','NEXUS PROTOCOL',
-    'HARDWARE ATTESTATION','IOTEX FORENSICS'
-  ];
-  const mq = document.getElementById('mq');
-  [...items, ...items].forEach(t => {
-    const s = document.createElement('span');
-    s.className = 'mi';
-    s.innerHTML = `<span class="md"></span>${t}`;
-    mq.appendChild(s);
-  });
-}
-
-/* ── HERO PARALLAX ───────────────────────────────── */
-function initHeroParallax() {
-  const kh = document.getElementById('kh');
-  if (!kh) return;
-  window.addEventListener('scroll', () => {
-    const p = Math.min(scrollY / 400, 1);
-    kh.style.opacity   = 1 - p * .35;
-    kh.style.transform = `translateY(${p * -22}px)`;
-  }, { passive: true });
-}
-
-/* ── TWITTER / X WIDGET ──────────────────────────── */
-function initTwitterWidget() {
-  const tl = document.querySelector('.twitter-timeline');
-  if (!tl) return;
-
-  const s = document.createElement('script');
-  s.src   = 'https://platform.twitter.com/widgets.js';
-  s.async = true;
-  s.onload = () => {
-    if (window.twttr && window.twttr.widgets) {
-      window.twttr.widgets.load(document.getElementById('x-widget-area'));
-    }
-    const loading = document.getElementById('x-loading');
-    if (loading) loading.style.display = 'none';
-    tl.style.display = 'block';
-    // twttr rendered event
-    if (window.twttr) {
-      window.twttr.events.bind('rendered', () => {
-        const l = document.getElementById('x-loading');
-        if (l) l.style.display = 'none';
-      });
-    }
-  };
-  s.onerror = () => {
-    const loading = document.getElementById('x-loading');
-    if (loading) {
-      loading.innerHTML = `<div style="padding:1.5rem;text-align:left">
-        <p style="font-family:var(--mono);font-size:.6rem;color:var(--t3);margin-bottom:1.25rem;text-transform:uppercase;letter-spacing:.1em">// Latest from @OrthonodeSys — visit X to see live posts</p>
-        <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener"
-           style="display:flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.7rem;color:var(--gold);padding:.85rem 1.1rem;background:var(--s2);border:1px solid var(--gold-line);border-radius:var(--r2);transition:background .2s"
-           onmouseover="this.style.background='rgba(245,197,24,.08)'" onmouseout="this.style.background='var(--s2)'">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          View @OrthonodeSys on X ↗
-        </a>
-      </div>`;
-    }
-  };
-  document.head.appendChild(s);
-}
-
-/* ── Security gate typing effect ─────────────────── */
-(function() {
-  const el = document.getElementById('sg-status');
-  if (!el) return;
-  const msgs = [
-    '// ESTABLISHING_SECURE_UPLINK',
-    '// VERIFYING_DEVICE_SIGNATURE',
-    '// AWAITING_HUMAN_CONFIRMATION'
-  ];
-  let i = 0;
-  setInterval(() => {
-    i = (i + 1) % msgs.length;
-    el.style.opacity = '0';
-    setTimeout(() => {
-      el.textContent  = msgs[i];
-      el.style.opacity = '1';
-      el.style.transition = 'opacity .4s';
-    }, 300);
-  }, 2200);
-})();
 </script>
+
 </body>
 </html>
