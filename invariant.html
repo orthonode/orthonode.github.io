@@ -3,625 +3,884 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <title>INVARIANT — Deterministic Trust Infrastructure for Bittensor | Orthonode Labs</title>
     <meta name="description" content="INVARIANT is a Bittensor subnet that produces a cryptographically-verified NTS (INVARIANT Trust Score) per miner. Three layers: SHA hardware identity, execution receipts, OAP lifecycle governance. Phase 1 complete. Testnet March 2026.">
-    <link rel="icon" type="image/png" href="https://orthonode.xyz/site-logo.png">
+    <meta name="keywords" content="INVARIANT Bittensor subnet, NTS trust score, TAO emissions, hardware miner verification, SHA receipt layer, OAP lifecycle governance, Bittensor Sybil resistance, deterministic trust score, Orthonode Labs">
+    <meta name="author" content="Orthonode Infrastructure Labs — Bhopal, Madhya Pradesh, India">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://orthonode.xyz/invariant.html">
+
+    <meta name="geo.region" content="IN-MP">
+    <meta name="geo.placename" content="Bhopal, Madhya Pradesh, India">
+    <meta name="geo.position" content="23.2599;77.4126">
+    <meta name="ICBM" content="23.2599, 77.4126">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orthonode.xyz/invariant.html">
+    <meta property="og:title" content="INVARIANT — Deterministic Trust Infrastructure for Bittensor">
+    <meta property="og:description" content="Three independently unfakeable layers stacked into a complete trust stack — NTS per miner, weights TAO emissions permanently. Phase 1 complete.">
+    <meta property="og:image" content="https://orthonode.xyz/banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="ORTHONODE SYSTEMS™">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@OrthonodeSys">
+    <meta name="twitter:title" content="INVARIANT — Deterministic Trust Infrastructure for Bittensor">
+    <meta name="twitter:description" content="Don't trust the output. Verify the execution. Three layers. One trust score. NTS weights TAO emissions permanently.">
+    <meta name="twitter:image" content="https://orthonode.xyz/banner.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "INVARIANT",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Bittensor",
+      "description": "INVARIANT is a Bittensor subnet that produces a cryptographically-verified NTS (INVARIANT Trust Score) per miner. Three layers: SHA hardware identity, TON-SHA execution receipts, OAP lifecycle governance. Phase 1 complete.",
+      "author": {
+        "@type": "Organization",
+        "name": "Orthonode Infrastructure Labs",
+        "url": "https://orthonode.xyz"
+      }
+    }
+    </script>
+
+    <meta name="theme-color" content="#04060A">
+    <link rel="icon" type="image/png" sizes="96x96" href="/site-logo.png">
+    <link rel="apple-touch-icon" href="/site-logo.png">
+    <link rel="shortcut icon" href="/site-logo.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-primary: #050505;
-            --bg-secondary: #0a0a0a;
-            --bg-elevated: #111111;
-            --border-subtle: #1a1a1a;
-            --border-primary: #262626;
-            --border-bright: #333333;
-            --text-primary: #ffffff;
-            --text-secondary: #ededed;
-            --text-tertiary: #a3a3a3;
-            --text-dim: #737373;
-            --text-muted: #525252;
-            --accent-gold: #f5c518;
-            --accent-gold-glow: rgba(245, 197, 24, 0.25);
-            --accent-success: #22c55e;
-            --accent-success-glow: rgba(34, 197, 94, 0.3);
-            --accent-blue: #3b82f6;
-            --accent-critical: #ef4444;
-            --font-ui: 'Inter', -apple-system, sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-            --font-display: 'Space Grotesk', sans-serif;
-            --shadow-glow: 0 0 24px rgba(245, 197, 24, 0.12);
+            --bg:        #04060A;
+            --bg-1:      #07090F;
+            --bg-2:      #0B0F18;
+            --bg-card:   #080C14;
+            --bg-raised: #0E1520;
+
+            --border:    rgba(255,255,255,0.06);
+            --border-md: rgba(255,255,255,0.10);
+            --border-hi: rgba(255,255,255,0.18);
+
+            --tx-1: #E4EBF0;
+            --tx-2: #8BA0B4;
+            --tx-3: #566476;
+            --tx-4: #374454;
+
+            --cyan:  #00CAFF;
+            --sha:   #2A9FE8;
+            --ton:   #0098EA;
+            --nexus: #00D084;
+            --oap:   #F59E0B;
+            --inv:   #EAB308;
+            --tix:   #9945FF;
+            --red:   #EF4444;
+            --green: #22C55E;
+
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
         body {
-            background: var(--bg-primary);
-            color: var(--text-secondary);
-            font-family: var(--font-ui);
+            background: var(--bg);
+            color: var(--tx-2);
+            font-family: var(--font-body);
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.65;
             overflow-x: hidden;
         }
+
         body::before {
             content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-image:
-                linear-gradient(var(--border-subtle) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.3;
-            z-index: -1;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px);
+            pointer-events: none; z-index: -1;
         }
 
-        a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
-        a:hover { color: var(--text-primary); }
-        ::selection { background: rgba(245,197,24,0.2); color: var(--text-primary); }
+        body::after {
+            content: '';
+            position: fixed; top: -20vh; right: -10vw;
+            width: 55vw; height: 55vw;
+            background: radial-gradient(ellipse, rgba(234,179,8,0.04) 0%, transparent 65%);
+            pointer-events: none; z-index: -2;
+        }
 
-        /* HEADER */
+        a { color: var(--tx-2); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: var(--tx-1); }
+        ::selection { background: rgba(234,179,8,0.2); }
+
+        /* ── Header ─── */
         header {
             position: fixed; top: 0; width: 100%; z-index: 1000;
-            backdrop-filter: blur(12px) saturate(180%);
-            background: rgba(5,5,5,0.85);
-            border-bottom: 1px solid var(--border-primary);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            background: rgba(4,6,10,0.88);
+            border-bottom: 1px solid var(--border);
         }
-        .header-content {
-            max-width: 1400px; margin: 0 auto;
-            padding: 0.875rem 2rem;
-            display: flex; justify-content: space-between; align-items: center; gap: 2rem;
+        header::after {
+            content: '';
+            position: absolute; bottom: -1px; left: 0; width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(234,179,8,0.4) 40%, rgba(245,158,11,0.25) 60%, transparent);
         }
-        .header-left { display: flex; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.75rem; }
-        .header-right { display: flex; align-items: center; gap: 0.75rem; }
-        .status-dot { width: 6px; height: 6px; background: var(--accent-success); border-radius: 50%; box-shadow: 0 0 10px var(--accent-success-glow); animation: pulse 2s infinite; display: inline-block; }
-        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-        .badge {
-            padding: 0.2rem 0.65rem; border-radius: 3px; font-family: var(--font-mono);
-            font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em;
-            border: 1px solid;
-        }
-        .badge-gold { color: var(--accent-gold); border-color: rgba(245,197,24,0.35); background: rgba(245,197,24,0.06); }
-        .badge-green { color: var(--accent-success); border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.06); }
-        .badge-dim { color: var(--text-dim); border-color: var(--border-primary); background: var(--bg-elevated); }
 
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .nav-inner {
+            max-width: 1360px; margin: 0 auto;
+            padding: 0.7rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
 
-        /* HERO */
+        .nav-left { display: flex; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.68rem; }
+        .nav-back { display: flex; align-items: center; gap: 0.45rem; color: var(--tx-3); transition: color 0.2s; }
+        .nav-back:hover { color: var(--inv); }
+        .nav-back img { border-radius: 3px; display: block; }
+        .nav-sep { color: var(--tx-4); }
+        .nav-status { display: flex; align-items: center; gap: 0.45rem; color: var(--tx-3); }
+        .live-dot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; box-shadow: 0 0 6px rgba(34,197,94,0.6); animation: blink 2s ease-in-out infinite; flex-shrink: 0; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .nav-right { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.65rem; }
+        .tag { padding: 0.18rem 0.55rem; border: 1px solid var(--border); color: var(--tx-3); transition: border-color 0.2s, color 0.2s; }
+        .tag:hover { border-color: var(--border-md); color: var(--tx-2); }
+        .tag-inv { color: var(--inv); border-color: rgba(234,179,8,0.2); }
+        .tag-inv:hover { border-color: rgba(234,179,8,0.4); }
+        .tag-green { color: var(--green); border-color: rgba(34,197,94,0.2); background: rgba(34,197,94,0.04); }
+
+        /* ── Container ─── */
+        .wrap { max-width: 1360px; margin: 0 auto; padding: 0 2rem; }
+
+        /* ── Reveal ─── */
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s var(--ease), transform 0.65s var(--ease); }
+        .reveal.in { opacity: 1; transform: translateY(0); }
+
+        /* ── Hero ─── */
         .hero {
-            min-height: 90vh; display: flex; flex-direction: column;
-            justify-content: center; padding-top: 8rem; padding-bottom: 4rem;
+            min-height: 90vh; padding-top: 9rem; padding-bottom: 5rem;
+            display: flex; flex-direction: column; justify-content: center;
+            position: relative;
         }
-        .hero-label {
-            font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1.5rem;
-            display: flex; align-items: center; gap: 0.5rem;
+
+        .hero-glow {
+            position: absolute; top: 0; right: -5%;
+            width: min(500px, 50vw); height: min(500px, 50vw);
+            background: radial-gradient(ellipse, rgba(234,179,8,0.06) 0%, rgba(245,158,11,0.02) 50%, transparent 70%);
+            border-radius: 50%; pointer-events: none;
+            animation: float 18s ease-in-out infinite;
         }
-        .hero-label::before { content: '//'; color: var(--accent-gold); opacity: 0.6; }
-        .brand-title {
-            font-family: var(--font-display); font-weight: 700;
-            font-size: clamp(3rem, 8vw, 6.5rem);
-            line-height: 0.92; letter-spacing: -0.04em;
-            background: linear-gradient(135deg, #ffffff 0%, #f5c518 40%, #fde047 70%, #f5c518 100%);
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-28px); } }
+
+        .breadcrumb { font-family: var(--font-mono); font-size: 0.65rem; color: var(--tx-3); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2rem; }
+        .breadcrumb .bc-cur { color: var(--inv); }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(234,179,8,0.25);
+            background: rgba(234,179,8,0.05);
+            font-family: var(--font-mono); font-size: 0.62rem;
+            color: var(--inv); letter-spacing: 0.08em; margin-bottom: 1.75rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-head);
+            font-size: clamp(4rem, 10vw, 8rem);
+            font-weight: 800; line-height: 0.92;
+            letter-spacing: -0.04em;
+            color: var(--tx-1); margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        .hero-title .accent {
+            background: linear-gradient(135deg, #fff 0%, var(--inv) 45%, #fde047 80%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            text-transform: uppercase; margin-bottom: 0.5rem;
         }
-        .brand-sub {
-            font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim);
-            letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2rem;
+
+        .hero-doctrine {
+            font-family: var(--font-mono); font-size: 0.72rem;
+            color: var(--tx-3); letter-spacing: 0.12em;
+            text-transform: uppercase; margin-bottom: 2.5rem;
         }
+
         .hero-tagline {
-            max-width: 720px; margin-bottom: 2.5rem;
-            padding-left: 1.5rem; border-left: 3px solid rgba(245,197,24,0.4);
+            max-width: 760px; margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            border-left: 2px solid rgba(234,179,8,0.35);
         }
-        .hero-tagline h1 {
-            font-family: var(--font-ui); font-weight: 400;
-            font-size: clamp(1.1rem, 2vw, 1.35rem);
-            line-height: 1.55; color: var(--text-primary); margin-bottom: 0.75rem;
+        .hero-tagline p {
+            font-size: clamp(1rem, 1.8vw, 1.25rem);
+            color: var(--tx-1); font-weight: 400;
+            line-height: 1.55; margin-bottom: 0.5rem;
         }
-        .hero-tagline .sub { color: var(--text-tertiary); font-size: 0.95rem; display: block; margin-top: 0.5rem; }
-        .hero-tagline .status { color: var(--accent-gold); font-family: var(--font-mono); font-size: 0.75rem; display: block; margin-top: 0.75rem; }
+        .hero-tagline .sub { font-size: 0.95rem; color: var(--tx-2); display: block; line-height: 1.65; }
 
-        .cta-row { display: flex; gap: 0.875rem; flex-wrap: wrap; margin-bottom: 3rem; }
-        .btn {
-            display: inline-flex; align-items: center; gap: 0.4rem;
-            padding: 0.8rem 1.6rem; font-family: var(--font-mono); font-size: 0.8rem;
-            font-weight: 600; border-radius: 5px; border: 1px solid transparent;
-            transition: all 0.2s; cursor: pointer; text-decoration: none; letter-spacing: 0.04em;
-        }
-        .btn-primary { background: var(--accent-gold); color: #000; border-color: var(--accent-gold); }
-        .btn-primary:hover { background: #fde047; transform: translateY(-2px); box-shadow: 0 6px 24px var(--accent-gold-glow); }
-        .btn-secondary { background: transparent; color: var(--text-primary); border-color: var(--border-bright); }
-        .btn-secondary:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated); border-color: var(--accent-gold); color: var(--accent-gold);
-            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.12);
-        }
+        .hero-chain { font-family: var(--font-mono); font-size: 0.65rem; color: var(--inv); letter-spacing: 0.06em; margin-bottom: 3rem; opacity: 0.8; }
 
-        /* STATS BAR */
-        .stats-bar {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            border: 1px solid var(--border-primary); gap: 1px; background: var(--border-primary);
-        }
-        .stat-item { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 1.4rem 1.5rem; text-align: center;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
-        }
-        .stat-value { font-family: var(--font-mono); font-size: 1.65rem; font-weight: 700; color: var(--accent-gold); display: block; margin-bottom: 0.2rem; }
-        .stat-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.06em; }
+        /* ── Stats bar ─── */
+        .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .stat { background: var(--bg-card); padding: 1.25rem 1.5rem; text-align: center; transition: background 0.25s; }
+        .stat:hover { background: var(--bg-raised); }
+        .stat-n { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 600; color: var(--inv); display: block; line-height: 1; margin-bottom: 0.4rem; }
+        .stat-l { font-family: var(--font-mono); font-size: 0.6rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.1em; }
 
-        /* SECTIONS */
-        section { padding: 4rem 0; }
-        .section-header {
-            font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim);
-            text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 2rem;
-            padding-bottom: 0.875rem; border-bottom: 1px solid var(--border-primary);
+        /* ── Sec label ─── */
+        .sec-label {
+            font-family: var(--font-mono); font-size: 0.65rem; color: var(--tx-3);
+            text-transform: uppercase; letter-spacing: 0.14em;
+            margin-bottom: 1.75rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; gap: 0.75rem;
         }
+        .sec-label::before { content: ''; width: 2px; height: 12px; background: linear-gradient(180deg, var(--inv), var(--oap)); flex-shrink: 0; }
 
-        /* THREE LAYERS */
-        .layers-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border-primary); border: 1px solid var(--border-primary); }
+        /* ── Sections ─── */
+        .section { margin: 5rem 0; }
+
+        /* ── Grid 2-col ─── */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+
+        /* ── Problem attack grid ─── */
+        .attack-inline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 1.25rem 0; }
+        .attack-cell { background: var(--bg-raised); padding: 0.875rem 1rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--red); }
+
+        /* ── Layer stack ─── */
+        .layer-stack { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
         .layer-row {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 2.25rem 2.5rem;
-            display: grid; grid-template-columns: 140px 1fr auto;
+            background: var(--bg-card);
+            display: grid; grid-template-columns: 120px 1fr 100px;
             gap: 2rem; align-items: start;
-            transition: background .35s,box-shadow .35s,border-color .35s;
+            padding: 2rem 2.25rem; transition: background 0.25s;
         }
-        .layer-row:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
-            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.12);
-        }
-        .layer-num { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; padding-top: 0.1rem; }
-        .layer-name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.4rem; }
-        .layer-tech { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); margin-bottom: 0.75rem; }
-        .layer-desc { color: var(--text-tertiary); font-size: 0.9rem; line-height: 1.65; }
-        .layer-badge { white-space: nowrap; margin-top: 0.2rem; }
+        .layer-row:hover { background: var(--bg-raised); }
 
-        /* FOUR GATES */
-        .gates-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border-primary); border: 1px solid var(--border-primary); }
-        .gate-card { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 1.75rem; transition: background .35s,box-shadow .35s,border-color .35s; }
-        .gate-card:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
-            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.12);
-        }
-        .gate-num { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
-        .gate-title { font-family: var(--font-display); font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem; }
-        .gate-desc { font-size: 0.83rem; color: var(--text-tertiary); line-height: 1.6; margin-bottom: 0.875rem; }
-        .gate-check { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); padding: 0.4rem 0.7rem; background: var(--bg-primary); border: 1px solid var(--border-primary); border-radius: 3px; display: inline-block; }
+        .layer-num { font-family: var(--font-mono); font-size: 0.62rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.1em; padding-top: 0.15rem; }
+        .layer-name { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; color: var(--tx-1); margin-bottom: 0.35rem; line-height: 1.2; }
+        .layer-tech { font-family: var(--font-mono); font-size: 0.68rem; color: var(--tx-3); margin-bottom: 0.75rem; }
+        .layer-desc { color: var(--tx-2); font-size: 0.9rem; line-height: 1.65; }
+        .layer-badge { display: flex; justify-content: flex-end; padding-top: 0.1rem; }
 
-        /* FORMULA */
+        .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.875rem; }
+        .chip { font-family: var(--font-mono); font-size: 0.6rem; padding: 0.18rem 0.5rem; border: 1px solid var(--border); color: var(--tx-3); letter-spacing: 0.04em; }
+        .chip-sha { border-color: rgba(42,159,232,0.25); color: var(--sha); background: rgba(42,159,232,0.04); }
+        .chip-ton { border-color: rgba(0,152,234,0.25); color: var(--ton); background: rgba(0,152,234,0.04); }
+        .chip-oap { border-color: rgba(245,158,11,0.25); color: var(--oap); background: rgba(245,158,11,0.04); }
+        .chip-inv { border-color: rgba(234,179,8,0.25); color: var(--inv); background: rgba(234,179,8,0.04); }
+
+        .pill { font-family: var(--font-mono); font-size: 0.6rem; padding: 0.18rem 0.5rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.3rem; }
+        .pill-green { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.22); color: var(--green); }
+        .pill-inv   { background: rgba(234,179,8,0.07); border: 1px solid rgba(234,179,8,0.22); color: var(--inv); }
+        .pill-sha   { background: rgba(42,159,232,0.07); border: 1px solid rgba(42,159,232,0.22); color: var(--sha); }
+
+        /* ── Gate grid ─── */
+        .gate-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .gate-card { background: var(--bg-card); padding: 1.75rem 1.5rem; transition: background 0.25s; border-top: 2px solid transparent; }
+        .gate-card:hover { background: var(--bg-raised); }
+        .gate-num { font-family: var(--font-mono); font-size: 0.6rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+        .gate-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--tx-1); margin-bottom: 0.5rem; }
+        .gate-desc { font-size: 0.83rem; color: var(--tx-2); line-height: 1.6; margin-bottom: 0.875rem; }
+        .gate-blocks { font-family: var(--font-mono); font-size: 0.68rem; color: var(--tx-3); padding: 0.35rem 0.65rem; background: var(--bg); border: 1px solid var(--border); display: inline-block; }
+
+        /* ── Formula block ─── */
         .formula-block {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); border: 1px solid var(--border-primary);
-            border-left: 3px solid var(--accent-gold); padding: 2rem 2.5rem; margin: 2rem 0;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
+            border: 1px solid var(--border);
+            border-left: 2px solid rgba(234,179,8,0.5);
+            background: rgba(234,179,8,0.03);
+            padding: 2.25rem 2.5rem;
         }
-        .formula-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1rem; }
-        .formula-eq { font-family: var(--font-display); font-size: clamp(1rem, 2.5vw, 1.5rem); color: var(--text-primary); font-weight: 600; letter-spacing: -0.02em; margin-bottom: 1rem; }
-        .formula-eq .v { color: var(--accent-gold); }
-        .formula-eq .op { color: var(--text-dim); }
-        .formula-notes { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-tertiary); line-height: 2; }
-        .formula-notes span { color: var(--text-primary); }
+        .formula-label { font-family: var(--font-mono); font-size: 0.62rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.25rem; }
+        .formula-eq { font-family: var(--font-mono); font-size: clamp(0.95rem, 2.2vw, 1.4rem); color: var(--tx-1); font-weight: 600; margin-bottom: 1.25rem; line-height: 1.5; }
+        .formula-eq .v { color: var(--inv); }
+        .formula-eq .op { color: var(--tx-3); }
+        .formula-notes { font-family: var(--font-mono); font-size: 0.78rem; color: var(--tx-3); line-height: 2; }
+        .formula-notes span { color: var(--tx-1); }
+        .formula-notes .warn { color: var(--red); }
 
-        /* ATTACK TABLE */
-        .attack-table { width: 100%; border-collapse: collapse; }
-        .attack-table th {
-            font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase;
-            letter-spacing: 0.1em; color: var(--text-dim); padding: 0.75rem 1.25rem;
-            border-bottom: 1px solid var(--border-primary); text-align: left;
-            background: var(--bg-elevated);
-        }
-        .attack-table td {
-            padding: 0.9rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.04);
-            font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-tertiary);
-            vertical-align: middle;
-        }
-        .attack-table tr:hover td { background: rgba(255,255,255,0.015); }
-        .attack-name { color: var(--text-secondary); font-weight: 500; }
-        .defense-none { color: var(--accent-critical); font-size: 0.7rem; }
-        .defense-inv { color: var(--accent-success); font-size: 0.7rem; }
+        /* ── Attack table ─── */
+        .table-wrap { border: 1px solid var(--border); overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.75rem; }
+        thead tr { background: var(--bg-2); border-bottom: 1px solid var(--border-md); }
+        th { padding: 0.7rem 1.2rem; text-align: left; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.62rem; font-weight: 500; }
+        tbody tr { border-bottom: 1px solid rgba(255,255,255,0.03); transition: background 0.15s; }
+        tbody tr:last-child { border-bottom: none; }
+        tbody tr:hover { background: rgba(255,255,255,0.02); }
+        td { padding: 0.75rem 1.2rem; color: var(--tx-2); }
+        .td-attack { color: var(--tx-1); font-weight: 500; }
+        .td-none { color: var(--red); }
+        .td-def { color: var(--green); }
 
-        /* ROADMAP PHASES */
-        .phases { display: flex; flex-direction: column; gap: 1px; background: var(--border-primary); border: 1px solid var(--border-primary); }
+        /* ── Evidence grid ─── */
+        .evidence-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .evidence-card { background: var(--bg-card); padding: 1.75rem; transition: background 0.25s; }
+        .evidence-card:hover { background: var(--bg-raised); }
+        .evidence-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem; }
+        .evidence-value { font-family: var(--font-mono); font-size: 0.78rem; color: var(--tx-2); word-break: break-all; line-height: 1.6; margin-bottom: 0.5rem; }
+        .evidence-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--tx-3); display: flex; gap: 1.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+        .evidence-link { font-family: var(--font-mono); font-size: 0.68rem; color: var(--sha); transition: color 0.2s; }
+        .evidence-link.ton-link { color: var(--ton); }
+        .evidence-link:hover { color: #5bbfff; }
+
+        /* ── Roadmap phases ─── */
+        .phases { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
         .phase-row {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 1.6rem 2rem;
-            display: grid; grid-template-columns: 80px 180px 1fr auto;
+            background: var(--bg-card);
+            display: grid; grid-template-columns: 60px 200px 1fr auto;
             gap: 1.5rem; align-items: center;
-            transition: background .35s,box-shadow .35s,border-color .35s;
+            padding: 1.5rem 2rem; transition: background 0.25s;
         }
-        .phase-row:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
-            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.12);
-        }
-        .phase-num { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; color: var(--text-muted); }
-        .phase-name { font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
-        .phase-target { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); margin-top: 0.2rem; }
-        .phase-desc { font-size: 0.85rem; color: var(--text-tertiary); line-height: 1.55; }
+        .phase-row:hover { background: var(--bg-raised); }
+        .phase-num { font-family: var(--font-mono); font-size: 1.2rem; font-weight: 600; color: var(--tx-4); }
+        .phase-name { font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; color: var(--tx-1); }
+        .phase-target { font-family: var(--font-mono); font-size: 0.65rem; color: var(--tx-3); margin-top: 0.2rem; }
+        .phase-desc { font-size: 0.85rem; color: var(--tx-2); line-height: 1.55; }
 
-        /* METRICS */
-        .metrics-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border-primary); border: 1px solid var(--border-primary); border-radius: 4px; overflow: hidden; }
-        .metric-card { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 1.5rem; transition: background .35s,box-shadow .35s,border-color .35s; }
-        .metric-card:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
-            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.12);
-        }
-        .metric-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
-        .metric-value { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; }
-        .metric-sub { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); }
+        /* ── Metrics grid ─── */
+        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+        .metric-card { background: var(--bg-card); padding: 1.5rem; transition: background 0.25s; }
+        .metric-card:hover { background: var(--bg-raised); }
+        .metric-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+        .metric-val { font-family: var(--font-mono); font-size: 1.4rem; font-weight: 600; color: var(--tx-1); margin-bottom: 0.25rem; }
+        .metric-sub { font-family: var(--font-mono); font-size: 0.65rem; color: var(--tx-3); }
 
-        /* CTA */
-        .cta-section {
-            margin: 2rem 0; padding: 4rem; background: var(--bg-elevated);
-            border: 1px solid var(--border-primary); border-radius: 8px; text-align: center;
-        }
-        .cta-section h2 { font-family: var(--font-display); font-size: 2rem; color: var(--text-primary); margin-bottom: 1rem; }
-        .cta-section p { color: var(--text-tertiary); font-size: 1rem; max-width: 560px; margin: 0 auto 2rem; }
-        .cta-section .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        /* ── CTA ─── */
+        .cta { background: var(--bg-card); border: 1px solid var(--border); padding: 3.5rem; text-align: center; position: relative; overflow: hidden; }
+        .cta::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 50%; height: 1px; background: linear-gradient(90deg, transparent, rgba(234,179,8,0.55), transparent); }
+        .cta h2 { font-family: var(--font-head); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; color: var(--tx-1); margin-bottom: 0.875rem; }
+        .cta p { color: var(--tx-2); max-width: 520px; margin: 0 auto 2rem; }
+        .cta-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
 
-        /* FOOTER */
-        footer { padding: 3rem 0 2rem; border-top: 1px solid var(--border-primary); }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; margin-bottom: 2rem; }
-        .footer-brand h4 { font-family: var(--font-display); font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.75rem; }
-        .footer-brand p { color: var(--text-dim); font-size: 0.85rem; line-height: 1.65; }
-        .footer-links h5 { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.875rem; }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 0.6rem; }
-        .footer-links a { color: var(--text-tertiary); font-size: 0.85rem; }
-        .footer-links a:hover { color: var(--accent-gold); }
-        .footer-bottom { padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); }
+        /* ── Buttons ─── */
+        .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.7rem 1.4rem; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; border: 1px solid var(--border-md); color: var(--tx-2); background: transparent; text-decoration: none; transition: all 0.22s var(--ease); letter-spacing: 0.03em; }
+        .btn:hover { color: var(--tx-1); border-color: var(--border-hi); background: rgba(255,255,255,0.03); }
+        .btn-primary { background: var(--inv); color: #04060A; border-color: var(--inv); }
+        .btn-primary:hover { background: #fde047; border-color: #fde047; color: #04060A; box-shadow: 0 0 24px rgba(234,179,8,0.35); }
 
-        /* TECH BADGES */
-        .tech-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
-        .tech-badge { font-family: var(--font-mono); font-size: 0.7rem; padding: 0.25rem 0.65rem; background: var(--bg-primary); border: 1px solid var(--border-bright); border-radius: 3px; color: var(--text-dim); }
+        /* ── Footer ─── */
+        footer { margin-top: 8rem; padding: 4rem 0 2rem; border-top: 1px solid var(--border); position: relative; }
+        footer::before { content: ''; position: absolute; top: -1px; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(234,179,8,0.35) 35%, rgba(245,158,11,0.2) 65%, transparent); }
 
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+        .footer-brand h4 { font-family: var(--font-head); font-size: 1rem; font-weight: 800; color: var(--tx-1); margin-bottom: 0.875rem; letter-spacing: 0.04em; }
+        .footer-brand p { color: var(--tx-3); font-size: 0.875rem; line-height: 1.6; }
+        .footer-col h5 { font-family: var(--font-mono); font-size: 0.62rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 1.1rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 0.65rem; }
+        .footer-col a { color: var(--tx-3); font-size: 0.875rem; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--tx-1); }
+        .footer-bottom { padding-top: 1.75rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.65rem; color: var(--tx-3); }
+        .footer-legal { display: flex; gap: 1.5rem; }
+        .footer-legal a { color: var(--tx-3); font-size: 0.65rem; }
+        .footer-legal a:hover { color: var(--tx-1); }
+
+        /* ── Responsive ─── */
         @media (max-width: 1024px) {
-            .layers-grid .layer-row { grid-template-columns: 1fr; }
-            .gates-grid { grid-template-columns: 1fr 1fr; }
-            .phase-row { grid-template-columns: 60px 1fr auto; }
-            .phase-desc { display: none; }
-            .metrics-grid { grid-template-columns: 1fr 1fr; }
+            .gate-grid { grid-template-columns: repeat(2, 1fr); }
+            .layer-row { grid-template-columns: 1fr; gap: 0.75rem; }
+            .layer-badge { justify-content: flex-start; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .footer-brand { grid-column: span 2; }
+            .phase-row { grid-template-columns: 50px 160px 1fr auto; gap: 1rem; }
         }
         @media (max-width: 768px) {
-            .header-content { flex-wrap: wrap; }
-            .hero { padding-top: 6rem; }
-            .stats-bar { grid-template-columns: 1fr 1fr; }
-            .gates-grid { grid-template-columns: 1fr; }
-            .cta-section { padding: 2rem; }
+            .nav-inner { padding: 0.7rem 1rem; }
+            .grid-2, .evidence-grid { grid-template-columns: 1fr; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .attack-inline { grid-template-columns: 1fr 1fr; }
+            .gate-grid { grid-template-columns: 1fr; }
+            .phase-row { grid-template-columns: 1fr; }
+            .phase-desc, .phase-num { display: none; }
+            .metrics-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
+            .footer-brand { grid-column: span 1; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .cta { padding: 2.5rem 1.5rem; }
+            .formula-block { padding: 1.5rem; }
         }
-    
-/* ── glass card depth injection ───────────────────── */
-.layer-row,.gate-card,.metric-card,.phase-row,.stat-item,.formula-block{box-shadow:0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);transition:background .35s,box-shadow .35s,border-color .35s!important}
-.layer-row:hover,.gate-card:hover,.metric-card:hover,.phase-row:hover,.stat-item:hover{box-shadow:0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(245,197,24,.07),inset 0 1px 0 rgba(255,255,255,.1)!important}
-</style>
+        @media (max-width: 480px) {
+            .stats-bar { grid-template-columns: 1fr 1fr; }
+            .attack-inline { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-    <div class="header-content">
-        <div class="header-left">
-            <span class="status-dot"></span>
-            <span style="color:var(--text-dim)">ORTHONODE INFRASTRUCTURE [OPERATIONAL]</span>
+<!-- ═══════════════════════════════
+     HEADER
+════════════════════════════════ -->
+<header role="banner">
+    <div class="nav-inner">
+        <div class="nav-left">
+            <a href="/" class="nav-back">
+                <img src="/site-logo.png" alt="" width="16" height="16">
+                orthonode.xyz
+            </a>
+            <span class="nav-sep">/</span>
+            <div class="nav-status">
+                <span class="live-dot" role="img" aria-label="Phase 1 complete"></span>
+                <span>INVARIANT</span>
+            </div>
         </div>
-        <div class="header-right">
-            <span class="badge badge-gold">BITTENSOR SUBNET</span>
-            <span class="badge badge-green">✓ PHASE 1 DONE</span>
-            <a href="/" class="badge badge-dim">← Back to Orthonode</a>
+        <div class="nav-right">
+            <span class="tag tag-green">PHASE_1_DONE</span>
+            <span class="tag tag-inv">BITTENSOR_SUBNET</span>
+            <span class="tag">TESTNET_MARCH_2026</span>
         </div>
     </div>
 </header>
 
-<main class="container">
+<!-- ═══════════════════════════════
+     MAIN
+════════════════════════════════ -->
+<main class="wrap">
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-label">Bittensor Subnet — Deterministic Trust Infrastructure — by Orthonode Labs</div>
-        <div class="brand-title">INVARIANT</div>
-        <div class="brand-sub">// Execution is the claim. Proof is INVARIANT.</div>
-        <div class="hero-tagline">
-            <h1>Every Bittensor subnet today trusts miner <em>outputs</em>. INVARIANT makes them <strong>provable</strong>.</h1>
-            <span class="sub">Three independently unfakeable layers stacked into a complete trust stack — producing a cryptographically-verified NTS (INVARIANT Trust Score) per miner that weights TAO emissions permanently.</span>
-            <span class="status">// SHA_ARBITRUM_LIVE &nbsp;·&nbsp; TON-SHA_TESTNET_LIVE &nbsp;·&nbsp; OAP_PUBLISHED &nbsp;·&nbsp; PHASE_1_COMPLETE &nbsp;·&nbsp; TESTNET_MARCH_2026</span>
-        </div>
-        <div class="cta-row">
-            <a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" class="btn btn-primary">View on GitHub ↗</a>
-            <a href="/sha.html" class="btn btn-secondary">Explore SHA</a>
-            <a href="/oap.html" class="btn btn-secondary">Explore OAP</a>
-            <a href="/invariant-roadmap.html" class="btn btn-secondary">Full Roadmap →</a>
-        </div>
-        <div class="stats-bar">
-            <div class="stat-item"><span class="stat-value">3</span><span class="stat-label">Protocol Layers</span></div>
-            <div class="stat-item"><span class="stat-value">21</span><span class="stat-label">Tests Passing</span></div>
-            <div class="stat-item"><span class="stat-value">9,000+</span><span class="stat-label">Rust Receipts/sec</span></div>
-            <div class="stat-item"><span class="stat-value">10,000+</span><span class="stat-label">Test Vectors</span></div>
-        </div>
-    </section>
+<!-- ── HERO ────────────────────────────────── -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
 
-    <!-- THE PROBLEM -->
-    <section>
-        <h2 class="section-header">// THE_PROBLEM : BITTENSOR_TRUST_GAP</h2>
-        <div style="background:var(--bg-secondary);border:1px solid var(--border-primary);padding:2.5rem;margin-bottom:1px;">
-            <p style="font-size:1.0625rem;color:var(--text-primary);font-weight:400;line-height:1.65;max-width:800px;margin-bottom:1.5rem;">
-                Academic analysis of two years of Bittensor on-chain data found that <strong>rewards are driven by stake, not quality</strong>. The root cause: Bittensor's Yuma Consensus scores miners on <em>outputs</em> — but outputs are trivial to fake.
-            </p>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--border-primary);border:1px solid var(--border-primary);">
-                <div style="background:var(--bg-elevated);padding:1rem 1.25rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-critical);">→ Return a cached response</div>
-                <div style="background:var(--bg-elevated);padding:1rem 1.25rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-critical);">→ Copy another miner's output</div>
-                <div style="background:var(--bg-elevated);padding:1rem 1.25rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-critical);">→ Run cheap model, claim expensive</div>
-                <div style="background:var(--bg-elevated);padding:1rem 1.25rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-critical);">→ Submit same receipt twice</div>
-                <div style="background:var(--bg-elevated);padding:1rem 1.25rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-critical);">→ Sybil with new identities</div>
-                <div style="background:var(--bg-elevated);padding:1rem 1.25rem;font-family:var(--font-mono);font-size:0.8rem;color:var(--accent-critical);">→ Validator cartel collusion</div>
-            </div>
-            <p style="color:var(--text-tertiary);font-size:0.9rem;margin-top:1.5rem;">Current Bittensor defense: <strong style="color:var(--text-secondary);">None</strong> for any of the above. INVARIANT closes every attack.</p>
-        </div>
-    </section>
+    <p class="breadcrumb">ORTHONODE SYSTEMS / <span class="bc-cur">INVARIANT</span></p>
 
-    <!-- THREE LAYERS -->
-    <section>
-        <h2 class="section-header">// ARCHITECTURE : THREE_LAYER_TRUST_STACK</h2>
-        <div class="layers-grid">
-            <div class="layer-row">
-                <div class="layer-num">Layer 1<br>Identity</div>
-                <div>
-                    <div class="layer-name">SHA — Stylus Hardware Anchor</div>
-                    <div class="layer-tech">Keccak-256 on Arbitrum · ESP32-S3 eFuse · Rust + Stylus</div>
-                    <div class="layer-desc">Hardware-bound identity. Binds immutable eFuse silicon identifiers to Arbitrum Stylus contracts. Proves <em>who</em> this miner is — at the silicon layer, not the software layer. 89+ live transactions.</div>
-                    <div class="tech-badges">
-                        <span class="tech-badge">ARBITRUM_SEPOLIA_LIVE</span>
-                        <span class="tech-badge">KECCAK-256</span>
-                        <span class="tech-badge">RUST_STYLUS</span>
-                        <span class="tech-badge">12,564 GAS/RECEIPT</span>
-                    </div>
-                </div>
-                <div class="layer-badge"><span class="badge badge-green">✓ Live</span></div>
-            </div>
-            <div class="layer-row">
-                <div class="layer-num">Layer 2<br>Receipt</div>
-                <div>
-                    <div class="layer-name">TON-SHA — Execution Receipt</div>
-                    <div class="layer-tech">SHA-256 four-gate · Tact 1.6 on TON · 0.03 TON/op</div>
-                    <div class="layer-desc">Four-gate execution receipt system. Proves <em>how</em> the miner produced the output. Identity gating → firmware governance → replay protection → cryptographic digest. 17+ live transactions on TON Testnet.</div>
-                    <div class="tech-badges">
-                        <span class="tech-badge">TON_TESTNET_LIVE</span>
-                        <span class="tech-badge">SHA-256</span>
-                        <span class="tech-badge">TACT_1.6</span>
-                        <span class="tech-badge">136-BYTE_RECEIPT</span>
-                    </div>
-                </div>
-                <div class="layer-badge"><span class="badge badge-green">✓ Live</span></div>
-            </div>
-            <div class="layer-row">
-                <div class="layer-num">Layer 3<br>History</div>
-                <div>
-                    <div class="layer-name">OAP — Integrity Governance Engine</div>
-                    <div class="layer-tech">Lifecycle trust scoring 0–100 · Append-only history · Python</div>
-                    <div class="layer-desc">Lifecycle trust governance. Append-only behavioral history produces NTS scores across every tempo. Catastrophic flag for repeat violations. Proves <em>who they have been</em> — across the miner's entire history. Cannot be reset.</div>
-                    <div class="tech-badges">
-                        <span class="tech-badge">NTS_0–100</span>
-                        <span class="tech-badge">APPEND_ONLY</span>
-                        <span class="tech-badge">CATASTROPHIC_FLAG</span>
-                        <span class="tech-badge">2/YR_OVERRIDE_CAP</span>
-                    </div>
-                </div>
-                <div class="layer-badge"><span class="badge badge-gold">Published</span></div>
-            </div>
-        </div>
-    </section>
+    <div class="hero-badge">
+        <span class="live-dot"></span>
+        PHASE 1 COMPLETE · TESTNET MARCH 2026 · BITTENSOR SUBNET
+    </div>
 
-    <!-- FOUR GATES -->
-    <section>
-        <h2 class="section-header">// FOUR_GATE_VERIFIER : EVERY_RECEIPT_PASSES_ALL_FOUR</h2>
-        <div class="gates-grid">
-            <div class="gate-card" style="border-top:2px solid #3b82f6">
-                <div class="gate-num">Gate 1 — Identity</div>
-                <div class="gate-title">Agent Registry Check</div>
-                <div class="gate-desc">agent_id must be in authorized registry. Blocks Sybil attacks and cross-miner output copying. The agent_id is hotkey-bound — cannot be forged.</div>
-                <span class="gate-check">Blocks: Sybil · Output Copying</span>
-            </div>
-            <div class="gate-card" style="border-top:2px solid #22c55e">
-                <div class="gate-num">Gate 2 — Model</div>
-                <div class="gate-title">Approved Model Registry</div>
-                <div class="gate-desc">model_hash must match the community-approved model list. Blocks model impersonation — running a cheap model while claiming an expensive one.</div>
-                <span class="gate-check">Blocks: Model Impersonation</span>
-            </div>
-            <div class="gate-card" style="border-top:2px solid #f59e0b">
-                <div class="gate-num">Gate 3 — Counter</div>
-                <div class="gate-title">Monotonic Counter</div>
-                <div class="gate-desc">counter must be strictly greater than the last confirmed counter. Mathematically airtight replay and rollback prevention. No exceptions.</div>
-                <span class="gate-check">Blocks: Replay · Rollback</span>
-            </div>
-            <div class="gate-card" style="border-top:2px solid #f5c518">
-                <div class="gate-num">Gate 4 — Digest</div>
-                <div class="gate-title">SHA-256 Digest Verification</div>
-                <div class="gate-desc">SHA-256(agent_id ‖ model_hash ‖ execution_hash ‖ counter) == digest. The execution_hash includes the tempo_id — so cross-tempo caching fails this gate.</div>
-                <span class="gate-check">Blocks: Caching · Tamper</span>
-            </div>
-        </div>
-    </section>
+    <div class="hero-title"><span class="accent">INVARIANT</span></div>
+    <div class="hero-doctrine">// Execution is the claim. Proof is INVARIANT.</div>
 
-    <!-- EMISSION FORMULA -->
-    <section>
-        <h2 class="section-header">// NTS_EMISSION_WEIGHTING</h2>
-        <div class="formula-block">
-            <div class="formula-label">// emission_weight_formula</div>
-            <div class="formula-eq">
-                <span class="v">weight</span> <span class="op">=</span>
-                <span class="v"> output_quality</span> <span class="op">×</span>
-                <span class="op">(</span><span class="v">NTS</span><span class="op">/100)</span>
-                <span class="op"> × </span><span class="v">freshness_factor</span>
-            </div>
-            <div class="formula-notes">
-                NTS 90 + perfect output = <span>weight 0.90</span><br>
-                NTS 40 + perfect output = <span>weight 0.40</span>&nbsp;&nbsp;(past behavior permanently shapes future earnings)<br>
-                Cold start = <span>NTS 50.0</span>&nbsp;&nbsp;·&nbsp;&nbsp;Gate 1 violation = <span style="color:var(--accent-critical)">−25.0 scar</span><br>
-                3× Gate 3 violations = <span style="color:var(--accent-critical)">Catastrophic flag — permanent NTS cap at 40.0</span><br>
-                Max 2 overrides/year — logged immutably — cannot be cleared programmatically
-            </div>
-        </div>
-    </section>
+    <div class="hero-tagline">
+        <p>Every Bittensor subnet today trusts miner <em>outputs</em>. INVARIANT makes them <strong>provable</strong>.</p>
+        <span class="sub">Three independently unfakeable layers stacked into a complete trust stack — producing a cryptographically-verified NTS (INVARIANT Trust Score) per miner that weights TAO emissions permanently.</span>
+    </div>
 
-    <!-- ATTACK TABLE -->
-    <section>
-        <h2 class="section-header">// ATTACK_DEFENSE_MATRIX</h2>
-        <div style="background:var(--bg-secondary);border:1px solid var(--border-primary);overflow:hidden;">
-            <table class="attack-table">
-                <thead>
-                    <tr>
-                        <th>Attack</th>
-                        <th>Current Bittensor Defense</th>
-                        <th>INVARIANT Defense</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td class="attack-name">Return a cached response</td><td class="defense-none">None</td><td class="defense-inv">execution_hash includes tempo_id → Gate 4 fails</td></tr>
-                    <tr><td class="attack-name">Copy another miner's output</td><td class="defense-none">None</td><td class="defense-inv">agent_id is hotkey-bound → Gate 1 fails</td></tr>
-                    <tr><td class="attack-name">Run cheap model, claim expensive</td><td class="defense-none">None</td><td class="defense-inv">model_hash must match approved registry → Gate 2 fails</td></tr>
-                    <tr><td class="attack-name">Submit same receipt twice</td><td class="defense-none">None</td><td class="defense-inv">Monotonic counter → Gate 3 fails</td></tr>
-                    <tr><td class="attack-name">Sybil with new identities</td><td class="defense-none">None</td><td class="defense-inv">NTS starts at 50 — gaming costs real tempo time</td></tr>
-                    <tr><td class="attack-name">Validator cartel collusion</td><td class="defense-none">Yuma (probabilistic)</td><td class="defense-inv">Gates are deterministic — two honest validators always agree</td></tr>
-                    <tr><td class="attack-name">Digest forgery</td><td class="defense-none">None</td><td class="defense-inv">Can't produce valid SHA-256 without running the computation</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+    <p class="hero-chain">// SHA_ARBITRUM_LIVE · TON_SHA_TESTNET_LIVE · OAP_PUBLISHED · PHASE_1_COMPLETE</p>
 
-    <!-- CONTRACTS LIVE -->
-    <section>
-        <h2 class="section-header">// LIVE_CONTRACTS : ON_CHAIN_EVIDENCE</h2>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border-primary);border:1px solid var(--border-primary);">
-            <div style="background:var(--bg-secondary);padding:2rem;transition:background 0.2s;" onmouseover="this.style.background='var(--bg-elevated)'" onmouseout="this.style.background='var(--bg-secondary)'">
-                <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.875rem;">SHA — Arbitrum Sepolia</div>
-                <div style="font-family:var(--font-mono);font-size:0.85rem;color:var(--text-secondary);word-break:break-all;margin-bottom:0.75rem;">
-                    <a href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener" style="color:var(--accent-blue);">0xD661a1aB8CEFaaCd78F4B968670C3bC438415615 ↗</a>
-                </div>
-                <div style="display:flex;gap:2rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--text-dim);">
-                    <span>89+ transactions</span>
-                    <span>Block #241,058,680</span>
-                    <span>12,564 gas/receipt</span>
+    <div class="stats-bar reveal" role="region" aria-label="INVARIANT statistics">
+        <div class="stat">
+            <span class="stat-n">3</span>
+            <span class="stat-l">Protocol Layers</span>
+        </div>
+        <div class="stat">
+            <span class="stat-n">21</span>
+            <span class="stat-l">Tests Passing</span>
+        </div>
+        <div class="stat">
+            <span class="stat-n">9,000+</span>
+            <span class="stat-l">Rust Receipts/sec</span>
+        </div>
+        <div class="stat">
+            <span class="stat-n">10,000+</span>
+            <span class="stat-l">Test Vectors</span>
+        </div>
+    </div>
+</section>
+
+<!-- ── THE PROBLEM ──────────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="problem-head">
+    <p class="sec-label" id="problem-head">// THE_PROBLEM : BITTENSOR_TRUST_GAP</p>
+    <div class="grid-2" style="margin-bottom:0;">
+        <div class="card span2">
+            <span class="card-label" style="color:var(--red);">ROOT_CAUSE</span>
+            <h3 style="font-family:var(--font-head);font-size:1.35rem;font-weight:700;color:var(--tx-1);margin-bottom:1rem;line-height:1.2;">Academic analysis of two years of Bittensor on-chain data found that <span style="color:var(--red);">rewards are driven by stake, not quality.</span></h3>
+            <p>Bittensor's Yuma Consensus scores miners on <em>outputs</em> — but outputs are trivial to fake. Every single attack vector below has <strong style="color:var(--red);">no current defense</strong>.</p>
+            <div class="attack-inline">
+                <div class="attack-cell">→ Return a cached response</div>
+                <div class="attack-cell">→ Copy another miner's output</div>
+                <div class="attack-cell">→ Run cheap model, claim expensive</div>
+                <div class="attack-cell">→ Submit same receipt twice</div>
+                <div class="attack-cell">→ Sybil with new identities</div>
+                <div class="attack-cell">→ Validator cartel collusion</div>
+            </div>
+            <p style="margin-top:0;">INVARIANT closes every attack — deterministically, on-chain, without trusted intermediaries.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ── THREE LAYERS ─────────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="arch-head">
+    <p class="sec-label" id="arch-head">// ARCHITECTURE : THREE_LAYER_TRUST_STACK</p>
+    <div class="layer-stack">
+        <div class="layer-row">
+            <div class="layer-num">Layer 1<br>Identity</div>
+            <div>
+                <div class="layer-name">SHA — Stylus Hardware Anchor</div>
+                <div class="layer-tech">Keccak-256 on Arbitrum · ESP32-S3 eFuse · Rust + Stylus</div>
+                <div class="layer-desc">Hardware-bound identity. Binds immutable eFuse silicon identifiers to Arbitrum Stylus contracts. Proves <em>who</em> this miner is — at the silicon layer, not the software layer. 89+ live transactions on Arbitrum Sepolia.</div>
+                <div class="chips">
+                    <span class="chip chip-sha">ARBITRUM_SEPOLIA_LIVE</span>
+                    <span class="chip chip-sha">KECCAK-256</span>
+                    <span class="chip chip-sha">RUST_STYLUS</span>
+                    <span class="chip chip-sha">12,564 GAS/RECEIPT</span>
                 </div>
             </div>
-            <div style="background:var(--bg-secondary);padding:2rem;transition:background 0.2s;border-left:1px solid var(--border-primary);" onmouseover="this.style.background='var(--bg-elevated)'" onmouseout="this.style.background='var(--bg-secondary)'">
-                <div style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.875rem;">TON-SHA — TON Testnet</div>
-                <div style="font-family:var(--font-mono);font-size:0.85rem;color:var(--text-secondary);word-break:break-all;margin-bottom:0.75rem;">
-                    <a href="https://testnet.tonscan.org/address/kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S" target="_blank" rel="noopener" style="color:#0098ea;">kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S ↗</a>
+            <div class="layer-badge"><span class="pill pill-green">✓ Live</span></div>
+        </div>
+        <div class="layer-row">
+            <div class="layer-num">Layer 2<br>Receipt</div>
+            <div>
+                <div class="layer-name">TON-SHA — Execution Receipt</div>
+                <div class="layer-tech">SHA-256 four-gate · Tact 1.6 on TON · 0.03 TON/op</div>
+                <div class="layer-desc">Four-gate execution receipt system. Proves <em>how</em> the miner produced the output. Identity gating → firmware governance → replay protection → cryptographic digest. 17+ live transactions on TON Testnet.</div>
+                <div class="chips">
+                    <span class="chip chip-ton">TON_TESTNET_LIVE</span>
+                    <span class="chip chip-ton">SHA-256</span>
+                    <span class="chip chip-ton">TACT_1.6</span>
+                    <span class="chip chip-ton">136-BYTE_RECEIPT</span>
                 </div>
-                <div style="display:flex;gap:2rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--text-dim);">
-                    <span>17+ transactions</span>
-                    <span>0.03 TON/op</span>
-                    <span>Tact 1.6</span>
+            </div>
+            <div class="layer-badge"><span class="pill pill-green">✓ Live</span></div>
+        </div>
+        <div class="layer-row">
+            <div class="layer-num">Layer 3<br>History</div>
+            <div>
+                <div class="layer-name">OAP — Integrity Governance Engine</div>
+                <div class="layer-tech">Lifecycle trust scoring 0–100 · Append-only history · Python</div>
+                <div class="layer-desc">Lifecycle trust governance. Append-only behavioral history produces NTS scores across every tempo. Catastrophic flag for repeat violations. Proves <em>who they have been</em> — across the miner's entire history. Cannot be reset.</div>
+                <div class="chips">
+                    <span class="chip chip-oap">NTS_0–100</span>
+                    <span class="chip chip-oap">APPEND_ONLY</span>
+                    <span class="chip chip-oap">CATASTROPHIC_FLAG</span>
+                    <span class="chip chip-oap">2/YR_OVERRIDE_CAP</span>
                 </div>
             </div>
+            <div class="layer-badge"><span class="pill pill-inv">Published</span></div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ROADMAP -->
-    <section>
-        <h2 class="section-header">// ROADMAP : SIX_PHASES_TO_ECOSYSTEM_LAYER</h2>
-        <div class="phases">
-            <div class="phase-row" style="border-left:3px solid var(--accent-success)">
-                <div class="phase-num" style="color:var(--accent-success)">P0</div>
-                <div><div class="phase-name">Foundation</div><div class="phase-target">Completed</div></div>
-                <div class="phase-desc">SHA + TON-SHA live on-chain. OAP architecture published. IoTeX forensic research released. 10,000+ test vectors.</div>
-                <span class="badge badge-green">Done</span>
-            </div>
-            <div class="phase-row" style="border-left:3px solid var(--accent-success)">
-                <div class="phase-num" style="color:var(--accent-success)">P1</div>
-                <div><div class="phase-name">Core Engine</div><div class="phase-target">Feb 2026 — Completed</div></div>
-                <div class="phase-desc">Python/Rust subnet engine. 21 tests passing. Bittensor v10 integration. Emission weighting formula. Local testability, no node required.</div>
-                <span class="badge badge-green">Done</span>
-            </div>
-            <div class="phase-row" style="border-left:3px solid var(--accent-blue);background:rgba(59,130,246,0.03)">
-                <div class="phase-num" style="color:var(--accent-blue)">P2</div>
-                <div><div class="phase-name">Testnet Deployment</div><div class="phase-target">March 2026 — Active</div></div>
-                <div class="phase-desc">Live INVARIANT subnet on Bittensor testnet. All four gate failures recorded on-chain. Open-source SDK published to PyPI.</div>
-                <span class="badge" style="color:var(--accent-blue);border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.07);">Active</span>
-            </div>
-            <div class="phase-row">
-                <div class="phase-num">P3</div>
-                <div><div class="phase-name">Cross-Subnet API</div><div class="phase-target">April 2026</div></div>
-                <div class="phase-desc">Public REST/WebSocket NTS API. Any subnet queries INVARIANT before accepting miner outputs. Drop-in validator plugin.</div>
-                <span class="badge badge-dim">Planned</span>
-            </div>
-            <div class="phase-row" style="border-left:3px solid rgba(245,197,24,0.3)">
-                <div class="phase-num" style="color:rgba(245,197,24,0.5)">P4</div>
-                <div><div class="phase-name">Mainnet Launch</div><div class="phase-target">May–Jun 2026</div></div>
-                <div class="phase-desc">INVARIANT live on Bittensor mainnet with real TAO emissions. 50+ miners at launch. Full security audit.</div>
-                <span class="badge badge-gold">Key Milestone</span>
-            </div>
-            <div class="phase-row">
-                <div class="phase-num">P5</div>
-                <div><div class="phase-name">Enterprise Revenue</div><div class="phase-target">Q3 2026</div></div>
-                <div class="phase-desc">Enterprise API. EU AI Act Article 13 compliance reports. $0.001–$0.01/receipt. $10K+/month protocol revenue target.</div>
-                <span class="badge badge-dim">Planned</span>
-            </div>
-            <div class="phase-row">
-                <div class="phase-num">P6</div>
-                <div><div class="phase-name">DAO Governance</div><div class="phase-target">Q4 2026</div></div>
-                <div class="phase-desc">TAO-weighted voting on protocol parameters. Open model registry. IIPs with 14-day upgrade timelocks. INVARIANT foundation (India).</div>
-                <span class="badge badge-dim">Planned</span>
-            </div>
+<!-- ── FOUR GATES ────────────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="gates-head">
+    <p class="sec-label" id="gates-head">// FOUR_GATE_VERIFIER : EVERY_RECEIPT_PASSES_ALL_FOUR</p>
+    <div class="gate-grid">
+        <div class="gate-card" style="border-top:2px solid var(--sha);">
+            <div class="gate-num">Gate 1 — Identity</div>
+            <div class="gate-title">Agent Registry Check</div>
+            <p class="gate-desc"><code>agent_id</code> must be in authorized registry. Blocks Sybil attacks and cross-miner output copying. The agent_id is hotkey-bound — cannot be forged.</p>
+            <span class="gate-blocks">Blocks: Sybil · Output Copying</span>
         </div>
-    </section>
-
-    <!-- METRICS -->
-    <section>
-        <h2 class="section-header">// METRICS_WE_TRACK</h2>
-        <div class="metrics-grid">
-            <div class="metric-card"><div class="metric-label">Phase 2 → Mainnet → 2027</div><div class="metric-value">10 → 500 → 10K</div><div class="metric-sub">Registered Miners</div></div>
-            <div class="metric-card"><div class="metric-label">Phase 2 → Mainnet → 2027</div><div class="metric-value">1K → 100K → 10M</div><div class="metric-sub">Receipts Verified / Day</div></div>
-            <div class="metric-card"><div class="metric-label">Phase 2 → Mainnet → 2027</div><div class="metric-value">0 → 5 → 50</div><div class="metric-sub">Subnet Integrations</div></div>
-            <div class="metric-card"><div class="metric-label">Phase 2 → Mainnet → 2027</div><div class="metric-value">$0 → $1K → $100K</div><div class="metric-sub">Protocol Revenue / Month</div></div>
-            <div class="metric-card"><div class="metric-label">Current</div><div class="metric-value">~9,000/s</div><div class="metric-sub">Rust Receipt Throughput</div></div>
-            <div class="metric-card"><div class="metric-label">Current</div><div class="metric-value">21</div><div class="metric-sub">Tests Passing (all attack vectors)</div></div>
+        <div class="gate-card" style="border-top:2px solid var(--green);">
+            <div class="gate-num">Gate 2 — Model</div>
+            <div class="gate-title">Approved Model Registry</div>
+            <p class="gate-desc"><code>model_hash</code> must match the community-approved model list. Blocks model impersonation — running a cheap model while claiming an expensive one.</p>
+            <span class="gate-blocks">Blocks: Model Impersonation</span>
         </div>
-    </section>
+        <div class="gate-card" style="border-top:2px solid var(--oap);">
+            <div class="gate-num">Gate 3 — Counter</div>
+            <div class="gate-title">Monotonic Counter</div>
+            <p class="gate-desc"><code>counter</code> must be strictly greater than the last confirmed counter. Mathematically airtight replay and rollback prevention. No exceptions.</p>
+            <span class="gate-blocks">Blocks: Replay · Rollback</span>
+        </div>
+        <div class="gate-card" style="border-top:2px solid var(--inv);">
+            <div class="gate-num">Gate 4 — Digest</div>
+            <div class="gate-title">SHA-256 Digest Verification</div>
+            <p class="gate-desc"><code>SHA-256(agent_id ‖ model_hash ‖ execution_hash ‖ counter) == digest</code>. The execution_hash includes tempo_id — so cross-tempo caching fails this gate.</p>
+            <span class="gate-blocks">Blocks: Caching · Tamper</span>
+        </div>
+    </div>
+</section>
 
-    <!-- CTA -->
-    <section class="cta-section">
+<!-- ── NTS FORMULA ──────────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="formula-head">
+    <p class="sec-label" id="formula-head">// NTS_EMISSION_WEIGHTING</p>
+    <div class="formula-block">
+        <div class="formula-label">// emission_weight_formula</div>
+        <div class="formula-eq">
+            <span class="v">weight</span>
+            <span class="op"> = </span>
+            <span class="v">output_quality</span>
+            <span class="op"> × </span>
+            <span class="op">(</span><span class="v">NTS</span><span class="op"> / 100)</span>
+            <span class="op"> × </span>
+            <span class="v">freshness_factor</span>
+        </div>
+        <div class="formula-notes">
+            NTS 90 + perfect output = <span>weight 0.90</span><br>
+            NTS 40 + perfect output = <span>weight 0.40</span>&nbsp;&nbsp;— past behavior permanently shapes future earnings<br>
+            Cold start = <span>NTS 50.0</span>&nbsp;&nbsp;·&nbsp;&nbsp;Gate 1 violation = <span class="warn">−25.0 scar</span><br>
+            3× Gate 3 violations = <span class="warn">Catastrophic flag — permanent NTS cap at 40.0</span><br>
+            Max 2 overrides/year — logged immutably — cannot be cleared programmatically
+        </div>
+    </div>
+</section>
+
+<!-- ── ATTACK DEFENSE MATRIX ─────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="defense-head">
+    <p class="sec-label" id="defense-head">// ATTACK_DEFENSE_MATRIX</p>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Attack</th>
+                    <th>Current Bittensor Defense</th>
+                    <th>INVARIANT Defense</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="td-attack">Return a cached response</td>
+                    <td class="td-none">None</td>
+                    <td class="td-def">execution_hash includes tempo_id → Gate 4 fails</td>
+                </tr>
+                <tr>
+                    <td class="td-attack">Copy another miner's output</td>
+                    <td class="td-none">None</td>
+                    <td class="td-def">agent_id is hotkey-bound → Gate 1 fails</td>
+                </tr>
+                <tr>
+                    <td class="td-attack">Run cheap model, claim expensive</td>
+                    <td class="td-none">None</td>
+                    <td class="td-def">model_hash must match approved registry → Gate 2 fails</td>
+                </tr>
+                <tr>
+                    <td class="td-attack">Submit same receipt twice</td>
+                    <td class="td-none">None</td>
+                    <td class="td-def">Monotonic counter → Gate 3 fails</td>
+                </tr>
+                <tr>
+                    <td class="td-attack">Sybil with new identities</td>
+                    <td class="td-none">None</td>
+                    <td class="td-def">NTS starts at 50 — gaming costs real tempo time</td>
+                </tr>
+                <tr>
+                    <td class="td-attack">Validator cartel collusion</td>
+                    <td style="color:var(--tx-3);">Yuma (probabilistic)</td>
+                    <td class="td-def">Gates are deterministic — two honest validators always agree</td>
+                </tr>
+                <tr>
+                    <td class="td-attack">Digest forgery</td>
+                    <td class="td-none">None</td>
+                    <td class="td-def">Can't produce valid SHA-256 without running the computation</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- ── LIVE CONTRACTS ────────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="evidence-head">
+    <p class="sec-label" id="evidence-head">// LIVE_CONTRACTS : ON_CHAIN_EVIDENCE</p>
+    <div class="evidence-grid">
+        <div class="evidence-card">
+            <div class="evidence-label">SHA — Arbitrum Sepolia</div>
+            <div class="evidence-value">0xD661a1aB8CEFaaCd78F4B968670C3bC438415615</div>
+            <div class="evidence-meta">
+                <span>89+ transactions</span>
+                <span>Block #241,058,680</span>
+                <span>12,564 gas/receipt</span>
+            </div>
+            <a class="evidence-link" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">View on Arbiscan →</a>
+        </div>
+        <div class="evidence-card">
+            <div class="evidence-label">TON-SHA — TON Testnet</div>
+            <div class="evidence-value">kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S</div>
+            <div class="evidence-meta">
+                <span>17+ transactions</span>
+                <span>0.03 TON/op</span>
+                <span>Tact 1.6</span>
+            </div>
+            <a class="evidence-link ton-link" href="https://testnet.tonscan.org/address/kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S" target="_blank" rel="noopener">View on TONScan →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ── ROADMAP ───────────────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="roadmap-head">
+    <p class="sec-label" id="roadmap-head">// ROADMAP : SIX_PHASES_TO_ECOSYSTEM_LAYER</p>
+    <div class="phases">
+        <div class="phase-row" style="border-left:2px solid var(--green);">
+            <div class="phase-num" style="color:var(--green);">P0</div>
+            <div><div class="phase-name">Foundation</div><div class="phase-target">Completed</div></div>
+            <div class="phase-desc">SHA + TON-SHA live on-chain. OAP architecture published. IoTeX forensic research released. 10,000+ test vectors validated.</div>
+            <span class="pill pill-green">Done</span>
+        </div>
+        <div class="phase-row" style="border-left:2px solid var(--green);">
+            <div class="phase-num" style="color:var(--green);">P1</div>
+            <div><div class="phase-name">Core Engine</div><div class="phase-target">Feb 2026 — Completed</div></div>
+            <div class="phase-desc">Python/Rust subnet engine. 21 tests passing. Bittensor v10 integration. Emission weighting formula. Local testability, no node required.</div>
+            <span class="pill pill-green">Done</span>
+        </div>
+        <div class="phase-row" style="border-left:2px solid var(--sha);background:rgba(42,159,232,0.02);">
+            <div class="phase-num" style="color:var(--sha);">P2</div>
+            <div><div class="phase-name">Testnet Deploy</div><div class="phase-target">March 2026 — Active</div></div>
+            <div class="phase-desc">Live INVARIANT subnet on Bittensor testnet. All four gate failures recorded on-chain. Open-source SDK published to PyPI.</div>
+            <span class="pill pill-sha">Active</span>
+        </div>
+        <div class="phase-row">
+            <div class="phase-num">P3</div>
+            <div><div class="phase-name">Cross-Subnet API</div><div class="phase-target">April 2026</div></div>
+            <div class="phase-desc">Public REST/WebSocket NTS API. Any subnet queries INVARIANT before accepting miner outputs. Drop-in validator plugin.</div>
+            <span class="pill" style="background:rgba(86,100,118,0.1);border:1px solid rgba(86,100,118,0.3);color:var(--tx-3);">Planned</span>
+        </div>
+        <div class="phase-row" style="border-left:2px solid rgba(234,179,8,0.3);">
+            <div class="phase-num" style="color:rgba(234,179,8,0.5);">P4</div>
+            <div><div class="phase-name">Mainnet Launch</div><div class="phase-target">May–Jun 2026</div></div>
+            <div class="phase-desc">INVARIANT live on Bittensor mainnet with real TAO emissions. 50+ miners at launch. Full security audit.</div>
+            <span class="pill pill-inv">Key Milestone</span>
+        </div>
+        <div class="phase-row">
+            <div class="phase-num">P5</div>
+            <div><div class="phase-name">Enterprise Revenue</div><div class="phase-target">Q3 2026</div></div>
+            <div class="phase-desc">Enterprise API. EU AI Act Article 13 compliance reports. $0.001–$0.01/receipt. $10K+/month protocol revenue target.</div>
+            <span class="pill" style="background:rgba(86,100,118,0.1);border:1px solid rgba(86,100,118,0.3);color:var(--tx-3);">Planned</span>
+        </div>
+        <div class="phase-row">
+            <div class="phase-num">P6</div>
+            <div><div class="phase-name">DAO Governance</div><div class="phase-target">Q4 2026</div></div>
+            <div class="phase-desc">TAO-weighted voting on protocol parameters. Open model registry. IIPs with 14-day upgrade timelocks. INVARIANT foundation (India).</div>
+            <span class="pill" style="background:rgba(86,100,118,0.1);border:1px solid rgba(86,100,118,0.3);color:var(--tx-3);">Planned</span>
+        </div>
+    </div>
+</section>
+
+<!-- ── METRICS ───────────────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="metrics-head">
+    <p class="sec-label" id="metrics-head">// METRICS_WE_TRACK</p>
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-label">Phase 2 → Mainnet → 2027</div>
+            <div class="metric-val">10 → 500 → 10K</div>
+            <div class="metric-sub">Registered Miners</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Phase 2 → Mainnet → 2027</div>
+            <div class="metric-val">1K → 100K → 10M</div>
+            <div class="metric-sub">Receipts Verified / Day</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Phase 2 → Mainnet → 2027</div>
+            <div class="metric-val">0 → 5 → 50</div>
+            <div class="metric-sub">Subnet Integrations</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Phase 2 → Mainnet → 2027</div>
+            <div class="metric-val">$0 → $1K → $100K</div>
+            <div class="metric-sub">Protocol Revenue / Month</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Current</div>
+            <div class="metric-val">~9,000/s</div>
+            <div class="metric-sub">Rust Receipt Throughput</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-label">Current</div>
+            <div class="metric-val">21</div>
+            <div class="metric-sub">Tests Passing (all attack vectors)</div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CTA ───────────────────────────────────── -->
+<section class="section reveal">
+    <div class="cta">
         <h2>Don't trust the output. Verify the execution.</h2>
         <p>Three layers. One trust score. Deterministic, cryptographic, append-only. The trust infrastructure Bittensor has never had.</p>
-        <div class="cta-btns">
-            <a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener" class="btn btn-primary">GitHub Repository ↗</a>
-            <a href="/sha.html" class="btn btn-secondary">SHA — Hardware Layer</a>
-            <a href="/oap.html" class="btn btn-secondary">OAP — Governance Layer</a>
-            <a href="/" class="btn btn-secondary">← Orthonode Homepage</a>
+        <div class="cta-row">
+            <a href="https://github.com/orthonode/invariant" class="btn btn-primary" target="_blank" rel="noopener">GitHub Repository ↗</a>
+            <a href="/sha.html" class="btn" style="border-color:rgba(42,159,232,0.25);color:var(--sha);">SHA — Hardware Layer</a>
+            <a href="/oap.html" class="btn" style="border-color:rgba(245,158,11,0.25);color:var(--oap);">OAP — Governance Layer</a>
+            <a href="/ton-sha.html" class="btn" style="border-color:rgba(0,152,234,0.25);color:var(--ton);">TON-SHA — Receipt Layer</a>
+            <a href="/" class="btn">← Orthonode</a>
         </div>
-    </section>
+    </div>
+</section>
 
 </main>
 
-<footer>
-    <div class="container">
+<!-- ═══════════════════════════════
+     FOOTER
+════════════════════════════════ -->
+<footer role="contentinfo">
+    <div class="wrap">
         <div class="footer-grid">
             <div class="footer-brand">
-                <h4>ORTHONODE INFRASTRUCTURE LABS</h4>
-                <p>Building verification infrastructure for Bittensor, DePIN networks, and autonomous systems. INVARIANT is the canonical trust layer Bittensor has never had.</p>
-                <p style="margin-top:0.75rem;"><strong>Location:</strong> Bhopal, Madhya Pradesh, India<br><strong>Classification:</strong> Infrastructure R&D (NIC 72900)</p>
+                <h4>ORTHONODE SYSTEMS™</h4>
+                <p>
+                    Building verification infrastructure for Bittensor, DePIN networks, and autonomous systems. INVARIANT is the canonical trust layer Bittensor has never had — three independently unfakeable layers, one NTS per miner.
+                </p>
+                <p style="margin-top:0.875rem;color:var(--tx-3);">
+                    <strong style="color:var(--tx-2);">Founder:</strong> Arhant Barmate<br>
+                    <strong style="color:var(--tx-2);">Location:</strong> Bhopal, Madhya Pradesh, India<br>
+                    <strong style="color:var(--tx-2);">Contact:</strong> infrastructure@orthonode.xyz
+                </p>
             </div>
-            <div class="footer-links">
+            <div class="footer-col">
                 <h5>INVARIANT</h5>
                 <ul>
                     <li><a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">GitHub Repository ↗</a></li>
-                    <li><a href="/sha.html">SHA — Hardware Layer</a></li>
-                    <li><a href="/ton-sha.html" style="color:#0098ea;">TON-SHA — Receipt Layer</a></li>
-                    <li><a href="/oap.html" style="color:var(--accent-gold);">OAP — Governance Layer</a></li>
-                    <li><a href="/iotex-research.html" style="color:var(--accent-critical);">IoTeX Research ↗</a></li>
+                    <li><a href="/sha.html" style="color:var(--sha);">SHA — Hardware Layer</a></li>
+                    <li><a href="/ton-sha.html" style="color:var(--ton);">TON-SHA — Receipt Layer</a></li>
+                    <li><a href="/oap.html" style="color:var(--oap);">OAP — Governance Layer</a></li>
+                    <li><a href="/iotex-research.html" style="color:var(--red);">IoTeX Research ↗</a></li>
                 </ul>
             </div>
-            <div class="footer-links">
+            <div class="footer-col">
                 <h5>Connect</h5>
                 <ul>
                     <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X / Twitter</a></li>
                     <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
-                    <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub (Org)</a></li>
                     <li><a href="mailto:infrastructure@orthonode.xyz">infrastructure@orthonode.xyz</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <span>© 2026 Orthonode Infrastructure Labs. All Rights Reserved.</span>
-            <div style="display:flex;gap:1.5rem;">
-                <a href="/terms.html">Terms</a>
-                <a href="/privacy.html">Privacy</a>
-                <a href="/">Home</a>
+            <div>© 2026 ORTHONODE SYSTEMS™. All Rights Reserved.</div>
+            <div class="footer-legal">
+                <a href="/terms.html">Terms of Service</a>
+                <a href="/privacy.html">Privacy Policy</a>
             </div>
         </div>
     </div>
 </footer>
+
+<script>
+    (function initReveal() {
+        const items = document.querySelectorAll('.reveal');
+        if (!items.length) return;
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('in'), i * 55);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.06, rootMargin: '0px 0px -36px 0px' });
+        items.forEach(el => obs.observe(el));
+    })();
+
+    (function initCounters() {
+        document.querySelectorAll('.stat-n').forEach(el => {
+            const txt = el.textContent.trim();
+            const m   = txt.match(/[\d,]+/);
+            if (!m) return;
+            const target = parseInt(m[0].replace(/,/g, ''));
+            if (target < 100) return;
+            const prefix = txt.slice(0, txt.search(/\d/));
+            const suffix = txt.slice(txt.search(/[\d,]+/) + m[0].length);
+            const obs2 = new IntersectionObserver(ents => {
+                if (!ents[0].isIntersecting) return;
+                obs2.disconnect();
+                const t0 = performance.now(), dur = 1400;
+                (function tick(now) {
+                    const p = Math.min((now - t0) / dur, 1);
+                    const e = 1 - Math.pow(1 - p, 3);
+                    el.textContent = prefix + Math.round(e * target).toLocaleString() + suffix;
+                    if (p < 1) requestAnimationFrame(tick);
+                })(t0);
+            }, { threshold: 0.5 });
+            obs2.observe(el);
+        });
+    })();
+</script>
 
 </body>
 </html>

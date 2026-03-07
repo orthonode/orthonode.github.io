@@ -4,1139 +4,390 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>OAP — Integrity Governance Engine | Orthonode Labs</title>
-    <meta name="description" content="OAP (Orthonode Assurance Platform) — deterministic motion validation and lifecycle trust governance for mobility, robotics, and DePIN systems. Physics compliance, device-bound identity, append-only integrity.">
+    <title>OAP — Integrity Governance Engine for DePIN & Mobility | ORTHONODE SYSTEMS™</title>
+    <meta name="description" content="OAP (Orthonode Assurance Platform) is a chain-agnostic integrity governance engine for DePIN hardware. Physics compliance, lifecycle trust scoring, clone containment. PROPRIETARY.">
+    <meta name="keywords" content="OAP Orthonode Assurance Platform, DePIN integrity governance, lifecycle trust scoring, physics compliance, chain-agnostic hardware attestation, clone containment, autonomous systems trust, Arhant Barmate">
+    <meta name="author" content="Arhant Barmate">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://orthonode.xyz/oap.html">
-
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-
-    <meta name="theme-color" content="#050505">
-    <link rel="icon" type="image/png" sizes="96x96" href="https://orthonode.xyz/site-logo.png">
-    <link rel="apple-touch-icon" href="https://orthonode.xyz/site-logo.png">
-
+    <meta name="geo.region" content="IN-MP">
+    <meta name="geo.placename" content="Bhopal, Madhya Pradesh, India">
+    <meta name="geo.position" content="23.2599;77.4126">
+    <meta name="ICBM" content="23.2599, 77.4126">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orthonode.xyz/oap.html">
+    <meta property="og:title" content="OAP — Integrity Governance Engine for DePIN & Mobility">
+    <meta property="og:description" content="Deterministic physics compliance and lifecycle trust governance for autonomous systems. OAP emits verifiable integrity state. Partners apply economic logic. PROPRIETARY.">
+    <meta property="og:image" content="https://orthonode.xyz/banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="ORTHONODE SYSTEMS™">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@OrthonodeSys">
+    <meta name="twitter:creator" content="@OrthonodeSys">
+    <meta name="twitter:title" content="OAP — Integrity Governance Engine | ORTHONODE SYSTEMS™">
+    <meta name="twitter:description" content="Deterministic physics compliance and lifecycle trust governance for DePIN hardware. Chain-agnostic. PROPRIETARY.">
+    <meta name="twitter:image" content="https://orthonode.xyz/banner.png">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"OAP — Orthonode Assurance Platform","applicationCategory":"DeveloperApplication","description":"Chain-agnostic integrity governance engine for DePIN hardware. Physics compliance, lifecycle trust scoring 0–100, clone containment, adaptive anchoring, override governance.","author":{"@type":"Person","name":"Arhant Barmate"},"publisher":{"@type":"Organization","name":"ORTHONODE SYSTEMS™","url":"https://orthonode.xyz"}}
+    </script>
+    <meta name="theme-color" content="#04060A">
+    <link rel="icon" type="image/png" sizes="96x96" href="/site-logo.png">
+    <link rel="apple-touch-icon" href="/site-logo.png">
+    <link rel="shortcut icon" href="/site-logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #050505;
-            --bg-secondary: #0a0a0a;
-            --bg-elevated: #111111;
-            --border-subtle: #1a1a1a;
-            --border-primary: #262626;
-            --border-bright: #333333;
+            --bg:#04060A; --bg-1:#07090F; --bg-2:#0B0F18; --bg-card:#080C14; --bg-raised:#0E1520;
+            --border:rgba(255,255,255,0.06); --border-md:rgba(255,255,255,0.10); --border-hi:rgba(255,255,255,0.18);
+            --tx-1:#E4EBF0; --tx-2:#8BA0B4; --tx-3:#566476; --tx-4:#374454;
+            --sha:#2A9FE8; --ton:#0098EA; --nexus:#00D084; --oap:#F59E0B; --inv:#EAB308; --tix:#9945FF; --red:#EF4444; --green:#22C55E; --cyan:#00CAFF;
+            --accent:#F59E0B;
+            --font-head:'Syne',sans-serif; --font-body:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif; --font-mono:'IBM Plex Mono','Courier New',monospace;
+            --ease:cubic-bezier(0.22,1,0.36,1);
+        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+        body{background:var(--bg);color:var(--tx-2);font-family:var(--font-body);font-size:16px;line-height:1.65;overflow-x:hidden}
+        body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.012) 2px,rgba(255,255,255,.012) 4px);pointer-events:none;z-index:-1}
+        body::after{content:'';position:fixed;top:-20vh;right:-10vw;width:55vw;height:55vw;background:radial-gradient(ellipse,rgba(245,158,11,.05) 0%,transparent 65%);pointer-events:none;z-index:-2}
+        a{color:var(--tx-2);text-decoration:none;transition:color .2s}
+        a:hover{color:var(--tx-1)}
+        ::selection{background:rgba(245,158,11,.2)}
 
-            --text-primary: #ffffff;
-            --text-secondary: #ededed;
-            --text-tertiary: #a3a3a3;
-            --text-dim: #737373;
-            --text-muted: #525252;
+        header{position:fixed;top:0;width:100%;z-index:1000;backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);background:rgba(4,6,10,.88);border-bottom:1px solid var(--border)}
+        header::after{content:'';position:absolute;bottom:-1px;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(245,158,11,.45) 40%,rgba(234,179,8,.25) 60%,transparent)}
+        .nav-inner{max-width:1360px;margin:0 auto;padding:.7rem 2rem;display:flex;justify-content:space-between;align-items:center}
+        .nav-left{display:flex;align-items:center;gap:1rem;font-family:var(--font-mono);font-size:.68rem}
+        .nav-back{display:flex;align-items:center;gap:.45rem;color:var(--tx-3);transition:color .2s}
+        .nav-back:hover{color:var(--accent)}
+        .nav-back img{border-radius:3px;display:block}
+        .nav-sep{color:var(--tx-4)}
+        .nav-status{display:flex;align-items:center;gap:.45rem;color:var(--tx-3);font-family:var(--font-mono);font-size:.68rem}
+        .live-dot{width:5px;height:5px;background:var(--oap);border-radius:50%;box-shadow:0 0 6px rgba(245,158,11,.6);animation:blink 2.5s ease-in-out infinite;flex-shrink:0}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+        .nav-right{display:flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.65rem}
+        .tag{padding:.18rem .55rem;border:1px solid var(--border);color:var(--tx-3);transition:border-color .2s,color .2s}
+        .tag:hover{border-color:var(--border-md);color:var(--tx-2)}
+        .tag-oap{color:var(--oap);border-color:rgba(245,158,11,.2)}
+        .tag-oap:hover{border-color:rgba(245,158,11,.4)}
+        .tag-prop{color:var(--tx-3);border-color:rgba(245,158,11,.15);background:rgba(245,158,11,.04)}
 
-            --accent-arbitrum: #28a0f0;
-            --accent-arbitrum-glow: rgba(40, 160, 240, 0.3);
-            --accent-success: #22c55e;
-            --accent-success-glow: rgba(34, 197, 94, 0.3);
-            --accent-warning: #fbbf24;
-            --accent-warning-glow: rgba(251, 191, 36, 0.2);
-            --accent-critical: #ef4444;
+        .wrap{max-width:1360px;margin:0 auto;padding:0 2rem}
+        .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+        .reveal.in{opacity:1;transform:translateY(0)}
 
-            /* OAP uses amber/warning as its signature accent */
-            --oap-accent: #fbbf24;
-            --oap-accent-glow: rgba(251, 191, 36, 0.15);
-            --oap-accent-border: rgba(251, 191, 36, 0.3);
+        .hero{min-height:88vh;padding-top:9rem;padding-bottom:5rem;display:flex;flex-direction:column;justify-content:center;position:relative}
+        .hero-glow{position:absolute;top:0;right:-5%;width:min(500px,50vw);height:min(500px,50vw);background:radial-gradient(ellipse,rgba(245,158,11,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;animation:float 16s ease-in-out infinite}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-28px)}}
+        .breadcrumb{font-family:var(--font-mono);font-size:.65rem;color:var(--tx-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2rem}
+        .breadcrumb .bc-cur{color:var(--accent)}
+        .hero-badge{display:inline-flex;align-items:center;gap:.6rem;padding:.3rem .8rem;border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.05);font-family:var(--font-mono);font-size:.62rem;color:var(--oap);letter-spacing:.08em;margin-bottom:1.75rem}
+        .hero h1{font-family:var(--font-head);font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:800;line-height:1.0;letter-spacing:-.03em;color:var(--tx-1);max-width:900px;margin-bottom:1.5rem}
+        .hero h1 .accent{color:var(--accent)}
+        .hero-sub{font-size:clamp(1rem,1.6vw,1.2rem);color:var(--tx-2);max-width:720px;margin-bottom:.75rem;line-height:1.65}
+        .hero-mono{font-family:var(--font-mono);font-size:.65rem;color:var(--oap);letter-spacing:.06em;margin-bottom:3rem;opacity:.8}
 
-            --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-            --font-display: 'Space Grotesk', sans-serif;
+        .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+        .stat{background:var(--bg-card);padding:1.25rem 1.5rem;text-align:center;transition:background .25s}
+        .stat:hover{background:var(--bg-raised)}
+        .stat-n{font-family:var(--font-mono);font-size:1.6rem;font-weight:600;color:var(--accent);display:block;line-height:1;margin-bottom:.4rem}
+        .stat-l{font-family:var(--font-mono);font-size:.6rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.1em}
 
-            --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.5);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.5);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.7);
-            --shadow-glow: 0 0 20px rgba(251, 191, 36, 0.1);
-        }
+        .sec-label{font-family:var(--font-mono);font-size:.65rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.75rem;padding-bottom:.85rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
+        .sec-label::before{content:'';width:2px;height:12px;background:linear-gradient(180deg,var(--oap),var(--inv));flex-shrink:0}
+        .section{margin:5rem 0}
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+        .card{background:var(--bg-card);padding:2rem 2.25rem;transition:background .25s}
+        .card:hover{background:var(--bg-raised)}
+        .card.span2{grid-column:span 2}
+        .card-label{font-family:var(--font-mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:1rem}
+        .card h3{font-family:var(--font-head);font-size:1.25rem;font-weight:700;color:var(--tx-1);margin-bottom:.875rem;line-height:1.2}
+        .card p{color:var(--tx-2);font-size:.925rem;line-height:1.68;margin-bottom:.75rem}
+        .card p:last-child{margin-bottom:0}
+        .card strong{color:var(--tx-1);font-weight:600}
 
-        body {
-            background: var(--bg-primary);
-            color: var(--text-secondary);
-            font-family: var(--font-ui);
-            font-size: 16px;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        .primitives-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+        .prim-card{background:var(--bg-card);padding:1.75rem;transition:background .25s}
+        .prim-card:hover{background:var(--bg-raised)}
+        .prim-num{font-family:var(--font-mono);font-size:.6rem;color:var(--oap);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+        .prim-card h3{font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--tx-1);margin-bottom:.5rem}
+        .prim-card p{font-size:.875rem;color:var(--tx-2);line-height:1.65}
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-image:
-                linear-gradient(var(--border-subtle) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.3;
-            z-index: -1;
-            pointer-events: none;
-        }
+        .domains-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
+        .domain-item{background:var(--bg-card);padding:1.25rem 1.5rem;transition:background .2s}
+        .domain-item:hover{background:var(--bg-raised)}
+        .domain-item h4{font-family:var(--font-mono);font-size:.75rem;font-weight:600;color:var(--tx-1);margin-bottom:.35rem;letter-spacing:.04em}
+        .domain-item p{font-size:.8rem;color:var(--tx-3);line-height:1.55}
 
-        /* Security Gate */
-        #security-gate {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: var(--bg-primary);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-        }
-        #security-gate h2 {
-            font-family: var(--font-display);
-            color: var(--text-primary);
-            margin-bottom: 2rem;
-            font-size: 1.5rem;
-            letter-spacing: 0.05em;
-        }
-        #security-gate img {
-            width: 80px; height: auto;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.2));
-        }
-        #app-content { display: none; opacity: 0; transition: opacity 0.5s ease-in; }
+        .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
+        .chip{font-family:var(--font-mono);font-size:.6rem;padding:.18rem .5rem;border:1px solid var(--border);color:var(--tx-3)}
+        .chip-oap{border-color:rgba(245,158,11,.25);color:var(--oap);background:rgba(245,158,11,.04)}
 
-        ::selection { background: var(--oap-accent-glow); color: var(--text-primary); }
+        .faq{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border)}
+        .faq-item{background:var(--bg-card);padding:1.5rem 2rem;transition:background .2s}
+        .faq-item:hover{background:var(--bg-raised)}
+        .faq-item h3{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--tx-1);margin-bottom:.6rem}
+        .faq-item p{color:var(--tx-2);font-size:.9rem;line-height:1.65}
 
-        a { color: var(--text-secondary); text-decoration: none; transition: all 0.2s ease; }
-        a:hover { color: var(--text-primary); }
+        .cta{background:var(--bg-card);border:1px solid var(--border);padding:3.5rem;text-align:center;position:relative;overflow:hidden}
+        .cta::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(245,158,11,.55),transparent)}
+        .cta h2{font-family:var(--font-head);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:var(--tx-1);margin-bottom:.875rem}
+        .cta p{color:var(--tx-2);max-width:520px;margin:0 auto 2rem}
+        .cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+        .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.4rem;font-family:var(--font-mono);font-size:.75rem;font-weight:600;border:1px solid var(--border-md);color:var(--tx-2);background:transparent;text-decoration:none;transition:all .22s var(--ease);letter-spacing:.03em}
+        .btn:hover{color:var(--tx-1);border-color:var(--border-hi);background:rgba(255,255,255,.03)}
+        .btn-primary{background:var(--oap);color:#04060A;border-color:var(--oap)}
+        .btn-primary:hover{background:#fbbf24;border-color:#fbbf24;color:#04060A;box-shadow:0 0 24px rgba(245,158,11,.35)}
 
-        /* Header */
-        header {
-            position: fixed;
-            top: 0; width: 100%;
-            z-index: 1000;
-            backdrop-filter: blur(12px) saturate(180%);
-            background: rgba(5,5,5,0.85);
-            border-bottom: 1px solid var(--border-primary);
-        }
-        .header-content {
-            max-width: 1400px; margin: 0 auto;
-            padding: 0.875rem 2rem;
-            display: flex; justify-content: space-between; align-items: center; gap: 2rem;
-        }
-        .header-left, .header-right {
-            display: flex; align-items: center; gap: 1rem;
-            font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.025em;
-        }
-        .status-indicator { display: flex; align-items: center; gap: 0.5rem; color: var(--text-dim); }
-        .status-dot {
-            width: 6px; height: 6px;
-            background: var(--oap-accent);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--oap-accent-glow);
-            animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;
-        }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .network-badge {
-            padding: 0.25rem 0.75rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-primary);
-            border-radius: 4px;
-            color: var(--oap-accent);
-            font-weight: 500;
-            white-space: nowrap;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-        }
-        .nav-back {
-            color: var(--text-dim);
-            font-family: var(--font-mono); font-size: 0.75rem;
-            display: flex; align-items: center; gap: 0.5rem;
-            transition: color 0.2s;
-        }
-        .nav-back:hover { color: var(--oap-accent); }
+        #citation{background:var(--bg-1);border:1px solid var(--border);border-left:2px solid rgba(245,158,11,.3);padding:1.5rem 2rem;margin-top:2rem}
+        #citation h2{font-family:var(--font-mono);font-size:.62rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:.75rem}
+        #citation p{font-family:var(--font-mono);font-size:.72rem;color:var(--tx-3);line-height:1.7}
 
-        /* Container */
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        footer{margin-top:8rem;padding:4rem 0 2rem;border-top:1px solid var(--border);position:relative}
+        footer::before{content:'';position:absolute;top:-1px;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(245,158,11,.35) 35%,rgba(234,179,8,.2) 65%,transparent)}
+        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3rem}
+        .footer-brand h4{font-family:var(--font-head);font-size:1rem;font-weight:800;color:var(--tx-1);margin-bottom:.875rem;letter-spacing:.04em}
+        .footer-brand p{color:var(--tx-3);font-size:.875rem;line-height:1.6}
+        .footer-col h5{font-family:var(--font-mono);font-size:.62rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.1rem}
+        .footer-col ul{list-style:none}
+        .footer-col li{margin-bottom:.65rem}
+        .footer-col a{color:var(--tx-3);font-size:.875rem;transition:color .2s}
+        .footer-col a:hover{color:var(--tx-1)}
+        .footer-bottom{padding-top:1.75rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.65rem;color:var(--tx-3)}
+        .footer-legal{display:flex;gap:1.5rem}
+        .footer-legal a{color:var(--tx-3);font-size:.65rem}
+        .footer-legal a:hover{color:var(--tx-1)}
 
-        /* Page Hero */
-        .page-hero { padding-top: 8rem; padding-bottom: 4rem; }
-
-        .breadcrumb {
-            font-family: var(--font-mono); font-size: 0.75rem;
-            color: var(--text-muted); margin-bottom: 2rem; letter-spacing: 0.05em;
-        }
-        .breadcrumb span { color: var(--oap-accent); }
-
-        .oap-badge {
-            display: inline-flex; align-items: center; gap: 0.75rem;
-            padding: 0.5rem 1rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-bright);
-            border-radius: 6px;
-            font-family: var(--font-mono); font-size: 0.8rem;
-            color: var(--text-dim); margin-bottom: 2rem;
-        }
-        .oap-badge-dot {
-            width: 8px; height: 8px;
-            background: var(--oap-accent);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--oap-accent-glow);
-            animation: pulse 2s infinite;
-        }
-
-        .page-title {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            line-height: 0.95;
-            letter-spacing: -0.03em;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-        }
-        .page-title .highlight { color: var(--oap-accent); }
-
-        .page-intro {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-tertiary);
-            max-width: 760px;
-            line-height: 1.65;
-            margin-bottom: 3rem;
-            padding-left: 1.5rem;
-            border-left: 3px solid var(--oap-accent);
-        }
-
-        /* Stats Strip */
-        .stats-strip {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 1px;
-            background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
-            margin-bottom: 5rem;
-        }
-        .stat-item { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 1.5rem; text-align: center;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
-        }
-        .stat-value {
-            font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700;
-            color: var(--oap-accent); display: block; margin-bottom: 0.25rem;
-        }
-        .stat-label {
-            font-family: var(--font-mono); font-size: 0.68rem;
-            color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em;
-        }
-
-        /* Section Headers */
-        .section-header {
-            font-family: var(--font-mono); font-size: 0.8rem;
-            color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em;
-            margin-bottom: 2rem; padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-primary);
-        }
-
-        /* Two-col layout */
-        .two-col {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 1px; background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09); margin-bottom: 2rem;
-        }
-        .two-col-card { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 2.5rem;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
-        }
-        .two-col-card h3 {
-            font-family: var(--font-display); font-size: 1.25rem;
-            color: var(--text-primary); margin-bottom: 1rem;
-        }
-        .two-col-card p {
-            color: var(--text-tertiary); font-size: 0.9375rem; line-height: 1.65;
-        }
-        .two-col-card p + p { margin-top: 1rem; }
-
-        /* Doctrine block */
-        .doctrine-section { margin-bottom: 5rem; }
-
-        .doctrine-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 1px; background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
-        }
-        .doctrine-card {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 2rem 2.5rem;
-            transition: background .35s,box-shadow .35s,border-color .35s;
-        }
-        .doctrine-card:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
-            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(251,191,36,.07),inset 0 1px 0 rgba(255,255,255,.12);
-        }
-        .doctrine-number {
-            font-family: var(--font-mono); font-size: 0.68rem;
-            color: var(--oap-accent); letter-spacing: 0.1em;
-            margin-bottom: 0.75rem; text-transform: uppercase;
-        }
-        .doctrine-card h3 {
-            font-family: var(--font-display); font-size: 1rem;
-            color: var(--text-primary); margin-bottom: 0.5rem;
-        }
-        .doctrine-card p {
-            font-size: 0.875rem; color: var(--text-tertiary); line-height: 1.6;
-        }
-
-        /* Capabilities */
-        .capabilities-section { margin-bottom: 5rem; }
-
-        .capability-block {
-            background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
-            margin-bottom: 1px;
-        }
-        .capability-block:last-child { margin-bottom: 0; }
-
-        .cap-row {
-            display: grid; grid-template-columns: 320px 1fr;
-            gap: 0; background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
-            transition: background .35s,box-shadow .35s,border-color .35s;
-        }
-        .cap-row:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
-            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(251,191,36,.07),inset 0 1px 0 rgba(255,255,255,.12);
-        }
-
-        .cap-label-col {
-            padding: 2.5rem;
-            border-right: 1px solid var(--border-primary);
-        }
-        .cap-num {
-            font-family: var(--font-mono); font-size: 0.68rem;
-            color: var(--oap-accent); text-transform: uppercase;
-            letter-spacing: 0.1em; margin-bottom: 0.75rem;
-            display: flex; align-items: center; gap: 0.5rem;
-        }
-        .cap-num::before { content: '//'; color: var(--text-muted); }
-        .cap-label-col h3 {
-            font-family: var(--font-display); font-size: 1.25rem;
-            color: var(--text-primary); line-height: 1.2;
-        }
-
-        .cap-body-col { padding: 2.5rem; }
-        .cap-body-col p {
-            color: var(--text-tertiary); font-size: 0.9375rem;
-            line-height: 1.65; margin-bottom: 1rem;
-        }
-        .cap-body-col p:last-child { margin-bottom: 0; }
-        .cap-body-col .cap-note {
-            font-family: var(--font-mono); font-size: 0.8rem;
-            color: var(--oap-accent); border-left: 2px solid var(--oap-accent);
-            padding-left: 1rem; margin-top: 1rem; font-style: italic; opacity: 0.85;
-        }
-
-        .cap-tags {
-            display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;
-        }
-        .cap-tag {
-            font-family: var(--font-mono); font-size: 0.72rem;
-            padding: 0.25rem 0.6rem;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-bright);
-            border-radius: 3px; color: var(--text-dim);
-        }
-
-        /* How It Works — Flow */
-        .flow-section { margin-bottom: 5rem; }
-
-        .flow-diagram {
-            display: grid; grid-template-columns: 1fr auto 1fr;
-            gap: 0; background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
-        }
-        .flow-side { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 2.5rem;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
-        }
-        .flow-divider {
-            width: 1px; background: var(--border-primary);
-            display: flex; align-items: center; justify-content: center;
-            position: relative;
-        }
-        .flow-divider::after {
-            content: '→';
-            position: absolute;
-            color: var(--oap-accent);
-            font-size: 1.5rem;
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
-            padding: 0.5rem;
-        }
-        .flow-side-label {
-            font-family: var(--font-mono); font-size: 0.72rem;
-            color: var(--oap-accent); text-transform: uppercase;
-            letter-spacing: 0.1em; margin-bottom: 1.5rem;
-        }
-        .flow-step-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
-        .flow-step-item {
-            display: flex; align-items: flex-start; gap: 0.75rem;
-            font-size: 0.9rem; color: var(--text-tertiary); line-height: 1.5;
-        }
-        .flow-step-item::before {
-            content: '→';
-            color: var(--oap-accent); flex-shrink: 0; margin-top: 0.1rem;
-        }
-        .flow-step-item strong { color: var(--text-primary); display: block; margin-bottom: 0.2rem; }
-
-        .flow-note {
-            margin-top: 1px;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-primary);
-            border-top: 2px solid var(--oap-accent);
-            padding: 1.5rem 2.5rem;
-            font-family: var(--font-mono); font-size: 0.85rem;
-            color: var(--text-dim);
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-        .flow-note-item strong { color: var(--oap-accent); }
-
-        /* Transparency Model */
-        .transparency-section { margin-bottom: 5rem; }
-
-        .transparency-grid {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 1px; background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
-        }
-        .transparency-card { background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 2.5rem;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
-        }
-        .transparency-card h3 {
-            font-family: var(--font-display); font-size: 1rem;
-            color: var(--text-primary); margin-bottom: 1.25rem;
-            display: flex; align-items: center; gap: 0.75rem;
-        }
-        .t-dot-pub {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: var(--accent-success);
-            box-shadow: 0 0 8px var(--accent-success-glow);
-            flex-shrink: 0;
-        }
-        .t-dot-priv {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: var(--oap-accent);
-            box-shadow: 0 0 8px var(--oap-accent-glow);
-            flex-shrink: 0;
-        }
-        .transparency-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
-        .transparency-list li {
-            font-size: 0.875rem; color: var(--text-tertiary);
-            display: flex; align-items: center; gap: 0.75rem;
-        }
-        .transparency-list li::before { content: '→'; color: var(--text-muted); }
-
-        /* Governance Summary */
-        .governance-section { margin-bottom: 5rem; }
-
-        .gov-table-wrap {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            overflow-x: auto; margin-bottom: 1.5rem;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
-        }
-        table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.85rem; }
-        thead tr { background: var(--bg-elevated); border-bottom: 1px solid var(--border-bright); }
-        th {
-            padding: 1rem 1.5rem; text-align: left;
-            color: var(--text-dim); font-size: 0.72rem;
-            text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500;
-        }
-        td { padding: 0.875rem 1.5rem; color: var(--text-tertiary); border-bottom: 1px solid var(--border-subtle); }
-        tr:last-child td { border-bottom: none; }
-        tr:hover td { background: var(--bg-elevated); }
-        .td-param { color: var(--text-secondary); font-weight: 500; }
-        .td-val { color: var(--oap-accent); font-weight: 600; }
-        .td-note { color: var(--text-dim); font-size: 0.8rem; }
-
-        .gov-axioms {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 1px; background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
-        }
-        .axiom {
-            background: var(--bg-elevated);
-            padding: 1.5rem 2rem;
-            font-family: var(--font-mono); font-size: 0.85rem;
-            color: var(--oap-accent);
-            display: flex; align-items: center; gap: 0.75rem;
-        }
-        .axiom::before { content: '//'; color: var(--text-muted); flex-shrink: 0; }
-
-        /* Application Domains */
-        .domains-section { margin-bottom: 5rem; }
-
-        .domains-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 1px; background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
-            margin-bottom: 1.5rem;
-        }
-        .domain-card {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary); padding: 2rem;
-            transition: background .35s,box-shadow .35s,border-color .35s;
-        }
-        .domain-card:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
-            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(251,191,36,.07),inset 0 1px 0 rgba(255,255,255,.12);
-        }
-        .domain-icon {
-            font-family: var(--font-mono); font-size: 0.68rem;
-            color: var(--text-muted); text-transform: uppercase;
-            letter-spacing: 0.1em; margin-bottom: 1rem;
-        }
-        .domain-card h3 {
-            font-family: var(--font-display); font-size: 1.1rem;
-            color: var(--text-primary); margin-bottom: 0.75rem;
-        }
-        .domain-card p { font-size: 0.875rem; color: var(--text-tertiary); line-height: 1.6; }
-
-        .domain-principle {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-primary);
-            border-left: 3px solid var(--oap-accent);
-            padding: 1.5rem 2rem;
-            font-family: var(--font-mono); font-size: 0.9rem;
-            color: var(--text-secondary); font-style: italic;
-        }
-
-        /* CTA */
-        .cta-section {
-            margin: 4rem 0 6rem; padding: 4rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-primary);
-            border-radius: 12px; text-align: center;
-        }
-        .cta-section h2 {
-            font-family: var(--font-display); font-size: 2rem;
-            color: var(--text-primary); margin-bottom: 1rem;
-        }
-        .cta-section p {
-            font-size: 1.125rem; color: var(--text-tertiary);
-            margin-bottom: 2rem; max-width: 600px;
-            margin-left: auto; margin-right: auto;
-        }
-        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.875rem 1.75rem;
-            font-family: var(--font-mono); font-size: 0.875rem; font-weight: 600;
-            text-decoration: none; border-radius: 6px;
-            transition: all 0.2s ease; cursor: pointer; border: none;
-        }
-        .btn-primary { background: var(--oap-accent); color: var(--bg-primary); }
-        .btn-primary:hover { background: #fcd34d; box-shadow: 0 0 20px var(--oap-accent-glow); transform: translateY(-2px); }
-        .btn-secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border-bright); }
-        .btn-secondary:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated); border-color: var(--oap-accent); color: var(--oap-accent);
-            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(251,191,36,.07),inset 0 1px 0 rgba(255,255,255,.12);
-        }
-
-        /* Footer */
-        footer { margin-top: 8rem; padding: 4rem 0 2rem; border-top: 1px solid var(--border-primary); }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
-        .footer-brand h4 { font-family: var(--font-display); font-size: 1.25rem; color: var(--text-primary); margin-bottom: 1rem; }
-        .footer-brand p { color: var(--text-dim); font-size: 0.875rem; line-height: 1.6; }
-        .footer-links h5 { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 0.75rem; }
-        .footer-links a { color: var(--text-tertiary); font-size: 0.875rem; transition: color 0.2s ease; }
-        .footer-links a:hover { color: var(--oap-accent); }
-        .footer-bottom {
-            padding-top: 2rem; border-top: 1px solid var(--border-subtle);
-            display: flex; justify-content: space-between; align-items: center;
-            font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);
-        }
-        .footer-legal { display: flex; gap: 1.5rem; }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .cap-row { grid-template-columns: 1fr; }
-            .cap-label-col { border-right: none; border-bottom: 1px solid var(--border-primary); }
-            .governance-section .gov-axioms { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 900px) {
-            .two-col, .transparency-grid { grid-template-columns: 1fr; }
-            .flow-diagram { grid-template-columns: 1fr; }
-            .flow-divider { display: none; }
-            .doctrine-grid, .domains-grid { grid-template-columns: 1fr 1fr; }
-            .gov-axioms { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 768px) {
-            .header-content { padding: 0.75rem 1rem; flex-direction: column; gap: 0.75rem; }
-            .doctrine-grid, .domains-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-            .cta-section { padding: 2rem; }
-            .flow-note { grid-template-columns: 1fr; }
-        }
-    
-/* ── glass card depth injection ───────────────────── */
-.module-card,.constraint-card,.gate-card,.stat-item,.layer-row,.phase-row{box-shadow:0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);transition:background .35s,box-shadow .35s,border-color .35s!important}
-.module-card:hover,.constraint-card:hover,.gate-card:hover,.stat-item:hover,.layer-row:hover,.phase-row:hover{box-shadow:0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(251,191,36,.07),inset 0 1px 0 rgba(255,255,255,.1)!important}
-</style>
+        @media(max-width:1024px){.primitives-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}.footer-brand{grid-column:span 2}}
+        @media(max-width:768px){.nav-inner{padding:.7rem 1rem}.grid-2{grid-template-columns:1fr}.card.span2{grid-column:span 1}.stats-bar{grid-template-columns:repeat(2,1fr)}.primitives-grid{grid-template-columns:1fr}.domains-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr}.footer-brand{grid-column:span 1}.footer-bottom{flex-direction:column;gap:1rem;text-align:center}.cta{padding:2.5rem 1.5rem}}
+        @media(max-width:480px){.stats-bar{grid-template-columns:1fr 1fr}.domains-grid{grid-template-columns:1fr}}
+    </style>
 </head>
 <body>
 
-<div id="security-gate">
-    <img src="/site-logo.png" alt="Orthonode" style="width:60px;height:60px;border-radius:8px">
-    <h2>// ESTABLISHING_SECURE_UPLINK</h2>
-    <div class="cf-turnstile"
-         data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb"
-         data-theme="dark"
-         data-callback="onHumanVerified">
+<header role="banner">
+    <div class="nav-inner">
+        <div class="nav-left">
+            <a href="/" class="nav-back"><img src="/site-logo.png" alt="" width="16" height="16"> orthonode.xyz</a>
+            <span class="nav-sep">/</span>
+            <div class="nav-status"><span class="live-dot"></span><span>OAP</span></div>
+        </div>
+        <div class="nav-right">
+            <span class="tag tag-prop">PROPRIETARY</span>
+            <span class="tag tag-oap">CHAIN_AGNOSTIC</span>
+            <span class="tag">PUBLISHED</span>
+        </div>
     </div>
-</div>
+</header>
 
-<div id="app-content">
+<main class="wrap">
 
-    <header role="banner">
-        <div class="header-content">
-            <div class="header-left">
-                <a href="/" class="nav-back"><img src="/site-logo.png" alt="" width="18" height="18" style="border-radius:3px;vertical-align:middle;margin-right:5px;display:inline-block">orthonode.xyz</a>
-                <div class="status-indicator">
-                    <span class="status-dot" role="img" aria-label="System operational"></span>
-                    <span>OAP ENGINE [IN_DEVELOPMENT]</span>
-                </div>
-            </div>
-            <div class="header-right">
-                <div class="network-badge">INTEGRITY_GOVERNANCE</div>
-                <div class="network-badge">MOBILITY_ROBOTICS</div>
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <p class="breadcrumb">ORTHONODE SYSTEMS / <span class="bc-cur">OAP</span></p>
+    <div class="hero-badge"><span class="live-dot"></span>PROPRIETARY · CHAIN-AGNOSTIC · ARCHITECTURE PUBLISHED</div>
+    <h1>Integrity <span class="accent">Governance</span><br>Engine</h1>
+    <p class="hero-sub">OAP (Orthonode Assurance Platform) governs device trust over its full operational lifecycle — enforcing physics compliance, managing integrity scores, detecting clones, and issuing verifiable signals. No blockchain dependency. No economic control. Chain-agnostic by design.</p>
+    <p class="hero-mono">// OAP_EMITS_VERIFIABLE_INTEGRITY_STATE · PARTNERS_APPLY_ECONOMIC_LOGIC</p>
+    <div class="stats-bar reveal">
+        <div class="stat"><span class="stat-n">5</span><span class="stat-l">Core Primitives</span></div>
+        <div class="stat"><span class="stat-n">0–100</span><span class="stat-l">Integrity Score</span></div>
+        <div class="stat"><span class="stat-n">2/yr</span><span class="stat-l">Override Cap</span></div>
+        <div class="stat"><span class="stat-n">Any</span><span class="stat-l">Chain Target</span></div>
+    </div>
+</section>
+
+<section class="section reveal" role="region" aria-labelledby="overview-head">
+    <p class="sec-label" id="overview-head">// PROTOCOL_OVERVIEW : WHAT_OAP_GOVERNS</p>
+    <div class="grid-2">
+        <div class="card">
+            <span class="card-label" style="color:var(--red);">THE_GAP</span>
+            <h3>SHA Anchors Identity. OAP Governs What Happens Next.</h3>
+            <p>SHA verifies <em>what</em> a device is at a single point in time. But devices operate over months or years — firmware changes, behavior drifts, clones appear, sensors degrade. No existing protocol governs device trust across its full lifecycle.</p>
+            <p>OAP closes that gap: append-only behavioral history, deterministic physics compliance checks, and lifecycle trust scoring that cannot be reset or manipulated.</p>
+        </div>
+        <div class="card">
+            <span class="card-label" style="color:var(--oap);">THE_PRIMITIVE</span>
+            <h3>Verifiable Integrity State, Not Economic Control</h3>
+            <p>OAP produces one output: a verifiable integrity signal representing the device's current trust state on a 0–100 scale. <strong>Partners apply economic logic</strong> — reward multipliers, access gates, compliance reports — on top of that signal.</p>
+            <p>OAP does not control rewards, governance, or economic decisions. It produces the truth. What you do with it is yours.</p>
+        </div>
+        <div class="card">
+            <span class="card-label" style="color:var(--tx-3);">WHAT_OAP_IS_NOT</span>
+            <h3>No Oracle, No Centralized Authority</h3>
+            <p>OAP is not a centralized reputation system, an oracle service, or a blockchain-specific module. It carries no economic stake, issues no tokens, and maintains no privileged keys. All governance logic is deterministic and auditable. Designed to compose with SHA on Arbitrum, TON-SHA on TON, and any future verification layer.</p>
+        </div>
+        <div class="card">
+            <span class="card-label" style="color:var(--green);">STATUS</span>
+            <h3>Architecture Published — PROPRIETARY</h3>
+            <p>OAP architecture is published. The implementation is PROPRIETARY — internals are not open-sourced. Surface-level integration documentation is available for qualified partners. Deployment targets are chain-agnostic; integration discussions are open.</p>
+            <p><a href="mailto:infrastructure@orthonode.xyz" style="color:var(--oap);">infrastructure@orthonode.xyz ↗</a></p>
+        </div>
+    </div>
+</section>
+
+<section class="section reveal" role="region" aria-labelledby="primitives-head">
+    <p class="sec-label" id="primitives-head">// CORE_PRIMITIVES : FIVE_GOVERNANCE_MODULES</p>
+    <div class="primitives-grid">
+        <div class="prim-card">
+            <div class="prim-num">Primitive 01</div>
+            <h3>Physics Profiles</h3>
+            <p>Deterministic motion validation against hardware-specific physics envelopes. Each device class has a profile defining legal motion bounds — acceleration, angular rate, thermal range. Violations flag immediately and contribute to lifecycle scoring.</p>
+        </div>
+        <div class="prim-card">
+            <div class="prim-num">Primitive 02</div>
+            <h3>Trust Lifecycle Scoring</h3>
+            <p>Append-only behavioral history produces a 0–100 integrity score across the device's full operational life. Each event — compliance, violation, override — is logged immutably. Past behavior permanently shapes future trust. Cannot be reset.</p>
+        </div>
+        <div class="prim-card">
+            <div class="prim-num">Primitive 03</div>
+            <h3>Clone Containment</h3>
+            <p>Cross-reference detection flags devices that share identity claims with concurrently active units. Statistical behavioral divergence analysis identifies hardware-level impersonation — cloned silicon cannot maintain the same behavioral fingerprint across independent physics channels.</p>
+        </div>
+        <div class="prim-card">
+            <div class="prim-num">Primitive 04</div>
+            <h3>Adaptive Anchoring</h3>
+            <p>Trust anchors recalibrate dynamically as the device ages and its behavioral baseline evolves. New calibration requires verified SHA receipt sequences — preventing arbitrary anchor reset. Adaptive anchoring accounts for legitimate sensor drift without opening a reset attack vector.</p>
+        </div>
+        <div class="prim-card">
+            <div class="prim-num">Primitive 05</div>
+            <h3>Override Governance</h3>
+            <p>A maximum of two operator overrides per device per year are permitted. Each override is logged immutably with timestamp, operator identity, and justification hash. Overrides cannot be cleared, backdated, or issued anonymously. The cap is protocol-enforced.</p>
+        </div>
+        <div class="prim-card" style="background:rgba(245,158,11,.03);border-left:2px solid rgba(245,158,11,.25);">
+            <div class="prim-num" style="color:var(--tx-3);">Composition</div>
+            <h3>OAP + SHA = Complete Trust Stack</h3>
+            <p>SHA provides the identity root — immutable at the silicon layer. OAP governs what that identity does over time. Together they produce a complete hardware trust primitive: point-in-time verification plus lifecycle behavioral governance.</p>
+            <div class="chips">
+                <span class="chip chip-oap">SHA → IDENTITY</span>
+                <span class="chip chip-oap">OAP → LIFECYCLE</span>
+                <span class="chip chip-oap">COMPOSED → FULL_TRUST</span>
             </div>
         </div>
-    </header>
+    </div>
+</section>
 
-    <main class="container">
+<section class="section reveal" role="region" aria-labelledby="domains-head">
+    <p class="sec-label" id="domains-head">// APPLICATION_DOMAINS : WHERE_INTEGRITY_GOVERNANCE_MATTERS</p>
+    <div class="domains-grid">
+        <div class="domain-item">
+            <h4>DePIN Reward Networks</h4>
+            <p>Proof that nodes are real, compliant, and active — not simulated for reward extraction.</p>
+        </div>
+        <div class="domain-item">
+            <h4>Mobility & Fleet</h4>
+            <p>Per-vehicle physics compliance and lifecycle trust. Odometer fraud and sensor spoofing produce OAP violations.</p>
+        </div>
+        <div class="domain-item">
+            <h4>Drone Operations</h4>
+            <p>Airspace physics profiling and geofence compliance. Mission boundary violations create permanent integrity events.</p>
+        </div>
+        <div class="domain-item">
+            <h4>Robotics & IIoT</h4>
+            <p>Lifecycle governance for industrial robots and connected sensors in critical automation loops.</p>
+        </div>
+        <div class="domain-item">
+            <h4>Autonomous Logistics</h4>
+            <p>End-to-end chain-of-custody integrity for autonomous delivery and warehouse systems.</p>
+        </div>
+        <div class="domain-item">
+            <h4>Mapping & Sensors</h4>
+            <p>Physics profile violations flag tampered or repositioned sensors without physical inspection.</p>
+        </div>
+        <div class="domain-item">
+            <h4>Arbitrum Orbit Chains</h4>
+            <p>Composable with SHA on Arbitrum for hardware-gated DePIN applications requiring identity plus behavioral proof.</p>
+        </div>
+        <div class="domain-item">
+            <h4>Partner Integrations</h4>
+            <p>OAP signals integrate via REST, gRPC, or on-chain event feeds. Partners own the economic layer.</p>
+        </div>
+    </div>
+</section>
 
-        <!-- Page Hero -->
-        <section class="page-hero">
-            <p class="breadcrumb">ORTHONODE SYSTEMS / <span>OAP — INTEGRITY GOVERNANCE ENGINE</span></p>
+<section class="section reveal" role="region" aria-labelledby="faq-head">
+    <p class="sec-label" id="faq-head">// FREQUENTLY_ASKED_QUESTIONS</p>
+    <div class="faq">
+        <div class="faq-item">
+            <h3>What is OAP and how does it differ from SHA?</h3>
+            <p>OAP (Orthonode Assurance Platform) is a chain-agnostic integrity governance engine for DePIN hardware. SHA verifies <em>what</em> a device is at a single moment — immutable silicon identity bound to a smart contract. OAP governs <em>how</em> that device behaves over its full operational lifetime — physics compliance, behavioral history, trust scoring 0–100, clone detection. They compose: SHA provides the identity root that OAP's lifecycle engine references. Together they form a complete hardware trust stack.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Is OAP open-source? Can I integrate it today?</h3>
+            <p>OAP architecture is published and the surface-level integration model is documented. The implementation is PROPRIETARY — internals are not open-sourced. Integration discussions are open for qualified partners. Contact infrastructure@orthonode.xyz with your use case. OAP is chain-agnostic by design — it does not require Arbitrum, TON, or any specific blockchain to operate, though it composes naturally with SHA on Arbitrum and TON-SHA on TON.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What does "OAP emits verifiable integrity state" mean in practice?</h3>
+            <p>OAP's output is a cryptographically verifiable integrity signal on a 0–100 scale representing the device's current trust state based on its full behavioral history. OAP does not control rewards, governance tokens, or economic decisions — those belong to the protocol or application layer above. Partners consume the OAP signal and apply their own economic logic: reward multipliers, access gating, compliance reporting. OAP is a trust primitive, not an economic protocol.</p>
+        </div>
+        <div class="faq-item">
+            <h3>What is the Override Governance cap and why does it exist?</h3>
+            <p>A maximum of two operator overrides per device per year are permitted by protocol. Each override is logged immutably — timestamp, operator identity, justification hash — and cannot be cleared, backdated, or issued anonymously. The cap prevents override abuse as an attack vector (e.g., repeatedly resetting a compromised device's trust score). Override governance is enforced at the protocol level, not via policy — it is not configurable.</p>
+        </div>
+    </div>
+</section>
 
-            <div class="oap-badge">
-                <span class="oap-badge-dot"></span>
-                <span>IN DEVELOPMENT · STRUCTURAL MODEL PUBLISHED · ARCHITECTURE DOCS AVAILABLE</span>
+<section class="section reveal">
+    <div class="cta">
+        <h2>Integrate OAP with Your Protocol</h2>
+        <p>OAP emits verifiable integrity state. You apply economic logic. Partnership inquiries welcome.</p>
+        <div class="cta-row">
+            <a href="mailto:infrastructure@orthonode.xyz" class="btn btn-primary">Contact for Integration →</a>
+            <a href="/sha.html" class="btn" style="border-color:rgba(42,159,232,.25);color:var(--sha);">Explore SHA</a>
+            <a href="/invariant.html" class="btn" style="border-color:rgba(234,179,8,.25);color:var(--inv);">Explore INVARIANT</a>
+            <a href="/" class="btn">← Back to Orthonode</a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer role="contentinfo">
+    <div class="wrap">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h4>ORTHONODE SYSTEMS™</h4>
+                <p>Building deterministic physical verification infrastructure for autonomous systems, DePIN networks, and mobility platforms. OAP governs lifecycle integrity. SHA anchors hardware identity on Arbitrum. TON-SHA brings agent trust to the TON ecosystem.</p>
+                <p style="margin-top:.875rem;color:var(--tx-3);"><strong style="color:var(--tx-2);">Founder:</strong> Arhant Barmate<br><strong style="color:var(--tx-2);">Location:</strong> Bhopal, Madhya Pradesh, India<br><strong style="color:var(--tx-2);">Contact:</strong> infrastructure@orthonode.xyz</p>
             </div>
-
-            <h1 class="page-title">
-                OAP — Integrity<br><span class="highlight">Governance Engine</span>
-            </h1>
-
-            <p class="page-intro">
-                Deterministic motion validation and lifecycle trust governance for mobility, robotics, and decentralized infrastructure systems. OAP does not block telemetry. It emits verifiable integrity state — giving protocols, operators, and economic layers a deterministic foundation for reward eligibility, device trust, and lifecycle governance.
-            </p>
-
-            <div class="stats-strip" role="region" aria-label="OAP dimensions">
-                <div class="stat-item">
-                    <span class="stat-value">5</span>
-                    <span class="stat-label">Core Capabilities</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">0–100</span>
-                    <span class="stat-label">Trust Score Range</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">2/yr</span>
-                    <span class="stat-label">Override Cap (365d)</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">Append-Only</span>
-                    <span class="stat-label">History Model</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">Chain-Agnostic</span>
-                    <span class="stat-label">Deployment Model</span>
-                </div>
+            <div class="footer-col">
+                <h5>Products</h5>
+                <ul>
+                    <li><a href="/sha.html" style="color:var(--sha);">SHA — Hardware Attestation</a></li>
+                    <li><a href="/oap.html" style="color:var(--oap);">OAP — Integrity Governance</a></li>
+                    <li><a href="/nexus.html">Nexus — Zero-Trust Gateway</a></li>
+                    <li><a href="/ton-sha.html" style="color:var(--ton);">TON-SHA — Agent Trust Layer</a></li>
+                    <li><a href="/invariant.html" style="color:var(--inv);">INVARIANT — Bittensor Subnet</a></li>
+                    <li><a href="/tix-dao.html" style="color:var(--tix);">TIX-DAO — Venue Governance</a></li>
+                </ul>
             </div>
-        </section>
-
-        <!-- What Is OAP -->
-        <section style="margin-bottom: 5rem;">
-            <h2 class="section-header">// WHAT_IS_OAP : SYSTEM_OVERVIEW</h2>
-            <div class="two-col">
-                <div class="two-col-card">
-                    <h3>The Problem It Solves</h3>
-                    <p>Autonomous systems — DePIN networks, mobility fleets, robotics platforms — make economic and operational decisions based on digital telemetry. But telemetry can be spoofed. Motion can be emulated. Firmware can be tampered. Device identities can be cloned. Counters can be rolled back.</p>
-                    <p>Most systems assume physical compliance. Very few verify it deterministically. OAP closes that gap — not by blocking data, but by continuously emitting a verifiable integrity signal that reflects the actual physical and behavioral state of each device over its full lifecycle.</p>
-                </div>
-                <div class="two-col-card">
-                    <h3>What OAP Governs</h3>
-                    <p>OAP governs integrity across three dimensions simultaneously: motion compliance (is the device behaving within expected physics?), trust lifecycle (what is this device's accumulated behavioral history?), and identity continuity (is this still the same device, operating under approved firmware?). These three dimensions are resolved into a single signed integrity output that downstream systems can consume without replicating the verification logic themselves.</p>
-                    <p>OAP emits state. Partners apply economic policy. No hidden resets. No silent forgiveness.</p>
-                </div>
-            </div>
-            <div class="two-col">
-                <div class="two-col-card">
-                    <h3>What OAP Is Not</h3>
-                    <p>OAP is not an anti-spoof tool. It is not a blacklist service, a content filter, or a fraud detection heuristic. It is a lifecycle integrity governance engine — designed to provide a deterministic, append-only record of integrity state that is structurally impossible to silently manipulate. It does not make economic decisions; it provides the verifiable foundation on which economic decisions can be made.</p>
-                </div>
-                <div class="two-col-card">
-                    <h3>Integration Philosophy</h3>
-                    <p>OAP publishes its mathematical structure, governance rules, and lifecycle model. It protects threshold constants, escalation parameters, and calibration values — balancing auditability with adversarial resilience. Partners retain full control over their economic policies. OAP provides the integrity signal; the downstream system decides what to do with it.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Doctrine -->
-        <section class="doctrine-section">
-            <h2 class="section-header">// DESIGN_DOCTRINE : FIRST_PRINCIPLES</h2>
-            <div class="doctrine-grid">
-                <div class="doctrine-card">
-                    <div class="doctrine-number">AXIOM_01</div>
-                    <h3>Physics Is Invariant</h3>
-                    <p>Real physical behavior obeys immutable laws. OAP's motion enforcement is grounded in physics envelopes — tolerances derived from vehicle class, environment, and sensor characteristics. Software cannot replicate the friction, inertia, and noise signatures of genuine physical operation.</p>
-                </div>
-                <div class="doctrine-card">
-                    <div class="doctrine-number">AXIOM_02</div>
-                    <h3>Identity Must Be Device-Bound</h3>
-                    <p>Trust cannot be portable. Each physical device carries a unique identity derived from hardware-level identifiers. Identity cannot be transferred, cloned, or rotated without explicit governance approval — making Sybil attacks and clone attacks structurally detectable.</p>
-                </div>
-                <div class="doctrine-card">
-                    <div class="doctrine-number">AXIOM_03</div>
-                    <h3>Trust Must Be Lifecycle-Governed</h3>
-                    <p>A clean history today does not erase a compromised history yesterday. OAP maintains a full behavioral record across each device's operating life. Trust is earned, degraded, and bounded — never silently reset. Redemption is possible but constrained by the severity of prior violations.</p>
-                </div>
-                <div class="doctrine-card">
-                    <div class="doctrine-number">AXIOM_04</div>
-                    <h3>Integrity Must Be Append-Only</h3>
-                    <p>History is immutable. Anchors, violation records, and trust state changes are appended, never overwritten. Pruned anchors are retained in summarized form. The integrity record grows forward — there is no mechanism for silent retrospective modification.</p>
-                </div>
-                <div class="doctrine-card">
-                    <div class="doctrine-number">AXIOM_05</div>
-                    <h3>Redemption Must Be Bounded</h3>
-                    <p>Devices that have crossed severe violation thresholds cannot self-restore. Re-provisioning requires explicit partner approval and results in a new identity under governed conditions. Override authority is capped, signed, logged, and limited to a fixed number per rolling period.</p>
-                </div>
-                <div class="doctrine-card">
-                    <div class="doctrine-number">AXIOM_06</div>
-                    <h3>Verification Must Be Deterministic</h3>
-                    <p>The same inputs always produce the same integrity output. OAP contains no probabilistic heuristics, no model inference, and no opaque scoring functions. Every output is reproducible from the underlying signed record — auditable by any party with access to the data.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Core Capabilities -->
-        <section class="capabilities-section">
-            <h2 class="section-header">// CORE_CAPABILITIES : FIVE_ENGINES</h2>
-
-            <div class="cap-row">
-                <div class="cap-label-col">
-                    <div class="cap-num">CAPABILITY_01</div>
-                    <h3>Motion Integrity</h3>
-                </div>
-                <div class="cap-body-col">
-                    <p>Physics envelope validation enforces that device motion conforms to expected bounds for the vehicle class, operating environment, and sensor profile. Violations are scored using a scar accumulation model — each event contributes to a running integrity penalty that decays at a governed rate for recoverable behavior, and permanently marks catastrophic events.</p>
-                    <p>Physics violations reduce reward eligibility — not data availability. OAP never silences a device; it adjusts its integrity signal. The reward layer decides what to do with that signal.</p>
-                    <div class="cap-tags">
-                        <span class="cap-tag">Physics Envelope</span>
-                        <span class="cap-tag">Vehicle-Class Profiles</span>
-                        <span class="cap-tag">Scar Accumulation</span>
-                        <span class="cap-tag">Decay Model</span>
-                        <span class="cap-tag">Catastrophic Event Flag</span>
-                        <span class="cap-tag">Reward-Neutral Scoring</span>
-                    </div>
-                    <p class="cap-note">Violations score integrity — not data flow. Economic policy lives downstream.</p>
-                </div>
-            </div>
-
-            <div class="cap-row" style="border-top: 1px solid var(--border-primary);">
-                <div class="cap-label-col">
-                    <div class="cap-num">CAPABILITY_02</div>
-                    <h3>Trust Lifecycle Governance</h3>
-                </div>
-                <div class="cap-body-col">
-                    <p>A device's trust score is a deterministic function of its full behavioral history — not its most recent state. OAP maintains a visible tamper count, applies a non-linear severity curve to escalating violations, and enforces a rolling decay window that allows gradual recovery from minor events. A configurable permanent downgrade threshold marks devices that have crossed an irreversible boundary.</p>
-                    <p>A controlled re-provision protocol allows severely degraded devices to be assigned new identities under explicit partner approval. Trust is deterministic. Redemption is bounded. History is append-only.</p>
-                    <div class="cap-tags">
-                        <span class="cap-tag">Non-Linear Severity Curve</span>
-                        <span class="cap-tag">Visible Tamper Count</span>
-                        <span class="cap-tag">Rolling Decay Window</span>
-                        <span class="cap-tag">Permanent Downgrade</span>
-                        <span class="cap-tag">Controlled Re-Provision</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cap-row" style="border-top: 1px solid var(--border-primary);">
-                <div class="cap-label-col">
-                    <div class="cap-num">CAPABILITY_03</div>
-                    <h3>Identity & Clone Containment</h3>
-                </div>
-                <div class="cap-body-col">
-                    <p>Each physical device operates under a unique signing key bound to hardware-level identifiers. Keys can be rotated under governed conditions, but each rotation is logged and traceable. Monotonic counter enforcement makes identity rollback attempts detectable — any submitted counter value below the last confirmed value triggers containment logic. Duplicate identity detection catches cloning attempts across the network.</p>
-                    <div class="cap-tags">
-                        <span class="cap-tag">Device-Unique Signing Keys</span>
-                        <span class="cap-tag">Rotatable Key Governance</span>
-                        <span class="cap-tag">Monotonic Counter</span>
-                        <span class="cap-tag">Duplicate Detection</span>
-                        <span class="cap-tag">Lower-Counter Freeze</span>
-                    </div>
-                    <p class="cap-note">Identity rollback becomes detectable and containable.</p>
-                </div>
-            </div>
-
-            <div class="cap-row" style="border-top: 1px solid var(--border-primary);">
-                <div class="cap-label-col">
-                    <div class="cap-num">CAPABILITY_04</div>
-                    <h3>Adaptive Anchoring</h3>
-                </div>
-                <div class="cap-body-col">
-                    <p>OAP dynamically adjusts the frequency at which integrity checkpoints are anchored, based on device trust score and behavioral state. High-risk devices anchor more frequently, reducing the window in which undetected manipulation can occur. Clean devices operate efficiently with less overhead. Anchoring can be triggered by state transitions, time intervals, or trust-score thresholds. Partner-side checkpoint retention policies are configurable within governed bounds.</p>
-                    <div class="cap-tags">
-                        <span class="cap-tag">Transition-Based Anchoring</span>
-                        <span class="cap-tag">Time-Based Anchoring</span>
-                        <span class="cap-tag">Trust-Adaptive Tightening</span>
-                        <span class="cap-tag">Partner Checkpoint Retention</span>
-                    </div>
-                    <p class="cap-note">High-risk devices anchor more. Clean devices run lean.</p>
-                </div>
-            </div>
-
-            <div class="cap-row" style="border-top: 1px solid var(--border-primary);">
-                <div class="cap-label-col">
-                    <div class="cap-num">CAPABILITY_05</div>
-                    <h3>Override Governance</h3>
-                </div>
-                <div class="cap-body-col">
-                    <p>Administrative overrides of integrity state are permitted under strictly governed conditions. Each override is level-restricted (only principals with sufficient authority may invoke it), cryptographically signed, and committed to the append-only log. Overrides are capped at two per rolling 365-day window per device. After an override, trust is restored only to a fixed baseline — never to the pre-degradation level. The integrity math remains intact; overrides are visible in the audit record and cannot be hidden.</p>
-                    <div class="cap-tags">
-                        <span class="cap-tag">Level-Restricted Authority</span>
-                        <span class="cap-tag">Signed & Logged</span>
-                        <span class="cap-tag">2/yr Cap</span>
-                        <span class="cap-tag">Fixed Trust Baseline Restore</span>
-                        <span class="cap-tag">Full Auditability</span>
-                    </div>
-                    <p class="cap-note">Integrity math remains intact. Overrides are visible — never silent.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- How It Works -->
-        <section class="flow-section">
-            <h2 class="section-header">// VERIFICATION_FLOW : DEVICE_TO_INTEGRITY_SIGNAL</h2>
-
-            <div class="flow-diagram">
-                <div class="flow-side">
-                    <div class="flow-side-label">DEVICE_LAYER</div>
-                    <ul class="flow-step-list">
-                        <li class="flow-step-item">
-                            <div>
-                                <strong>Motion Envelope Check</strong>
-                                Physics-bounded validation against vehicle-class profile. Scar accumulation on violation.
-                            </div>
-                        </li>
-                        <li class="flow-step-item">
-                            <div>
-                                <strong>Trust Engine Evaluation</strong>
-                                Running trust score updated from full behavioral history, tamper count, and severity model.
-                            </div>
-                        </li>
-                        <li class="flow-step-item">
-                            <div>
-                                <strong>Adaptive Anchoring Decision</strong>
-                                Checkpoint frequency adjusted by current trust tier. State committed to anchor.
-                            </div>
-                        </li>
-                        <li class="flow-step-item">
-                            <div>
-                                <strong>Signed Checkpoint Emitted</strong>
-                                Checkpoint includes integrity state, counter, firmware hash, and device signature.
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="flow-divider"></div>
-                <div class="flow-side">
-                    <div class="flow-side-label">PARTNER_LAYER</div>
-                    <ul class="flow-step-list">
-                        <li class="flow-step-item">
-                            <div>
-                                <strong>Signature Verification</strong>
-                                Checkpoint signature verified against device's registered public key.
-                            </div>
-                        </li>
-                        <li class="flow-step-item">
-                            <div>
-                                <strong>Counter Monotonic Validation</strong>
-                                Submitted counter checked against last confirmed value. Rollback triggers freeze.
-                            </div>
-                        </li>
-                        <li class="flow-step-item">
-                            <div>
-                                <strong>Anchor Storage</strong>
-                                Verified checkpoint stored within retention policy bounds. Pruned anchors summarized.
-                            </div>
-                        </li>
-                        <li class="flow-step-item">
-                            <div>
-                                <strong>Economic Policy Application</strong>
-                                Partner applies their own reward or access rules against the OAP integrity signal.
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="flow-note">
-                <div class="flow-note-item"><strong>OAP emits:</strong> Deterministic integrity state</div>
-                <div class="flow-note-item"><strong>Partners apply:</strong> Their own economic logic</div>
-            </div>
-        </section>
-
-        <!-- Transparency Model -->
-        <section class="transparency-section">
-            <h2 class="section-header">// TRANSPARENCY_MODEL : PUBLISHED_VS_PROTECTED</h2>
-            <div class="transparency-grid">
-                <div class="transparency-card">
-                    <h3><span class="t-dot-pub"></span>Published (Auditable)</h3>
-                    <ul class="transparency-list">
-                        <li>Mathematical structure of all scoring functions</li>
-                        <li>Governance rules for overrides, re-provision, and key rotation</li>
-                        <li>Trust lifecycle model and state machine</li>
-                        <li>Signed checkpoint format and field definitions</li>
-                        <li>Monotonic counter enforcement logic</li>
-                        <li>Anchor retention and pruning policy</li>
-                    </ul>
-                </div>
-                <div class="transparency-card">
-                    <h3><span class="t-dot-priv"></span>Protected (Adversarial Resilience)</h3>
-                    <ul class="transparency-list">
-                        <li>Threshold constants for scar accumulation</li>
-                        <li>Escalation parameters and severity breakpoints</li>
-                        <li>Motion envelope tolerance values by vehicle class</li>
-                        <li>Adaptive anchoring calibration parameters</li>
-                        <li>Permanent downgrade trigger thresholds</li>
-                        <li>Decay rate coefficients</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Governance Summary -->
-        <section class="governance-section">
-            <h2 class="section-header">// GOVERNANCE_SUMMARY : PARAMETER_TABLE</h2>
-            <div class="gov-table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Parameter</th>
-                            <th>Value</th>
-                            <th>Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="td-param">Trust Score Range</td>
-                            <td class="td-val">0 – 100</td>
-                            <td class="td-note">Deterministic function of full behavioral history</td>
-                        </tr>
-                        <tr>
-                            <td class="td-param">Tamper Count Visibility</td>
-                            <td class="td-val">Visible</td>
-                            <td class="td-note">Exposed in signed checkpoint; not hideable</td>
-                        </tr>
-                        <tr>
-                            <td class="td-param">Override Cap</td>
-                            <td class="td-val">2 per rolling 365 days</td>
-                            <td class="td-note">Per device; signed, logged, and capped</td>
-                        </tr>
-                        <tr>
-                            <td class="td-param">Override Trust Restore</td>
-                            <td class="td-val">Fixed baseline only</td>
-                            <td class="td-note">Never restored to pre-degradation level</td>
-                        </tr>
-                        <tr>
-                            <td class="td-param">Permanent Downgrade</td>
-                            <td class="td-val">Triggered at severe threshold</td>
-                            <td class="td-note">Threshold protected; trigger is visible in record</td>
-                        </tr>
-                        <tr>
-                            <td class="td-param">Re-Provision</td>
-                            <td class="td-val">New identity, partner-approved</td>
-                            <td class="td-note">Old identity retained in audit log</td>
-                        </tr>
-                        <tr>
-                            <td class="td-param">History Model</td>
-                            <td class="td-val">Append-only</td>
-                            <td class="td-note">Pruned anchors retained in summarized form</td>
-                        </tr>
-                        <tr>
-                            <td class="td-param">Economic Enforcement</td>
-                            <td class="td-val">None (OAP emits state only)</td>
-                            <td class="td-note">Economic policy is the partner's responsibility</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="gov-axioms">
-                <div class="axiom">No hidden resets</div>
-                <div class="axiom">No silent forgiveness</div>
-                <div class="axiom">No economic enforcement by OAP</div>
-            </div>
-        </section>
-
-        <!-- Application Domains -->
-        <section class="domains-section">
-            <h2 class="section-header">// APPLICATION_DOMAINS : WHERE_OAP_FITS</h2>
-            <div class="domains-grid">
-                <div class="domain-card">
-                    <div class="domain-icon">DOMAIN_01</div>
-                    <h3>DePIN Reward Networks</h3>
-                    <p>Hardware nodes submitting telemetry data, compute proofs, or sensor readings can have their integrity continuously validated by OAP — preventing Sybil attacks, replay exploitation, and firmware tampering from draining reward pools.</p>
-                </div>
-                <div class="domain-card">
-                    <div class="domain-icon">DOMAIN_02</div>
-                    <h3>Mobility & Fleet Platforms</h3>
-                    <p>Ride-share, delivery, and logistics fleets rely on GPS and motion telemetry for billing, insurance, and compliance. OAP provides a deterministic integrity layer that distinguishes genuine physical trips from emulated data streams.</p>
-                </div>
-                <div class="domain-card">
-                    <div class="domain-icon">DOMAIN_03</div>
-                    <h3>Drone Operations</h3>
-                    <p>UAV platforms operating under regulatory or economic constraints require verifiable proof of physical compliance. OAP's physics envelope enforcement and firmware governance provide a structured integrity foundation for autonomous aerial operations.</p>
-                </div>
-                <div class="domain-card">
-                    <div class="domain-icon">DOMAIN_04</div>
-                    <h3>Robotics & Industrial IoT</h3>
-                    <p>Autonomous robots and industrial sensors operating in adversarial environments require continuous behavioral integrity validation. OAP provides lifecycle governance that adapts to device aging, environment changes, and behavioral drift.</p>
-                </div>
-                <div class="domain-card">
-                    <div class="domain-icon">DOMAIN_05</div>
-                    <h3>Autonomous Logistics</h3>
-                    <p>Last-mile delivery, warehouse automation, and autonomous vehicle networks generate telemetry that drives billing, SLA verification, and operational trust. OAP provides the deterministic integrity signal that makes that telemetry trustworthy.</p>
-                </div>
-                <div class="domain-card">
-                    <div class="domain-icon">DOMAIN_06</div>
-                    <h3>Mapping & Sensor Networks</h3>
-                    <p>Distributed sensor grids — air quality, traffic, geographic mapping — require confidence that submitted data originates from genuine physical sensors in genuine locations. OAP's identity and motion validation closes that gap.</p>
-                </div>
-            </div>
-            <div class="domain-principle">
-                "If incentives depend on physical reality, verification cannot be optional."
-            </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="cta-section">
-            <h2>Request a Technical Brief</h2>
-            <p>OAP is in active development. If you're building a mobility, robotics, or DePIN system that requires deterministic physical integrity, reach out to discuss integration architecture.</p>
-            <div class="cta-buttons">
-                <a href="/cdn-cgi/l/email-protection#7c15121a0e1d0f080e091f08090e193c130e0814131213181952040506" class="btn btn-primary">
-                    <span>Request Technical Brief</span><span>↗</span>
-                </a>
-                <a href="/sha.html" class="btn btn-secondary">
-                    <span>Explore SHA →</span>
-                </a>
-                <a href="/" class="btn btn-secondary">
-                    <span>← Back to Orthonode</span>
-                </a>
-            </div>
-        </section>
-
-    </main>
-
-    <footer role="contentinfo">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h4>ORTHONODE INFRASTRUCTURE LABS</h4>
-                    <p>Building deterministic physical verification infrastructure for autonomous systems, DePIN networks, and mobility platforms. OAP governs lifecycle integrity. SHA anchors hardware identity on-chain.</p>
-                    <p style="margin-top:1rem;">
-                        <strong>Location:</strong> Bhopal, Madhya Pradesh, India<br>
-                        <strong>Classification:</strong> Infrastructure Research & Development (NIC 72900)
-                    </p>
-                </div>
-                <div class="footer-links">
-                    <h5>Products</h5>
-                    <ul>
-                        <li><a href="/oap.html">OAP — Integrity Governance</a></li>
-                        <li><a href="/sha.html">SHA — Hardware Attestation</a></li>
-                        <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub (Org)</a></li>
-                        <li><a href="https://github.com/arhantbarmate/stylus-hardware-anchor" target="_blank" rel="noopener">SHA Repository</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h5>Connect</h5>
-                    <ul>
-                        <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X / Twitter</a></li>
-                        <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
-                        <li><a href="https://www.reddit.com/user/Automatic_Stick_3881/" target="_blank" rel="noopener">Reddit</a></li>
-                        <li><a href="/" rel="noopener">← orthonode.xyz</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div>© 2026 Orthonode Infrastructure Labs. All Rights Reserved.</div>
-                <div class="footer-legal">
-                    <a href="/terms.html">Terms of Service</a>
-                    <a href="/privacy.html">Privacy Policy</a>
-                </div>
+            <div class="footer-col">
+                <h5>Connect</h5>
+                <ul>
+                    <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X / Twitter</a></li>
+                    <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
+                    <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub (Org)</a></li>
+                    <li><a href="mailto:infrastructure@orthonode.xyz">infrastructure@orthonode.xyz</a></li>
+                </ul>
             </div>
         </div>
-    </footer>
+        <div id="citation">
+            <h2>About</h2>
+            <p>ORTHONODE SYSTEMS™ — OAP (Orthonode Assurance Platform) by Arhant Barmate. Chain-agnostic integrity governance engine for DePIN hardware. PROPRIETARY implementation. Architecture published 2026. Website: https://orthonode.xyz | @OrthonodeSys | infrastructure@orthonode.xyz</p>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2026 ORTHONODE SYSTEMS™. All Rights Reserved.</div>
+            <div class="footer-legal"><a href="/terms.html">Terms of Service</a><a href="/privacy.html">Privacy Policy</a></div>
+        </div>
+    </div>
+</footer>
 
-</div>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    function onHumanVerified(token) {
-        const gate = document.getElementById('security-gate');
-        const content = document.getElementById('app-content');
-        gate.style.display = 'none';
-        content.style.display = 'block';
-        setTimeout(() => {
-            content.style.opacity = '1';
-            initOAPAnimations();
-        }, 50);
-    }
-
-    function initOAPAnimations() {
-        // Scroll-reveal cards
-        const cards = document.querySelectorAll('.arch-layer, .stat-item, .guarantee-card, .milestone-card, .evidence-card, .two-col-card');
-        const obs = new IntersectionObserver(entries => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }, (i % 4) * 90);
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        cards.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(14px)';
-            el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-            obs.observe(el);
-        });
-
-        // Animate stat values counting up
-        document.querySelectorAll('.stat-value').forEach(el => {
-            const text = el.textContent.trim();
-            const numMatch = text.match(/[\d,]+/);
-            if (!numMatch || parseInt(numMatch[0].replace(/,/g,'')) < 100) return;
-            const target = parseInt(numMatch[0].replace(/,/g,''));
-            const prefix = text.slice(0, text.search(/\d/));
-            const suffix = text.slice(text.search(/[\d,]+/) + numMatch[0].length);
-            const startTime = performance.now();
-            const dur = 1000;
-            const obsCount = new IntersectionObserver(entries => {
-                if (!entries[0].isIntersecting) return;
-                obsCount.disconnect();
-                function tick(now) {
-                    const p = Math.min((now - startTime) / dur, 1);
-                    const ease = 1 - Math.pow(1-p, 3);
-                    el.textContent = prefix + Math.round(ease * target).toLocaleString() + suffix;
-                    if (p < 1) requestAnimationFrame(tick);
-                }
-                requestAnimationFrame(tick);
-            }, { threshold: 0.5 });
-            obsCount.observe(el);
-        });
-    }
+<script>
+(function(){const items=document.querySelectorAll('.reveal');if(!items.length)return;const obs=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('in'),i*55);obs.unobserve(en.target);}});},{threshold:.06,rootMargin:'0px 0px -36px 0px'});items.forEach(el=>obs.observe(el));})();
 </script>
-
 </body>
 </html>

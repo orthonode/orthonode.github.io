@@ -1,314 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <title>404 - Route Not Found | Orthonode Infrastructure Labs</title>
-    <meta name="description" content="The requested resource could not be found on Orthonode Infrastructure Labs servers.">
-    <meta name="robots" content="noindex, nofollow">
-    
-    <link rel="icon" type="image/png" href="/site-logo.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-primary: #050505;
-            --text-primary: #ffffff;
-            --text-secondary: #ededed;
-            --text-dim: #737373;
-            --text-muted: #525252;
-            --accent-error: #ef4444;
-            --accent-error-glow: rgba(239, 68, 68, 0.3);
-            --border-primary: #262626;
-            --border-bright: #333333;
-            
-            --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-            --font-display: 'Space Grotesk', sans-serif;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>404 — Page Not Found | Orthonode Systems</title>
+<meta name="description" content="Page not found. Return to Orthonode Systems — Verification Infrastructure for the Decentralized Stack.">
+<meta name="author" content="Arhant Barmate">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://orthonode.xyz/404">
+<meta property="og:type" content="website">
+<meta property="og:title" content="404 — Page Not Found | Orthonode Systems">
+<meta property="og:description" content="Page not found. Return to Orthonode Systems — Verification Infrastructure for the Decentralized Stack.">
+<meta property="og:url" content="https://orthonode.xyz">
+<meta property="og:image" content="https://orthonode.xyz/orthonode-banner.png">
+<meta property="og:site_name" content="Orthonode Systems">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@OrthonodeSys">
+<meta name="twitter:title" content="404 — Page Not Found | Orthonode Systems">
+<meta name="twitter:description" content="Page not found. Return to Orthonode Systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "404 — Page Not Found",
+  "description": "The requested page was not found on Orthonode Systems.",
+  "url": "https://orthonode.xyz/404",
+  "author": {
+    "@type": "Person",
+    "name": "Arhant Barmate",
+    "email": "infrastructure@orthonode.xyz"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Orthonode Systems",
+    "url": "https://orthonode.xyz"
+  },
+  "mainEntityOfPage": {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Orthonode Systems?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Orthonode Systems builds trust primitives for decentralized systems — hardware identity, AI execution receipts, and on-chain governance. Visit orthonode.xyz to learn more."
         }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+      },
+      {
+        "@type": "Question",
+        "name": "How do I find the page I was looking for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Visit the Orthonode Systems site index at orthonode.xyz/site-index for a complete directory of all pages, or return to the homepage at orthonode.xyz."
         }
-
-        html {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+      },
+      {
+        "@type": "Question",
+        "name": "How do I contact Orthonode Systems?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Email infrastructure@orthonode.xyz or reach out via @OrthonodeSys on Twitter."
         }
+      }
+    ]
+  }
+}
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#04060A;--bg-1:#080C14;--bg-card:#080C14;--bg-raised:#0E1520;
+--border:rgba(255,255,255,.06);--border-h:rgba(255,255,255,.12);
+--tx-1:#F0F0F0;--tx-2:#A0A8B8;--tx-3:#5A6478;--tx-4:#2A3040;
+--red:#EF4444;--red-dim:rgba(239,68,68,.08);--red-glow:rgba(239,68,68,.2);
+--r:8px;--r2:12px;--r3:16px;
+--font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'IBM Plex Mono',monospace;
+}
+html{scroll-behavior:smooth;height:100%}
+body{background:var(--bg);color:var(--tx-1);font-family:var(--font-body);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+a{color:var(--red);text-decoration:none}
+a:hover{opacity:.8}
+::selection{background:var(--red);color:#fff}
 
-        body {
-            background: var(--bg-primary);
-            color: var(--text-secondary);
-            font-family: var(--font-ui);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            text-align: center;
-            overflow: hidden;
-            position: relative;
-        }
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 32px;height:56px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:rgba(4,6,10,.92);backdrop-filter:blur(16px)}
+.nav-inner{max-width:1120px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-back{font-family:var(--font-mono);font-size:11px;color:var(--tx-3);letter-spacing:.08em;text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--tx-1)}
+.nav-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;padding:3px 8px;border-radius:4px;border:1px solid rgba(239,68,68,.3);color:var(--red)}
 
-        /* Animated Background Grid */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(38, 38, 38, 0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(38, 38, 38, 0.3) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.5;
-            z-index: -1;
-            pointer-events: none;
-            animation: grid-shift 20s linear infinite;
-        }
+/* MAIN */
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:80px 32px;min-height:calc(100vh - 200px)}
+.error-container{max-width:600px;text-align:center}
 
-        @keyframes grid-shift {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
+/* 404 DISPLAY */
+.error-code{font-family:var(--font-head);font-size:clamp(100px,20vw,180px);font-weight:800;line-height:1;letter-spacing:-.05em;color:var(--red);opacity:.15;position:relative;margin-bottom:-20px;user-select:none;animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.12}50%{opacity:.2}}
+.error-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.15em;color:var(--red);text-transform:uppercase;margin-bottom:20px;display:block}
+h1{font-family:var(--font-head);font-size:clamp(24px,4vw,40px);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
+.error-sub{font-size:15px;color:var(--tx-2);line-height:1.65;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto}
 
-        ::selection {
-            background: var(--accent-error-glow);
-            color: var(--text-primary);
-        }
+/* STATUS BOX */
+.status-box{background:var(--bg-card);border:1px solid rgba(239,68,68,.2);border-radius:var(--r2);padding:20px 24px;margin-bottom:32px;font-family:var(--font-mono);font-size:12px;text-align:left;line-height:2}
+.status-line{display:flex;gap:12px;align-items:center}
+.status-key{color:var(--tx-3);flex-shrink:0;min-width:120px}
+.status-val{color:var(--tx-2)}
+.status-val.err{color:var(--red)}
+.status-val.ok{color:#16C47F}
 
-        /* Logo */
-        .logo-mark {
-            width: 64px;
-            height: auto;
-            margin-bottom: 2rem;
-            opacity: 0.4;
-            filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.2));
-            animation: fade-pulse 3s ease-in-out infinite;
-        }
+/* LINKS */
+.error-links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--r);font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;border:1px solid transparent}
+.btn-pri{background:var(--red);color:#fff;border-color:var(--red)}
+.btn-pri:hover{opacity:.85;transform:translateY(-1px)}
+.btn-sec{background:transparent;color:var(--tx-1);border-color:var(--border-h)}
+.btn-sec:hover{border-color:var(--red);color:var(--red);opacity:1}
 
-        @keyframes fade-pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.6; }
-        }
+/* QUICK NAV */
+.quick-nav{margin-top:48px;padding-top:32px;border-top:1px solid var(--border)}
+.quick-nav-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--tx-3);text-transform:uppercase;margin-bottom:16px}
+.quick-links{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.quick-link{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;padding:6px 14px;border-radius:var(--r);border:1px solid var(--border);color:var(--tx-3);text-decoration:none;transition:all .2s}
+.quick-link:hover{border-color:var(--border-h);color:var(--tx-1);opacity:1}
 
-        /* Error Container */
-        .error-container {
-            max-width: 600px;
-            padding: 0 2rem;
-        }
+/* FOOTER */
+footer{background:var(--bg-1);border-top:1px solid var(--border);padding:28px 32px}
+.footer-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-brand{font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--tx-3)}
+.footer-meta{font-family:var(--font-mono);font-size:10px;color:var(--tx-4)}
 
-        /* 404 Display */
-        .error-code {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: clamp(5rem, 15vw, 8rem);
-            line-height: 0.9;
-            letter-spacing: -0.05em;
-            background: linear-gradient(135deg, 
-                var(--accent-error) 0%, 
-                #dc2626 30%, 
-                #b91c1c 60%, 
-                #991b1b 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            filter: drop-shadow(0 4px 12px var(--accent-error-glow));
-            margin-bottom: 1.5rem;
-            animation: glow-pulse 2s ease-in-out infinite;
-        }
+/* CITATION */
+#citation{background:var(--bg-1);border-top:1px solid var(--border);padding:32px}
+.cite-inner{max-width:600px;margin:0 auto}
+.cite-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--tx-3);text-transform:uppercase;margin-bottom:12px}
+.cite-block{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;font-family:var(--font-mono);font-size:11px;color:var(--tx-2);line-height:1.7}
 
-        @keyframes glow-pulse {
-            0%, 100% { 
-                filter: drop-shadow(0 4px 12px var(--accent-error-glow));
-            }
-            50% { 
-                filter: drop-shadow(0 4px 24px rgba(239, 68, 68, 0.5));
-            }
-        }
-
-        /* Error Messages */
-        .error-title {
-            font-family: var(--font-mono);
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-        }
-
-        .error-messages {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--text-dim);
-            line-height: 1.8;
-            margin-bottom: 0.5rem;
-        }
-
-        .error-messages > div {
-            margin-bottom: 0.5rem;
-        }
-
-        .error-messages::before {
-            content: '> ';
-            color: var(--accent-error);
-        }
-
-        .error-note {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 1.5rem;
-            opacity: 0.6;
-        }
-
-        /* Actions */
-        .error-actions {
-            margin-top: 3rem;
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.875rem 1.75rem;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border-bright);
-        }
-
-        .btn-primary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--text-primary);
-            box-shadow: 0 0 16px rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-primary::before {
-            content: '←';
-            font-size: 1rem;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-dim);
-            border: 1px solid var(--border-primary);
-        }
-
-        .btn-secondary:hover {
-            color: var(--text-primary);
-            border-color: var(--border-bright);
-        }
-
-        /* System Info Footer */
-        .system-info {
-            position: fixed;
-            bottom: 2rem;
-            left: 0;
-            right: 0;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            opacity: 0.5;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .error-code {
-                font-size: clamp(4rem, 20vw, 6rem);
-            }
-
-            .error-actions {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .logo-mark {
-                width: 48px;
-            }
-        }
-
-        @media (max-height: 600px) {
-            .logo-mark {
-                display: none;
-            }
-            
-            .error-code {
-                font-size: 4rem;
-                margin-bottom: 1rem;
-            }
-        }
-    
-/* ── glass depth injection ─────────────────────────── */
-.btn-primary{box-shadow:inset 0 1px 0 rgba(255,255,255,.09);transition:all .35s}
-.btn-primary:hover{background:rgba(255,255,255,.06)!important;box-shadow:0 12px 40px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.12)!important}
-.btn-secondary:hover{border-color:rgba(255,255,255,.25)!important}
+@media(max-width:768px){
+  main{padding:80px 20px}
+  #nav{padding:0 20px}
+  footer{padding:24px 20px}
+  #citation{padding:24px 20px}
+  .error-links{flex-direction:column;align-items:center}
+}
 </style>
 </head>
 <body>
 
-    <img src="/site-logo.png" 
-         class="logo-mark" 
-         alt="Orthonode Infrastructure Labs"
-         width="64"
-         height="64">
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="nav-back" href="/">orthonode.xyz</a>
+    <span class="nav-tag">HTTP 404</span>
+  </div>
+</nav>
 
-    <div class="error-container">
-        <h1 class="error-code">404</h1>
-        
-        <div class="error-title">ROUTE_NOT_FOUND</div>
-        
-        <div class="error-messages">
-            <div>> THE_REQUESTED_SECTOR_DOES_NOT_EXIST</div>
-            <div>> RESOURCE_PATH_INVALID</div>
-        </div>
+<main>
+  <div class="error-container">
+    <div class="error-code" aria-hidden="true">404</div>
+    <span class="error-label">Verification failed — resource not found</span>
+    <h1>Page Not Found</h1>
+    <p class="error-sub">The page you requested does not exist or has been moved. Check the URL or navigate back to find what you're looking for.</p>
 
-        <p class="error-note">
-            (Legacy Coreframe Systems routes have been decommissioned.)<br>
-            All infrastructure operations have migrated to Orthonode Labs.
-        </p>
-
-        <div class="error-actions">
-            <a href="/" class="btn btn-primary">RETURN TO CONSOLE</a>
-            <a href="https://github.com/orthonode/Stylus-Hardware-Anchor" 
-               class="btn btn-secondary" 
-               target="_blank" 
-               rel="noopener noreferrer">
-                VIEW REPOSITORY
-            </a>
-        </div>
+    <div class="status-box">
+      <div class="status-line">
+        <span class="status-key">STATUS</span>
+        <span class="status-val err">404 NOT_FOUND</span>
+      </div>
+      <div class="status-line">
+        <span class="status-key">GATE_1</span>
+        <span class="status-val err">RESOURCE_MISSING</span>
+      </div>
+      <div class="status-line">
+        <span class="status-key">PROTOCOL</span>
+        <span class="status-val ok">FAIL_CLOSED</span>
+      </div>
+      <div class="status-line">
+        <span class="status-key">REDIRECT</span>
+        <span class="status-val">→ orthonode.xyz</span>
+      </div>
     </div>
 
-    <div class="system-info">
-        ORTHONODE_INFRASTRUCTURE_LABS // ERROR_HANDLER_v3.0 // STATUS:OPERATIONAL
+    <div class="error-links">
+      <a href="/" class="btn btn-pri">Return Home</a>
+      <a href="/site-index" class="btn btn-sec">Site Index</a>
     </div>
 
+    <div class="quick-nav">
+      <div class="quick-nav-label">Quick Navigation</div>
+      <div class="quick-links">
+        <a href="/sha" class="quick-link">SHA</a>
+        <a href="/oap" class="quick-link">OAP</a>
+        <a href="/nexus" class="quick-link">Nexus</a>
+        <a href="/ton-sha" class="quick-link">TON-SHA</a>
+        <a href="/invariant" class="quick-link">INVARIANT</a>
+        <a href="/tix-dao" class="quick-link">TIX-DAO</a>
+        <a href="/iotex-research" class="quick-link">Research</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div id="citation">
+  <div class="cite-inner">
+    <div class="cite-label">Citation Reference</div>
+    <div class="cite-block">
+      Orthonode Systems™ — orthonode.xyz<br>
+      Author: Arhant Barmate | Contact: infrastructure@orthonode.xyz<br>
+      Verification Infrastructure for the Decentralized Stack.
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">ORTHONODE SYSTEMS™</div>
+    <div class="footer-meta">© 2026 Orthonode Systems™. infrastructure@orthonode.xyz</div>
+  </div>
+</footer>
+
+<script>
+// Auto-redirect after 30s
+let countdown = 30;
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('sc', window.scrollY > 60); }, { passive: true });
+</script>
 </body>
 </html>

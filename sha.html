@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
     <title>Stylus Hardware Anchor (SHA) | Hardware Sybil Resistance for Arbitrum DePIN | Orthonode Labs</title>
     <meta name="description" content="SHA (Stylus Hardware Anchor) — the first on-chain hardware Sybil resistance primitive for Arbitrum Stylus. Binds ESP32-S3 eFuse silicon to smart contracts. 12,564 gas/receipt at N=50. 10,000+ test vectors. Live on Arbitrum Sepolia. $25K grant under review.">
     <meta name="keywords" content="Arbitrum Stylus hardware verification, DePIN Sybil resistance, ESP32 eFuse blockchain, hardware identity smart contract, Rust WASM Arbitrum, hardware attestation DePIN, Keccak-256 device binding, Stylus Hardware Anchor, on-chain device identity, replay protection smart contract, firmware governance blockchain, Orthonode Labs, Bhopal India blockchain">
@@ -22,9 +22,14 @@
     <meta property="og:title" content="Stylus Hardware Anchor (SHA) — Hardware Sybil Resistance for Arbitrum DePIN">
     <meta property="og:description" content="First on-chain hardware Sybil resistance primitive for Arbitrum Stylus. ESP32-S3 eFuse silicon binding, 12,564 gas/receipt, 10,000+ validated test vectors. Live on Sepolia.">
     <meta property="og:image" content="https://orthonode.xyz/banner.png">
-    <meta property="og:site_name" content="Orthonode Infrastructure Labs">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="ORTHONODE SYSTEMS™">
+    <meta property="og:locale" content="en_US">
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@OrthonodeSys">
+    <meta name="twitter:creator" content="@OrthonodeSys">
     <meta name="twitter:title" content="Stylus Hardware Anchor (SHA) | Orthonode Labs">
     <meta name="twitter:description" content="First hardware Sybil resistance primitive for Arbitrum Stylus. 12,564 gas/receipt. ESP32-S3 eFuse binding. Testnet live.">
     <meta name="twitter:image" content="https://orthonode.xyz/banner.png">
@@ -54,1252 +59,1155 @@
       }
     }
     </script>
-    
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
-    <meta name="theme-color" content="#050505">
-    <link rel="icon" type="image/png" sizes="96x96" href="https://orthonode.xyz/site-logo.png">
-    <link rel="apple-touch-icon" href="https://orthonode.xyz/site-logo.png">
-    
+    <meta name="theme-color" content="#04060A">
+    <link rel="icon" type="image/png" sizes="96x96" href="/site-logo.png">
+    <link rel="apple-touch-icon" href="/site-logo.png">
+    <link rel="shortcut icon" href="/site-logo.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-primary: #050505;
-            --bg-secondary: #0a0a0a;
-            --bg-elevated: #111111;
-            --border-subtle: #1a1a1a;
-            --border-primary: #262626;
-            --border-bright: #333333;
-            
-            --text-primary: #ffffff;
-            --text-secondary: #ededed;
-            --text-tertiary: #a3a3a3;
-            --text-dim: #737373;
-            --text-muted: #525252;
-            
-            --accent-arbitrum: #28a0f0;
-            --accent-arbitrum-glow: rgba(40, 160, 240, 0.3);
-            --accent-success: #22c55e;
-            --accent-success-glow: rgba(34, 197, 94, 0.3);
-            --accent-warning: #fbbf24;
-            --accent-critical: #ef4444;
-            
-            --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-            --font-display: 'Space Grotesk', sans-serif;
-            
-            --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.5);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.5);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.7);
-            --shadow-glow: 0 0 20px rgba(40, 160, 240, 0.15);
+            --bg:        #04060A;
+            --bg-1:      #07090F;
+            --bg-2:      #0B0F18;
+            --bg-card:   #080C14;
+            --bg-raised: #0E1520;
+
+            --border:    rgba(255,255,255,0.06);
+            --border-md: rgba(255,255,255,0.10);
+            --border-hi: rgba(255,255,255,0.18);
+
+            --tx-1: #E4EBF0;
+            --tx-2: #8BA0B4;
+            --tx-3: #566476;
+            --tx-4: #374454;
+
+            --cyan:  #00CAFF;
+            --sha:   #2A9FE8;
+            --ton:   #0098EA;
+            --nexus: #00D084;
+            --oap:   #F59E0B;
+            --inv:   #EAB308;
+            --tix:   #9945FF;
+            --red:   #EF4444;
+            --green: #22C55E;
+
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        
         html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-        
+
         body {
-            background: var(--bg-primary);
-            color: var(--text-secondary);
-            font-family: var(--font-ui);
+            background: var(--bg);
+            color: var(--tx-2);
+            font-family: var(--font-body);
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.65;
             overflow-x: hidden;
         }
 
         body::before {
             content: '';
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-image:
-                linear-gradient(var(--border-subtle) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.3;
-            z-index: -1;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px);
+            pointer-events: none; z-index: -1;
         }
 
-        /* Security Gate */
-        #security-gate {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: var(--bg-primary);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
+        body::after {
+            content: '';
+            position: fixed; top: -30vh; right: -10vw;
+            width: 60vw; height: 60vw;
+            background: radial-gradient(ellipse, rgba(42,159,232,0.05) 0%, transparent 65%);
+            pointer-events: none; z-index: -2;
         }
 
-        #security-gate h2 {
-            font-family: var(--font-display);
-            color: var(--text-primary);
-            margin-bottom: 2rem;
-            font-size: 1.5rem;
-            letter-spacing: 0.05em;
-        }
+        a { color: var(--tx-2); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: var(--tx-1); }
+        ::selection { background: rgba(42,159,232,0.2); }
 
-        #security-gate img {
-            width: 80px;
-            height: auto;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 0 20px rgba(40, 160, 240, 0.2));
-        }
-
-        #app-content {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.5s ease-in;
-        }
-
-        ::selection { background: var(--accent-arbitrum-glow); color: var(--text-primary); }
-
-        a { color: var(--text-secondary); text-decoration: none; transition: all 0.2s ease; }
-        a:hover { color: var(--text-primary); }
-
-        /* Header */
+        /* ── Header ─── */
         header {
-            position: fixed;
-            top: 0; width: 100%;
-            z-index: 1000;
-            backdrop-filter: blur(12px) saturate(180%);
-            background: rgba(5,5,5,0.85);
-            border-bottom: 1px solid var(--border-primary);
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            background: rgba(4,6,10,0.88);
+            border-bottom: 1px solid var(--border);
         }
 
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0.875rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 2rem;
+        header::after {
+            content: '';
+            position: absolute; bottom: -1px; left: 0; width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(42,159,232,0.4) 40%, rgba(0,202,255,0.25) 60%, transparent);
         }
 
-        .header-left, .header-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            letter-spacing: 0.025em;
+        .nav-inner {
+            max-width: 1360px; margin: 0 auto;
+            padding: 0.7rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
-        .status-indicator { display: flex; align-items: center; gap: 0.5rem; color: var(--text-dim); }
-
-        .status-dot {
-            width: 6px; height: 6px;
-            background: var(--accent-success);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-success-glow);
-            animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;
-        }
-
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-
-        .network-badge {
-            padding: 0.25rem 0.75rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-primary);
-            border-radius: 4px;
-            color: var(--accent-arbitrum);
-            font-weight: 500;
-            white-space: nowrap;
+        .nav-left {
+            display: flex; align-items: center; gap: 1rem;
+            font-family: var(--font-mono); font-size: 0.68rem;
         }
 
         .nav-back {
-            color: var(--text-dim);
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            display: flex; align-items: center; gap: 0.45rem;
+            color: var(--tx-3);
             transition: color 0.2s;
         }
-        .nav-back:hover { color: var(--accent-arbitrum); }
+        .nav-back:hover { color: var(--sha); }
+        .nav-back img { border-radius: 3px; display: block; }
 
-        /* Container */
-        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .nav-sep { color: var(--tx-4); }
 
-        /* Page Hero */
-        .page-hero {
-            padding-top: 8rem;
-            padding-bottom: 4rem;
+        .live-dot {
+            width: 5px; height: 5px;
+            background: var(--green); border-radius: 50%;
+            box-shadow: 0 0 6px rgba(34,197,94,0.6);
+            animation: blink 2s ease-in-out infinite;
+            flex-shrink: 0;
         }
 
-        .page-hero .breadcrumb {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            letter-spacing: 0.05em;
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .nav-status {
+            display: flex; align-items: center; gap: 0.45rem;
+            color: var(--tx-3);
         }
 
-        .page-hero .breadcrumb span { color: var(--accent-arbitrum); }
-
-        .sha-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.5rem 1rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-bright);
-            border-radius: 6px;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            margin-bottom: 2rem;
+        .nav-right {
+            display: flex; align-items: center; gap: 0.5rem;
+            font-family: var(--font-mono); font-size: 0.65rem;
         }
 
-        .sha-badge-dot {
-            width: 8px; height: 8px;
-            background: var(--accent-success);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--accent-success-glow);
-            animation: pulse 2s infinite;
+        .tag {
+            padding: 0.18rem 0.55rem;
+            border: 1px solid var(--border);
+            color: var(--tx-3);
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .tag:hover { border-color: var(--border-md); color: var(--tx-2); }
+        .tag-blue { color: var(--sha); border-color: rgba(42,159,232,0.2); }
+        .tag-blue:hover { border-color: rgba(42,159,232,0.4); }
+        .tag-green { color: var(--green); border-color: rgba(34,197,94,0.2); background: rgba(34,197,94,0.04); }
+
+        /* ── Container ─── */
+        .wrap { max-width: 1360px; margin: 0 auto; padding: 0 2rem; }
+
+        /* ── Reveal ─── */
+        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s var(--ease), transform 0.65s var(--ease); }
+        .reveal.in { opacity: 1; transform: translateY(0); }
+
+        /* ── Hero ─── */
+        .hero {
+            min-height: 88vh;
+            padding-top: 9rem; padding-bottom: 5rem;
+            display: flex; flex-direction: column; justify-content: center;
+            position: relative;
         }
 
-        .page-title {
-            font-family: var(--font-display);
-            font-weight: 700;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            line-height: 0.95;
+        .hero-glow {
+            position: absolute; top: 0; right: -5%;
+            width: min(520px, 50vw); height: min(520px, 50vw);
+            background: radial-gradient(ellipse, rgba(42,159,232,0.07) 0%, rgba(0,202,255,0.025) 50%, transparent 70%);
+            border-radius: 50%; pointer-events: none;
+            animation: float 16s ease-in-out infinite;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-28px); } }
+
+        .breadcrumb {
+            font-family: var(--font-mono); font-size: 0.65rem;
+            color: var(--tx-3); letter-spacing: 0.12em;
+            text-transform: uppercase; margin-bottom: 2rem;
+        }
+        .breadcrumb .bc-cur { color: var(--sha); }
+
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.6rem;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(42,159,232,0.25);
+            background: rgba(42,159,232,0.05);
+            font-family: var(--font-mono); font-size: 0.62rem;
+            color: var(--sha); letter-spacing: 0.08em;
+            margin-bottom: 1.75rem;
+        }
+
+        .hero h1 {
+            font-family: var(--font-head);
+            font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+            font-weight: 800;
+            line-height: 1.0;
             letter-spacing: -0.03em;
-            color: var(--text-primary);
+            color: var(--tx-1);
+            max-width: 900px;
             margin-bottom: 1.5rem;
         }
 
-        .page-title .highlight { color: var(--accent-arbitrum); }
+        .hero h1 .accent { color: var(--sha); }
 
-        .page-intro {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: var(--text-tertiary);
-            max-width: 760px;
+        .hero-sub {
+            font-size: clamp(1rem, 1.6vw, 1.2rem);
+            color: var(--tx-2);
+            max-width: 720px;
+            margin-bottom: 0.75rem;
             line-height: 1.65;
-            margin-bottom: 3rem;
-            padding-left: 1.5rem;
-            border-left: 3px solid var(--accent-arbitrum);
         }
 
-        /* Stats Strip */
-        .stats-strip {
+        .hero-chain {
+            font-family: var(--font-mono); font-size: 0.65rem;
+            color: var(--sha); letter-spacing: 0.06em;
+            margin-bottom: 3rem; opacity: 0.8;
+        }
+
+        /* ── Stats bar ─── */
+        .stats-bar {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            grid-template-columns: repeat(5, 1fr);
             gap: 1px;
-            background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
-            margin-bottom: 5rem;
+            background: var(--border);
+            border: 1px solid var(--border);
         }
 
-        .stat-item {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
-            padding: 1.5rem;
+        .stat {
+            background: var(--bg-card);
+            padding: 1.25rem 1.5rem;
             text-align: center;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
+            transition: background 0.25s;
+        }
+        .stat:hover { background: var(--bg-raised); }
+
+        .stat-n {
+            font-family: var(--font-mono);
+            font-size: 1.6rem; font-weight: 600;
+            color: var(--sha); display: block;
+            line-height: 1; margin-bottom: 0.4rem;
         }
 
-        .stat-value {
-            font-family: var(--font-mono);
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--accent-arbitrum);
-            display: block;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* Section Headers */
-        .section-header {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            text-transform: uppercase;
+        .stat-l {
+            font-family: var(--font-mono); font-size: 0.6rem;
+            color: var(--tx-3); text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-primary);
         }
 
-        /* What Is SHA */
-        .what-section { margin-bottom: 5rem; }
-
-        .two-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1px;
-            background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
-            margin-bottom: 2rem;
+        /* ── Sec label ─── */
+        .sec-label {
+            font-family: var(--font-mono); font-size: 0.65rem;
+            color: var(--tx-3); text-transform: uppercase;
+            letter-spacing: 0.14em; margin-bottom: 1.75rem;
+            padding-bottom: 0.85rem; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .sec-label::before {
+            content: ''; width: 2px; height: 12px;
+            background: linear-gradient(180deg, var(--sha), var(--cyan));
+            flex-shrink: 0;
         }
 
-        .two-col-card {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
-            padding: 2.5rem;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
-        }
+        /* ── Sections ─── */
+        .section { margin: 5rem 0; }
 
-        .two-col-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            color: var(--text-primary);
+        /* ── Grid 2-col ─── */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+
+        /* ── Card ─── */
+        .card {
+            background: var(--bg-card);
+            padding: 2rem 2.25rem;
+            transition: background 0.25s;
+            position: relative;
+        }
+        .card:hover { background: var(--bg-raised); }
+        .card.span2 { grid-column: span 2; }
+
+        .card-label {
+            font-family: var(--font-mono); font-size: 0.62rem;
+            text-transform: uppercase; letter-spacing: 0.12em;
             margin-bottom: 1rem;
         }
+        .card h3 {
+            font-family: var(--font-head); font-size: 1.25rem;
+            font-weight: 700; color: var(--tx-1);
+            margin-bottom: 0.875rem; line-height: 1.2;
+        }
+        .card p { color: var(--tx-2); font-size: 0.925rem; line-height: 1.68; margin-bottom: 0.75rem; }
+        .card strong { color: var(--tx-1); font-weight: 600; }
+        .card p:last-child { margin-bottom: 0; }
 
-        .two-col-card p {
-            color: var(--text-tertiary);
-            font-size: 0.9375rem;
-            line-height: 1.65;
+        /* ── Architecture layers ─── */
+        .arch-list {
+            display: flex; flex-direction: column;
+            gap: 1px; background: var(--border);
+            border: 1px solid var(--border);
         }
 
-        /* Architecture */
-        .arch-section { margin-bottom: 5rem; }
+        .arch-item {
+            background: var(--bg-card);
+            display: grid; grid-template-columns: 72px 1fr;
+            gap: 2rem; align-items: start;
+            padding: 2rem 2.25rem;
+            transition: background 0.25s;
+        }
+        .arch-item:hover { background: var(--bg-raised); }
 
-        .arch-layers {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1px;
-            background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
+        .arch-num {
+            font-family: var(--font-mono); font-size: 2.2rem;
+            font-weight: 600; color: var(--tx-4); line-height: 1;
+            padding-top: 0.2rem;
         }
 
-        .arch-layer {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
-            padding: 2rem 2.5rem;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 2rem;
-            align-items: start;
-            transition: background .35s,box-shadow .35s,border-color .35s;
+        .arch-content h3 {
+            font-family: var(--font-head); font-size: 1.2rem;
+            font-weight: 700; color: var(--tx-1);
+            margin-bottom: 0.75rem; line-height: 1.2;
         }
+        .arch-content p { color: var(--tx-2); font-size: 0.9rem; line-height: 1.68; margin-bottom: 1rem; }
+        .arch-content p:last-child { margin-bottom: 0; }
 
-        .arch-layer:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
-            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(40,160,240,.07),inset 0 1px 0 rgba(255,255,255,.12);
+        .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+        .chip {
+            font-family: var(--font-mono); font-size: 0.6rem;
+            padding: 0.18rem 0.5rem;
+            border: 1px solid var(--border);
+            color: var(--tx-3); letter-spacing: 0.04em;
         }
+        .chip-sha { border-color: rgba(42,159,232,0.25); color: var(--sha); background: rgba(42,159,232,0.04); }
 
-        .layer-num {
-            font-family: var(--font-mono);
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent-arbitrum);
-            opacity: 0.4;
-            line-height: 1;
-            min-width: 3rem;
-            text-align: right;
-        }
-
-        .layer-content h3 {
-            font-family: var(--font-display);
-            font-size: 1.125rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .layer-content p {
-            color: var(--text-tertiary);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 0.75rem;
-        }
-
-        .layer-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.75rem;
-        }
-
-        .detail-chip {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            padding: 0.25rem 0.6rem;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-bright);
-            border-radius: 3px;
-            color: var(--text-dim);
-        }
-
-        /* How It Works — Flow */
-        .flow-section { margin-bottom: 5rem; }
-
-        .flow-steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1px;
-            background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
-            margin-bottom: 2rem;
+        /* ── Flow steps ─── */
+        .flow-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 1px; background: var(--border); border: 1px solid var(--border);
         }
 
         .flow-step {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
-            padding: 2rem;
-            position: relative;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
+            background: var(--bg-card);
+            padding: 1.75rem 1.5rem;
+            transition: background 0.25s, border-top 0.25s;
+            border-top: 2px solid transparent;
         }
-
-        .flow-step::after {
-            content: '→';
-            position: absolute;
-            right: -14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--accent-arbitrum);
-            font-size: 1.25rem;
-            z-index: 2;
-        }
-
-        .flow-step:last-child::after { display: none; }
+        .flow-step:hover { background: var(--bg-raised); }
+        .flow-step.active { border-top-color: var(--sha); background: var(--bg-raised); }
 
         .step-num {
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            color: var(--accent-arbitrum);
-            letter-spacing: 0.1em;
-            margin-bottom: 0.75rem;
+            font-family: var(--font-mono); font-size: 0.6rem;
+            color: var(--sha); letter-spacing: 0.1em;
+            text-transform: uppercase; margin-bottom: 0.75rem;
         }
-
         .step-title {
-            font-family: var(--font-display);
-            font-size: 1rem;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
+            font-family: var(--font-head); font-size: 1rem;
+            font-weight: 700; color: var(--tx-1);
+            margin-bottom: 0.6rem; line-height: 1.2;
+        }
+        .step-desc { color: var(--tx-2); font-size: 0.85rem; line-height: 1.65; }
+
+        /* ── Guarantee cards ─── */
+        .gate-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 1px; background: var(--border); border: 1px solid var(--border);
         }
 
-        .step-desc {
-            font-size: 0.875rem;
-            color: var(--text-tertiary);
-            line-height: 1.55;
+        .gate-card {
+            background: var(--bg-card);
+            padding: 2rem 2.25rem;
+            transition: background 0.25s;
+            position: relative;
+        }
+        .gate-card:hover { background: var(--bg-raised); }
+
+        .gate-label {
+            font-family: var(--font-mono); font-size: 0.6rem;
+            color: var(--sha); text-transform: uppercase;
+            letter-spacing: 0.12em; margin-bottom: 0.75rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .gate-label::before {
+            content: ''; width: 6px; height: 6px;
+            background: var(--sha); border-radius: 50%;
+            box-shadow: 0 0 6px rgba(42,159,232,0.5);
         }
 
-        /* Core Guarantees */
-        .guarantees-section { margin-bottom: 5rem; }
-
-        .guarantees-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1px;
-            background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
+        .gate-card h3 {
+            font-family: var(--font-head); font-size: 1.15rem;
+            font-weight: 700; color: var(--tx-1);
+            margin-bottom: 0.75rem; line-height: 1.2;
         }
+        .gate-card p { color: var(--tx-2); font-size: 0.9rem; line-height: 1.68; }
 
-        .guarantee-card {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
-            padding: 2.5rem;
-            transition: background .35s,box-shadow .35s,border-color .35s;
-        }
-
-        .guarantee-card:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated);
-            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(40,160,240,.07),inset 0 1px 0 rgba(255,255,255,.12);
-        }
-
-        .guarantee-icon {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--accent-arbitrum);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .guarantee-icon::before { content: '//'; color: var(--text-muted); }
-
-        .guarantee-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .guarantee-card p {
-            color: var(--text-tertiary);
-            font-size: 0.9rem;
-            line-height: 1.65;
-        }
-
-        /* Benchmarks */
-        .bench-section { margin-bottom: 5rem; }
-
+        /* ── Benchmarks ─── */
         .bench-table-wrap {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
-            border: 1px solid var(--border-primary);
+            border: 1px solid var(--border);
             overflow-x: auto;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
         }
 
         table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
+            width: 100%; border-collapse: collapse;
+            font-family: var(--font-mono); font-size: 0.75rem;
         }
 
         thead tr {
-            background: var(--bg-elevated);
-            border-bottom: 1px solid var(--border-bright);
+            background: var(--bg-2);
+            border-bottom: 1px solid var(--border-md);
         }
-
         th {
-            padding: 1rem 1.5rem;
-            text-align: left;
-            color: var(--text-dim);
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-weight: 500;
+            padding: 0.7rem 1.2rem; text-align: left;
+            color: var(--tx-3); text-transform: uppercase;
+            letter-spacing: 0.1em; font-size: 0.62rem; font-weight: 500;
         }
-
-        td {
-            padding: 0.875rem 1.5rem;
-            color: var(--text-tertiary);
-            border-bottom: 1px solid var(--border-subtle);
+        tbody tr {
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            transition: background 0.15s;
         }
+        tbody tr:last-child { border-bottom: none; }
+        tbody tr:hover { background: rgba(255,255,255,0.02); }
 
-        tr:last-child td { border-bottom: none; }
-        tr:hover td { background: var(--bg-elevated); }
-
-        .td-label { color: var(--text-secondary); font-weight: 500; }
-        .td-gas { color: var(--accent-arbitrum); font-weight: 600; }
-        .td-ok { color: var(--accent-success); }
-        .td-fail { color: var(--accent-critical); }
+        td { padding: 0.65rem 1.2rem; color: var(--tx-2); }
+        .td-label { color: var(--tx-3); font-size: 0.72rem; }
+        .td-gas { color: var(--tx-1); font-weight: 500; }
+        .td-ok { color: var(--green); }
+        .td-fail { color: var(--red); }
 
         .bench-note {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            border-left: 3px solid var(--accent-arbitrum);
-            padding: 1.25rem 1.5rem;
-            font-size: 0.875rem;
-            color: var(--text-tertiary);
-            line-height: 1.6;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
+            margin-top: 1rem;
+            padding: 0.875rem 1.2rem;
+            border: 1px solid var(--border);
+            border-left: 2px solid rgba(42,159,232,0.35);
+            background: rgba(42,159,232,0.03);
+            font-family: var(--font-mono); font-size: 0.72rem;
+            color: var(--tx-3); line-height: 1.75;
         }
 
-        /* Grant / Roadmap */
-        .grant-section { margin-bottom: 5rem; }
-
-        .milestone-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1px;
-            background: rgba(255,255,255,.07);
-            border: 1px solid rgba(255,255,255,.09);
-            margin-bottom: 2rem;
+        /* ── Gas chart ─── */
+        .chart-wrap {
+            border: 1px solid var(--border);
+            background: #030507;
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+        }
+        .chart-label {
+            font-family: var(--font-mono); font-size: 0.65rem;
+            color: var(--tx-3); text-transform: uppercase;
+            letter-spacing: 0.1em; margin-bottom: 1rem;
+        }
+        #gasChart { width: 100%; height: 200px; display: block; }
+        .chart-note {
+            font-family: var(--font-mono); font-size: 0.65rem;
+            color: var(--tx-4); margin-top: 0.75rem; text-align: center;
         }
 
+        /* ── Grant / Milestones ─── */
         .milestone-card {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
+            border: 1px solid var(--border);
+            background: var(--bg-card);
             padding: 2.5rem;
-            box-shadow: 0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);
+            position: relative;
+        }
+        .milestone-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; width: 3px; height: 100%;
+            background: linear-gradient(180deg, var(--sha), var(--cyan));
         }
 
         .milestone-tag {
-            font-family: var(--font-mono);
-            font-size: 0.68rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-            color: var(--accent-warning);
+            font-family: var(--font-mono); font-size: 0.62rem;
+            color: var(--sha); text-transform: uppercase;
+            letter-spacing: 0.1em; margin-bottom: 1rem;
         }
-
         .milestone-card h3 {
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            color: var(--text-primary);
+            font-family: var(--font-head); font-size: 1.3rem;
+            font-weight: 700; color: var(--tx-1);
             margin-bottom: 0.5rem;
         }
-
         .milestone-budget {
-            font-family: var(--font-mono);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-arbitrum);
-            margin-bottom: 1rem;
+            font-family: var(--font-mono); font-size: 1.5rem;
+            font-weight: 600; color: var(--green);
+            margin-bottom: 0.25rem;
         }
-
         .milestone-timeline {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            margin-bottom: 1.5rem;
+            font-family: var(--font-mono); font-size: 0.68rem;
+            color: var(--tx-3); margin-bottom: 1.5rem;
         }
 
-        .deliverable-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
+        .deliverable-list { list-style: none; }
         .deliverable-list li {
-            font-size: 0.875rem;
-            color: var(--text-tertiary);
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            line-height: 1.5;
+            font-size: 0.9rem; color: var(--tx-2);
+            padding: 0.55rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            display: flex; gap: 0.75rem;
+            line-height: 1.55;
         }
-
+        .deliverable-list li:last-child { border-bottom: none; }
         .deliverable-list li::before {
             content: '→';
-            color: var(--accent-arbitrum);
-            flex-shrink: 0;
-            margin-top: 0.1rem;
+            font-family: var(--font-mono); font-size: 0.72rem;
+            color: var(--sha); flex-shrink: 0; margin-top: 0.1rem;
         }
 
+        /* ── KPI strip ─── */
         .kpi-strip {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-primary);
-            border-top: 2px solid var(--accent-arbitrum);
-            padding: 2rem 2.5rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            display: grid; grid-template-columns: repeat(6, 1fr);
+            gap: 1px; background: var(--border);
+            border: 1px solid var(--border); margin-top: 1.5rem;
         }
-
-        .kpi-item {}
-        .kpi-label {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.4rem;
+        .kpi-item {
+            background: var(--bg-card);
+            padding: 1.1rem 1.25rem;
+            text-align: center; transition: background 0.2s;
         }
-        .kpi-val {
-            font-family: var(--font-mono);
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
+        .kpi-item:hover { background: var(--bg-raised); }
+        .kpi-label { font-family: var(--font-mono); font-size: 0.58rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.4rem; }
+        .kpi-val { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: var(--tx-1); }
 
-        /* On-Chain Evidence */
-        .evidence-section { margin-bottom: 5rem; }
-
+        /* ── Evidence grid ─── */
         .evidence-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 1px; background: var(--border);
+            border: 1px solid var(--border);
         }
 
         .evidence-card {
-            background: linear-gradient(155deg,rgba(255,255,255,.042) 0%,rgba(255,255,255,.008) 100%),var(--bg-secondary);
-            border: 1px solid var(--border-primary);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: background .35s,box-shadow .35s,border-color .35s;
+            background: var(--bg-card);
+            padding: 1.5rem 1.75rem;
+            transition: background 0.25s;
         }
-
-        .evidence-card:hover {
-            border-color: var(--border-bright);
-            box-shadow: var(--shadow-glow);
-        }
-
+        .evidence-card:hover { background: var(--bg-raised); }
         .evidence-label {
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.75rem;
+            font-family: var(--font-mono); font-size: 0.6rem;
+            color: var(--tx-3); text-transform: uppercase;
+            letter-spacing: 0.1em; margin-bottom: 0.6rem;
         }
-
         .evidence-value {
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            color: var(--text-primary);
-            word-break: break-all;
-            margin-bottom: 0.75rem;
+            font-family: var(--font-mono); font-size: 0.72rem;
+            color: var(--tx-2); word-break: break-all;
+            line-height: 1.6; margin-bottom: 0.75rem;
         }
-
         .evidence-link {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--accent-arbitrum);
+            font-family: var(--font-mono); font-size: 0.68rem;
+            color: var(--sha); transition: color 0.2s;
         }
+        .evidence-link:hover { color: #5bbfff; }
 
-        .evidence-link:hover { text-decoration: underline; }
-
-        /* CTA */
-        .cta-section {
-            margin: 4rem 0 6rem;
-            padding: 4rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            text-align: center;
+        /* ── CTA ─── */
+        .cta {
+            background: var(--bg-card); border: 1px solid var(--border);
+            padding: 3.5rem; text-align: center;
+            position: relative; overflow: hidden;
         }
-
-        .cta-section h2 {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
+        .cta::before {
+            content: ''; position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 50%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(42,159,232,0.55), transparent);
         }
-
-        .cta-section p {
-            font-size: 1.125rem;
-            color: var(--text-tertiary);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        .cta h2 {
+            font-family: var(--font-head); font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 800; color: var(--tx-1); margin-bottom: 0.875rem;
         }
+        .cta p { color: var(--tx-2); max-width: 520px; margin: 0 auto 2rem; }
 
-        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
 
+        /* ── Buttons ─── */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.875rem 1.75rem;
-            font-family: var(--font-mono);
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: none;
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            padding: 0.7rem 1.4rem;
+            font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600;
+            border: 1px solid var(--border-md); color: var(--tx-2);
+            background: transparent; text-decoration: none;
+            transition: all 0.22s var(--ease); letter-spacing: 0.03em;
+        }
+        .btn:hover { color: var(--tx-1); border-color: var(--border-hi); background: rgba(255,255,255,0.03); }
+        .btn-primary { background: var(--sha); color: #030608; border-color: var(--sha); }
+        .btn-primary:hover { background: #45b0ff; border-color: #45b0ff; color: #030608; box-shadow: 0 0 24px rgba(42,159,232,0.35); }
+
+        /* ── Pill ─── */
+        .pill {
+            font-family: var(--font-mono); font-size: 0.6rem;
+            padding: 0.18rem 0.5rem; font-weight: 500;
+            display: inline-flex; align-items: center; gap: 0.3rem;
+        }
+        .pill-green { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.22); color: var(--green); }
+        .pill-sha   { background: rgba(42,159,232,0.08); border: 1px solid rgba(42,159,232,0.22); color: var(--sha); }
+
+        /* ── Footer ─── */
+        footer {
+            margin-top: 8rem;
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border);
+            position: relative;
+        }
+        footer::before {
+            content: ''; position: absolute;
+            top: -1px; left: 0; width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(42,159,232,0.35) 35%, rgba(0,202,255,0.2) 65%, transparent);
         }
 
-        .btn-primary { background: var(--accent-arbitrum); color: var(--bg-primary); }
-        .btn-primary:hover { background: #3db0ff; box-shadow: 0 0 20px var(--accent-arbitrum-glow); transform: translateY(-2px); }
-        .btn-secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border-bright); }
-        .btn-secondary:hover { background: linear-gradient(155deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.012) 100%),var(--bg-elevated); border-color: var(--accent-arbitrum);
-            box-shadow: 0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(40,160,240,.07),inset 0 1px 0 rgba(255,255,255,.12);
-        }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+        .footer-brand h4 { font-family: var(--font-head); font-size: 1rem; font-weight: 800; color: var(--tx-1); margin-bottom: 0.875rem; letter-spacing: 0.04em; }
+        .footer-brand p { color: var(--tx-3); font-size: 0.875rem; line-height: 1.6; }
 
-        /* Footer */
-        footer { margin-top: 8rem; padding: 4rem 0 2rem; border-top: 1px solid var(--border-primary); }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-brand h4 { font-family: var(--font-display); font-size: 1.25rem; color: var(--text-primary); margin-bottom: 1rem; }
-        .footer-brand p { color: var(--text-dim); font-size: 0.875rem; line-height: 1.6; }
-
-        .footer-links h5 { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 0.75rem; }
-        .footer-links a { color: var(--text-tertiary); font-size: 0.875rem; transition: color 0.2s ease; }
-        .footer-links a:hover { color: var(--accent-arbitrum); }
+        .footer-col h5 { font-family: var(--font-mono); font-size: 0.62rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 1.1rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 0.65rem; }
+        .footer-col a { color: var(--tx-3); font-size: 0.875rem; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--tx-1); }
 
         .footer-bottom {
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-subtle);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--text-muted);
+            padding-top: 1.75rem; border-top: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: var(--font-mono); font-size: 0.65rem; color: var(--tx-3);
         }
-
         .footer-legal { display: flex; gap: 1.5rem; }
+        .footer-legal a { color: var(--tx-3); font-size: 0.65rem; }
+        .footer-legal a:hover { color: var(--tx-1); }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .two-col, .guarantees-grid, .milestone-grid { grid-template-columns: 1fr; }
-            .flow-steps { grid-template-columns: 1fr 1fr; }
-            .flow-step::after { display: none; }
+        /* ── Responsive ─── */
+        @media (max-width: 1024px) {
+            .kpi-strip { grid-template-columns: repeat(3, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .footer-brand { grid-column: span 2; }
         }
-
         @media (max-width: 768px) {
-            .header-content { padding: 0.75rem 1rem; flex-direction: column; gap: 0.75rem; }
-            .flow-steps { grid-template-columns: 1fr; }
+            .nav-inner { padding: 0.7rem 1rem; }
+            .grid-2, .gate-grid, .evidence-grid { grid-template-columns: 1fr; }
+            .card.span2 { grid-column: span 1; }
+            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .flow-grid { grid-template-columns: 1fr 1fr; }
+            .arch-item { grid-template-columns: 48px 1fr; gap: 1.25rem; }
             .footer-grid { grid-template-columns: 1fr; }
+            .footer-brand { grid-column: span 1; }
             .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-            .cta-section { padding: 2rem; }
-            .arch-layer { grid-template-columns: 1fr; gap: 0.75rem; }
-            .layer-num { text-align: left; font-size: 1.25rem; }
+            .cta { padding: 2.5rem 1.5rem; }
+            .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+            .milestone-card { padding: 1.75rem; }
         }
-    
-/* ── glass card depth injection ───────────────────── */
-.stat-item,.feature-card,.spec-card,.metric-card,.evidence-card,.gate-card,.layer-card,.module-card{box-shadow:0 2px 16px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.09);transition:background .35s,box-shadow .35s,border-color .35s!important}
-.stat-item:hover,.feature-card:hover,.spec-card:hover,.metric-card:hover,.evidence-card:hover,.gate-card:hover,.layer-card:hover{box-shadow:0 20px 60px rgba(0,0,0,.65),0 0 50px rgba(40,160,240,.07),inset 0 1px 0 rgba(255,255,255,.1)!important}
-</style>
+        @media (max-width: 480px) {
+            .stats-bar { grid-template-columns: 1fr 1fr; }
+            .flow-grid { grid-template-columns: 1fr; }
+            .nav-right { gap: 0.35rem; }
+        }
+    </style>
 </head>
 <body>
 
-<div id="security-gate">
-    <img src="/site-logo.png" alt="Orthonode" style="width:60px;height:60px;border-radius:8px">
-    <h2>// ESTABLISHING_SECURE_UPLINK</h2>
-    <div class="cf-turnstile"
-         data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb"
-         data-theme="dark"
-         data-callback="onHumanVerified">
+<!-- ═══════════════════════════════
+     HEADER
+════════════════════════════════ -->
+<header role="banner">
+    <div class="nav-inner">
+        <div class="nav-left">
+            <a href="/" class="nav-back">
+                <img src="/site-logo.png" alt="" width="16" height="16">
+                orthonode.xyz
+            </a>
+            <span class="nav-sep">/</span>
+            <div class="nav-status">
+                <span class="live-dot" role="img" aria-label="Testnet live"></span>
+                <span>SHA PROTOCOL</span>
+            </div>
+        </div>
+        <div class="nav-right">
+            <span class="tag tag-green">TESTNET_LIVE</span>
+            <span class="tag tag-blue">ARBITRUM_SEPOLIA</span>
+            <span class="tag">STYLUS_v1.0</span>
+        </div>
     </div>
-</div>
+</header>
 
-<div id="app-content">
+<!-- ═══════════════════════════════
+     MAIN
+════════════════════════════════ -->
+<main class="wrap">
 
-    <header role="banner">
-        <div class="header-content">
-            <div class="header-left">
-                <a href="/" class="nav-back"><img src="/site-logo.png" alt="" width="18" height="18" style="border-radius:3px;vertical-align:middle;margin-right:5px;display:inline-block">orthonode.xyz</a>
-                <div class="status-indicator">
-                    <span class="status-dot" role="img" aria-label="System operational"></span>
-                    <span>SHA PROTOCOL [TESTNET_LIVE]</span>
-                </div>
-            </div>
-            <div class="header-right">
-                <div class="network-badge">ARBITRUM_SEPOLIA</div>
-                <div class="network-badge">STYLUS_v1.0</div>
-            </div>
+<!-- ── HERO ────────────────────────────────── -->
+<section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+
+    <p class="breadcrumb">ORTHONODE SYSTEMS / <span class="bc-cur">STYLUS HARDWARE ANCHOR</span></p>
+
+    <div class="hero-badge">
+        <span class="live-dot"></span>
+        PROTOTYPE DEPLOYED · ARBITRUM SEPOLIA · $25K GRANT APPLICATION SUBMITTED
+    </div>
+
+    <h1>
+        Stylus Hardware<br>
+        <span class="accent">Anchor (SHA)</span>
+    </h1>
+
+    <p class="hero-sub">
+        A reusable hardware identity verification primitive for Arbitrum Stylus. SHA cryptographically binds immutable ESP32-S3 eFuse silicon identifiers to on-chain execution logic — enabling deterministic device identity, replay-safe receipts, and firmware-governed access control without centralized intermediaries.
+    </p>
+
+    <p class="hero-chain">// CONTRACT: 0xD661a1aB8CEFaaCd78F4B968670C3bC438415615 · ARBITRUM SEPOLIA</p>
+
+    <div class="stats-bar reveal" role="region" aria-label="SHA statistics">
+        <div class="stat">
+            <span class="stat-n">12.5k</span>
+            <span class="stat-l">Gas / Receipt (N=50)</span>
         </div>
-    </header>
+        <div class="stat">
+            <span class="stat-n">118,935</span>
+            <span class="stat-l">Gas / Single Verify</span>
+        </div>
+        <div class="stat">
+            <span class="stat-n">10,000+</span>
+            <span class="stat-l">Test Vectors Validated</span>
+        </div>
+        <div class="stat">
+            <span class="stat-n">100%</span>
+            <span class="stat-l">Keccak-256 Parity</span>
+        </div>
+        <div class="stat">
+            <span class="stat-n">$25K</span>
+            <span class="stat-l">Grant Applied (Arbitrum)</span>
+        </div>
+    </div>
+</section>
 
-    <main class="container">
+<!-- ── WHAT IS SHA ──────────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="overview-head">
+    <p class="sec-label" id="overview-head">// PROTOCOL_OVERVIEW : WHAT_SHA_SOLVES</p>
+    <div class="grid-2" style="margin-bottom:0;">
+        <div class="card">
+            <span class="card-label" style="color:var(--red);">THE_PROBLEM</span>
+            <h3>No Reusable Hardware Identity Layer</h3>
+            <p>Arbitrum has no protocol-level primitive for binding physical device identity to on-chain execution. Every team building hardware-integrated applications must implement custom cryptographic verification logic from scratch — introducing fragmented security assumptions, inconsistent replay protection, and repeated implementation risk across the ecosystem.</p>
+            <p>SHA eliminates this duplication by providing a shared, auditable infrastructure layer that any Stylus contract can import.</p>
+        </div>
+        <div class="card">
+            <span class="card-label" style="color:var(--sha);">THE_SOLUTION</span>
+            <h3>Silicon-Bound On-Chain Identity</h3>
+            <p>SHA binds immutable silicon identifiers (ESP32 eFuse values burned at manufacture) to Stylus smart contracts using a gas-efficient, cryptographic verification protocol. It enforces four core guarantees — identity gating, firmware governance, replay protection, and cryptographic proof — within a single modular primitive.</p>
+            <p>Built in Rust/WASM via Arbitrum Stylus, SHA achieves lower gas overhead than equivalent Solidity implementations, making hardware verification economically viable at scale.</p>
+        </div>
+        <div class="card">
+            <span class="card-label" style="color:var(--tx-3);">WHAT_SHA_IS_NOT</span>
+            <h3>No Trusted Intermediary</h3>
+            <p>SHA is not an oracle system, an enclave-based attestation service, a centralized hardware verification provider, or a single-protocol solution. It relies on no trusted intermediary — all verification logic executes deterministically on-chain inside the Stylus WASM runtime.</p>
+        </div>
+        <div class="card">
+            <span class="card-label" style="color:var(--green);">CURRENT_STATUS</span>
+            <h3>Live Prototype on Sepolia</h3>
+            <p>A research prototype is live on Arbitrum Sepolia. Core feasibility has been validated: eFuse-based hardware binding works, Keccak-256 parity between device and contract confirmed across 10,000+ test vectors, and gas benchmarks published. Production hardening — fuzzing, threat modeling, audit preparation — is next, pending grant approval.</p>
+        </div>
+    </div>
+</section>
 
-        <!-- Page Hero -->
-        <section class="page-hero">
-            <p class="breadcrumb">ORTHONODE SYSTEMS / <span>STYLUS HARDWARE ANCHOR</span></p>
-
-            <div class="sha-badge">
-                <span class="sha-badge-dot"></span>
-                <span>PROTOTYPE DEPLOYED · ARBITRUM SEPOLIA · GRANT APPLICATION SUBMITTED</span>
-            </div>
-
-            <h1 class="page-title">
-                Stylus Hardware<br><span class="highlight">Anchor (SHA)</span>
-            </h1>
-
-            <p class="page-intro">
-                A reusable hardware identity verification primitive for Arbitrum Stylus. SHA cryptographically binds immutable ESP32-S3 eFuse silicon identifiers to on-chain execution logic — enabling deterministic device identity, replay-safe receipts, and firmware-governed access control without centralized intermediaries.
-            </p>
-
-            <div class="stats-strip" role="region" aria-label="SHA statistics">
-                <div class="stat-item">
-                    <span class="stat-value">12.5k–29.7k</span>
-                    <span class="stat-label">Gas / Receipt (Batch)</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">118,935</span>
-                    <span class="stat-label">Gas / Single Verify</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">10,000+</span>
-                    <span class="stat-label">Test Vectors Validated</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">100%</span>
-                    <span class="stat-label">Keccak-256 Parity</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-value">Sepolia</span>
-                    <span class="stat-label">Network (Testnet)</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- What Is SHA -->
-        <section class="what-section">
-            <h2 class="section-header">// WHAT_IS_SHA : PROTOCOL_OVERVIEW</h2>
-            <div class="two-col">
-                <div class="two-col-card">
-                    <h3>The Problem It Solves</h3>
-                    <p>Arbitrum has no reusable, protocol-level primitive for binding physical device identity to on-chain execution. Every team building hardware-integrated applications must implement custom cryptographic verification logic from scratch — introducing fragmented security assumptions, inconsistent replay protection, and repeated implementation risk across the ecosystem.</p>
-                    <p style="margin-top:1rem;">SHA eliminates this duplication by providing a shared, auditable infrastructure layer that any Stylus contract can import.</p>
-                </div>
-                <div class="two-col-card">
-                    <h3>What SHA Provides</h3>
-                    <p>SHA binds immutable silicon identifiers (ESP32 eFuse values burned at manufacture) to Stylus smart contracts using a gas-efficient, cryptographic verification protocol. It enforces four core guarantees — identity gating, firmware governance, replay protection, and cryptographic proof — within a single modular primitive.</p>
-                    <p style="margin-top:1rem;">Built in Rust/WASM via Arbitrum Stylus, SHA achieves lower gas overhead than equivalent Solidity implementations, making hardware verification economically viable at scale.</p>
-                </div>
-            </div>
-
-            <div class="two-col">
-                <div class="two-col-card">
-                    <h3>What SHA Is Not</h3>
-                    <p>SHA is not an oracle system, an enclave-based attestation service, a centralized hardware verification provider, or a single-protocol solution. It relies on no trusted intermediary — all verification logic executes deterministically on-chain inside the Stylus WASM runtime.</p>
-                </div>
-                <div class="two-col-card">
-                    <h3>Current Status</h3>
-                    <p>A research prototype is live on Arbitrum Sepolia. Core feasibility has been validated: eFuse-based hardware binding works, Keccak-256 parity between device and contract has been confirmed across 10,000+ test vectors, and gas benchmarks have been published. Production hardening — fuzzing, threat modeling, audit preparation — is the next phase, pending grant approval.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Architecture -->
-        <section class="arch-section">
-            <h2 class="section-header">// SYSTEM_ARCHITECTURE : THREE_LAYER_STACK</h2>
-            <div class="arch-layers">
-                <div class="arch-layer">
-                    <div class="layer-num">01</div>
-                    <div class="layer-content">
-                        <h3>Silicon Layer — ESP32-S3</h3>
-                        <p>The hardware root of trust. Manufacturer-burned eFuse identifiers (Base MAC + Chip Model) are extracted at runtime and composed into a 32-byte Hardware Identity (HW_ID). On-device Keccak-256 hashing (Ethereum-compatible, 0x01 padding) produces receipt digests that match on-chain computation deterministically.</p>
-                        <div class="layer-details">
-                            <span class="detail-chip">ESP32-S3 eFuse</span>
-                            <span class="detail-chip">Base MAC + Chip Model</span>
-                            <span class="detail-chip">Keccak-256 (0x01 pad)</span>
-                            <span class="detail-chip">32-byte HW_ID</span>
-                            <span class="detail-chip">Monotonic Counter</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="arch-layer">
-                    <div class="layer-num">02</div>
-                    <div class="layer-content">
-                        <h3>Verification Layer — Stylus / Rust / WASM</h3>
-                        <p>The on-chain enforcement layer. Stylus contracts reconstruct receipt digests from submitted parameters and compare them against device-generated values. Monotonic counter enforcement prevents receipt replay. Firmware hash gating restricts execution to devices running approved firmware versions. All logic executes in the Stylus WASM runtime, achieving lower gas overhead than equivalent Solidity implementations.</p>
-                        <div class="layer-details">
-                            <span class="detail-chip">Rust (Stylus SDK 0.6.x)</span>
-                            <span class="detail-chip">WASM Execution</span>
-                            <span class="detail-chip">Replay Protection</span>
-                            <span class="detail-chip">Firmware Hash Gating</span>
-                            <span class="detail-chip">Identity Registry</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="arch-layer">
-                    <div class="layer-num">03</div>
-                    <div class="layer-content">
-                        <h3>Middleware Layer — Python SDK</h3>
-                        <p>Developer-facing tooling for device authorization flows, receipt generation utilities, and on-chain submission helpers. The SDK exposes an async interface with configurable RPC endpoints, enabling multi-chain support across Arbitrum One, Nova, and Orbit chains by simply changing the provider URL. Published to PyPI as <code style="color:var(--accent-arbitrum);">anchor-verifier</code>.</p>
-                        <div class="layer-details">
-                            <span class="detail-chip">Python async interface</span>
-                            <span class="detail-chip">Configurable RPC</span>
-                            <span class="detail-chip">PyPI: anchor-verifier</span>
-                            <span class="detail-chip">Multi-chain support</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- How It Works -->
-        <section class="flow-section">
-            <h2 class="section-header">// VERIFICATION_FLOW : DEVICE_TO_CONTRACT</h2>
-            <div class="flow-steps">
-                <div class="flow-step">
-                    <div class="step-num">STEP_01</div>
-                    <div class="step-title">Hardware Identity</div>
-                    <p class="step-desc">ESP32-S3 reads manufacturer-burned eFuse values. Base MAC and Chip Model compose a 32-byte HW_ID unique to each physical device. This identity cannot be cloned or emulated in software.</p>
-                </div>
-                <div class="flow-step">
-                    <div class="step-num">STEP_02</div>
-                    <div class="step-title">Receipt Generation</div>
-                    <p class="step-desc">The device generates a receipt: a Keccak-256 digest over (HW_ID ∥ firmware_hash ∥ counter ∥ payload). The monotonic counter increments on each submission, making receipts non-replayable by construction.</p>
-                </div>
-                <div class="flow-step">
-                    <div class="step-num">STEP_03</div>
-                    <div class="step-title">On-Chain Submission</div>
-                    <p class="step-desc">The Python SDK submits the receipt parameters to the Stylus contract via EIP-1559 transaction. Single or batch submission paths are both supported.</p>
-                </div>
-                <div class="flow-step">
-                    <div class="step-num">STEP_04</div>
-                    <div class="step-title">Contract Verification</div>
-                    <p class="step-desc">The Stylus contract reconstructs the digest, checks the identity registry, validates the firmware hash, enforces counter monotonicity, and emits a verified event. Failure reverts with a typed error.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Core Guarantees -->
-        <section class="guarantees-section">
-            <h2 class="section-header">// CORE_GUARANTEES : FOUR_PRIMITIVES</h2>
-            <div class="guarantees-grid">
-                <div class="guarantee-card">
-                    <div class="guarantee-icon">Identity Gate</div>
-                    <h3>Device-Bound Execution</h3>
-                    <p>Only transactions originating from pre-authorized hardware identities can execute gated contract functions. Silicon eFuse values are burned at manufacture and cannot be reprogrammed, making hardware identity immutable and Sybil-resistant.</p>
-                </div>
-                <div class="guarantee-card">
-                    <div class="guarantee-icon">Firmware Governance</div>
-                    <h3>Approved Firmware Enforcement</h3>
-                    <p>Contract execution is restricted to devices running firmware versions whose hashes have been explicitly approved by the contract owner. This creates a governance-controlled execution layer — outdated or compromised firmware is automatically rejected on-chain.</p>
-                </div>
-                <div class="guarantee-card">
-                    <div class="guarantee-icon">Replay Protection</div>
-                    <h3>Monotonic Counter Enforcement</h3>
-                    <p>Each hardware receipt embeds a monotonically increasing counter enforced by the Stylus contract. Submitted receipts must have a counter strictly greater than the last accepted value for that device. Replayed or duplicated receipts are deterministically rejected.</p>
-                </div>
-                <div class="guarantee-card">
-                    <div class="guarantee-icon">Cryptographic Proof</div>
-                    <h3>On-Chain Digest Validation</h3>
-                    <p>The Stylus contract independently reconstructs the Keccak-256 receipt digest from submitted parameters and compares it against the device-generated value. No trusted oracle or off-chain co-signer is required — verification is fully deterministic and self-contained on-chain.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Benchmarks -->
-        <section class="bench-section">
-            <h2 class="section-header">// GAS_BENCHMARKS : ARBITRUM_SEPOLIA · 2026-02-16</h2>
-            <div class="bench-table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Function</th>
-                            <th>Gas Used</th>
-                            <th>Gas / Receipt</th>
-                            <th>Status</th>
-                            <th>Notes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="td-label">verifyReceiptsBatchBitsetBytes — N=5</td>
-                            <td class="td-gas">148,741</td>
-                            <td class="td-gas">29,748</td>
-                            <td class="td-ok">✓</td>
-                            <td>Batch path</td>
-                        </tr>
-                        <tr>
-                            <td class="td-label">verifyReceiptsBatchBitsetBytes — N=10</td>
-                            <td class="td-gas">202,090</td>
-                            <td class="td-gas">20,209</td>
-                            <td class="td-ok">✓</td>
-                            <td>Batch path</td>
-                        </tr>
-                        <tr>
-                            <td class="td-label">verifyReceiptsBatchBitsetBytes — N=20</td>
-                            <td class="td-gas">308,387</td>
-                            <td class="td-gas">15,419</td>
-                            <td class="td-ok">✓</td>
-                            <td>Batch path</td>
-                        </tr>
-                        <tr>
-                            <td class="td-label">verifyReceiptsBatchBitsetBytes — N=50</td>
-                            <td class="td-gas">628,201</td>
-                            <td class="td-gas">12,564</td>
-                            <td class="td-ok">✓</td>
-                            <td>Best amortization</td>
-                        </tr>
-                        <tr>
-                            <td class="td-label">verifyReceipt (single — success)</td>
-                            <td class="td-gas">118,935</td>
-                            <td class="td-gas">118,935</td>
-                            <td class="td-ok">✓</td>
-                            <td>Success path</td>
-                        </tr>
-                        <tr>
-                            <td class="td-label">verifyReceipt (single — invalid digest)</td>
-                            <td class="td-gas">98,631</td>
-                            <td class="td-gas">—</td>
-                            <td class="td-fail">REVERT</td>
-                            <td>DigestMismatch — expected</td>
-                        </tr>
-                        <tr>
-                            <td class="td-label">authorizeNode(bytes32)</td>
-                            <td class="td-gas">99,288</td>
-                            <td class="td-gas">—</td>
-                            <td class="td-ok">✓</td>
-                            <td>Setup / owner-only</td>
-                        </tr>
-                        <tr>
-                            <td class="td-label">approveFirmware(bytes32)</td>
-                            <td class="td-gas">99,285</td>
-                            <td class="td-gas">—</td>
-                            <td class="td-ok">✓</td>
-                            <td>Setup / owner-only</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="bench-note">
-                <strong style="color:var(--text-primary);">Interpretation:</strong> Batch verification shows strong amortization — gas per receipt drops from 29.7k at N=5 to 12.6k at N=50, demonstrating the advantage of native-compiled WASM logic vs. per-transaction Solidity dispatch. Contract: <code style="color:var(--accent-arbitrum);">0xd661a1ab8cefaacd78f4b968670c3bc438415615</code> (Arbitrum Sepolia). Deploy tx: <code style="color:var(--text-dim);">0x1a9eaa...489</code>. These are preliminary benchmarks; final validated benchmarks will be published as part of Milestone 1 deliverables.
-            </div>
-
-            <!-- Interactive Gas Chart -->
-            <div style="background:var(--bg-secondary);border:1px solid var(--border-primary);margin-top:1.5rem;padding:1.5rem;">
-                <div style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem;">// GAS_AMORTIZATION_CURVE · WASM_BATCH_VERIFICATION</div>
-                <canvas id="gasChart" style="width:100%;height:220px;display:block;"></canvas>
-                <div style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);margin-top:0.75rem;text-align:center;">Gas per receipt vs batch size — WASM amortization advantage. Impossible to replicate at this cost in Solidity.</div>
-            </div>
-        </section>
-
-        <!-- Grant & Roadmap -->
-        <section class="grant-section">
-            <h2 class="section-header">// GRANT_APPLICATION : ARBITRUM_FOUNDATION_ESP · FEB 2026</h2>
-
-            <div class="milestone-grid">
-                <div class="milestone-card">
-                    <div class="milestone-tag">MILESTONE_01 · MONTHS 1–6 · FULL GRANT SCOPE</div>
-                    <h3>Security Hardening & Developer Release</h3>
-                    <div class="milestone-budget">$25,000 USD</div>
-                    <div class="milestone-timeline">February 2026 – August 2026</div>
-                    <ul class="deliverable-list">
-                        <li>Hardened Stylus verification contract with input validation, DoS protection, and deterministic replay enforcement</li>
-                        <li>Coverage-guided fuzzing suite (≥1,000,000 executions via cargo-fuzz)</li>
-                        <li>Published cryptographic parity validation (≥10,000 test vectors, device ↔ contract)</li>
-                        <li>Reproducible gas benchmark documentation with testnet execution logs</li>
-                        <li>Threat model covering attack surface, trust boundaries, and known limitations</li>
-                        <li>Public tagged GitHub release — all artifacts independently verifiable</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="kpi-strip">
-                <div class="kpi-item">
-                    <div class="kpi-label">Total Grant Ask</div>
-                    <div class="kpi-val">$25,000 USD</div>
-                </div>
-                <div class="kpi-item">
-                    <div class="kpi-label">Fuzz Executions (M1 KPI)</div>
-                    <div class="kpi-val">≥1,000,000</div>
-                </div>
-                <div class="kpi-item">
-                    <div class="kpi-label">Test Vectors (M1 KPI)</div>
-                    <div class="kpi-val">≥10,000</div>
-                </div>
-                <div class="kpi-item">
-                    <div class="kpi-label">Phase 2 Scope</div>
-                    <div class="kpi-val">SDK + Audit</div>
-                </div>
-                <div class="kpi-item">
-                    <div class="kpi-label">Network Scope</div>
-                    <div class="kpi-val">Testnet Only</div>
-                </div>
-                <div class="kpi-item">
-                    <div class="kpi-label">Duration</div>
-                    <div class="kpi-val">6 Months</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- On-Chain Evidence -->
-        <section class="evidence-section">
-            <h2 class="section-header">// ON_CHAIN_EVIDENCE : ARBITRUM_SEPOLIA</h2>
-            <div class="evidence-grid">
-                <div class="evidence-card">
-                    <div class="evidence-label">Stylus Contract (Benchmark Suite)</div>
-                    <div class="evidence-value">0xd661a1ab8cefaacd78f4b968670c3bc438415615</div>
-                    <a class="evidence-link" href="https://sepolia.arbiscan.io/address/0xd661a1ab8cefaacd78f4b968670c3bc438415615" target="_blank" rel="noopener">View on Arbiscan →</a>
-                </div>
-                <div class="evidence-card">
-                    <div class="evidence-label">Deploy Transaction</div>
-                    <div class="evidence-value" style="font-size:0.78rem;">0x1a9eaa02f816d86a71f9bf234425e83b5c090d1f3e4f3691851964b71747a489</div>
-                    <a class="evidence-link" href="https://sepolia.arbiscan.io/tx/0x1a9eaa02f816d86a71f9bf234425e83b5c090d1f3e4f3691851964b71747a489" target="_blank" rel="noopener">View TX →</a>
-                </div>
-                <div class="evidence-card">
-                    <div class="evidence-label">Activate Transaction</div>
-                    <div class="evidence-value" style="font-size:0.78rem;">0x353d26f4dea36a4410454b7b081cc41610f691dfea7ce29d5c9b1e9aa968f955</div>
-                    <a class="evidence-link" href="https://sepolia.arbiscan.io/tx/0x353d26f4dea36a4410454b7b081cc41610f691dfea7ce29d5c9b1e9aa968f955" target="_blank" rel="noopener">View TX →</a>
-                </div>
-                <div class="evidence-card">
-                    <div class="evidence-label">v1.0.0 Prototype Release</div>
-                    <div class="evidence-value">GitHub Release · Tagged</div>
-                    <a class="evidence-link" href="https://github.com/arhantbarmate/stylus-hardware-anchor/releases/tag/v1.0.0" target="_blank" rel="noopener">View Release →</a>
-                </div>
-                <div class="evidence-card">
-                    <div class="evidence-label">Source Repository</div>
-                    <div class="evidence-value">arhantbarmate / stylus-hardware-anchor</div>
-                    <a class="evidence-link" href="https://github.com/arhantbarmate/stylus-hardware-anchor" target="_blank" rel="noopener">View on GitHub →</a>
-                </div>
-                <div class="evidence-card">
-                    <div class="evidence-label">Video Demonstration</div>
-                    <div class="evidence-value">Loom — Live Prototype Walkthrough</div>
-                    <a class="evidence-link" href="https://www.loom.com/share/6867ea17f56a458dae9375b29b640882" target="_blank" rel="noopener">Watch Demo →</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA -->
-        <section class="cta-section">
-            <h2>Explore the Protocol</h2>
-            <p>Review the source code, verify on-chain evidence, or watch the prototype demonstration.</p>
-            <div class="cta-buttons">
-                <a href="https://github.com/arhantbarmate/stylus-hardware-anchor" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-                    <span>View Source Code</span><span>↗</span>
-                </a>
-                <a href="https://www.loom.com/share/6867ea17f56a458dae9375b29b640882" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-                    <span>Watch Demo</span><span>↗</span>
-                </a>
-                <a href="https://sepolia.arbiscan.io/address/0xd661a1ab8cefaacd78f4b968670c3bc438415615" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-                    <span>Verify On-Chain</span><span>↗</span>
-                </a>
-                <a href="/" class="btn btn-secondary">
-                    <span>← Back to Orthonode</span>
-                </a>
-            </div>
-        </section>
-
-    </main>
-
-    <footer role="contentinfo">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h4>ORTHONODE INFRASTRUCTURE LABS</h4>
-                    <p>Building reusable hardware verification infrastructure for decentralized physical infrastructure networks (DePIN) on Arbitrum Stylus. SHA is a research prototype — grant application submitted February 2026 for production hardening.</p>
-                    <p style="margin-top:1rem;">
-                        <strong>Location:</strong> Bhopal, Madhya Pradesh, India<br>
-                        <strong>Classification:</strong> Infrastructure Research & Development (NIC 72900)
-                    </p>
-                </div>
-                <div class="footer-links">
-                    <h5>SHA Technical</h5>
-                    <ul>
-                        <li><a href="https://github.com/arhantbarmate/stylus-hardware-anchor" target="_blank" rel="noopener">GitHub Repository</a></li>
-                        <li><a href="https://github.com/arhantbarmate/stylus-hardware-anchor/blob/main/docs/ARCHITECTURE.md" target="_blank" rel="noopener">Architecture Docs</a></li>
-                        <li><a href="https://sepolia.arbiscan.io/address/0xd661a1ab8cefaacd78f4b968670c3bc438415615" target="_blank" rel="noopener">Testnet Contract</a></li>
-                        <li><a href="https://www.loom.com/share/6867ea17f56a458dae9375b29b640882" target="_blank" rel="noopener">Video Demonstration</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h5>Connect</h5>
-                    <ul>
-                        <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X / Twitter</a></li>
-                        <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
-                        <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub (Org)</a></li>
-                        <li><a href="/" rel="noopener">← orthonode.xyz</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div>© 2026 Orthonode Infrastructure Labs. All Rights Reserved.</div>
-                <div class="footer-legal">
-                    <a href="/terms.html">Terms of Service</a>
-                    <a href="/privacy.html">Privacy Policy</a>
+<!-- ── ARCHITECTURE ─────────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="arch-head">
+    <p class="sec-label" id="arch-head">// SYSTEM_ARCHITECTURE : THREE_LAYER_STACK</p>
+    <div class="arch-list">
+        <div class="arch-item">
+            <div class="arch-num">01</div>
+            <div class="arch-content">
+                <h3>Silicon Layer — ESP32-S3</h3>
+                <p>The hardware root of trust. Manufacturer-burned eFuse identifiers (Base MAC + Chip Model) are extracted at runtime and composed into a 32-byte Hardware Identity (HW_ID). On-device Keccak-256 hashing (Ethereum-compatible, 0x01 padding) produces receipt digests that match on-chain computation deterministically.</p>
+                <div class="chips">
+                    <span class="chip chip-sha">ESP32-S3 eFuse</span>
+                    <span class="chip chip-sha">Base MAC + Chip Model</span>
+                    <span class="chip chip-sha">Keccak-256 (0x01 pad)</span>
+                    <span class="chip chip-sha">32-byte HW_ID</span>
+                    <span class="chip chip-sha">Monotonic Counter</span>
                 </div>
             </div>
         </div>
-    </footer>
+        <div class="arch-item">
+            <div class="arch-num">02</div>
+            <div class="arch-content">
+                <h3>Verification Layer — Stylus / Rust / WASM</h3>
+                <p>The on-chain enforcement layer. Stylus contracts reconstruct receipt digests from submitted parameters and compare them against device-generated values. Monotonic counter enforcement prevents receipt replay. Firmware hash gating restricts execution to devices running approved firmware versions. All logic executes in the Stylus WASM runtime, achieving lower gas overhead than equivalent Solidity implementations.</p>
+                <div class="chips">
+                    <span class="chip chip-sha">Rust (Stylus SDK 0.6.x)</span>
+                    <span class="chip chip-sha">WASM Execution</span>
+                    <span class="chip chip-sha">Replay Protection</span>
+                    <span class="chip chip-sha">Firmware Hash Gating</span>
+                    <span class="chip chip-sha">Identity Registry</span>
+                </div>
+            </div>
+        </div>
+        <div class="arch-item">
+            <div class="arch-num">03</div>
+            <div class="arch-content">
+                <h3>Middleware Layer — Python SDK</h3>
+                <p>Developer-facing tooling for device authorization flows, receipt generation utilities, and on-chain submission helpers. The SDK exposes an async interface with configurable RPC endpoints, enabling multi-chain support across Arbitrum One, Nova, and Orbit chains by simply changing the provider URL. Published to PyPI as <code style="color:var(--sha);">anchor-verifier</code>.</p>
+                <div class="chips">
+                    <span class="chip chip-sha">Python async interface</span>
+                    <span class="chip chip-sha">Configurable RPC</span>
+                    <span class="chip chip-sha">PyPI: anchor-verifier</span>
+                    <span class="chip chip-sha">Multi-chain support</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-</div>
+<!-- ── HOW IT WORKS ─────────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="flow-head">
+    <p class="sec-label" id="flow-head">// VERIFICATION_FLOW : DEVICE_TO_CONTRACT</p>
+    <div class="flow-grid" id="flowGrid">
+        <div class="flow-step">
+            <div class="step-num">STEP_01</div>
+            <div class="step-title">Hardware Identity</div>
+            <p class="step-desc">ESP32-S3 reads manufacturer-burned eFuse values. Base MAC and Chip Model compose a 32-byte HW_ID unique to each physical device. This identity cannot be cloned or emulated in software.</p>
+        </div>
+        <div class="flow-step">
+            <div class="step-num">STEP_02</div>
+            <div class="step-title">Receipt Generation</div>
+            <p class="step-desc">The device generates a receipt: a Keccak-256 digest over (HW_ID ∥ firmware_hash ∥ counter ∥ payload). The monotonic counter increments on each submission, making receipts non-replayable by construction.</p>
+        </div>
+        <div class="flow-step">
+            <div class="step-num">STEP_03</div>
+            <div class="step-title">On-Chain Submission</div>
+            <p class="step-desc">The Python SDK submits the receipt parameters to the Stylus contract via EIP-1559 transaction. Single or batch submission paths are both supported, with batch path achieving 12.5k gas per receipt at N=50.</p>
+        </div>
+        <div class="flow-step">
+            <div class="step-num">STEP_04</div>
+            <div class="step-title">Contract Verification</div>
+            <p class="step-desc">The Stylus contract reconstructs the digest, checks the identity registry, validates the firmware hash, enforces counter monotonicity, and emits a verified event. Failure reverts with a typed error.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ── CORE GUARANTEES ──────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="gates-head">
+    <p class="sec-label" id="gates-head">// CORE_GUARANTEES : FOUR_GATE_PRIMITIVES</p>
+    <div class="gate-grid">
+        <div class="gate-card">
+            <div class="gate-label">Gate 01 — Identity Gate</div>
+            <h3>Device-Bound Execution</h3>
+            <p>Only transactions originating from pre-authorized hardware identities can execute gated contract functions. Silicon eFuse values are burned at manufacture and cannot be reprogrammed, making hardware identity immutable and Sybil-resistant.</p>
+        </div>
+        <div class="gate-card">
+            <div class="gate-label">Gate 02 — Firmware Governance</div>
+            <h3>Approved Firmware Enforcement</h3>
+            <p>Contract execution is restricted to devices running firmware versions whose hashes have been explicitly approved by the contract owner. This creates a governance-controlled execution layer — outdated or compromised firmware is automatically rejected on-chain.</p>
+        </div>
+        <div class="gate-card">
+            <div class="gate-label">Gate 03 — Replay Protection</div>
+            <h3>Monotonic Counter Enforcement</h3>
+            <p>Each hardware receipt embeds a monotonically increasing counter enforced by the Stylus contract. Submitted receipts must have a counter strictly greater than the last accepted value for that device. Replayed or duplicated receipts are deterministically rejected.</p>
+        </div>
+        <div class="gate-card">
+            <div class="gate-label">Gate 04 — Cryptographic Proof</div>
+            <h3>On-Chain Digest Validation</h3>
+            <p>The Stylus contract independently reconstructs the Keccak-256 receipt digest from submitted parameters and compares it against the device-generated value. No trusted oracle or off-chain co-signer is required — verification is fully deterministic and self-contained on-chain.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ── GAS BENCHMARKS ───────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="bench-head">
+    <p class="sec-label" id="bench-head">// GAS_BENCHMARKS : ARBITRUM_SEPOLIA · 2026-02-16</p>
+
+    <div class="bench-table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Function</th>
+                    <th>Gas Used</th>
+                    <th>Gas / Receipt</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="td-label">verifyReceiptsBatchBitsetBytes — N=5</td>
+                    <td class="td-gas">148,741</td>
+                    <td class="td-gas">29,748</td>
+                    <td class="td-ok">✓ OK</td>
+                    <td>Batch path</td>
+                </tr>
+                <tr>
+                    <td class="td-label">verifyReceiptsBatchBitsetBytes — N=10</td>
+                    <td class="td-gas">202,090</td>
+                    <td class="td-gas">20,209</td>
+                    <td class="td-ok">✓ OK</td>
+                    <td>Batch path</td>
+                </tr>
+                <tr>
+                    <td class="td-label">verifyReceiptsBatchBitsetBytes — N=20</td>
+                    <td class="td-gas">308,387</td>
+                    <td class="td-gas">15,419</td>
+                    <td class="td-ok">✓ OK</td>
+                    <td>Batch path</td>
+                </tr>
+                <tr>
+                    <td class="td-label">verifyReceiptsBatchBitsetBytes — N=50</td>
+                    <td class="td-gas">628,201</td>
+                    <td class="td-gas">12,564</td>
+                    <td class="td-ok">✓ OK</td>
+                    <td>Best amortization</td>
+                </tr>
+                <tr>
+                    <td class="td-label">verifyReceipt (single — success)</td>
+                    <td class="td-gas">118,935</td>
+                    <td class="td-gas">118,935</td>
+                    <td class="td-ok">✓ OK</td>
+                    <td>Success path</td>
+                </tr>
+                <tr>
+                    <td class="td-label">verifyReceipt (single — invalid digest)</td>
+                    <td class="td-gas">98,631</td>
+                    <td class="td-gas">—</td>
+                    <td class="td-fail">REVERT</td>
+                    <td>DigestMismatch — expected</td>
+                </tr>
+                <tr>
+                    <td class="td-label">authorizeNode(bytes32)</td>
+                    <td class="td-gas">99,288</td>
+                    <td class="td-gas">—</td>
+                    <td class="td-ok">✓ OK</td>
+                    <td>Setup / owner-only</td>
+                </tr>
+                <tr>
+                    <td class="td-label">approveFirmware(bytes32)</td>
+                    <td class="td-gas">99,285</td>
+                    <td class="td-gas">—</td>
+                    <td class="td-ok">✓ OK</td>
+                    <td>Setup / owner-only</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="bench-note">
+        <strong style="color:var(--tx-1);">Interpretation:</strong> Batch verification shows strong amortization — gas per receipt drops from 29.7k at N=5 to 12.6k at N=50, demonstrating the advantage of native-compiled WASM logic vs. per-transaction Solidity dispatch. Contract: <code style="color:var(--sha);">0xd661a1ab8cefaacd78f4b968670c3bc438415615</code> (Arbitrum Sepolia). These are preliminary benchmarks; final validated benchmarks will be published as part of Milestone 1 deliverables.
+    </div>
+
+    <div class="chart-wrap">
+        <div class="chart-label">// GAS_AMORTIZATION_CURVE · WASM_BATCH_VERIFICATION</div>
+        <canvas id="gasChart"></canvas>
+        <div class="chart-note">Gas per receipt vs batch size — WASM amortization advantage</div>
+    </div>
+</section>
+
+<!-- ── GRANT & ROADMAP ───────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="grant-head">
+    <p class="sec-label" id="grant-head">// GRANT_APPLICATION : ARBITRUM_FOUNDATION_ESP · FEB 2026</p>
+
+    <div class="milestone-card">
+        <div class="milestone-tag">MILESTONE_01 · MONTHS 1–6 · FULL GRANT SCOPE</div>
+        <h3>Security Hardening &amp; Developer Release</h3>
+        <div class="milestone-budget">$25,000 USD</div>
+        <div class="milestone-timeline">February 2026 – August 2026</div>
+        <ul class="deliverable-list">
+            <li>Hardened Stylus verification contract with input validation, DoS protection, and deterministic replay enforcement</li>
+            <li>Coverage-guided fuzzing suite (≥1,000,000 executions via cargo-fuzz)</li>
+            <li>Published cryptographic parity validation (≥10,000 test vectors, device ↔ contract)</li>
+            <li>Reproducible gas benchmark documentation with testnet execution logs</li>
+            <li>Threat model covering attack surface, trust boundaries, and known limitations</li>
+            <li>Public tagged GitHub release — all artifacts independently verifiable</li>
+        </ul>
+    </div>
+
+    <div class="kpi-strip">
+        <div class="kpi-item">
+            <div class="kpi-label">Total Grant Ask</div>
+            <div class="kpi-val">$25,000</div>
+        </div>
+        <div class="kpi-item">
+            <div class="kpi-label">Fuzz Executions</div>
+            <div class="kpi-val">≥1,000,000</div>
+        </div>
+        <div class="kpi-item">
+            <div class="kpi-label">Test Vectors</div>
+            <div class="kpi-val">≥10,000</div>
+        </div>
+        <div class="kpi-item">
+            <div class="kpi-label">Phase 2 Scope</div>
+            <div class="kpi-val">SDK + Audit</div>
+        </div>
+        <div class="kpi-item">
+            <div class="kpi-label">Network Scope</div>
+            <div class="kpi-val">Testnet Only</div>
+        </div>
+        <div class="kpi-item">
+            <div class="kpi-label">Duration</div>
+            <div class="kpi-val">6 Months</div>
+        </div>
+    </div>
+</section>
+
+<!-- ── ON-CHAIN EVIDENCE ─────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="evidence-head">
+    <p class="sec-label" id="evidence-head">// ON_CHAIN_EVIDENCE : ARBITRUM_SEPOLIA</p>
+    <div class="evidence-grid">
+        <div class="evidence-card">
+            <div class="evidence-label">Stylus Contract (Benchmark Suite)</div>
+            <div class="evidence-value">0xd661a1ab8cefaacd78f4b968670c3bc438415615</div>
+            <a class="evidence-link" href="https://sepolia.arbiscan.io/address/0xd661a1ab8cefaacd78f4b968670c3bc438415615" target="_blank" rel="noopener">View on Arbiscan →</a>
+        </div>
+        <div class="evidence-card">
+            <div class="evidence-label">Deploy Transaction</div>
+            <div class="evidence-value">0x1a9eaa02f816d86a71f9bf234425e83b5c090d1f3e4f3691851964b71747a489</div>
+            <a class="evidence-link" href="https://sepolia.arbiscan.io/tx/0x1a9eaa02f816d86a71f9bf234425e83b5c090d1f3e4f3691851964b71747a489" target="_blank" rel="noopener">View TX →</a>
+        </div>
+        <div class="evidence-card">
+            <div class="evidence-label">Activate Transaction</div>
+            <div class="evidence-value">0x353d26f4dea36a4410454b7b081cc41610f691dfea7ce29d5c9b1e9aa968f955</div>
+            <a class="evidence-link" href="https://sepolia.arbiscan.io/tx/0x353d26f4dea36a4410454b7b081cc41610f691dfea7ce29d5c9b1e9aa968f955" target="_blank" rel="noopener">View TX →</a>
+        </div>
+        <div class="evidence-card">
+            <div class="evidence-label">v1.0.0 Prototype Release</div>
+            <div class="evidence-value">GitHub Release · Tagged v1.0.0</div>
+            <a class="evidence-link" href="https://github.com/arhantbarmate/stylus-hardware-anchor/releases/tag/v1.0.0" target="_blank" rel="noopener">View Release →</a>
+        </div>
+        <div class="evidence-card">
+            <div class="evidence-label">Source Repository</div>
+            <div class="evidence-value">arhantbarmate / stylus-hardware-anchor</div>
+            <a class="evidence-link" href="https://github.com/arhantbarmate/stylus-hardware-anchor" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+        <div class="evidence-card">
+            <div class="evidence-label">Video Demonstration</div>
+            <div class="evidence-value">Loom — Live Prototype Walkthrough</div>
+            <a class="evidence-link" href="https://www.loom.com/share/6867ea17f56a458dae9375b29b640882" target="_blank" rel="noopener">Watch Demo →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ── CTA ───────────────────────────────────── -->
+<section class="section reveal">
+    <div class="cta">
+        <h2>Explore the Protocol</h2>
+        <p>Review the source code, verify on-chain evidence, or explore the broader ORTHONODE infrastructure stack.</p>
+        <div class="cta-row">
+            <a href="https://github.com/arhantbarmate/stylus-hardware-anchor" class="btn btn-primary" target="_blank" rel="noopener">View Source ↗</a>
+            <a href="https://www.loom.com/share/6867ea17f56a458dae9375b29b640882" class="btn" target="_blank" rel="noopener">Watch Demo ↗</a>
+            <a href="https://sepolia.arbiscan.io/address/0xd661a1ab8cefaacd78f4b968670c3bc438415615" class="btn" target="_blank" rel="noopener">Verify On-Chain ↗</a>
+            <a href="/iotex-research.html" class="btn" style="border-color:rgba(42,159,232,0.25);color:var(--sha);">IoTeX Research Paper ↗</a>
+            <a href="/" class="btn">← Back to Orthonode</a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- ═══════════════════════════════
+     FOOTER
+════════════════════════════════ -->
+<footer role="contentinfo">
+    <div class="wrap">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h4>ORTHONODE SYSTEMS™</h4>
+                <p>
+                    Building deterministic physical verification infrastructure for autonomous systems, DePIN networks, and mobility platforms. SHA anchors hardware identity on Arbitrum Stylus. OAP governs lifecycle integrity. TON-SHA brings agent trust to the TON ecosystem.
+                </p>
+                <p style="margin-top:0.875rem;color:var(--tx-3);">
+                    <strong style="color:var(--tx-2);">Founder:</strong> Arhant Barmate<br>
+                    <strong style="color:var(--tx-2);">Location:</strong> Bhopal, Madhya Pradesh, India<br>
+                    <strong style="color:var(--tx-2);">Contact:</strong> infrastructure@orthonode.xyz
+                </p>
+            </div>
+            <div class="footer-col">
+                <h5>SHA Technical</h5>
+                <ul>
+                    <li><a href="https://github.com/arhantbarmate/stylus-hardware-anchor" target="_blank" rel="noopener">GitHub Repository</a></li>
+                    <li><a href="https://github.com/arhantbarmate/stylus-hardware-anchor/blob/main/docs/ARCHITECTURE.md" target="_blank" rel="noopener">Architecture Docs</a></li>
+                    <li><a href="https://sepolia.arbiscan.io/address/0xd661a1ab8cefaacd78f4b968670c3bc438415615" target="_blank" rel="noopener">Testnet Contract</a></li>
+                    <li><a href="https://www.loom.com/share/6867ea17f56a458dae9375b29b640882" target="_blank" rel="noopener">Video Demo</a></li>
+                    <li><a href="/iotex-research.html">IoTeX Research Paper</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>All Products</h5>
+                <ul>
+                    <li><a href="/sha.html" style="color:var(--sha);">SHA — Hardware Attestation</a></li>
+                    <li><a href="/oap.html">OAP — Integrity Governance</a></li>
+                    <li><a href="/nexus.html">Nexus — Zero-Trust Gateway</a></li>
+                    <li><a href="/ton-sha.html" style="color:var(--ton);">TON-SHA — Agent Trust Layer</a></li>
+                    <li><a href="/invariant.html" style="color:var(--inv);">INVARIANT — Bittensor Subnet</a></li>
+                    <li><a href="/tix-dao.html" style="color:var(--tix);">TIX-DAO — Venue Governance</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>© 2026 ORTHONODE SYSTEMS™. All Rights Reserved.</div>
+            <div class="footer-legal">
+                <a href="/terms.html">Terms of Service</a>
+                <a href="/privacy.html">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script>
-    function onHumanVerified(token) {
-        const gate = document.getElementById('security-gate');
-        const content = document.getElementById('app-content');
-        gate.style.display = 'none';
-        content.style.display = 'block';
-        setTimeout(() => { content.style.opacity = '1'; }, 50);
-        initGasChart();
-        initVerifyFlow();
-        initCounterAnim();
-    }
+    /* ── Scroll Reveal ─── */
+    (function initReveal() {
+        const items = document.querySelectorAll('.reveal');
+        if (!items.length) return;
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('in'), i * 55);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.06, rootMargin: '0px 0px -36px 0px' });
+        items.forEach(el => obs.observe(el));
+    })();
 
-    /* ── Gas Amortization Chart ─────────────────────────────── */
-    function initGasChart() {
+    /* ── Stat count-up ─── */
+    (function initCounters() {
+        document.querySelectorAll('.stat-n').forEach(el => {
+            const txt = el.textContent.trim();
+            const m   = txt.match(/[\d,]+/);
+            if (!m) return;
+            const target = parseInt(m[0].replace(/,/g, ''));
+            if (target < 100) return;
+            const prefix = txt.slice(0, txt.search(/\d/));
+            const suffix = txt.slice(txt.search(/[\d,]+/) + m[0].length);
+            const obs2 = new IntersectionObserver(ents => {
+                if (!ents[0].isIntersecting) return;
+                obs2.disconnect();
+                const t0 = performance.now();
+                const dur = 1400;
+                (function tick(now) {
+                    const p = Math.min((now - t0) / dur, 1);
+                    const e = 1 - Math.pow(1 - p, 3);
+                    el.textContent = prefix + Math.round(e * target).toLocaleString() + suffix;
+                    if (p < 1) requestAnimationFrame(tick);
+                })(t0);
+            }, { threshold: 0.5 });
+            obs2.observe(el);
+        });
+    })();
+
+    /* ── Verification flow pulse ─── */
+    (function initFlowPulse() {
+        const steps = document.querySelectorAll('#flowGrid .flow-step');
+        if (!steps.length) return;
+        let active = 0;
+        function pulse() {
+            steps.forEach((s, i) => s.classList.toggle('active', i === active));
+            active = (active + 1) % steps.length;
+        }
+        pulse();
+        setInterval(pulse, 1600);
+    })();
+
+    /* ── Gas Amortization Chart ─── */
+    (function initGasChart() {
         const canvas = document.getElementById('gasChart');
         if (!canvas) return;
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight || 200;
+
         const ctx = canvas.getContext('2d');
-        const W = canvas.width = canvas.offsetWidth;
-        const H = canvas.height = canvas.offsetHeight;
+        const W = canvas.width;
+        const H = canvas.height;
 
         const data = [
             { n: 1,  gas: 118935 },
@@ -1309,17 +1217,16 @@
             { n: 50, gas: 12564  },
         ];
 
-        const PAD = { t: 30, r: 20, b: 50, l: 72 };
+        const PAD = { t: 30, r: 20, b: 48, l: 68 };
         const chartW = W - PAD.l - PAD.r;
         const chartH = H - PAD.t - PAD.b;
         const maxGas = 130000;
-        const accent = '#28a0f0';
-        const dim = '#373737';
-        const textDim = '#525252';
-        const textPrimary = '#ededed';
+        const accent  = '#2A9FE8';
+        const dimLine = '#1e2a35';
+        const dimText = '#3d5265';
+        const bright  = '#E4EBF0';
 
         let progress = 0;
-        let animFrame;
 
         function xPos(i) { return PAD.l + (i / (data.length - 1)) * chartW; }
         function yPos(gas) { return PAD.t + chartH - (gas / maxGas) * chartH; }
@@ -1328,92 +1235,58 @@
             ctx.clearRect(0, 0, W, H);
 
             // Grid lines
-            ctx.strokeStyle = dim;
-            ctx.lineWidth = 0.5;
             [0, 30000, 60000, 90000, 120000].forEach(g => {
                 const y = yPos(g);
-                ctx.beginPath(); ctx.moveTo(PAD.l, y); ctx.lineTo(W - PAD.r, y);
-                ctx.stroke();
-                ctx.fillStyle = textDim;
-                ctx.font = '10px JetBrains Mono, monospace';
+                ctx.strokeStyle = dimLine; ctx.lineWidth = 0.5;
+                ctx.beginPath(); ctx.moveTo(PAD.l, y); ctx.lineTo(W - PAD.r, y); ctx.stroke();
+                ctx.fillStyle = dimText; ctx.font = '10px IBM Plex Mono, monospace';
                 ctx.textAlign = 'right';
-                ctx.fillText((g/1000).toFixed(0) + 'k', PAD.l - 8, y + 4);
+                ctx.fillText((g / 1000).toFixed(0) + 'k', PAD.l - 8, y + 4);
             });
 
-            // X axis labels
-            ctx.fillStyle = textDim;
-            ctx.font = '10px JetBrains Mono, monospace';
-            ctx.textAlign = 'center';
-            data.forEach((d, i) => {
-                ctx.fillText('N=' + d.n, xPos(i), H - 12);
-            });
+            // X-axis labels
+            ctx.fillStyle = dimText; ctx.font = '10px IBM Plex Mono, monospace'; ctx.textAlign = 'center';
+            data.forEach((d, i) => ctx.fillText('N=' + d.n, xPos(i), H - 10));
 
-            // Axis label
-            ctx.save();
-            ctx.translate(14, PAD.t + chartH / 2);
-            ctx.rotate(-Math.PI / 2);
-            ctx.fillStyle = textDim;
-            ctx.font = '9px JetBrains Mono, monospace';
-            ctx.textAlign = 'center';
-            ctx.fillText('GAS / RECEIPT', 0, 0);
-            ctx.restore();
-
-            // Gradient fill under curve
+            // Gradient fill
             const totalPoints = data.length - 1;
-            const currentIdx = Math.min(Math.floor(p * totalPoints), totalPoints - 1);
-            const frac = (p * totalPoints) - currentIdx;
+            const ci = Math.min(Math.floor(p * totalPoints), totalPoints - 1);
+            const frac = (p * totalPoints) - ci;
 
             const grad = ctx.createLinearGradient(0, PAD.t, 0, PAD.t + chartH);
-            grad.addColorStop(0, 'rgba(40,160,240,0.18)');
-            grad.addColorStop(1, 'rgba(40,160,240,0.0)');
+            grad.addColorStop(0, 'rgba(42,159,232,0.16)');
+            grad.addColorStop(1, 'rgba(42,159,232,0.0)');
 
             ctx.beginPath();
             ctx.moveTo(xPos(0), yPos(0));
             ctx.lineTo(xPos(0), yPos(data[0].gas));
-            for (let i = 1; i <= currentIdx; i++) {
-                ctx.lineTo(xPos(i), yPos(data[i].gas));
-            }
-            if (currentIdx < totalPoints) {
-                const cx = xPos(currentIdx) + frac * (xPos(currentIdx + 1) - xPos(currentIdx));
-                const cy = yPos(data[currentIdx].gas) + frac * (yPos(data[currentIdx + 1].gas) - yPos(data[currentIdx].gas));
-                ctx.lineTo(cx, cy);
-                ctx.lineTo(cx, yPos(0));
+            for (let i = 1; i <= ci; i++) ctx.lineTo(xPos(i), yPos(data[i].gas));
+            if (ci < totalPoints) {
+                const cx = xPos(ci) + frac * (xPos(ci + 1) - xPos(ci));
+                const cy = yPos(data[ci].gas) + frac * (yPos(data[ci + 1].gas) - yPos(data[ci].gas));
+                ctx.lineTo(cx, cy); ctx.lineTo(cx, yPos(0));
             } else {
-                ctx.lineTo(xPos(currentIdx), yPos(0));
+                ctx.lineTo(xPos(ci), yPos(0));
             }
-            ctx.closePath();
-            ctx.fillStyle = grad;
-            ctx.fill();
+            ctx.closePath(); ctx.fillStyle = grad; ctx.fill();
 
             // Curve line
-            ctx.beginPath();
-            ctx.strokeStyle = accent;
-            ctx.lineWidth = 2.5;
-            ctx.lineJoin = 'round';
+            ctx.beginPath(); ctx.strokeStyle = accent; ctx.lineWidth = 2.5; ctx.lineJoin = 'round';
             ctx.moveTo(xPos(0), yPos(data[0].gas));
-            for (let i = 1; i <= currentIdx; i++) {
-                ctx.lineTo(xPos(i), yPos(data[i].gas));
-            }
-            if (currentIdx < totalPoints) {
-                const cx = xPos(currentIdx) + frac * (xPos(currentIdx + 1) - xPos(currentIdx));
-                const cy = yPos(data[currentIdx].gas) + frac * (yPos(data[currentIdx + 1].gas) - yPos(data[currentIdx].gas));
+            for (let i = 1; i <= ci; i++) ctx.lineTo(xPos(i), yPos(data[i].gas));
+            if (ci < totalPoints) {
+                const cx = xPos(ci) + frac * (xPos(ci + 1) - xPos(ci));
+                const cy = yPos(data[ci].gas) + frac * (yPos(data[ci + 1].gas) - yPos(data[ci].gas));
                 ctx.lineTo(cx, cy);
             }
             ctx.stroke();
 
-            // Dots for completed points
-            for (let i = 0; i <= currentIdx; i++) {
-                ctx.beginPath();
-                ctx.arc(xPos(i), yPos(data[i].gas), 5, 0, Math.PI * 2);
-                ctx.fillStyle = accent;
-                ctx.fill();
-                ctx.strokeStyle = '#050505';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-
-                // Value label
-                ctx.fillStyle = textPrimary;
-                ctx.font = 'bold 10px JetBrains Mono, monospace';
+            // Data points
+            for (let i = 0; i <= ci; i++) {
+                ctx.beginPath(); ctx.arc(xPos(i), yPos(data[i].gas), 5, 0, Math.PI * 2);
+                ctx.fillStyle = accent; ctx.fill();
+                ctx.strokeStyle = '#04060A'; ctx.lineWidth = 2; ctx.stroke();
+                ctx.fillStyle = bright; ctx.font = 'bold 10px IBM Plex Mono, monospace';
                 ctx.textAlign = 'center';
                 ctx.fillText(data[i].gas.toLocaleString(), xPos(i), yPos(data[i].gas) - 12);
             }
@@ -1422,48 +1295,14 @@
         function animate() {
             progress = Math.min(progress + 0.018, 1);
             draw(progress);
-            if (progress < 1) animFrame = requestAnimationFrame(animate);
+            if (progress < 1) requestAnimationFrame(animate);
         }
 
-        // Observe visibility
-        const observer = new IntersectionObserver(entries => {
+        const obs = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && progress === 0) animate();
         }, { threshold: 0.3 });
-        observer.observe(canvas);
-    }
-
-    /* ── Live Verification Flow ─────────────────────────────── */
-    function initVerifyFlow() {
-        const steps = document.querySelectorAll('.flow-step');
-        if (!steps.length) return;
-
-        let active = -1;
-        function pulse() {
-            steps.forEach((s, i) => {
-                s.style.borderTop = i === active ? '2px solid #28a0f0' : '2px solid transparent';
-                s.style.background = i === active ? 'var(--bg-elevated)' : 'var(--bg-secondary)';
-            });
-            active = (active + 1) % steps.length;
-        }
-        pulse();
-        setInterval(pulse, 1400);
-    }
-
-    /* ── Counter Animation on guarantee cards ───────────────── */
-    function initCounterAnim() {
-        const cards = document.querySelectorAll('.guarantee-card');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.borderLeft = '3px solid #28a0f0';
-                card.style.transform = 'translateX(4px)';
-                card.style.transition = 'all 0.2s ease';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.borderLeft = '';
-                card.style.transform = '';
-            });
-        });
-    }
+        obs.observe(canvas);
+    })();
 </script>
 
 </body>
