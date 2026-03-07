@@ -20,3 +20,17 @@ key.pem
 # --- Node/Dependencies ---
 node_modules/
 .npm/
+
+# Claude Code local tooling — never push
+.claude/
+CLAUDE.md
+docs/session/
+docs/prd/
+docs/design/
+docs/plan/
+docs/performance/
+docs/coverage/
+
+# Playwright
+playwright-report/
+test-results/
