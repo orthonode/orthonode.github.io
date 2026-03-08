@@ -104,7 +104,8 @@
             --nexus: #00D084;
             --oap:   #F59E0B;
             --inv:   #EAB308;
-            --tix:   #9945FF;
+            --tix:      #9945FF;
+            --dotlend:  #E6007A;
             --red:   #EF4444;
             --green: #22C55E;
 
@@ -759,6 +760,9 @@
         .lnk-inv { color: var(--inv); }
         .lnk-tix { color: var(--tix); }
         .lnk-nexus { color: var(--nexus); }
+        .lnk-dotlend { color: var(--dotlend); }
+        .lnk-dotlend:hover { color: #ff4da6; }
+        .pill-dotlend { background: rgba(230,0,122,0.07); border: 1px solid rgba(230,0,122,0.22); color: var(--dotlend); }
 
         /* ── Row tags ─── */
         .row-tags { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
@@ -860,15 +864,15 @@
         From silicon identity on Arbitrum to AI execution receipts on Bittensor to on-chain ticketing governance on Solana — ORTHONODE builds the trust primitives that decentralized systems cannot assume.
     </p>
 
-    <p class="hero-status">// SHA_ARBITRUM_LIVE &nbsp;:&nbsp; TON_SHA_LIVE &nbsp;:&nbsp; INVARIANT_PHASE1_DONE &nbsp;:&nbsp; TIX_DAO_DEPLOYED &nbsp;:&nbsp; OAP_PUBLISHED</p>
+    <p class="hero-status">// SHA_ARBITRUM_LIVE &nbsp;:&nbsp; TON_SHA_LIVE &nbsp;:&nbsp; INVARIANT_PHASE1_DONE &nbsp;:&nbsp; TIX_DAO_DEPLOYED &nbsp;:&nbsp; OAP_PUBLISHED &nbsp;:&nbsp; <span style="color:var(--dotlend);">DOTLEND_POLKADOT_LIVE</span></p>
 
     <div class="stats-bar reveal" role="region" aria-label="Project statistics">
         <div class="stat">
-            <span class="stat-n">5</span>
+            <span class="stat-n">6</span>
             <span class="stat-l">Active Projects</span>
         </div>
         <div class="stat">
-            <span class="stat-n">3</span>
+            <span class="stat-n">4</span>
             <span class="stat-l">Chains Live</span>
         </div>
         <div class="stat">
@@ -1168,6 +1172,60 @@
     </div>
 </section>
 
+<!-- ── DOTLEND ──────────────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="dotlend-head">
+    <p class="sec-label" id="dotlend-head">// DOTLEND : MONEY_MARKET_ON_POLKADOT_HUB</p>
+    <div class="feat" style="padding-left:2.75rem;">
+        <div class="feat-left-bar" style="background:var(--dotlend);"></div>
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap;">
+            <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--dotlend);text-transform:uppercase;letter-spacing:0.12em;">POLKADOT_HUB_DEFI</span>
+            <span class="pill pill-green">✓ TESTNET LIVE</span>
+            <span class="pill pill-dotlend">POLKADOT SOLIDITY HACK 2026</span>
+        </div>
+        <h3>DotLend — The First Money Market on Polkadot Hub</h3>
+        <div class="feat-inner">
+            <div>
+                <p>
+                    $330M in HOLLAR and vDOT at 76% utilization on Hydration — supply cap hit, demand proven. Yet there were <strong>zero native lending markets on Polkadot Hub</strong>. DotLend fixes this: deposit vDOT as collateral, borrow HOLLAR at up to 70% LTV, while continuing to earn Bifrost staking yield on deposited assets.
+                </p>
+                <p>
+                    Solvency is cryptographically proven every 6 hours via a Noir ZK circuit (UltraHonk). On mainnet, the oracle feeds vDOT prices trustlessly via <strong>Hyperbridge ISMP</strong> from Hydration's Omnipool — no Chainlink, no bridges, 100% Polkadot-native.
+                </p>
+                <div class="badges" style="margin-top:1.25rem;">
+                    <span class="badge" style="border-color:rgba(230,0,122,0.25);color:var(--dotlend);">POLKADOT_HUB</span>
+                    <span class="badge">SOLIDITY_0.8.20</span>
+                    <span class="badge">NOIR_ZK_CIRCUIT</span>
+                    <span class="badge">HYPERBRIDGE_ISMP</span>
+                    <span class="badge">RESOLC_COMPILER</span>
+                    <span class="badge">70%_LTV</span>
+                    <span class="badge">76_TESTS</span>
+                </div>
+            </div>
+            <div>
+                <div class="data-table">
+                    <div class="data-table-head">// DOTLEND STATUS</div>
+                    <div class="data-row"><span>Network</span><span style="color:var(--dotlend);">Polkadot Hub TestNet</span></div>
+                    <div class="data-row"><span>Contracts</span><span style="color:var(--green);">7 deployed ✓</span></div>
+                    <div class="data-row"><span>Tests passing</span><span style="color:var(--green);">76 / 76</span></div>
+                    <div class="data-row"><span>Oracle interval</span><span>30 min</span></div>
+                    <div class="data-row"><span>ZK proof interval</span><span>6 hours</span></div>
+                    <div class="data-row"><span>Frontend</span><span style="color:var(--dotlend);">nexucore.xyz</span></div>
+                    <div class="data-row"><span>LTV</span><span>70%</span></div>
+                </div>
+                <div class="addr">
+                    LendingPool: <a href="https://blockscout-testnet.polkadot.io/address/0xA8b36339C55c664BBe7C59d2d59Abf91f472C8d0" target="_blank" rel="noopener" style="color:var(--dotlend);">0xA8b3…C8d0 ↗</a>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:1.75rem;display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;">
+            <a href="/dotlend.html" class="lnk lnk-dotlend" style="font-family:var(--font-mono);font-size:0.75rem;">Explore DotLend → <span style="opacity:0.5;">/dotlend.html</span></a>
+            <a href="https://nexucore.xyz" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--tx-3);">Live App ↗</a>
+            <a href="https://youtu.be/WYxeeyrQLWc" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--tx-3);">Demo Video ↗</a>
+            <a href="https://github.com/orthonode/dotlend" target="_blank" rel="noopener" style="font-family:var(--font-mono);font-size:0.7rem;color:var(--tx-3);">GitHub ↗</a>
+        </div>
+    </div>
+</section>
+
 <!-- ── LIVE METRICS ──────────────────────────── -->
 <section class="section reveal" role="region" aria-labelledby="metrics-head">
     <p class="sec-label" id="metrics-head">// LIVE_METRICS : ARBITRUM_SEPOLIA [SHA]</p>
@@ -1203,60 +1261,27 @@
     </div>
 </section>
 
-<!-- ── SYSTEM LOG ─────────────────────────────── -->
-<section class="section reveal" role="region" aria-labelledby="log-head">
-    <p class="sec-label" id="log-head">// SYSTEM_LOG : LATEST_TRANSMISSIONS</p>
-    <div class="terminal">
-        <div class="terminal-head">
-            <span class="term-prompt">root@orthonode:~#</span> cat /var/logs/system_update.txt | tail -2
+<!-- ── LATEST FROM X ─────────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="feed-head">
+    <p class="sec-label" id="feed-head">// LATEST_TRANSMISSIONS : @OrthonodeSys</p>
+    <div style="border:1px solid var(--border);background:var(--bg-card);overflow:hidden;">
+        <div style="background:var(--bg-2);padding:0.7rem 1.25rem;border-bottom:1px solid var(--border);font-family:var(--font-mono);font-size:0.72rem;color:var(--tx-3);display:flex;align-items:center;gap:0.75rem;">
+            <svg width="14" height="14" viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;opacity:0.6"><path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.163 519.284ZM569.165 687.828L521.697 619.934L144.011 79.6904H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.828Z" fill="currentColor"/></svg>
+            <span>@OrthonodeSys — live feed</span>
+            <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" style="color:var(--sha);margin-left:auto;font-size:0.65rem;">View on X ↗</a>
         </div>
-
-        <article class="terminal-entry">
-            <div class="entry-meta">
-                <span>[2026-02-22 09:00 UTC]</span>
-                <span style="color:var(--red);">ID: IOTEX_EXPLOIT_ANALYSIS</span>
-            </div>
-            <div class="entry-body">
-                <p style="color:#E4EBF0;font-weight:600;margin-bottom:0.5rem;">RESEARCH PUBLISHED: IoTeX Exploit — SHA Forensic Breakdown</p>
-                <p style="margin-bottom:0.75rem;">IoTeX lost $2M–$8.8M on February 21 to a private key compromise planned 6–18 months in advance. We published a full forensic analysis — gate-by-gate — of how SHA-gated execution would have stopped it at Gate 1 before a single dollar moved.</p>
-                <ul>
-                    <li>&gt; Formal threat model — 8 attacker assumptions, 5 out-of-scope vectors</li>
-                    <li>&gt; Gate 1–4 forensic analysis with conditional verdicts</li>
-                    <li>&gt; SHA vs HSM / MPC / TSS / multi-sig comparative breakdown</li>
-                    <li>&gt; OAP structural model applied to 18-month dwell window</li>
-                    <li>&gt; Full adversarial counter-analysis</li>
-                </ul>
-                <p class="entry-quote">"You can copy a key. You cannot copy silicon."</p>
-            </div>
-            <div class="entry-footer">
-                <a href="/iotex-research.html" class="term-link">[READ_FULL_PAPER → orthonode.xyz/iotex-research.html] ↗</a>
-            </div>
-        </article>
-
-        <article class="terminal-entry">
-            <div class="entry-meta">
-                <span>[2026-02-00 UTC]</span>
-                <span style="color:var(--sha);">ID: SHA_DEPIN_DEEP_DIVE</span>
-            </div>
-            <div class="entry-body">
-                <p style="color:#E4EBF0;font-weight:600;margin-bottom:0.5rem;">ARTICLE: SHA — The Hardware Trust Layer DePIN Has Been Missing</p>
-                <p style="margin-bottom:0.75rem;">DePIN is a $50B thesis built on a dangerous assumption — that the hardware nodes reporting data to your network are real. Software can simulate anything. A single laptop can emulate 10,000 devices. SHA closes that gap at the silicon layer.</p>
-                <ul>
-                    <li>&gt; eFuse silicon identity — burned at fabrication, impossible to clone in software</li>
-                    <li>&gt; Four guarantees: Identity Gating, Firmware Governance, Replay Protection, Cryptographic Proof</li>
-                    <li>&gt; 12,523 gas per receipt at N=50 — only viable because of Arbitrum Stylus WASM</li>
-                    <li>&gt; 10,000+ Keccak-256 test vectors. 100% cross-layer parity confirmed</li>
-                    <li>&gt; MIT open source — a primitive any Stylus contract can compose with</li>
-                </ul>
-                <p class="entry-quote">"Physics is invariant. Verification is deterministic. Trust is earned, not assumed."</p>
-            </div>
-            <div class="entry-footer" style="display:flex;gap:2rem;flex-wrap:wrap;">
-                <a href="/sha.html" class="term-link">[READ_FULL_ARTICLE → orthonode.xyz/sha.html] ↗</a>
-                <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" class="term-link">[VIEW_ON_X] ↗</a>
-            </div>
-        </article>
+        <div style="max-height:600px;overflow-y:auto;">
+            <a class="twitter-timeline"
+               data-theme="dark"
+               data-chrome="noheader nofooter noborders transparent"
+               data-tweet-limit="5"
+               data-dnt="true"
+               href="https://twitter.com/OrthonodeSys?ref_src=twsrc%5Etfw">
+            </a>
+        </div>
     </div>
 </section>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <!-- ── RESEARCH LOG ───────────────────────────── -->
 <section class="section reveal" role="region" aria-labelledby="research-head">
@@ -1362,8 +1387,9 @@
 <section class="section reveal">
     <div class="cta">
         <h2>Explore ORTHONODE Infrastructure</h2>
-        <p>Five projects. One doctrine. Deterministic verification for AI, hardware, and decentralized networks.</p>
+        <p>Six projects. One doctrine. Deterministic verification for AI, hardware, and decentralized networks.</p>
         <div class="cta-row">
+            <a href="/dotlend.html" class="btn" style="border-color:rgba(230,0,122,0.3);color:var(--dotlend);">Explore DotLend ↗</a>
             <a href="/invariant.html" class="btn" style="border-color:rgba(234,179,8,0.3);color:var(--inv);">Explore INVARIANT ↗</a>
             <a href="/tix-dao.html" class="btn" style="border-color:rgba(153,69,255,0.3);color:var(--tix);">Explore TIX-DAO ↗</a>
             <a href="/nexus.html" class="btn" style="border-color:rgba(0,208,132,0.3);color:var(--nexus);">Explore Nexus ↗</a>
@@ -1384,7 +1410,7 @@
             <div class="footer-brand">
                 <h4>ORTHONODE SYSTEMS™</h4>
                 <p>
-                    Building deterministic physical verification infrastructure for autonomous systems, DePIN networks, and mobility platforms. OAP governs lifecycle integrity. SHA anchors hardware identity on Arbitrum. TON-SHA brings agent trust to the TON ecosystem.
+                    Building deterministic physical verification infrastructure for autonomous systems, DePIN networks, and decentralized finance. OAP governs lifecycle integrity. SHA anchors hardware identity on Arbitrum. DotLend is the first money market on Polkadot Hub.
                 </p>
                 <p style="margin-top:0.875rem;">
                     <strong style="color:var(--tx-2);">Founder:</strong> Arhant Barmate<br>
@@ -1396,6 +1422,7 @@
             <div class="footer-col">
                 <h5>Products</h5>
                 <ul>
+                    <li><a href="/dotlend.html" style="color:var(--dotlend);">DotLend — Polkadot Money Market</a></li>
                     <li><a href="/invariant.html" style="color:var(--inv);">INVARIANT — Bittensor Trust Subnet</a></li>
                     <li><a href="/tix-dao.html" style="color:var(--tix);">TIX-DAO — Venue Governance</a></li>
                     <li><a href="/nexus.html">Nexus — Zero-Trust Gateway</a></li>
@@ -1428,7 +1455,7 @@
         <section id="citation">
             <h2>About</h2>
             <p>
-                ORTHONODE SYSTEMS™ — founded and led by Arhant Barmate, infrastructure engineer and builder of SHA, OAP, Nexus Protocol, TON-SHA, INVARIANT, and TIX-DAO.<br>
+                ORTHONODE SYSTEMS™ — founded and led by Arhant Barmate, infrastructure engineer and builder of SHA, OAP, Nexus Protocol, TON-SHA, INVARIANT, TIX-DAO, and DotLend.<br>
                 Website: https://orthonode.xyz &nbsp;|&nbsp; GitHub: https://github.com/orthonode &nbsp;|&nbsp; Twitter: @OrthonodeSys &nbsp;|&nbsp; Email: infrastructure@orthonode.xyz
             </p>
         </section>
