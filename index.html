@@ -1160,85 +1160,193 @@
 
         .metrics-addr-val:hover { text-decoration: underline; }
 
-        /* ─── TWITTER PANEL ─── */
-        .x-panel {
-            border: 1px solid rgba(29,161,242,0.2);
+        /* ─── BUILD LOG ─── */
+        .build-log {
+            margin-top: 40px;
+            border: 1px solid var(--b2);
             border-radius: 12px;
             overflow: hidden;
-            background: rgba(29,161,242,0.03);
-            max-width: 680px;
-            margin: 32px auto 0;
+            background: var(--surface);
         }
 
-        .x-panel-head {
+        .build-entry {
+            display: grid;
+            grid-template-columns: 100px 88px 1fr 92px;
+            gap: 16px;
+            align-items: center;
+            padding: 13px 22px;
+            border-bottom: 1px solid var(--b1);
+            transition: background 0.15s;
+        }
+
+        .build-entry:last-child { border-bottom: none; }
+        .build-entry:hover { background: var(--raised); }
+
+        .build-date {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--t3);
+            letter-spacing: 0.06em;
+            white-space: nowrap;
+        }
+
+        .build-tag {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            padding: 2px 7px;
+            border-radius: 3px;
+            border: 1px solid;
+            letter-spacing: 0.06em;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .build-title {
+            font-size: 13px;
+            color: var(--t1);
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .build-badge {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--t3);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            text-align: right;
+        }
+
+        .build-log-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 20px;
-            border-bottom: 1px solid rgba(29,161,242,0.15);
-            background: rgba(29,161,242,0.05);
+            padding: 12px 22px;
+            background: var(--b1);
+            border-top: 1px solid var(--b2);
         }
 
-        .x-panel-brand {
-            display: flex;
+        .build-log-x {
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
-            font-family: var(--font-head);
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--t1);
-        }
-
-        .x-icon {
-            width: 20px;
-            height: 20px;
-            fill: #1da1f2;
-        }
-
-        .x-follow {
+            gap: 8px;
             font-family: var(--font-mono);
             font-size: 11px;
             color: #1da1f2;
             text-decoration: none;
-            padding: 5px 12px;
-            border: 1px solid rgba(29,161,242,0.4);
-            border-radius: 4px;
-            transition: background 0.2s;
+            transition: opacity 0.2s;
+        }
+
+        .build-log-x:hover { opacity: 0.75; }
+
+        .build-log-meta {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--t3);
             letter-spacing: 0.06em;
         }
 
-        .x-follow:hover { background: rgba(29,161,242,0.1); }
+        /* ─── HERO STATUS PANEL ─── */
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 48px;
+            align-items: start;
+        }
 
-        .x-loading {
-            display: flex; align-items: center; justify-content: center;
-            gap: 0.5rem; padding: 2.5rem;
-            font-family: var(--font-mono); font-size: 0.65rem; color: var(--t3);
+        .hero-status-panel {
+            border: 1px solid var(--b2);
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--surface);
+            position: relative;
+            z-index: 2;
+            margin-top: 8px;
         }
-        .x-loading-dot {
-            width: 5px; height: 5px; border-radius: 50%; background: var(--t3);
-            animation: xpulse 1.4s ease-in-out infinite;
-        }
-        .x-loading-dot:nth-child(2) { animation-delay: 0.2s; }
-        .x-loading-dot:nth-child(3) { animation-delay: 0.4s; }
-        @keyframes xpulse { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
 
-        .x-fallback {
-            padding: 2.5rem 2rem; display: flex; flex-direction: column;
-            align-items: center; gap: 1.25rem; text-align: center;
+        .hero-status-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 16px;
+            border-bottom: 1px solid var(--b1);
+            background: var(--b1);
         }
-        .x-fallback-handle { font-family: var(--font-mono); font-size: 1rem; font-weight: 600; color: var(--t1); }
-        .x-fallback-note { font-family: var(--font-mono); font-size: 0.65rem; color: var(--t3); max-width: 320px; line-height: 1.7; }
-        .x-fallback-btn {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.55rem 1.2rem; border: 1px solid rgba(29,161,242,0.3); color: #1DA1F2;
-            font-family: var(--font-mono); font-size: 0.72rem; border-radius: 3px;
-            transition: border-color 0.2s, background 0.2s; text-decoration: none;
-        }
-        .x-fallback-btn:hover { border-color: rgba(29,161,242,0.55); background: rgba(29,161,242,0.07); color: #1DA1F2; }
 
-        .x-panel-body {
-            padding: 8px;
-            min-height: 180px;
+        .hero-status-title {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--t3);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .hero-status-live {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--green);
+            letter-spacing: 0.08em;
+        }
+
+        .hero-status-live::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .hero-status-row {
+            display: grid;
+            grid-template-columns: 16px 1fr auto;
+            gap: 10px;
+            align-items: center;
+            padding: 9px 16px;
+            border-bottom: 1px solid var(--b1);
+        }
+
+        .hero-status-row:last-child { border-bottom: none; }
+
+        .sdot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .sdot-live   { background: var(--green); box-shadow: 0 0 5px rgba(34,197,94,0.7); }
+        .sdot-tl     { background: var(--plasma); box-shadow: 0 0 5px rgba(0,200,255,0.6); animation: pulse 2s ease-in-out infinite; }
+        .sdot-active { background: var(--oap); }
+
+        .hero-status-name {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--t1);
+            letter-spacing: 0.04em;
+        }
+
+        .hero-status-chain {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--t3);
+            letter-spacing: 0.04em;
+            text-align: right;
+        }
+
+        .hero-status-footer {
+            padding: 9px 16px;
+            background: var(--b1);
+            border-top: 1px solid var(--b1);
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--t3);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-align: center;
         }
 
         /* ─── RESEARCH LOG ─── */
@@ -1501,6 +1609,13 @@
         @media (max-width: 1024px) {
             .doctrine-grid { grid-template-columns: repeat(2, 1fr); }
             .metrics-grid  { grid-template-columns: repeat(3, 1fr); }
+            .hero-layout   { grid-template-columns: 1fr; }
+            .hero-status-panel { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .build-entry { grid-template-columns: 1fr; gap: 4px; }
+            .build-badge { display: none; }
         }
 
         @media (max-width: 768px) {
@@ -1723,48 +1838,99 @@
             </div>
 
             <div class="hero-inner">
-                <div class="hero-eyebrow">Infrastructure Labs // Physical Verification Layer</div>
+                <div class="hero-layout">
 
-                <h1>
-                    Verification Infrastructure<br>
-                    for the <span class="accent">Decentralized Stack.</span>
-                </h1>
+                    <!-- LEFT: headline + CTAs + stats -->
+                    <div class="hero-left">
+                        <div class="hero-eyebrow">Infrastructure Labs // Physical Verification Layer</div>
 
-                <p class="hero-sub">
-                    ORTHONODE SYSTEMS™ builds the trust primitives that decentralized systems cannot assume —
-                    from silicon identity on Arbitrum to AI execution receipts on Bittensor to on-chain
-                    ticketing governance on Solana.
-                </p>
+                        <h1>
+                            Verification Infrastructure<br>
+                            for the <span class="accent">Decentralized Stack.</span>
+                        </h1>
 
-                <div class="hero-actions">
-                    <a href="dotlend.html" class="btn btn-primary">Explore DotLend ↗</a>
-                    <a href="sha.html"     class="btn btn-ghost">SHA on Arbitrum</a>
-                    <a href="nexus.html"   class="btn btn-ghost">Nexus Protocol</a>
-                    <a href="site-index.html" class="btn btn-ghost">Research Log</a>
-                </div>
+                        <p class="hero-sub">
+                            ORTHONODE SYSTEMS™ builds the trust primitives that decentralized systems cannot assume —
+                            from silicon identity on Arbitrum to AI execution receipts on Bittensor to on-chain
+                            ticketing governance on Solana.
+                        </p>
 
-                <div class="stats-bar">
-                    <div class="stat-item">
-                        <span class="stat-n" data-count="7">0</span>
-                        <span class="stat-l">Projects</span>
+                        <div class="hero-actions">
+                            <a href="dotlend.html" class="btn btn-primary">Explore DotLend ↗</a>
+                            <a href="sha.html"     class="btn btn-ghost">SHA on Arbitrum</a>
+                            <a href="nexus.html"   class="btn btn-ghost">Nexus Protocol</a>
+                            <a href="site-index.html" class="btn btn-ghost">Research Log</a>
+                        </div>
+
+                        <div class="stats-bar">
+                            <div class="stat-item">
+                                <span class="stat-n" data-count="7">0</span>
+                                <span class="stat-l">Projects</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-n" data-count="5">0</span>
+                                <span class="stat-l">Chains</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-n" data-count="13">0</span>
+                                <span class="stat-l">DotLend Contracts</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-n">10K+</span>
+                                <span class="stat-l">Tests</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-n">$25K</span>
+                                <span class="stat-l">Grant Applied</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-n" data-count="5">0</span>
-                        <span class="stat-l">Chains</span>
+
+                    <!-- RIGHT: live system status panel -->
+                    <div class="hero-status-panel" aria-label="System status">
+                        <div class="hero-status-head">
+                            <span class="hero-status-title">// system_status</span>
+                            <span class="hero-status-live">All Systems Operational</span>
+                        </div>
+                        <div class="hero-status-row">
+                            <span class="sdot sdot-live"></span>
+                            <span class="hero-status-name">SHA</span>
+                            <span class="hero-status-chain">Arbitrum Sepolia · LIVE</span>
+                        </div>
+                        <div class="hero-status-row">
+                            <span class="sdot sdot-tl"></span>
+                            <span class="hero-status-name">DotLend</span>
+                            <span class="hero-status-chain">Polkadot Hub · Testnet</span>
+                        </div>
+                        <div class="hero-status-row">
+                            <span class="sdot sdot-tl"></span>
+                            <span class="hero-status-name">TON-SHA</span>
+                            <span class="hero-status-chain">TON Testnet · Live</span>
+                        </div>
+                        <div class="hero-status-row">
+                            <span class="sdot sdot-active"></span>
+                            <span class="hero-status-name">Nexus Protocol</span>
+                            <span class="hero-status-chain">Chain-Agnostic · Phase 1.4.0</span>
+                        </div>
+                        <div class="hero-status-row">
+                            <span class="sdot sdot-active"></span>
+                            <span class="hero-status-name">OAP</span>
+                            <span class="hero-status-chain">Multi-Chain · Published</span>
+                        </div>
+                        <div class="hero-status-row">
+                            <span class="sdot sdot-tl"></span>
+                            <span class="hero-status-name">INVARIANT</span>
+                            <span class="hero-status-chain">Bittensor · Phase 2</span>
+                        </div>
+                        <div class="hero-status-row">
+                            <span class="sdot sdot-tl"></span>
+                            <span class="hero-status-name">TIX-DAO</span>
+                            <span class="hero-status-chain">Solana Devnet · Demo</span>
+                        </div>
+                        <div class="hero-status-footer">7 projects · 0 mainnet · 0 incidents</div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-n" data-count="13">0</span>
-                        <span class="stat-l">DotLend Contracts</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-n">10K+</span>
-                        <span class="stat-l">Tests</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-n">$25K</span>
-                        <span class="stat-l">Grant Applied</span>
-                    </div>
-                </div>
+
+                </div><!-- /.hero-layout -->
             </div>
         </section>
 
@@ -2308,52 +2474,58 @@
             </div>
         </section>
 
-        <!-- ── TWITTER / X FEED ── -->
+        <!-- ── BUILD LOG ── -->
         <section class="section wrap reveal" style="padding-bottom:40px;">
-            <p class="sec-label">// LIVE_FEED : @OrthonodeSys</p>
-            <h2 class="sec-title">Follow the build.</h2>
+            <p class="sec-label">// BUILD_LOG : @OrthonodeSys</p>
+            <h2 class="sec-title">The work, in order.</h2>
+            <p class="sec-sub">Every milestone shipped — from first silicon identity to ZK lending on Polkadot. Follow live on <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" style="color:var(--plasma);text-decoration:none;">@OrthonodeSys ↗</a>.</p>
 
-            <div class="x-panel">
-                <div class="x-panel-head">
-                    <div class="x-panel-brand">
-                        <svg class="x-icon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.852L1.254 2.25H8.08l4.261 5.63 5.903-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                        </svg>
-                        @OrthonodeSys
-                    </div>
-                    <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" class="x-follow">
-                        Follow on X ↗
-                    </a>
+            <div class="build-log">
+                <div class="build-entry">
+                    <span class="build-date">2026-03-15</span>
+                    <span class="build-tag" style="color:var(--dot);border-color:rgba(230,0,122,0.35);background:rgba(230,0,122,0.06);">POLKADOT</span>
+                    <span class="build-title">DotLend submitted to Polkadot Solidity Hackathon 2026 — 13 contracts, 108 tests, Noir ZK oracle every 30 min</span>
+                    <span class="build-badge" style="color:var(--dot);">Submitted</span>
                 </div>
-                <div class="x-panel-body" id="x-body">
-                    <!-- Loading shimmer shown until widget renders -->
-                    <div class="x-loading" id="x-loader">
-                        <span class="x-loading-dot"></span>
-                        <span class="x-loading-dot"></span>
-                        <span class="x-loading-dot"></span>
-                        <span style="margin-left:0.5rem;">loading latest tweet</span>
-                    </div>
-                    <a class="twitter-timeline"
-                       data-theme="dark"
-                       data-chrome="noheader nofooter noborders transparent"
-                       data-tweet-limit="2"
-                       data-width="700"
-                       data-dnt="true"
-                       href="https://twitter.com/OrthonodeSys?ref_src=twsrc%5Etfw">
-                        <!-- Fallback for blocked/localhost environments -->
-                        <div class="x-fallback">
-                            <div class="x-fallback-handle">@OrthonodeSys</div>
-                            <div class="x-fallback-note">Live tweets load on orthonode.xyz — Twitter's widget requires the real domain. View the feed directly on X.</div>
-                            <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" class="x-fallback-btn">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.852L1.254 2.25H8.08l4.261 5.63 5.903-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                                View @OrthonodeSys on X ↗
-                            </a>
-                        </div>
+                <div class="build-entry">
+                    <span class="build-date">2026-03-07</span>
+                    <span class="build-tag" style="color:var(--plasma);border-color:rgba(0,200,255,0.35);background:rgba(0,200,255,0.06);">SITE</span>
+                    <span class="build-title">2026 design system launched across all 11 pages — DotLend featured, new visual identity</span>
+                    <span class="build-badge" style="color:var(--plasma);">Deployed</span>
+                </div>
+                <div class="build-entry">
+                    <span class="build-date">2026-02-18</span>
+                    <span class="build-tag" style="color:var(--sha);border-color:rgba(42,159,232,0.35);background:rgba(42,159,232,0.06);">ARBITRUM</span>
+                    <span class="build-title">SHA — $25K Stylus Sprint grant applied. 12,523 gas/receipt, 9K+ Rust receipts/sec on Arbitrum Sepolia</span>
+                    <span class="build-badge" style="color:var(--sha);">Grant Applied</span>
+                </div>
+                <div class="build-entry">
+                    <span class="build-date">2026-01-10</span>
+                    <span class="build-tag" style="color:var(--ton);border-color:rgba(0,152,234,0.35);background:rgba(0,152,234,0.06);">TON</span>
+                    <span class="build-title">TON-SHA deployed to TON Testnet — 4-gate agent trust primitive, 640-bit receipts at 0.03 TON/op</span>
+                    <span class="build-badge" style="color:var(--ton);">Testnet Live</span>
+                </div>
+                <div class="build-entry">
+                    <span class="build-date">2025-11-22</span>
+                    <span class="build-tag" style="color:var(--nexus);border-color:rgba(0,212,138,0.35);background:rgba(0,212,138,0.06);">NEXUS</span>
+                    <span class="build-title">Nexus Protocol Phase 1.4.0 complete — 1M transaction stress test passed, 50–60 TPS sustained</span>
+                    <span class="build-badge" style="color:var(--nexus);">Phase 1.4.0</span>
+                </div>
+                <div class="build-entry">
+                    <span class="build-date">2025-09-14</span>
+                    <span class="build-tag" style="color:var(--sha);border-color:rgba(42,159,232,0.35);background:rgba(42,159,232,0.06);">ARBITRUM</span>
+                    <span class="build-title">SHA v1.0 — first ESP32-S3 eFuse silicon identity verified on Arbitrum Sepolia via Stylus</span>
+                    <span class="build-badge" style="color:var(--green);">First Deploy</span>
+                </div>
+                <div class="build-log-footer">
+                    <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" class="build-log-x">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.852L1.254 2.25H8.08l4.261 5.63 5.903-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        Follow @OrthonodeSys on X for live updates ↗
                     </a>
+                    <span class="build-log-meta">6 entries · latest first</span>
                 </div>
             </div>
         </section>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
         <!-- ── RESEARCH LOG ── -->
         <section class="section wrap reveal">
@@ -2712,21 +2884,6 @@
             btn.setAttribute('aria-expanded', 'true');
         }
     }
-
-    /* ── Hide X loader once widget iframe renders ── */
-    (function () {
-        var loader = document.getElementById('x-loader');
-        if (!loader) return;
-        var t = setInterval(function () {
-            var iframe = document.querySelector('#x-body iframe');
-            if (iframe) {
-                loader.style.display = 'none';
-                clearInterval(t);
-            }
-        }, 500);
-        // Give up after 8 seconds — fallback stays visible
-        setTimeout(function () { clearInterval(t); loader.style.display = 'none'; }, 8000);
-    })();
 
     /* ── Dev bypass: skip gate on localhost ── */
     (function () {
