@@ -11,7 +11,7 @@
    <!-- Main Homepage -->
    <url>
       <loc>https://orthonode.xyz/</loc>
-      <lastmod>2026-03-09</lastmod>
+      <lastmod>2026-03-15</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
       <image:image>
@@ -37,7 +37,7 @@
    <!-- SHA — Stylus Hardware Anchor (flagship product) -->
    <url>
       <loc>https://orthonode.xyz/sha.html</loc>
-      <lastmod>2026-03-07</lastmod>
+      <lastmod>2026-03-15</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.95</priority>
       <image:image>
@@ -50,7 +50,7 @@
    <!-- INVARIANT — Bittensor Trust Subnet -->
    <url>
       <loc>https://orthonode.xyz/invariant.html</loc>
-      <lastmod>2026-03-07</lastmod>
+      <lastmod>2026-03-15</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.9</priority>
       <image:image>
@@ -63,7 +63,7 @@
    <!-- IoTeX Research Paper — Featured publication -->
    <url>
       <loc>https://orthonode.xyz/iotex-research.html</loc>
-      <lastmod>2026-02-22</lastmod>
+      <lastmod>2026-03-15</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.85</priority>
       <image:image>
@@ -76,7 +76,7 @@
    <!-- OAP — Orthonode Assurance Platform -->
    <url>
       <loc>https://orthonode.xyz/oap.html</loc>
-      <lastmod>2026-03-07</lastmod>
+      <lastmod>2026-03-15</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
       <image:image>
@@ -89,7 +89,7 @@
    <!-- Nexus Protocol — Zero-Trust Edge Gateway -->
    <url>
       <loc>https://orthonode.xyz/nexus.html</loc>
-      <lastmod>2026-03-07</lastmod>
+      <lastmod>2026-03-15</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
       <image:image>
@@ -102,7 +102,7 @@
    <!-- TON-SHA — Agent Trust Layer for TON Ecosystem -->
    <url>
       <loc>https://orthonode.xyz/ton-sha.html</loc>
-      <lastmod>2026-03-07</lastmod>
+      <lastmod>2026-03-15</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
       <image:image>
@@ -115,7 +115,7 @@
    <!-- DotLend — Money Market on Polkadot Hub -->
    <url>
       <loc>https://orthonode.xyz/dotlend.html</loc>
-      <lastmod>2026-03-09</lastmod>
+      <lastmod>2026-03-15</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.9</priority>
       <image:image>
@@ -123,12 +123,16 @@
          <image:title>DotLend — The First Money Market on Polkadot Hub</image:title>
          <image:caption>Deposit vDOT, borrow HOLLAR at 70% LTV. ZK solvency proofs every 6 hours. Polkadot Solidity Hackathon 2026.</image:caption>
       </image:image>
+      <image:image>
+         <image:loc>https://orthonode.xyz/DotLend_Infographic.png</image:loc>
+         <image:title>DotLend Protocol Infographic — Polkadot Hub Money Market</image:title>
+      </image:image>
    </url>
 
    <!-- TIX-DAO — Venue Governance On-Chain -->
    <url>
       <loc>https://orthonode.xyz/tix-dao.html</loc>
-      <lastmod>2026-03-07</lastmod>
+      <lastmod>2026-03-15</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.8</priority>
       <image:image>
@@ -144,7 +148,7 @@
 
    <url>
       <loc>https://orthonode.xyz/site-index.html</loc>
-      <lastmod>2026-03-07</lastmod>
+      <lastmod>2026-03-15</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.7</priority>
    </url>
@@ -155,14 +159,14 @@
 
    <url>
       <loc>https://orthonode.xyz/terms.html</loc>
-      <lastmod>2026-02-01</lastmod>
+      <lastmod>2026-03-15</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.3</priority>
    </url>
 
    <url>
       <loc>https://orthonode.xyz/privacy.html</loc>
-      <lastmod>2026-02-01</lastmod>
+      <lastmod>2026-03-15</lastmod>
       <changefreq>monthly</changefreq>
       <priority>0.3</priority>
    </url>

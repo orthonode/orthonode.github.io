@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>DotLend — First Money Market on Polkadot Hub | Orthonode Labs</title>
-    <meta name="description" content="DotLend is the first money market on Polkadot Hub. Deposit vDOT as collateral, borrow HOLLAR at up to 70% LTV. ZK solvency circuit in Noir. 7 contracts deployed. 76 tests passing. Live on Polkadot Hub TestNet.">
+    <meta name="description" content="DotLend is the first money market on Polkadot Hub. Deposit vDOT or WPAS as collateral, borrow HOLLAR at up to 70% LTV. ZK solvency circuit in Noir. 13 contracts deployed. 108 tests passing. Live on Polkadot Hub TestNet.">
     <meta name="keywords" content="DotLend, Polkadot Hub money market, vDOT lending, HOLLAR stablecoin, DeFi Polkadot, CDP protocol, ZK solvency proof, PolkaVM Solidity, Bifrost vDOT, Hydration HOLLAR, Orthonode Labs, Arhant Barmate">
     <meta name="author" content="Orthonode Infrastructure Labs — Bhopal, Madhya Pradesh, India">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
@@ -20,7 +20,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orthonode.xyz/dotlend.html">
     <meta property="og:title" content="DotLend — First Money Market on Polkadot Hub">
-    <meta property="og:description" content="Deposit vDOT. Borrow HOLLAR. Solvency cryptographically logged every 6 hours. 7 contracts live on Polkadot Hub TestNet.">
+    <meta property="og:description" content="Deposit vDOT or WPAS. Borrow HOLLAR. Solvency cryptographically logged every 30 minutes. 13 contracts live on Polkadot Hub TestNet.">
     <meta property="og:image" content="https://orthonode.xyz/banner.png">
     <meta property="og:site_name" content="ORTHONODE SYSTEMS™">
     <meta property="og:locale" content="en_US">
@@ -29,7 +29,7 @@
     <meta name="twitter:site" content="@OrthonodeSys">
     <meta name="twitter:creator" content="@OrthonodeSys">
     <meta name="twitter:title" content="DotLend — First Money Market on Polkadot Hub">
-    <meta name="twitter:description" content="Deposit vDOT. Borrow HOLLAR. Solvency cryptographically logged every 6 hours. Live on Polkadot Hub TestNet.">
+    <meta name="twitter:description" content="Deposit vDOT or WPAS. Borrow HOLLAR. Solvency cryptographically logged every 30 minutes. Live on Polkadot Hub TestNet.">
     <meta name="twitter:image" content="https://orthonode.xyz/banner.png">
 
     <meta name="theme-color" content="#04060A">
@@ -617,6 +617,45 @@
         .footer-legal a { color: var(--tx-4); }
         .footer-legal a:hover { color: var(--tx-3); }
 
+        /* ── Animated charts ── */
+        .bar-chart { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1.25rem; }
+        .bar-row { display: grid; grid-template-columns: 130px 1fr 80px; gap: 0.75rem; align-items: center; }
+        .bar-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--tx-3); white-space: nowrap; }
+        .bar-track { height: 6px; background: rgba(255,255,255,0.04); border-radius: 3px; overflow: hidden; }
+        .bar-fill { height: 100%; width: 0; border-radius: 3px; background: var(--clr, var(--dotlend)); transition: width 1.4s cubic-bezier(0.22,1,0.36,1); }
+        .bar-fill.anim { width: var(--w); }
+        .bar-val { font-family: var(--font-mono); font-size: 0.68rem; color: var(--tx-2); text-align: right; }
+
+        .donut-wrap { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; margin-top: 1rem; }
+        .donut-item { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+        .donut-lbl { font-family: var(--font-mono); font-size: 0.58rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.1em; }
+        .d-ring-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 8; }
+        .d-ring-fg { fill: none; stroke-width: 8; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%;
+            stroke-dasharray: 188.5; stroke-dashoffset: 188.5; transition: stroke-dashoffset 1.6s cubic-bezier(0.22,1,0.36,1); }
+        .d-ring-fg.anim { stroke-dashoffset: var(--offset); }
+        .d-text { font-family: var(--font-mono); font-size: 12px; font-weight: 600; fill: #E4EBF0; }
+
+        /* ── ZK circuit visualization ── */
+        .zk-vis { margin: 1.25rem 0; }
+        .zk-gate-row { display: flex; align-items: center; gap: 0; margin-bottom: 4px; }
+        .zk-gate-node { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid rgba(230,0,122,0.3); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.55rem; color: var(--dotlend); background: rgba(230,0,122,0.06); flex-shrink: 0; }
+        .zk-gate-line { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(230,0,122,0.3), rgba(0,200,255,0.2)); }
+        .zk-gate-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--tx-3); padding: 0 0.75rem; white-space: nowrap; }
+        .zk-gate-status { font-family: var(--font-mono); font-size: 0.58rem; color: var(--green); padding-left: 0.5rem; }
+
+        /* ── Phase steps ── */
+        .phase-steps { display: flex; margin-top: 1rem; }
+        .phase-step { display: flex; flex-direction: column; align-items: center; flex: 1; }
+        .phase-step-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.1); background: #060E1C; position: relative; z-index: 1; }
+        .phase-step.done .phase-step-dot { background: var(--green); border-color: var(--green); box-shadow: 0 0 8px rgba(34,197,94,0.4); }
+        .phase-step.active .phase-step-dot { background: var(--dotlend); border-color: var(--dotlend); box-shadow: 0 0 10px rgba(230,0,122,0.5); animation: pdot 2s ease-in-out infinite; }
+        @keyframes pdot { 0%,100%{box-shadow:0 0 8px rgba(230,0,122,0.4)}50%{box-shadow:0 0 18px rgba(230,0,122,0.8)} }
+        .phase-step-line { height: 1.5px; width: 100%; background: rgba(255,255,255,0.06); margin-top: 4px; }
+        .phase-step.done .phase-step-line { background: var(--green); }
+        .phase-step-lbl { font-family: var(--font-mono); font-size: 0.5rem; color: var(--tx-3); margin-top: 0.35rem; text-align: center; }
+        .phase-step.done .phase-step-lbl { color: var(--green); }
+        .phase-step.active .phase-step-lbl { color: var(--dotlend); }
+
         /* ── Responsive ─── */
         @media (max-width: 900px) {
             .nav-inner { padding: 0.7rem 1rem; }
@@ -668,10 +707,10 @@
     </h1>
 
     <p class="hero-sub">
-        Deposit vDOT as collateral. Borrow HOLLAR at up to 70% LTV. Earn Bifrost staking yield while borrowing. ZK solvency circuit logs protocol health every 6 hours.
+        Deposit vDOT or WPAS as collateral. Borrow HOLLAR at up to 70% LTV. Earn Bifrost staking yield while borrowing. ZK solvency circuit logs protocol health every 30 minutes.
     </p>
 
-    <p class="hero-status">// 7_CONTRACTS_DEPLOYED &nbsp;:&nbsp; 76_TESTS_PASSING &nbsp;:&nbsp; ORACLE_LIVE_30MIN &nbsp;:&nbsp; SOLVENCY_LOG_6H &nbsp;:&nbsp; POLKAVM_COMPLIANT</p>
+    <p class="hero-status">// 13_CONTRACTS_DEPLOYED &nbsp;:&nbsp; 108_TESTS_PASSING &nbsp;:&nbsp; ORACLE_LIVE_30MIN &nbsp;:&nbsp; SOLVENCY_LOG_30MIN &nbsp;:&nbsp; POLKAVM_COMPLIANT</p>
 
     <div class="hero-actions">
         <a href="https://nexucore.xyz" target="_blank" rel="noopener" class="btn-primary">Live Demo ↗</a>
@@ -682,11 +721,11 @@
 
     <div class="stats-bar reveal" role="region" aria-label="DotLend statistics">
         <div class="stat">
-            <span class="stat-n">7</span>
+            <span class="stat-n">13</span>
             <span class="stat-l">Contracts Deployed</span>
         </div>
         <div class="stat">
-            <span class="stat-n">76</span>
+            <span class="stat-n">108</span>
             <span class="stat-l">Tests Passing</span>
         </div>
         <div class="stat">
@@ -700,6 +739,40 @@
         <div class="stat">
             <span class="stat-n">76%</span>
             <span class="stat-l">vDOT Utilization</span>
+        </div>
+    </div>
+    <div class="donut-wrap reveal" style="justify-content:center;padding:1.5rem 0;border-top:1px solid rgba(255,255,255,0.04);">
+        <div class="donut-item">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+                <circle class="d-ring-bg" cx="40" cy="40" r="30"/>
+                <circle class="d-ring-fg" cx="40" cy="40" r="30" stroke="#E6007A" style="--offset:45.2;" data-offset="45.2"/>
+                <text class="d-text" x="40" y="44" text-anchor="middle">76%</text>
+            </svg>
+            <span class="donut-lbl">vDOT Util</span>
+        </div>
+        <div class="donut-item">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+                <circle class="d-ring-bg" cx="40" cy="40" r="30"/>
+                <circle class="d-ring-fg" cx="40" cy="40" r="30" stroke="#00C8FF" style="--offset:56.55;" data-offset="56.55"/>
+                <text class="d-text" x="40" y="44" text-anchor="middle">70%</text>
+            </svg>
+            <span class="donut-lbl">Max LTV</span>
+        </div>
+        <div class="donut-item">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+                <circle class="d-ring-bg" cx="40" cy="40" r="30"/>
+                <circle class="d-ring-fg" cx="40" cy="40" r="30" stroke="#22C55E" style="--offset:37.7;" data-offset="37.7"/>
+                <text class="d-text" x="40" y="44" text-anchor="middle">80%</text>
+            </svg>
+            <span class="donut-lbl">Liq Thresh</span>
+        </div>
+        <div class="donut-item">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+                <circle class="d-ring-bg" cx="40" cy="40" r="30"/>
+                <circle class="d-ring-fg" cx="40" cy="40" r="30" stroke="#F59E0B" style="--offset:9.4;" data-offset="9.4"/>
+                <text class="d-text" x="40" y="44" text-anchor="middle">5%</text>
+            </svg>
+            <span class="donut-lbl">Stab Fee/yr</span>
         </div>
     </div>
 </section>
@@ -723,6 +796,29 @@
             <h3>Hydration is an AMM. DotLend is a CDP engine.</h3>
             <p>Hydration lets you supply to liquidity pools. It cannot give you a collateralized debt position — there is no borrow-against-collateral mechanism. These are complementary, not competing protocols.</p>
             <p>DotLend is a <strong>liquidity source for Hydration</strong>: deposit vDOT → borrow HOLLAR → deploy HOLLAR into Hydration pools. Victor Xu (Bifrost) confirmed vDOT lending is the #1 requested feature from the community.</p>
+            <div class="bar-chart reveal" style="max-width:500px;margin-top:1.25rem;">
+                <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.75rem;">// POLKADOT_LENDING_LANDSCAPE</div>
+                <div class="bar-row">
+                    <span class="bar-label">DotLend TVL pot</span>
+                    <div class="bar-track"><div class="bar-fill" style="--w:100%;--clr:var(--dotlend);"></div></div>
+                    <span class="bar-val" style="color:var(--dotlend);">$330M</span>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">vDOT Utilization</span>
+                    <div class="bar-track"><div class="bar-fill" style="--w:76%;--clr:#E6007A;"></div></div>
+                    <span class="bar-val">76%</span>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">Parallel Finance</span>
+                    <div class="bar-track"><div class="bar-fill" style="--w:2%;--clr:var(--tx-3);"></div></div>
+                    <span class="bar-val" style="color:var(--tx-3);">~0 TVL</span>
+                </div>
+                <div class="bar-row">
+                    <span class="bar-label">Acala aUSD</span>
+                    <div class="bar-track"><div class="bar-fill" style="--w:5%;--clr:var(--red);"></div></div>
+                    <span class="bar-val" style="color:var(--red);">Depegged</span>
+                </div>
+            </div>
         </div>
         <div class="card">
             <span class="card-label" style="color:var(--tx-3);">WHY_ONLY_POLKADOT</span>
@@ -760,8 +856,8 @@
             <div>
                 <div class="data-table">
                     <div class="data-table-head">// PROTOCOL STATUS</div>
-                    <div class="data-row"><span>Contracts deployed</span><span style="color:var(--green);">7 live ✓</span></div>
-                    <div class="data-row"><span>Tests passing</span><span style="color:var(--green);">76 / 0 failures</span></div>
+                    <div class="data-row"><span>Contracts deployed</span><span style="color:var(--green);">13 live ✓</span></div>
+                    <div class="data-row"><span>Tests passing</span><span style="color:var(--green);">102 + 6 fuzz / 0 failures</span></div>
                     <div class="data-row"><span>Network</span><span style="color:var(--dotlend);">Polkadot Hub TestNet</span></div>
                     <div class="data-row"><span>Chain ID</span><span>420420417</span></div>
                     <div class="data-row"><span>Compiler</span><span>resolc 0.5.0</span></div>
@@ -820,18 +916,44 @@
             <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--dotlend);text-transform:uppercase;letter-spacing:0.12em;">ZERO_KNOWLEDGE_PROOF</span>
             <span class="pill pill-warn">CIRCUIT REAL · VERIFIER MOCKED</span>
         </div>
-        <h3>A ZK solvency circuit in Noir logs protocol health every 6 hours. On-chain verification pending PolkaVM BN254 support.</h3>
+        <h3>A ZK solvency circuit in Noir logs protocol health every 30 minutes. On-chain verification pending PolkaVM BN254 support.</h3>
+        <div class="zk-vis reveal">
+            <div class="zk-gate-row">
+                <div class="zk-gate-node">G1</div>
+                <div class="zk-gate-line"></div>
+                <span class="zk-gate-label">Collateral ratio check (TVL ≥ debt × 1.25)</span>
+                <span class="zk-gate-status">✓ PASS</span>
+            </div>
+            <div class="zk-gate-row">
+                <div class="zk-gate-node">G2</div>
+                <div class="zk-gate-line"></div>
+                <span class="zk-gate-label">Oracle price freshness (≤ 30 min stale)</span>
+                <span class="zk-gate-status">✓ PASS</span>
+            </div>
+            <div class="zk-gate-row">
+                <div class="zk-gate-node">G3</div>
+                <div class="zk-gate-line"></div>
+                <span class="zk-gate-label">Individual position health (factor ≥ 1.0)</span>
+                <span class="zk-gate-status">✓ PASS</span>
+            </div>
+            <div class="zk-gate-row">
+                <div class="zk-gate-node">G4</div>
+                <div class="zk-gate-line"></div>
+                <span class="zk-gate-label">UltraHonk proof verified (pending BN254 precompile)</span>
+                <span class="zk-gate-status" style="color:var(--dotlend);">⏳ MOCK</span>
+            </div>
+        </div>
         <div class="feat-inner">
             <div>
                 <p>The Noir circuit (UltraHonk proving system) constrains <code style="font-family:var(--font-mono);color:var(--tx-1);">sum(collateral_values) &gt; sum(debt_amounts)</code> with aggregate totals as public inputs and per-user positions as private witnesses. The circuit compiles cleanly and generates valid proofs off-chain.</p>
-                <p>Every 6 hours a Railway worker reads all active positions, computes collateral and debt totals, and calls <code style="font-family:var(--font-mono);color:var(--tx-1);">SolvencyGateway.publishSolvencyProof()</code>. A <code style="font-family:var(--font-mono);color:var(--tx-1);">SolvencyProven</code> event is emitted on-chain and visible on Blockscout.</p>
+                <p>Every 30 minutes a Railway worker reads all active positions, computes collateral and debt totals, and calls <code style="font-family:var(--font-mono);color:var(--tx-1);">SolvencyGateway.publishSolvencyProof()</code>. A <code style="font-family:var(--font-mono);color:var(--tx-1);">SolvencyProven</code> event is emitted on-chain and visible on Blockscout.</p>
                 <div class="badges" style="margin-top:1.25rem;">
                     <span class="badge">NOIR_1.0.0-BETA.19</span>
                     <span class="badge">ULTRAHONK</span>
                     <span class="badge">64_USER_SLOTS</span>
                     <span class="badge">PRIVATE_POSITIONS</span>
                     <span class="badge">PUBLIC_TOTALS</span>
-                    <span class="badge badge-neutral">RAILWAY_6H</span>
+                    <span class="badge badge-neutral">RAILWAY_30MIN</span>
                 </div>
             </div>
             <div>
@@ -839,7 +961,7 @@
                     <div class="data-table-head">// ZK STATUS</div>
                     <div class="data-row"><span>Circuit</span><span style="color:var(--green);">Compiles ✓</span></div>
                     <div class="data-row"><span>Proof generation</span><span style="color:var(--green);">Off-chain ✓</span></div>
-                    <div class="data-row"><span>On-chain event</span><span style="color:var(--green);">Fires every 6h ✓</span></div>
+                    <div class="data-row"><span>On-chain event</span><span style="color:var(--green);">Fires every 30min ✓</span></div>
                     <div class="data-row"><span>On-chain verifier</span><span style="color:#eab308;">MockSolvencyVerifier</span></div>
                     <div class="data-row"><span>BN254 precompiles</span><span style="color:#eab308;">PolkaVM: pending</span></div>
                     <div class="data-row"><span>Real verifier</span><span style="color:var(--tx-3);">Repo-ready</span></div>
@@ -863,8 +985,8 @@
         </div>
         <div class="contract-row">
             <span class="contract-name">PriceOracle</span>
-            <span class="contract-addr">0xea7a8D7Dad04fD3B3Bf0242F3b7114b7CfcCBc1D</span>
-            <a href="https://blockscout-testnet.polkadot.io/address/0xea7a8D7Dad04fD3B3Bf0242F3b7114b7CfcCBc1D" target="_blank" rel="noopener" class="contract-link">View ↗</a>
+            <span class="contract-addr">0x1282F6B59869a57Fd2a1D7a5BC8535bB7B15D173</span>
+            <a href="https://blockscout-testnet.polkadot.io/address/0x1282F6B59869a57Fd2a1D7a5BC8535bB7B15D173" target="_blank" rel="noopener" class="contract-link">View ↗</a>
         </div>
         <div class="contract-row">
             <span class="contract-name">MockvDOT</span>
@@ -877,14 +999,14 @@
             <a href="https://blockscout-testnet.polkadot.io/address/0x2C8C4b2F63E50E566f9BA87EA4f75Caa368c2AAf" target="_blank" rel="noopener" class="contract-link">View ↗</a>
         </div>
         <div class="contract-row">
-            <span class="contract-name">CollateralVault</span>
-            <span class="contract-addr">0xc8cdEF13677bEA21e8b8282c9cE118EbBE4fA14c</span>
-            <a href="https://blockscout-testnet.polkadot.io/address/0xc8cdEF13677bEA21e8b8282c9cE118EbBE4fA14c" target="_blank" rel="noopener" class="contract-link">View ↗</a>
+            <span class="contract-name">CollateralVault (vDOT)</span>
+            <span class="contract-addr">0xF94eBe7F8d8F922B7FBBFb4BE080EB71a69415A2</span>
+            <a href="https://blockscout-testnet.polkadot.io/address/0xF94eBe7F8d8F922B7FBBFb4BE080EB71a69415A2" target="_blank" rel="noopener" class="contract-link">View ↗</a>
         </div>
         <div class="contract-row">
-            <span class="contract-name">LendingPool</span>
-            <span class="contract-addr">0xd8e2bE395Cb8F54BEDfBc6ed6C249Ad43A4fa52b</span>
-            <a href="https://blockscout-testnet.polkadot.io/address/0xd8e2bE395Cb8F54BEDfBc6ed6C249Ad43A4fa52b" target="_blank" rel="noopener" class="contract-link">View ↗</a>
+            <span class="contract-name">LendingPool (vDOT)</span>
+            <span class="contract-addr">0x34B22768B16262aD5b7fC23DD797D80791e4e7e6</span>
+            <a href="https://blockscout-testnet.polkadot.io/address/0x34B22768B16262aD5b7fC23DD797D80791e4e7e6" target="_blank" rel="noopener" class="contract-link">View ↗</a>
         </div>
         <div class="contract-row">
             <span class="contract-name">MockSolvencyVerifier</span>
@@ -893,8 +1015,13 @@
         </div>
         <div class="contract-row">
             <span class="contract-name">SolvencyGateway</span>
-            <span class="contract-addr">0x6B682835bB25f7cA9e69D54B4B26e3A238Df66C0</span>
-            <a href="https://blockscout-testnet.polkadot.io/address/0x6B682835bB25f7cA9e69D54B4B26e3A238Df66C0" target="_blank" rel="noopener" class="contract-link">View ↗</a>
+            <span class="contract-addr">0x199E3E7c1f1382bc389b495B927B0535B390Acd0</span>
+            <a href="https://blockscout-testnet.polkadot.io/address/0x199E3E7c1f1382bc389b495B927B0535B390Acd0" target="_blank" rel="noopener" class="contract-link">View ↗</a>
+        </div>
+        <div class="contract-row">
+            <span class="contract-name">WPAS</span>
+            <span class="contract-addr">0xc09348291775B55Da40433ba44240c262D87Eb90</span>
+            <a href="https://blockscout-testnet.polkadot.io/address/0xc09348291775B55Da40433ba44240c262D87Eb90" target="_blank" rel="noopener" class="contract-link">View ↗</a>
         </div>
     </div>
 
@@ -966,7 +1093,7 @@
                 <div class="data-row">
                     <span style="color:var(--green);">Phase 1 — Testnet ✓</span>
                     <span style="color:var(--tx-3);">March 2026</span>
-                    <span>7 contracts on Polkadot Hub TestNet, 76 tests, live frontend</span>
+                    <span>13 contracts on Polkadot Hub TestNet, 108 tests, live frontend</span>
                 </div>
                 <div class="data-row">
                     <span style="color:var(--dotlend);">Phase 2 — Grant + Audit</span>
@@ -990,6 +1117,12 @@
                 </div>
             </div>
         </div>
+        <div class="phase-steps reveal" style="margin-top:1.5rem;max-width:600px;">
+            <div class="phase-step done"><div class="phase-step-dot"></div><div class="phase-step-line"></div><span class="phase-step-lbl">P1 TestNet</span></div>
+            <div class="phase-step active"><div class="phase-step-dot"></div><div class="phase-step-line"></div><span class="phase-step-lbl">P2 Mainnet</span></div>
+            <div class="phase-step"><div class="phase-step-dot"></div><div class="phase-step-line"></div><span class="phase-step-lbl">P3 Bridge</span></div>
+            <div class="phase-step"><div class="phase-step-dot"></div><span class="phase-step-lbl">P4 SLPx</span></div>
+        </div>
     </div>
 </section>
 
@@ -1002,6 +1135,76 @@
         <a href="https://github.com/orthonode/dotlend" target="_blank" rel="noopener" class="btn-neutral">GitHub ↗</a>
         <a href="https://blockscout-testnet.polkadot.io" target="_blank" rel="noopener" class="btn-neutral">Blockscout Explorer ↗</a>
         <a href="https://nexucore.xyz/mint" target="_blank" rel="noopener" class="btn-neutral">Mint Test Tokens ↗</a>
+    </div>
+</section>
+
+<!-- ── DEMO VIDEO ───────────────────────── -->
+<section class="section reveal" role="region" aria-labelledby="video-head">
+    <p class="sec-label" id="video-head">// DEMO_VIDEO : LIVE_WALKTHROUGH</p>
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:1px solid var(--border);background:var(--bg-card);">
+        <iframe
+            src="https://www.youtube.com/embed/WYxeeyrQLWc?rel=0&modestbranding=1&color=white"
+            title="DotLend — First Money Market on Polkadot Hub | Demo"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            style="position:absolute;top:0;left:0;width:100%;height:100%;">
+        </iframe>
+    </div>
+    <p style="font-family:var(--font-mono);font-size:0.65rem;color:var(--tx-3);margin-top:0.75rem;">
+        Full walkthrough: collateral deposit → borrow → ZK oracle → liquidation cycle. Polkadot Solidity Hackathon 2026 submission.
+    </p>
+</section>
+
+<!-- ── INFOGRAPHIC & DOCS ───────────────── -->
+<section class="section reveal" role="region" aria-labelledby="docs-head">
+    <p class="sec-label" id="docs-head">// PROTOCOL_DOCS : INFOGRAPHIC_AND_RESEARCH</p>
+
+    <!-- Infographic -->
+    <div style="margin-bottom:2.5rem;">
+        <p style="font-family:var(--font-mono);font-size:0.6rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:1rem;">// PROTOCOL_INFOGRAPHIC</p>
+        <a href="/DotLend_Infographic.png" target="_blank" rel="noopener" style="display:block;border:1px solid rgba(230,0,122,0.15);overflow:hidden;transition:border-color 0.25s;" onmouseover="this.style.borderColor='rgba(230,0,122,0.4)'" onmouseout="this.style.borderColor='rgba(230,0,122,0.15)'">
+            <img src="/DotLend_Infographic.png"
+                 alt="DotLend Protocol Infographic — collateral flow, ZK oracle, liquidation mechanics"
+                 style="width:100%;height:auto;display:block;filter:brightness(0.95);">
+        </a>
+        <p style="font-family:var(--font-mono);font-size:0.62rem;color:var(--tx-3);margin-top:0.6rem;">Click to open full resolution ↗</p>
+    </div>
+
+    <!-- PDF downloads -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);">
+        <a href="/DotLend_Native_Polkadot_Lending.pdf" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:1.25rem;padding:1.75rem 2rem;background:var(--bg-card);text-decoration:none;transition:background 0.2s;"
+           onmouseover="this.style.background='var(--bg-raised)'" onmouseout="this.style.background='var(--bg-card)'">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--dotlend)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="9" y1="13" x2="15" y2="13"/>
+                <line x1="9" y1="17" x2="15" y2="17"/>
+                <polyline points="9 9 10 9"/>
+            </svg>
+            <div>
+                <div style="font-family:var(--font-head);font-size:0.95rem;font-weight:700;color:var(--tx-1);margin-bottom:0.3rem;">DotLend — Native Polkadot Lending</div>
+                <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--tx-3);">PDF · Full protocol specification</div>
+                <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--dotlend);margin-top:0.3rem;">Download PDF ↗</div>
+            </div>
+        </a>
+        <a href="/DotLend_Protocol.pdf" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:1.25rem;padding:1.75rem 2rem;background:var(--bg-card);text-decoration:none;transition:background 0.2s;"
+           onmouseover="this.style.background='var(--bg-raised)'" onmouseout="this.style.background='var(--bg-card)'">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--sha)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="9" y1="13" x2="15" y2="13"/>
+                <line x1="9" y1="17" x2="15" y2="17"/>
+                <polyline points="9 9 10 9"/>
+            </svg>
+            <div>
+                <div style="font-family:var(--font-head);font-size:0.95rem;font-weight:700;color:var(--tx-1);margin-bottom:0.3rem;">DotLend Protocol Reference</div>
+                <div style="font-family:var(--font-mono);font-size:0.62rem;color:var(--tx-3);">PDF · Technical architecture &amp; contract spec</div>
+                <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--sha);margin-top:0.3rem;">Download PDF ↗</div>
+            </div>
+        </a>
     </div>
 </section>
 
@@ -1060,6 +1263,36 @@
     }, { threshold: 0.08 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    function initCharts() {
+        var bars = document.querySelectorAll('.bar-track');
+        var barObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var fill = entry.target.querySelector('.bar-fill');
+                    if (fill) fill.classList.add('anim');
+                    barObs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        bars.forEach(function(b) { barObs.observe(b); });
+
+        var rings = document.querySelectorAll('.d-ring-fg');
+        var ringObs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var offset = entry.target.getAttribute('data-offset');
+                    if (offset !== null) entry.target.style.strokeDashoffset = offset;
+                    entry.target.classList.add('anim');
+                    ringObs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+        rings.forEach(function(r) { ringObs.observe(r); });
+    }
+    initCharts();
+
+    (function(){var h=location.hostname;if(h==='localhost'||h==='127.0.0.1'||h===''||h==='0.0.0.0'){var g=document.getElementById('gate');var a=document.getElementById('app');if(g&&a){g.style.display='none';a.style.display='block';}}})();
 </script>
 
 </body>

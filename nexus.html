@@ -202,7 +202,7 @@
 <header role="banner">
     <div class="nav-inner">
         <div class="nav-left">
-            <a href="/" class="nav-back"><img src="/site-logo.png" alt="" width="16" height="16"> orthonode.xyz</a>
+            <a href="/" class="nav-back"><img src="/site-logo.png" alt="ORTHONODE SYSTEMS™" width="24" height="24" style="border-radius:4px;vertical-align:middle;margin-right:6px;"> orthonode.xyz</a>
             <span class="nav-sep">/</span>
             <div class="nav-status"><span class="live-dot"></span><span>NEXUS PROTOCOL</span></div>
         </div>
@@ -411,6 +411,7 @@
 
 <script>
 function onHumanVerified(){const g=document.getElementById('gate'),a=document.getElementById('app');g.style.display='none';a.style.display='block';requestAnimationFrame(()=>setTimeout(()=>{a.style.opacity='1';initReveal();},20));}
+(function(){var h=location.hostname;if(h==='localhost'||h==='127.0.0.1'||h===''||h==='0.0.0.0'){onHumanVerified('dev-bypass');}})();
 function initReveal(){const items=document.querySelectorAll('.reveal');if(!items.length)return;const obs=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('in'),i*55);obs.unobserve(en.target);}});},{threshold:.06,rootMargin:'0px 0px -36px 0px'});items.forEach(el=>obs.observe(el));}
 </script>
 </body>
