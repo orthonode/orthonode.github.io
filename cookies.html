@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Cookie Policy | ORTHONODE SYSTEMS™</title>
+    <meta name="title" content="Cookie Policy | ORTHONODE SYSTEMS™">
+    <meta name="description" content="ORTHONODE SYSTEMS™ Cookie Policy — we use only essential cookies for bot protection via Cloudflare Turnstile. No advertising, no analytics, no tracking.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://orthonode.xyz/cookies.html">
+
+    <meta name="geo.region" content="IN-MP">
+    <meta name="geo.placename" content="Bhopal">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orthonode.xyz/cookies.html">
+    <meta property="og:title" content="Cookie Policy | ORTHONODE SYSTEMS™">
+    <meta property="og:description" content="ORTHONODE SYSTEMS™ uses only essential cookies for human verification. No advertising or analytics cookies.">
+    <meta property="og:image" content="https://orthonode.xyz/banner.png">
+    <meta property="og:site_name" content="ORTHONODE SYSTEMS™">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --void:    #000000;
+            --space:   #070707;
+            --surface: #0D0D0D;
+            --raised:  #141414;
+
+            --b1: rgba(255,255,255,0.055);
+            --b2: rgba(255,255,255,0.11);
+            --b3: rgba(255,255,255,0.22);
+
+            --t1: #F5F5F5;
+            --t2: #8C8C8C;
+            --t3: #404040;
+            --t4: #1C1C1C;
+
+            --silver: #D0D0D0;
+            --chrome: #A8A8A8;
+            --green:  #22C55E;
+            --red:    #EF4444;
+
+            --font-head: 'Syne', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--void);
+            color: var(--t1);
+            font-family: var(--font-body);
+            font-size: 15px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* ─── STAR FIELD ─── */
+        #star-field {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ─── NAV ─── */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px) saturate(150%);
+            -webkit-backdrop-filter: blur(16px) saturate(150%);
+            background: rgba(0,0,0,0.85);
+            border-bottom: 1px solid var(--b2);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            height: 52px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--t2);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            transition: color 0.2s;
+        }
+
+        .nav-back:hover { color: var(--t1); }
+
+        .nav-back img {
+            width: 22px; height: 22px;
+            border-radius: 4px;
+            vertical-align: middle;
+        }
+
+        .nav-page-title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--t3);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* ─── LAYOUT ─── */
+        main {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 96px 32px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ─── PAGE HEADER ─── */
+        .page-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--chrome);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0.75;
+        }
+
+        .page-title {
+            font-family: var(--font-head);
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .page-meta {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--t3);
+            letter-spacing: 0.06em;
+            margin-bottom: 56px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--b2);
+        }
+
+        /* ─── SUMMARY BOX ─── */
+        .summary-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 48px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .summary-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .summary-label {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--t3);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .summary-val {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .summary-val.yes  { color: var(--green); }
+        .summary-val.no   { color: var(--t2); }
+        .summary-val.none { color: var(--t3); }
+
+        /* ─── SECTIONS ─── */
+        .doc-section {
+            margin-bottom: 48px;
+        }
+
+        .doc-section-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--chrome);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            opacity: 0.7;
+        }
+
+        .doc-section h2 {
+            font-family: var(--font-head);
+            font-size: clamp(18px, 2.5vw, 24px);
+            font-weight: 700;
+            margin-bottom: 14px;
+            letter-spacing: -0.01em;
+        }
+
+        .doc-section p {
+            color: var(--t2);
+            font-size: 14px;
+            font-weight: 300;
+            margin-bottom: 14px;
+            line-height: 1.8;
+        }
+
+        .doc-section p:last-child { margin-bottom: 0; }
+
+        /* ─── COOKIE TABLE ─── */
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            border: 1px solid var(--b2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .cookie-table th {
+            background: var(--surface);
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--t3);
+            padding: 10px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--b2);
+        }
+
+        .cookie-table td {
+            font-size: 13px;
+            color: var(--t2);
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--b1);
+            vertical-align: top;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .cookie-table tr:last-child td { border-bottom: none; }
+
+        .cookie-table tr:hover td { background: var(--raised); }
+
+        .cookie-name {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--t1);
+            font-weight: 500;
+        }
+
+        .cookie-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: var(--font-mono);
+            font-size: 9px;
+            padding: 2px 7px;
+            border-radius: 3px;
+            letter-spacing: 0.06em;
+        }
+
+        .badge-essential {
+            color: var(--green);
+            border: 1px solid rgba(34,197,94,0.3);
+            background: rgba(34,197,94,0.06);
+        }
+
+        .badge-none {
+            color: var(--t3);
+            border: 1px solid var(--b2);
+            background: var(--b1);
+        }
+
+        /* ─── CONTROL STEPS ─── */
+        .control-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .control-item {
+            display: grid;
+            grid-template-columns: 24px 1fr;
+            gap: 12px;
+            align-items: start;
+            padding: 14px 16px;
+            background: var(--surface);
+            border: 1px solid var(--b1);
+            border-radius: 8px;
+        }
+
+        .control-num {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--t3);
+            padding-top: 2px;
+        }
+
+        .control-text {
+            font-size: 13px;
+            color: var(--t2);
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .control-text strong {
+            color: var(--t1);
+            font-weight: 500;
+        }
+
+        .control-text a {
+            color: var(--silver);
+            text-decoration: none;
+        }
+
+        .control-text a:hover { text-decoration: underline; }
+
+        /* ─── CONTACT BLOCK ─── */
+        .contact-block {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 24px;
+            margin-top: 16px;
+        }
+
+        .contact-block p {
+            font-size: 13px;
+            color: var(--t2);
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .contact-block a {
+            color: var(--silver);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 12px;
+        }
+
+        .contact-block a:hover { text-decoration: underline; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            border-top: 1px solid var(--b1);
+            background: var(--space);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-bottom {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-copy {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--t3);
+            letter-spacing: 0.06em;
+        }
+
+        .footer-links-row {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-links-row a {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--t3);
+            text-decoration: none;
+            letter-spacing: 0.06em;
+            transition: color 0.2s;
+        }
+
+        .footer-links-row a:hover { color: var(--t2); }
+
+        /* ─── CITATION ─── */
+        #citation {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--t4);
+            letter-spacing: 0.06em;
+        }
+
+        @media (max-width: 640px) {
+            nav { padding: 0 16px; }
+            main { padding: 88px 16px 64px; }
+            .summary-box { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="star-field" aria-hidden="true"></canvas>
+
+<header>
+    <nav>
+        <a href="index.html" class="nav-back">
+            <img src="/site-logo.png" alt="ORTHONODE SYSTEMS™">
+            ← ORTHONODE SYSTEMS™
+        </a>
+        <span class="nav-page-title">Cookie Policy</span>
+    </nav>
+</header>
+
+<main>
+    <p class="page-eyebrow">// LEGAL_DOCS : COOKIE_POLICY</p>
+    <h1 class="page-title">Cookie Policy</h1>
+    <p class="page-meta">
+        Effective: 2026-03-15 &nbsp;·&nbsp; Owner: Arhant Barmate, ORTHONODE SYSTEMS™ &nbsp;·&nbsp;
+        Applies to: <a href="https://orthonode.xyz" style="color:var(--silver);text-decoration:none;">orthonode.xyz</a>
+    </p>
+
+    <!-- TL;DR summary -->
+    <div class="summary-box">
+        <div class="summary-item">
+            <span class="summary-label">Essential Cookies</span>
+            <span class="summary-val yes">Yes — 1</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Analytics Cookies</span>
+            <span class="summary-val none">None</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Advertising Cookies</span>
+            <span class="summary-val none">None</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Third-Party Tracking</span>
+            <span class="summary-val none">None</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Data Sold</span>
+            <span class="summary-val no">Never</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Cookie Banner</span>
+            <span class="summary-val no">Not required</span>
+        </div>
+    </div>
+
+    <!-- 1 — What are cookies -->
+    <div class="doc-section">
+        <p class="doc-section-label">// 01</p>
+        <h2>What are cookies?</h2>
+        <p>
+            Cookies are small text files stored in your browser when you visit a website.
+            They can store session state, security tokens, or preference data.
+            Cookies are set either by the website you are visiting (first-party) or by
+            third-party services embedded in the page.
+        </p>
+        <p>
+            This policy explains which cookies orthonode.xyz sets, why, and how you can
+            control them.
+        </p>
+    </div>
+
+    <!-- 2 — Cookies we use -->
+    <div class="doc-section">
+        <p class="doc-section-label">// 02</p>
+        <h2>Cookies we use</h2>
+        <p>
+            orthonode.xyz is a static website with no server-side session management,
+            no user accounts, and no analytics platform. The only cookie in use is set
+            by Cloudflare Turnstile, a human verification challenge used on the homepage
+            and the Nexus Protocol page to prevent automated abuse.
+        </p>
+
+        <table class="cookie-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Provider</th>
+                    <th>Purpose</th>
+                    <th>Duration</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="cookie-name">cf_clearance</span></td>
+                    <td>Cloudflare</td>
+                    <td>
+                        Stores proof that the visitor has passed the Turnstile human
+                        verification challenge. Prevents repeat challenges during the
+                        same session.
+                    </td>
+                    <td>Session</td>
+                    <td><span class="cookie-badge badge-essential">Essential</span></td>
+                </tr>
+                <tr>
+                    <td><span class="cookie-name">__cf_bm</span></td>
+                    <td>Cloudflare</td>
+                    <td>
+                        Short-lived bot management token set by Cloudflare during
+                        Turnstile verification. Used to distinguish human visitors
+                        from automated traffic.
+                    </td>
+                    <td>30 minutes</td>
+                    <td><span class="cookie-badge badge-essential">Essential</span></td>
+                </tr>
+                <tr>
+                    <td><span class="cookie-name">(none)</span></td>
+                    <td>ORTHONODE SYSTEMS™</td>
+                    <td>
+                        We do not set any first-party cookies. No analytics, no
+                        preferences, no session tokens.
+                    </td>
+                    <td>—</td>
+                    <td><span class="cookie-badge badge-none">N/A</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            We do not use Google Analytics, Meta Pixel, LinkedIn Insight Tag, Hotjar,
+            Mixpanel, or any other analytics or advertising platform. No visitor data
+            is collected, stored, or sold.
+        </p>
+    </div>
+
+    <!-- 3 — Local storage -->
+    <div class="doc-section">
+        <p class="doc-section-label">// 03</p>
+        <h2>Local storage and session storage</h2>
+        <p>
+            Cloudflare Turnstile may use browser <code style="font-family:var(--font-mono);font-size:12px;color:var(--silver);">localStorage</code> or
+            <code style="font-family:var(--font-mono);font-size:12px;color:var(--silver);">sessionStorage</code>
+            internally to manage its verification state. This is limited to the duration
+            of your visit and contains no personal data beyond a verification token.
+        </p>
+        <p>
+            We do not write to <code style="font-family:var(--font-mono);font-size:12px;color:var(--silver);">localStorage</code>
+            or <code style="font-family:var(--font-mono);font-size:12px;color:var(--silver);">sessionStorage</code> ourselves.
+        </p>
+    </div>
+
+    <!-- 4 — Why no consent banner -->
+    <div class="doc-section">
+        <p class="doc-section-label">// 04</p>
+        <h2>Why there is no cookie consent banner</h2>
+        <p>
+            Under the EU ePrivacy Directive and GDPR, cookies that are strictly necessary
+            for the operation of the service do not require prior consent. Cloudflare
+            Turnstile cookies fall into this category — the site cannot function without
+            bot protection on the protected pages.
+        </p>
+        <p>
+            Because we set no analytics, advertising, or preference cookies, no consent
+            banner is legally required. We believe this is also the right approach for
+            user experience — unnecessary popups degrade the visit for no benefit.
+        </p>
+    </div>
+
+    <!-- 5 — How to control cookies -->
+    <div class="doc-section">
+        <p class="doc-section-label">// 05</p>
+        <h2>How to control cookies</h2>
+        <p>
+            You can control and delete cookies through your browser settings. Note that
+            disabling the Cloudflare Turnstile cookies will prevent human verification
+            from completing, making the protected pages inaccessible.
+        </p>
+
+        <div class="control-list">
+            <div class="control-item">
+                <span class="control-num">01</span>
+                <span class="control-text">
+                    <strong>Chrome:</strong> Settings → Privacy and security →
+                    Cookies and other site data → See all site data and permissions.
+                    Search for <code style="font-family:var(--font-mono);font-size:11px;">orthonode.xyz</code> and delete.
+                </span>
+            </div>
+            <div class="control-item">
+                <span class="control-num">02</span>
+                <span class="control-text">
+                    <strong>Firefox:</strong> Settings → Privacy &amp; Security →
+                    Cookies and Site Data → Manage Data. Search and remove orthonode.xyz.
+                </span>
+            </div>
+            <div class="control-item">
+                <span class="control-num">03</span>
+                <span class="control-text">
+                    <strong>Safari:</strong> Preferences → Privacy → Manage Website Data.
+                    Search for orthonode.xyz and remove.
+                </span>
+            </div>
+            <div class="control-item">
+                <span class="control-num">04</span>
+                <span class="control-text">
+                    <strong>Cloudflare Privacy:</strong> For details on how Cloudflare
+                    handles data via Turnstile, see the
+                    <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">
+                        Cloudflare Privacy Policy ↗
+                    </a>.
+                    Turnstile is designed to be privacy-preserving and does not
+                    require cookies in all configurations.
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6 — Updates -->
+    <div class="doc-section">
+        <p class="doc-section-label">// 06</p>
+        <h2>Policy updates</h2>
+        <p>
+            This policy is reviewed whenever new functionality is added to orthonode.xyz.
+            If we ever introduce analytics or any non-essential cookies, this page will
+            be updated and a consent mechanism will be implemented. The effective date at
+            the top of this page reflects the most recent revision.
+        </p>
+        <p>
+            As of the effective date above, this site uses only the two essential
+            Cloudflare cookies listed in section 02.
+        </p>
+    </div>
+
+    <!-- 7 — Contact -->
+    <div class="doc-section">
+        <p class="doc-section-label">// 07</p>
+        <h2>Contact</h2>
+        <p>Questions about this Cookie Policy or how ORTHONODE SYSTEMS™ handles data:</p>
+        <div class="contact-block">
+            <p><strong style="color:var(--t1);">Arhant Barmate</strong> — Founder, ORTHONODE SYSTEMS™</p>
+            <p>Bhopal, Madhya Pradesh, India</p>
+            <p style="margin-top:12px;">
+                <a href="mailto:infrastructure@orthonode.xyz">infrastructure@orthonode.xyz</a>
+            </p>
+            <p style="margin-top:4px;">
+                <a href="https://orthonode.xyz" target="_blank" rel="noopener">orthonode.xyz</a>
+                &nbsp;·&nbsp;
+                <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">@OrthonodeSys</a>
+            </p>
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    <div class="footer-bottom">
+        <span class="footer-copy">© 2026 ORTHONODE SYSTEMS™ — Bhopal, India</span>
+        <div class="footer-links-row">
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="cookies.html">Cookies</a>
+            <a href="site-index.html">Site Index</a>
+        </div>
+    </div>
+    <div style="max-width:760px;margin:0 auto;padding:0 32px 16px;">
+        <span class="footer-copy" id="citation" style="font-size:9px;opacity:0.5;">
+            orthonode.xyz/cookies.html · Cookie Policy · ORTHONODE SYSTEMS™
+        </span>
+    </div>
+</footer>
+
+<script>
+    /* ── Star field ── */
+    (function () {
+        var canvas = document.getElementById('star-field');
+        if (!canvas || !canvas.getContext) return;
+        var ctx = canvas.getContext('2d');
+        var W, H, dpr, stars, raf;
+        var N_STARS = 100, MAX_LINK = 130, SPEED = 0.25;
+
+        function Star() {
+            this.x = Math.random() * W; this.y = Math.random() * H;
+            this.vx = (Math.random() - 0.5) * SPEED; this.vy = (Math.random() - 0.5) * SPEED;
+            this.r = Math.random() * 1.2 + 0.3; this.a = Math.random() * 0.5 + 0.15;
+            this.tw = Math.random() * Math.PI * 2; this.ts = 0.008 + Math.random() * 0.01;
+        }
+
+        function resize() {
+            dpr = window.devicePixelRatio || 1;
+            W = window.innerWidth; H = window.innerHeight;
+            canvas.width = W * dpr; canvas.height = H * dpr;
+            canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+            ctx.scale(dpr, dpr);
+        }
+
+        function init() { resize(); stars = []; for (var i = 0; i < N_STARS; i++) stars.push(new Star()); }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            for (var i = 0; i < stars.length; i++) {
+                for (var j = i + 1; j < stars.length; j++) {
+                    var dx = stars[i].x - stars[j].x, dy = stars[i].y - stars[j].y;
+                    var d2 = dx*dx + dy*dy;
+                    if (d2 < MAX_LINK * MAX_LINK) {
+                        var dist = Math.sqrt(d2);
+                        ctx.beginPath();
+                        ctx.strokeStyle = 'rgba(255,255,255,' + (0.12 * (1 - dist/MAX_LINK)).toFixed(3) + ')';
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(stars[i].x, stars[i].y); ctx.lineTo(stars[j].x, stars[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            for (var i = 0; i < stars.length; i++) {
+                var s = stars[i]; s.tw += s.ts;
+                ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,' + Math.min(1, Math.max(0, s.a + Math.sin(s.tw) * 0.1)).toFixed(3) + ')';
+                ctx.fill();
+                s.x += s.vx; s.y += s.vy;
+                if (s.x < -10) s.x = W+10; if (s.x > W+10) s.x = -10;
+                if (s.y < -10) s.y = H+10; if (s.y > H+10) s.y = -10;
+            }
+            raf = requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', function () { cancelAnimationFrame(raf); init(); draw(); }, { passive: true });
+        init(); draw();
+    })();
+</script>
+
+</body>
+</html>

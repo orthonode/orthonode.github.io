@@ -1668,12 +1668,26 @@
         .phase-step.done .phase-step-lbl { color: var(--green); }
         .phase-step.active .phase-step-lbl { color: var(--plasma); }
 
-        /* ── Hero constellation ── */
-        .hero-constellation { position: absolute; top: 0; right: 0; width: min(500px,44vw); height: min(500px,44vw); pointer-events: none; }
-        .hero-constellation svg { width: 100%; height: 100%; opacity: 0.55; }
+        /* ── Full-viewport star field canvas ── */
+        #star-field {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Ensure all page content sits above the canvas */
+        #gate   { z-index: 1000; }
+        header  { z-index: 100; }
+        #app    { position: relative; z-index: 1; }
     </style>
 </head>
 <body>
+
+<!-- ═══ STAR FIELD ═══ -->
+<canvas id="star-field" aria-hidden="true"></canvas>
 
 <!-- ═══ SECURITY GATE ═══ -->
 <div id="gate">
@@ -1764,45 +1778,6 @@
         <!-- ── HERO ── -->
         <section class="hero wrap">
             <div class="hero-bg"></div>
-
-            <div class="hero-constellation" aria-hidden="true">
-                <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Center hub -->
-                    <circle cx="200" cy="200" r="18" stroke="#D0D0D0" stroke-width="1.5"/>
-                    <circle cx="200" cy="200" r="30" stroke="#D0D0D0" stroke-width="0.5" stroke-dasharray="4 6" opacity="0.4">
-                        <animateTransform attributeName="transform" type="rotate" from="0 200 200" to="360 200 200" dur="20s" repeatCount="indefinite"/>
-                    </circle>
-                    <text x="200" y="205" text-anchor="middle" fill="#D0D0D0" font-size="7" font-family="IBM Plex Mono" letter-spacing="1">ONS</text>
-                    <!-- ARB node -->
-                    <line x1="200" y1="200" x2="340" y2="90" stroke="#28A0F0" stroke-width="0.8" stroke-dasharray="3 5" opacity="0.7"/>
-                    <circle cx="340" cy="90" r="10" stroke="#28A0F0" stroke-width="1.5" fill="rgba(40,160,240,0.08)"/>
-                    <text x="340" y="94" text-anchor="middle" fill="#28A0F0" font-size="6" font-family="IBM Plex Mono">ARB</text>
-                    <!-- TON node -->
-                    <line x1="200" y1="200" x2="360" y2="220" stroke="#0098EA" stroke-width="0.8" stroke-dasharray="3 5" opacity="0.7"/>
-                    <circle cx="360" cy="220" r="10" stroke="#0098EA" stroke-width="1.5" fill="rgba(0,152,234,0.08)"/>
-                    <text x="360" y="224" text-anchor="middle" fill="#0098EA" font-size="6" font-family="IBM Plex Mono">TON</text>
-                    <!-- DOT node -->
-                    <line x1="200" y1="200" x2="290" y2="350" stroke="#E6007A" stroke-width="0.8" stroke-dasharray="3 5" opacity="0.7"/>
-                    <circle cx="290" cy="350" r="10" stroke="#E6007A" stroke-width="1.5" fill="rgba(230,0,122,0.08)"/>
-                    <text x="290" y="354" text-anchor="middle" fill="#E6007A" font-size="6" font-family="IBM Plex Mono">DOT</text>
-                    <!-- TAO node -->
-                    <line x1="200" y1="200" x2="100" y2="340" stroke="#EAB308" stroke-width="0.8" stroke-dasharray="3 5" opacity="0.7"/>
-                    <circle cx="100" cy="340" r="10" stroke="#EAB308" stroke-width="1.5" fill="rgba(234,179,8,0.08)"/>
-                    <text x="100" y="344" text-anchor="middle" fill="#EAB308" font-size="6" font-family="IBM Plex Mono">TAO</text>
-                    <!-- SOL node -->
-                    <line x1="200" y1="200" x2="60" y2="130" stroke="#9945FF" stroke-width="0.8" stroke-dasharray="3 5" opacity="0.7"/>
-                    <circle cx="60" cy="130" r="10" stroke="#9945FF" stroke-width="1.5" fill="rgba(153,69,255,0.08)"/>
-                    <text x="60" y="134" text-anchor="middle" fill="#9945FF" font-size="6" font-family="IBM Plex Mono">SOL</text>
-                    <!-- Orbit ring around center -->
-                    <circle cx="200" cy="200" r="80" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="2 8"/>
-                    <circle cx="200" cy="200" r="140" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="1 12"/>
-                    <!-- Animated pulse on center -->
-                    <circle cx="200" cy="200" r="18" stroke="#D0D0D0" stroke-width="0.5" opacity="0.3">
-                        <animate attributeName="r" values="18;38;18" dur="4s" repeatCount="indefinite"/>
-                        <animate attributeName="opacity" values="0.3;0;0.3" dur="4s" repeatCount="indefinite"/>
-                    </circle>
-                </svg>
-            </div>
 
             <div class="hero-inner">
                 <div class="hero-layout">
@@ -2687,6 +2662,7 @@
                         <li><a href="site-index.html">Research Log</a></li>
                         <li><a href="terms.html">Terms</a></li>
                         <li><a href="privacy.html">Privacy</a></li>
+                        <li><a href="cookies.html">Cookies</a></li>
                     </ul>
                 </div>
             </div>
@@ -2858,6 +2834,105 @@
         if (h === 'localhost' || h === '127.0.0.1' || h === '' || h === '0.0.0.0') {
             onHumanVerified('dev-bypass');
         }
+    })();
+
+    /* ══════════════════════════════════════════
+       STAR FIELD — canvas particle constellation
+       ══════════════════════════════════════════ */
+    (function () {
+        var canvas = document.getElementById('star-field');
+        if (!canvas || !canvas.getContext) return;
+        var ctx = canvas.getContext('2d');
+
+        var W, H, dpr, stars, raf;
+        var N_STARS    = 160;   /* number of particles */
+        var MAX_LINK   = 140;   /* px — max distance to draw a connection line */
+        var SPEED      = 0.28;  /* base drift speed */
+
+        /* Each star: position, velocity, radius, opacity, twinkle phase */
+        function Star() {
+            this.x  = Math.random() * W;
+            this.y  = Math.random() * H;
+            this.vx = (Math.random() - 0.5) * SPEED;
+            this.vy = (Math.random() - 0.5) * SPEED;
+            this.r  = Math.random() * 1.4 + 0.3;
+            this.a  = Math.random() * 0.55 + 0.15;
+            this.tw = Math.random() * Math.PI * 2; /* twinkle offset */
+            this.ts = 0.008 + Math.random() * 0.012; /* twinkle speed */
+        }
+
+        function resize() {
+            dpr    = window.devicePixelRatio || 1;
+            W      = window.innerWidth;
+            H      = window.innerHeight;
+            canvas.width  = W * dpr;
+            canvas.height = H * dpr;
+            canvas.style.width  = W + 'px';
+            canvas.style.height = H + 'px';
+            ctx.scale(dpr, dpr);
+        }
+
+        function init() {
+            resize();
+            stars = [];
+            for (var i = 0; i < N_STARS; i++) stars.push(new Star());
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+
+            /* Connection lines — drawn before stars so stars sit on top */
+            for (var i = 0; i < stars.length; i++) {
+                for (var j = i + 1; j < stars.length; j++) {
+                    var dx   = stars[i].x - stars[j].x;
+                    var dy   = stars[i].y - stars[j].y;
+                    var dist = dx * dx + dy * dy; /* squared — avoid sqrt until needed */
+                    if (dist < MAX_LINK * MAX_LINK) {
+                        dist = Math.sqrt(dist);
+                        var alpha = 0.14 * (1 - dist / MAX_LINK);
+                        ctx.beginPath();
+                        ctx.strokeStyle = 'rgba(255,255,255,' + alpha.toFixed(3) + ')';
+                        ctx.lineWidth   = 0.5;
+                        ctx.moveTo(stars[i].x, stars[i].y);
+                        ctx.lineTo(stars[j].x, stars[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            /* Stars */
+            for (var i = 0; i < stars.length; i++) {
+                var s = stars[i];
+                s.tw += s.ts;
+                var brightness = s.a + Math.sin(s.tw) * 0.12;
+
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,255,255,' + Math.min(1, Math.max(0, brightness)).toFixed(3) + ')';
+                ctx.fill();
+
+                /* Move */
+                s.x += s.vx;
+                s.y += s.vy;
+
+                /* Wrap edges */
+                if (s.x < -10)  s.x = W + 10;
+                if (s.x > W+10) s.x = -10;
+                if (s.y < -10)  s.y = H + 10;
+                if (s.y > H+10) s.y = -10;
+            }
+
+            raf = requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', function () {
+            cancelAnimationFrame(raf);
+            init();
+            draw();
+        }, { passive: true });
+
+        init();
+        draw();
     })();
 </script>
 
