@@ -106,6 +106,7 @@
 
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :where(a, button) { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 
         :root {
             /* ── Obsidian Chrome palette ── */
@@ -166,8 +167,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 28px;
-            overflow: hidden;
+            gap: 24px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 24px 16px;
         }
 
         #gate::before {
@@ -564,6 +567,8 @@
             transition: all 0.2s var(--ease);
             cursor: pointer;
             border: none;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-primary {
@@ -1577,60 +1582,128 @@
         .clr-tix    { color: var(--tix); }
 
         /* ─── RESPONSIVE ─── */
+
+        /* ── Tablet ── */
         @media (max-width: 1024px) {
-            .doctrine-grid { grid-template-columns: repeat(2, 1fr); }
-            .metrics-grid  { grid-template-columns: repeat(3, 1fr); }
-            .hero-layout   { grid-template-columns: 1fr; }
+            .doctrine-grid     { grid-template-columns: repeat(2, 1fr); }
+            .metrics-grid      { grid-template-columns: repeat(3, 1fr); }
+            .hero-layout       { grid-template-columns: 1fr; }
             .hero-status-panel { display: none; }
         }
 
+        /* ── Mobile ── */
         @media (max-width: 768px) {
-            .build-entry { grid-template-columns: 1fr; gap: 4px; }
-            .build-badge { display: none; }
-        }
+            /* Layout */
+            nav          { padding: 0 16px; }
+            .wrap        { padding: 0 16px; }
+            .section     { padding: 56px 0; }
+            .hero        { padding: 72px 0 48px; }
 
-        @media (max-width: 768px) {
-            nav { padding: 0 16px; }
-            .nav-chains { display: none; }
-            .wrap { padding: 0 16px; }
+            /* Nav: hide chain dots, allow tags to scroll */
+            .nav-chains  { display: none; }
+            .nav-tags    { gap: 4px; }
+            .nav-tag     { font-size: 9px; padding: 2px 6px; }
 
-            .dotlend-inner {
-                grid-template-columns: 1fr;
-                gap: 32px;
-                padding: 28px;
+            /* Ticker */
+            .ticker-item { font-size: 9px; padding: 0 14px; gap: 7px; }
+
+            /* Hero */
+            .hero-sub    { font-size: 15px; }
+            .hero-actions { flex-wrap: wrap; gap: 8px; }
+            .btn         { font-size: 11px; padding: 9px 16px; }
+
+            /* Stats bar: 3-up then wrap */
+            .stats-bar   { flex-wrap: wrap; max-width: 100%; }
+            .stat-item   {
+                flex: 1 1 30%;
+                min-width: 90px;
+                border-bottom: 1px solid var(--b2);
             }
 
-            .proj-grid { grid-template-columns: 1fr; }
+            /* Projects */
+            .dotlend-inner    { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
+            .dotlend-title    { font-size: clamp(20px, 5vw, 28px); }
+            .proj-grid        { grid-template-columns: 1fr; }
+            .dl-stats-grid    { grid-template-columns: repeat(2, 1fr); }
 
-            .problem-grid { grid-template-columns: 1fr; }
-
+            /* Problem / Doctrine */
+            .problem-grid  { grid-template-columns: 1fr; }
             .doctrine-grid { grid-template-columns: 1fr 1fr; }
 
-            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            /* Metrics */
+            .metrics-grid  { grid-template-columns: repeat(2, 1fr); }
+            .metrics-addr  { flex-direction: column; align-items: flex-start; gap: 4px; }
+            .metrics-addr-val { font-size: 10px; word-break: break-all; }
 
-            .stats-bar {
-                flex-wrap: wrap;
-                border-radius: 8px;
-            }
+            /* Bar chart */
+            .bar-row { grid-template-columns: 80px 1fr 55px; gap: 0.5rem; }
+            .bar-label { font-size: 0.6rem; }
 
-            .stat-item {
-                border-bottom: 1px solid var(--b2);
-                border-right: 1px solid var(--b2);
-            }
+            /* Build log */
+            .build-entry  { grid-template-columns: 80px 72px 1fr; gap: 8px; }
+            .build-badge  { display: none; }
+            .build-title  { font-size: 12px; }
+            .build-log-footer { flex-direction: column; gap: 6px; align-items: flex-start; }
 
-            .footer-top { grid-template-columns: 1fr; gap: 32px; }
+            /* Research list */
+            .research-item { flex-wrap: wrap; gap: 8px; }
+            .research-arrow { display: none; }
 
+            /* FAQ */
+            .faq-q { font-size: 13px; }
+
+            /* Footer */
+            .footer-top    { grid-template-columns: 1fr; gap: 28px; padding: 40px 0 28px; }
             .footer-bottom { flex-direction: column; text-align: center; gap: 8px; }
         }
 
+        /* ── Small phones (≤ 480px) ── */
         @media (max-width: 480px) {
-            h1 { font-size: 32px; }
-            .doctrine-grid { grid-template-columns: 1fr; }
-            .dl-stats-grid { grid-template-columns: 1fr 1fr; }
-            .metrics-grid  { grid-template-columns: 1fr 1fr; }
-            .hero-actions { flex-direction: column; }
-            .cta-actions  { flex-direction: column; align-items: center; }
+            h1 { font-size: clamp(28px, 9vw, 38px); }
+
+            .hero        { padding: 64px 0 40px; }
+            .section     { padding: 44px 0; }
+
+            .hero-eyebrow { font-size: 9px; padding: 4px 10px; }
+            .hero-sub     { font-size: 14px; }
+            .hero-actions { flex-direction: column; align-items: stretch; }
+            .btn          { justify-content: center; }
+
+            .stats-bar  { flex-direction: column; max-width: 100%; }
+            .stat-item  { border-right: none; border-bottom: 1px solid var(--b2); width: 100%; }
+            .stat-item:last-child { border-bottom: none; }
+
+            .doctrine-grid  { grid-template-columns: 1fr; }
+            .dl-stats-grid  { grid-template-columns: 1fr 1fr; }
+            .metrics-grid   { grid-template-columns: 1fr 1fr; }
+            .cta-actions    { flex-direction: column; align-items: stretch; }
             .dotlend-actions { flex-direction: column; }
+
+            /* Build log: stack on tiny screens */
+            .build-entry  { grid-template-columns: 1fr; gap: 3px; padding: 10px 14px; }
+            .build-date   { font-size: 9px; }
+            .build-tag    { font-size: 8px; max-width: fit-content; }
+
+            /* Donut charts */
+            .donut-wrap { gap: 12px; }
+            .donut-svg  { width: 60px; height: 60px; }
+
+            /* Section label */
+            .sec-label  { font-size: 9px; }
+            .sec-title  { font-size: clamp(20px, 6vw, 30px); }
+
+            /* Phase steps */
+            .phase-steps { gap: 8px; }
+            .phase-step-num { font-size: 9px; }
+        }
+
+        /* ── Very small (≤ 360px — older Androids) ── */
+        @media (max-width: 360px) {
+            nav { padding: 0 12px; }
+            .wrap { padding: 0 12px; }
+            .nav-tags { display: none; }
+            h1 { font-size: 26px; }
+            .dotlend-inner { padding: 16px; }
         }
 
         /* ── Chain SVG icons ── */
@@ -1703,7 +1776,9 @@
          data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb"
          data-callback="onHumanVerified"
          data-theme="dark"
-         data-size="normal">
+         data-size="flexible"
+         data-appearance="always"
+         style="width:min(300px,90vw);">
     </div>
     <div class="gate-label" style="font-size:10px;opacity:0.5;">Powered by Cloudflare Turnstile</div>
 </div>
@@ -2845,9 +2920,10 @@
         var ctx = canvas.getContext('2d');
 
         var W, H, dpr, stars, raf;
-        var N_STARS    = 160;   /* number of particles */
-        var MAX_LINK   = 140;   /* px — max distance to draw a connection line */
-        var SPEED      = 0.28;  /* base drift speed */
+        var isMobile   = window.innerWidth < 768;
+        var N_STARS    = isMobile ? 70 : 160;  /* fewer particles on mobile */
+        var MAX_LINK   = isMobile ? 100 : 140; /* shorter links on mobile */
+        var SPEED      = 0.28;                 /* base drift speed */
 
         /* Each star: position, velocity, radius, opacity, twinkle phase */
         function Star() {

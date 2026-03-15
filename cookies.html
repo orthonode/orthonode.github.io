@@ -420,9 +420,17 @@
         }
 
         @media (max-width: 640px) {
-            nav { padding: 0 16px; }
-            main { padding: 88px 16px 64px; }
+            nav   { padding: 0 16px; }
+            main  { padding: 80px 16px 56px; }
             .summary-box { grid-template-columns: 1fr 1fr; }
+            .cookie-table th, .cookie-table td { padding: 8px 10px; font-size: 12px; }
+            .control-item { grid-template-columns: 20px 1fr; gap: 8px; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 8px; }
+        }
+
+        @media (max-width: 400px) {
+            .summary-box { grid-template-columns: 1fr; }
+            .page-title  { font-size: 28px; }
         }
     </style>
 </head>
@@ -698,7 +706,8 @@
         if (!canvas || !canvas.getContext) return;
         var ctx = canvas.getContext('2d');
         var W, H, dpr, stars, raf;
-        var N_STARS = 100, MAX_LINK = 130, SPEED = 0.25;
+        var isMobile = window.innerWidth < 768;
+        var N_STARS = isMobile ? 50 : 100, MAX_LINK = isMobile ? 100 : 130, SPEED = 0.25;
 
         function Star() {
             this.x = Math.random() * W; this.y = Math.random() * H;
