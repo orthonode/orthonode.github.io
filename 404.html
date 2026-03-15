@@ -72,9 +72,10 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
---bg:#04060A;--bg-1:#080C14;--bg-card:#080C14;--bg-raised:#0E1520;
+--void:#000000;--bg:#000000;--bg-1:#070707;--bg-card:#0D0D0D;--bg-raised:#141414;
 --border:rgba(255,255,255,.06);--border-h:rgba(255,255,255,.12);
---tx-1:#F0F0F0;--tx-2:#A0A8B8;--tx-3:#5A6478;--tx-4:#2A3040;
+--tx-1:#F5F5F5;--tx-2:#8C8C8C;--tx-3:#404040;--tx-4:#1C1C1C;
+--silver:#D0D0D0;--chrome:#A8A8A8;--plasma:#C8C8C8;
 --red:#EF4444;--red-dim:rgba(239,68,68,.08);--red-glow:rgba(239,68,68,.2);
 --r:8px;--r2:12px;--r3:16px;
 --font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'IBM Plex Mono',monospace;
@@ -86,7 +87,7 @@ a:hover{opacity:.8}
 ::selection{background:var(--red);color:#fff}
 
 /* NAV */
-#nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 32px;height:56px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:rgba(4,6,10,.92);backdrop-filter:blur(16px)}
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 32px;height:56px;display:flex;align-items:center;border-bottom:1px solid var(--border);background:rgba(0,0,0,.92);backdrop-filter:blur(16px)}
 .nav-inner{max-width:1120px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
 .nav-back{font-family:var(--font-mono);font-size:11px;color:var(--tx-3);letter-spacing:.08em;text-decoration:none;transition:color .2s}
 .nav-back:hover{color:var(--tx-1)}
@@ -145,9 +146,24 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:28px 32
   #citation{padding:24px 20px}
   .error-links{flex-direction:column;align-items:center}
 }
+
+/* ── MOBILE ──────────────────────────────── */
+@media(max-width:1024px){
+  .hero-layout,.hero-grid,.content-grid,.two-col{grid-template-columns:1fr!important;}
+  .side-panel,.hero-aside,.status-panel{display:none!important;}
+}
+@media(max-width:480px){
+  h1,.page-title,.hero-title{font-size:clamp(1.4rem,8vw,2rem)!important;}
+  .badge,.tag{font-size:.65rem!important;padding:3px 8px!important;}
+  .btn,.cta-btn,.btn-primary{padding:10px 20px!important;font-size:.85rem!important;}
+}
+@media(max-width:360px){
+  .container,.wrap{padding:0 12px!important;}
+}
 </style>
 </head>
 <body>
+<canvas id="star-field" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
 
 <nav id="nav">
   <div class="nav-inner">
@@ -226,6 +242,42 @@ footer{background:var(--bg-1);border-top:1px solid var(--border);padding:28px 32
 let countdown = 30;
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => { nav.classList.toggle('sc', window.scrollY > 60); }, { passive: true });
+</script>
+<script>
+(function(){
+  var c=document.getElementById('star-field');
+  if(!c)return;
+  var ctx=c.getContext('2d');
+  var dpr=window.devicePixelRatio||1;
+  var W,H,stars=[];
+  var isMob=window.innerWidth<768;
+  var N=isMob?60:130;
+  var ML=isMob?90:130;
+  function resize(){W=window.innerWidth;H=window.innerHeight;c.width=W*dpr;c.height=H*dpr;ctx.scale(dpr,dpr);c.style.width=W+'px';c.style.height=H+'px';}
+  function init(){resize();stars=[];for(var i=0;i<N;i++)stars.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*1.2+.3,a:Math.random(),tw:Math.random()*Math.PI*2,ts:Math.random()*.015+.005});}
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i];
+      s.x+=s.vx;s.y+=s.vy;
+      if(s.x<0)s.x=W;if(s.x>W)s.x=0;
+      if(s.y<0)s.y=H;if(s.y>H)s.y=0;
+      s.tw+=s.ts;
+      var al=.35+.45*Math.sin(s.tw);
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(200,200,200,'+al+')';ctx.fill();
+      for(var j=i+1;j<stars.length;j++){
+        var q=stars[j];
+        var dx=s.x-q.x,dy=s.y-q.y;
+        var d=Math.sqrt(dx*dx+dy*dy);
+        if(d<ML){ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle='rgba(180,180,180,'+(0.12*(1-d/ML))+')';ctx.lineWidth=.5;ctx.stroke();}
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',function(){init();});
+  init();draw();
+})();
 </script>
 </body>
 </html>
