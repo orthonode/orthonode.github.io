@@ -342,5 +342,23 @@ function toggleFaq(btn){
   init();draw();
 })();
 </script>
+
+<!-- Cookie consent bar -->
+<div id="cookie-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(10,10,10,0.97);border-top:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+  <p style="margin:0;font-family:'DM Sans',sans-serif;font-size:.82rem;color:#8C8C8C;line-height:1.5;">This site uses essential cookies only for Cloudflare bot protection. No tracking or analytics. <a href="/cookies.html" style="color:#D0D0D0;text-decoration:underline;text-underline-offset:3px;">Learn more</a></p>
+  <button onclick="dismissCookieBar()" style="flex-shrink:0;background:#141414;border:1px solid rgba(255,255,255,0.15);color:#F5F5F5;font-family:'DM Sans',sans-serif;font-size:.8rem;padding:7px 18px;border-radius:6px;cursor:pointer;white-space:nowrap;transition:background .2s;">Got it</button>
+</div>
+<script>
+(function(){
+  if(localStorage.getItem('orthonode_cc')==='1') return;
+  var bar=document.getElementById('cookie-bar');
+  if(bar){bar.style.display='flex';}
+})();
+function dismissCookieBar(){
+  localStorage.setItem('orthonode_cc','1');
+  var bar=document.getElementById('cookie-bar');
+  if(bar){bar.style.opacity='0';bar.style.transition='opacity .3s';setTimeout(function(){bar.style.display='none';},300);}
+}
+</script>
 </body>
 </html>
