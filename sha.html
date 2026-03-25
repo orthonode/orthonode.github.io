@@ -112,8 +112,31 @@
         .fade-in-step.visible { opacity: 1; transform: translateY(0); }
     </style>
 <script>const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null}},init(){},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","arbitrum_sepolia",7);const b=document.getElementById("cookie-banner");if(!ON.cookie.get("on_banner")&&b)b.style.display="flex"});</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root){animation:250ms ease-out both vtOut}
+    ::view-transition-new(root){animation:250ms ease-in both vtIn}
+    @keyframes vtOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-10px)}}
+    @keyframes vtIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    .nav-link{position:relative}
+    .nav-link::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 0.25s ease}
+    .nav-link:hover::after{transform:scaleX(1)}
+    .proto-card{transition:transform 0.3s cubic-bezier(0.22,1,0.36,1),box-shadow 0.3s ease}
+    .proto-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(230,0,122,0.2)}
+    </style>
 </head>
-<body class="selection:bg-primary-container selection:text-on-primary-container"><canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas><script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script><div style="position:fixed;top:0;left:0;z-index:200;padding:16px 24px;"><a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.08em;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">← ORTHONODE.SYSTEMS</a></div><div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;align-items:center;gap:20px;max-width:520px;width:90vw;"><p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">Cookies used. <a href="/cookies.html" style="color:#2A9FE8;">Learn more</a></p><button onclick="ON.acceptCookies()" style="background:#2A9FE8;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button></div>
+<body class="selection:bg-primary-container selection:text-on-primary-container"><canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas><script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script><div style="position:fixed;top:0;left:0;z-index:200;padding:14px 20px;display:flex;align-items:center;gap:16px;">
+      <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.08em;display:flex;align-items:center;gap:6px;transition:color 0.2s;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">← HOME</a>
+      <span style="color:rgba(255,255,255,0.15);font-size:11px;">|</span>
+      <a href="dotlend.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">DOT</a>
+      <a href="sha.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">SHA</a>
+      <a href="invariant.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">INV</a>
+      <a href="tix-dao.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">TIX</a>
+      <a href="nexus.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">NEX</a>
+    </div><div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;align-items:center;gap:20px;max-width:520px;width:90vw;"><p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">Cookies used. <a href="/cookies.html" style="color:#2A9FE8;">Learn more</a></p><button onclick="ON.acceptCookies()" style="background:#2A9FE8;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button></div>
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/5 shadow-[0_0_20px_rgba(42,159,232,0.08)]">
 <div class="flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto">
@@ -509,4 +532,40 @@
         }
     </script>
 <script>document.querySelectorAll("button,a").forEach(el=>{if(el.textContent.trim().toLowerCase().includes("connect wallet"))el.remove()});document.querySelectorAll("button").forEach(btn=>{const icon=btn.querySelector(".material-symbols-outlined");if(icon&&(icon.textContent.trim()==="add"||icon.textContent.trim()==="remove")){btn.addEventListener("click",()=>{const p=btn.nextElementSibling;if(!p)return;if(p.style.display==="block"){p.style.display="none";icon.textContent="add";}else{p.style.display="block";icon.textContent="remove";}});}});</script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded",()=>{
+      if(typeof gsap!=="undefined"){
+        gsap.registerPlugin(ScrollTrigger);
+        // Nav entrance
+        gsap.fromTo("nav,header",[{y:-60,opacity:0}],[{y:0,opacity:1,duration:0.5,ease:"power3.out"}]);
+        // Hero text
+        gsap.fromTo("h1",{opacity:0,y:30},{opacity:1,y:0,duration:0.8,ease:"power3.out",delay:0.15});
+        // Cards staggered
+        gsap.utils.toArray(".glass,.card,[class*='rounded-xl']").forEach((el,i)=>{
+          gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:0.6,ease:"power2.out",
+            scrollTrigger:{trigger:el,start:"top 88%",once:true},delay:i*0.05>0.4?0.4:i*0.05
+          });
+        });
+        // Counter animation
+        document.querySelectorAll("[data-target]").forEach(el=>{
+          const t=parseInt(el.dataset.target);
+          ScrollTrigger.create({trigger:el,start:"top 85%",once:true,
+            onEnter:()=>gsap.to({v:0},{v:t,duration:1.2,ease:"power2.out",
+              onUpdate:function(){el.textContent=(this.targets()[0].v<10?"0":"")+Math.round(this.targets()[0].v)}})
+          });
+        });
+        // View transition polyfill
+        if(!document.startViewTransition){
+          document.addEventListener("click",e=>{
+            const a=e.target.closest("a[href]");
+            if(!a||a.target==="_blank"||a.href.includes("://")&&!a.href.includes(location.hostname)||a.href.startsWith("mailto:"))return;
+            e.preventDefault();document.body.style.opacity="0";
+            document.body.style.transition="opacity 0.2s";
+            setTimeout(()=>{location.href=a.href},200);
+          });
+        }
+      }
+    });
+    </script>
 </body></html>
