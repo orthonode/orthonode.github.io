@@ -300,6 +300,29 @@
     #hero-headline { min-height: 1em; }
     /* Ensure app is shown after any gate close */
     </style>
+
+    <style>
+    /* Protocol cards: visible by default, animate on scroll reveal */
+    .protocol-card {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    /* word-reveal: start hidden, JS animates to visible */
+    .word-reveal {
+      display: inline-block;
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    /* Fallback: if JS fails, show hero text after 2s */
+    @keyframes heroFallback {
+      0%   { opacity:0; transform:translateY(20px); }
+      100% { opacity:1; transform:translateY(0); }
+    }
+    #hero-headline:not(:empty) .word-reveal {
+      animation: heroFallback 0.6s ease forwards;
+    }
+    </style>
+    <script src="/nav.js" defer></script>
 </head>
 <body class="font-body font-light overflow-x-hidden bg-background">
     <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
@@ -325,7 +348,7 @@
         ORTHONODE SYSTEMS™
     </div>
 <div class="hidden md:flex items-center space-x-10">
-<a class="nav-link" href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.08em;margin-right:4px;">HOME</a><a class="nav-link active text-primary font-headline uppercase text-sm tracking-tight" href="dotlend.html" >DotLend</a>
+<a class="nav-link" href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:#E6007A;letter-spacing:0.08em;margin-right:4px;border-bottom:1px solid #E6007A;padding-bottom:2px;">HOME</a><a class="nav-link" style="font-family:DM Sans,sans-serif;font-size:14px;color:rgba(255,255,255,0.6);" href="dotlend.html" >DotLend</a>
 <a class="nav-link text-white/60 font-headline uppercase text-sm tracking-tight hover:text-white transition-colors" href="sha.html" >SHA</a>
 <a class="nav-link text-white/60 font-headline uppercase text-sm tracking-tight hover:text-white transition-colors" href="ton-sha.html" >TON-SHA</a>
 <a class="nav-link text-white/60 font-headline uppercase text-sm tracking-tight hover:text-white transition-colors" href="invariant.html" >INVARIANT</a>
@@ -535,6 +558,7 @@
 <a class="text-white/60 hover:text-primary transition-all text-sm uppercase tracking-tight" href="dotlend.html" >DotLend</a>
 <a class="text-white/60 hover:text-primary transition-all text-sm uppercase tracking-tight" href="sha.html" >SHA</a>
 <a class="text-white/60 hover:text-primary transition-all text-sm uppercase tracking-tight" href="invariant.html" >INVARIANT</a>
+<a class="text-white/60 hover:text-primary transition-all text-sm uppercase tracking-tight" href="iotex-research.html">IoTeX Research</a>
 <a class="text-white/60 hover:text-primary transition-all text-sm uppercase tracking-tight" href="tix-dao.html" >TIX-DAO</a>
 </div>
 </div>
@@ -620,30 +644,18 @@
 </script>
 
     </div><!-- /#app -->
-    <div class="mobile-fab" aria-label="Mobile navigation">
-      <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:#E6007A;text-decoration:none;letter-spacing:0.06em;" title="Home">⌂</a>
-      <a href="dotlend.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;" title="DotLend">DOT</a>
-      <a href="sha.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;" title="SHA">SHA</a>
-      <a href="invariant.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;" title="INVARIANT">INV</a>
-      <a href="tix-dao.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;" title="TIX-DAO">TIX</a>
-      <a href="nexus.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.6);text-decoration:none;" title="Nexus">NEX</a>
-    </div>
+    
     <script>
     function initAnimations(){
+      setTimeout(()=>ScrollTrigger && ScrollTrigger.refresh(), 300);
       gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
       // ── Hero word reveal ──────────────────────────────────
-      const h1 = document.querySelector(".hero-headline");
-      if(h1){
-        const orig = h1.innerHTML;
-        // Wrap each word in reveal spans, preserving HTML tags
-        h1.innerHTML = orig.replace(/([A-Za-z’‘.,!?]+)/g, (w)=>
-          `<span class="word-reveal-outer"><span class="word-reveal-inner">${w}</span></span>`
-        );
-        gsap.to(".word-reveal-inner", {
-          y: 0, duration: 0.8, ease: "power4.out",
-          stagger: 0.07, delay: 0.2
-        });
+      gsap.to(".word-reveal", {
+        y: 0, opacity: 1, duration: 0.7,
+        ease: "power4.out", stagger: 0.07, delay: 0.1,
+        clearProps: "transform"
+      });
       }
 
       // ── Fade-in sections on scroll ────────────────────────
