@@ -87,8 +87,8 @@
     </style>
 
     <script>
-    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null},remove(k){this.set(k,"",0)}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365)},acceptCookies(){ON.cookie.set("on_banner","1",365);document.getElementById("cookie-banner")?.classList.add("hidden")}};
-    document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","polkadot_hub",7);if(!ON.cookie.get("on_banner"))document.getElementById("cookie-banner")?.classList.remove("hidden");});
+    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null},remove(k){this.set(k,"",0)}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365)},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};
+    document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","polkadot_hub",7);const cb=document.getElementById("cookie-banner");if(!ON.cookie.get("on_banner")&&cb)cb.style.display="flex";});
     </script>
 </head>
 <body class="font-body font-300">
@@ -97,7 +97,7 @@
     <div style="position:fixed;top:0;left:0;z-index:200;padding:16px 24px;">
       <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.08em;display:flex;align-items:center;gap:8px;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">← ORTHONODE.SYSTEMS</a>
     </div>
-    <div id="cookie-banner" class="hidden" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;display:flex;align-items:center;gap:20px;max-width:520px;width:90vw;">
+    <div id="cookie-banner" class="hidden" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;display:none;align-items:center;gap:20px;max-width:520px;width:90vw;">
       <p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">We use cookies for site functionality. <a href="/cookies.html" style="color:#E6007A;">Learn more</a></p>
       <button onclick="ON.acceptCookies()" style="background:#E6007A;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:0.08em;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button>
     </div>

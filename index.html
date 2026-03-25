@@ -92,7 +92,7 @@
     </style>
 
     <script>
-    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null},remove(k){this.set(k,"",0)}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365);this.showBanner()},showBanner(){if(!this.cookie.get("on_banner"))document.getElementById("cookie-banner")?.classList.remove("hidden")},acceptCookies(){ON.cookie.set("on_banner","1",365);document.getElementById("cookie-banner")?.classList.add("hidden")}};
+    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null},remove(k){this.set(k,"",0)}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365);this.showBanner()},showBanner(){const b=document.getElementById("cookie-banner");if(!this.cookie.get("on_banner")&&b)b.style.display="flex"},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};
     window.onHumanVerified=function(t){ON.cookie.set("on_verified",t,1/24);const g=document.getElementById("gate");g.style.transition="opacity 0.6s,transform 0.6s";g.style.opacity="0";g.style.transform="scale(1.05)";setTimeout(()=>{g.style.display="none";document.getElementById("app").style.display="block";ON.init()},600)};
     document.addEventListener("DOMContentLoaded",()=>{if(ON.cookie.get("on_verified")){document.getElementById("gate")?.remove();document.getElementById("app").style.display="block";ON.init()}});
     </script>
@@ -112,7 +112,7 @@
     </div>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <!-- ═══ COOKIE BANNER ═══ -->
-    <div id="cookie-banner" class="hidden" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;display:flex;align-items:center;gap:20px;max-width:520px;width:90vw;">
+    <div id="cookie-banner" class="hidden" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;display:none;align-items:center;gap:20px;max-width:520px;width:90vw;">
       <p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">We use cookies including <code style="font-family:IBM Plex Mono,monospace;font-size:11px;color:#E6007A;">on_verified</code>, <code style="font-family:IBM Plex Mono,monospace;font-size:11px;color:#E6007A;">on_theme</code>, <code style="font-family:IBM Plex Mono,monospace;font-size:11px;color:#E6007A;">on_chain</code>, and <code style="font-family:IBM Plex Mono,monospace;font-size:11px;color:#E6007A;">on_banner</code> for site functionality. <a href="/cookies.html" style="color:#E6007A;">Learn more</a></p>
       <button onclick="ON.acceptCookies()" style="background:#E6007A;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:0.08em;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button>
     </div>
@@ -736,8 +736,8 @@
       if(btn.closest(".space-y-4")&&btn.querySelector(".material-symbols-outlined")){
         btn.addEventListener("click",()=>{
           const panel=btn.nextElementSibling;
-          if(panel&&panel.classList.contains("hidden")){panel.classList.remove("hidden");btn.querySelector(".material-symbols-outlined").textContent="remove"}
-          else if(panel){panel.classList.add("hidden");btn.querySelector(".material-symbols-outlined").textContent="add"}
+          if(panel&&panel.classList.contains("hidden")){panel.style.display='block';btn.querySelector(".material-symbols-outlined").textContent="remove"}
+          else if(panel){panel.style.display='none';btn.querySelector(".material-symbols-outlined").textContent="add"}
         });
       }
     });
