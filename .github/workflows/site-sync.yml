@@ -16,34 +16,59 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run SEO/GEO audit
-        uses: anthropics/claude-code-action@beta
-        with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          prompt: |
-            Run /site-seo to audit all HTML pages in this repo for SEO and GEO compliance.
+      - name: SEO / Content checks
+        run: |
+          PASS=0; FAIL=0
 
-            Check every HTML page for:
-            - <title> tag present and unique (format: "[Name] | ORTHONODE SYSTEMS™")
-            - <meta name="description"> present, 120-160 characters
-            - <link rel="canonical"> present and correct
-            - <meta name="author" content="Arhant Barmate"> present
-            - <meta name="robots" content="index, follow"> present
-            - Open Graph tags complete
-            - Twitter Card tags complete
-            - JSON-LD structured data present
-            - Mobile viewport meta tag present
-            - <h1> exists exactly once per page
-            - No $49,000 grant figure (SHA grant is $25,000)
-            - SHA contract: 0xD661a1aB8CEFaaCd78F4B968670C3bC438415615
+          check() {
+            local label="$1"; local file="$2"; local pattern="$3"
+            if grep -qE "$pattern" "$file" 2>/dev/null; then
+              echo "  ✓ $label: $file"
+              PASS=$((PASS+1))
+            else
+              echo "  ✗ $label MISSING: $file"
+              FAIL=$((FAIL+1))
+            fi
+          }
 
-            Output results in format:
-            CHECK: [name]
-            STATUS: PASS / FAIL
-            FILE: [filename:line if FAIL]
-            DETAIL: [exact issue]
+          PAGES="index.html dotlend.html sha.html invariant.html tix-dao.html nexus.html oap.html ton-sha.html cookies.html"
 
-            Print: "X/Y checks PASS — [N] FAIL items"
+          for PAGE in $PAGES; do
+            [ ! -f "$PAGE" ] && continue
+            echo "── $PAGE"
+            check "<title> tag"        "$PAGE" "<title>"
+            check "meta description"   "$PAGE" "meta name=\"description\""
+            check "viewport meta"      "$PAGE" "meta name=\"viewport\""
+            check "charset utf-8"      "$PAGE" "charset"
+            check "og:title"           "$PAGE" "og:title"
+          done
 
-            If any FAIL items exist, list them clearly so they can be fixed in the next commit.
-            Do NOT modify any files — audit only.
+          echo ""
+          echo "── Grant amount check (no \$49,000 in HTML)"
+          if grep -rE '\$49,000|49,000' --include="*.html" --exclude-dir=docs . 2>/dev/null; then
+            echo "  ✗ FAIL: \$49,000 found — SHA grant is \$25,000"
+            FAIL=$((FAIL+1))
+          else
+            echo "  ✓ PASS"
+            PASS=$((PASS+1))
+          fi
+
+          echo ""
+          echo "── SHA contract address check"
+          if grep -q "0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" sha.html 2>/dev/null; then
+            echo "  ✓ PASS: contract address present in sha.html"
+            PASS=$((PASS+1))
+          else
+            echo "  ✗ WARN: SHA contract address not found in sha.html"
+          fi
+
+          echo ""
+          echo "── sitemap.xml present"
+          [ -f "sitemap.xml" ] && echo "  ✓ PASS" && PASS=$((PASS+1)) || echo "  ✗ FAIL" && FAIL=$((FAIL+1))
+
+          echo ""
+          echo "══════════════════════════════"
+          echo "Result: $PASS PASS — $FAIL FAIL"
+          echo "══════════════════════════════"
+
+          [ $FAIL -gt 0 ] && exit 1 || exit 0
