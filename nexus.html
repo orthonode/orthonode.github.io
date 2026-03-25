@@ -132,34 +132,13 @@
 <body class="bg-surface text-on-surface selection:bg-primary selection:text-on-primary min-h-screen">
     <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
     <script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script>
-    <div style="position:fixed;top:0;left:0;z-index:200;padding:14px 20px;display:flex;align-items:center;gap:16px;">
-      <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.08em;display:flex;align-items:center;gap:6px;transition:color 0.2s;" onmouseover="this.style.color='#00D48A'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">← HOME</a>
-      <span style="color:rgba(255,255,255,0.15);font-size:11px;">|</span>
-      <a href="dotlend.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#00D48A'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">DOT</a>
-      <a href="sha.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#00D48A'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">SHA</a>
-      <a href="invariant.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#00D48A'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">INV</a>
-      <a href="tix-dao.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#00D48A'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">TIX</a>
-      <a href="nexus.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#00D48A'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">NEX</a>
-    </div>
+    
     <div id="cookie-banner" class="hidden" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;display:none;align-items:center;gap:20px;max-width:520px;width:90vw;">
       <p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">We use cookies for site functionality. <a href="/cookies.html" style="color:#00D48A;">Learn more</a></p>
       <button onclick="ON.acceptCookies()" style="background:#00D48A;color:#000;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:0.08em;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button>
     </div>
 <!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-4 bg-black/60 backdrop-blur-xl">
-<div class="text-xl font-extrabold tracking-tighter text-[#00D48A] uppercase brand-syne">
-            ORTHONODE SYSTEMS™
-        </div>
-<nav class="hidden md:flex items-center space-x-8">
-<a class="text-[#00D48A] border-b-2 border-[#00D48A] pb-1 label-mono text-xs uppercase tracking-widest" href="https://github.com/orthonode" target="_blank" rel="noopener">Network</a>
-<a class="text-gray-400 font-light hover:text-white transition-colors label-mono text-xs uppercase tracking-widest" href="https://github.com/orthonode" target="_blank" rel="noopener">Protocols</a>
-<a class="text-gray-400 font-light hover:text-white transition-colors label-mono text-xs uppercase tracking-widest" href="https://github.com/orthonode" target="_blank" rel="noopener">Validator</a>
-<a class="text-gray-400 font-light hover:text-white transition-colors label-mono text-xs uppercase tracking-widest" href="https://github.com/orthonode" target="_blank" rel="noopener">Governance</a>
-</nav>
-<button class="bg-primary text-on-primary px-5 py-2 label-mono font-bold text-xs uppercase tracking-wider hover:scale-95 transition-transform">
-            Connect Node
-        </button>
-</header>
+
 <main class="pt-24">
 <!-- Hero Section -->
 <section class="relative min-h-[921px] flex flex-col items-center justify-center px-8 text-center overflow-hidden">
@@ -389,11 +368,11 @@
                 ORTHONODE SYSTEMS™
             </div>
 <div class="flex flex-wrap justify-center gap-6">
-<a class="text-gray-500 hover:text-[#00D48A] transition-colors label-mono text-[10px] uppercase tracking-widest" href="https://github.com/orthonode" target="_blank" rel="noopener">Documentation</a>
-<a class="text-gray-500 hover:text-[#00D48A] transition-colors label-mono text-[10px] uppercase tracking-widest" href="https://github.com/orthonode" target="_blank" rel="noopener">Security Audit</a>
-<a class="text-gray-500 hover:text-[#00D48A] transition-colors label-mono text-[10px] uppercase tracking-widest" href="https://github.com/orthonode" target="_blank" rel="noopener">Whitepaper</a>
-<a class="text-gray-500 hover:text-[#00D48A] transition-colors label-mono text-[10px] uppercase tracking-widest" href="https://github.com/orthonode" target="_blank" rel="noopener">Terms of Service</a>
-<a class="text-gray-500 hover:text-[#00D48A] transition-colors label-mono text-[10px] uppercase tracking-widest" href="https://github.com/orthonode" target="_blank" rel="noopener">Status</a>
+<a class="text-gray-500 hover:text-[#00D48A] transition-colors label-mono text-[10px] uppercase tracking-widest" href="https://github.com/orthonode/nexus-core" target="_blank" rel="noopener">Documentation</a>
+<a class="text-gray-500 hover:text-[#00D48A] transition-colors label-mono text-[10px] uppercase tracking-widest" href="https://github.com/orthonode/nexus-core" target="_blank" rel="noopener">Security Audit</a>
+<a class="text-gray-500 hover:text-[#00D48A] transition-colors label-mono text-[10px] uppercase tracking-widest" href="https://github.com/orthonode/nexus-core" target="_blank" rel="noopener">Whitepaper</a>
+<a class="text-gray-500 hover:text-[#00D48A] transition-colors label-mono text-[10px] uppercase tracking-widest" href="https://github.com/orthonode/nexus-core" target="_blank" rel="noopener">Terms of Service</a>
+<a class="text-gray-500 hover:text-[#00D48A] transition-colors label-mono text-[10px] uppercase tracking-widest" href="https://github.com/orthonode/nexus-core" target="_blank" rel="noopener">Status</a>
 </div>
 <div class="label-mono text-[10px] text-gray-500 uppercase tracking-widest text-center md:text-right">
                 © 2024 ORTHONODE SYSTEMS™. ALL RIGHTS RESERVED. SECURED BY OBSIDIAN PROTOCOL.

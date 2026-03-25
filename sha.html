@@ -129,15 +129,7 @@
     </style>
     <script src="/nav.js" defer></script>
 </head>
-<body class="selection:bg-primary-container selection:text-on-primary-container"><canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas><script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script><div style="position:fixed;top:0;left:0;z-index:200;padding:14px 20px;display:flex;align-items:center;gap:16px;">
-      <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.08em;display:flex;align-items:center;gap:6px;transition:color 0.2s;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">← HOME</a>
-      <span style="color:rgba(255,255,255,0.15);font-size:11px;">|</span>
-      <a href="dotlend.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">DOT</a>
-      <a href="sha.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">SHA</a>
-      <a href="invariant.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">INV</a>
-      <a href="tix-dao.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">TIX</a>
-      <a href="nexus.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">NEX</a>
-    </div><div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;align-items:center;gap:20px;max-width:520px;width:90vw;"><p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">Cookies used. <a href="/cookies.html" style="color:#2A9FE8;">Learn more</a></p><button onclick="ON.acceptCookies()" style="background:#2A9FE8;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button></div>
+<body class="selection:bg-primary-container selection:text-on-primary-container"><canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas><script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script><div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;align-items:center;gap:20px;max-width:520px;width:90vw;"><p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">Cookies used. <a href="/cookies.html" style="color:#2A9FE8;">Learn more</a></p><button onclick="ON.acceptCookies()" style="background:#2A9FE8;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button></div>
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/5 shadow-[0_0_20px_rgba(42,159,232,0.08)]">
 <div class="flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto">
@@ -145,13 +137,13 @@
 <span class="text-[#2A9FE8] font-syne font-extrabold text-2xl tracking-tighter bg-[#2A9FE8]/10 px-2 py-0.5 rounded-sm">SHA</span>
 <div class="hidden md:flex gap-8">
 <a class="text-[#2A9FE8] font-mono text-sm border-b border-[#2A9FE8]" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Network</a>
-<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Lending</a>
-<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Governance</a>
-<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Security</a>
+
+
+
 </div>
 </div>
 <div class="flex items-center gap-6">
-<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors flex items-center gap-1" href="https://github.com/orthonode/sha" target="_blank">
+<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors flex items-center gap-1" href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener">
                 GitHub <span class="text-[10px]">↗</span>
 </a>
 <a class="text-gray-400 font-mono text-sm hover:text-white transition-colors flex items-center gap-1" href="https://sepolia.arbiscan.io" target="_blank">
@@ -185,7 +177,7 @@
 <a class="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-mono text-sm flex items-center gap-2 hover:opacity-90 transition-all" href="https://sepolia.arbiscan.io" target="_blank">
                         View on Explorer <span class="material-symbols-outlined text-sm">north_east</span>
 </a>
-<a class="glass-panel text-white px-8 py-4 rounded-lg font-mono text-sm flex items-center gap-2 hover:bg-white/5 transition-all" href="https://github.com/orthonode/sha" target="_blank">
+<a class="glass-panel text-white px-8 py-4 rounded-lg font-mono text-sm flex items-center gap-2 hover:bg-white/5 transition-all" href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener">
                         GitHub <span class="material-symbols-outlined text-sm">north_east</span>
 </a>
 <button class="border border-white/10 text-on-surface-variant px-8 py-4 rounded-lg font-mono text-sm flex items-center gap-2 hover:text-white transition-all">
@@ -434,17 +426,17 @@
 <div class="space-y-4">
 <h6 class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#2A9FE8]">Technical</h6>
 <ul class="space-y-2 font-dm-sans text-xs text-gray-600">
-<li><a class="hover:text-[#2A9FE8] transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Protocol Docs</a></li>
-<li><a class="hover:text-[#2A9FE8] transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Smart Contracts</a></li>
-<li><a class="hover:text-[#2A9FE8] transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Audit Reports</a></li>
+<li><a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener" class="hover:text-[#2A9FE8] transition-colors">Protocol Docs</a></li>
+<li><a href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener" class="hover:text-[#2A9FE8] transition-colors">Contract on Arbiscan ↗</a></li>
+<li><a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener" class="hover:text-[#2A9FE8] transition-colors">GitHub Repo ↗</a></li>
 </ul>
 </div>
 <div class="space-y-4">
 <h6 class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#2A9FE8]">Resources</h6>
 <ul class="space-y-2 font-dm-sans text-xs text-gray-600">
-<li><a class="hover:text-[#2A9FE8] transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">GitHub</a></li>
-<li><a class="hover:text-[#2A9FE8] transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Status</a></li>
-<li><a class="hover:text-[#2A9FE8] transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Terms</a></li>
+<li><a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener" class="hover:text-[#2A9FE8] transition-colors">GitHub ↗</a></li>
+<li><a href="/sha.html" class="hover:text-[#2A9FE8] transition-colors">Status</a></li>
+<li><a href="/terms.html" class="hover:text-[#2A9FE8] transition-colors">Terms</a></li>
 </ul>
 </div>
 <div class="space-y-4">

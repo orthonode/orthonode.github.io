@@ -201,8 +201,16 @@
   // Insert nav as first child of body
   document.body.insertAdjacentHTML("afterbegin", navHTML);
 
-  // Remove any old duplicate nav elements (Stitch-generated ones)
-  document.querySelectorAll("nav:not(#on-nav)").forEach(n => n.remove());
+  // Remove any old duplicate nav/header elements (Stitch-generated ones)
+  document.querySelectorAll("nav:not(#on-nav), header").forEach(el => el.remove());
+  // Remove old back-nav strips
+  document.querySelectorAll("div[style*='position:fixed']").forEach(el => {
+    if (el.id === "on-nav" || el.id === "on-drawer" || el.id === "gate" || el.id === "cookie-banner" || el.id === "star-field") return;
+    const txt = el.innerText || "";
+    if (txt.includes("HOME") || txt.includes("← ") || txt.includes("ORTHONODE")) {
+      if (!el.querySelector("#on-logo")) el.remove();
+    }
+  });
   // Remove old back-nav divs on sub-pages
   document.querySelectorAll("[style*='position:fixed'][style*='top:0'][style*='left:0']:not(#on-nav):not(#on-drawer):not(#gate)").forEach(el => {
     if (el.querySelector("a") && el.querySelector("a").textContent.includes("HOME")) el.remove();

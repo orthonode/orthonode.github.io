@@ -323,6 +323,20 @@
     }
     </style>
     <script src="/nav.js" defer></script>
+
+    <style id="on-card-override">
+    /* Force protocol cards visible — Stitch IntersectionObserver fails after display:none */
+    .protocol-card,
+    .protocol-card.revealed {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease !important;
+    }
+    .protocol-card:hover {
+      border-color: rgba(255,255,255,0.15) !important;
+      transform: translateY(-6px) !important;
+    }
+    </style>
 </head>
 <body class="font-body font-light overflow-x-hidden bg-background">
     <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
@@ -433,11 +447,11 @@
 <div class="space-y-6">
 <div class="flex justify-between items-center border-b border-white/5 pb-4">
 <span class="text-white/40 font-label text-[10px] uppercase">Total Value Locked</span>
-<span class="text-white font-headline text-2xl">$41.2M</span>
+<span class="text-white font-headline text-2xl">$330M Simulated</span>
 </div>
 <div class="flex justify-between items-center border-b border-white/5 pb-4">
 <span class="text-white/40 font-label text-[10px] uppercase">Active Wallets</span>
-<span class="text-white font-headline text-2xl">12.4K</span>
+<span class="text-white font-headline text-xl">Testnet Live</span>
 </div>
 <div class="flex justify-between items-center">
 <span class="text-white/40 font-label text-[10px] uppercase">Security Level</span>
@@ -667,12 +681,7 @@
       });
 
       // ── Protocol card stagger on scroll ──────────────────
-      gsap.utils.toArray(".proto-card").forEach((card,i) => {
-        gsap.fromTo(card, {opacity:0, y:30, scale:0.97}, {
-          opacity:1, y:0, scale:1, duration:0.7, ease:"back.out(1.5)",
-          delay: i * 0.1,
-          scrollTrigger:{ trigger:card, start:"top 88%", once:true }
-        });
+      // proto-card animation handled by CSS hover (removed GSAP fromTo which caused opacity stuck at 0)
       });
 
       // ── Counter animation ─────────────────────────────────

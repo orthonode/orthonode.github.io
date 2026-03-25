@@ -156,15 +156,7 @@
 <body class="font-body font-300">
     <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
     <script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script>
-    <div style="position:fixed;top:0;left:0;z-index:200;padding:14px 20px;display:flex;align-items:center;gap:16px;">
-      <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.08em;display:flex;align-items:center;gap:6px;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">← HOME</a>
-      <span style="color:rgba(255,255,255,0.15);font-size:11px;">|</span>
-      <a href="dotlend.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">DOT</a>
-      <a href="sha.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">SHA</a>
-      <a href="invariant.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">INV</a>
-      <a href="tix-dao.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">TIX</a>
-      <a href="nexus.html" style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">NEX</a>
-    </div>
+    
     <div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;align-items:center;gap:20px;max-width:520px;width:90vw;">
       <p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">We use cookies for site functionality. <a href="/cookies.html" style="color:#E6007A;">Learn more</a></p>
       <button onclick="ON.acceptCookies()" style="background:#E6007A;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:0.08em;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button>
@@ -176,10 +168,10 @@
             ORTHONODE <span class="text-primary-container">/</span> DOTLEND
         </div>
 <div class="hidden md:flex gap-8 items-center">
-<a class="text-[#E6007A] border-b-2 border-[#E6007A] pb-1 font-label text-[10px] tracking-widest uppercase" href="https://nexucore.xyz" target="_blank" rel="noopener">Network</a>
-<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="https://nexucore.xyz" target="_blank" rel="noopener">Lending</a>
-<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="https://nexucore.xyz" target="_blank" rel="noopener">Governance</a>
-<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="https://nexucore.xyz" target="_blank" rel="noopener">Security</a>
+<a class="text-[#E6007A] border-b-2 border-[#E6007A] pb-1 font-label text-[10px] tracking-widest uppercase" href="https://github.com/orthonode/dotlend/blob/main/README.md" target="_blank" rel="noopener">Network Docs</a>
+<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="https://github.com/orthonode/dotlend" target="_blank" rel="noopener">Lending Docs</a>
+<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="https://github.com/orthonode/dotlend/blob/main/README.md#governance" target="_blank" rel="noopener">Governance</a>
+<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="https://github.com/orthonode/dotlend/blob/main/README.md#security" target="_blank" rel="noopener">Security</a>
 </div>
 <div class="flex items-center gap-6">
 <!-- Status Dots -->
@@ -237,7 +229,7 @@
 </a>
 <span class="absolute -top-3 -right-3 bg-secondary px-2 py-0.5 rounded text-[8px] font-label font-bold text-black border border-black z-10">TESTNET</span>
 </div>
-<a class="glass px-8 py-4 rounded-xl font-bold border border-outline-variant/30 hover:border-primary-container transition-all" href="https://github.com/orthonode/dotlend">Protocol Docs</a>
+<a class="glass px-8 py-4 rounded-xl font-bold border border-outline-variant/30 hover:border-primary-container transition-all" href="https://github.com/orthonode/dotlend">GitHub Docs ↗</a>
 <button class="glass px-8 py-4 rounded-xl font-bold border border-outline-variant/30 hover:border-primary-container transition-all">Security Audit</button>
 <button class="glass px-8 py-4 rounded-xl font-bold border border-outline-variant/30 hover:border-primary-container transition-all">GitHub Repo</button>
 </div>
@@ -517,12 +509,12 @@
 <p class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40">© 2024 ORTHONODE SYSTEMS. SOVEREIGN INFRASTRUCTURE.</p>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-4">
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://nexucore.xyz" target="_blank" rel="noopener">Protocol Docs</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://nexucore.xyz" target="_blank" rel="noopener">Smart Contracts</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://nexucore.xyz" target="_blank" rel="noopener">Audit Reports</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://github.com/orthonode">GitHub</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://nexucore.xyz" target="_blank" rel="noopener">Status</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://nexucore.xyz" target="_blank" rel="noopener">Terms of Service</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://github.com/orthonode/dotlend" target="_blank" rel="noopener">Protocol Docs ↗</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://github.com/orthonode/dotlend/tree/main/contracts" target="_blank" rel="noopener">Smart Contracts ↗</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://github.com/orthonode/dotlend" target="_blank" rel="noopener">GitHub ↗</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://github.com/orthonode/dotlend" target="_blank" rel="noopener">GitHub ↗</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="/dotlend.html">Status</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="/terms.html">Terms of Service</a>
 </div>
 </div>
 </footer>
