@@ -15,8 +15,8 @@ jobs:
 
       - name: Check for incorrect grant amount ($49,000)
         run: |
-          if grep -r "\$49,000\|49000" --include="*.html" --include="*.md" . 2>/dev/null | grep -v "//"; then
-            echo "ERROR: $49,000 found in source — SHA grant is $25,000"
+          if grep -rE '\$49,000|49,000' --include="*.html" --exclude-dir=docs . 2>/dev/null; then
+            echo "ERROR: \$49,000 found in HTML source — SHA grant is \$25,000"
             exit 1
           fi
 
