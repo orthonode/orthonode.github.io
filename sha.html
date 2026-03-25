@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
-    <meta name="description" content="Silicon-level hardware identity verification burning ESP32 eFuse data into Arbitrum Stylus smart contracts via Rust.">
-    <meta property="og:title" content="SHA — Secure Hardware Attestation on Arbitrum Stylus | ORTHONODE SYSTEMS™">
-    <meta property="og:description" content="Silicon-level hardware identity verification burning ESP32 eFuse data into Arbitrum Stylus smart contracts via Rust.">
-    <meta property="og:type" content="website">
-    <link rel="canonical" href="https://orthonode.xyz/sha.html">
-    <link rel="icon" href="/site-logo.png" type="image/png">
+<html class="dark" lang="en"><head><meta name="description" content="Silicon-level ESP32 eFuse identity burned into Arbitrum Stylus smart contracts via Rust/WASM. Contract: 0xD661...615."><meta property="og:title" content="SHA — Secure Hardware Attestation on Arbitrum Stylus | ORTHONODE SYSTEMS™"><link rel="icon" href="/site-logo.png" type="image/png">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>SHA | Secure Hardware Attestation</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=DM+Sans:wght@300&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
@@ -85,38 +78,62 @@
         .glass-panel { background: rgba(53, 53, 53, 0.4); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.1); }
         .glow-hover:hover { box-shadow: 0 0 40px rgba(42, 159, 232, 0.15); border-color: rgba(42, 159, 232, 0.4); }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-    </style>
 
-    <script>
-    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null},remove(k){this.set(k,"",0)}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365)},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};
-    document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","arbitrum_sepolia",7);const cb=document.getElementById("cookie-banner");if(!ON.cookie.get("on_banner")&&cb)cb.style.display="flex";});
-    </script>
+        @keyframes glitch {
+            0% { transform: translate(0); text-shadow: none; opacity: 1; }
+            20% { transform: translate(-2px, 2px); text-shadow: 2px 0 #2A9FE8, -2px 0 #ff0000; opacity: 0.8; }
+            40% { transform: translate(-2px, -2px); text-shadow: -2px 0 #2A9FE8, 2px 0 #ff0000; opacity: 1; }
+            60% { transform: translate(2px, 2px); text-shadow: 2px 0 #2A9FE8, -2px 0 #ff0000; opacity: 0.9; }
+            80% { transform: translate(2px, -2px); text-shadow: -2px 0 #2A9FE8, 2px 0 #ff0000; opacity: 1; }
+            100% { transform: translate(0); text-shadow: none; opacity: 1; }
+        }
+        .animate-glitch { animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both; }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .scanline-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(42, 159, 232, 0.05) 50%, transparent 100%);
+            animation: scanline 8s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(42, 159, 232, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(42, 159, 232, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(42, 159, 232, 0); }
+        }
+        .status-pulse { animation: pulse-glow 2s infinite; }
+
+        .fade-in-step { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .fade-in-step.visible { opacity: 1; transform: translateY(0); }
+    </style>
+<script>const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null}},init(){},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","arbitrum_sepolia",7);const b=document.getElementById("cookie-banner");if(!ON.cookie.get("on_banner")&&b)b.style.display="flex"});</script>
 </head>
-<body class="selection:bg-primary-container selection:text-on-primary-container">
-    <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-    <script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script>
-    <div style="position:fixed;top:0;left:0;z-index:200;padding:16px 24px;">
-      <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.08em;display:flex;align-items:center;gap:8px;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">← ORTHONODE.SYSTEMS</a>
-    </div>
-    <div id="cookie-banner" class="hidden" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;display:none;align-items:center;gap:20px;max-width:520px;width:90vw;">
-      <p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">We use cookies for site functionality. <a href="/cookies.html" style="color:#E6007A;">Learn more</a></p>
-      <button onclick="ON.acceptCookies()" style="background:#E6007A;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:0.08em;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button>
-    </div>
+<body class="selection:bg-primary-container selection:text-on-primary-container"><canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas><script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script><div style="position:fixed;top:0;left:0;z-index:200;padding:16px 24px;"><a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.08em;" onmouseover="this.style.color='#2A9FE8'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">← ORTHONODE.SYSTEMS</a></div><div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;align-items:center;gap:20px;max-width:520px;width:90vw;"><p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">Cookies used. <a href="/cookies.html" style="color:#2A9FE8;">Learn more</a></p><button onclick="ON.acceptCookies()" style="background:#2A9FE8;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button></div>
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/5 shadow-[0_0_20px_rgba(42,159,232,0.08)]">
 <div class="flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto">
 <div class="flex items-center gap-6">
 <span class="text-[#2A9FE8] font-syne font-extrabold text-2xl tracking-tighter bg-[#2A9FE8]/10 px-2 py-0.5 rounded-sm">SHA</span>
 <div class="hidden md:flex gap-8">
-<a class="text-[#2A9FE8] font-mono text-sm border-b border-[#2A9FE8]" href="#">Network</a>
-<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors" href="#">Lending</a>
-<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors" href="#">Governance</a>
-<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors" href="#">Security</a>
+<a class="text-[#2A9FE8] font-mono text-sm border-b border-[#2A9FE8]" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Network</a>
+<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Lending</a>
+<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Governance</a>
+<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Security</a>
 </div>
 </div>
-<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-lg font-mono text-sm font-medium hover:opacity-80 active:scale-[0.99] transition-all duration-300">
-                Connect Wallet
-            </button>
+<div class="flex items-center gap-6">
+<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors flex items-center gap-1" href="https://github.com/orthonode/sha" target="_blank">
+                GitHub <span class="text-[10px]">↗</span>
+</a>
+<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors flex items-center gap-1" href="https://sepolia.arbiscan.io" target="_blank">
+                Explorer <span class="text-[10px]">↗</span>
+</a>
+</div>
 </div>
 </nav>
 <main class="pt-32 pb-24 px-8 max-w-[1440px] mx-auto overflow-hidden">
@@ -129,7 +146,7 @@
 <span class="font-mono text-[10px] tracking-widest uppercase bg-surface-container-high px-3 py-1 text-on-surface-variant rounded-sm">RUST/WASM</span>
 <span class="font-mono text-[10px] tracking-widest uppercase bg-surface-container-high px-3 py-1 text-on-surface-variant rounded-sm">EFUSE IDENTITY</span>
 </div>
-<h1 class="text-[12rem] md:text-[16rem] leading-[0.85] font-syne font-extrabold tracking-tighter text-[#2A9FE8]">
+<h1 class="text-[12rem] md:text-[16rem] leading-[0.85] font-syne font-extrabold tracking-tighter text-[#2A9FE8] animate-glitch">
                     SHA
                 </h1>
 <div class="max-w-3xl space-y-6">
@@ -141,12 +158,12 @@
                     </p>
 </div>
 <div class="flex flex-wrap gap-4 pt-8">
-<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-mono text-sm flex items-center gap-2 hover:opacity-90 transition-all">
+<a class="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-mono text-sm flex items-center gap-2 hover:opacity-90 transition-all" href="https://sepolia.arbiscan.io" target="_blank">
                         View on Explorer <span class="material-symbols-outlined text-sm">north_east</span>
-</button>
-<button class="glass-panel text-white px-8 py-4 rounded-lg font-mono text-sm flex items-center gap-2 hover:bg-white/5 transition-all">
+</a>
+<a class="glass-panel text-white px-8 py-4 rounded-lg font-mono text-sm flex items-center gap-2 hover:bg-white/5 transition-all" href="https://github.com/orthonode/sha" target="_blank">
                         GitHub <span class="material-symbols-outlined text-sm">north_east</span>
-</button>
+</a>
 <button class="border border-white/10 text-on-surface-variant px-8 py-4 rounded-lg font-mono text-sm flex items-center gap-2 hover:text-white transition-all">
                         Read Architecture <span class="material-symbols-outlined text-sm">north_east</span>
 </button>
@@ -154,25 +171,25 @@
 </div>
 </section>
 <!-- Key Metrics Bento -->
-<section class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-40">
+<section class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-40" id="metrics-grid">
 <div class="col-span-1 md:col-span-2 glass-panel p-8 rounded-lg glow-hover transition-all">
 <span class="material-symbols-outlined text-[#2A9FE8] mb-4">local_fire_department</span>
-<div class="font-mono text-4xl text-white mb-2">100%</div>
+<div class="font-mono text-4xl text-white mb-2"><span class="counter" data-target="100">0</span>%</div>
 <div class="font-mono text-xs uppercase tracking-widest text-on-surface-variant">eFuse Burn Rate</div>
 </div>
 <div class="glass-panel p-8 rounded-lg glow-hover transition-all">
 <span class="material-symbols-outlined text-[#2A9FE8] mb-4">account_tree</span>
-<div class="font-mono text-xl text-white mb-2">EVM</div>
+<div class="font-mono text-xl text-white mb-2"><span class="counter-text" data-text="EVM">---</span></div>
 <div class="font-mono text-xs uppercase tracking-widest text-on-surface-variant">Compatible</div>
 </div>
 <div class="glass-panel p-8 rounded-lg glow-hover transition-all">
 <span class="material-symbols-outlined text-[#2A9FE8] mb-4">fingerprint</span>
-<div class="font-mono text-xl text-white mb-2">1:1</div>
+<div class="font-mono text-xl text-white mb-2"><span class="counter-ratio" data-target="1">0</span>:1</div>
 <div class="font-mono text-xs uppercase tracking-widest text-on-surface-variant">Device ID</div>
 </div>
 <div class="glass-panel p-8 rounded-lg glow-hover transition-all">
 <span class="material-symbols-outlined text-[#2A9FE8] mb-4">speed</span>
-<div class="font-mono text-xl text-white mb-2">&lt;1s</div>
+<div class="font-mono text-xl text-white mb-2">&lt;<span class="counter" data-target="1">0</span>s</div>
 <div class="font-mono text-xs uppercase tracking-widest text-on-surface-variant">Verification</div>
 </div>
 <div class="col-span-1 md:col-span-5 glass-panel p-8 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4 border-primary/20">
@@ -189,14 +206,16 @@
 </div>
 </section>
 <!-- How SHA Works -->
-<section class="mb-40">
+<section class="mb-40 relative py-16 px-4">
+<div class="scanline-overlay"></div>
+<div class="relative z-10">
 <div class="mb-16">
 <h3 class="text-xs font-mono uppercase tracking-[0.4em] text-[#2A9FE8] mb-4">Protocol Workflow</h3>
 <h2 class="text-5xl font-syne font-extrabold text-white">How SHA Works</h2>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative" id="workflow-steps">
 <!-- Step 1 -->
-<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-6 fade-in-step">
 <div class="font-mono text-6xl text-white/5 font-bold">01</div>
 <div class="h-1 w-12 bg-[#2A9FE8]"></div>
 <h4 class="text-2xl font-syne font-extrabold text-white">Silicon Extraction</h4>
@@ -205,7 +224,7 @@
                     </p>
 </div>
 <!-- Step 2 -->
-<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-6 fade-in-step">
 <div class="font-mono text-6xl text-white/5 font-bold">02</div>
 <div class="h-1 w-12 bg-[#2A9FE8]"></div>
 <h4 class="text-2xl font-syne font-extrabold text-white">Stylus Burning</h4>
@@ -214,13 +233,14 @@
                     </p>
 </div>
 <!-- Step 3 -->
-<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-6 fade-in-step">
 <div class="font-mono text-6xl text-white/5 font-bold">03</div>
 <div class="h-1 w-12 bg-[#2A9FE8]"></div>
 <h4 class="text-2xl font-syne font-extrabold text-white">Permanent Proof</h4>
 <p class="text-on-surface-variant leading-relaxed">
                         The hardware identity is now verified on-chain. Any third-party protocol can query the SHA registry to confirm device authenticity with <strong>sub-second latency</strong>.
                     </p>
+</div>
 </div>
 </div>
 </section>
@@ -309,7 +329,7 @@
 <!-- Contract Details -->
 <div class="glass-panel p-12 rounded-lg flex flex-col justify-center">
 <div class="flex items-center gap-3 mb-8">
-<div class="w-2 h-2 rounded-full bg-[#2A9FE8]"></div>
+<div class="w-2 h-2 rounded-full bg-[#2A9FE8] status-pulse"></div>
 <span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant">Contract Manifest</span>
 </div>
 <div class="space-y-8">
@@ -368,11 +388,11 @@
                 </p>
 <div class="flex gap-4">
 <div class="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-full border border-white/5">
-<div class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#2A9FE8]"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#2A9FE8] status-pulse"></div>
 <span class="font-mono text-[10px] uppercase tracking-wider text-white">Cross-Chain Sync</span>
 </div>
 <div class="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-full border border-white/5">
-<div class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#2A9FE8]"></div>
+<div class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#2A9FE8] status-pulse"></div>
 <span class="font-mono text-[10px] uppercase tracking-wider text-white">Agent Validation</span>
 </div>
 </div>
@@ -390,27 +410,103 @@
 <div class="space-y-4">
 <h6 class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#2A9FE8]">Technical</h6>
 <ul class="space-y-2 font-dm-sans text-xs text-gray-600">
-<li><a class="hover:text-[#2A9FE8] transition-colors" href="#">Protocol Docs</a></li>
-<li><a class="hover:text-[#2A9FE8] transition-colors" href="#">Smart Contracts</a></li>
-<li><a class="hover:text-[#2A9FE8] transition-colors" href="#">Audit Reports</a></li>
+<li><a class="hover:text-[#2A9FE8] transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Protocol Docs</a></li>
+<li><a class="hover:text-[#2A9FE8] transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Smart Contracts</a></li>
+<li><a class="hover:text-[#2A9FE8] transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Audit Reports</a></li>
 </ul>
 </div>
 <div class="space-y-4">
 <h6 class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#2A9FE8]">Resources</h6>
 <ul class="space-y-2 font-dm-sans text-xs text-gray-600">
-<li><a class="hover:text-[#2A9FE8] transition-colors" href="#">GitHub</a></li>
-<li><a class="hover:text-[#2A9FE8] transition-colors" href="#">Status</a></li>
-<li><a class="hover:text-[#2A9FE8] transition-colors" href="#">Terms</a></li>
+<li><a class="hover:text-[#2A9FE8] transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">GitHub</a></li>
+<li><a class="hover:text-[#2A9FE8] transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Status</a></li>
+<li><a class="hover:text-[#2A9FE8] transition-colors" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Terms</a></li>
 </ul>
 </div>
 <div class="space-y-4">
 <h6 class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#2A9FE8]">Network</h6>
 <div class="font-mono text-[10px] text-white bg-white/5 p-3 rounded">
                         Arbitrum One Mainnet<br/>
-<span class="text-[#2A9FE8]">Active Status: Normal</span>
+<span class="text-[#2A9FE8] flex items-center gap-2">
+<span class="w-1 h-1 rounded-full bg-[#2A9FE8] status-pulse"></span>
+                            Active Status: Normal
+                        </span>
 </div>
 </div>
 </div>
 </div>
 </footer>
+<script>
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.2
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.id === 'metrics-grid') {
+                        startMetricsAnimations();
+                    } else if (entry.target.classList.contains('fade-in-step')) {
+                        // Handled individually below for delay
+                    }
+                    animationObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Individual observers for staggered workflow steps
+        const workflowObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    const steps = document.querySelectorAll('.fade-in-step');
+                    steps.forEach((step, i) => {
+                        setTimeout(() => {
+                            step.classList.add('visible');
+                        }, i * 150);
+                    });
+                    workflowObserver.disconnect();
+                }
+            });
+        }, observerOptions);
+
+        workflowObserver.observe(document.querySelector('#workflow-steps'));
+        animationObserver.observe(document.querySelector('#metrics-grid'));
+
+        function startMetricsAnimations() {
+            // Number counters
+            document.querySelectorAll('.counter').forEach(counter => {
+                const target = parseInt(counter.dataset.target);
+                const duration = 2000;
+                const startTime = performance.now();
+
+                function update(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const value = Math.floor(progress * target);
+                    counter.innerText = value;
+                    if (progress < 1) requestAnimationFrame(update);
+                }
+                requestAnimationFrame(update);
+            });
+
+            // Ratio counter (1:1)
+            document.querySelectorAll('.counter-ratio').forEach(counter => {
+                const target = parseInt(counter.dataset.target);
+                setTimeout(() => counter.innerText = target, 500);
+            });
+
+            // Text swap (EVM)
+            document.querySelectorAll('.counter-text').forEach(counter => {
+                const text = counter.dataset.text;
+                let i = 0;
+                const interval = setInterval(() => {
+                    counter.innerText = text.substring(0, i + 1);
+                    i++;
+                    if (i === text.length) clearInterval(interval);
+                }, 100);
+            });
+        }
+    </script>
+<script>document.querySelectorAll("button,a").forEach(el=>{if(el.textContent.trim().toLowerCase().includes("connect wallet"))el.remove()});document.querySelectorAll("button").forEach(btn=>{const icon=btn.querySelector(".material-symbols-outlined");if(icon&&(icon.textContent.trim()==="add"||icon.textContent.trim()==="remove")){btn.addEventListener("click",()=>{const p=btn.nextElementSibling;if(!p)return;if(p.style.display==="block"){p.style.display="none";icon.textContent="add";}else{p.style.display="block";icon.textContent="remove";}});}});</script>
 </body></html>

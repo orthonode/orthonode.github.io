@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
-    <meta name="description" content="Deterministic AI execution receipts with 0-100 NTS scoring at 9,000+ receipts per second on Bittensor subnet.">
-    <meta property="og:title" content="INVARIANT — Node Trust Score Protocol on Bittensor | ORTHONODE SYSTEMS™">
-    <meta property="og:description" content="Deterministic AI execution receipts with 0-100 NTS scoring at 9,000+ receipts per second on Bittensor subnet.">
-    <meta property="og:type" content="website">
-    <link rel="canonical" href="https://orthonode.xyz/invariant.html">
-    <link rel="icon" href="/site-logo.png" type="image/png">
+<html class="dark" lang="en"><head><meta name="description" content="Deterministic AI execution receipts with 0-100 NTS scoring at 9K+ receipts/sec on Bittensor. SHA + TON-SHA + OAP trust stack."><meta property="og:title" content="INVARIANT — Node Trust Score Protocol on Bittensor | ORTHONODE SYSTEMS™"><link rel="icon" href="/site-logo.png" type="image/png">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>INVARIANT | AI Execution Receipt Verification</title>
@@ -15,7 +9,6 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500&amp;display=swap" rel="stylesheet"/>
 <!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -84,37 +77,103 @@
       }
     </script>
 <style>
-        body { font-family: 'DM Sans', sans-serif; background-color: #000000; color: #e2e2e2; }
+        body { font-family: 'DM Sans', sans-serif; background-color: #000000; color: #e2e2e2; overflow-x: hidden; }
         .font-syne { font-family: 'Syne', sans-serif; font-weight: 800; }
         .font-mono { font-family: 'IBM Plex Mono', monospace; }
-        .glass-card {
+        
+        /* Protocol/Feature Card Micro-animations */
+        .glass-card, .bg-surface-container-low {
             background: rgba(19, 19, 19, 0.6);
             backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        .glass-card:hover, .bg-surface-container-low:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(234, 179, 8, 0.3);
+            border-color: rgba(234, 179, 8, 0.3);
+        }
+
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
         }
+        
         .text-shadow-gold {
             text-shadow: 0 0 30px rgba(234, 179, 8, 0.3);
         }
-    </style>
 
-    <script>
-    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null},remove(k){this.set(k,"",0)}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365)},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};
-    document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","bittensor_tao",7);const cb=document.getElementById("cookie-banner");if(!ON.cookie.get("on_banner")&&cb)cb.style.display="flex";});
-    </script>
+        /* Shimmer Animation for Headline */
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .shimmer-text {
+            background: linear-gradient(90deg, #ffd165 0%, #ffffff 50%, #ffd165 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s infinite linear;
+        }
+
+        /* Particle Sparks Background */
+        .particle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .particle-container::before, .particle-container::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #EAB308;
+            border-radius: 50%;
+            opacity: 0;
+            animation: drift-up 4s infinite linear;
+        }
+        @keyframes drift-up {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
+        }
+        /* Randomized particle clusters */
+        .particle-container::after { animation-delay: 2s; left: 30%; }
+        .particle-seed-1 { position: absolute; left: 15%; animation: drift-up 5s infinite 1s; }
+        .particle-seed-2 { position: absolute; left: 65%; animation: drift-up 6s infinite 0.5s; }
+        .particle-seed-3 { position: absolute; left: 85%; animation: drift-up 4.5s infinite 2.5s; }
+
+        /* Roadmap Entrance Animation */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .roadmap-item {
+            opacity: 0;
+            animation: slideInLeft 0.6s ease-out forwards;
+        }
+
+        /* Gauge Animation */
+        .gauge-active {
+            stroke-dasharray: 502; /* 2 * PI * 80 */
+            stroke-dashoffset: 502;
+            transition: stroke-dashoffset 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+    </style>
+<script>const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null}},init(){},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","bittensor_tao",7);const b=document.getElementById("cookie-banner");if(!ON.cookie.get("on_banner")&&b)b.style.display="flex"});</script>
 </head>
-<body class="bg-background selection:bg-primary-container selection:text-on-primary-container">
-    <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-    <script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script>
-    <div style="position:fixed;top:0;left:0;z-index:200;padding:16px 24px;">
-      <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.08em;display:flex;align-items:center;gap:8px;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">← ORTHONODE.SYSTEMS</a>
-    </div>
-    <div id="cookie-banner" class="hidden" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;display:none;align-items:center;gap:20px;max-width:520px;width:90vw;">
-      <p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">We use cookies for site functionality. <a href="/cookies.html" style="color:#E6007A;">Learn more</a></p>
-      <button onclick="ON.acceptCookies()" style="background:#E6007A;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:0.08em;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button>
-    </div>
+<body class="bg-background selection:bg-primary-container selection:text-on-primary-container"><canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas><script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script><div style="position:fixed;top:0;left:0;z-index:200;padding:16px 24px;"><a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.08em;" onmouseover="this.style.color='#EAB308'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">← ORTHONODE.SYSTEMS</a></div><div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;align-items:center;gap:20px;max-width:520px;width:90vw;"><p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">Cookies used. <a href="/cookies.html" style="color:#EAB308;">Learn more</a></p><button onclick="ON.acceptCookies()" style="background:#EAB308;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button></div>
+<!-- Background Particles -->
+<div class="particle-container">
+<div class="particle-seed-1 w-1 h-1 bg-primary rounded-full opacity-40"></div>
+<div class="particle-seed-2 w-0.5 h-0.5 bg-primary rounded-full opacity-30"></div>
+<div class="particle-seed-3 w-1.5 h-1.5 bg-primary rounded-full opacity-20"></div>
+</div>
 <!-- TopNavBar -->
 <nav class="bg-black/60 backdrop-blur-xl docked full-width top-0 sticky z-50 tonal-shift bg-neutral-900/50 shadow-[0_20px_40px_rgba(234,179,8,0.04)]">
 <div class="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
@@ -122,15 +181,12 @@
 <span class="text-xl font-bold tracking-tighter text-white uppercase font-headline">ORTHONODE</span>
 <span class="text-xl font-bold tracking-tighter text-yellow-500 uppercase font-headline">INVARIANT</span>
 </div>
-<div class="hidden md:flex items-center gap-8">
-<a class="text-yellow-500 border-b-2 border-yellow-500 pb-1 font-mono text-sm" href="#">Network</a>
-<a class="text-neutral-400 font-mono hover:text-white transition-colors text-sm" href="#">Lending</a>
-<a class="text-neutral-400 font-mono hover:text-white transition-colors text-sm" href="#">Governance</a>
-<a class="text-neutral-400 font-mono hover:text-white transition-colors text-sm" href="#">Security</a>
+<div class="flex items-center gap-8">
+<a class="text-yellow-500 border-b-2 border-yellow-500 pb-1 font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Network</a>
+<a class="text-neutral-400 font-mono hover:text-white transition-colors text-sm" href="https://github.com/orthonode" target="_blank">GitHub ↗</a>
+<a class="text-neutral-400 font-mono hover:text-white transition-colors text-sm" href="https://bittensor.com" target="_blank">Bittensor ↗</a>
+<a class="hidden md:block text-neutral-400 font-mono hover:text-white transition-colors text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Lending</a>
 </div>
-<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-mono text-xs font-bold hover:scale-95 transition-transform duration-300">
-                Connect Wallet
-            </button>
 </div>
 </nav>
 <main class="relative">
@@ -142,7 +198,7 @@
 <span class="bg-surface-container-high px-3 py-1 text-[10px] font-mono tracking-widest text-on-surface-variant border border-outline-variant/30 rounded-lg">BITTENSOR TAO</span>
 <span class="bg-surface-container-high px-3 py-1 text-[10px] font-mono tracking-widest text-on-surface-variant border border-outline-variant/30 rounded-lg">NTS SCORING</span>
 </div>
-<h1 class="text-[12vw] md:text-[10rem] leading-[0.85] font-headline text-primary mb-8 tracking-tighter text-shadow-gold">
+<h1 class="text-[12vw] md:text-[10rem] leading-[0.85] font-headline mb-8 tracking-tighter text-shadow-gold shimmer-text">
                     INVARIANT
                 </h1>
 <div class="max-w-4xl">
@@ -153,12 +209,12 @@
                         Deterministic AI execution receipts with 0–100 NTS scoring — 9,000+ receipts per second throughput on Bittensor subnet.
                     </p>
 <div class="flex flex-wrap gap-4">
-<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-headline text-lg hover:scale-105 transition-transform flex items-center gap-2">
+<a class="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-headline text-lg hover:scale-105 transition-transform flex items-center gap-2" href="https://github.com/orthonode/invariant" target="_blank">
                             Explore Subnet <span class="material-symbols-outlined">north_east</span>
-</button>
-<button class="border border-white/10 hover:bg-surface-container-highest transition-all px-8 py-4 rounded-lg font-headline text-lg flex items-center gap-2">
-                            GitHub <span class="material-symbols-outlined">code</span>
-</button>
+</a>
+<a class="border border-white/10 hover:bg-surface-container-highest transition-all px-8 py-4 rounded-lg font-headline text-lg flex items-center gap-2" href="https://github.com/orthonode/invariant" target="_blank">
+                            GitHub <span class="material-symbols-outlined">north_east</span>
+</a>
 </div>
 </div>
 </div>
@@ -173,7 +229,7 @@
 <div class="glass-card p-8 rounded-xl flex flex-col justify-between aspect-square md:aspect-auto h-64">
 <span class="text-primary material-symbols-outlined text-4xl">speed</span>
 <div>
-<div class="text-4xl font-headline text-white">9K+</div>
+<div class="text-4xl font-headline text-white"><span data-count="9000">0</span>+</div>
 <div class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">Receipts/Sec</div>
 </div>
 </div>
@@ -187,7 +243,7 @@
 <div class="glass-card p-8 rounded-xl flex flex-col justify-between h-64">
 <span class="text-primary material-symbols-outlined text-4xl">verified</span>
 <div>
-<div class="text-4xl font-headline text-white">21</div>
+<div class="text-4xl font-headline text-white" data-count="21">0</div>
 <div class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">Tests Passing</div>
 </div>
 </div>
@@ -244,9 +300,9 @@
 <div class="relative w-full aspect-square max-w-md">
 <svg class="w-full h-full transform -rotate-90" viewbox="0 0 200 200">
 <!-- Background Gauge -->
-<circle cx="100" cy="100" fill="none" r="80" stroke="#1B1B1B" stroke-dasharray="377" stroke-dashoffset="125" stroke-linecap="round" stroke-width="12"></circle>
-<!-- Active Gauge (Animated feel) -->
-<circle class="drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]" cx="100" cy="100" fill="none" r="80" stroke="#EAB308" stroke-dasharray="310" stroke-dashoffset="125" stroke-linecap="round" stroke-width="12"></circle>
+<circle cx="100" cy="100" fill="none" r="80" stroke="#1B1B1B" stroke-dasharray="502" stroke-dashoffset="0" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Active Gauge -->
+<circle class="gauge-active drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]" cx="100" cy="100" fill="none" id="nts-gauge" r="80" stroke="#EAB308" stroke-linecap="round" stroke-width="12"></circle>
 </svg>
 <div class="absolute inset-0 flex flex-col items-center justify-center text-center pt-8">
 <span class="text-7xl font-headline text-white tracking-tighter">98.4</span>
@@ -286,7 +342,7 @@
 <!-- Phase Roadmap -->
 <section class="px-8 pb-32 max-w-screen-2xl mx-auto">
 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-<div class="relative p-8 rounded-xl bg-surface-container-low border border-primary/20">
+<div class="roadmap-item relative p-8 rounded-xl bg-surface-container-low border border-primary/20" style="animation-delay: 0ms;">
 <span class="font-mono text-primary text-[10px] uppercase mb-4 block">Phase 1</span>
 <h5 class="text-white font-headline text-xl mb-4">Core NTS</h5>
 <div class="flex items-center gap-2 text-primary">
@@ -294,7 +350,7 @@
 <span class="font-mono text-[10px] uppercase">Done</span>
 </div>
 </div>
-<div class="relative p-8 rounded-xl glass-card">
+<div class="roadmap-item relative p-8 rounded-xl glass-card" style="animation-delay: 200ms;">
 <span class="font-mono text-on-surface-variant text-[10px] uppercase mb-4 block">Phase 2</span>
 <h5 class="text-white font-headline text-xl mb-4">Subnet Reg</h5>
 <div class="flex items-center gap-2 text-yellow-500">
@@ -302,7 +358,7 @@
 <span class="font-mono text-[10px] uppercase">Active</span>
 </div>
 </div>
-<div class="relative p-8 rounded-xl glass-card opacity-60">
+<div class="roadmap-item relative p-8 rounded-xl glass-card opacity-60" style="animation-delay: 400ms;">
 <span class="font-mono text-on-surface-variant text-[10px] uppercase mb-4 block">Phase 3</span>
 <h5 class="text-white font-headline text-xl mb-4">Validator Intel</h5>
 <div class="flex items-center gap-2 text-on-surface-variant">
@@ -310,7 +366,7 @@
 <span class="font-mono text-[10px] uppercase">Pending</span>
 </div>
 </div>
-<div class="relative p-8 rounded-xl glass-card opacity-60">
+<div class="roadmap-item relative p-8 rounded-xl glass-card opacity-60" style="animation-delay: 600ms;">
 <span class="font-mono text-on-surface-variant text-[10px] uppercase mb-4 block">Phase 4</span>
 <h5 class="text-white font-headline text-xl mb-4">Cross-chain</h5>
 <div class="flex items-center gap-2 text-on-surface-variant">
@@ -365,13 +421,51 @@
 <p class="font-mono text-[10px] text-neutral-700 uppercase tracking-widest">© 2024 ORTHONODE SYSTEMS. Sovereign Infrastructure.</p>
 </div>
 <div class="flex flex-wrap gap-x-12 gap-y-4 md:justify-end">
-<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="#">Protocol Docs</a>
-<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="#">Smart Contracts</a>
-<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="#">Audit Reports</a>
-<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="#">GitHub</a>
-<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="#">Status</a>
-<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="#">Terms</a>
+<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Protocol Docs</a>
+<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Smart Contracts</a>
+<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Audit Reports</a>
+<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="https://github.com/orthonode" target="_blank">GitHub</a>
+<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Status</a>
+<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Terms</a>
 </div>
 </div>
 </footer>
+<script>
+        // Animations on load
+        window.addEventListener('load', () => {
+            // Gauge animation
+            const gauge = document.getElementById('nts-gauge');
+            const circumference = 2 * Math.PI * 80;
+            const targetScore = 98.4;
+            const percentage = targetScore / 100;
+            // The gauge is a partial circle visually in the original design (approx 3/4)
+            // But if we want it to reach 98.4% of the full circle:
+            const offset = circumference - (percentage * circumference);
+            gauge.style.strokeDashoffset = offset;
+
+            // Counter animations
+            const animateCounter = (element, target, duration) => {
+                let start = 0;
+                const increment = target / (duration / 16); // 16ms per frame
+                const update = () => {
+                    start += increment;
+                    if (start >= target) {
+                        element.innerText = Math.floor(target);
+                    } else {
+                        element.innerText = Math.floor(start);
+                        requestAnimationFrame(update);
+                    }
+                };
+                update();
+            };
+
+            const counterElements = document.querySelectorAll('[data-count]');
+            counterElements.forEach(el => {
+                const targetValue = parseInt(el.getAttribute('data-count'));
+                const duration = targetValue > 100 ? 1200 : 800;
+                animateCounter(el, targetValue, duration);
+            });
+        });
+    </script>
+<script>document.querySelectorAll("button,a").forEach(el=>{if(el.textContent.trim().toLowerCase().includes("connect wallet"))el.remove()});document.querySelectorAll("button").forEach(btn=>{const icon=btn.querySelector(".material-symbols-outlined");if(icon&&(icon.textContent.trim()==="add"||icon.textContent.trim()==="remove")){btn.addEventListener("click",()=>{const p=btn.nextElementSibling;if(!p)return;if(p.style.display==="block"){p.style.display="none";icon.textContent="add";}else{p.style.display="block";icon.textContent="remove";}});}});</script>
 </body></html>

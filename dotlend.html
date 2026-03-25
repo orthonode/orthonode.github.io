@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 
 <html class="dark" lang="en"><head>
-    <meta name="description" content="Over-collateralised lending protocol on Polkadot Hub with Noir ZK oracles, vDOT/WPAS collateral, and full ERC-20 borrowing.">
+    <meta name="description" content="The Aave of Polkadot. Deposit vDOT or WPAS, borrow USDH at 70% LTV with Noir ZK solvency architecture.">
     <meta property="og:title" content="DotLend — First Money Market on Polkadot Hub | ORTHONODE SYSTEMS™">
-    <meta property="og:description" content="Over-collateralised lending protocol on Polkadot Hub with Noir ZK oracles, vDOT/WPAS collateral, and full ERC-20 borrowing.">
+    <meta property="og:description" content="The Aave of Polkadot. Deposit vDOT or WPAS, borrow USDH at 70% LTV with Noir ZK solvency architecture.">
     <meta property="og:type" content="website">
-    <link rel="canonical" href="https://orthonode.xyz/dotlend.html">
     <link rel="icon" href="/site-logo.png" type="image/png">
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>DotLend | First Money Market on Polkadot Hub</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=DM+Sans:wght@300;400&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Space+Grotesk:wght@300;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -79,25 +77,73 @@
     </script>
 <style>
         body { background-color: #000000; color: #e5e2e1; }
-        .glass { background: rgba(19, 19, 19, 0.6); backdrop-filter: blur(24px); border: 1px solid rgba(91, 63, 71, 0.15); }
+        .glass { 
+            background: rgba(19, 19, 19, 0.6); 
+            backdrop-filter: blur(24px); 
+            border: 1px solid rgba(91, 63, 71, 0.15); 
+            transition: all 0.3s ease;
+        }
+        .glass:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(230, 0, 122, 0.3);
+            border-color: rgba(230, 0, 122, 0.3);
+        }
         .syne-800 { font-family: 'Syne'; font-weight: 800; letter-spacing: -0.02em; }
         .mono-label { font-family: 'IBM Plex Mono'; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; }
-        .gradient-border-panel { position: relative; border-radius: 0.5rem; background: linear-gradient(black, black) padding-box, linear-gradient(to right, #e6007a, #9945ff) border-box; border: 1px solid transparent; }
+        
+        @keyframes gradient-animate {
+            0% { border-color: #e6007a; }
+            50% { border-color: #9945ff; }
+            100% { border-color: #e6007a; }
+        }
+        .gradient-border-panel { 
+            position: relative; 
+            border-radius: 0.5rem; 
+            background: linear-gradient(black, black) padding-box, linear-gradient(to right, #e6007a, #9945ff) border-box; 
+            border: 1px solid transparent; 
+            animation: gradient-animate 3s infinite linear;
+        }
+
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+        
+        @keyframes slide-up {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-slide-up { animation: slide-up 0.6s ease-out forwards; }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { opacity: 0; animation: fade-in 0.5s ease-out forwards; }
+
+        @keyframes status-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 4px rgba(34, 197, 94, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #22c55e;
+            animation: status-pulse 2s infinite;
+        }
     </style>
 
     <script>
-    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null},remove(k){this.set(k,"",0)}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365)},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};
-    document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","polkadot_hub",7);const cb=document.getElementById("cookie-banner");if(!ON.cookie.get("on_banner")&&cb)cb.style.display="flex";});
+    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365)},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};
+    document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","polkadot_hub",7);const b=document.getElementById("cookie-banner");if(!ON.cookie.get("on_banner")&&b)b.style.display="flex"});
     </script>
 </head>
 <body class="font-body font-300">
     <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
     <script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script>
     <div style="position:fixed;top:0;left:0;z-index:200;padding:16px 24px;">
-      <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.08em;display:flex;align-items:center;gap:8px;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">← ORTHONODE.SYSTEMS</a>
+      <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:0.08em;display:flex;align-items:center;gap:8px;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">← ORTHONODE.SYSTEMS</a>
     </div>
-    <div id="cookie-banner" class="hidden" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;display:none;align-items:center;gap:20px;max-width:520px;width:90vw;">
+    <div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;align-items:center;gap:20px;max-width:520px;width:90vw;">
       <p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">We use cookies for site functionality. <a href="/cookies.html" style="color:#E6007A;">Learn more</a></p>
       <button onclick="ON.acceptCookies()" style="background:#E6007A;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:0.08em;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button>
     </div>
@@ -105,20 +151,44 @@
 <nav class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-3xl shadow-[0_0_20px_rgba(230,0,122,0.1)]">
 <div class="flex justify-between items-center px-8 h-20 w-full max-w-[1440px] mx-auto">
 <div class="text-xl font-800 tracking-tighter text-[#e5e2e1] uppercase font-headline">
-                ORTHONODE <span class="text-primary-container">/</span> DOTLEND
-            </div>
+            ORTHONODE <span class="text-primary-container">/</span> DOTLEND
+        </div>
 <div class="hidden md:flex gap-8 items-center">
-<a class="text-[#E6007A] border-b-2 border-[#E6007A] pb-1 font-label text-[10px] tracking-widest uppercase" href="#">Network</a>
-<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="#">Lending</a>
-<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="#">Governance</a>
-<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="#">Security</a>
+<a class="text-[#E6007A] border-b-2 border-[#E6007A] pb-1 font-label text-[10px] tracking-widest uppercase" href="https://nexucore.xyz" target="_blank" rel="noopener">Network</a>
+<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="https://nexucore.xyz" target="_blank" rel="noopener">Lending</a>
+<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="https://nexucore.xyz" target="_blank" rel="noopener">Governance</a>
+<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="https://nexucore.xyz" target="_blank" rel="noopener">Security</a>
+</div>
+<div class="flex items-center gap-6">
+<!-- Status Dots -->
+<div class="flex items-center gap-2">
+<div class="group relative flex flex-col items-center">
+<div class="status-dot"></div>
+<span class="absolute top-6 font-label text-[7px] opacity-0 group-hover:opacity-100 transition-opacity">ARB</span>
+</div>
+<div class="group relative flex flex-col items-center">
+<div class="status-dot" style="animation-delay: 0.2s"></div>
+<span class="absolute top-6 font-label text-[7px] opacity-0 group-hover:opacity-100 transition-opacity">TON</span>
+</div>
+<div class="group relative flex flex-col items-center">
+<div class="status-dot" style="animation-delay: 0.4s"></div>
+<span class="absolute top-6 font-label text-[7px] opacity-0 group-hover:opacity-100 transition-opacity">DOT</span>
+</div>
+<div class="group relative flex flex-col items-center">
+<div class="status-dot" style="animation-delay: 0.6s"></div>
+<span class="absolute top-6 font-label text-[7px] opacity-0 group-hover:opacity-100 transition-opacity">TAO</span>
+</div>
+<div class="group relative flex flex-col items-center">
+<div class="status-dot" style="animation-delay: 0.8s"></div>
+<span class="absolute top-6 font-label text-[7px] opacity-0 group-hover:opacity-100 transition-opacity">SOL</span>
+</div>
 </div>
 <div class="flex items-center gap-4">
-<button class="material-symbols-outlined text-[#e5e2e1]/60 hover:text-primary-container transition-all">settings</button>
-<button class="material-symbols-outlined text-[#e5e2e1]/60 hover:text-primary-container transition-all">notifications</button>
-<button class="bg-primary-container text-white px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-wider scale-95 active:scale-90 transition-all shadow-[0_0_15px_rgba(230,0,122,0.4)]">
-                    Connect Wallet
-                </button>
+<a class="text-[#e5e2e1]/60 hover:text-white transition-all text-[10px] font-label uppercase tracking-widest border border-outline-variant/30 px-4 py-2 rounded-lg" href="https://github.com/orthonode/dotlend">Docs ↗</a>
+<a class="bg-primary-container text-white px-5 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider scale-95 active:scale-90 transition-all shadow-[0_0_15px_rgba(230,0,122,0.4)]" href="https://github.com/orthonode">
+                    GitHub ↗
+                </a>
+</div>
 </div>
 </div>
 </nav>
@@ -127,44 +197,47 @@
 <section class="relative mb-32 flex flex-col items-center text-center">
 <div class="absolute -top-40 -left-40 w-96 h-96 bg-primary-container/10 blur-[120px] rounded-full"></div>
 <div class="absolute -top-20 -right-40 w-80 h-80 bg-tertiary-container/10 blur-[100px] rounded-full"></div>
-<div class="flex gap-3 mb-8">
+<div class="flex gap-3 mb-8 animate-slide-up">
 <span class="px-3 py-1 bg-surface-container-low text-[10px] font-label text-secondary rounded-lg border border-outline-variant/20">POLKADOT SOLIDITY HACK 2026</span>
 <span class="px-3 py-1 bg-surface-container-low text-[10px] font-label text-primary-container rounded-lg border border-primary-container/30">TESTNET LIVE</span>
 <span class="px-3 py-1 bg-surface-container-low text-[10px] font-label text-tertiary rounded-lg border border-tertiary-container/30">ZK-VERIFIED</span>
 </div>
-<h1 class="text-9xl md:text-[12rem] syne-800 text-primary-container leading-[0.85] tracking-tighter mb-6">
-                DOTLEND
-            </h1>
-<p class="text-2xl md:text-3xl font-300 text-on-surface/80 max-w-2xl mx-auto mb-12">
-                The first sovereign money market engineered for the Polkadot Hub ecosystem.
-            </p>
-<div class="flex flex-wrap justify-center gap-4">
-<button class="bg-primary-container text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-[0_0_30px_rgba(230,0,122,0.4)] transition-all">
+<h1 class="text-9xl md:text-[12rem] syne-800 text-primary-container leading-[0.85] tracking-tighter mb-6 animate-slide-up" style="animation-delay: 0.1s">
+            DOTLEND
+        </h1>
+<p class="text-2xl md:text-3xl font-300 text-on-surface/80 max-w-2xl mx-auto mb-12 animate-slide-up" style="animation-delay: 0.2s">
+            The first sovereign money market engineered for the Polkadot Hub ecosystem.
+        </p>
+<div class="flex flex-wrap justify-center items-center gap-4 animate-slide-up" style="animation-delay: 0.3s">
+<div class="relative group">
+<a class="bg-primary-container text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-[0_0_30px_rgba(230,0,122,0.4)] transition-all" href="https://github.com/orthonode/dotlend">
                     Launch App <span class="material-symbols-outlined">north_east</span>
-</button>
-<button class="glass px-8 py-4 rounded-xl font-bold border border-outline-variant/30 hover:border-primary-container transition-all">Protocol Docs</button>
+</a>
+<span class="absolute -top-3 -right-3 bg-secondary px-2 py-0.5 rounded text-[8px] font-label font-bold text-black border border-black z-10">TESTNET</span>
+</div>
+<a class="glass px-8 py-4 rounded-xl font-bold border border-outline-variant/30 hover:border-primary-container transition-all" href="https://github.com/orthonode/dotlend">Protocol Docs</a>
 <button class="glass px-8 py-4 rounded-xl font-bold border border-outline-variant/30 hover:border-primary-container transition-all">Security Audit</button>
 <button class="glass px-8 py-4 rounded-xl font-bold border border-outline-variant/30 hover:border-primary-container transition-all">GitHub Repo</button>
 </div>
 </section>
 <!-- Metrics Bar -->
 <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-32">
-<div class="glass p-8 rounded-xl relative group">
+<div class="glass p-8 rounded-xl relative group animate-fade-in" style="animation-delay: 0.1s">
 <p class="mono-label text-[10px] text-on-surface/40 mb-2">Deployed Contracts</p>
 <h3 class="syne-800 text-5xl text-primary-container">13</h3>
 <div class="absolute bottom-0 left-0 h-1 w-0 bg-primary-container group-hover:w-full transition-all duration-500"></div>
 </div>
-<div class="glass p-8 rounded-xl relative group">
+<div class="glass p-8 rounded-xl relative group animate-fade-in" style="animation-delay: 0.2s">
 <p class="mono-label text-[10px] text-on-surface/40 mb-2">Technical Tests</p>
 <h3 class="syne-800 text-5xl text-primary-container">108</h3>
 <div class="absolute bottom-0 left-0 h-1 w-0 bg-primary-container group-hover:w-full transition-all duration-500"></div>
 </div>
-<div class="glass p-8 rounded-xl relative group">
+<div class="glass p-8 rounded-xl relative group animate-fade-in" style="animation-delay: 0.3s">
 <p class="mono-label text-[10px] text-on-surface/40 mb-2">HOLLAR TVL</p>
 <h3 class="syne-800 text-5xl text-primary-container">$330M</h3>
 <div class="absolute bottom-0 left-0 h-1 w-0 bg-primary-container group-hover:w-full transition-all duration-500"></div>
 </div>
-<div class="glass p-8 rounded-xl relative group">
+<div class="glass p-8 rounded-xl relative group animate-fade-in" style="animation-delay: 0.4s">
 <p class="mono-label text-[10px] text-on-surface/40 mb-2">Max LTV</p>
 <h3 class="syne-800 text-5xl text-primary-container">70%</h3>
 <div class="absolute bottom-0 left-0 h-1 w-0 bg-primary-container group-hover:w-full transition-all duration-500"></div>
@@ -174,7 +247,7 @@
 <section class="mb-32">
 <h2 class="syne-800 text-4xl mb-12 uppercase tracking-tighter">Core Architecture</h2>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="glass p-10 rounded-xl hover:translate-y-[-8px] transition-transform">
+<div class="glass p-10 rounded-xl transition-all">
 <div class="w-12 h-12 bg-secondary-container/20 flex items-center justify-center rounded-lg mb-6">
 <span class="material-symbols-outlined text-secondary">layers</span>
 </div>
@@ -194,14 +267,14 @@
 </li>
 </ul>
 </div>
-<div class="glass p-10 rounded-xl border-primary-container/20 hover:translate-y-[-8px] transition-transform">
+<div class="glass p-10 rounded-xl gradient-border-panel transition-all">
 <div class="w-12 h-12 bg-primary-container/20 flex items-center justify-center rounded-lg mb-6">
 <span class="material-symbols-outlined text-primary-container">security</span>
 </div>
 <h4 class="syne-800 text-xl mb-4">ZK Oracle Layer</h4>
 <p class="text-on-surface/60 text-sm mb-6 leading-relaxed">
-                        Privacy-preserving price feeds powered by Noir ZK circuits with low-latency updates.
-                    </p>
+                    Privacy-preserving price feeds powered by Noir ZK circuits with low-latency updates.
+                </p>
 <div class="bg-surface-container-lowest p-4 rounded-lg font-label text-[11px]">
 <div class="flex justify-between mb-2">
 <span>CIRCUIT_ID:</span>
@@ -213,14 +286,14 @@
 </div>
 </div>
 </div>
-<div class="glass p-10 rounded-xl hover:translate-y-[-8px] transition-transform">
+<div class="glass p-10 rounded-xl transition-all">
 <div class="w-12 h-12 bg-tertiary-container/20 flex items-center justify-center rounded-lg mb-6">
 <span class="material-symbols-outlined text-tertiary">bolt</span>
 </div>
 <h4 class="syne-800 text-xl mb-4">Lending Engine</h4>
 <p class="text-on-surface/60 text-sm mb-6 leading-relaxed">
-                        High-efficiency liquidations and dynamic health factor calculations for cross-chain assets.
-                    </p>
+                    High-efficiency liquidations and dynamic health factor calculations for cross-chain assets.
+                </p>
 <div class="flex gap-2">
 <span class="px-2 py-1 bg-surface-container-high rounded font-label text-[10px]">ERC-20</span>
 <span class="px-2 py-1 bg-surface-container-high rounded font-label text-[10px]">POLKAVM</span>
@@ -286,8 +359,8 @@
 <p class="text-xs text-on-surface/50 leading-relaxed mb-6">Users deposit vDOT or WPAS into the lending pool to start earning passive yield and unlock borrowing power.</p>
 <div class="flex items-center gap-2 text-[10px] font-label text-on-surface/40">
 <span class="material-symbols-outlined text-[14px]">account_balance_wallet</span>
-                        TXN_CONFIRM_ZK_PROVE
-                    </div>
+                    TXN_CONFIRM_ZK_PROVE
+                </div>
 </div>
 <div class="glass p-8 rounded-xl border-l-4 border-l-primary-container">
 <span class="mono-label text-primary-container text-[10px] block mb-4">Step 02 / BORROW</span>
@@ -295,8 +368,8 @@
 <p class="text-xs text-on-surface/50 leading-relaxed mb-6">Based on health factor, users mint HOLLAR stablecoin against their collateral. Liquidity is instant.</p>
 <div class="flex items-center gap-2 text-[10px] font-label text-on-surface/40">
 <span class="material-symbols-outlined text-[14px]">payments</span>
-                        LTV_CHECK_PASSED
-                    </div>
+                    LTV_CHECK_PASSED
+                </div>
 </div>
 <div class="glass p-8 rounded-xl border-l-4 border-l-tertiary">
 <span class="mono-label text-tertiary text-[10px] block mb-4">Step 03 / LIQUIDATE</span>
@@ -304,8 +377,8 @@
 <p class="text-xs text-on-surface/50 leading-relaxed mb-6">Automatic bots monitor health factors. If a position drops below 1.0, collateral is auctioned for HOLLAR.</p>
 <div class="flex items-center gap-2 text-[10px] font-label text-on-surface/40">
 <span class="material-symbols-outlined text-[14px]">gavel</span>
-                        SYSTEM_SOLVENT_TRUE
-                    </div>
+                    SYSTEM_SOLVENT_TRUE
+                </div>
 </div>
 </div>
 </section>
@@ -316,8 +389,8 @@
 <div class="w-full md:w-1/2">
 <h2 class="syne-800 text-5xl mb-6 text-primary-container">ZK Solvency Verification</h2>
 <p class="text-on-surface/70 font-300 leading-relaxed mb-8">
-                            DotLend utilizes the Noir domain-specific language to generate zero-knowledge proofs of protocol solvency. This allows us to prove that our reserves exceed liabilities without revealing the exact composition of our whale positions.
-                        </p>
+                        DotLend utilizes the Noir domain-specific language to generate zero-knowledge proofs of protocol solvency. This allows us to prove that our reserves exceed liabilities without revealing the exact composition of our whale positions.
+                    </p>
 <div class="space-y-4">
 <div class="flex gap-4 items-start">
 <span class="material-symbols-outlined text-primary-container mt-1">verified</span>
@@ -422,13 +495,39 @@
 <p class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40">© 2024 ORTHONODE SYSTEMS. SOVEREIGN INFRASTRUCTURE.</p>
 </div>
 <div class="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-4">
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="#">Protocol Docs</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="#">Smart Contracts</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="#">Audit Reports</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="#">GitHub</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="#">Status</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="#">Terms of Service</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://nexucore.xyz" target="_blank" rel="noopener">Protocol Docs</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://nexucore.xyz" target="_blank" rel="noopener">Smart Contracts</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://nexucore.xyz" target="_blank" rel="noopener">Audit Reports</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://github.com/orthonode">GitHub</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://nexucore.xyz" target="_blank" rel="noopener">Status</a>
+<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://nexucore.xyz" target="_blank" rel="noopener">Terms of Service</a>
 </div>
 </div>
 </footer>
+
+    <script>
+    // Remove any remaining Connect Wallet elements
+    document.querySelectorAll("button,a").forEach(el=>{
+      if(el.textContent.trim().toLowerCase().includes("connect wallet"))el.remove();
+    });
+    // FAQ accordion
+    document.querySelectorAll("button").forEach(btn=>{
+      const icon=btn.querySelector(".material-symbols-outlined");
+      if(icon&&(icon.textContent.trim()==="add"||icon.textContent.trim()==="remove")){
+        btn.addEventListener("click",()=>{
+          const p=btn.nextElementSibling;
+          if(!p)return;
+          if(p.style.display==="block"){p.style.display="none";icon.textContent="add";}
+          else{p.style.display="block";icon.textContent="remove";}
+        });
+      }
+    });
+    // Counter animation
+    function animCounter(el,target,dur){const s=performance.now();(function tick(now){const p=Math.min((now-s)/dur,1),e=1-Math.pow(1-p,3),v=Math.round(e*target);el.textContent=v<10?"0"+v:v;if(p<1)requestAnimationFrame(tick)})(performance.now())}
+    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,t=parseInt(el.dataset.target||"0");if(t>0)animCounter(el,t,1200);obs.unobserve(el)}})},{threshold:0.5});
+    document.querySelectorAll(".font-mono,.label,.mono").forEach(el=>{
+      const txt=el.textContent.trim();
+      if(/^\d{1,5}\+?$/.test(txt)&&!el.closest("nav")){el.dataset.target=txt.replace(/\D/g,"");obs.observe(el);}
+    });
+    </script>
 </body></html>
