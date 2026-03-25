@@ -1,708 +1,405 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TIX-DAO | On-Chain Ticketing Governance — Orthonode Systems</title>
-<meta name="description" content="TIX-DAO is a Solana SPL-Governance venue ticketing DAO. Hardware-verified NFT tickets, on-chain attendance records, and trust-anchored venue governance built by Orthonode Systems for Graveyard Hackathon 2026.">
-<meta name="author" content="Arhant Barmate">
-<meta name="keywords" content="TIX-DAO, Solana, SPL-Governance, NFT ticketing, on-chain governance, Orthonode, Graveyard Hackathon">
-<meta name="robots" content="index, follow">
-<meta name="geo.region" content="IN-MP">
-<meta name="geo.placename" content="Bhopal">
-<link rel="canonical" href="https://orthonode.xyz/tix-dao.html">
-<meta property="og:type" content="website">
-<meta property="og:title" content="TIX-DAO | On-Chain Ticketing Governance — Orthonode Systems">
-<meta property="og:description" content="SPL-Governance venue ticketing DAO on Solana. Hardware-verified NFT tickets, trust-anchored governance, zero-friction entry verification.">
-<meta property="og:url" content="https://orthonode.xyz/tix-dao.html">
-<meta property="og:image" content="https://orthonode.xyz/orthonode-banner.png">
-<meta property="og:site_name" content="Orthonode Systems">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@OrthonodeSys">
-<meta name="twitter:title" content="TIX-DAO | On-Chain Ticketing Governance">
-<meta name="twitter:description" content="SPL-Governance venue ticketing DAO on Solana. Hardware-verified NFT tickets and trust-anchored governance by Orthonode Systems.">
-<meta name="twitter:image" content="https://orthonode.xyz/orthonode-banner.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "TIX-DAO",
-  "description": "On-chain venue ticketing governance powered by SPL-Governance on Solana. Hardware-verified NFT tickets with trust-anchored entry verification.",
-  "url": "https://orthonode.xyz/tix-dao.html",
-  "applicationCategory": "BlockchainApplication",
-  "operatingSystem": "Solana",
-  "author": {
-    "@type": "Person",
-    "name": "Arhant Barmate",
-    "email": "infrastructure@orthonode.xyz"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Orthonode Systems",
-    "url": "https://orthonode.xyz"
-  },
-  "mainEntityOfPage": {
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is TIX-DAO?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "TIX-DAO is a Solana-based SPL-Governance system for venue ticketing. It issues hardware-verified NFT tickets, records attendance on-chain, and enables token-weighted governance over venue policies."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How does TIX-DAO prevent ticket fraud?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "TIX-DAO anchors each ticket NFT to a hardware identity primitive from Orthonode's SHA layer. Entry verification happens on-chain — a forged ticket fails gate verification because the hardware attestation cannot be replicated."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is TIX-DAO live?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "TIX-DAO is a competition project built for Graveyard Hackathon 2026. The UI is deployed at tix-dao.vercel.app on Solana devnet. Mainnet deployment requires explicit authorization."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is the governance model?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Venue stakeholders hold governance tokens (TIX). Proposals are submitted and voted on via SPL-Governance. Token weight determines vote power. Hardware-verified attendance records inform future policy decisions."
-        }
+
+<html class="dark" lang="en"><head>
+    <meta name="description" content="Decentralized event ticketing DAO with NFT tickets, transparent price discovery, and community treasury on Solana.">
+    <meta property="og:title" content="TIX-DAO — On-chain Ticketing Governance on Solana | ORTHONODE SYSTEMS™">
+    <meta property="og:description" content="Decentralized event ticketing DAO with NFT tickets, transparent price discovery, and community treasury on Solana.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://orthonode.xyz/tix-dao.html">
+    <link rel="icon" href="/site-logo.png" type="image/png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TIX-DAO | Sovereign Ticketing Protocol</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=DM+Sans:ital,wght@0,300;1,300&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Epilogue:wght@800&amp;family=Manrope:wght@300;500&amp;family=Space+Grotesk:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary-fixed": "#2d1600",
+              "surface-tint": "#d8b9ff",
+              "outline-variant": "#4c4355",
+              "on-primary-fixed": "#290055",
+              "outline": "#978da1",
+              "on-tertiary-fixed-variant": "#6b3b00",
+              "on-primary-container": "#ffffff",
+              "on-secondary-container": "#00653b",
+              "surface-dim": "#131313",
+              "surface-bright": "#393939",
+              "tertiary-container": "#af6400",
+              "surface-container-high": "#2a2a2a",
+              "secondary": "#a0ffc3",
+              "primary-container": "#9945ff",
+              "primary-fixed-dim": "#d8b9ff",
+              "primary-fixed": "#eddcff",
+              "surface-container-lowest": "#0e0e0e",
+              "surface-container": "#1f1f1f",
+              "on-primary": "#450086",
+              "inverse-surface": "#e2e2e2",
+              "surface": "#131313",
+              "on-background": "#e2e2e2",
+              "tertiary-fixed-dim": "#ffb875",
+              "secondary-container": "#00ec91",
+              "on-primary-fixed-variant": "#6300bb",
+              "on-surface-variant": "#cec2d8",
+              "primary": "#d8b9ff",
+              "on-tertiary-container": "#ffffff",
+              "error": "#ffb4ab",
+              "tertiary-fixed": "#ffdcc0",
+              "on-secondary-fixed": "#002110",
+              "on-secondary": "#00391f",
+              "inverse-on-surface": "#303030",
+              "on-secondary-fixed-variant": "#00522f",
+              "background": "#000000",
+              "surface-container-low": "#1b1b1b",
+              "secondary-fixed": "#56ffa8",
+              "tertiary": "#ffb875",
+              "surface-variant": "#353535",
+              "on-error-container": "#ffdad6",
+              "surface-container-highest": "#353535",
+              "error-container": "#93000a",
+              "on-error": "#690005",
+              "inverse-primary": "#7f21e5",
+              "on-surface": "#e2e2e2",
+              "secondary-fixed-dim": "#00e38b",
+              "on-tertiary": "#4b2800"
+            },
+            fontFamily: {
+              "headline": ["Syne", "sans-serif"],
+              "body": ["DM Sans", "sans-serif"],
+              "technical": ["IBM Plex Mono", "monospace"],
+              "label": ["IBM Plex Mono", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
       }
-    ]
-  }
-}
-</script>
+    </script>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
---void:#000000;--bg:#000000;--bg-1:#070707;--bg-2:#0D0D0D;--bg-card:#0D0D0D;--bg-raised:#141414;
---border:rgba(255,255,255,.06);--border-h:rgba(255,255,255,.12);
---tx-1:#F5F5F5;--tx-2:#8C8C8C;--tx-3:#404040;--tx-4:#1C1C1C;
---silver:#D0D0D0;--chrome:#A8A8A8;--plasma:#C8C8C8;
---tix:#9945FF;--tix-dim:rgba(153,69,255,.08);--tix-glow:rgba(153,69,255,.22);
---green:#22C55E;--red:#EF4444;--amber:#F59E0B;
---r:8px;--r2:12px;--r3:16px;
---font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'IBM Plex Mono',monospace;
-}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--tx-1);font-family:var(--font-body);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:var(--tix);text-decoration:none}
-a:hover{opacity:.8}
-::selection{background:var(--tix);color:#fff}
+        body {
+            background-color: #000000;
+            color: #e2e2e2;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+        }
+        .syne-800 { font-family: 'Syne', sans-serif; font-weight: 800; }
+        .ibm-mono { font-family: 'IBM Plex Mono', monospace; }
+        .glass-card {
+            background: rgba(19, 19, 19, 0.6);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(151, 141, 161, 0.15);
+            border-radius: 8px;
+        }
+        .ambient-glow:hover {
+            box-shadow: 0 0 30px rgba(153, 69, 255, 0.25);
+            border-color: rgba(153, 69, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(153, 69, 255, 0.5);
+        }
+        .scanning-line {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #14F195, transparent);
+            position: absolute;
+            top: 0;
+            animation: scan 3s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 0; opacity: 0; }
+            50% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+    </style>
 
-/* NAV */
-#nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 32px;height:56px;display:flex;align-items:center;border-bottom:1px solid transparent;transition:background .3s,border-color .3s;backdrop-filter:blur(0px)}
-#nav.sc{background:rgba(0,0,0,.92);border-color:var(--border);backdrop-filter:blur(16px)}
-.nav-inner{max-width:1120px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.nav-back{font-family:var(--font-mono);font-size:11px;color:var(--tx-3);letter-spacing:.08em;transition:color .2s}
-.nav-back:hover{color:var(--tx-1)}
-.nav-back span{color:var(--tix)}
-.nav-tags{display:flex;gap:8px;flex-wrap:wrap}
-.tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;padding:3px 8px;border-radius:4px;border:1px solid var(--border);color:var(--tx-3)}
-.tag.live{border-color:rgba(153,69,255,.3);color:var(--tix)}
-.tag.sol{border-color:rgba(34,197,94,.25);color:var(--green)}
-.tag.hack{border-color:rgba(245,158,11,.25);color:var(--amber)}
-
-/* LAYOUT */
-.wrap{max-width:1120px;margin:0 auto;padding:0 32px}
-section{padding:80px 0}
-section:first-of-type{padding-top:140px}
-
-/* LABELS */
-.sec-label{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;color:var(--tix);text-transform:uppercase;margin-bottom:12px}
-
-/* HERO */
-#hero{padding-top:140px;padding-bottom:80px;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;pointer-events:none}
-.hero-bg::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse at center,rgba(153,69,255,.1) 0%,transparent 70%)}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;color:var(--tix);border:1px solid rgba(153,69,255,.3);border-radius:20px;padding:4px 12px 4px 8px;margin-bottom:28px}
-.hero-badge::before{content:'';width:6px;height:6px;background:var(--tix);border-radius:50%;box-shadow:0 0 8px var(--tix)}
-h1.hero-title{font-family:var(--font-head);font-size:clamp(44px,8vw,88px);font-weight:800;line-height:1;letter-spacing:-.03em;margin-bottom:20px}
-h1.hero-title .acc{color:var(--tix)}
-.hero-sub{font-size:17px;color:var(--tx-2);max-width:620px;line-height:1.7;margin-bottom:40px}
-.hero-sub strong{color:var(--tx-1)}
-.hero-links{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:56px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--r);font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;border:1px solid transparent}
-.btn-pri{background:var(--tix);color:#fff;border-color:var(--tix)}
-.btn-pri:hover{opacity:.85;transform:translateY(-1px)}
-.btn-sec{background:transparent;color:var(--tx-1);border-color:var(--border-h)}
-.btn-sec:hover{border-color:var(--tix);color:var(--tix);opacity:1}
-
-/* STATS BAR */
-.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden}
-.stat-cell{background:var(--bg-card);padding:20px 24px}
-.stat-n{font-family:var(--font-head);font-size:28px;font-weight:800;color:var(--tix);line-height:1}
-.stat-l{font-size:12px;color:var(--tx-3);margin-top:4px;font-family:var(--font-mono)}
-
-/* CARDS */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r2);padding:24px;transition:border-color .2s,transform .2s}
-.card:hover{border-color:var(--border-h);transform:translateY(-2px)}
-.card-ico{width:36px;height:36px;border-radius:var(--r);background:var(--tix-dim);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:16px}
-.card h3{font-family:var(--font-head);font-size:15px;font-weight:700;margin-bottom:8px}
-.card p{font-size:13px;color:var(--tx-2);line-height:1.6}
-
-/* FEATURE TABLE */
-.feat-table{width:100%;border-collapse:collapse;font-size:13px}
-.feat-table th{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--tx-3);padding:10px 16px;text-align:left;border-bottom:1px solid var(--border)}
-.feat-table td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--tx-2)}
-.feat-table td:first-child{font-family:var(--font-mono);font-size:12px;color:var(--tx-1)}
-.feat-table tr:last-child td{border-bottom:none}
-.feat-table tr:hover td{background:var(--bg-raised)}
-.badge-yes{display:inline-block;padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-size:10px;background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.2)}
-.badge-no{display:inline-block;padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-size:10px;background:rgba(239,68,68,.08);color:var(--red);border:1px solid rgba(239,68,68,.15)}
-.badge-plan{display:inline-block;padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-size:10px;background:rgba(245,158,11,.08);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
-
-/* FLOW */
-.flow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
-.flow-step{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r2);padding:24px;position:relative}
-.flow-step::before{content:attr(data-n);position:absolute;top:16px;right:16px;font-family:var(--font-mono);font-size:10px;color:var(--tx-4);letter-spacing:.06em}
-.flow-step .flow-ico{font-size:24px;margin-bottom:12px}
-.flow-step h4{font-family:var(--font-head);font-size:14px;font-weight:700;margin-bottom:6px;color:var(--tix)}
-.flow-step p{font-size:12px;color:var(--tx-2);line-height:1.55}
-
-/* CODE BLOCK */
-.code-block{background:var(--bg-1);border:1px solid var(--border);border-radius:var(--r2);padding:24px;font-family:var(--font-mono);font-size:12px;line-height:1.8;overflow-x:auto}
-.code-block .cm{color:var(--tx-3)}
-.code-block .ck{color:#9945FF}
-.code-block .cs{color:#22C55E}
-.code-block .cn{color:#F59E0B}
-.code-block .cf{color:#0ECFB1}
-
-/* ARCH */
-.arch-list{display:flex;flex-direction:column;gap:2px}
-.arch-item{display:grid;grid-template-columns:60px 1fr;gap:24px;align-items:start;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;transition:border-color .2s}
-.arch-item:hover{border-color:var(--border-h)}
-.arch-num{font-family:var(--font-mono);font-size:11px;color:var(--tx-4);letter-spacing:.06em;padding-top:3px}
-.arch-body h4{font-family:var(--font-head);font-size:14px;font-weight:700;margin-bottom:6px;color:var(--tix)}
-.arch-body p{font-size:13px;color:var(--tx-2);line-height:1.6}
-
-/* TIMELINE */
-.timeline{display:flex;flex-direction:column;gap:2px}
-.tl-item{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:16px 0;border-bottom:1px solid var(--border)}
-.tl-item:last-child{border-bottom:none}
-.tl-phase{font-family:var(--font-mono);font-size:11px;color:var(--tix);letter-spacing:.06em}
-.tl-body h4{font-size:13px;font-weight:600;margin-bottom:4px}
-.tl-body p{font-size:12px;color:var(--tx-2);line-height:1.55}
-.tl-status{display:inline-block;font-family:var(--font-mono);font-size:10px;padding:2px 8px;border-radius:4px;margin-top:6px}
-.tl-done{background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.2)}
-.tl-wip{background:rgba(153,69,255,.1);color:var(--tix);border:1px solid rgba(153,69,255,.25)}
-.tl-plan{background:rgba(90,100,120,.1);color:var(--tx-3);border:1px solid var(--border)}
-
-/* FAQ */
-.faq-list{display:flex;flex-direction:column;gap:2px}
-.faq-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
-.faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:transparent;border:none;color:var(--tx-1);font-family:var(--font-body);font-size:14px;font-weight:500;cursor:pointer;text-align:left;gap:12px;transition:background .2s}
-.faq-q:hover{background:var(--bg-raised)}
-.faq-q svg{flex-shrink:0;transition:transform .3s;color:var(--tix)}
-.faq-item.open .faq-q svg{transform:rotate(45deg)}
-.faq-a{font-size:13px;color:var(--tx-2);line-height:1.65;padding:0 20px;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
-.faq-item.open .faq-a{max-height:200px;padding:0 20px 16px}
-
-/* CTA */
-.cta-box{background:var(--bg-card);border:1px solid rgba(153,69,255,.2);border-radius:var(--r3);padding:48px;text-align:center;position:relative;overflow:hidden}
-.cta-box::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:500px;height:400px;background:radial-gradient(ellipse,rgba(153,69,255,.07) 0%,transparent 70%);pointer-events:none}
-.cta-box h2{font-family:var(--font-head);font-size:clamp(24px,4vw,36px);font-weight:800;margin-bottom:12px}
-.cta-box p{color:var(--tx-2);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto}
-
-/* CITATION */
-#citation{background:var(--bg-1);border-top:1px solid var(--border);padding:40px 0}
-.cite-inner{max-width:1120px;margin:0 auto;padding:0 32px}
-.cite-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;color:var(--tx-3);text-transform:uppercase;margin-bottom:16px}
-.cite-block{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:16px 20px;font-family:var(--font-mono);font-size:11px;color:var(--tx-2);line-height:1.7}
-
-/* FOOTER */
-footer{background:var(--bg-1);border-top:1px solid var(--border);padding:40px 0}
-.footer-inner{max-width:1120px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.footer-brand{font-family:var(--font-head);font-size:14px;font-weight:700}
-.footer-brand span{color:var(--tix)}
-.footer-links{display:flex;gap:20px;flex-wrap:wrap}
-.footer-links a{font-size:12px;color:var(--tx-3);transition:color .2s}
-.footer-links a:hover{color:var(--tx-1)}
-.footer-meta{font-family:var(--font-mono);font-size:10px;color:var(--tx-4);width:100%;margin-top:8px}
-
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
-.reveal.in{opacity:1;transform:translateY(0)}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .wrap{padding:0 20px}
-  #nav{padding:0 20px}
-  section{padding:56px 0}
-  section:first-of-type{padding-top:100px}
-  .stats-bar{grid-template-columns:repeat(2,1fr)}
-  .card-grid{grid-template-columns:1fr}
-  .flow-grid{grid-template-columns:1fr 1fr}
-  .arch-item{grid-template-columns:1fr}
-  .tl-item{grid-template-columns:1fr}
-  .cta-box{padding:32px 20px}
-  h1.hero-title{font-size:clamp(36px,10vw,64px)}
-}
-
-/* ── MOBILE ──────────────────────────────── */
-@media(max-width:1024px){
-  .hero-layout,.hero-grid,.content-grid,.two-col{grid-template-columns:1fr!important;}
-  .side-panel,.hero-aside,.status-panel{display:none!important;}
-}
-@media(max-width:768px){
-  :root{--nav-h:52px;}
-  h1,.page-title{font-size:clamp(1.6rem,7vw,2.4rem)!important;}
-  h2,.section-title{font-size:clamp(1.2rem,5vw,1.8rem)!important;}
-  .hero-title,.h1{font-size:clamp(1.8rem,8vw,2.8rem)!important;}
-  .card-grid,.metrics-grid,.stat-row,.feature-grid{grid-template-columns:1fr!important;gap:12px!important;}
-  .gate-box,.gate-inner{padding:24px 16px!important;}
-  section,.section{padding:48px 0!important;}
-  .container,.wrap{padding:0 16px!important;}
-  table{font-size:.8rem;}
-  table td,table th{padding:8px 10px!important;}
-}
-@media(max-width:480px){
-  h1,.page-title,.hero-title{font-size:clamp(1.4rem,8vw,2rem)!important;}
-  .badge,.tag{font-size:.65rem!important;padding:3px 8px!important;}
-  .btn,.cta-btn,.btn-primary{padding:10px 20px!important;font-size:.85rem!important;}
-  .stat-n,[data-count]{font-size:1.8rem!important;}
-  nav .nav-tags{display:none!important;}
-}
-@media(max-width:360px){
-  .container,.wrap{padding:0 12px!important;}
-  h1,.hero-title{font-size:1.4rem!important;}
-}
-</style>
+    <script>
+    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null},remove(k){this.set(k,"",0)}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365)},acceptCookies(){ON.cookie.set("on_banner","1",365);document.getElementById("cookie-banner")?.classList.add("hidden")}};
+    document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","solana_devnet",7);if(!ON.cookie.get("on_banner"))document.getElementById("cookie-banner")?.classList.remove("hidden");});
+    </script>
 </head>
-<body>
-<canvas id="star-field" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-
-<nav id="nav">
-  <div class="nav-inner">
-    <a class="nav-back" href="/"><img src="/site-logo.png" alt="ORTHONODE SYSTEMS™" width="24" height="24" style="border-radius:4px;vertical-align:middle;margin-right:6px;">orthonode.xyz / <span>TIX-DAO</span></a>
-    <div class="nav-tags">
-      <span class="tag live">DEVNET_LIVE</span>
-      <span class="tag sol">SOLANA</span>
-      <span class="tag hack">HACKATHON_2026</span>
+<body class="selection:bg-primary-container selection:text-white overflow-x-hidden">
+    <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+    <script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script>
+    <div style="position:fixed;top:0;left:0;z-index:200;padding:16px 24px;">
+      <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.08em;display:flex;align-items:center;gap:8px;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">← ORTHONODE.SYSTEMS</a>
     </div>
-  </div>
+    <div id="cookie-banner" class="hidden" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;display:flex;align-items:center;gap:20px;max-width:520px;width:90vw;">
+      <p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">We use cookies for site functionality. <a href="/cookies.html" style="color:#E6007A;">Learn more</a></p>
+      <button onclick="ON.acceptCookies()" style="background:#E6007A;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:0.08em;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button>
+    </div>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full flex justify-between items-center px-8 py-4 max-w-none bg-black/80 backdrop-blur-xl z-50">
+<div class="text-xl font-extrabold tracking-tighter text-white font-[Syne]">
+            ORTHONODE SYSTEMS™ <span class="text-[#9945FF] ml-2">TIX-DAO</span>
+</div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-[#9945FF] border-b-2 border-[#9945FF] pb-1 font-bold ibm-mono text-xs tracking-widest uppercase" href="#">Network</a>
+<a class="text-white/60 hover:text-white transition-colors ibm-mono text-xs tracking-widest uppercase" href="#">Lending</a>
+<a class="text-white/60 hover:text-white transition-colors ibm-mono text-xs tracking-widest uppercase" href="#">Governance</a>
+<a class="text-white/60 hover:text-white transition-colors ibm-mono text-xs tracking-widest uppercase" href="#">Security</a>
 </nav>
-
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="wrap">
-    <div class="hero-badge">TYPE_B — COMPETITION PROJECT</div>
-    <h1 class="hero-title">TIX<span class="acc">-DAO</span></h1>
-    <p class="hero-sub">
-      <strong>On-chain venue ticketing governance</strong> powered by SPL-Governance on Solana.
-      Hardware-verified NFT tickets. Trust-anchored entry. No bots. No scalpers.
-      Built for <strong>Graveyard Hackathon 2026</strong>.
-    </p>
-    <div class="hero-links">
-      <a href="https://tix-dao.vercel.app" class="btn btn-pri" target="_blank" rel="noopener">View Live UI ↗</a>
-      <a href="mailto:infrastructure@orthonode.xyz" class="btn btn-sec">Contact Team</a>
-    </div>
-    <div class="stats-bar reveal">
-      <div class="stat-cell">
-        <div class="stat-n" data-count="4">4</div>
-        <div class="stat-l">SPL ACCOUNTS</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-n" data-count="100">100%</div>
-        <div class="stat-l">ON-CHAIN VOTE</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-n" data-count="0">0</div>
-        <div class="stat-l">CENTRALIZED DEPS</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-n">DEVNET</div>
-        <div class="stat-l">DEPLOYMENT</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <p class="sec-label reveal">Overview</p>
-    <h2 class="reveal" style="font-family:var(--font-head);font-size:clamp(24px,4vw,36px);font-weight:800;margin-bottom:12px">What TIX-DAO Solves</h2>
-    <p class="reveal" style="color:var(--tx-2);max-width:640px;margin-bottom:40px">Venue ticketing is broken — centralized platforms, rampant scalping, zero provenance, no community voice. TIX-DAO replaces all of it with programmable, verifiable, community-owned infrastructure.</p>
-    <div class="card-grid reveal">
-      <div class="card">
-        <div class="card-ico">🎫</div>
-        <h3>NFT Ticket Issuance</h3>
-        <p>Each ticket is a Solana NFT minted at purchase. Ownership is on-chain, transferable, and provably scarce. No duplicates possible.</p>
-      </div>
-      <div class="card">
-        <div class="card-ico">🔐</div>
-        <h3>Hardware Verification</h3>
-        <p>Gate entry checks ticket against Orthonode hardware attestation. A forged or copied ticket fails Gate 1 — hardware identity cannot be spoofed.</p>
-      </div>
-      <div class="card">
-        <div class="card-ico">🗳️</div>
-        <h3>SPL-Governance</h3>
-        <p>Venue policies, refund rules, and event parameters are set via on-chain proposals. TIX token holders vote. No admin backdoor.</p>
-      </div>
-      <div class="card">
-        <div class="card-ico">📋</div>
-        <h3>Attendance Records</h3>
-        <p>Every scan is a Solana transaction. Attendance is immutable, auditable, and usable for future governance weight calculations.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section style="background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="wrap">
-    <p class="sec-label reveal">Ticket Lifecycle</p>
-    <h2 class="reveal" style="font-family:var(--font-head);font-size:clamp(22px,3.5vw,32px);font-weight:800;margin-bottom:36px">From Purchase to Entry — Fully On-Chain</h2>
-    <div class="flow-grid reveal">
-      <div class="flow-step" data-n="01">
-        <div class="flow-ico">🛒</div>
-        <h4>Purchase</h4>
-        <p>Buyer pays SOL. Smart contract mints NFT ticket to buyer wallet. Metadata stored on-chain including event, seat, timestamp.</p>
-      </div>
-      <div class="flow-step" data-n="02">
-        <div class="flow-ico">🔗</div>
-        <h4>Anchor Bind</h4>
-        <p>Ticket NFT is linked to buyer's hardware identity via Orthonode attestation. Binding stored in program account.</p>
-      </div>
-      <div class="flow-step" data-n="03">
-        <div class="flow-ico">📲</div>
-        <h4>Gate Scan</h4>
-        <p>Entry scanner reads NFT + hardware signature. Validates binding on-chain. Pass = hardware + NFT match. Fail = reject.</p>
-      </div>
-      <div class="flow-step" data-n="04">
-        <div class="flow-ico">✅</div>
-        <h4>Attendance TX</h4>
-        <p>Successful entry writes attendance transaction. Immutable record used for governance weight in future proposals.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <p class="sec-label reveal">Architecture</p>
-    <h2 class="reveal" style="font-family:var(--font-head);font-size:clamp(22px,3.5vw,32px);font-weight:800;margin-bottom:36px">Program Design</h2>
-    <div class="arch-list reveal">
-      <div class="arch-item">
-        <div class="arch-num">01</div>
-        <div class="arch-body">
-          <h4>tix_ticket Program</h4>
-          <p>Core Anchor program managing ticket NFT minting, hardware binding, and entry verification. Stores ticket state PDA per event + buyer combination. Validates attestation receipts from Orthonode SHA layer before confirming entry.</p>
-        </div>
-      </div>
-      <div class="arch-item">
-        <div class="arch-num">02</div>
-        <div class="arch-body">
-          <h4>tix_governance Program</h4>
-          <p>Wraps SPL-Governance for venue-specific proposals. TIX token holders submit proposals for event parameters, refund policies, and venue rule changes. Attendance weight multiplies base token weight — frequent attendees have more governance voice.</p>
-        </div>
-      </div>
-      <div class="arch-item">
-        <div class="arch-num">03</div>
-        <div class="arch-body">
-          <h4>tix_treasury Program</h4>
-          <p>Manages ticket revenue, refund pools, and DAO treasury. Revenue split configurable via governance. Emergency refund proposals can unlock treasury within 24-hour timelock.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section style="background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="wrap">
-    <p class="sec-label reveal">Token Model</p>
-    <h2 class="reveal" style="font-family:var(--font-head);font-size:clamp(22px,3.5vw,32px);font-weight:800;margin-bottom:20px">TIX Token</h2>
-    <p class="reveal" style="color:var(--tx-2);max-width:640px;margin-bottom:36px">TIX is the SPL governance token. It is not a financial instrument — it is a governance primitive that represents venue participation.</p>
-    <div class="reveal" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden">
-      <table class="feat-table" style="width:100%">
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Value</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Standard</td>
-            <td>SPL Token (Solana)</td>
-            <td><span class="badge-yes">CONFIRMED</span></td>
-          </tr>
-          <tr>
-            <td>Governance Weight</td>
-            <td>1 TIX = 1 vote + attendance multiplier</td>
-            <td><span class="badge-yes">CONFIRMED</span></td>
-          </tr>
-          <tr>
-            <td>Distribution</td>
-            <td>Purchase-based issuance + early-event bonus</td>
-            <td><span class="badge-wip" style="display:inline-block;padding:2px 8px;border-radius:4px;font-family:var(--font-mono);font-size:10px;background:rgba(153,69,255,.1);color:var(--tix);border:1px solid rgba(153,69,255,.25)">IN DESIGN</span></td>
-          </tr>
-          <tr>
-            <td>Treasury Use</td>
-            <td>Venue revenue, refund pools, DAO reserve</td>
-            <td><span class="badge-yes">CONFIRMED</span></td>
-          </tr>
-          <tr>
-            <td>Transfer</td>
-            <td>Non-transferable governance weight (transferable raw)</td>
-            <td><span class="badge-plan">PLANNED</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <p class="sec-label reveal">Program Interface</p>
-    <h2 class="reveal" style="font-family:var(--font-head);font-size:clamp(22px,3.5vw,32px);font-weight:800;margin-bottom:36px">Core Instructions</h2>
-    <div class="code-block reveal">
-<span class="cm">// tix_ticket — Core Instructions</span>
-
-<span class="ck">pub fn</span> <span class="cs">initialize_event</span>(ctx: Context&lt;InitEvent&gt;, params: EventParams) -&gt; Result&lt;()&gt;;
-<span class="ck">pub fn</span> <span class="cs">mint_ticket</span>(ctx: Context&lt;MintTicket&gt;, hw_commitment: [u8; <span class="cn">32</span>]) -&gt; Result&lt;()&gt;;
-<span class="ck">pub fn</span> <span class="cs">verify_entry</span>(ctx: Context&lt;VerifyEntry&gt;, attestation: HwAttestation) -&gt; Result&lt;()&gt;;
-<span class="ck">pub fn</span> <span class="cs">record_attendance</span>(ctx: Context&lt;RecordAttend&gt;) -&gt; Result&lt;()&gt;;
-
-<span class="cm">// tix_governance — Proposal Instructions</span>
-
-<span class="ck">pub fn</span> <span class="cs">create_proposal</span>(ctx: Context&lt;CreateProp&gt;, proposal: VenueProposal) -&gt; Result&lt;()&gt;;
-<span class="ck">pub fn</span> <span class="cs">cast_vote</span>(ctx: Context&lt;CastVote&gt;, vote: Vote) -&gt; Result&lt;()&gt;;
-<span class="ck">pub fn</span> <span class="cs">finalize_proposal</span>(ctx: Context&lt;FinalizeProp&gt;) -&gt; Result&lt;()&gt;;
-
-<span class="cm">// Ticket Account State</span>
-
-<span class="ck">pub struct</span> TicketState {
-  event_id:   <span class="cf">Pubkey</span>,      <span class="cm">// 32 bytes</span>
-  holder:     <span class="cf">Pubkey</span>,      <span class="cm">// 32 bytes</span>
-  hw_binding: [u8; <span class="cn">32</span>],   <span class="cm">// hardware commitment hash</span>
-  used:       <span class="cf">bool</span>,        <span class="cm">// entry consumed flag</span>
-  mint_ts:    <span class="cn">i64</span>,         <span class="cm">// unix timestamp</span>
-}
-    </div>
-  </div>
-</section>
-
-<section style="background:var(--bg-1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="wrap">
-    <p class="sec-label reveal">Roadmap</p>
-    <h2 class="reveal" style="font-family:var(--font-head);font-size:clamp(22px,3.5vw,32px);font-weight:800;margin-bottom:36px">Development Phases</h2>
-    <div class="timeline reveal">
-      <div class="tl-item">
-        <div class="tl-phase">PHASE 0</div>
-        <div class="tl-body">
-          <h4>Hackathon Build — Graveyard 2026</h4>
-          <p>Core programs, devnet deployment, Vercel UI. Competition submission package.</p>
-          <span class="tl-status tl-done">COMPLETE</span>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-phase">PHASE 1</div>
-        <div class="tl-body">
-          <h4>Hardened Program + Audit</h4>
-          <p>Security audit of Anchor programs. Full integration with Orthonode SHA attestation layer. Comprehensive test coverage.</p>
-          <span class="tl-status tl-plan">PENDING AUTHORIZATION</span>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-phase">PHASE 2</div>
-        <div class="tl-body">
-          <h4>SPL-Governance Integration</h4>
-          <p>Full governance deployment, TIX token distribution design, attendance-weight multiplier, refund pool mechanics.</p>
-          <span class="tl-status tl-plan">PENDING AUTHORIZATION</span>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-phase">PHASE 3</div>
-        <div class="tl-body">
-          <h4>Mainnet Pilot</h4>
-          <p>Single-venue pilot event on Solana mainnet. End-to-end hardware-verified entry. Requires explicit Arhant authorization.</p>
-          <span class="tl-status tl-plan">REQUIRES EXPLICIT APPROVAL</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <p class="sec-label reveal">FAQ</p>
-    <h2 class="reveal" style="font-family:var(--font-head);font-size:clamp(22px,3.5vw,32px);font-weight:800;margin-bottom:32px">Common Questions</h2>
-    <div class="faq-list reveal">
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          What is TIX-DAO?
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="8" y1="2" x2="8" y2="14" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
-        <div class="faq-a">TIX-DAO is a Solana-based SPL-Governance system for venue ticketing. It issues hardware-verified NFT tickets, records attendance on-chain, and enables token-weighted governance over venue policies. Built for Graveyard Hackathon 2026 as a Type B competition project by Orthonode Systems.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          How does TIX-DAO prevent ticket fraud?
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="8" y1="2" x2="8" y2="14" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
-        <div class="faq-a">Each ticket NFT is anchored to the buyer's hardware identity via Orthonode's SHA attestation layer. Entry verification checks both the NFT ownership and the hardware binding on-chain. A forged or transferred ticket fails Gate 1 because the hardware signature cannot be replicated — it is tied to the specific device at mint time.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          Is TIX-DAO live on mainnet?
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="8" y1="2" x2="8" y2="14" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
-        <div class="faq-a">TIX-DAO is currently deployed on Solana devnet with a live UI at tix-dao.vercel.app. It is a sandboxed competition project. Mainnet deployment requires explicit authorization from Orthonode Systems leadership and a completed security audit of all Anchor programs.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
-          What is the governance model?
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="8" y1="2" x2="8" y2="14" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="8" x2="14" y2="8" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
-        <div class="faq-a">Venue stakeholders hold TIX governance tokens. Proposals for event parameters, refund policies, and venue rule changes are submitted and voted on via SPL-Governance. Base token weight is multiplied by an attendance factor — frequent attendees carry more governance voice. All decisions are executed on-chain with no admin override path.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="cta-box reveal">
-      <p class="sec-label" style="justify-content:center;display:flex">Contact</p>
-      <h2>Interested in TIX-DAO?</h2>
-      <p>This is a competition project. Partnership inquiries and pilot venue discussions welcome. Reach out to the Orthonode team directly.</p>
-      <a href="mailto:infrastructure@orthonode.xyz" class="btn btn-pri">infrastructure@orthonode.xyz</a>
-    </div>
-  </div>
-</section>
-
-<div id="citation">
-  <div class="cite-inner">
-    <div class="cite-label">Citation</div>
-    <div class="cite-block">
-      Barmate, A. (2026). TIX-DAO: On-Chain Venue Ticketing Governance via SPL-Governance and Hardware-Verified NFT Tickets on Solana.<br>
-      Orthonode Systems — Infrastructure Labs // Physical Verification Layer.<br>
-      URL: https://orthonode.xyz/tix-dao.html | Contact: infrastructure@orthonode.xyz
-    </div>
-  </div>
+<div class="flex items-center space-x-6">
+<div class="flex space-x-4">
+<span class="material-symbols-outlined text-white/60 hover:text-white cursor-pointer transition-colors">settings</span>
+<span class="material-symbols-outlined text-white/60 hover:text-white cursor-pointer transition-colors">notifications</span>
 </div>
-
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">ORTHONODE SYSTEMS™</div>
-    <nav class="footer-links">
-      <a href="/">Home</a>
-      <a href="/sha">SHA Protocol</a>
-      <a href="/ton-sha">TON-SHA</a>
-      <a href="/invariant">INVARIANT</a>
-      <a href="/terms">Terms</a>
-      <a href="/privacy">Privacy</a>
-    </nav>
-    <div class="footer-meta">© 2026 Orthonode Systems. TIX-DAO is a competition project — sandboxed, no mainnet without authorization. Built by Arhant Barmate.</div>
-  </div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2 rounded-lg font-bold hover:shadow-[0_0_15px_rgba(153,69,255,0.4)] transition-all duration-300 active:scale-95">
+                Connect Wallet
+            </button>
+</div>
+</header>
+<main class="pt-32 pb-24">
+<!-- Hero Section -->
+<section class="container mx-auto px-8 flex flex-col items-center text-center mb-32 relative">
+<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="flex space-x-3 mb-8">
+<span class="ibm-mono text-[10px] tracking-[0.2em] bg-surface-container-low border border-outline-variant/20 px-3 py-1 text-secondary uppercase">Solana Devnet</span>
+<span class="ibm-mono text-[10px] tracking-[0.2em] bg-surface-container-low border border-outline-variant/20 px-3 py-1 text-white uppercase">Demo Live</span>
+<span class="ibm-mono text-[10px] tracking-[0.2em] bg-surface-container-low border border-outline-variant/20 px-3 py-1 text-primary-container uppercase">DAO Governed</span>
+</div>
+<h1 class="syne-800 text-8xl md:text-[10rem] leading-[0.9] text-primary-container text-glow mb-6 tracking-tighter">
+                TIX-DAO
+            </h1>
+<h2 class="syne-800 text-3xl md:text-4xl text-white mb-8 max-w-3xl uppercase">
+                On-chain Ticketing Governance on Solana Devnet
+            </h2>
+<p class="text-xl text-on-surface-variant max-w-2xl leading-relaxed mb-12">
+                Decentralized event ticketing with DAO governance — NFT tickets, transparent price discovery, and community-controlled treasury on Solana.
+            </p>
+<div class="flex space-x-4">
+<button class="bg-gradient-to-r from-[#9945FF] to-[#14F195] text-black font-black px-10 py-4 rounded-lg flex items-center group transition-all duration-300 hover:shadow-[0_0_30px_rgba(153,69,255,0.5)]">
+                    Try Demo 
+                    <span class="material-symbols-outlined ml-2 text-sm group-hover:translate-x-1 transition-transform">north_east</span>
+</button>
+<button class="border border-outline-variant/30 text-white font-bold px-10 py-4 rounded-lg flex items-center hover:bg-white/5 transition-colors">
+                    GitHub
+                    <span class="material-symbols-outlined ml-2 text-sm">north_east</span>
+</button>
+</div>
+</section>
+<!-- Key Features (Bento Grid) -->
+<section class="container mx-auto px-8 mb-40">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- NFT Ticketing -->
+<div class="glass-card ambient-glow p-8 flex flex-col h-full group">
+<span class="material-symbols-outlined text-[#9945FF] text-4xl mb-6" data-weight="fill">confirmation_number</span>
+<h3 class="syne-800 text-xl text-white mb-4 uppercase">NFT Ticketing</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Issue unique, non-fungible digital tickets secured by Solana's ledger, ensuring zero counterfeits.</p>
+</div>
+<!-- DAO Governance -->
+<div class="glass-card ambient-glow p-8 flex flex-col h-full">
+<span class="material-symbols-outlined text-[#14F195] text-4xl mb-6" data-weight="fill">how_to_vote</span>
+<h3 class="syne-800 text-xl text-white mb-4 uppercase">DAO Governance</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Community-driven price discovery through democratic voting on ticket caps and event fees.</p>
+</div>
+<!-- Transparent Treasury -->
+<div class="glass-card ambient-glow p-8 flex flex-col h-full">
+<span class="material-symbols-outlined text-[#9945FF] text-4xl mb-6" data-weight="fill">account_balance_wallet</span>
+<h3 class="syne-800 text-xl text-white mb-4 uppercase">Transparent Treasury</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Real-time visibility of protocol funds. Every cent of revenue is auditable on the blockchain.</p>
+</div>
+<!-- Anti-scalping -->
+<div class="glass-card ambient-glow p-8 flex flex-col h-full">
+<span class="material-symbols-outlined text-[#14F195] text-4xl mb-6" data-weight="fill">shield_with_heart</span>
+<h3 class="syne-800 text-xl text-white mb-4 uppercase">Anti-scalping</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Programmable price ceilings and resale logic to prevent predatory secondary markets.</p>
+</div>
+</div>
+</section>
+<!-- How It Works (Visual Flow) -->
+<section class="container mx-auto px-8 mb-40">
+<div class="flex flex-col items-center mb-16">
+<span class="ibm-mono text-[#9945FF] text-xs tracking-widest mb-4 uppercase">Protocol Lifecycle</span>
+<h2 class="syne-800 text-4xl text-white uppercase text-center">Engineered for Sovereignty</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+<!-- Connector lines (Desktop) -->
+<div class="hidden md:block absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent -z-10"></div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-primary-container flex items-center justify-center syne-800 text-primary-container mb-6 z-10">1</div>
+<p class="ibm-mono text-[10px] text-white/40 uppercase mb-2">Initiate</p>
+<p class="text-sm font-bold text-white uppercase leading-tight">DAO votes on event</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/30 flex items-center justify-center syne-800 text-white mb-6 z-10">2</div>
+<p class="ibm-mono text-[10px] text-white/40 uppercase mb-2">Mint</p>
+<p class="text-sm font-bold text-white uppercase leading-tight">Smart contract mints NFT tickets</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/30 flex items-center justify-center syne-800 text-white mb-6 z-10">3</div>
+<p class="ibm-mono text-[10px] text-white/40 uppercase mb-2">Acquire</p>
+<p class="text-sm font-bold text-white uppercase leading-tight">User purchases ticket NFT</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant/30 flex items-center justify-center syne-800 text-white mb-6 z-10">4</div>
+<p class="ibm-mono text-[10px] text-white/40 uppercase mb-2">Access</p>
+<p class="text-sm font-bold text-white uppercase leading-tight">Event verification via NFT</p>
+</div>
+<div class="flex flex-col items-center text-center p-4">
+<div class="w-12 h-12 rounded-full bg-[#14F195]/20 border border-[#14F195] flex items-center justify-center syne-800 text-[#14F195] mb-6 z-10">5</div>
+<p class="ibm-mono text-[10px] text-white/40 uppercase mb-2">Settle</p>
+<p class="text-sm font-bold text-white uppercase leading-tight">Revenue to DAO treasury</p>
+</div>
+</div>
+</section>
+<!-- Architecture (3-Layer Diagram) -->
+<section class="container mx-auto px-8 mb-40">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<span class="ibm-mono text-secondary text-xs tracking-widest mb-4 uppercase">System Architecture</span>
+<h2 class="syne-800 text-5xl text-white mb-8 uppercase leading-[1.1]">The Stack of Authority</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-10">
+                        A triple-layered protocol designed for high-frequency ticketing transactions and robust community oversight.
+                    </p>
+<ul class="space-y-6">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary-container mr-4">layers</span>
+<div>
+<h4 class="font-bold text-white uppercase text-sm">Frontend Layer</h4>
+<p class="text-sm text-on-surface-variant">The gateway for users to browse, vote, and claim tickets.</p>
+</div>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary-container mr-4">account_tree</span>
+<div>
+<h4 class="font-bold text-white uppercase text-sm">DAO Layer</h4>
+<p class="text-sm text-on-surface-variant">On-chain voting logic and multi-sig treasury protection.</p>
+</div>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-primary-container mr-4">bolt</span>
+<div>
+<h4 class="font-bold text-white uppercase text-sm">Solana Programs</h4>
+<p class="text-sm text-on-surface-variant">Core logic for high-speed NFT minting and verification.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="flex flex-col space-y-4">
+<!-- Layer 1 -->
+<div class="glass-card p-6 border-l-4 border-l-[#14F195] relative overflow-hidden group">
+<div class="scanning-line"></div>
+<div class="flex justify-between items-center mb-2">
+<span class="ibm-mono text-[10px] text-white/40">LAYER 03</span>
+<span class="text-[10px] bg-[#14F195]/10 text-secondary px-2 py-0.5 rounded">ACTIVE</span>
+</div>
+<h4 class="syne-800 text-lg text-white mb-2 uppercase">Frontend: Demo Interface</h4>
+<p class="ibm-mono text-[10px] text-white/40">React / Tailwind / Solana Wallet Adapter</p>
+</div>
+<!-- Layer 2 -->
+<div class="glass-card p-6 border-l-4 border-l-[#9945FF] relative group">
+<div class="flex justify-between items-center mb-2">
+<span class="ibm-mono text-[10px] text-white/40">LAYER 02</span>
+<span class="text-[10px] bg-[#9945FF]/10 text-primary-container px-2 py-0.5 rounded">SECURE</span>
+</div>
+<h4 class="syne-800 text-lg text-white mb-2 uppercase">DAO Layer: Governance</h4>
+<p class="ibm-mono text-[10px] text-white/40">Proposal Engine / Treasury Management</p>
+</div>
+<!-- Layer 3 -->
+<div class="glass-card p-6 border-l-4 border-l-white/20 relative group">
+<div class="flex justify-between items-center mb-2">
+<span class="ibm-mono text-[10px] text-white/40">LAYER 01</span>
+<span class="text-[10px] bg-white/5 text-white/40 px-2 py-0.5 rounded">STABLE</span>
+</div>
+<h4 class="syne-800 text-lg text-white mb-2 uppercase">Solana Programs: Core</h4>
+<p class="ibm-mono text-[10px] text-white/40">Minting / Transfer / Metaplex Integration</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Program Details (Technical Section) -->
+<section class="container mx-auto px-8 mb-40">
+<div class="bg-surface-container-lowest border border-outline-variant/10 rounded-xl p-10 relative">
+<div class="absolute top-4 right-6 flex items-center space-x-2">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="ibm-mono text-[10px] text-secondary">DEVNET STATUS: OPERATIONAL</span>
+</div>
+<h3 class="syne-800 text-2xl text-white mb-10 uppercase tracking-widest">Protocol Registry</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div>
+<p class="ibm-mono text-[10px] text-white/40 uppercase mb-4">Core Program ID</p>
+<div class="flex items-center space-x-3 bg-black p-4 rounded-lg border border-primary-container/20">
+<code class="ibm-mono text-primary-container text-sm">TixD11v5qG3...pQvXyZ9rW2L</code>
+<span class="material-symbols-outlined text-white/40 text-sm hover:text-white cursor-pointer">content_copy</span>
+</div>
+</div>
+<div>
+<p class="ibm-mono text-[10px] text-white/40 uppercase mb-4">Treasury Address</p>
+<div class="flex items-center space-x-3 bg-black p-4 rounded-lg border border-primary-container/20">
+<code class="ibm-mono text-primary-container text-sm">DAOTrsY7...m1k2n3o4p5q</code>
+<span class="material-symbols-outlined text-white/40 text-sm hover:text-white cursor-pointer">content_copy</span>
+</div>
+</div>
+<div>
+<p class="ibm-mono text-[10px] text-white/40 uppercase mb-4">Governance Token</p>
+<div class="flex items-center space-x-3 bg-black p-4 rounded-lg border border-primary-container/20">
+<code class="ibm-mono text-primary-container text-sm">TIX...Token...v1</code>
+<span class="material-symbols-outlined text-white/40 text-sm hover:text-white cursor-pointer">content_copy</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<p class="ibm-mono text-[10px] text-white/40 uppercase mb-1">Current Network</p>
+<p class="syne-800 text-white uppercase">Solana Devnet</p>
+</div>
+<div class="text-right">
+<p class="ibm-mono text-[10px] text-white/40 uppercase mb-1">Uptime</p>
+<p class="syne-800 text-secondary uppercase">99.98%</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Demo Status Section -->
+<section class="container mx-auto px-8">
+<div class="glass-card p-12 text-center relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+<h3 class="syne-800 text-4xl text-white mb-6 uppercase">Experience the Protocol</h3>
+<p class="text-on-surface-variant max-w-xl mx-auto mb-10">
+                    The TIX-DAO demo is currently live on Solana Devnet. Connect your Phantom or Solflare wallet to mint test tickets and participate in active governance proposals.
+                </p>
+<a class="inline-flex items-center space-x-4 bg-white text-black font-black px-12 py-5 rounded-lg hover:bg-secondary transition-all group" href="#">
+<span>LAUNCH PROTOCOL DEMO</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">bolt</span>
+</a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-black py-12 border-t border-white/10 mt-20">
+<div class="w-full grid grid-cols-1 md:grid-cols-2 lg:flex lg:justify-between px-12 gap-8">
+<div class="flex flex-col gap-4">
+<div class="text-lg font-black text-white font-[Syne]">ORTHONODE SYSTEMS</div>
+<p class="ibm-mono text-[10px] text-white/40 max-w-xs leading-relaxed uppercase tracking-widest">
+                    Building the future of sovereign digital infrastructure.
+                </p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
+<div class="flex flex-col gap-3">
+<p class="ibm-mono text-xs text-white font-bold uppercase tracking-widest mb-2">Protocol</p>
+<a class="ibm-mono text-[11px] text-white/40 hover:text-[#14F195] transition-colors uppercase tracking-widest" href="#">Protocol Docs</a>
+<a class="ibm-mono text-[11px] text-white/40 hover:text-[#14F195] transition-colors uppercase tracking-widest" href="#">Smart Contracts</a>
+<a class="ibm-mono text-[11px] text-white/40 hover:text-[#14F195] transition-colors uppercase tracking-widest" href="#">Audit Reports</a>
+</div>
+<div class="flex flex-col gap-3">
+<p class="ibm-mono text-xs text-white font-bold uppercase tracking-widest mb-2">Developer</p>
+<a class="ibm-mono text-[11px] text-white/40 hover:text-[#14F195] transition-colors uppercase tracking-widest" href="#">GitHub</a>
+<a class="ibm-mono text-[11px] text-white/40 hover:text-[#14F195] transition-colors uppercase tracking-widest" href="#">Status</a>
+</div>
+<div class="flex flex-col gap-3">
+<p class="ibm-mono text-xs text-white font-bold uppercase tracking-widest mb-2">Legal</p>
+<a class="ibm-mono text-[11px] text-white/40 hover:text-[#14F195] transition-colors uppercase tracking-widest" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+<div class="container mx-auto px-12 mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] ibm-mono text-white/20 tracking-[0.3em] uppercase">
+<span>© 2024 ORTHONODE SYSTEMS — ALL RIGHTS RESERVED</span>
+<span class="mt-4 md:mt-0">SOLANA ECOSYSTEM PARTNER</span>
+</div>
 </footer>
-
-<script>
-(function(){
-  const nav=document.getElementById('nav');
-  window.addEventListener('scroll',()=>{nav.classList.toggle('sc',window.scrollY>60)},{passive:true});
-
-  const obs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target)}});
-  },{threshold:.1});
-  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-  // counter-up
-  const cobs=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(!e.isIntersecting) return;
-      const el=e.target;
-      const raw=el.getAttribute('data-count');
-      if(!raw) return;
-      const target=parseFloat(raw.replace(/[^0-9.]/g,''));
-      const suffix=raw.replace(/[0-9.]/g,'');
-      const dur=1400;
-      const start=performance.now();
-      function tick(now){
-        const p=Math.min((now-start)/dur,1);
-        const v=Math.round(p*target);
-        el.textContent=v+suffix;
-        if(p<1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-      cobs.unobserve(el);
-    });
-  },{threshold:.5});
-  document.querySelectorAll('[data-count]').forEach(el=>cobs.observe(el));
-})();
-
-function toggleFaq(btn){
-  const item=btn.parentElement;
-  item.classList.toggle('open');
-}
-</script>
-<script>
-(function(){
-  var c=document.getElementById('star-field');
-  if(!c)return;
-  var ctx=c.getContext('2d');
-  var dpr=window.devicePixelRatio||1;
-  var W,H,stars=[];
-  var isMob=window.innerWidth<768;
-  var N=isMob?60:130;
-  var ML=isMob?90:130;
-  function resize(){W=window.innerWidth;H=window.innerHeight;c.width=W*dpr;c.height=H*dpr;ctx.scale(dpr,dpr);c.style.width=W+'px';c.style.height=H+'px';}
-  function init(){resize();stars=[];for(var i=0;i<N;i++)stars.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*1.2+.3,a:Math.random(),tw:Math.random()*Math.PI*2,ts:Math.random()*.015+.005});}
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    for(var i=0;i<stars.length;i++){
-      var s=stars[i];
-      s.x+=s.vx;s.y+=s.vy;
-      if(s.x<0)s.x=W;if(s.x>W)s.x=0;
-      if(s.y<0)s.y=H;if(s.y>H)s.y=0;
-      s.tw+=s.ts;
-      var al=.35+.45*Math.sin(s.tw);
-      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(200,200,200,'+al+')';ctx.fill();
-      for(var j=i+1;j<stars.length;j++){
-        var q=stars[j];
-        var dx=s.x-q.x,dy=s.y-q.y;
-        var d=Math.sqrt(dx*dx+dy*dy);
-        if(d<ML){ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle='rgba(180,180,180,'+(0.12*(1-d/ML))+')';ctx.lineWidth=.5;ctx.stroke();}
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize',function(){init();});
-  init();draw();
-})();
-</script>
-
-<!-- Cookie consent bar -->
-<div id="cookie-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(10,10,10,0.97);border-top:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-  <p style="margin:0;font-family:'DM Sans',sans-serif;font-size:.82rem;color:#8C8C8C;line-height:1.5;">This site uses essential cookies only for Cloudflare bot protection. No tracking or analytics. <a href="/cookies.html" style="color:#D0D0D0;text-decoration:underline;text-underline-offset:3px;">Learn more</a></p>
-  <button onclick="dismissCookieBar()" style="flex-shrink:0;background:#141414;border:1px solid rgba(255,255,255,0.15);color:#F5F5F5;font-family:'DM Sans',sans-serif;font-size:.8rem;padding:7px 18px;border-radius:6px;cursor:pointer;white-space:nowrap;transition:background .2s;">Got it</button>
-</div>
-<script>
-(function(){
-  if(localStorage.getItem('orthonode_cc')==='1') return;
-  var bar=document.getElementById('cookie-bar');
-  if(bar){bar.style.display='flex';}
-})();
-function dismissCookieBar(){
-  localStorage.setItem('orthonode_cc','1');
-  var bar=document.getElementById('cookie-bar');
-  if(bar){bar.style.opacity='0';bar.style.transition='opacity .3s';setTimeout(function(){bar.style.display='none';},300);}
-}
-</script>
-</body>
-</html>
+</body></html>

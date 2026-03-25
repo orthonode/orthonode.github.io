@@ -1,3034 +1,754 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>ORTHONODE SYSTEMS™ | Verification Infrastructure for the Decentralized Stack</title>
-    <meta name="title" content="ORTHONODE SYSTEMS™ | Verification Infrastructure for the Decentralized Stack">
-    <meta name="description" content="ORTHONODE SYSTEMS™ builds verification infrastructure across 5 chains: SHA on Arbitrum Stylus, DotLend on Polkadot Hub, INVARIANT on Bittensor, TIX-DAO on Solana, TON-SHA on TON. Founded by Arhant Barmate, Bhopal, India.">
-    <meta name="keywords" content="ORTHONODE SYSTEMS, Arhant Barmate, verification infrastructure, decentralized stack, Arbitrum Stylus SHA, hardware identity blockchain, ESP32 eFuse smart contract, TON agent trust, Bittensor subnet INVARIANT, TIX-DAO Solana governance, Nexus Protocol zero trust, DotLend Polkadot Hub money market, Bifrost vDOT, Noir ZK circuit, PolkaVM">
-    <meta name="author" content="Arhant Barmate">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-    <link rel="canonical" href="https://orthonode.xyz/">
-
-    <meta name="geo.region" content="IN-MP">
-    <meta name="geo.placename" content="Bhopal">
-    <meta name="geo.position" content="23.2599;77.4126">
-    <meta name="ICBM" content="23.2599, 77.4126">
-
+<html class="dark" lang="en"><head>
+    <meta name="description" content="ORTHONODE SYSTEMS™ — Verification infrastructure for the decentralized stack. Building trust primitives across Arbitrum, Polkadot, TON, Bittensor, and Solana.">
+    <meta name="keywords" content="ORTHONODE, DotLend, SHA, TON-SHA, INVARIANT, TIX-DAO, Nexus, Polkadot, Arbitrum, blockchain, ZK, verification">
+    <meta property="og:title" content="ORTHONODE SYSTEMS™ | Sovereign Infrastructure">
+    <meta property="og:description" content="Verification infrastructure for the decentralized stack — 7 protocols across 5 chains.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://orthonode.xyz/">
-    <meta property="og:title" content="ORTHONODE SYSTEMS™ | Verification Infrastructure for the Decentralized Stack">
-    <meta property="og:description" content="Verification infrastructure across 5 chains. SHA on Arbitrum · DotLend on Polkadot Hub · INVARIANT on Bittensor · TIX-DAO on Solana · TON-SHA on TON. Founded by Arhant Barmate.">
-    <meta property="og:image" content="https://orthonode.xyz/banner.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="ORTHONODE SYSTEMS™">
-    <meta property="og:locale" content="en_US">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@OrthonodeSys">
-    <meta name="twitter:creator" content="@OrthonodeSys">
-    <meta name="twitter:title" content="ORTHONODE SYSTEMS™ | Verification Infrastructure for the Decentralized Stack">
-    <meta name="twitter:description" content="Verification infrastructure across 5 chains. SHA · DotLend · INVARIANT · TIX-DAO · TON-SHA. Founded by Arhant Barmate.">
-    <meta name="twitter:image" content="https://orthonode.xyz/banner.png">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": "https://orthonode.xyz/#org",
-          "name": "ORTHONODE SYSTEMS™",
-          "legalName": "Orthonode Infrastructure Labs",
-          "url": "https://orthonode.xyz",
-          "logo": "https://orthonode.xyz/site-logo.png",
-          "foundingDate": "2025",
-          "founders": [{
-            "@type": "Person",
-            "name": "Arhant Barmate",
-            "jobTitle": "Founder",
-            "email": "infrastructure@orthonode.xyz",
-            "sameAs": [
-              "https://twitter.com/OrthonodeSys",
-              "https://www.linkedin.com/in/arhant-barmate-5710163aa/"
-            ]
-          }],
-          "description": "ORTHONODE SYSTEMS™ builds verification infrastructure for the decentralized stack across 5 chains.",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Bhopal",
-            "addressRegion": "MP",
-            "addressCountry": "IN"
-          },
-          "sameAs": [
-            "https://twitter.com/OrthonodeSys",
-            "https://github.com/orthonode"
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://orthonode.xyz/#website",
-          "url": "https://orthonode.xyz",
-          "name": "ORTHONODE SYSTEMS™",
-          "publisher": { "@id": "https://orthonode.xyz/#org" },
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "https://orthonode.xyz/site-index.html?q={search_term_string}"
+    <meta property="og:url" content="https://orthonode.xyz">
+    <link rel="canonical" href="https://orthonode.xyz">
+    <link rel="icon" href="/site-logo.png" type="image/png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ORTHONODE SYSTEMS™ | Sovereign Infrastructure</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=DM+Sans:wght@300;400;700&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Space+Grotesk:wght@300;700&amp;family=Inter:wght@300;400;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "#000000",
+              "outline-variant": "#5b3f47",
+              "inverse-surface": "#e5e2e1",
+              "inverse-primary": "#ba0061",
+              "surface-container": "#201f1f",
+              "tertiary-fixed": "#eddcff",
+              "surface": "#131313",
+              "error": "#ffb4ab",
+              "tertiary-container": "#9945ff",
+              "secondary-fixed-dim": "#92ccff",
+              "surface-variant": "#353534",
+              "on-secondary-fixed-variant": "#004b73",
+              "surface-container-lowest": "#0e0e0e",
+              "surface-bright": "#3a3939",
+              "secondary-container": "#1b98e1",
+              "on-surface": "#e5e2e1",
+              "tertiary-fixed-dim": "#d8b9ff",
+              "on-tertiary": "#450086",
+              "on-secondary-container": "#002c47",
+              "on-tertiary-container": "#ffffff",
+              "surface-container-highest": "#353534",
+              "error-container": "#93000a",
+              "on-surface-variant": "#e3bdc6",
+              "primary-fixed-dim": "#ffb1c7",
+              "on-primary-fixed": "#3e001d",
+              "inverse-on-surface": "#313030",
+              "primary-fixed": "#ffd9e2",
+              "primary-container": "#e6007a",
+              "on-error-container": "#ffdad6",
+              "on-primary-container": "#ffffff",
+              "tertiary": "#d8b9ff",
+              "surface-tint": "#ffb1c7",
+              "on-tertiary-fixed-variant": "#6300bb",
+              "secondary-fixed": "#cce5ff",
+              "surface-container-high": "#2a2a2a",
+              "surface-dim": "#131313",
+              "on-secondary": "#003351",
+              "on-error": "#690005",
+              "primary": "#ffb1c7",
+              "on-background": "#e5e2e1",
+              "on-primary-fixed-variant": "#8e0049",
+              "on-primary": "#650032",
+              "on-secondary-fixed": "#001d31",
+              "on-tertiary-fixed": "#290055",
+              "secondary": "#92ccff",
+              "outline": "#aa8890",
+              "surface-container-low": "#1c1b1b"
             },
-            "query-input": "required name=search_term_string"
-          }
+            fontFamily: {
+              "headline": ["Syne", "sans-serif"],
+              "body": ["DM Sans", "sans-serif"],
+              "label": ["IBM Plex Mono", "monospace"],
+              "mono": ["IBM Plex Mono", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
         },
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://orthonode.xyz/" },
-            { "@type": "ListItem", "position": 2, "name": "SHA", "item": "https://orthonode.xyz/sha.html" },
-            { "@type": "ListItem", "position": 3, "name": "DotLend", "item": "https://orthonode.xyz/dotlend.html" },
-            { "@type": "ListItem", "position": 4, "name": "OAP", "item": "https://orthonode.xyz/oap.html" },
-            { "@type": "ListItem", "position": 5, "name": "Nexus Protocol", "item": "https://orthonode.xyz/nexus.html" }
-          ]
-        }
-      ]
-    }
+      }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glow-primary { box-shadow: 0 0 20px rgba(230, 0, 122, 0.2); }
+        .glass-panel { background: rgba(19, 19, 19, 0.6); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .marquee { display: flex; overflow: hidden; user-select: none; gap: 2rem; }
+        .marquee-content { flex-shrink: 0; display: flex; justify-content: space-around; min-width: 100%; gap: 2rem; animation: scroll 40s linear infinite; }
+        @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+        .text-tracking-tight { letter-spacing: -0.02em; }
+        .border-gradient { border: 1px solid; border-image-source: linear-gradient(90deg, #E6007A, #9945FF); border-image-slice: 1; }
+    </style>
+
+    <script>
+    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null},remove(k){this.set(k,"",0)}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365);this.showBanner()},showBanner(){if(!this.cookie.get("on_banner"))document.getElementById("cookie-banner")?.classList.remove("hidden")},acceptCookies(){ON.cookie.set("on_banner","1",365);document.getElementById("cookie-banner")?.classList.add("hidden")}};
+    window.onHumanVerified=function(t){ON.cookie.set("on_verified",t,1/24);const g=document.getElementById("gate");g.style.transition="opacity 0.6s,transform 0.6s";g.style.opacity="0";g.style.transform="scale(1.05)";setTimeout(()=>{g.style.display="none";document.getElementById("app").style.display="block";ON.init()},600)};
+    document.addEventListener("DOMContentLoaded",()=>{if(ON.cookie.get("on_verified")){document.getElementById("gate")?.remove();document.getElementById("app").style.display="block";ON.init()}});
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-white">
+    <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+    <script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:120},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.9+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script>
+    <!-- ═══ SECURITY GATE ═══ -->
+    <div id="gate" style="position:fixed;inset:0;z-index:9999;background:#000000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;">
+      <img src="/site-logo.png" alt="ORTHONODE SYSTEMS™" style="height:52px;object-fit:contain;margin-bottom:8px;">
+      <div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(208,208,208,0.85)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.6 9.4 8 10 4.4-.6 8-5 8-10V6L12 2z"/><polyline points="9 12 11 14 15 10"/></svg>
+      </div>
+      <div style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.12em;text-transform:uppercase;">Human Verification Required</div>
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb" data-callback="onHumanVerified" data-theme="dark" data-size="flexible" data-appearance="always" style="width:min(300px,90vw);"></div>
+      <div style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);">Powered by Cloudflare Turnstile</div>
+    </div>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <!-- ═══ COOKIE BANNER ═══ -->
+    <div id="cookie-banner" class="hidden" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;display:flex;align-items:center;gap:20px;max-width:520px;width:90vw;">
+      <p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">We use cookies including <code style="font-family:IBM Plex Mono,monospace;font-size:11px;color:#E6007A;">on_verified</code>, <code style="font-family:IBM Plex Mono,monospace;font-size:11px;color:#E6007A;">on_theme</code>, <code style="font-family:IBM Plex Mono,monospace;font-size:11px;color:#E6007A;">on_chain</code>, and <code style="font-family:IBM Plex Mono,monospace;font-size:11px;color:#E6007A;">on_banner</code> for site functionality. <a href="/cookies.html" style="color:#E6007A;">Learn more</a></p>
+      <button onclick="ON.acceptCookies()" style="background:#E6007A;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:0.08em;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button>
+    </div>
+    <!-- ═══ APP WRAPPER ═══ -->
+    <div id="app" style="display:none;position:relative;z-index:1;">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-3xl px-8 py-4 border-b border-white/5">
+<div class="max-w-[1440px] mx-auto flex justify-between items-center">
+<div class="flex items-center gap-4">
+<span class="text-xl font-extrabold tracking-tighter text-zinc-100 font-headline uppercase">ORTHONODE SYSTEMS™</span>
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1 rounded-full border border-white/5">
+<span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+<span class="text-[10px] font-mono text-emerald-500 uppercase tracking-widest">OPERATIONAL</span>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-8 font-mono text-xs tracking-widest text-zinc-500">
+<div class="flex items-center gap-2 hover:text-[#2A9FE8] transition-colors cursor-crosshair">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2A9FE8]"></span> ARB
+                </div>
+<div class="flex items-center gap-2 hover:text-[#0098EA] transition-colors cursor-crosshair">
+<span class="w-1.5 h-1.5 rounded-full bg-[#0098EA]"></span> TON
+                </div>
+<div class="flex items-center gap-2 hover:text-[#E6007A] transition-colors cursor-crosshair">
+<span class="w-1.5 h-1.5 rounded-full bg-[#E6007A]"></span> DOT
+                </div>
+<div class="flex items-center gap-2 hover:text-[#EAB308] transition-colors cursor-crosshair">
+<span class="w-1.5 h-1.5 rounded-full bg-[#EAB308]"></span> TAO
+                </div>
+<div class="flex items-center gap-2 hover:text-[#9945FF] transition-colors cursor-crosshair">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9945FF]"></span> SOL
+                </div>
+</div>
+<div class="flex items-center gap-6">
+<a class="text-xs font-mono text-[#E6007A] font-bold border-b border-[#E6007A] pb-0.5" href="#">DotLend</a>
+<a class="text-xs font-mono text-secondary hover:text-white transition-colors" href="#">SHA</a>
+<a class="text-xs font-mono text-zinc-400 hover:text-white transition-colors" href="#">TON-SHA</a>
+<div class="flex gap-4 ml-4 border-l border-white/10 pl-6 text-zinc-400">
+<span class="material-symbols-outlined text-sm hover:text-white transition-colors cursor-pointer">hub</span>
+<span class="material-symbols-outlined text-sm hover:text-white transition-colors cursor-pointer">security</span>
+<span class="material-symbols-outlined text-sm hover:text-white transition-colors cursor-pointer">terminal</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Live Protocol Ticker -->
+<div class="fixed top-[72px] w-full z-40 bg-[#0e0e0e] border-y border-white/5 py-2 overflow-hidden">
+<div class="marquee">
+<div class="marquee-content font-mono text-[10px] text-zinc-500 tracking-tighter uppercase">
+<span>SHA_ARBITRUM_SEPOLIA: <span class="text-emerald-500">LIVE</span></span> ◆ 
+                <span>DOTLEND_POLKADOT_HUB: <span class="text-amber-500">TESTNET_LIVE</span></span> ◆ 
+                <span>INVARIANT: <span class="text-emerald-500">PHASE_1_COMPLETE</span></span> ◆ 
+                <span>TIX_DAO: <span class="text-purple-500">SOLANA_DEVNET</span></span> ◆ 
+                <span>TON_SHA: <span class="text-amber-500">TESTNET_LIVE</span></span> ◆ 
+                <span>NEXUS_PROTOCOL: <span class="text-secondary">PHASE_1.4.0_ACTIVE</span></span> ◆
+                <span>SHA_ARBITRUM_SEPOLIA: <span class="text-emerald-500">LIVE</span></span> ◆ 
+                <span>DOTLEND_POLKADOT_HUB: <span class="text-amber-500">TESTNET_LIVE</span></span> ◆ 
+                <span>INVARIANT: <span class="text-emerald-500">PHASE_1_COMPLETE</span></span>
+</div>
+</div>
+</div>
+<main class="pt-32 pb-24 px-8 max-w-[1440px] mx-auto space-y-32">
+<!-- Hero Section -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center min-h-[716px]">
+<div class="lg:col-span-7 space-y-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full">
+<span class="text-[10px] font-mono tracking-widest text-zinc-400">Infrastructure Labs // Physical Verification Layer</span>
+</div>
+<h1 class="text-6xl md:text-7xl lg:text-[72px] font-headline text-tracking-tight leading-[0.9] text-on-surface">
+                    Verification Infrastructure for the <span class="text-primary-container">Decentralized</span> Stack.
+                </h1>
+<p class="text-xl text-zinc-400 font-body max-w-2xl leading-relaxed">
+                    Orthonode builds deterministic trust primitives for sovereign environments. Bridging physical hardware attestation with multi-chain protocol verification.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-on-surface text-background px-8 py-3 font-bold text-sm tracking-tight hover:bg-white transition-all flex items-center gap-2">
+                        Explore DotLend <span class="material-symbols-outlined text-sm">north_east</span>
+</button>
+<button class="border border-white/10 text-on-surface px-6 py-3 font-mono text-xs hover:bg-white/5 transition-all">SHA on Arbitrum</button>
+<button class="border border-white/10 text-on-surface px-6 py-3 font-mono text-xs hover:bg-white/5 transition-all">Nexus Protocol</button>
+<button class="border border-white/10 text-on-surface px-6 py-3 font-mono text-xs hover:bg-white/5 transition-all">Research Log</button>
+</div>
+<div class="grid grid-cols-5 gap-4 pt-12 border-t border-white/5">
+<div>
+<div class="text-2xl font-mono text-on-surface">07</div>
+<div class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Projects</div>
+</div>
+<div>
+<div class="text-2xl font-mono text-on-surface">05</div>
+<div class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Chains</div>
+</div>
+<div>
+<div class="text-2xl font-mono text-on-surface">13</div>
+<div class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">DotLend Contracts</div>
+</div>
+<div>
+<div class="text-2xl font-mono text-on-surface">10K+</div>
+<div class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Tests</div>
+</div>
+<div>
+<div class="text-2xl font-mono text-on-surface">$25K</div>
+<div class="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Grants</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5">
+<div class="glass-panel p-8 rounded-xl relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 blur-[80px]"></div>
+<div class="flex justify-between items-center mb-8 pb-4 border-b border-white/5">
+<h3 class="font-headline text-lg uppercase tracking-wider">Live System Status</h3>
+<span class="text-[10px] font-mono text-emerald-500">ALL SYSTEMS ONLINE</span>
+</div>
+<div class="space-y-6">
+<div class="flex justify-between items-center group/item cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<span class="font-mono text-xs text-zinc-300">DOTLEND_V1</span>
+</div>
+<span class="text-[10px] font-mono text-zinc-500">POLKADOT_HUB</span>
+</div>
+<div class="flex justify-between items-center group/item cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<span class="font-mono text-xs text-zinc-300">SHA_VERIFIER</span>
+</div>
+<span class="text-[10px] font-mono text-zinc-500">ARBITRUM</span>
+</div>
+<div class="flex justify-between items-center group/item cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<span class="font-mono text-xs text-zinc-300">TON_SHA_PROVER</span>
+</div>
+<span class="text-[10px] font-mono text-zinc-500">TON_NETWORK</span>
+</div>
+<div class="flex justify-between items-center group/item cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.5)]"></span>
+<span class="font-mono text-xs text-zinc-300">INVARIANT_CORE</span>
+</div>
+<span class="text-[10px] font-mono text-zinc-500">EVM_COMPAT</span>
+</div>
+<div class="flex justify-between items-center group/item cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<span class="font-mono text-xs text-zinc-300">TIX_DAO_ENGINE</span>
+</div>
+<span class="text-[10px] font-mono text-zinc-500">SOLANA</span>
+</div>
+<div class="flex justify-between items-center group/item cursor-pointer">
+<div class="flex items-center gap-4">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+<span class="font-mono text-xs text-zinc-300">NEXUS_SHIELD</span>
+</div>
+<span class="text-[10px] font-mono text-zinc-500">CROSS_CHAIN</span>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-white/5 flex gap-4">
+<img class="w-full h-24 object-cover rounded opacity-50" data-alt="abstract digital visualization of node network connections with glowing data points on deep black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQLo2ETOXrUyla00MJcVDoH_3-VqjaTPtt-1QtIPdn26Jp7c9-CKOtU9wtWh_LXxEusdIJCjs_gIbCmLEFNoFOvSgkYX4AEcUEZmh-tCD_rZpK1PYMfGRcEOAHTBZl-_t0Mnn5Oe-s2sEZvf2gjJ3D0UeSHEaridLCoN8eFHFtd04wlXHNgtnN9KwjlIkY6ad7LhoRhcs26QIVba2sD7LIl3S07BwNC7ZK2K_F2cYm8KwYYzLKoD5VTJpoaxx4MVpRbCAe4L32hnc"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured DotLend Card -->
+<section class="relative">
+<div class="absolute -inset-[2px] bg-gradient-to-r from-[#E6007A] via-[#9945FF] to-[#E6007A] rounded-xl opacity-20"></div>
+<div class="relative bg-[#0e0e0e] border border-white/10 rounded-xl overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-2">
+<div class="p-12 space-y-8 border-r border-white/5">
+<div class="space-y-4">
+<div class="inline-block bg-[#E6007A]/10 text-[#E6007A] px-3 py-1 text-[10px] font-mono rounded border border-[#E6007A]/20">FEATURED PROTOCOL</div>
+<h2 class="text-4xl font-headline text-tracking-tight leading-none">DotLend — First Money Market on Polkadot Hub</h2>
+<p class="text-zinc-400 font-body leading-relaxed">
+                                A high-performance lending protocol engineered for the Polkadot ecosystem. DotLend leverages PolkaVM for sub-millisecond interest rate calculations and trustless verification.
+                            </p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="bg-white/5 px-2 py-1 rounded text-[10px] font-mono border border-white/10 text-zinc-300">Solidity</span>
+<span class="bg-white/5 px-2 py-1 rounded text-[10px] font-mono border border-white/10 text-zinc-300">Hardhat</span>
+<span class="bg-white/5 px-2 py-1 rounded text-[10px] font-mono border border-white/10 text-zinc-300">Foundry Forge</span>
+<span class="bg-white/5 px-2 py-1 rounded text-[10px] font-mono border border-white/10 text-zinc-300">Noir ZK</span>
+<span class="bg-white/5 px-2 py-1 rounded text-[10px] font-mono border border-white/10 text-zinc-300">PolkaVM</span>
+<span class="bg-white/5 px-2 py-1 rounded text-[10px] font-mono border border-white/10 text-zinc-300">vDOT</span>
+<span class="bg-white/5 px-2 py-1 rounded text-[10px] font-mono border border-white/10 text-zinc-300">WPAS</span>
+</div>
+<div class="flex gap-4">
+<button class="bg-[#E6007A] text-white px-8 py-3 text-xs font-bold hover:glow-primary transition-all">LAUNCH APP</button>
+<button class="border border-white/10 text-on-surface px-8 py-3 text-xs font-mono hover:bg-white/5 transition-all">DOCUMENTATION</button>
+</div>
+</div>
+<div class="p-12 bg-surface-container-low/30 space-y-12">
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-1">
+<div class="text-[10px] font-mono text-zinc-500 uppercase">Deployed Contracts</div>
+<div class="text-3xl font-mono text-on-surface">13</div>
+</div>
+<div class="space-y-1">
+<div class="text-[10px] font-mono text-zinc-500 uppercase">Unit Tests Passed</div>
+<div class="text-3xl font-mono text-on-surface">108</div>
+</div>
+<div class="space-y-1">
+<div class="text-[10px] font-mono text-zinc-500 uppercase">Simulated TVL</div>
+<div class="text-3xl font-mono text-[#E6007A]">$330M</div>
+</div>
+<div class="space-y-1">
+<div class="text-[10px] font-mono text-zinc-500 uppercase">Max LTV</div>
+<div class="text-3xl font-mono text-on-surface">70%</div>
+</div>
+</div>
+<div class="flex justify-around items-center pt-8 border-t border-white/5">
+<div class="text-center space-y-3">
+<div class="relative w-16 h-16 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90">
+<circle class="text-white/5" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-[#E6007A]" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="176" stroke-dashoffset="42" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-[10px] font-mono">76%</span>
+</div>
+<div class="text-[9px] font-mono text-zinc-500 uppercase tracking-tighter">vDOT Util</div>
+</div>
+<div class="text-center space-y-3">
+<div class="relative w-16 h-16 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90">
+<circle class="text-white/5" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-secondary" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="176" stroke-dashoffset="53" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-[10px] font-mono">70%</span>
+</div>
+<div class="text-[9px] font-mono text-zinc-500 uppercase tracking-tighter">Max LTV</div>
+</div>
+<div class="text-center space-y-3">
+<div class="relative w-16 h-16 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90">
+<circle class="text-white/5" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-tertiary" cx="32" cy="32" fill="transparent" r="28" stroke="currentColor" stroke-dasharray="176" stroke-dashoffset="35" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-[10px] font-mono">80%</span>
+</div>
+<div class="text-[9px] font-mono text-zinc-500 uppercase tracking-tighter">Liq Thresh</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Protocol Grid -->
+<section class="space-y-12">
+<div class="flex justify-between items-end">
+<div class="space-y-2">
+<h2 class="text-4xl font-headline tracking-tighter">PROTOCOL_REGISTRY</h2>
+<p class="text-zinc-500 font-mono text-xs uppercase">Verification active across 6 sovereign primitives</p>
+</div>
+<div class="text-zinc-500 font-mono text-xs border border-white/10 px-4 py-2 hover:text-white transition-colors cursor-pointer">VIEW ALL ARCHIVES —&gt;</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- INVARIANT -->
+<div class="bg-surface p-6 rounded-lg border border-white/5 hover:border-amber-500/50 transition-all group">
+<div class="h-1 w-full bg-amber-500 mb-6"></div>
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline text-xl">INVARIANT</h3>
+<span class="text-[9px] font-mono bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded border border-amber-500/20">DEVNET</span>
+</div>
+<p class="text-xs text-zinc-400 mb-6 line-clamp-2">Constant product market maker (CPMM) with deterministic execution paths.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<div class="text-[9px] font-mono text-zinc-600 uppercase">Chain</div>
+<div class="text-xs font-mono text-zinc-200">Arbitrum One</div>
+</div>
+<div>
+<div class="text-[9px] font-mono text-zinc-600 uppercase">State</div>
+<div class="text-xs font-mono text-zinc-200">Phase 1</div>
+</div>
+</div>
+<a class="text-[10px] font-mono text-zinc-500 group-hover:text-amber-500 flex items-center gap-2 transition-colors" href="#">EXPLORE_PRIMITIVE <span class="material-symbols-outlined text-[12px]">arrow_forward</span></a>
+</div>
+<!-- TIX-DAO -->
+<div class="bg-surface p-6 rounded-lg border border-white/5 hover:border-purple-500/50 transition-all group">
+<div class="h-1 w-full bg-purple-500 mb-6"></div>
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline text-xl">TIX-DAO</h3>
+<span class="text-[9px] font-mono bg-purple-500/10 text-purple-500 px-2 py-0.5 rounded border border-purple-500/20">BETA</span>
+</div>
+<p class="text-xs text-zinc-400 mb-6 line-clamp-2">Decentralized ticketing infrastructure for sovereign event management.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<div class="text-[9px] font-mono text-zinc-600 uppercase">Chain</div>
+<div class="text-xs font-mono text-zinc-200">Solana</div>
+</div>
+<div>
+<div class="text-[9px] font-mono text-zinc-600 uppercase">State</div>
+<div class="text-xs font-mono text-zinc-200">Live</div>
+</div>
+</div>
+<a class="text-[10px] font-mono text-zinc-500 group-hover:text-purple-500 flex items-center gap-2 transition-colors" href="#">EXPLORE_PRIMITIVE <span class="material-symbols-outlined text-[12px]">arrow_forward</span></a>
+</div>
+<!-- SHA -->
+<div class="bg-surface p-6 rounded-lg border border-white/5 hover:border-secondary/50 transition-all group">
+<div class="h-1 w-full bg-secondary mb-6"></div>
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline text-xl">SHA</h3>
+<span class="text-[9px] font-mono bg-secondary/10 text-secondary px-2 py-0.5 rounded border border-secondary/20">STYLUS</span>
+</div>
+<p class="text-xs text-zinc-400 mb-6 line-clamp-2">Secured Hardware Authentication for non-custodial asset management.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<div class="text-[9px] font-mono text-zinc-600 uppercase">Chain</div>
+<div class="text-xs font-mono text-zinc-200">Arbitrum</div>
+</div>
+<div>
+<div class="text-[9px] font-mono text-zinc-600 uppercase">State</div>
+<div class="text-xs font-mono text-zinc-200">Production</div>
+</div>
+</div>
+<a class="text-[10px] font-mono text-zinc-500 group-hover:text-secondary flex items-center gap-2 transition-colors" href="#">EXPLORE_PRIMITIVE <span class="material-symbols-outlined text-[12px]">arrow_forward</span></a>
+</div>
+<!-- TON-SHA -->
+<div class="bg-surface p-6 rounded-lg border border-white/5 hover:border-sky-500/50 transition-all group">
+<div class="h-1 w-full bg-sky-500 mb-6"></div>
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline text-xl">TON-SHA</h3>
+<span class="text-[9px] font-mono bg-sky-500/10 text-sky-500 px-2 py-0.5 rounded border border-sky-500/20">TESTNET</span>
+</div>
+<p class="text-xs text-zinc-400 mb-6 line-clamp-2">Porting hardware-grade verification to the Open Network ecosystem.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<div class="text-[9px] font-mono text-zinc-600 uppercase">Chain</div>
+<div class="text-xs font-mono text-zinc-200">TON</div>
+</div>
+<div>
+<div class="text-[9px] font-mono text-zinc-600 uppercase">State</div>
+<div class="text-xs font-mono text-zinc-200">Testing</div>
+</div>
+</div>
+<a class="text-[10px] font-mono text-zinc-500 group-hover:text-sky-500 flex items-center gap-2 transition-colors" href="#">EXPLORE_PRIMITIVE <span class="material-symbols-outlined text-[12px]">arrow_forward</span></a>
+</div>
+<!-- NEXUS -->
+<div class="bg-surface p-6 rounded-lg border border-white/5 hover:border-emerald-500/50 transition-all group">
+<div class="h-1 w-full bg-emerald-500 mb-6"></div>
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline text-xl">NEXUS</h3>
+<span class="text-[9px] font-mono bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded border border-emerald-500/20">ORCHESTRATOR</span>
+</div>
+<p class="text-xs text-zinc-400 mb-6 line-clamp-2">Cross-chain state orchestration with high-fidelity proof generation.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<div class="text-[9px] font-mono text-zinc-600 uppercase">Chain</div>
+<div class="text-xs font-mono text-zinc-200">Multi-Chain</div>
+</div>
+<div>
+<div class="text-[9px] font-mono text-zinc-600 uppercase">State</div>
+<div class="text-xs font-mono text-zinc-200">v1.4.0</div>
+</div>
+</div>
+<a class="text-[10px] font-mono text-zinc-500 group-hover:text-emerald-500 flex items-center gap-2 transition-colors" href="#">EXPLORE_PRIMITIVE <span class="material-symbols-outlined text-[12px]">arrow_forward</span></a>
+</div>
+<!-- OAP -->
+<div class="bg-surface p-6 rounded-lg border border-white/5 hover:border-orange-500/50 transition-all group">
+<div class="h-1 w-full bg-orange-500 mb-6"></div>
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline text-xl">OAP</h3>
+<span class="text-[9px] font-mono bg-orange-500/10 text-orange-500 px-2 py-0.5 rounded border border-orange-500/20">RESEARCH</span>
+</div>
+<p class="text-xs text-zinc-400 mb-6 line-clamp-2">Open Attestation Protocol for physical compute resource verification.</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<div class="text-[9px] font-mono text-zinc-600 uppercase">Chain</div>
+<div class="text-xs font-mono text-zinc-200">Substrate</div>
+</div>
+<div>
+<div class="text-[9px] font-mono text-zinc-600 uppercase">State</div>
+<div class="text-xs font-mono text-zinc-200">Paper v0.1</div>
+</div>
+</div>
+<a class="text-[10px] font-mono text-zinc-500 group-hover:text-orange-500 flex items-center gap-2 transition-colors" href="#">EXPLORE_PRIMITIVE <span class="material-symbols-outlined text-[12px]">arrow_forward</span></a>
+</div>
+</div>
+</section>
+<!-- "Why Verification?" Section -->
+<section class="space-y-16">
+<div class="max-w-3xl">
+<h2 class="text-5xl font-headline tracking-tighter mb-6">Why Verification?</h2>
+<p class="text-zinc-400 text-lg leading-relaxed">The transition from "Don't be evil" to "Can't be evil" requires infrastructure that does not negotiate with the truth.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-8 border border-white/5 bg-surface-container-low/50 relative group">
+<div class="font-mono text-4xl text-white/5 mb-8 group-hover:text-[#E6007A]/20 transition-colors">01</div>
+<h3 class="font-headline text-xl mb-4">Trust Is Not Assumed</h3>
+<p class="text-sm text-zinc-500 leading-relaxed font-body">In sovereign environments, trust is a liability. We replace assumptions with mathematical certainty through cryptographic proofs.</p>
+</div>
+<div class="p-8 border border-white/5 bg-surface-container-low/50 relative group">
+<div class="font-mono text-4xl text-white/5 mb-8 group-hover:text-secondary/20 transition-colors">02</div>
+<h3 class="font-headline text-xl mb-4">Execution Must Be Provable</h3>
+<p class="text-sm text-zinc-500 leading-relaxed font-body">Off-chain computation is useless without on-chain verification. Every cycle must leave a deterministic footprint.</p>
+</div>
+<div class="p-8 border border-white/5 bg-surface-container-low/50 relative group">
+<div class="font-mono text-4xl text-white/5 mb-8 group-hover:text-emerald-500/20 transition-colors">03</div>
+<h3 class="font-headline text-xl mb-4">Infrastructure Before App</h3>
+<p class="text-sm text-zinc-500 leading-relaxed font-body">Solid foundations enable complex ecosystems. We build the verification layer so others can build the future.</p>
+</div>
+</div>
+</section>
+<!-- Doctrine Section -->
+<section class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+<div class="p-8 border border-white/5 bg-black hover:bg-zinc-900/40 transition-all cursor-default">
+<div class="w-12 h-12 bg-zinc-900 rounded-lg flex items-center justify-center mb-6 border border-white/5">
+<span class="material-symbols-outlined text-zinc-400">fingerprint</span>
+</div>
+<h4 class="font-headline text-sm uppercase tracking-widest mb-3">Silicon-First Identity</h4>
+<p class="text-xs text-zinc-500 leading-relaxed">Binding cryptographic keys to tamper-proof hardware at the edge.</p>
+</div>
+<div class="p-8 border border-white/5 bg-black hover:bg-zinc-900/40 transition-all cursor-default">
+<div class="w-12 h-12 bg-zinc-900 rounded-lg flex items-center justify-center mb-6 border border-white/5">
+<span class="material-symbols-outlined text-zinc-400">receipt_long</span>
+</div>
+<h4 class="font-headline text-sm uppercase tracking-widest mb-3">Deterministic Receipts</h4>
+<p class="text-xs text-zinc-500 leading-relaxed">Every transaction generates an auditable proof of compute validity.</p>
+</div>
+<div class="p-8 border border-white/5 bg-black hover:bg-zinc-900/40 transition-all cursor-default">
+<div class="w-12 h-12 bg-zinc-900 rounded-lg flex items-center justify-center mb-6 border border-white/5">
+<span class="material-symbols-outlined text-zinc-400">lan</span>
+</div>
+<h4 class="font-headline text-sm uppercase tracking-widest mb-3">Cross-Chain Fabric</h4>
+<p class="text-xs text-zinc-500 leading-relaxed">Unified trust primitives that bridge state across divergent networks.</p>
+</div>
+<div class="p-8 border border-white/5 bg-black hover:bg-zinc-900/40 transition-all cursor-default">
+<div class="w-12 h-12 bg-zinc-900 rounded-lg flex items-center justify-center mb-6 border border-white/5">
+<span class="material-symbols-outlined text-zinc-400">verified</span>
+</div>
+<h4 class="font-headline text-sm uppercase tracking-widest mb-3">Open Verification</h4>
+<p class="text-xs text-zinc-500 leading-relaxed">Radical transparency through public-domain proof schemas.</p>
+</div>
+</section>
+<!-- SHA Metrics Section -->
+<section class="space-y-12">
+<div class="p-12 glass-panel rounded-xl">
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-8 mb-16">
+<div class="space-y-2">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-secondary rounded-full shadow-[0_0_10px_#92ccff]"></span>
+<h2 class="text-4xl font-headline tracking-tighter uppercase">SHA Architecture Metrics</h2>
+</div>
+<p class="text-zinc-500 font-mono text-sm uppercase tracking-widest">Hardware-Anchored Trust Execution</p>
+</div>
+<div class="flex items-center gap-4 bg-black/40 border border-white/5 p-4 rounded-lg">
+<span class="text-[10px] font-mono text-zinc-600">SHA_CONTRACT:</span>
+<code class="text-xs font-mono text-zinc-200">0x8a91...4fc2</code>
+<span class="material-symbols-outlined text-sm text-zinc-500 cursor-pointer hover:text-white">content_copy</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+<div class="space-y-4">
+<div class="text-4xl font-mono text-on-surface">100%</div>
+<div class="text-[10px] font-mono text-zinc-500 uppercase leading-tight">eFuse Burn Rate Success</div>
+</div>
+<div class="space-y-4">
+<div class="text-4xl font-mono text-on-surface">EVM</div>
+<div class="text-[10px] font-mono text-zinc-500 uppercase leading-tight">Native Contract Compatibility</div>
+</div>
+<div class="space-y-4">
+<div class="text-4xl font-mono text-[#E6007A]">1:1</div>
+<div class="text-[10px] font-mono text-zinc-500 uppercase leading-tight">Hardware ID per Device</div>
+</div>
+<div class="space-y-4">
+<div class="text-4xl font-mono text-on-surface">RUST</div>
+<div class="text-[10px] font-mono text-zinc-500 uppercase leading-tight">Arbitrum Stylus Optimized</div>
+</div>
+<div class="space-y-4">
+<div class="text-4xl font-mono text-on-surface">&lt;1s</div>
+<div class="text-[10px] font-mono text-zinc-500 uppercase leading-tight">Sub-second Verification</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Build Log -->
+<section class="space-y-12">
+<h2 class="text-4xl font-headline tracking-tighter">BUILD_LOG.MD</h2>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-white/10">
+<th class="py-6 px-4 font-mono text-[10px] text-zinc-500 uppercase">Timestamp</th>
+<th class="py-6 px-4 font-mono text-[10px] text-zinc-500 uppercase">Type</th>
+<th class="py-6 px-4 font-mono text-[10px] text-zinc-500 uppercase">Protocol</th>
+<th class="py-6 px-4 font-mono text-[10px] text-zinc-500 uppercase">Event Description</th>
+<th class="py-6 px-4 font-mono text-[10px] text-zinc-500 uppercase text-right">Reference</th>
+</tr>
+</thead>
+<tbody class="font-mono text-xs">
+<tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+<td class="py-6 px-4 text-zinc-400">2024-05-12</td>
+<td class="py-6 px-4"><span class="bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded border border-emerald-500/20">DEPLOY</span></td>
+<td class="py-6 px-4 text-zinc-200">SHA_VERIFIER</td>
+<td class="py-6 px-4 text-zinc-500">Initial Stylus contract deployment on Arbitrum Sepolia</td>
+<td class="py-6 px-4 text-right text-secondary">v2.0.4-MAIN</td>
+</tr>
+<tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+<td class="py-6 px-4 text-zinc-400">2024-05-08</td>
+<td class="py-6 px-4"><span class="bg-primary-container/10 text-primary-container px-2 py-0.5 rounded border border-primary-container/20">AUDIT</span></td>
+<td class="py-6 px-4 text-zinc-200">DOTLEND_HUB</td>
+<td class="py-6 px-4 text-zinc-500">Security review of vDOT liquidation logic completed</td>
+<td class="py-6 px-4 text-right text-secondary">A-1102</td>
+</tr>
+<tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+<td class="py-6 px-4 text-zinc-400">2024-04-29</td>
+<td class="py-6 px-4"><span class="bg-zinc-500/10 text-zinc-500 px-2 py-0.5 rounded border border-zinc-500/20">RESEARCH</span></td>
+<td class="py-6 px-4 text-zinc-200">NEXUS_CORE</td>
+<td class="py-6 px-4 text-zinc-500">Multi-proof aggregation benchmark analysis</td>
+<td class="py-6 px-4 text-right text-secondary">R-402</td>
+</tr>
+<tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+<td class="py-6 px-4 text-zinc-400">2024-04-15</td>
+<td class="py-6 px-4"><span class="bg-sky-500/10 text-sky-500 px-2 py-0.5 rounded border border-sky-500/20">MILESTONE</span></td>
+<td class="py-6 px-4 text-zinc-200">TON_SHA</td>
+<td class="py-6 px-4 text-zinc-500">First hardware-anchored attestation on TON testnet</td>
+<td class="py-6 px-4 text-right text-secondary">v0.9.2-ALPHA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- FAQ Accordion -->
+<section class="max-w-4xl mx-auto space-y-12">
+<h2 class="text-4xl font-headline tracking-tighter text-center">Protocol FAQ</h2>
+<div class="space-y-4">
+<div class="border border-white/5 bg-surface-container-low/30 rounded-lg overflow-hidden group">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-colors">
+<span class="font-headline text-lg">How does SHA differ from standard multisigs?</span>
+<span class="material-symbols-outlined text-zinc-500">add</span>
+</button>
+<div class="px-6 pb-6 text-sm text-zinc-500 font-body leading-relaxed hidden">
+                        SHA leverages physical secure enclaves at the hardware level, ensuring that the key cannot be extracted even if the OS is compromised. Unlike software multisigs, SHA is anchored in silicon.
+                    </div>
+</div>
+<div class="border border-white/5 bg-surface-container-low/30 rounded-lg overflow-hidden">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-colors">
+<span class="font-headline text-lg">What is the status of the DotLend Polkadot Hub?</span>
+<span class="material-symbols-outlined text-zinc-500">add</span>
+</button>
+</div>
+<div class="border border-white/5 bg-surface-container-low/30 rounded-lg overflow-hidden">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-colors">
+<span class="font-headline text-lg">Is Arbitrum Stylus necessary for SHA?</span>
+<span class="material-symbols-outlined text-zinc-500">add</span>
+</button>
+</div>
+<div class="border border-white/5 bg-surface-container-low/30 rounded-lg overflow-hidden">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-colors">
+<span class="font-headline text-lg">How can I integrate the Nexus verification layer?</span>
+<span class="material-symbols-outlined text-zinc-500">add</span>
+</button>
+</div>
+<div class="border border-white/5 bg-surface-container-low/30 rounded-lg overflow-hidden">
+<button class="w-full flex justify-between items-center p-6 text-left hover:bg-white/5 transition-colors">
+<span class="font-headline text-lg">Are there hardware requirements for OAP?</span>
+<span class="material-symbols-outlined text-zinc-500">add</span>
+</button>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="text-center py-24 border-y border-white/5">
+<div class="max-w-2xl mx-auto space-y-8">
+<h2 class="text-5xl md:text-6xl font-headline tracking-tighter leading-none">Build on Verified Infrastructure.</h2>
+<p class="text-zinc-400 font-body text-lg">Deploy your first deterministic trust primitive today with the ORTHONODE SDK.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+<button class="bg-[#E6007A] text-white px-10 py-4 font-bold tracking-tight hover:glow-primary transition-all">START BUILDING</button>
+<button class="border border-white/10 text-on-surface px-10 py-4 font-mono text-sm hover:bg-white/5 transition-all">READ DOCUMENTATION</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-black border-t border-zinc-900 py-24">
+<div class="max-w-[1440px] mx-auto px-12 grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-32">
+<div class="space-y-6">
+<div class="text-2xl font-extrabold tracking-tighter text-white font-headline uppercase">ORTHONODE</div>
+<p class="text-sm text-zinc-500 font-body leading-relaxed max-w-xs">
+                    Sovereign infrastructure for a deterministic world. Building the trust primitives for the decentralized stack.
+                </p>
+<div class="text-xs font-mono text-zinc-400 pt-4">
+                    core@orthonode.systems
+                </div>
+</div>
+<div class="space-y-8">
+<h5 class="text-[10px] font-mono font-bold text-zinc-600 uppercase tracking-widest">PROTOCOLS</h5>
+<ul class="space-y-4">
+<li><a class="text-xs font-mono text-zinc-500 hover:text-[#E6007A] transition-colors" href="#">DotLend</a></li>
+<li><a class="text-xs font-mono text-zinc-500 hover:text-[#E6007A] transition-colors" href="#">SHA</a></li>
+<li><a class="text-xs font-mono text-zinc-500 hover:text-[#E6007A] transition-colors" href="#">TON-SHA</a></li>
+<li><a class="text-xs font-mono text-zinc-500 hover:text-[#E6007A] transition-colors" href="#">INVARIANT</a></li>
+<li><a class="text-xs font-mono text-zinc-500 hover:text-[#E6007A] transition-colors" href="#">TIX-DAO</a></li>
+</ul>
+</div>
+<div class="space-y-8">
+<h5 class="text-[10px] font-mono font-bold text-zinc-600 uppercase tracking-widest">COMPANY</h5>
+<ul class="space-y-4">
+<li><a class="text-xs font-mono text-zinc-500 hover:text-white transition-colors uppercase" href="#">Nexus</a></li>
+<li><a class="text-xs font-mono text-zinc-500 hover:text-white transition-colors uppercase" href="#">OAP</a></li>
+<li><a class="text-xs font-mono text-zinc-500 hover:text-white transition-colors uppercase" href="#">GitHub</a></li>
+<li><a class="text-xs font-mono text-zinc-500 hover:text-white transition-colors uppercase" href="#">Twitter/X</a></li>
+<li><a class="text-xs font-mono text-zinc-500 hover:text-white transition-colors uppercase" href="#">Documentation</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto px-12 mt-24 pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-[10px] font-mono text-zinc-600 tracking-widest uppercase">
+                © 2024 ORTHONODE SYSTEMS™ — SOVEREIGN INFRASTRUCTURE
+            </div>
+<div class="flex gap-6 items-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all cursor-default">
+<span class="text-[10px] font-mono text-zinc-700">VERIFIED ON:</span>
+<span class="text-[10px] font-mono text-zinc-500">ARB</span>
+<span class="text-[10px] font-mono text-zinc-500">SOL</span>
+<span class="text-[10px] font-mono text-zinc-500">DOT</span>
+<span class="text-[10px] font-mono text-zinc-500">TON</span>
+<span class="text-[10px] font-mono text-zinc-500">TAO</span>
+</div>
+</div>
+</footer>
+    </div><!-- /#app -->
+    <script>
+    // FAQ accordion
+    document.querySelectorAll("section button").forEach(btn=>{
+      if(btn.closest(".space-y-4")&&btn.querySelector(".material-symbols-outlined")){
+        btn.addEventListener("click",()=>{
+          const panel=btn.nextElementSibling;
+          if(panel&&panel.classList.contains("hidden")){panel.classList.remove("hidden");btn.querySelector(".material-symbols-outlined").textContent="remove"}
+          else if(panel){panel.classList.add("hidden");btn.querySelector(".material-symbols-outlined").textContent="add"}
+        });
+      }
+    });
+    // Wire internal links
+    const linkMap={"DotLend":"dotlend.html","SHA":"sha.html","TON-SHA":"ton-sha.html","INVARIANT":"invariant.html","TIX-DAO":"tix-dao.html","Nexus":"nexus.html","OAP":"oap.html"};
+    document.querySelectorAll("a[href='#']").forEach(a=>{
+      const t=a.textContent.trim();
+      if(linkMap[t])a.href=linkMap[t];
+    });
+    // Wire the EXPLORE_PRIMITIVE links
+    document.querySelectorAll("a.text-\\[10px\\]").forEach(a=>{ if(a.textContent.includes("EXPLORE")) { const card=a.closest("div[class*='bg-surface']"); if(card){const title=card.querySelector("h3")?.textContent?.trim(); if(title&&linkMap[title])a.href=linkMap[title];} } });
     </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
-
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        :where(a, button) { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-
-        :root {
-            /* ── Obsidian Chrome palette ── */
-            --void:    #000000;
-            --space:   #070707;
-            --surface: #0D0D0D;
-            --raised:  #141414;
-
-            --b1: rgba(255,255,255,0.055);
-            --b2: rgba(255,255,255,0.11);
-            --b3: rgba(255,255,255,0.22);
-
-            --t1: #F5F5F5;
-            --t2: #8C8C8C;
-            --t3: #404040;
-            --t4: #1C1C1C;
-
-            --silver: #D0D0D0;
-            --chrome: #A8A8A8;
-            --plasma: #C8C8C8;
-
-            --sha:   #2A9FE8;
-            --ton:   #0098EA;
-            --nexus: #00D48A;
-            --oap:   #F59E0B;
-            --inv:   #EAB308;
-            --tix:   #9945FF;
-            --dot:   #E6007A;
-
-            --red:   #EF4444;
-            --green: #22C55E;
-
-            --font-head: 'Syne', sans-serif;
-            --font-body: 'DM Sans', sans-serif;
-            --font-mono: 'IBM Plex Mono', monospace;
-            --ease: cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            background: var(--void);
-            color: var(--t1);
-            font-family: var(--font-body);
-            font-size: 15px;
-            line-height: 1.65;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* ─── GATE ─── */
-        #gate {
-            position: fixed;
-            inset: 0;
-            z-index: 1000;
-            background: var(--void);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 24px;
-            overflow-x: hidden;
-            overflow-y: auto;
-            padding: 24px 16px;
-        }
-
-        #gate::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 60% 50% at 30% 40%, rgba(200,200,200,0.05) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 60% at 70% 60%, rgba(255,255,255,0.04) 0%, transparent 70%);
-            animation: gatePulse 6s ease-in-out infinite alternate;
-        }
-
-        @keyframes gatePulse {
-            from { opacity: 0.5; transform: scale(1); }
-            to   { opacity: 1;   transform: scale(1.05); }
-        }
-
-        .gate-logo-img {
-            width: 72px;
-            height: 72px;
-            border-radius: 10px;
-            filter: drop-shadow(0 0 28px rgba(255,255,255,0.18));
-            position: relative;
-            z-index: 1;
-        }
-
-        .gate-logo {
-            font-family: var(--font-head);
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 0.18em;
-            color: var(--t2);
-            text-transform: uppercase;
-            position: relative;
-            z-index: 1;
-        }
-
-        .gate-label {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--t3);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 1;
-        }
-
-        .gate-orb {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.18);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .gate-orb::before {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.07);
-            animation: orbRing 3s ease-in-out infinite;
-        }
-
-        .gate-orb::after {
-            content: '';
-            position: absolute;
-            inset: 8px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
-            animation: orbGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes orbRing {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50%       { transform: scale(1.15); opacity: 1; }
-        }
-
-        @keyframes orbGlow {
-            from { opacity: 0.4; }
-            to   { opacity: 1; }
-        }
-
-        .gate-icon {
-            font-size: 28px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* ─── APP WRAPPER ─── */
-        #app {
-            display: none;
-        }
-
-        /* ─── HERO BACKGROUND ─── */
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        /* Precision engineering grid — replaces colored orbs */
-        .hero-bg::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-            background-size: 72px 72px;
-        }
-
-        /* Vignette — dark corners, subtle center glow */
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 70% 60% at 50% 30%, rgba(255,255,255,0.025) 0%, transparent 65%),
-                linear-gradient(to bottom, transparent 40%, var(--void) 100%),
-                linear-gradient(to right, var(--void) 0%, transparent 15%, transparent 85%, var(--void) 100%);
-        }
-
-        /* ─── HEADER / NAV ─── */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            backdrop-filter: blur(12px) saturate(150%);
-            -webkit-backdrop-filter: blur(12px) saturate(150%);
-            background: rgba(0,0,0,0.75);
-            border-bottom: 1px solid var(--b1);
-            transition: background 0.4s var(--ease), border-color 0.4s var(--ease), backdrop-filter 0.4s;
-        }
-
-        header.sc {
-            background: rgba(0,0,0,0.92);
-            border-bottom-color: var(--b2);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), rgba(255,255,255,0.08), transparent);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        header.sc::after { opacity: 1; }
-
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            padding: 0 32px;
-            height: 52px;
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            flex-shrink: 0;
-        }
-
-        .nav-wordmark {
-            font-family: var(--font-head);
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            color: var(--t1);
-            text-transform: uppercase;
-        }
-
-        .nav-status {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--green);
-            letter-spacing: 0.1em;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .nav-status::before {
-            content: '●';
-            font-size: 7px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50%       { opacity: 0.3; }
-        }
-
-        .nav-chains {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            font-family: var(--font-mono);
-            font-size: 10px;
-            letter-spacing: 0.06em;
-        }
-
-        .chain-dot {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            color: var(--t3);
-        }
-
-        .chain-dot span {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .nav-tags {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-
-        .nav-tag {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            padding: 3px 8px;
-            border-radius: 4px;
-            letter-spacing: 0.08em;
-            text-decoration: none;
-            border: 1px solid;
-            transition: opacity 0.2s;
-        }
-
-        .nav-tag:hover { opacity: 0.75; }
-
-        .nav-tag.dot   { color: var(--dot); border-color: rgba(230,0,122,0.35); background: rgba(230,0,122,0.06); }
-        .nav-tag.arb   { color: var(--sha); border-color: rgba(42,159,232,0.35); background: rgba(42,159,232,0.06); }
-        .nav-tag.ton-t { color: var(--silver); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
-
-        /* ─── TICKER ─── */
-        .ticker-wrap {
-            overflow: hidden;
-            border-bottom: 1px solid var(--b1);
-            background: var(--space);
-            padding: 7px 0;
-            margin-top: 52px;
-        }
-
-        .ticker-track {
-            display: flex;
-            white-space: nowrap;
-            animation: marquee 40s linear infinite;
-        }
-
-        .ticker-track:hover { animation-play-state: paused; }
-
-        .ticker-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-family: var(--font-mono);
-            font-size: 10px;
-            letter-spacing: 0.1em;
-            color: var(--t3);
-            padding: 0 24px;
-        }
-
-        .ticker-sep { color: var(--plasma); opacity: 0.5; }
-
-        .ticker-key { color: var(--t2); }
-        .ticker-val { color: var(--green); }
-        .ticker-val.live   { color: var(--green); }
-        .ticker-val.tl     { color: var(--plasma); }
-        .ticker-val.done   { color: var(--inv); }
-        .ticker-val.active { color: var(--nexus); }
-        .ticker-val.sub    { color: var(--dot); }
-
-        @keyframes marquee {
-            from { transform: translateX(0); }
-            to   { transform: translateX(-50%); }
-        }
-
-        /* ─── LAYOUT ─── */
-        .wrap {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-
-        .section {
-            padding: 88px 0;
-        }
-
-        /* ─── HERO ─── */
-        .hero {
-            position: relative;
-            padding: 100px 0 88px;
-            overflow: hidden;
-        }
-
-        .hero-inner {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--silver);
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            margin-bottom: 28px;
-            padding: 5px 12px;
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 4px;
-            background: rgba(255,255,255,0.04);
-        }
-
-        .hero-eyebrow::before {
-            content: '';
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--silver);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        h1 {
-            font-family: var(--font-head);
-            font-size: clamp(38px, 5.5vw, 72px);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 24px;
-        }
-
-        .accent {
-            background: linear-gradient(135deg, #FFFFFF 0%, #888888 55%, #D0D0D0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-sub {
-            font-size: 18px;
-            color: var(--t2);
-            max-width: 580px;
-            margin-bottom: 40px;
-            font-weight: 300;
-            line-height: 1.7;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 56px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-family: var(--font-mono);
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 0.06em;
-            text-decoration: none;
-            transition: all 0.2s var(--ease);
-            cursor: pointer;
-            border: none;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .btn-primary {
-            background: #FFFFFF;
-            color: #000000;
-            font-weight: 600;
-        }
-
-        .btn-primary:hover {
-            background: var(--silver);
-            transform: translateY(-1px);
-            box-shadow: 0 8px 32px rgba(255,255,255,0.2);
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--t2);
-            border: 1px solid rgba(255,255,255,0.14);
-        }
-
-        .btn-ghost:hover {
-            background: rgba(255,255,255,0.06);
-            color: var(--t1);
-            border-color: rgba(255,255,255,0.28);
-        }
-
-        .stats-bar {
-            display: flex;
-            gap: 0;
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 8px;
-            overflow: hidden;
-            max-width: fit-content;
-        }
-
-        .stat-item {
-            padding: 14px 28px;
-            border-right: 1px solid rgba(255,255,255,0.08);
-            text-align: center;
-            background: rgba(255,255,255,0.03);
-        }
-
-        .stat-item:last-child { border-right: none; }
-
-        .stat-n {
-            display: block;
-            font-family: var(--font-head);
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--t1);
-            line-height: 1;
-        }
-
-        .stat-l {
-            display: block;
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--t3);
-            letter-spacing: 0.1em;
-            margin-top: 4px;
-            text-transform: uppercase;
-        }
-
-        /* ─── SECTION LABEL ─── */
-        .sec-label {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--chrome);
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            margin-bottom: 32px;
-            opacity: 0.7;
-        }
-
-        .sec-title {
-            font-family: var(--font-head);
-            font-size: clamp(26px, 3vw, 40px);
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 16px;
-        }
-
-        .sec-sub {
-            font-size: 16px;
-            color: var(--t2);
-            max-width: 520px;
-            font-weight: 300;
-        }
-
-        /* ─── DOTLEND FEATURED ─── */
-        .dotlend-card {
-            border-radius: 12px;
-            padding: 2px;
-            background: linear-gradient(135deg, rgba(230,0,122,0.6), rgba(42,159,232,0.3) 50%, rgba(230,0,122,0.4));
-            margin-bottom: 24px;
-            animation: dotBorderPulse 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes dotBorderPulse {
-            from {
-                background: linear-gradient(135deg, rgba(230,0,122,0.5), rgba(42,159,232,0.25) 50%, rgba(230,0,122,0.35));
-                box-shadow: 0 0 30px rgba(230,0,122,0.12);
-            }
-            to {
-                background: linear-gradient(135deg, rgba(230,0,122,0.8), rgba(42,159,232,0.5) 50%, rgba(230,0,122,0.6));
-                box-shadow: 0 0 60px rgba(230,0,122,0.2);
-            }
-        }
-
-        .dotlend-inner {
-            background: var(--surface);
-            border-radius: 11px;
-            padding: 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            align-items: start;
-        }
-
-        .dotlend-left { }
-
-        .dotlend-badges {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .badge {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            padding: 4px 10px;
-            border-radius: 4px;
-            letter-spacing: 0.08em;
-            font-weight: 500;
-        }
-
-        .badge-latest {
-            background: rgba(230,0,122,0.15);
-            color: var(--dot);
-            border: 1px solid rgba(230,0,122,0.3);
-        }
-
-        .badge-hack {
-            background: rgba(255,255,255,0.04);
-            color: var(--t2);
-            border: 1px solid var(--b2);
-        }
-
-        .badge-live {
-            background: rgba(34,197,94,0.1);
-            color: var(--green);
-            border: 1px solid rgba(34,197,94,0.25);
-        }
-
-        .dotlend-title {
-            font-family: var(--font-head);
-            font-size: 30px;
-            font-weight: 800;
-            margin-bottom: 12px;
-            line-height: 1.1;
-        }
-
-        .dotlend-title span {
-            color: var(--dot);
-        }
-
-        .dotlend-desc {
-            font-size: 15px;
-            color: var(--t2);
-            line-height: 1.7;
-            margin-bottom: 24px;
-            font-weight: 300;
-        }
-
-        .tech-badges {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-bottom: 28px;
-        }
-
-        .tech-badge {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            padding: 4px 9px;
-            border-radius: 4px;
-            background: var(--b1);
-            color: var(--t3);
-            border: 1px solid var(--b2);
-        }
-
-        .dotlend-actions {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .btn-dot {
-            background: rgba(230,0,122,0.12);
-            color: var(--dot);
-            border: 1px solid rgba(230,0,122,0.3);
-        }
-
-        .btn-dot:hover {
-            background: rgba(230,0,122,0.22);
-            transform: translateY(-1px);
-            box-shadow: 0 8px 24px rgba(230,0,122,0.2);
-        }
-
-        .dotlend-right { }
-
-        .dl-stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .dl-stat {
-            background: var(--raised);
-            border: 1px solid var(--b2);
-            border-radius: 8px;
-            padding: 16px;
-            text-align: center;
-        }
-
-        .dl-stat-n {
-            font-family: var(--font-head);
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--dot);
-            display: block;
-            line-height: 1;
-        }
-
-        .dl-stat-l {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--t3);
-            letter-spacing: 0.08em;
-            display: block;
-            margin-top: 6px;
-        }
-
-        .dl-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: var(--font-mono);
-            font-size: 11px;
-        }
-
-        .dl-table tr {
-            border-bottom: 1px solid var(--b1);
-        }
-
-        .dl-table tr:last-child { border-bottom: none; }
-
-        .dl-table td {
-            padding: 8px 0;
-            vertical-align: top;
-        }
-
-        .dl-table td:first-child {
-            color: var(--t3);
-            width: 40%;
-            letter-spacing: 0.08em;
-        }
-
-        .dl-table td:last-child {
-            color: var(--t1);
-            word-break: break-all;
-        }
-
-        .dl-table .addr {
-            color: var(--dot);
-            font-size: 10px;
-        }
-
-        /* ─── PROJECT GRID ─── */
-        .proj-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-
-        .proj-card {
-            background: var(--surface);
-            border: 1px solid var(--b2);
-            border-radius: 10px;
-            padding: 28px;
-            position: relative;
-            overflow: hidden;
-            transition: border-color 0.3s, transform 0.3s var(--ease), box-shadow 0.3s;
-            cursor: default;
-        }
-
-        .proj-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle 200px at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.04) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-
-        .proj-card:hover::before { opacity: 1; }
-
-        .proj-card:hover {
-            border-color: var(--b3);
-            transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-2px);
-            box-shadow: 0 16px 48px rgba(0,0,0,0.4);
-        }
-
-        .proj-top-bar {
-            height: 3px;
-            border-radius: 3px 3px 0 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-        }
-
-        .proj-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .proj-name {
-            font-family: var(--font-head);
-            font-size: 22px;
-            font-weight: 700;
-            line-height: 1;
-        }
-
-        .proj-pills {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .pill {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            padding: 3px 8px;
-            border-radius: 4px;
-            letter-spacing: 0.08em;
-            border: 1px solid;
-        }
-
-        .pill-chain {
-            color: var(--t3);
-            border-color: var(--b2);
-            background: var(--b1);
-        }
-
-        .pill-status-live   { color: var(--green); border-color: rgba(34,197,94,0.3); background: rgba(34,197,94,0.06); }
-        .pill-status-tl     { color: var(--silver); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
-        .pill-status-done   { color: var(--inv); border-color: rgba(234,179,8,0.3); background: rgba(234,179,8,0.06); }
-        .pill-status-active { color: var(--nexus); border-color: rgba(0,212,138,0.3); background: rgba(0,212,138,0.06); }
-
-        .proj-desc {
-            font-size: 14px;
-            color: var(--t2);
-            margin-bottom: 18px;
-            line-height: 1.6;
-            font-weight: 300;
-        }
-
-        .proj-metrics {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 16px;
-        }
-
-        .proj-metric-v {
-            font-family: var(--font-head);
-            font-size: 18px;
-            font-weight: 700;
-            display: block;
-            line-height: 1;
-        }
-
-        .proj-metric-l {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--t3);
-            letter-spacing: 0.06em;
-            display: block;
-            margin-top: 3px;
-        }
-
-        .proj-tech {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .proj-footer {
-            border-top: 1px solid var(--b1);
-            padding-top: 16px;
-        }
-
-        .proj-link {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            letter-spacing: 0.08em;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: gap 0.2s, opacity 0.2s;
-        }
-
-        .proj-link:hover { gap: 10px; opacity: 0.8; }
-
-        /* ─── PROBLEM SECTION ─── */
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 40px;
-        }
-
-        .problem-card {
-            background: var(--surface);
-            border: 1px solid var(--b2);
-            border-radius: 10px;
-            padding: 28px;
-        }
-
-        .problem-num {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--t4);
-            letter-spacing: 0.12em;
-            margin-bottom: 12px;
-        }
-
-        .problem-title {
-            font-family: var(--font-head);
-            font-size: 17px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .problem-desc {
-            font-size: 14px;
-            color: var(--t2);
-            line-height: 1.65;
-            font-weight: 300;
-        }
-
-        /* ─── DOCTRINE ─── */
-        .doctrine-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-            margin-top: 40px;
-        }
-
-        .doctrine-card {
-            background: var(--surface);
-            border: 1px solid var(--b2);
-            border-radius: 10px;
-            padding: 24px;
-        }
-
-        .doctrine-icon {
-            font-size: 22px;
-            margin-bottom: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 52px;
-            height: 52px;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: var(--silver);
-            transition: background 0.25s, border-color 0.25s;
-        }
-        .doctrine-card:hover .doctrine-icon {
-            background: rgba(255,255,255,0.09);
-            border-color: rgba(255,255,255,0.22);
-        }
-
-        .doctrine-title {
-            font-family: var(--font-head);
-            font-size: 15px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .doctrine-desc {
-            font-size: 13px;
-            color: var(--t2);
-            line-height: 1.6;
-            font-weight: 300;
-        }
-
-        /* ─── METRICS ─── */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 14px;
-            margin-top: 40px;
-        }
-
-        .metric-card {
-            background: var(--surface);
-            border: 1px solid var(--b2);
-            border-radius: 10px;
-            padding: 24px 20px;
-            text-align: center;
-        }
-
-        .metric-n {
-            font-family: var(--font-head);
-            font-size: 28px;
-            font-weight: 800;
-            color: var(--sha);
-            display: block;
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-
-        .metric-l {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--t3);
-            letter-spacing: 0.1em;
-            display: block;
-        }
-
-        .metrics-addr {
-            margin-top: 20px;
-            padding: 16px 20px;
-            background: var(--surface);
-            border: 1px solid var(--b2);
-            border-radius: 8px;
-            display: flex;
-            gap: 16px;
-            align-items: center;
-            font-family: var(--font-mono);
-            font-size: 12px;
-        }
-
-        .metrics-addr-label { color: var(--t3); flex-shrink: 0; letter-spacing: 0.08em; }
-
-        .metrics-addr-val {
-            color: var(--sha);
-            word-break: break-all;
-            text-decoration: none;
-        }
-
-        .metrics-addr-val:hover { text-decoration: underline; }
-
-        /* ─── BUILD LOG ─── */
-        .build-log {
-            margin-top: 40px;
-            border: 1px solid var(--b2);
-            border-radius: 12px;
-            overflow: hidden;
-            background: var(--surface);
-        }
-
-        .build-entry {
-            display: grid;
-            grid-template-columns: 100px 88px 1fr 92px;
-            gap: 16px;
-            align-items: center;
-            padding: 13px 22px;
-            border-bottom: 1px solid var(--b1);
-            transition: background 0.15s;
-        }
-
-        .build-entry:last-child { border-bottom: none; }
-        .build-entry:hover { background: var(--raised); }
-
-        .build-date {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--t3);
-            letter-spacing: 0.06em;
-            white-space: nowrap;
-        }
-
-        .build-tag {
-            font-family: var(--font-mono);
-            font-size: 9px;
-            padding: 2px 7px;
-            border-radius: 3px;
-            border: 1px solid;
-            letter-spacing: 0.06em;
-            white-space: nowrap;
-            text-align: center;
-        }
-
-        .build-title {
-            font-size: 13px;
-            color: var(--t1);
-            font-weight: 400;
-            line-height: 1.5;
-        }
-
-        .build-badge {
-            font-family: var(--font-mono);
-            font-size: 9px;
-            color: var(--t3);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            white-space: nowrap;
-            text-align: right;
-        }
-
-        .build-log-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 22px;
-            background: var(--b1);
-            border-top: 1px solid var(--b2);
-        }
-
-        .build-log-x {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: #1da1f2;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-
-        .build-log-x:hover { opacity: 0.75; }
-
-        .build-log-meta {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--t3);
-            letter-spacing: 0.06em;
-        }
-
-        /* ─── HERO STATUS PANEL ─── */
-        .hero-layout {
-            display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 48px;
-            align-items: start;
-        }
-
-        .hero-status-panel {
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 12px;
-            overflow: hidden;
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            position: relative;
-            z-index: 2;
-            margin-top: 8px;
-        }
-
-        .hero-status-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 11px 16px;
-            border-bottom: 1px solid var(--b1);
-            background: var(--b1);
-        }
-
-        .hero-status-title {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--t3);
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-        }
-
-        .hero-status-live {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-family: var(--font-mono);
-            font-size: 9px;
-            color: var(--green);
-            letter-spacing: 0.08em;
-        }
-
-        .hero-status-live::before {
-            content: '';
-            width: 5px;
-            height: 5px;
-            border-radius: 50%;
-            background: var(--green);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .hero-status-row {
-            display: grid;
-            grid-template-columns: 16px 1fr auto;
-            gap: 10px;
-            align-items: center;
-            padding: 9px 16px;
-            border-bottom: 1px solid var(--b1);
-        }
-
-        .hero-status-row:last-child { border-bottom: none; }
-
-        .sdot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-        }
-
-        .sdot-live   { background: #22C55E; box-shadow: 0 0 5px rgba(34,197,94,0.8); }
-        .sdot-tl     { background: var(--silver); box-shadow: 0 0 4px rgba(208,208,208,0.5); animation: pulse 2.5s ease-in-out infinite; }
-        .sdot-active { background: var(--chrome); }
-
-        .hero-status-name {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--t1);
-            letter-spacing: 0.04em;
-        }
-
-        .hero-status-chain {
-            font-family: var(--font-mono);
-            font-size: 9px;
-            color: var(--t3);
-            letter-spacing: 0.04em;
-            text-align: right;
-        }
-
-        .hero-status-footer {
-            padding: 9px 16px;
-            background: var(--b1);
-            border-top: 1px solid var(--b1);
-            font-family: var(--font-mono);
-            font-size: 9px;
-            color: var(--t3);
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            text-align: center;
-        }
-
-        /* ─── RESEARCH LOG ─── */
-        .research-list {
-            margin-top: 32px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .research-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 16px 20px;
-            background: var(--surface);
-            border: 1px solid var(--b2);
-            border-radius: 8px;
-            text-decoration: none;
-            transition: border-color 0.2s, background 0.2s;
-        }
-
-        .research-item:hover {
-            border-color: var(--b3);
-            background: var(--raised);
-        }
-
-        .research-tag {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            padding: 3px 8px;
-            border-radius: 4px;
-            letter-spacing: 0.08em;
-            flex-shrink: 0;
-            color: var(--t3);
-            border: 1px solid var(--b2);
-            background: var(--b1);
-        }
-
-        .research-title {
-            font-size: 14px;
-            color: var(--t1);
-            flex: 1;
-        }
-
-        .research-arrow {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--t3);
-        }
-
-        /* ─── FAQ ─── */
-        .faq-list {
-            margin-top: 32px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .faq-item {
-            border: 1px solid var(--b2);
-            border-radius: 8px;
-            overflow: hidden;
-            background: var(--surface);
-        }
-
-        .faq-q {
-            width: 100%;
-            background: none;
-            border: none;
-            padding: 18px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            cursor: pointer;
-            text-align: left;
-            color: var(--t1);
-            font-family: var(--font-body);
-            font-size: 15px;
-            transition: background 0.2s;
-        }
-
-        .faq-q:hover { background: var(--b1); }
-
-        .faq-icon {
-            font-family: var(--font-mono);
-            font-size: 18px;
-            color: var(--t3);
-            transition: transform 0.3s var(--ease);
-            flex-shrink: 0;
-        }
-
-        .faq-item.open .faq-icon { transform: rotate(45deg); color: var(--plasma); }
-
-        .faq-a {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s var(--ease);
-        }
-
-        .faq-item.open .faq-a { max-height: 300px; }
-
-        .faq-a-inner {
-            padding: 0 20px 18px;
-            font-size: 14px;
-            color: var(--t2);
-            line-height: 1.7;
-            font-weight: 300;
-        }
-
-        .faq-a-inner a { color: var(--plasma); text-decoration: none; }
-        .faq-a-inner a:hover { text-decoration: underline; }
-
-        /* ─── CTA ─── */
-        .cta-section {
-            text-align: center;
-            padding: 88px 0;
-            position: relative;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(255,255,255,0.04) 0%, transparent 70%);
-        }
-
-        .cta-section .sec-title {
-            font-size: clamp(28px, 4vw, 50px);
-            margin-bottom: 20px;
-        }
-
-        .cta-section .sec-sub {
-            margin: 0 auto 36px;
-            text-align: center;
-        }
-
-        .cta-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* ─── FOOTER ─── */
-        footer {
-            border-top: 1px solid var(--b1);
-            background: var(--space);
-        }
-
-        .footer-top {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 48px;
-            padding: 56px 0 40px;
-        }
-
-        .footer-brand-name {
-            font-family: var(--font-head);
-            font-size: 16px;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            margin-bottom: 8px;
-        }
-
-        .footer-brand-sub {
-            font-size: 13px;
-            color: var(--t3);
-            margin-bottom: 16px;
-            font-weight: 300;
-        }
-
-        .footer-contact {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--t2);
-            text-decoration: none;
-        }
-
-        .footer-contact:hover { color: var(--t1); }
-
-        .footer-col-title {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--t3);
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-        }
-
-        .footer-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .footer-links a {
-            font-size: 13px;
-            color: var(--t2);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover { color: var(--t1); }
-
-        .footer-bottom {
-            border-top: 1px solid var(--b1);
-            padding: 20px 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-        }
-
-        .footer-copy {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--t3);
-            letter-spacing: 0.06em;
-        }
-
-        .citation {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--t4);
-            letter-spacing: 0.06em;
-        }
-
-        /* ─── REVEAL ─── */
-        .reveal {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-        }
-
-        .reveal.in {
-            opacity: 1;
-            transform: none;
-        }
-
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-
-        /* ─── MONO TEXT HELPERS ─── */
-        .mono { font-family: var(--font-mono); }
-        .clr-plasma { color: var(--plasma); }
-        .clr-green  { color: var(--green); }
-        .clr-dot    { color: var(--dot); }
-        .clr-sha    { color: var(--sha); }
-        .clr-ton    { color: var(--ton); }
-        .clr-nexus  { color: var(--nexus); }
-        .clr-oap    { color: var(--oap); }
-        .clr-inv    { color: var(--inv); }
-        .clr-tix    { color: var(--tix); }
-
-        /* ─── RESPONSIVE ─── */
-
-        /* ── Tablet ── */
-        @media (max-width: 1024px) {
-            .doctrine-grid     { grid-template-columns: repeat(2, 1fr); }
-            .metrics-grid      { grid-template-columns: repeat(3, 1fr); }
-            .hero-layout       { grid-template-columns: 1fr; }
-            .hero-status-panel { display: none; }
-        }
-
-        /* ── Mobile ── */
-        @media (max-width: 768px) {
-            /* Layout */
-            nav          { padding: 0 16px; }
-            .wrap        { padding: 0 16px; }
-            .section     { padding: 56px 0; }
-            .hero        { padding: 72px 0 48px; }
-
-            /* Nav: hide chain dots, allow tags to scroll */
-            .nav-chains  { display: none; }
-            .nav-tags    { gap: 4px; }
-            .nav-tag     { font-size: 9px; padding: 2px 6px; }
-
-            /* Ticker */
-            .ticker-item { font-size: 9px; padding: 0 14px; gap: 7px; }
-
-            /* Hero */
-            .hero-sub    { font-size: 15px; }
-            .hero-actions { flex-wrap: wrap; gap: 8px; }
-            .btn         { font-size: 11px; padding: 9px 16px; }
-
-            /* Stats bar: 3-up then wrap */
-            .stats-bar   { flex-wrap: wrap; max-width: 100%; }
-            .stat-item   {
-                flex: 1 1 30%;
-                min-width: 90px;
-                border-bottom: 1px solid var(--b2);
-            }
-
-            /* Projects */
-            .dotlend-inner    { grid-template-columns: 1fr; gap: 28px; padding: 24px; }
-            .dotlend-title    { font-size: clamp(20px, 5vw, 28px); }
-            .proj-grid        { grid-template-columns: 1fr; }
-            .dl-stats-grid    { grid-template-columns: repeat(2, 1fr); }
-
-            /* Problem / Doctrine */
-            .problem-grid  { grid-template-columns: 1fr; }
-            .doctrine-grid { grid-template-columns: 1fr 1fr; }
-
-            /* Metrics */
-            .metrics-grid  { grid-template-columns: repeat(2, 1fr); }
-            .metrics-addr  { flex-direction: column; align-items: flex-start; gap: 4px; }
-            .metrics-addr-val { font-size: 10px; word-break: break-all; }
-
-            /* Bar chart */
-            .bar-row { grid-template-columns: 80px 1fr 55px; gap: 0.5rem; }
-            .bar-label { font-size: 0.6rem; }
-
-            /* Build log */
-            .build-entry  { grid-template-columns: 80px 72px 1fr; gap: 8px; }
-            .build-badge  { display: none; }
-            .build-title  { font-size: 12px; }
-            .build-log-footer { flex-direction: column; gap: 6px; align-items: flex-start; }
-
-            /* Research list */
-            .research-item { flex-wrap: wrap; gap: 8px; }
-            .research-arrow { display: none; }
-
-            /* FAQ */
-            .faq-q { font-size: 13px; }
-
-            /* Footer */
-            .footer-top    { grid-template-columns: 1fr; gap: 28px; padding: 40px 0 28px; }
-            .footer-bottom { flex-direction: column; text-align: center; gap: 8px; }
-        }
-
-        /* ── Small phones (≤ 480px) ── */
-        @media (max-width: 480px) {
-            h1 { font-size: clamp(28px, 9vw, 38px); }
-
-            .hero        { padding: 64px 0 40px; }
-            .section     { padding: 44px 0; }
-
-            .hero-eyebrow { font-size: 9px; padding: 4px 10px; }
-            .hero-sub     { font-size: 14px; }
-            .hero-actions { flex-direction: column; align-items: stretch; }
-            .btn          { justify-content: center; }
-
-            .stats-bar  { flex-direction: column; max-width: 100%; }
-            .stat-item  { border-right: none; border-bottom: 1px solid var(--b2); width: 100%; }
-            .stat-item:last-child { border-bottom: none; }
-
-            .doctrine-grid  { grid-template-columns: 1fr; }
-            .dl-stats-grid  { grid-template-columns: 1fr 1fr; }
-            .metrics-grid   { grid-template-columns: 1fr 1fr; }
-            .cta-actions    { flex-direction: column; align-items: stretch; }
-            .dotlend-actions { flex-direction: column; }
-
-            /* Build log: stack on tiny screens */
-            .build-entry  { grid-template-columns: 1fr; gap: 3px; padding: 10px 14px; }
-            .build-date   { font-size: 9px; }
-            .build-tag    { font-size: 8px; max-width: fit-content; }
-
-            /* Donut charts */
-            .donut-wrap { gap: 12px; }
-            .donut-svg  { width: 60px; height: 60px; }
-
-            /* Section label */
-            .sec-label  { font-size: 9px; }
-            .sec-title  { font-size: clamp(20px, 6vw, 30px); }
-
-            /* Phase steps */
-            .phase-steps { gap: 8px; }
-            .phase-step-num { font-size: 9px; }
-        }
-
-        /* ── Very small (≤ 360px — older Androids) ── */
-        @media (max-width: 360px) {
-            nav { padding: 0 12px; }
-            .wrap { padding: 0 12px; }
-            .nav-tags { display: none; }
-            h1 { font-size: 26px; }
-            .dotlend-inner { padding: 16px; }
-        }
-
-        /* ── Chain SVG icons ── */
-        .chain-dot svg { vertical-align: middle; }
-
-        /* ── Bar chart ── */
-        .bar-chart { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1.25rem; }
-        .bar-row { display: grid; grid-template-columns: 120px 1fr 70px; gap: 0.75rem; align-items: center; }
-        .bar-label { font-family: var(--font-mono); font-size: 0.65rem; color: var(--t3); white-space: nowrap; }
-        .bar-track { height: 6px; background: var(--b1); border-radius: 3px; overflow: hidden; }
-        .bar-fill { height: 100%; width: 0; border-radius: 3px; background: var(--clr, var(--plasma)); transition: width 1.4s cubic-bezier(0.22,1,0.36,1); }
-        .bar-fill.anim { width: var(--w); }
-        .bar-val { font-family: var(--font-mono); font-size: 0.68rem; color: var(--t2); text-align: right; }
-
-        /* ── Donut chart ── */
-        .donut-wrap { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; margin-top: 1.25rem; }
-        .donut-item { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
-        .donut-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--t3); text-transform: uppercase; letter-spacing: 0.1em; }
-        .donut-svg .ring-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 8; }
-        .donut-svg .ring-fg { fill: none; stroke-width: 8; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%;
-            stroke-dasharray: 188.5; stroke-dashoffset: 188.5; transition: stroke-dashoffset 1.6s cubic-bezier(0.22,1,0.36,1); }
-        .donut-svg .ring-fg.anim { stroke-dashoffset: var(--offset); }
-        .donut-svg text { font-family: var(--font-mono); font-size: 13px; font-weight: 600; fill: var(--t1); }
-
-        /* ── Phase steps ── */
-        .phase-steps { display: flex; gap: 0; margin-top: 1rem; }
-        .phase-step { display: flex; flex-direction: column; align-items: center; flex: 1; }
-        .phase-step-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--b2); background: var(--void); position: relative; z-index: 1; transition: background 0.4s, border-color 0.4s; }
-        .phase-step.done .phase-step-dot { background: var(--green); border-color: var(--green); box-shadow: 0 0 8px rgba(34,197,94,0.5); }
-        .phase-step.active .phase-step-dot { background: var(--silver); border-color: var(--silver); box-shadow: 0 0 10px rgba(208,208,208,0.5); animation: pulseDot 2s ease-in-out infinite; }
-        @keyframes pulseDot { 0%,100%{box-shadow:0 0 8px rgba(208,208,208,0.4)} 50%{box-shadow:0 0 18px rgba(255,255,255,0.7)} }
-        .phase-step-line { height: 1.5px; width: 100%; background: var(--b2); margin-top: 4px; }
-        .phase-step.done .phase-step-line { background: var(--green); }
-        .phase-step-lbl { font-family: var(--font-mono); font-size: 0.52rem; color: var(--t3); margin-top: 0.4rem; text-align: center; letter-spacing: 0.04em; }
-        .phase-step.done .phase-step-lbl { color: var(--green); }
-        .phase-step.active .phase-step-lbl { color: var(--plasma); }
-
-        /* ── Full-viewport star field canvas ── */
-        #star-field {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* Ensure all page content sits above the canvas */
-        #gate   { z-index: 1000; }
-        header  { z-index: 100; }
-        #app    { position: relative; z-index: 1; }
-    </style>
-</head>
-<body>
-
-<!-- ═══ STAR FIELD ═══ -->
-<canvas id="star-field" aria-hidden="true"></canvas>
-
-<!-- ═══ SECURITY GATE ═══ -->
-<div id="gate">
-    <img src="/site-logo.png" alt="ORTHONODE SYSTEMS™" class="gate-logo-img">
-    <div class="gate-orb">
-        <svg class="gate-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(208,208,208,0.85)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2L4 6v6c0 5 3.6 9.4 8 10 4.4-.6 8-5 8-10V6L12 2z"/>
-            <polyline points="9 12 11 14 15 10"/>
-        </svg>
-    </div>
-    <div class="gate-label">Human Verification Required</div>
-    <div class="cf-turnstile"
-         data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb"
-         data-callback="onHumanVerified"
-         data-theme="dark"
-         data-size="flexible"
-         data-appearance="always"
-         style="width:min(300px,90vw);">
-    </div>
-    <div class="gate-label" style="font-size:10px;opacity:0.5;">Powered by Cloudflare Turnstile</div>
-</div>
-
-<!-- ═══ APP ═══ -->
-<div id="app">
-
-    <!-- NAV -->
-    <header id="hdr">
-        <nav>
-            <a href="/" class="nav-brand">
-                <span class="nav-wordmark">ORTHONODE SYSTEMS™</span>
-                <span class="nav-status">OPERATIONAL</span>
-            </a>
-
-            <div class="nav-chains">
-                <span class="chain-dot" title="Arbitrum Sepolia">
-                    <svg width="14" height="14" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" fill="#213147"/><path d="M16 6L7 22h3.5L16 12l5.5 10H25L16 6z" fill="#28A0F0"/><path d="M11.5 22l1.8-3.2 1.8 3.2H11.5z" fill="#28A0F0" opacity="0.6"/></svg>
-                    ARB
-                </span>
-                <span class="chain-dot" title="TON Testnet">
-                    <svg width="14" height="14" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" fill="#0098EA"/><path d="M9 11h14l-7 10-7-10z" fill="white" opacity="0.9"/><line x1="16" y1="11" x2="16" y2="21" stroke="white" stroke-width="1.5"/></svg>
-                    TON
-                </span>
-                <span class="chain-dot" title="Polkadot Hub">
-                    <svg width="14" height="14" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="10" r="4" fill="#E6007A"/><circle cx="23" cy="20" r="3" fill="#E6007A" opacity="0.85"/><circle cx="9" cy="20" r="3" fill="#E6007A" opacity="0.85"/><circle cx="16" cy="25" r="2.5" fill="#E6007A" opacity="0.65"/><circle cx="23.5" cy="12.5" r="2.5" fill="#E6007A" opacity="0.65"/><circle cx="8.5" cy="12.5" r="2.5" fill="#E6007A" opacity="0.65"/></svg>
-                    DOT
-                </span>
-                <span class="chain-dot" title="Bittensor">
-                    <svg width="14" height="14" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" fill="#1a1200"/><line x1="16" y1="6" x2="16" y2="26" stroke="#EAB308" stroke-width="2.5" stroke-linecap="round"/><line x1="8" y1="16" x2="24" y2="16" stroke="#EAB308" stroke-width="2.5" stroke-linecap="round"/><path d="M11 11l10 10M21 11L11 21" stroke="#EAB308" stroke-width="1.2" opacity="0.4"/></svg>
-                    TAO
-                </span>
-                <span class="chain-dot" title="Solana Devnet">
-                    <svg width="14" height="14" viewBox="0 0 32 32" fill="none"><path d="M6 23h17l3-3H9l-3 3z" fill="#9945FF"/><path d="M6 16h17l3-3H9l-3 3z" fill="#14F195"/><path d="M6 9h17l3-3H9l-3 3z" fill="#9945FF" opacity="0.7"/></svg>
-                    SOL
-                </span>
-            </div>
-
-            <div class="nav-tags">
-                <a href="dotlend.html" class="nav-tag dot">DotLend</a>
-                <a href="sha.html"     class="nav-tag arb">SHA</a>
-                <a href="ton-sha.html" class="nav-tag ton-t">TON-SHA</a>
-            </div>
-        </nav>
-    </header>
-
-    <!-- TICKER -->
-    <div class="ticker-wrap" aria-hidden="true">
-        <div class="ticker-track">
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">SHA_ARBITRUM_SEPOLIA</span> <span class="ticker-val live">LIVE</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">DOTLEND_POLKADOT_HUB</span> <span class="ticker-val tl">TESTNET_LIVE</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">INVARIANT</span> <span class="ticker-val done">PHASE_1_COMPLETE</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">TIX_DAO</span> <span class="ticker-val tl">SOLANA_DEVNET DEMO_LIVE</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">TON_SHA</span> <span class="ticker-val tl">TESTNET_LIVE</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">NEXUS_PROTOCOL</span> <span class="ticker-val active">PHASE_1.4.0_ACTIVE</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">OAP</span> <span class="ticker-val active">PUBLISHED</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">POLKADOT_SOLIDITY_HACK_2026</span> <span class="ticker-val sub">SUBMITTED</span></span>
-            <!-- duplicate for seamless loop -->
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">SHA_ARBITRUM_SEPOLIA</span> <span class="ticker-val live">LIVE</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">DOTLEND_POLKADOT_HUB</span> <span class="ticker-val tl">TESTNET_LIVE</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">INVARIANT</span> <span class="ticker-val done">PHASE_1_COMPLETE</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">TIX_DAO</span> <span class="ticker-val tl">SOLANA_DEVNET DEMO_LIVE</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">TON_SHA</span> <span class="ticker-val tl">TESTNET_LIVE</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">NEXUS_PROTOCOL</span> <span class="ticker-val active">PHASE_1.4.0_ACTIVE</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">OAP</span> <span class="ticker-val active">PUBLISHED</span></span>
-            <span class="ticker-item"><span class="ticker-sep">◆</span> <span class="ticker-key">POLKADOT_SOLIDITY_HACK_2026</span> <span class="ticker-val sub">SUBMITTED</span></span>
-        </div>
-    </div>
-
-    <main>
-
-        <!-- ── HERO ── -->
-        <section class="hero wrap">
-            <div class="hero-bg"></div>
-
-            <div class="hero-inner">
-                <div class="hero-layout">
-
-                    <!-- LEFT: headline + CTAs + stats -->
-                    <div class="hero-left">
-                        <div class="hero-eyebrow">Infrastructure Labs // Physical Verification Layer</div>
-
-                        <h1>
-                            Verification Infrastructure<br>
-                            for the <span class="accent">Decentralized Stack.</span>
-                        </h1>
-
-                        <p class="hero-sub">
-                            ORTHONODE SYSTEMS™ builds the trust primitives that decentralized systems cannot assume —
-                            from silicon identity on Arbitrum to AI execution receipts on Bittensor to on-chain
-                            ticketing governance on Solana.
-                        </p>
-
-                        <div class="hero-actions">
-                            <a href="dotlend.html" class="btn btn-primary">Explore DotLend ↗</a>
-                            <a href="sha.html"     class="btn btn-ghost">SHA on Arbitrum</a>
-                            <a href="nexus.html"   class="btn btn-ghost">Nexus Protocol</a>
-                            <a href="site-index.html" class="btn btn-ghost">Research Log</a>
-                        </div>
-
-                        <div class="stats-bar">
-                            <div class="stat-item">
-                                <span class="stat-n" data-count="7">0</span>
-                                <span class="stat-l">Projects</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-n" data-count="5">0</span>
-                                <span class="stat-l">Chains</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-n" data-count="13">0</span>
-                                <span class="stat-l">DotLend Contracts</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-n">10K+</span>
-                                <span class="stat-l">Tests</span>
-                            </div>
-                            <div class="stat-item">
-                                <span class="stat-n">$25K</span>
-                                <span class="stat-l">Grant Applied</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- RIGHT: live system status panel -->
-                    <div class="hero-status-panel" aria-label="System status">
-                        <div class="hero-status-head">
-                            <span class="hero-status-title">// system_status</span>
-                            <span class="hero-status-live">All Systems Operational</span>
-                        </div>
-                        <div class="hero-status-row">
-                            <span class="sdot sdot-live"></span>
-                            <span class="hero-status-name">SHA</span>
-                            <span class="hero-status-chain">Arbitrum Sepolia · LIVE</span>
-                        </div>
-                        <div class="hero-status-row">
-                            <span class="sdot sdot-tl"></span>
-                            <span class="hero-status-name">DotLend</span>
-                            <span class="hero-status-chain">Polkadot Hub · Testnet</span>
-                        </div>
-                        <div class="hero-status-row">
-                            <span class="sdot sdot-tl"></span>
-                            <span class="hero-status-name">TON-SHA</span>
-                            <span class="hero-status-chain">TON Testnet · Live</span>
-                        </div>
-                        <div class="hero-status-row">
-                            <span class="sdot sdot-active"></span>
-                            <span class="hero-status-name">Nexus Protocol</span>
-                            <span class="hero-status-chain">Chain-Agnostic · Phase 1.4.0</span>
-                        </div>
-                        <div class="hero-status-row">
-                            <span class="sdot sdot-active"></span>
-                            <span class="hero-status-name">OAP</span>
-                            <span class="hero-status-chain">Multi-Chain · Published</span>
-                        </div>
-                        <div class="hero-status-row">
-                            <span class="sdot sdot-tl"></span>
-                            <span class="hero-status-name">INVARIANT</span>
-                            <span class="hero-status-chain">Bittensor · Phase 2</span>
-                        </div>
-                        <div class="hero-status-row">
-                            <span class="sdot sdot-tl"></span>
-                            <span class="hero-status-name">TIX-DAO</span>
-                            <span class="hero-status-chain">Solana Devnet · Demo</span>
-                        </div>
-                        <div class="hero-status-footer">7 projects · 0 mainnet · 0 incidents</div>
-                    </div>
-
-                </div><!-- /.hero-layout -->
-            </div>
-        </section>
-
-        <!-- ── PROJECTS ── -->
-        <section class="section wrap">
-            <p class="sec-label reveal">// DEPLOYED_INFRASTRUCTURE : 7_PROJECTS_ACROSS_5_CHAINS</p>
-
-            <!-- DOTLEND FEATURED -->
-            <div class="dotlend-card reveal reveal-delay-1">
-                <div class="dotlend-inner">
-                    <div class="dotlend-left">
-                        <div class="dotlend-badges">
-                            <span class="badge badge-latest">LATEST PROJECT</span>
-                            <span class="badge badge-hack">POLKADOT SOLIDITY HACK 2026</span>
-                            <span class="badge badge-live">✓ TESTNET LIVE</span>
-                        </div>
-
-                        <h2 class="dotlend-title">
-                            <span>DotLend</span> — First Money Market<br>on Polkadot Hub
-                        </h2>
-
-                        <p class="dotlend-desc">
-                            Over-collateralised lending protocol on Polkadot Hub TestNet.
-                            vDOT and WPAS collateral support, Noir ZK proof oracles refreshed
-                            every 30 minutes, and full ERC-20 borrowing — all verified on PolkaVM.
-                        </p>
-
-                        <div class="tech-badges">
-                            <span class="tech-badge">Solidity</span>
-                            <span class="tech-badge">Hardhat</span>
-                            <span class="tech-badge">Foundry Forge</span>
-                            <span class="tech-badge">Noir ZK</span>
-                            <span class="tech-badge">PolkaVM</span>
-                            <span class="tech-badge">vDOT</span>
-                            <span class="tech-badge">WPAS</span>
-                            <span class="tech-badge">EVM-compatible</span>
-                        </div>
-
-                        <div class="dotlend-actions">
-                            <a href="dotlend.html" class="btn btn-dot">Explore DotLend ↗</a>
-                            <a href="https://nexucore.xyz" target="_blank" rel="noopener" class="btn btn-ghost">Live App ↗</a>
-                            <a href="https://youtu.be/Oj9luiA8mJM?si=uuFf-SzpvUBl9Q9Z" target="_blank" rel="noopener" class="btn btn-ghost">Demo Video ↗</a>
-                            <a href="https://github.com/orthonode/dotlend" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
-                        </div>
-                    </div>
-
-                    <div class="dotlend-right">
-                        <div class="dl-stats-grid">
-                            <div class="dl-stat">
-                                <span class="dl-stat-n">13</span>
-                                <span class="dl-stat-l">CONTRACTS DEPLOYED</span>
-                            </div>
-                            <div class="dl-stat">
-                                <span class="dl-stat-n">108</span>
-                                <span class="dl-stat-l">TESTS (102 HH + 6 FUZZ)</span>
-                            </div>
-                            <div class="dl-stat">
-                                <span class="dl-stat-n">$330M</span>
-                                <span class="dl-stat-l">HOLLAR TVL SIMULATED</span>
-                            </div>
-                            <div class="dl-stat">
-                                <span class="dl-stat-n">70%</span>
-                                <span class="dl-stat-l">MAX LTV RATIO</span>
-                            </div>
-                        </div>
-
-                        <table class="dl-table">
-                            <tr>
-                                <td>Chain</td>
-                                <td>Polkadot Hub TestNet (ID: 420420417)</td>
-                            </tr>
-                            <tr>
-                                <td>Collateral</td>
-                                <td>vDOT + WPAS</td>
-                            </tr>
-                            <tr>
-                                <td>ZK Oracle</td>
-                                <td>Noir circuit, refreshed every 30 min</td>
-                            </tr>
-                            <tr>
-                                <td>Liquidation</td>
-                                <td>80% threshold (HF &lt; 1 trigger)</td>
-                            </tr>
-                            <tr>
-                                <td>LendingPool</td>
-                                <td class="addr">0x34B22768B16262aD5b7fC23DD797D80791e4e7e6</td>
-                            </tr>
-                        </table>
-                        <div class="donut-wrap" style="justify-content:center;">
-                            <div class="donut-item">
-                                <svg class="donut-svg" width="72" height="72" viewBox="0 0 80 80">
-                                    <circle class="ring-bg" cx="40" cy="40" r="30"/>
-                                    <circle class="ring-fg" cx="40" cy="40" r="30" stroke="#E6007A" style="--offset:45.2;" data-offset="45.2"/>
-                                    <text x="40" y="44" text-anchor="middle">76%</text>
-                                </svg>
-                                <span class="donut-label">vDOT Util</span>
-                            </div>
-                            <div class="donut-item">
-                                <svg class="donut-svg" width="72" height="72" viewBox="0 0 80 80">
-                                    <circle class="ring-bg" cx="40" cy="40" r="30"/>
-                                    <circle class="ring-fg" cx="40" cy="40" r="30" stroke="#D0D0D0" style="--offset:56.55;" data-offset="56.55"/>
-                                    <text x="40" y="44" text-anchor="middle">70%</text>
-                                </svg>
-                                <span class="donut-label">Max LTV</span>
-                            </div>
-                            <div class="donut-item">
-                                <svg class="donut-svg" width="72" height="72" viewBox="0 0 80 80">
-                                    <circle class="ring-bg" cx="40" cy="40" r="30"/>
-                                    <circle class="ring-fg" cx="40" cy="40" r="30" stroke="#22C55E" style="--offset:37.7;" data-offset="37.7"/>
-                                    <text x="40" y="44" text-anchor="middle">80%</text>
-                                </svg>
-                                <span class="donut-label">Liq Thresh</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- GRID ROW 1: INVARIANT + TIX-DAO -->
-            <div class="proj-grid reveal reveal-delay-2">
-
-                <div class="proj-card" id="card-inv">
-                    <div class="proj-top-bar" style="background:linear-gradient(90deg,var(--inv),rgba(234,179,8,0.2));"></div>
-                    <div class="proj-header">
-                        <span class="proj-name clr-inv">INVARIANT</span>
-                        <div class="proj-pills">
-                            <span class="pill pill-chain">Bittensor</span>
-                            <span class="pill pill-status-done">Phase 1 Done</span>
-                        </div>
-                    </div>
-                    <p class="proj-desc">
-                        NTS (Node Trust Score) subnet on Bittensor. Deterministic AI execution
-                        receipts with 0–100 scoring, 9,000+ receipts/sec throughput.
-                    </p>
-                    <div class="proj-metrics">
-                        <div>
-                            <span class="proj-metric-v clr-inv">9K+</span>
-                            <span class="proj-metric-l">REC/SEC</span>
-                        </div>
-                        <div>
-                            <span class="proj-metric-v clr-inv">21</span>
-                            <span class="proj-metric-l">TESTS</span>
-                        </div>
-                        <div>
-                            <span class="proj-metric-v clr-inv">0–100</span>
-                            <span class="proj-metric-l">NTS SCORE</span>
-                        </div>
-                    </div>
-                    <div class="proj-tech">
-                        <span class="tech-badge">Rust</span>
-                        <span class="tech-badge">Bittensor SDK</span>
-                        <span class="tech-badge">Subnet</span>
-                        <span class="tech-badge">Python</span>
-                    </div>
-                    <div class="phase-steps" style="margin-top:1rem;">
-                        <div class="phase-step done"><div class="phase-step-dot"></div><div class="phase-step-line"></div><span class="phase-step-lbl">P0</span></div>
-                        <div class="phase-step done"><div class="phase-step-dot"></div><div class="phase-step-line"></div><span class="phase-step-lbl">P1</span></div>
-                        <div class="phase-step active"><div class="phase-step-dot"></div><div class="phase-step-line"></div><span class="phase-step-lbl">P2</span></div>
-                        <div class="phase-step"><div class="phase-step-dot"></div><div class="phase-step-line"></div><span class="phase-step-lbl">P3</span></div>
-                        <div class="phase-step"><div class="phase-step-dot"></div><span class="phase-step-lbl">P4</span></div>
-                    </div>
-                    <div class="proj-footer">
-                        <a href="invariant.html" class="proj-link clr-inv">Explore INVARIANT →</a>
-                    </div>
-                </div>
-
-                <div class="proj-card" id="card-tix">
-                    <div class="proj-top-bar" style="background:linear-gradient(90deg,var(--tix),rgba(153,69,255,0.2));"></div>
-                    <div class="proj-header">
-                        <span class="proj-name clr-tix">TIX-DAO</span>
-                        <div class="proj-pills">
-                            <span class="pill pill-chain">Solana</span>
-                            <span class="pill pill-status-tl">Demo Live</span>
-                        </div>
-                    </div>
-                    <p class="proj-desc">
-                        SPL-Governance venue ticketing DAO on Solana Devnet. On-chain governance
-                        for a $23B live-events market with 30-day lock mechanisms.
-                    </p>
-                    <div class="proj-metrics">
-                        <div>
-                            <span class="proj-metric-v clr-tix">30d</span>
-                            <span class="proj-metric-l">LOCK PERIOD</span>
-                        </div>
-                        <div>
-                            <span class="proj-metric-v clr-tix">0</span>
-                            <span class="proj-metric-l">VULNS</span>
-                        </div>
-                        <div>
-                            <span class="proj-metric-v clr-tix">$23B</span>
-                            <span class="proj-metric-l">MARKET TARGET</span>
-                        </div>
-                    </div>
-                    <div class="proj-tech">
-                        <span class="tech-badge">Anchor</span>
-                        <span class="tech-badge">SPL-Governance</span>
-                        <span class="tech-badge">Next.js</span>
-                        <span class="tech-badge">Solana</span>
-                    </div>
-                    <div class="proj-footer">
-                        <a href="tix-dao.html" class="proj-link clr-tix">Explore TIX-DAO →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- GRID ROW 2: TON-SHA + NEXUS -->
-            <div class="proj-grid reveal reveal-delay-1">
-
-                <div class="proj-card" id="card-ton">
-                    <div class="proj-top-bar" style="background:linear-gradient(90deg,var(--ton),rgba(0,152,234,0.2));"></div>
-                    <div class="proj-header">
-                        <span class="proj-name clr-ton">TON-SHA</span>
-                        <div class="proj-pills">
-                            <span class="pill pill-chain">TON</span>
-                            <span class="pill pill-status-tl">Testnet Live</span>
-                        </div>
-                    </div>
-                    <p class="proj-desc">
-                        4-gate agent trust primitive on TON. Hardware-anchored receipts with
-                        640-bit identities and 0.03 TON cost per operation.
-                    </p>
-                    <div class="proj-metrics">
-                        <div>
-                            <span class="proj-metric-v clr-ton">4</span>
-                            <span class="proj-metric-l">TRUST GATES</span>
-                        </div>
-                        <div>
-                            <span class="proj-metric-v clr-ton">100+</span>
-                            <span class="proj-metric-l">TXN COUNT</span>
-                        </div>
-                        <div>
-                            <span class="proj-metric-v clr-ton">640b</span>
-                            <span class="proj-metric-l">RECEIPTS</span>
-                        </div>
-                    </div>
-                    <div class="proj-tech">
-                        <span class="tech-badge">FunC</span>
-                        <span class="tech-badge">TON SDK</span>
-                        <span class="tech-badge">Tact</span>
-                        <span class="tech-badge">Blueprint</span>
-                    </div>
-                    <div class="proj-footer">
-                        <a href="ton-sha.html" class="proj-link clr-ton">Explore TON-SHA →</a>
-                    </div>
-                </div>
-
-                <div class="proj-card" id="card-nexus">
-                    <div class="proj-top-bar" style="background:linear-gradient(90deg,var(--nexus),rgba(0,212,138,0.2));"></div>
-                    <div class="proj-header">
-                        <span class="proj-name clr-nexus">Nexus Protocol</span>
-                        <div class="proj-pills">
-                            <span class="pill pill-chain">Chain-Agnostic</span>
-                            <span class="pill pill-status-active">Phase 1.4.0</span>
-                        </div>
-                    </div>
-                    <p class="proj-desc">
-                        Zero-trust edge gateway for decentralized infrastructure.
-                        Verify-then-execute model, tested to 1M transactions, 50–60 TPS.
-                    </p>
-                    <div class="proj-metrics">
-                        <div>
-                            <span class="proj-metric-v clr-nexus">1M</span>
-                            <span class="proj-metric-l">TXN STRESS TEST</span>
-                        </div>
-                        <div>
-                            <span class="proj-metric-v clr-nexus">50–60</span>
-                            <span class="proj-metric-l">TPS</span>
-                        </div>
-                        <div>
-                            <span class="proj-metric-v clr-nexus">1.4.0</span>
-                            <span class="proj-metric-l">PHASE</span>
-                        </div>
-                    </div>
-                    <div class="proj-tech">
-                        <span class="tech-badge">Rust</span>
-                        <span class="tech-badge">Zero Trust</span>
-                        <span class="tech-badge">Edge</span>
-                        <span class="tech-badge">Multi-chain</span>
-                    </div>
-                    <div class="proj-footer">
-                        <a href="nexus.html" class="proj-link clr-nexus">Explore Nexus →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- GRID ROW 3: OAP + SHA -->
-            <div class="proj-grid reveal reveal-delay-2">
-
-                <div class="proj-card" id="card-oap">
-                    <div class="proj-top-bar" style="background:linear-gradient(90deg,var(--oap),rgba(245,158,11,0.2));"></div>
-                    <div class="proj-header">
-                        <span class="proj-name clr-oap">OAP</span>
-                        <div class="proj-pills">
-                            <span class="pill pill-chain">Multi-Chain</span>
-                            <span class="pill pill-status-active">Active</span>
-                        </div>
-                    </div>
-                    <p class="proj-desc">
-                        Orthonode Assurance Platform — chain-agnostic deterministic hardware
-                        attestation with physics compliance and clone containment.
-                    </p>
-                    <div class="proj-metrics">
-                        <div>
-                            <span class="proj-metric-v clr-oap">4</span>
-                            <span class="proj-metric-l">GATES</span>
-                        </div>
-                        <div>
-                            <span class="proj-metric-v clr-oap">∞</span>
-                            <span class="proj-metric-l">CHAINS</span>
-                        </div>
-                        <div>
-                            <span class="proj-metric-v clr-oap">0</span>
-                            <span class="proj-metric-l">CLONES PASSED</span>
-                        </div>
-                    </div>
-                    <div class="proj-tech">
-                        <span class="tech-badge">PROPRIETARY</span>
-                        <span class="tech-badge">Rust</span>
-                        <span class="tech-badge">Hardware Attestation</span>
-                    </div>
-                    <div class="proj-footer">
-                        <a href="oap.html" class="proj-link clr-oap">Explore OAP →</a>
-                    </div>
-                </div>
-
-                <div class="proj-card" id="card-sha">
-                    <div class="proj-top-bar" style="background:linear-gradient(90deg,var(--sha),rgba(42,159,232,0.2));"></div>
-                    <div class="proj-header">
-                        <span class="proj-name clr-sha">SHA</span>
-                        <div class="proj-pills">
-                            <span class="pill pill-chain">Arbitrum Sepolia</span>
-                            <span class="pill pill-status-live">LIVE</span>
-                        </div>
-                    </div>
-                    <p class="proj-desc">
-                        Stylus Hardware Anchor — ESP32-S3 eFuse 4-gate silicon identity verified
-                        on Arbitrum Stylus. $25K Stylus Sprint grant applied.
-                    </p>
-                    <div class="proj-metrics">
-                        <div>
-                            <span class="proj-metric-v clr-sha">12,523</span>
-                            <span class="proj-metric-l">GAS/RECEIPT</span>
-                        </div>
-                        <div>
-                            <span class="proj-metric-v clr-sha">10K+</span>
-                            <span class="proj-metric-l">TEST VECTORS</span>
-                        </div>
-                        <div>
-                            <span class="proj-metric-v clr-sha">$25K</span>
-                            <span class="proj-metric-l">GRANT APPLIED</span>
-                        </div>
-                    </div>
-                    <div class="proj-tech">
-                        <span class="tech-badge">Rust</span>
-                        <span class="tech-badge">Arbitrum Stylus</span>
-                        <span class="tech-badge">ESP32-S3</span>
-                        <span class="tech-badge">eFuse</span>
-                    </div>
-                    <div class="proj-footer">
-                        <a href="sha.html" class="proj-link clr-sha">Explore SHA →</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── THE PROBLEM ── -->
-        <section class="section wrap reveal">
-            <p class="sec-label">// THE_PROBLEM</p>
-            <h2 class="sec-title">Decentralized systems assume trust.<br>We verify it.</h2>
-            <p class="sec-sub">
-                Every DePIN node, AI agent, and on-chain service makes claims about its hardware,
-                execution environment, and identity. None of them can prove it without primitives
-                that exist at the silicon layer.
-            </p>
-
-            <div class="problem-grid">
-                <div class="problem-card">
-                    <div class="problem-num">01 // IDENTITY</div>
-                    <h3 class="problem-title">Unverified Hardware Identity</h3>
-                    <p class="problem-desc">
-                        DePIN nodes claim hardware specs with no cryptographic proof.
-                        Clone attacks, emulation, and spoofing go undetected at the
-                        contract layer.
-                    </p>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-num">02 // EXECUTION</div>
-                    <h3 class="problem-title">Unattested AI Execution</h3>
-                    <p class="problem-desc">
-                        Bittensor validators cannot distinguish genuine inference from
-                        fabricated outputs. No receipt mechanism exists at the subnet level
-                        for hardware-bound proof.
-                    </p>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-num">03 // GOVERNANCE</div>
-                    <h3 class="problem-title">Centralized Venue Control</h3>
-                    <p class="problem-desc">
-                        $23B live-events market runs on opaque ticketing systems with
-                        no on-chain governance, no community treasury, and no verifiable
-                        provenance for ticket issuance.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── DOCTRINE ── -->
-        <section class="section wrap reveal">
-            <p class="sec-label">// OPERATING_DOCTRINE</p>
-            <h2 class="sec-title">How we build.</h2>
-
-            <div class="doctrine-grid">
-                <div class="doctrine-card">
-                    <span class="doctrine-icon">
-                        <!-- Shield lock: fail-closed -->
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2L4 6v6c0 5 3.6 9.4 8 10 4.4-.6 8-5 8-10V6L12 2z"/>
-                            <rect x="9" y="11" width="6" height="5" rx="1"/>
-                            <path d="M12 11V9a2 2 0 0 0-2-2v0a2 2 0 0 1 4 0v2"/>
-                        </svg>
-                    </span>
-                    <h3 class="doctrine-title">Fail-Closed Always</h3>
-                    <p class="doctrine-desc">
-                        Every system defaults to denial. Verification is a prerequisite,
-                        not a checkpoint. Root cause only — no workarounds.
-                    </p>
-                </div>
-                <div class="doctrine-card">
-                    <span class="doctrine-icon">
-                        <!-- Chip/circuit: silicon to chain -->
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="7" y="7" width="10" height="10" rx="1"/>
-                            <path d="M9 4V2M12 4V2M15 4V2"/>
-                            <path d="M9 22v-2M12 22v-2M15 22v-2"/>
-                            <path d="M4 9H2M4 12H2M4 15H2"/>
-                            <path d="M22 9h-2M22 12h-2M22 15h-2"/>
-                            <circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.4"/>
-                        </svg>
-                    </span>
-                    <h3 class="doctrine-title">Silicon to Chain</h3>
-                    <p class="doctrine-desc">
-                        Identity anchored in eFuse hardware, carried through the
-                        attestation layer, and verified on-chain. No gaps in the chain
-                        of custody.
-                    </p>
-                </div>
-                <div class="doctrine-card">
-                    <span class="doctrine-icon">
-                        <!-- Network nodes: multi-chain -->
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="2.5"/>
-                            <circle cx="4"  cy="6"  r="2"/>
-                            <circle cx="20" cy="6"  r="2"/>
-                            <circle cx="4"  cy="18" r="2"/>
-                            <circle cx="20" cy="18" r="2"/>
-                            <path d="M9.7 10.5L6 7.8M14.3 10.5L18 7.8M9.7 13.5L6 16.2M14.3 13.5L18 16.2"/>
-                        </svg>
-                    </span>
-                    <h3 class="doctrine-title">Multi-Chain by Design</h3>
-                    <p class="doctrine-desc">
-                        Arbitrum, TON, Polkadot, Bittensor, Solana. Each chain chosen
-                        for its verification primitive fit — not portfolio diversification.
-                    </p>
-                </div>
-                <div class="doctrine-card">
-                    <span class="doctrine-icon">
-                        <!-- Verified badge: no mainnet without proof -->
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2l2.4 3.2L18 4.5l.5 3.8 3.5 1.7-1.7 3.5L22 17l-3.8.5L16.5 21 12 19.5 7.5 21l-1.7-3.5L2 17l1.7-3.5L2 10l3.5-1.7L6 4.5l3.6 1.2L12 2z"/>
-                            <polyline points="8.5 12 11 14.5 15.5 10"/>
-                        </svg>
-                    </span>
-                    <h3 class="doctrine-title">No Mainnet Without Proof</h3>
-                    <p class="doctrine-desc">
-                        Every deployment is preceded by documented testing, stress tests,
-                        and explicit founder sign-off. Testnet is not a shortcut.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── LIVE METRICS ── -->
-        <section class="section wrap reveal">
-            <p class="sec-label">// LIVE_METRICS : SHA_ARBITRUM_SEPOLIA</p>
-            <h2 class="sec-title">SHA on Arbitrum Sepolia.</h2>
-            <p class="sec-sub">Hardware identity verification, live on Arbitrum Stylus testnet.</p>
-
-            <div class="metrics-grid" style="margin-top:40px;">
-                <div class="metric-card">
-                    <span class="metric-n" data-count="12523">0</span>
-                    <span class="metric-l">GAS PER RECEIPT</span>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-n">9K+</span>
-                    <span class="metric-l">RUST RECEIPTS/SEC</span>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-n" data-count="21">0</span>
-                    <span class="metric-l">PYTHON TESTS PASSING</span>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-n">10K+</span>
-                    <span class="metric-l">TEST VECTORS</span>
-                </div>
-                <div class="metric-card">
-                    <span class="metric-n">$25K</span>
-                    <span class="metric-l">STYLUS SPRINT GRANT</span>
-                </div>
-            </div>
-
-            <div class="metrics-addr">
-                <span class="metrics-addr-label">CONTRACT</span>
-                <a class="metrics-addr-val"
-                   href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615"
-                   target="_blank" rel="noopener">
-                    0xD661a1aB8CEFaaCd78F4B968670C3bC438415615
-                </a>
-            </div>
-            <div class="bar-chart" style="margin-top:1.5rem;padding:1.5rem 0;border-top:1px solid var(--b1);">
-                <div style="font-family:var(--font-mono);font-size:0.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.75rem;">// GAS_EFFICIENCY : SHA_VS_INDUSTRY</div>
-                <div class="bar-row">
-                    <span class="bar-label">SHA Receipt</span>
-                    <div class="bar-track bar-anim-target"><div class="bar-fill" style="--w:25%;--clr:var(--sha);"></div></div>
-                    <span class="bar-val" style="color:var(--green);">12,523</span>
-                </div>
-                <div class="bar-row">
-                    <span class="bar-label">ERC-721 Mint</span>
-                    <div class="bar-track bar-anim-target"><div class="bar-fill" style="--w:55%;--clr:var(--t3);"></div></div>
-                    <span class="bar-val">~28,000</span>
-                </div>
-                <div class="bar-row">
-                    <span class="bar-label">Industry Avg</span>
-                    <div class="bar-track bar-anim-target"><div class="bar-fill" style="--w:100%;--clr:var(--red);"></div></div>
-                    <span class="bar-val" style="color:var(--red);">~50,000</span>
-                </div>
-                <div class="bar-row">
-                    <span class="bar-label">INVARIANT NTS</span>
-                    <div class="bar-track bar-anim-target"><div class="bar-fill" style="--w:18%;--clr:var(--inv);"></div></div>
-                    <span class="bar-val" style="color:var(--inv);">9K+/sec</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── BUILD LOG ── -->
-        <section class="section wrap reveal" style="padding-bottom:40px;">
-            <p class="sec-label">// BUILD_LOG : @OrthonodeSys</p>
-            <h2 class="sec-title">The work, in order.</h2>
-            <p class="sec-sub">Every milestone shipped — from first silicon identity to ZK lending on Polkadot. Follow live on <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" style="color:var(--plasma);text-decoration:none;">@OrthonodeSys ↗</a>.</p>
-
-            <div class="build-log">
-                <div class="build-entry">
-                    <span class="build-date">2026-03-15</span>
-                    <span class="build-tag" style="color:var(--dot);border-color:rgba(230,0,122,0.35);background:rgba(230,0,122,0.06);">POLKADOT</span>
-                    <span class="build-title">DotLend submitted to Polkadot Solidity Hackathon 2026 — 13 contracts, 108 tests, Noir ZK oracle every 30 min</span>
-                    <span class="build-badge" style="color:var(--dot);">Submitted</span>
-                </div>
-                <div class="build-entry">
-                    <span class="build-date">2026-03-07</span>
-                    <span class="build-tag" style="color:var(--silver);border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.05);">SITE</span>
-                    <span class="build-title">2026 design system launched across all 11 pages — DotLend featured, new visual identity</span>
-                    <span class="build-badge" style="color:var(--plasma);">Deployed</span>
-                </div>
-                <div class="build-entry">
-                    <span class="build-date">2026-02-18</span>
-                    <span class="build-tag" style="color:var(--sha);border-color:rgba(42,159,232,0.35);background:rgba(42,159,232,0.06);">ARBITRUM</span>
-                    <span class="build-title">SHA — $25K Stylus Sprint grant applied. 12,523 gas/receipt, 9K+ Rust receipts/sec on Arbitrum Sepolia</span>
-                    <span class="build-badge" style="color:var(--sha);">Grant Applied</span>
-                </div>
-                <div class="build-entry">
-                    <span class="build-date">2026-01-10</span>
-                    <span class="build-tag" style="color:var(--ton);border-color:rgba(0,152,234,0.35);background:rgba(0,152,234,0.06);">TON</span>
-                    <span class="build-title">TON-SHA deployed to TON Testnet — 4-gate agent trust primitive, 640-bit receipts at 0.03 TON/op</span>
-                    <span class="build-badge" style="color:var(--ton);">Testnet Live</span>
-                </div>
-                <div class="build-entry">
-                    <span class="build-date">2025-11-22</span>
-                    <span class="build-tag" style="color:var(--nexus);border-color:rgba(0,212,138,0.35);background:rgba(0,212,138,0.06);">NEXUS</span>
-                    <span class="build-title">Nexus Protocol Phase 1.4.0 complete — 1M transaction stress test passed, 50–60 TPS sustained</span>
-                    <span class="build-badge" style="color:var(--nexus);">Phase 1.4.0</span>
-                </div>
-                <div class="build-entry">
-                    <span class="build-date">2025-09-14</span>
-                    <span class="build-tag" style="color:var(--sha);border-color:rgba(42,159,232,0.35);background:rgba(42,159,232,0.06);">ARBITRUM</span>
-                    <span class="build-title">SHA v1.0 — first ESP32-S3 eFuse silicon identity verified on Arbitrum Sepolia via Stylus</span>
-                    <span class="build-badge" style="color:var(--green);">First Deploy</span>
-                </div>
-                <div class="build-log-footer">
-                    <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" class="build-log-x">
-                        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.852L1.254 2.25H8.08l4.261 5.63 5.903-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                        Follow @OrthonodeSys on X for live updates ↗
-                    </a>
-                    <span class="build-log-meta">6 entries · latest first</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── RESEARCH LOG ── -->
-        <section class="section wrap reveal">
-            <p class="sec-label">// RESEARCH_LOG</p>
-            <h2 class="sec-title">Published research &amp; documentation.</h2>
-
-            <div class="research-list">
-                <a href="iotex-research.html" class="research-item">
-                    <span class="research-tag">FORENSIC</span>
-                    <span class="research-title">IoTeX Protocol Forensic Analysis — Decentralized Physical Infrastructure Security</span>
-                    <span class="research-arrow">→</span>
-                </a>
-                <a href="sha.html" class="research-item">
-                    <span class="research-tag">ARBITRUM</span>
-                    <span class="research-title">SHA — Stylus Hardware Anchor: Silicon Identity Verification on Arbitrum Stylus</span>
-                    <span class="research-arrow">→</span>
-                </a>
-                <a href="dotlend.html" class="research-item">
-                    <span class="research-tag">POLKADOT</span>
-                    <span class="research-title">DotLend — First Money Market Protocol on Polkadot Hub with Noir ZK Oracle</span>
-                    <span class="research-arrow">→</span>
-                </a>
-                <a href="invariant.html" class="research-item">
-                    <span class="research-tag">BITTENSOR</span>
-                    <span class="research-title">INVARIANT — Node Trust Score Subnet: Deterministic AI Execution Receipts</span>
-                    <span class="research-arrow">→</span>
-                </a>
-                <a href="oap.html" class="research-item">
-                    <span class="research-tag">ATTESTATION</span>
-                    <span class="research-title">OAP — Orthonode Assurance Platform: Chain-Agnostic Hardware Attestation Protocol</span>
-                    <span class="research-arrow">→</span>
-                </a>
-                <a href="site-index.html" class="research-item">
-                    <span class="research-tag">INDEX</span>
-                    <span class="research-title">Full Site Index — All Projects, Research, and Documentation</span>
-                    <span class="research-arrow">→</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- ── FAQ ── -->
-        <section class="section wrap reveal">
-            <p class="sec-label">// FAQ</p>
-            <h2 class="sec-title">Common questions.</h2>
-
-            <div class="faq-list">
-                <div class="faq-item">
-                    <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-                        <span>What chains does ORTHONODE SYSTEMS™ deploy on?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">
-                            Currently deployed or in active development on five chains: Arbitrum (SHA on Stylus),
-                            TON (TON-SHA), Polkadot Hub (DotLend), Bittensor (INVARIANT), and Solana (TIX-DAO).
-                            All deployments are on testnet or devnet. No mainnet without explicit founder approval.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-                        <span>What is the SHA Stylus Sprint grant?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">
-                            ORTHONODE SYSTEMS™ applied for the $25,000 Arbitrum Stylus Sprint grant in February 2026
-                            for the SHA (Stylus Hardware Anchor) project. SHA demonstrates hardware identity verification
-                            using ESP32-S3 eFuse silicon bound to Arbitrum Stylus smart contracts. Grant amount: $25,000.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-                        <span>What is DotLend and why Polkadot Hub?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">
-                            DotLend is the first over-collateralised lending protocol on Polkadot Hub TestNet.
-                            Built for the Polkadot Solidity Hackathon 2026, it supports vDOT and WPAS collateral,
-                            uses Noir ZK circuits for oracle price verification every 30 minutes, and is deployed
-                            across 13 contracts on PolkaVM (Chain ID 420420417). LendingPool:
-                            <a href="https://github.com/orthonode/dotlend" target="_blank" rel="noopener">
-                                0x34B22768B16262aD5b7fC23DD797D80791e4e7e6
-                            </a>.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-                        <span>What is Nexus Protocol?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">
-                            Nexus Protocol is ORTHONODE's zero-trust edge gateway for decentralized infrastructure.
-                            It operates on a verify-then-execute model, consuming identity signals from SHA and OAP
-                            attestation. It has been stress-tested to 1 million transactions at 50–60 TPS.
-                            Current phase: 1.4.0. Live at
-                            <a href="nexus.html">nexus.html</a>.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-                        <span>Is any project on mainnet?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">
-                            No. All ORTHONODE SYSTEMS™ projects are currently on testnet or devnet.
-                            SHA is live on Arbitrum Sepolia. DotLend is live on Polkadot Hub TestNet.
-                            TON-SHA is on TON Testnet. TIX-DAO is on Solana Devnet.
-                            No mainnet deployment proceeds without documented founder approval and a full
-                            security review.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
-                        <span>How do I contact ORTHONODE SYSTEMS™?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-a">
-                        <div class="faq-a-inner">
-                            Email: <a href="mailto:infrastructure@orthonode.xyz">infrastructure@orthonode.xyz</a><br>
-                            Twitter/X: <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">@OrthonodeSys</a><br>
-                            GitHub: <a href="https://github.com/orthonode" target="_blank" rel="noopener">github.com/orthonode</a><br>
-                            LinkedIn: <a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">Arhant Barmate</a><br>
-                            Founder: Arhant Barmate — Bhopal, India
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── CTA ── -->
-        <section class="section cta-section wrap reveal">
-            <p class="sec-label" style="justify-content:center;display:flex;">// BUILD_WITH_US</p>
-            <h2 class="sec-title">
-                Trust is not assumed.<br>
-                <span class="accent">It is verified.</span>
-            </h2>
-            <p class="sec-sub" style="margin:0 auto 36px;">
-                ORTHONODE SYSTEMS™ is building the verification layer the decentralized stack
-                needs. Follow the work, explore the contracts, or reach out.
-            </p>
-            <div class="cta-actions">
-                <a href="https://github.com/orthonode" target="_blank" rel="noopener" class="btn btn-primary">GitHub ↗</a>
-                <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener" class="btn btn-ghost">@OrthonodeSys</a>
-                <a href="mailto:infrastructure@orthonode.xyz" class="btn btn-ghost">infrastructure@orthonode.xyz</a>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- ── FOOTER ── -->
-    <footer>
-        <div class="wrap">
-            <div class="footer-top">
-                <div>
-                    <div class="footer-brand-name">ORTHONODE SYSTEMS™</div>
-                    <div class="footer-brand-sub">Infrastructure Labs // Physical Verification Layer</div>
-                    <a href="mailto:infrastructure@orthonode.xyz" class="footer-contact">infrastructure@orthonode.xyz</a>
-                </div>
-
-                <div>
-                    <div class="footer-col-title">Products</div>
-                    <ul class="footer-links">
-                        <li><a href="sha.html">SHA — Arbitrum Stylus</a></li>
-                        <li><a href="dotlend.html">DotLend — Polkadot Hub</a></li>
-                        <li><a href="oap.html">OAP — Attestation</a></li>
-                        <li><a href="nexus.html">Nexus Protocol</a></li>
-                        <li><a href="ton-sha.html">TON-SHA</a></li>
-                        <li><a href="invariant.html">INVARIANT</a></li>
-                        <li><a href="tix-dao.html">TIX-DAO</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <div class="footer-col-title">Connect</div>
-                    <ul class="footer-links">
-                        <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">@OrthonodeSys</a></li>
-                        <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">github.com/orthonode</a></li>
-                        <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
-                        <li><a href="site-index.html">Research Log</a></li>
-                        <li><a href="terms.html">Terms</a></li>
-                        <li><a href="privacy.html">Privacy</a></li>
-                        <li><a href="cookies.html">Cookies</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <span class="footer-copy">© 2026 ORTHONODE SYSTEMS™ — Bhopal, India</span>
-                <span class="citation" id="citation">
-                    orthonode.xyz · Verification Infrastructure for the Decentralized Stack
-                </span>
-            </div>
-        </div>
-    </footer>
-
-</div><!-- /#app -->
-
-<script>
-    function onHumanVerified(token) {
-        const gate = document.getElementById('gate');
-        const app  = document.getElementById('app');
-        gate.style.opacity = '0';
-        gate.style.transform = 'scale(0.98)';
-        gate.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        setTimeout(function () {
-            gate.style.display = 'none';
-            app.style.display = 'block';
-            requestAnimationFrame(function () {
-                initNavScroll();
-                initReveal();
-                initCounters();
-                initCardTilt();
-                initCardGlow();
-                initCharts();
-            });
-        }, 500);
-    }
-
-    function initNavScroll() {
-        var hdr = document.getElementById('hdr');
-        window.addEventListener('scroll', function () {
-            if (window.scrollY > 20) {
-                hdr.classList.add('sc');
-            } else {
-                hdr.classList.remove('sc');
-            }
-        }, { passive: true });
-    }
-
-    function initReveal() {
-        var els = document.querySelectorAll('.reveal');
-        if (!('IntersectionObserver' in window)) {
-            els.forEach(function (el) { el.classList.add('in'); });
-            return;
-        }
-        var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('in');
-                    io.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-        els.forEach(function (el) { io.observe(el); });
-    }
-
-    function initCounters() {
-        var els = document.querySelectorAll('[data-count]');
-        var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (!entry.isIntersecting) return;
-                var el = entry.target;
-                var target = parseInt(el.getAttribute('data-count'), 10);
-                var duration = 1200;
-                var start = performance.now();
-                function tick(now) {
-                    var elapsed = now - start;
-                    var progress = Math.min(elapsed / duration, 1);
-                    var eased = 1 - Math.pow(1 - progress, 3);
-                    var current = Math.round(eased * target);
-                    el.textContent = current.toLocaleString();
-                    if (progress < 1) requestAnimationFrame(tick);
-                }
-                requestAnimationFrame(tick);
-                io.unobserve(el);
-            });
-        }, { threshold: 0.5 });
-        els.forEach(function (el) { io.observe(el); });
-    }
-
-    function initCardTilt() {
-        var cards = document.querySelectorAll('.proj-card');
-        cards.forEach(function (card) {
-            card.addEventListener('mousemove', function (e) {
-                var rect = card.getBoundingClientRect();
-                var cx = rect.left + rect.width / 2;
-                var cy = rect.top  + rect.height / 2;
-                var dx = (e.clientX - cx) / (rect.width  / 2);
-                var dy = (e.clientY - cy) / (rect.height / 2);
-                var rx = (-dy * 3).toFixed(2) + 'deg';
-                var ry = ( dx * 3).toFixed(2) + 'deg';
-                card.style.setProperty('--rx', rx);
-                card.style.setProperty('--ry', ry);
-            });
-            card.addEventListener('mouseleave', function () {
-                card.style.setProperty('--rx', '0deg');
-                card.style.setProperty('--ry', '0deg');
-                card.style.transform = '';
-            });
-        });
-    }
-
-    function initCardGlow() {
-        var cards = document.querySelectorAll('.proj-card, .dotlend-inner');
-        cards.forEach(function (card) {
-            card.addEventListener('mousemove', function (e) {
-                var rect = card.getBoundingClientRect();
-                var x = ((e.clientX - rect.left) / rect.width  * 100).toFixed(1) + '%';
-                var y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1) + '%';
-                card.style.setProperty('--mx', x);
-                card.style.setProperty('--my', y);
-            });
-        });
-    }
-
-    function initCharts() {
-        // Bar charts
-        var bars = document.querySelectorAll('.bar-track');
-        var barObs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    var fill = entry.target.querySelector('.bar-fill');
-                    if (fill) fill.classList.add('anim');
-                    barObs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-        bars.forEach(function(b) { barObs.observe(b); });
-
-        // Donut rings
-        var rings = document.querySelectorAll('.ring-fg');
-        var ringObs = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    var offset = entry.target.getAttribute('data-offset');
-                    if (offset) entry.target.style.strokeDashoffset = offset;
-                    entry.target.classList.add('anim');
-                    ringObs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.4 });
-        rings.forEach(function(r) { ringObs.observe(r); });
-    }
-
-    function toggleFaq(btn) {
-        var item = btn.closest('.faq-item');
-        var isOpen = item.classList.contains('open');
-        document.querySelectorAll('.faq-item.open').forEach(function (el) {
-            el.classList.remove('open');
-            el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-        });
-        if (!isOpen) {
-            item.classList.add('open');
-            btn.setAttribute('aria-expanded', 'true');
-        }
-    }
-
-    /* ── Dev bypass: skip gate on localhost ── */
-    (function () {
-        var h = location.hostname;
-        if (h === 'localhost' || h === '127.0.0.1' || h === '' || h === '0.0.0.0') {
-            onHumanVerified('dev-bypass');
-        }
-    })();
-
-    /* ══════════════════════════════════════════
-       STAR FIELD — canvas particle constellation
-       ══════════════════════════════════════════ */
-    (function () {
-        var canvas = document.getElementById('star-field');
-        if (!canvas || !canvas.getContext) return;
-        var ctx = canvas.getContext('2d');
-
-        var W, H, dpr, stars, raf;
-        var isMobile   = window.innerWidth < 768;
-        var N_STARS    = isMobile ? 70 : 160;  /* fewer particles on mobile */
-        var MAX_LINK   = isMobile ? 100 : 140; /* shorter links on mobile */
-        var SPEED      = 0.28;                 /* base drift speed */
-
-        /* Each star: position, velocity, radius, opacity, twinkle phase */
-        function Star() {
-            this.x  = Math.random() * W;
-            this.y  = Math.random() * H;
-            this.vx = (Math.random() - 0.5) * SPEED;
-            this.vy = (Math.random() - 0.5) * SPEED;
-            this.r  = Math.random() * 1.4 + 0.3;
-            this.a  = Math.random() * 0.55 + 0.15;
-            this.tw = Math.random() * Math.PI * 2; /* twinkle offset */
-            this.ts = 0.008 + Math.random() * 0.012; /* twinkle speed */
-        }
-
-        function resize() {
-            dpr    = window.devicePixelRatio || 1;
-            W      = window.innerWidth;
-            H      = window.innerHeight;
-            canvas.width  = W * dpr;
-            canvas.height = H * dpr;
-            canvas.style.width  = W + 'px';
-            canvas.style.height = H + 'px';
-            ctx.scale(dpr, dpr);
-        }
-
-        function init() {
-            resize();
-            stars = [];
-            for (var i = 0; i < N_STARS; i++) stars.push(new Star());
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, W, H);
-
-            /* Connection lines — drawn before stars so stars sit on top */
-            for (var i = 0; i < stars.length; i++) {
-                for (var j = i + 1; j < stars.length; j++) {
-                    var dx   = stars[i].x - stars[j].x;
-                    var dy   = stars[i].y - stars[j].y;
-                    var dist = dx * dx + dy * dy; /* squared — avoid sqrt until needed */
-                    if (dist < MAX_LINK * MAX_LINK) {
-                        dist = Math.sqrt(dist);
-                        var alpha = 0.14 * (1 - dist / MAX_LINK);
-                        ctx.beginPath();
-                        ctx.strokeStyle = 'rgba(255,255,255,' + alpha.toFixed(3) + ')';
-                        ctx.lineWidth   = 0.5;
-                        ctx.moveTo(stars[i].x, stars[i].y);
-                        ctx.lineTo(stars[j].x, stars[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            /* Stars */
-            for (var i = 0; i < stars.length; i++) {
-                var s = stars[i];
-                s.tw += s.ts;
-                var brightness = s.a + Math.sin(s.tw) * 0.12;
-
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(255,255,255,' + Math.min(1, Math.max(0, brightness)).toFixed(3) + ')';
-                ctx.fill();
-
-                /* Move */
-                s.x += s.vx;
-                s.y += s.vy;
-
-                /* Wrap edges */
-                if (s.x < -10)  s.x = W + 10;
-                if (s.x > W+10) s.x = -10;
-                if (s.y < -10)  s.y = H + 10;
-                if (s.y > H+10) s.y = -10;
-            }
-
-            raf = requestAnimationFrame(draw);
-        }
-
-        window.addEventListener('resize', function () {
-            cancelAnimationFrame(raf);
-            init();
-            draw();
-        }, { passive: true });
-
-        init();
-        draw();
-    })();
-</script>
-
-<!-- Cookie consent bar -->
-<div id="cookie-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(10,10,10,0.97);border-top:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-  <p style="margin:0;font-family:'DM Sans',sans-serif;font-size:.82rem;color:#8C8C8C;line-height:1.5;">This site uses essential cookies only for Cloudflare bot protection. No tracking or analytics. <a href="/cookies.html" style="color:#D0D0D0;text-decoration:underline;text-underline-offset:3px;">Learn more</a></p>
-  <button onclick="dismissCookieBar()" style="flex-shrink:0;background:#141414;border:1px solid rgba(255,255,255,0.15);color:#F5F5F5;font-family:'DM Sans',sans-serif;font-size:.8rem;padding:7px 18px;border-radius:6px;cursor:pointer;white-space:nowrap;transition:background .2s;">Got it</button>
-</div>
-<script>
-(function(){
-  if(localStorage.getItem('orthonode_cc')==='1') return;
-  var bar=document.getElementById('cookie-bar');
-  if(bar){bar.style.display='flex';}
-})();
-function dismissCookieBar(){
-  localStorage.setItem('orthonode_cc','1');
-  var bar=document.getElementById('cookie-bar');
-  if(bar){bar.style.opacity='0';bar.style.transition='opacity .3s';setTimeout(function(){bar.style.display='none';},300);}
-}
-</script>
-
-</body>
-</html>
+</body></html>

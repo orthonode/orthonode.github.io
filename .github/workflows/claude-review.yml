@@ -1,0 +1,55 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  content-check:
+    name: Content Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for incorrect grant amount ($49,000)
+        run: |
+          if grep -r "\$49,000\|49000" --include="*.html" --include="*.md" . 2>/dev/null | grep -v "//"; then
+            echo "ERROR: $49,000 found in source — SHA grant is $25,000"
+            exit 1
+          fi
+
+      - name: Check for secret keys or credentials
+        run: |
+          if grep -r "secret.*key\|secretKey\|private.*key\|PRIVATE_KEY\|SECRET_KEY" --include="*.html" --include="*.js" . 2>/dev/null | grep -iv "public\|comment\|//"; then
+            echo "ERROR: Possible secret key or credential detected in source"
+            exit 1
+          fi
+
+      - name: Check Cloudflare Turnstile — confirm no secret sitekey pattern
+        run: |
+          # Secret sitekeys start with 1x0000 (test) or secret- patterns — warn only
+          if grep -r "0x4AAAAAAA\|secret.*turnstile\|turnstile.*secret" --include="*.html" . 2>/dev/null | grep -v "//"; then
+            echo "WARNING: Possible Turnstile secret sitekey pattern detected — verify this is the public key"
+          fi
+
+      - name: Verify canonical deployment addresses present
+        run: |
+          if ! grep -q "0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" sha.html 2>/dev/null; then
+            echo "WARNING: SHA contract address not found in sha.html — confirm page is up to date"
+          fi
+
+      - name: HTML structure check (basic)
+        run: |
+          for f in index.html sha.html oap.html nexus.html ton-sha.html invariant.html tix-dao.html; do
+            if [ -f "$f" ]; then
+              if ! grep -q "<title>" "$f"; then
+                echo "ERROR: Missing <title> tag in $f"
+                exit 1
+              fi
+              if ! grep -q "canonical" "$f"; then
+                echo "WARNING: Missing canonical link in $f"
+              fi
+            fi
+          done

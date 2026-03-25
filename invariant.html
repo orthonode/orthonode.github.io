@@ -1,974 +1,377 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>INVARIANT — Deterministic Trust Infrastructure for Bittensor | Orthonode Labs</title>
-    <meta name="description" content="INVARIANT is a Bittensor subnet that produces a cryptographically-verified NTS (INVARIANT Trust Score) per miner. Three layers: SHA hardware identity, execution receipts, OAP lifecycle governance. Phase 1 complete. Testnet March 2026.">
-    <meta name="keywords" content="INVARIANT Bittensor subnet, NTS trust score, TAO emissions, hardware miner verification, SHA receipt layer, OAP lifecycle governance, Bittensor Sybil resistance, deterministic trust score, Orthonode Labs">
-    <meta name="author" content="Orthonode Infrastructure Labs — Bhopal, Madhya Pradesh, India">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-    <link rel="canonical" href="https://orthonode.xyz/invariant.html">
-
-    <meta name="geo.region" content="IN-MP">
-    <meta name="geo.placename" content="Bhopal, Madhya Pradesh, India">
-    <meta name="geo.position" content="23.2599;77.4126">
-    <meta name="ICBM" content="23.2599, 77.4126">
-
+<html class="dark" lang="en"><head>
+    <meta name="description" content="Deterministic AI execution receipts with 0-100 NTS scoring at 9,000+ receipts per second on Bittensor subnet.">
+    <meta property="og:title" content="INVARIANT — Node Trust Score Protocol on Bittensor | ORTHONODE SYSTEMS™">
+    <meta property="og:description" content="Deterministic AI execution receipts with 0-100 NTS scoring at 9,000+ receipts per second on Bittensor subnet.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://orthonode.xyz/invariant.html">
-    <meta property="og:title" content="INVARIANT — Deterministic Trust Infrastructure for Bittensor">
-    <meta property="og:description" content="Three independently unfakeable layers stacked into a complete trust stack — NTS per miner, weights TAO emissions permanently. Phase 1 complete.">
-    <meta property="og:image" content="https://orthonode.xyz/banner.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="ORTHONODE SYSTEMS™">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@OrthonodeSys">
-    <meta name="twitter:title" content="INVARIANT — Deterministic Trust Infrastructure for Bittensor">
-    <meta name="twitter:description" content="Don't trust the output. Verify the execution. Three layers. One trust score. NTS weights TAO emissions permanently.">
-    <meta name="twitter:image" content="https://orthonode.xyz/banner.png">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "INVARIANT",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "Bittensor",
-      "description": "INVARIANT is a Bittensor subnet that produces a cryptographically-verified NTS (INVARIANT Trust Score) per miner. Three layers: SHA hardware identity, TON-SHA execution receipts, OAP lifecycle governance. Phase 1 complete.",
-      "author": {
-        "@type": "Organization",
-        "name": "Orthonode Infrastructure Labs",
-        "url": "https://orthonode.xyz"
+    <link rel="canonical" href="https://orthonode.xyz/invariant.html">
+    <link rel="icon" href="/site-logo.png" type="image/png">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INVARIANT | AI Execution Receipt Verification</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed": "#251a00",
+              "primary": "#ffd165",
+              "on-secondary-container": "#bab8b7",
+              "on-primary-container": "#604700",
+              "secondary": "#c8c6c5",
+              "surface-variant": "#353535",
+              "surface-dim": "#131313",
+              "error": "#ffb4ab",
+              "error-container": "#93000a",
+              "tertiary-container": "#60c5ff",
+              "background": "#000000",
+              "on-surface-variant": "#d3c5ac",
+              "on-secondary": "#313030",
+              "on-tertiary-fixed-variant": "#004c6c",
+              "outline-variant": "#4f4633",
+              "on-tertiary-fixed": "#001e2e",
+              "surface-container": "#1f1f1f",
+              "tertiary-fixed-dim": "#83cfff",
+              "surface-container-high": "#2a2a2a",
+              "surface-tint": "#f7be1d",
+              "primary-container": "#eab308",
+              "surface-bright": "#393939",
+              "tertiary-fixed": "#c7e7ff",
+              "inverse-primary": "#785a00",
+              "outline": "#9b8f79",
+              "surface-container-highest": "#353535",
+              "tertiary": "#adddff",
+              "secondary-container": "#4a4949",
+              "surface": "#131313",
+              "on-surface": "#e2e2e2",
+              "on-error": "#690005",
+              "on-error-container": "#ffdad6",
+              "on-tertiary": "#00344c",
+              "secondary-fixed": "#e5e2e1",
+              "on-tertiary-container": "#005072",
+              "on-background": "#e2e2e2",
+              "on-secondary-fixed": "#1c1b1b",
+              "surface-container-lowest": "#0e0e0e",
+              "on-primary-fixed-variant": "#5a4300",
+              "primary-fixed": "#ffdf9a",
+              "on-secondary-fixed-variant": "#474646",
+              "surface-container-low": "#1b1b1b",
+              "inverse-on-surface": "#303030",
+              "secondary-fixed-dim": "#c8c6c5",
+              "on-primary": "#3f2e00",
+              "inverse-surface": "#e2e2e2",
+              "primary-fixed-dim": "#f7be1d"
+            },
+            fontFamily: {
+              "headline": ["Syne", "sans-serif"],
+              "body": ["DM Sans", "sans-serif"],
+              "label": ["IBM Plex Mono", "monospace"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
       }
-    }
     </script>
-
-    <meta name="theme-color" content="#000000">
-    <link rel="icon" type="image/png" sizes="96x96" href="/site-logo.png">
-    <link rel="apple-touch-icon" href="/site-logo.png">
-    <link rel="shortcut icon" href="/site-logo.png">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --void:      #000000;
-            --bg:        #000000;
-            --bg-1:      #070707;
-            --bg-2:      #0D0D0D;
-            --bg-card:   #0D0D0D;
-            --bg-raised: #141414;
-
-            --border:    rgba(255,255,255,0.06);
-            --border-md: rgba(255,255,255,0.10);
-            --border-hi: rgba(255,255,255,0.18);
-
-            --tx-1: #F5F5F5;
-            --tx-2: #8C8C8C;
-            --tx-3: #404040;
-            --tx-4: #1C1C1C;
-
-            --silver: #D0D0D0;
-            --chrome: #A8A8A8;
-            --plasma: #C8C8C8;
-
-            --sha:   #2A9FE8;
-            --ton:   #0098EA;
-            --nexus: #00D084;
-            --oap:   #F59E0B;
-            --inv:   #EAB308;
-            --tix:   #9945FF;
-            --red:   #EF4444;
-            --green: #22C55E;
-
-            --font-head: 'Syne', sans-serif;
-            --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
-
-            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+<style>
+        body { font-family: 'DM Sans', sans-serif; background-color: #000000; color: #e2e2e2; }
+        .font-syne { font-family: 'Syne', sans-serif; font-weight: 800; }
+        .font-mono { font-family: 'IBM Plex Mono', monospace; }
+        .glass-card {
+            background: rgba(19, 19, 19, 0.6);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-
-        body {
-            background: var(--bg);
-            color: var(--tx-2);
-            font-family: var(--font-body);
-            font-size: 16px;
-            line-height: 1.65;
-            overflow-x: hidden;
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
         }
-
-        body::before {
-            content: '';
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px);
-            pointer-events: none; z-index: -1;
-        }
-
-        body::after {
-            content: '';
-            position: fixed; top: -20vh; right: -10vw;
-            width: 55vw; height: 55vw;
-            background: radial-gradient(ellipse, rgba(255,255,255,0.015) 0%, transparent 65%);
-            pointer-events: none; z-index: -2;
-        }
-
-        a { color: var(--tx-2); text-decoration: none; transition: color 0.2s; }
-        a:hover { color: var(--tx-1); }
-        ::selection { background: rgba(234,179,8,0.2); }
-
-        /* ── Header ─── */
-        header {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            backdrop-filter: blur(20px) saturate(160%);
-            -webkit-backdrop-filter: blur(20px) saturate(160%);
-            background: rgba(0,0,0,0.85);
-            border-bottom: 1px solid var(--border);
-        }
-        header::after {
-            content: '';
-            position: absolute; bottom: -1px; left: 0; width: 100%; height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(200,200,200,0.25) 40%, rgba(200,200,200,0.15) 60%, transparent);
-        }
-
-        .nav-inner {
-            max-width: 1360px; margin: 0 auto;
-            padding: 0.7rem 2rem;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
-        .nav-left { display: flex; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.68rem; }
-        .nav-back { display: flex; align-items: center; gap: 0.45rem; color: var(--tx-3); transition: color 0.2s; }
-        .nav-back:hover { color: var(--inv); }
-        .nav-back img { border-radius: 3px; display: block; }
-        .nav-sep { color: var(--tx-4); }
-        .nav-status { display: flex; align-items: center; gap: 0.45rem; color: var(--tx-3); }
-        .live-dot { width: 5px; height: 5px; background: var(--green); border-radius: 50%; box-shadow: 0 0 6px rgba(34,197,94,0.6); animation: blink 2s ease-in-out infinite; flex-shrink: 0; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-        .nav-right { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.65rem; }
-        .tag { padding: 0.18rem 0.55rem; border: 1px solid var(--border); color: var(--tx-3); transition: border-color 0.2s, color 0.2s; }
-        .tag:hover { border-color: var(--border-md); color: var(--tx-2); }
-        .tag-inv { color: var(--inv); border-color: rgba(234,179,8,0.2); }
-        .tag-inv:hover { border-color: rgba(234,179,8,0.4); }
-        .tag-green { color: var(--green); border-color: rgba(34,197,94,0.2); background: rgba(34,197,94,0.04); }
-
-        /* ── Container ─── */
-        .wrap { max-width: 1360px; margin: 0 auto; padding: 0 2rem; }
-
-        /* ── Reveal ─── */
-        .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s var(--ease), transform 0.65s var(--ease); }
-        .reveal.in { opacity: 1; transform: translateY(0); }
-
-        /* ── Hero ─── */
-        .hero {
-            min-height: 90vh; padding-top: 9rem; padding-bottom: 5rem;
-            display: flex; flex-direction: column; justify-content: center;
-            position: relative;
-        }
-
-        .hero-glow {
-            position: absolute; top: 0; right: -5%;
-            width: min(500px, 50vw); height: min(500px, 50vw);
-            background: radial-gradient(ellipse, rgba(234,179,8,0.06) 0%, rgba(245,158,11,0.02) 50%, transparent 70%);
-            border-radius: 50%; pointer-events: none;
-            animation: float 18s ease-in-out infinite;
-        }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-28px); } }
-
-        .breadcrumb { font-family: var(--font-mono); font-size: 0.65rem; color: var(--tx-3); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2rem; }
-        .breadcrumb .bc-cur { color: var(--inv); }
-
-        .hero-badge {
-            display: inline-flex; align-items: center; gap: 0.6rem;
-            padding: 0.3rem 0.8rem;
-            border: 1px solid rgba(234,179,8,0.25);
-            background: rgba(234,179,8,0.05);
-            font-family: var(--font-mono); font-size: 0.62rem;
-            color: var(--inv); letter-spacing: 0.08em; margin-bottom: 1.75rem;
-        }
-
-        .hero-title {
-            font-family: var(--font-head);
-            font-size: clamp(4rem, 10vw, 8rem);
-            font-weight: 800; line-height: 0.92;
-            letter-spacing: -0.04em;
-            color: var(--tx-1); margin-bottom: 0.75rem;
-            position: relative;
-        }
-
-        .hero-title .accent {
-            background: linear-gradient(135deg, #fff 0%, var(--inv) 45%, #fde047 80%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-        }
-
-        .hero-doctrine {
-            font-family: var(--font-mono); font-size: 0.72rem;
-            color: var(--tx-3); letter-spacing: 0.12em;
-            text-transform: uppercase; margin-bottom: 2.5rem;
-        }
-
-        .hero-tagline {
-            max-width: 760px; margin-bottom: 0.75rem;
-            padding-left: 1.5rem;
-            border-left: 2px solid rgba(234,179,8,0.35);
-        }
-        .hero-tagline p {
-            font-size: clamp(1rem, 1.8vw, 1.25rem);
-            color: var(--tx-1); font-weight: 400;
-            line-height: 1.55; margin-bottom: 0.5rem;
-        }
-        .hero-tagline .sub { font-size: 0.95rem; color: var(--tx-2); display: block; line-height: 1.65; }
-
-        .hero-chain { font-family: var(--font-mono); font-size: 0.65rem; color: var(--inv); letter-spacing: 0.06em; margin-bottom: 3rem; opacity: 0.8; }
-
-        /* ── Stats bar ─── */
-        .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-        .stat { background: var(--bg-card); padding: 1.25rem 1.5rem; text-align: center; transition: background 0.25s; }
-        .stat:hover { background: var(--bg-raised); }
-        .stat-n { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 600; color: var(--inv); display: block; line-height: 1; margin-bottom: 0.4rem; }
-        .stat-l { font-family: var(--font-mono); font-size: 0.6rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.1em; }
-
-        /* ── Sec label ─── */
-        .sec-label {
-            font-family: var(--font-mono); font-size: 0.65rem; color: var(--tx-3);
-            text-transform: uppercase; letter-spacing: 0.14em;
-            margin-bottom: 1.75rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--border);
-            display: flex; align-items: center; gap: 0.75rem;
-        }
-        .sec-label::before { content: ''; width: 2px; height: 12px; background: linear-gradient(180deg, var(--inv), var(--oap)); flex-shrink: 0; }
-
-        /* ── Sections ─── */
-        .section { margin: 5rem 0; }
-
-        /* ── Grid 2-col ─── */
-        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-
-        /* ── Problem attack grid ─── */
-        .attack-inline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin: 1.25rem 0; }
-        .attack-cell { background: var(--bg-raised); padding: 0.875rem 1rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--red); }
-
-        /* ── Layer stack ─── */
-        .layer-stack { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
-        .layer-row {
-            background: var(--bg-card);
-            display: grid; grid-template-columns: 120px 1fr 100px;
-            gap: 2rem; align-items: start;
-            padding: 2rem 2.25rem; transition: background 0.25s;
-        }
-        .layer-row:hover { background: var(--bg-raised); }
-
-        .layer-num { font-family: var(--font-mono); font-size: 0.62rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.1em; padding-top: 0.15rem; }
-        .layer-name { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; color: var(--tx-1); margin-bottom: 0.35rem; line-height: 1.2; }
-        .layer-tech { font-family: var(--font-mono); font-size: 0.68rem; color: var(--tx-3); margin-bottom: 0.75rem; }
-        .layer-desc { color: var(--tx-2); font-size: 0.9rem; line-height: 1.65; }
-        .layer-badge { display: flex; justify-content: flex-end; padding-top: 0.1rem; }
-
-        .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.875rem; }
-        .chip { font-family: var(--font-mono); font-size: 0.6rem; padding: 0.18rem 0.5rem; border: 1px solid var(--border); color: var(--tx-3); letter-spacing: 0.04em; }
-        .chip-sha { border-color: rgba(42,159,232,0.25); color: var(--sha); background: rgba(42,159,232,0.04); }
-        .chip-ton { border-color: rgba(0,152,234,0.25); color: var(--ton); background: rgba(0,152,234,0.04); }
-        .chip-oap { border-color: rgba(245,158,11,0.25); color: var(--oap); background: rgba(245,158,11,0.04); }
-        .chip-inv { border-color: rgba(234,179,8,0.25); color: var(--inv); background: rgba(234,179,8,0.04); }
-
-        .pill { font-family: var(--font-mono); font-size: 0.6rem; padding: 0.18rem 0.5rem; font-weight: 500; display: inline-flex; align-items: center; gap: 0.3rem; }
-        .pill-green { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.22); color: var(--green); }
-        .pill-inv   { background: rgba(234,179,8,0.07); border: 1px solid rgba(234,179,8,0.22); color: var(--inv); }
-        .pill-sha   { background: rgba(42,159,232,0.07); border: 1px solid rgba(42,159,232,0.22); color: var(--sha); }
-
-        /* ── Gate grid ─── */
-        .gate-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-        .gate-card { background: var(--bg-card); padding: 1.75rem 1.5rem; transition: background 0.25s; border-top: 2px solid transparent; }
-        .gate-card:hover { background: var(--bg-raised); }
-        .gate-num { font-family: var(--font-mono); font-size: 0.6rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
-        .gate-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: var(--tx-1); margin-bottom: 0.5rem; }
-        .gate-desc { font-size: 0.83rem; color: var(--tx-2); line-height: 1.6; margin-bottom: 0.875rem; }
-        .gate-blocks { font-family: var(--font-mono); font-size: 0.68rem; color: var(--tx-3); padding: 0.35rem 0.65rem; background: var(--bg); border: 1px solid var(--border); display: inline-block; }
-
-        /* ── Formula block ─── */
-        .formula-block {
-            border: 1px solid var(--border);
-            border-left: 2px solid rgba(234,179,8,0.5);
-            background: rgba(234,179,8,0.03);
-            padding: 2.25rem 2.5rem;
-        }
-        .formula-label { font-family: var(--font-mono); font-size: 0.62rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.25rem; }
-        .formula-eq { font-family: var(--font-mono); font-size: clamp(0.95rem, 2.2vw, 1.4rem); color: var(--tx-1); font-weight: 600; margin-bottom: 1.25rem; line-height: 1.5; }
-        .formula-eq .v { color: var(--inv); }
-        .formula-eq .op { color: var(--tx-3); }
-        .formula-notes { font-family: var(--font-mono); font-size: 0.78rem; color: var(--tx-3); line-height: 2; }
-        .formula-notes span { color: var(--tx-1); }
-        .formula-notes .warn { color: var(--red); }
-
-        /* ── Attack table ─── */
-        .table-wrap { border: 1px solid var(--border); overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 0.75rem; }
-        thead tr { background: var(--bg-2); border-bottom: 1px solid var(--border-md); }
-        th { padding: 0.7rem 1.2rem; text-align: left; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.62rem; font-weight: 500; }
-        tbody tr { border-bottom: 1px solid rgba(255,255,255,0.03); transition: background 0.15s; }
-        tbody tr:last-child { border-bottom: none; }
-        tbody tr:hover { background: rgba(255,255,255,0.02); }
-        td { padding: 0.75rem 1.2rem; color: var(--tx-2); }
-        .td-attack { color: var(--tx-1); font-weight: 500; }
-        .td-none { color: var(--red); }
-        .td-def { color: var(--green); }
-
-        /* ── Evidence grid ─── */
-        .evidence-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-        .evidence-card { background: var(--bg-card); padding: 1.75rem; transition: background 0.25s; }
-        .evidence-card:hover { background: var(--bg-raised); }
-        .evidence-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.6rem; }
-        .evidence-value { font-family: var(--font-mono); font-size: 0.78rem; color: var(--tx-2); word-break: break-all; line-height: 1.6; margin-bottom: 0.5rem; }
-        .evidence-meta { font-family: var(--font-mono); font-size: 0.68rem; color: var(--tx-3); display: flex; gap: 1.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
-        .evidence-link { font-family: var(--font-mono); font-size: 0.68rem; color: var(--sha); transition: color 0.2s; }
-        .evidence-link.ton-link { color: var(--ton); }
-        .evidence-link:hover { color: #5bbfff; }
-
-        /* ── Roadmap phases ─── */
-        .phases { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
-        .phase-row {
-            background: var(--bg-card);
-            display: grid; grid-template-columns: 60px 200px 1fr auto;
-            gap: 1.5rem; align-items: center;
-            padding: 1.5rem 2rem; transition: background 0.25s;
-        }
-        .phase-row:hover { background: var(--bg-raised); }
-        .phase-num { font-family: var(--font-mono); font-size: 1.2rem; font-weight: 600; color: var(--tx-4); }
-        .phase-name { font-family: var(--font-head); font-size: 0.95rem; font-weight: 700; color: var(--tx-1); }
-        .phase-target { font-family: var(--font-mono); font-size: 0.65rem; color: var(--tx-3); margin-top: 0.2rem; }
-        .phase-desc { font-size: 0.85rem; color: var(--tx-2); line-height: 1.55; }
-
-        /* ── Metrics grid ─── */
-        .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-        .metric-card { background: var(--bg-card); padding: 1.5rem; transition: background 0.25s; }
-        .metric-card:hover { background: var(--bg-raised); }
-        .metric-label { font-family: var(--font-mono); font-size: 0.6rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
-        .metric-val { font-family: var(--font-mono); font-size: 1.4rem; font-weight: 600; color: var(--tx-1); margin-bottom: 0.25rem; }
-        .metric-sub { font-family: var(--font-mono); font-size: 0.65rem; color: var(--tx-3); }
-
-        /* ── CTA ─── */
-        .cta { background: var(--bg-card); border: 1px solid var(--border); padding: 3.5rem; text-align: center; position: relative; overflow: hidden; }
-        .cta::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 50%; height: 1px; background: linear-gradient(90deg, transparent, rgba(234,179,8,0.55), transparent); }
-        .cta h2 { font-family: var(--font-head); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; color: var(--tx-1); margin-bottom: 0.875rem; }
-        .cta p { color: var(--tx-2); max-width: 520px; margin: 0 auto 2rem; }
-        .cta-row { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
-
-        /* ── Buttons ─── */
-        .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.7rem 1.4rem; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 600; border: 1px solid var(--border-md); color: var(--tx-2); background: transparent; text-decoration: none; transition: all 0.22s var(--ease); letter-spacing: 0.03em; }
-        .btn:hover { color: var(--tx-1); border-color: var(--border-hi); background: rgba(255,255,255,0.03); }
-        .btn-primary { background: var(--inv); color: #04060A; border-color: var(--inv); }
-        .btn-primary:hover { background: #fde047; border-color: #fde047; color: #04060A; box-shadow: 0 0 24px rgba(234,179,8,0.35); }
-
-        /* ── Footer ─── */
-        footer { margin-top: 8rem; padding: 4rem 0 2rem; border-top: 1px solid var(--border); position: relative; }
-        footer::before { content: ''; position: absolute; top: -1px; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(234,179,8,0.35) 35%, rgba(245,158,11,0.2) 65%, transparent); }
-
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
-        .footer-brand h4 { font-family: var(--font-head); font-size: 1rem; font-weight: 800; color: var(--tx-1); margin-bottom: 0.875rem; letter-spacing: 0.04em; }
-        .footer-brand p { color: var(--tx-3); font-size: 0.875rem; line-height: 1.6; }
-        .footer-col h5 { font-family: var(--font-mono); font-size: 0.62rem; color: var(--tx-3); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 1.1rem; }
-        .footer-col ul { list-style: none; }
-        .footer-col li { margin-bottom: 0.65rem; }
-        .footer-col a { color: var(--tx-3); font-size: 0.875rem; transition: color 0.2s; }
-        .footer-col a:hover { color: var(--tx-1); }
-        .footer-bottom { padding-top: 1.75rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.65rem; color: var(--tx-3); }
-        .footer-legal { display: flex; gap: 1.5rem; }
-        .footer-legal a { color: var(--tx-3); font-size: 0.65rem; }
-        .footer-legal a:hover { color: var(--tx-1); }
-
-        /* ── Responsive ─── */
-        @media (max-width: 1024px) {
-            .gate-grid { grid-template-columns: repeat(2, 1fr); }
-            .layer-row { grid-template-columns: 1fr; gap: 0.75rem; }
-            .layer-badge { justify-content: flex-start; }
-            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
-            .footer-brand { grid-column: span 2; }
-            .phase-row { grid-template-columns: 50px 160px 1fr auto; gap: 1rem; }
-        }
-        @media (max-width: 768px) {
-            .nav-inner { padding: 0.7rem 1rem; }
-            .grid-2, .evidence-grid { grid-template-columns: 1fr; }
-            .stats-bar { grid-template-columns: repeat(2, 1fr); }
-            .attack-inline { grid-template-columns: 1fr 1fr; }
-            .gate-grid { grid-template-columns: 1fr; }
-            .phase-row { grid-template-columns: 1fr; }
-            .phase-desc, .phase-num { display: none; }
-            .metrics-grid { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .footer-brand { grid-column: span 1; }
-            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-            .cta { padding: 2.5rem 1.5rem; }
-            .formula-block { padding: 1.5rem; }
-        }
-        @media (max-width: 480px) {
-            .stats-bar { grid-template-columns: 1fr 1fr; }
-            .attack-inline { grid-template-columns: 1fr; }
-        }
-
-        /* ── MOBILE ──────────────────────────────── */
-        @media(max-width:1024px){
-          .hero-layout,.hero-grid,.content-grid,.two-col{grid-template-columns:1fr!important;}
-          .side-panel,.hero-aside,.status-panel{display:none!important;}
-        }
-        @media(max-width:768px){
-          :root{--nav-h:52px;}
-          h1,.page-title{font-size:clamp(1.6rem,7vw,2.4rem)!important;}
-          h2,.section-title{font-size:clamp(1.2rem,5vw,1.8rem)!important;}
-          .hero-title,.h1{font-size:clamp(1.8rem,8vw,2.8rem)!important;}
-          .card-grid,.metrics-grid,.stat-row,.feature-grid{grid-template-columns:1fr!important;gap:12px!important;}
-          .gate-box,.gate-inner{padding:24px 16px!important;}
-          section,.section{padding:48px 0!important;}
-          .container,.wrap{padding:0 16px!important;}
-          table{font-size:.8rem;}
-          table td,table th{padding:8px 10px!important;}
-        }
-        @media(max-width:480px){
-          h1,.page-title,.hero-title{font-size:clamp(1.4rem,8vw,2rem)!important;}
-          .badge,.tag{font-size:.65rem!important;padding:3px 8px!important;}
-          .btn,.cta-btn,.btn-primary{padding:10px 20px!important;font-size:.85rem!important;}
-          .stat-n,[data-count]{font-size:1.8rem!important;}
-          nav .nav-tags{display:none!important;}
-        }
-        @media(max-width:360px){
-          .container,.wrap{padding:0 12px!important;}
-          h1,.hero-title{font-size:1.4rem!important;}
+        .text-shadow-gold {
+            text-shadow: 0 0 30px rgba(234, 179, 8, 0.3);
         }
     </style>
+
+    <script>
+    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null},remove(k){this.set(k,"",0)}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365)},acceptCookies(){ON.cookie.set("on_banner","1",365);document.getElementById("cookie-banner")?.classList.add("hidden")}};
+    document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","bittensor_tao",7);if(!ON.cookie.get("on_banner"))document.getElementById("cookie-banner")?.classList.remove("hidden");});
+    </script>
 </head>
-<body>
-<canvas id="star-field" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-
-<!-- ═══════════════════════════════
-     HEADER
-════════════════════════════════ -->
-<header role="banner">
-    <div class="nav-inner">
-        <div class="nav-left">
-            <a href="/" class="nav-back">
-                <img src="/site-logo.png" alt="ORTHONODE SYSTEMS™" width="24" height="24" style="border-radius:4px;">
-                orthonode.xyz
-            </a>
-            <span class="nav-sep">/</span>
-            <div class="nav-status">
-                <span class="live-dot" role="img" aria-label="Phase 1 complete"></span>
-                <span>INVARIANT</span>
-            </div>
-        </div>
-        <div class="nav-right">
-            <span class="tag tag-green">PHASE_1_DONE</span>
-            <span class="tag tag-inv">BITTENSOR_SUBNET</span>
-            <span class="tag">TESTNET_MARCH_2026</span>
-        </div>
+<body class="bg-background selection:bg-primary-container selection:text-on-primary-container">
+    <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
+    <script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script>
+    <div style="position:fixed;top:0;left:0;z-index:200;padding:16px 24px;">
+      <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:0.08em;display:flex;align-items:center;gap:8px;transition:color 0.2s;" onmouseover="this.style.color='#E6007A'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">← ORTHONODE.SYSTEMS</a>
     </div>
-</header>
-
-<!-- ═══════════════════════════════
-     MAIN
-════════════════════════════════ -->
-<main class="wrap">
-
-<!-- ── HERO ────────────────────────────────── -->
-<section class="hero">
-    <div class="hero-glow" aria-hidden="true"></div>
-
-    <p class="breadcrumb">ORTHONODE SYSTEMS / <span class="bc-cur">INVARIANT</span></p>
-
-    <div class="hero-badge">
-        <span class="live-dot"></span>
-        PHASE 1 COMPLETE · TESTNET MARCH 2026 · BITTENSOR SUBNET
+    <div id="cookie-banner" class="hidden" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;display:flex;align-items:center;gap:20px;max-width:520px;width:90vw;">
+      <p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">We use cookies for site functionality. <a href="/cookies.html" style="color:#E6007A;">Learn more</a></p>
+      <button onclick="ON.acceptCookies()" style="background:#E6007A;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:0.08em;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button>
     </div>
-
-    <div class="hero-title"><span class="accent">INVARIANT</span></div>
-    <div class="hero-doctrine">// Execution is the claim. Proof is INVARIANT.</div>
-
-    <div class="hero-tagline">
-        <p>Every Bittensor subnet today trusts miner <em>outputs</em>. INVARIANT makes them <strong>provable</strong>.</p>
-        <span class="sub">Three independently unfakeable layers stacked into a complete trust stack — producing a cryptographically-verified NTS (INVARIANT Trust Score) per miner that weights TAO emissions permanently.</span>
-    </div>
-
-    <p class="hero-chain">// SHA_ARBITRUM_LIVE · TON_SHA_TESTNET_LIVE · OAP_PUBLISHED · PHASE_1_COMPLETE</p>
-
-    <div class="stats-bar reveal" role="region" aria-label="INVARIANT statistics">
-        <div class="stat">
-            <span class="stat-n">3</span>
-            <span class="stat-l">Protocol Layers</span>
-        </div>
-        <div class="stat">
-            <span class="stat-n">21</span>
-            <span class="stat-l">Tests Passing</span>
-        </div>
-        <div class="stat">
-            <span class="stat-n">9,000+</span>
-            <span class="stat-l">Rust Receipts/sec</span>
-        </div>
-        <div class="stat">
-            <span class="stat-n">10,000+</span>
-            <span class="stat-l">Test Vectors</span>
-        </div>
-    </div>
-</section>
-
-<!-- ── THE PROBLEM ──────────────────────────── -->
-<section class="section reveal" role="region" aria-labelledby="problem-head">
-    <p class="sec-label" id="problem-head">// THE_PROBLEM : BITTENSOR_TRUST_GAP</p>
-    <div class="grid-2" style="margin-bottom:0;">
-        <div class="card span2">
-            <span class="card-label" style="color:var(--red);">ROOT_CAUSE</span>
-            <h3 style="font-family:var(--font-head);font-size:1.35rem;font-weight:700;color:var(--tx-1);margin-bottom:1rem;line-height:1.2;">Academic analysis of two years of Bittensor on-chain data found that <span style="color:var(--red);">rewards are driven by stake, not quality.</span></h3>
-            <p>Bittensor's Yuma Consensus scores miners on <em>outputs</em> — but outputs are trivial to fake. Every single attack vector below has <strong style="color:var(--red);">no current defense</strong>.</p>
-            <div class="attack-inline">
-                <div class="attack-cell">→ Return a cached response</div>
-                <div class="attack-cell">→ Copy another miner's output</div>
-                <div class="attack-cell">→ Run cheap model, claim expensive</div>
-                <div class="attack-cell">→ Submit same receipt twice</div>
-                <div class="attack-cell">→ Sybil with new identities</div>
-                <div class="attack-cell">→ Validator cartel collusion</div>
-            </div>
-            <p style="margin-top:0;">INVARIANT closes every attack — deterministically, on-chain, without trusted intermediaries.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ── THREE LAYERS ─────────────────────────── -->
-<section class="section reveal" role="region" aria-labelledby="arch-head">
-    <p class="sec-label" id="arch-head">// ARCHITECTURE : THREE_LAYER_TRUST_STACK</p>
-    <div class="layer-stack">
-        <div class="layer-row">
-            <div class="layer-num">Layer 1<br>Identity</div>
-            <div>
-                <div class="layer-name">SHA — Stylus Hardware Anchor</div>
-                <div class="layer-tech">Keccak-256 on Arbitrum · ESP32-S3 eFuse · Rust + Stylus</div>
-                <div class="layer-desc">Hardware-bound identity. Binds immutable eFuse silicon identifiers to Arbitrum Stylus contracts. Proves <em>who</em> this miner is — at the silicon layer, not the software layer. 89+ live transactions on Arbitrum Sepolia.</div>
-                <div class="chips">
-                    <span class="chip chip-sha">ARBITRUM_SEPOLIA_LIVE</span>
-                    <span class="chip chip-sha">KECCAK-256</span>
-                    <span class="chip chip-sha">RUST_STYLUS</span>
-                    <span class="chip chip-sha">12,564 GAS/RECEIPT</span>
-                </div>
-            </div>
-            <div class="layer-badge"><span class="pill pill-green">✓ Live</span></div>
-        </div>
-        <div class="layer-row">
-            <div class="layer-num">Layer 2<br>Receipt</div>
-            <div>
-                <div class="layer-name">TON-SHA — Execution Receipt</div>
-                <div class="layer-tech">SHA-256 four-gate · Tact 1.6 on TON · 0.03 TON/op</div>
-                <div class="layer-desc">Four-gate execution receipt system. Proves <em>how</em> the miner produced the output. Identity gating → firmware governance → replay protection → cryptographic digest. 17+ live transactions on TON Testnet.</div>
-                <div class="chips">
-                    <span class="chip chip-ton">TON_TESTNET_LIVE</span>
-                    <span class="chip chip-ton">SHA-256</span>
-                    <span class="chip chip-ton">TACT_1.6</span>
-                    <span class="chip chip-ton">136-BYTE_RECEIPT</span>
-                </div>
-            </div>
-            <div class="layer-badge"><span class="pill pill-green">✓ Live</span></div>
-        </div>
-        <div class="layer-row">
-            <div class="layer-num">Layer 3<br>History</div>
-            <div>
-                <div class="layer-name">OAP — Integrity Governance Engine</div>
-                <div class="layer-tech">Lifecycle trust scoring 0–100 · Append-only history · Python</div>
-                <div class="layer-desc">Lifecycle trust governance. Append-only behavioral history produces NTS scores across every tempo. Catastrophic flag for repeat violations. Proves <em>who they have been</em> — across the miner's entire history. Cannot be reset.</div>
-                <div class="chips">
-                    <span class="chip chip-oap">NTS_0–100</span>
-                    <span class="chip chip-oap">APPEND_ONLY</span>
-                    <span class="chip chip-oap">CATASTROPHIC_FLAG</span>
-                    <span class="chip chip-oap">2/YR_OVERRIDE_CAP</span>
-                </div>
-            </div>
-            <div class="layer-badge"><span class="pill pill-inv">Published</span></div>
-        </div>
-    </div>
-</section>
-
-<!-- ── FOUR GATES ────────────────────────────── -->
-<section class="section reveal" role="region" aria-labelledby="gates-head">
-    <p class="sec-label" id="gates-head">// FOUR_GATE_VERIFIER : EVERY_RECEIPT_PASSES_ALL_FOUR</p>
-    <div class="gate-grid">
-        <div class="gate-card" style="border-top:2px solid var(--sha);">
-            <div class="gate-num">Gate 1 — Identity</div>
-            <div class="gate-title">Agent Registry Check</div>
-            <p class="gate-desc"><code>agent_id</code> must be in authorized registry. Blocks Sybil attacks and cross-miner output copying. The agent_id is hotkey-bound — cannot be forged.</p>
-            <span class="gate-blocks">Blocks: Sybil · Output Copying</span>
-        </div>
-        <div class="gate-card" style="border-top:2px solid var(--green);">
-            <div class="gate-num">Gate 2 — Model</div>
-            <div class="gate-title">Approved Model Registry</div>
-            <p class="gate-desc"><code>model_hash</code> must match the community-approved model list. Blocks model impersonation — running a cheap model while claiming an expensive one.</p>
-            <span class="gate-blocks">Blocks: Model Impersonation</span>
-        </div>
-        <div class="gate-card" style="border-top:2px solid var(--oap);">
-            <div class="gate-num">Gate 3 — Counter</div>
-            <div class="gate-title">Monotonic Counter</div>
-            <p class="gate-desc"><code>counter</code> must be strictly greater than the last confirmed counter. Mathematically airtight replay and rollback prevention. No exceptions.</p>
-            <span class="gate-blocks">Blocks: Replay · Rollback</span>
-        </div>
-        <div class="gate-card" style="border-top:2px solid var(--inv);">
-            <div class="gate-num">Gate 4 — Digest</div>
-            <div class="gate-title">SHA-256 Digest Verification</div>
-            <p class="gate-desc"><code>SHA-256(agent_id ‖ model_hash ‖ execution_hash ‖ counter) == digest</code>. The execution_hash includes tempo_id — so cross-tempo caching fails this gate.</p>
-            <span class="gate-blocks">Blocks: Caching · Tamper</span>
-        </div>
-    </div>
-</section>
-
-<!-- ── NTS FORMULA ──────────────────────────── -->
-<section class="section reveal" role="region" aria-labelledby="formula-head">
-    <p class="sec-label" id="formula-head">// NTS_EMISSION_WEIGHTING</p>
-    <div class="formula-block">
-        <div class="formula-label">// emission_weight_formula</div>
-        <div class="formula-eq">
-            <span class="v">weight</span>
-            <span class="op"> = </span>
-            <span class="v">output_quality</span>
-            <span class="op"> × </span>
-            <span class="op">(</span><span class="v">NTS</span><span class="op"> / 100)</span>
-            <span class="op"> × </span>
-            <span class="v">freshness_factor</span>
-        </div>
-        <div class="formula-notes">
-            NTS 90 + perfect output = <span>weight 0.90</span><br>
-            NTS 40 + perfect output = <span>weight 0.40</span>&nbsp;&nbsp;— past behavior permanently shapes future earnings<br>
-            Cold start = <span>NTS 50.0</span>&nbsp;&nbsp;·&nbsp;&nbsp;Gate 1 violation = <span class="warn">−25.0 scar</span><br>
-            3× Gate 3 violations = <span class="warn">Catastrophic flag — permanent NTS cap at 40.0</span><br>
-            Max 2 overrides/year — logged immutably — cannot be cleared programmatically
-        </div>
-    </div>
-</section>
-
-<!-- ── ATTACK DEFENSE MATRIX ─────────────────── -->
-<section class="section reveal" role="region" aria-labelledby="defense-head">
-    <p class="sec-label" id="defense-head">// ATTACK_DEFENSE_MATRIX</p>
-    <div class="table-wrap">
-        <table>
-            <thead>
-                <tr>
-                    <th>Attack</th>
-                    <th>Current Bittensor Defense</th>
-                    <th>INVARIANT Defense</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="td-attack">Return a cached response</td>
-                    <td class="td-none">None</td>
-                    <td class="td-def">execution_hash includes tempo_id → Gate 4 fails</td>
-                </tr>
-                <tr>
-                    <td class="td-attack">Copy another miner's output</td>
-                    <td class="td-none">None</td>
-                    <td class="td-def">agent_id is hotkey-bound → Gate 1 fails</td>
-                </tr>
-                <tr>
-                    <td class="td-attack">Run cheap model, claim expensive</td>
-                    <td class="td-none">None</td>
-                    <td class="td-def">model_hash must match approved registry → Gate 2 fails</td>
-                </tr>
-                <tr>
-                    <td class="td-attack">Submit same receipt twice</td>
-                    <td class="td-none">None</td>
-                    <td class="td-def">Monotonic counter → Gate 3 fails</td>
-                </tr>
-                <tr>
-                    <td class="td-attack">Sybil with new identities</td>
-                    <td class="td-none">None</td>
-                    <td class="td-def">NTS starts at 50 — gaming costs real tempo time</td>
-                </tr>
-                <tr>
-                    <td class="td-attack">Validator cartel collusion</td>
-                    <td style="color:var(--tx-3);">Yuma (probabilistic)</td>
-                    <td class="td-def">Gates are deterministic — two honest validators always agree</td>
-                </tr>
-                <tr>
-                    <td class="td-attack">Digest forgery</td>
-                    <td class="td-none">None</td>
-                    <td class="td-def">Can't produce valid SHA-256 without running the computation</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
-
-<!-- ── LIVE CONTRACTS ────────────────────────── -->
-<section class="section reveal" role="region" aria-labelledby="evidence-head">
-    <p class="sec-label" id="evidence-head">// LIVE_CONTRACTS : ON_CHAIN_EVIDENCE</p>
-    <div class="evidence-grid">
-        <div class="evidence-card">
-            <div class="evidence-label">SHA — Arbitrum Sepolia</div>
-            <div class="evidence-value">0xD661a1aB8CEFaaCd78F4B968670C3bC438415615</div>
-            <div class="evidence-meta">
-                <span>89+ transactions</span>
-                <span>Block #241,058,680</span>
-                <span>12,564 gas/receipt</span>
-            </div>
-            <a class="evidence-link" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">View on Arbiscan →</a>
-        </div>
-        <div class="evidence-card">
-            <div class="evidence-label">TON-SHA — TON Testnet</div>
-            <div class="evidence-value">kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S</div>
-            <div class="evidence-meta">
-                <span>17+ transactions</span>
-                <span>0.03 TON/op</span>
-                <span>Tact 1.6</span>
-            </div>
-            <a class="evidence-link ton-link" href="https://testnet.tonscan.org/address/kQBqWso0ZgbTc9jhBZ9YRtQF6dDkHdPD0LDWgIzL0S4Ibe6S" target="_blank" rel="noopener">View on TONScan →</a>
-        </div>
-    </div>
-</section>
-
-<!-- ── ROADMAP ───────────────────────────────── -->
-<section class="section reveal" role="region" aria-labelledby="roadmap-head">
-    <p class="sec-label" id="roadmap-head">// ROADMAP : SIX_PHASES_TO_ECOSYSTEM_LAYER</p>
-    <div class="phases">
-        <div class="phase-row" style="border-left:2px solid var(--green);">
-            <div class="phase-num" style="color:var(--green);">P0</div>
-            <div><div class="phase-name">Foundation</div><div class="phase-target">Completed</div></div>
-            <div class="phase-desc">SHA + TON-SHA live on-chain. OAP architecture published. IoTeX forensic research released. 10,000+ test vectors validated.</div>
-            <span class="pill pill-green">Done</span>
-        </div>
-        <div class="phase-row" style="border-left:2px solid var(--green);">
-            <div class="phase-num" style="color:var(--green);">P1</div>
-            <div><div class="phase-name">Core Engine</div><div class="phase-target">Feb 2026 — Completed</div></div>
-            <div class="phase-desc">Python/Rust subnet engine. 21 tests passing. Bittensor v10 integration. Emission weighting formula. Local testability, no node required.</div>
-            <span class="pill pill-green">Done</span>
-        </div>
-        <div class="phase-row" style="border-left:2px solid var(--sha);background:rgba(42,159,232,0.02);">
-            <div class="phase-num" style="color:var(--sha);">P2</div>
-            <div><div class="phase-name">Testnet Deploy</div><div class="phase-target">March 2026 — Active</div></div>
-            <div class="phase-desc">Live INVARIANT subnet on Bittensor testnet. All four gate failures recorded on-chain. Open-source SDK published to PyPI.</div>
-            <span class="pill pill-sha">Active</span>
-        </div>
-        <div class="phase-row">
-            <div class="phase-num">P3</div>
-            <div><div class="phase-name">Cross-Subnet API</div><div class="phase-target">April 2026</div></div>
-            <div class="phase-desc">Public REST/WebSocket NTS API. Any subnet queries INVARIANT before accepting miner outputs. Drop-in validator plugin.</div>
-            <span class="pill" style="background:rgba(86,100,118,0.1);border:1px solid rgba(86,100,118,0.3);color:var(--tx-3);">Planned</span>
-        </div>
-        <div class="phase-row" style="border-left:2px solid rgba(234,179,8,0.3);">
-            <div class="phase-num" style="color:rgba(234,179,8,0.5);">P4</div>
-            <div><div class="phase-name">Mainnet Launch</div><div class="phase-target">May–Jun 2026</div></div>
-            <div class="phase-desc">INVARIANT live on Bittensor mainnet with real TAO emissions. 50+ miners at launch. Full security audit.</div>
-            <span class="pill pill-inv">Key Milestone</span>
-        </div>
-        <div class="phase-row">
-            <div class="phase-num">P5</div>
-            <div><div class="phase-name">Enterprise Revenue</div><div class="phase-target">Q3 2026</div></div>
-            <div class="phase-desc">Enterprise API. EU AI Act Article 13 compliance reports. $0.001–$0.01/receipt. $10K+/month protocol revenue target.</div>
-            <span class="pill" style="background:rgba(86,100,118,0.1);border:1px solid rgba(86,100,118,0.3);color:var(--tx-3);">Planned</span>
-        </div>
-        <div class="phase-row">
-            <div class="phase-num">P6</div>
-            <div><div class="phase-name">DAO Governance</div><div class="phase-target">Q4 2026</div></div>
-            <div class="phase-desc">TAO-weighted voting on protocol parameters. Open model registry. IIPs with 14-day upgrade timelocks. INVARIANT foundation (India).</div>
-            <span class="pill" style="background:rgba(86,100,118,0.1);border:1px solid rgba(86,100,118,0.3);color:var(--tx-3);">Planned</span>
-        </div>
-    </div>
-</section>
-
-<!-- ── METRICS ───────────────────────────────── -->
-<section class="section reveal" role="region" aria-labelledby="metrics-head">
-    <p class="sec-label" id="metrics-head">// METRICS_WE_TRACK</p>
-    <div class="metrics-grid">
-        <div class="metric-card">
-            <div class="metric-label">Phase 2 → Mainnet → 2026</div>
-            <div class="metric-val">10 → 500 → 10K</div>
-            <div class="metric-sub">Registered Miners</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-label">Phase 2 → Mainnet → 2026</div>
-            <div class="metric-val">1K → 100K → 10M</div>
-            <div class="metric-sub">Receipts Verified / Day</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-label">Phase 2 → Mainnet → 2026</div>
-            <div class="metric-val">0 → 5 → 50</div>
-            <div class="metric-sub">Subnet Integrations</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-label">Phase 2 → Mainnet → 2026</div>
-            <div class="metric-val">$0 → $1K → $100K</div>
-            <div class="metric-sub">Protocol Revenue / Month</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-label">Current</div>
-            <div class="metric-val">~9,000/s</div>
-            <div class="metric-sub">Rust Receipt Throughput</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-label">Current</div>
-            <div class="metric-val">21</div>
-            <div class="metric-sub">Tests Passing (all attack vectors)</div>
-        </div>
-    </div>
-</section>
-
-<!-- ── CTA ───────────────────────────────────── -->
-<section class="section reveal">
-    <div class="cta">
-        <h2>Don't trust the output. Verify the execution.</h2>
-        <p>Three layers. One trust score. Deterministic, cryptographic, append-only. The trust infrastructure Bittensor has never had.</p>
-        <div class="cta-row">
-            <a href="https://github.com/orthonode/invariant" class="btn btn-primary" target="_blank" rel="noopener">GitHub Repository ↗</a>
-            <a href="/sha.html" class="btn" style="border-color:rgba(42,159,232,0.25);color:var(--sha);">SHA — Hardware Layer</a>
-            <a href="/oap.html" class="btn" style="border-color:rgba(245,158,11,0.25);color:var(--oap);">OAP — Governance Layer</a>
-            <a href="/ton-sha.html" class="btn" style="border-color:rgba(0,152,234,0.25);color:var(--ton);">TON-SHA — Receipt Layer</a>
-            <a href="/" class="btn">← Orthonode</a>
-        </div>
-    </div>
-</section>
-
-</main>
-
-<!-- ═══════════════════════════════
-     FOOTER
-════════════════════════════════ -->
-<footer role="contentinfo">
-    <div class="wrap">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <h4>ORTHONODE SYSTEMS™</h4>
-                <p>
-                    Building verification infrastructure for Bittensor, DePIN networks, and autonomous systems. INVARIANT is the canonical trust layer Bittensor has never had — three independently unfakeable layers, one NTS per miner.
-                </p>
-                <p style="margin-top:0.875rem;color:var(--tx-3);">
-                    <strong style="color:var(--tx-2);">Founder:</strong> Arhant Barmate<br>
-                    <strong style="color:var(--tx-2);">Location:</strong> Bhopal, Madhya Pradesh, India<br>
-                    <strong style="color:var(--tx-2);">Contact:</strong> infrastructure@orthonode.xyz
-                </p>
-            </div>
-            <div class="footer-col">
-                <h5>INVARIANT</h5>
-                <ul>
-                    <li><a href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">GitHub Repository ↗</a></li>
-                    <li><a href="/sha.html" style="color:var(--sha);">SHA — Hardware Layer</a></li>
-                    <li><a href="/ton-sha.html" style="color:var(--ton);">TON-SHA — Receipt Layer</a></li>
-                    <li><a href="/oap.html" style="color:var(--oap);">OAP — Governance Layer</a></li>
-                    <li><a href="/iotex-research.html" style="color:var(--red);">IoTeX Research ↗</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h5>Connect</h5>
-                <ul>
-                    <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X / Twitter</a></li>
-                    <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
-                    <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub (Org)</a></li>
-                    <li><a href="mailto:infrastructure@orthonode.xyz">infrastructure@orthonode.xyz</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div>© 2026 ORTHONODE SYSTEMS™. All Rights Reserved.</div>
-            <div class="footer-legal">
-                <a href="/terms.html">Terms of Service</a>
-                <a href="/privacy.html">Privacy Policy</a>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<script>
-    (function initReveal() {
-        const items = document.querySelectorAll('.reveal');
-        if (!items.length) return;
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('in'), i * 55);
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.06, rootMargin: '0px 0px -36px 0px' });
-        items.forEach(el => obs.observe(el));
-    })();
-
-    (function initCounters() {
-        document.querySelectorAll('.stat-n').forEach(el => {
-            const txt = el.textContent.trim();
-            const m   = txt.match(/[\d,]+/);
-            if (!m) return;
-            const target = parseInt(m[0].replace(/,/g, ''));
-            if (target < 100) return;
-            const prefix = txt.slice(0, txt.search(/\d/));
-            const suffix = txt.slice(txt.search(/[\d,]+/) + m[0].length);
-            const obs2 = new IntersectionObserver(ents => {
-                if (!ents[0].isIntersecting) return;
-                obs2.disconnect();
-                const t0 = performance.now(), dur = 1400;
-                (function tick(now) {
-                    const p = Math.min((now - t0) / dur, 1);
-                    const e = 1 - Math.pow(1 - p, 3);
-                    el.textContent = prefix + Math.round(e * target).toLocaleString() + suffix;
-                    if (p < 1) requestAnimationFrame(tick);
-                })(t0);
-            }, { threshold: 0.5 });
-            obs2.observe(el);
-        });
-    })();
-</script>
-<script>
-(function(){
-  var c=document.getElementById('star-field');
-  if(!c)return;
-  var ctx=c.getContext('2d');
-  var dpr=window.devicePixelRatio||1;
-  var W,H,stars=[];
-  var isMob=window.innerWidth<768;
-  var N=isMob?60:130;
-  var ML=isMob?90:130;
-  function resize(){W=window.innerWidth;H=window.innerHeight;c.width=W*dpr;c.height=H*dpr;ctx.scale(dpr,dpr);c.style.width=W+'px';c.style.height=H+'px';}
-  function init(){resize();stars=[];for(var i=0;i<N;i++)stars.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*1.2+.3,a:Math.random(),tw:Math.random()*Math.PI*2,ts:Math.random()*.015+.005});}
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    for(var i=0;i<stars.length;i++){
-      var s=stars[i];
-      s.x+=s.vx;s.y+=s.vy;
-      if(s.x<0)s.x=W;if(s.x>W)s.x=0;
-      if(s.y<0)s.y=H;if(s.y>H)s.y=0;
-      s.tw+=s.ts;
-      var al=.35+.45*Math.sin(s.tw);
-      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(200,200,200,'+al+')';ctx.fill();
-      for(var j=i+1;j<stars.length;j++){
-        var q=stars[j];
-        var dx=s.x-q.x,dy=s.y-q.y;
-        var d=Math.sqrt(dx*dx+dy*dy);
-        if(d<ML){ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle='rgba(180,180,180,'+(0.12*(1-d/ML))+')';ctx.lineWidth=.5;ctx.stroke();}
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize',function(){init();});
-  init();draw();
-})();
-</script>
-
-<!-- Cookie consent bar -->
-<div id="cookie-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(10,10,10,0.97);border-top:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-  <p style="margin:0;font-family:'DM Sans',sans-serif;font-size:.82rem;color:#8C8C8C;line-height:1.5;">This site uses essential cookies only for Cloudflare bot protection. No tracking or analytics. <a href="/cookies.html" style="color:#D0D0D0;text-decoration:underline;text-underline-offset:3px;">Learn more</a></p>
-  <button onclick="dismissCookieBar()" style="flex-shrink:0;background:#141414;border:1px solid rgba(255,255,255,0.15);color:#F5F5F5;font-family:'DM Sans',sans-serif;font-size:.8rem;padding:7px 18px;border-radius:6px;cursor:pointer;white-space:nowrap;transition:background .2s;">Got it</button>
+<!-- TopNavBar -->
+<nav class="bg-black/60 backdrop-blur-xl docked full-width top-0 sticky z-50 tonal-shift bg-neutral-900/50 shadow-[0_20px_40px_rgba(234,179,8,0.04)]">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tighter text-white uppercase font-headline">ORTHONODE</span>
+<span class="text-xl font-bold tracking-tighter text-yellow-500 uppercase font-headline">INVARIANT</span>
 </div>
-<script>
-(function(){
-  if(localStorage.getItem('orthonode_cc')==='1') return;
-  var bar=document.getElementById('cookie-bar');
-  if(bar){bar.style.display='flex';}
-})();
-function dismissCookieBar(){
-  localStorage.setItem('orthonode_cc','1');
-  var bar=document.getElementById('cookie-bar');
-  if(bar){bar.style.opacity='0';bar.style.transition='opacity .3s';setTimeout(function(){bar.style.display='none';},300);}
-}
-</script>
-
-</body>
-</html>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-yellow-500 border-b-2 border-yellow-500 pb-1 font-mono text-sm" href="#">Network</a>
+<a class="text-neutral-400 font-mono hover:text-white transition-colors text-sm" href="#">Lending</a>
+<a class="text-neutral-400 font-mono hover:text-white transition-colors text-sm" href="#">Governance</a>
+<a class="text-neutral-400 font-mono hover:text-white transition-colors text-sm" href="#">Security</a>
+</div>
+<button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-lg font-mono text-xs font-bold hover:scale-95 transition-transform duration-300">
+                Connect Wallet
+            </button>
+</div>
+</nav>
+<main class="relative">
+<!-- Hero Section -->
+<section class="pt-32 pb-20 px-8 max-w-screen-2xl mx-auto overflow-hidden">
+<div class="relative z-10">
+<div class="flex flex-wrap gap-3 mb-8">
+<span class="bg-surface-container-high px-3 py-1 text-[10px] font-mono tracking-widest text-primary border border-outline-variant/30 rounded-lg">PHASE 1 COMPLETE</span>
+<span class="bg-surface-container-high px-3 py-1 text-[10px] font-mono tracking-widest text-on-surface-variant border border-outline-variant/30 rounded-lg">BITTENSOR TAO</span>
+<span class="bg-surface-container-high px-3 py-1 text-[10px] font-mono tracking-widest text-on-surface-variant border border-outline-variant/30 rounded-lg">NTS SCORING</span>
+</div>
+<h1 class="text-[12vw] md:text-[10rem] leading-[0.85] font-headline text-primary mb-8 tracking-tighter text-shadow-gold">
+                    INVARIANT
+                </h1>
+<div class="max-w-4xl">
+<h2 class="text-3xl md:text-5xl font-headline text-white mb-6 uppercase leading-tight">
+                        Node Trust Score Protocol on Bittensor
+                    </h2>
+<p class="text-xl text-on-surface-variant font-body font-light mb-10 max-w-2xl">
+                        Deterministic AI execution receipts with 0–100 NTS scoring — 9,000+ receipts per second throughput on Bittensor subnet.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-headline text-lg hover:scale-105 transition-transform flex items-center gap-2">
+                            Explore Subnet <span class="material-symbols-outlined">north_east</span>
+</button>
+<button class="border border-white/10 hover:bg-surface-container-highest transition-all px-8 py-4 rounded-lg font-headline text-lg flex items-center gap-2">
+                            GitHub <span class="material-symbols-outlined">code</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Background Aesthetic -->
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
+<div class="w-full h-full bg-gradient-to-l from-primary/20 to-transparent blur-[120px]"></div>
+</div>
+</section>
+<!-- Key Metrics Bento -->
+<section class="px-8 pb-32 max-w-screen-2xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="glass-card p-8 rounded-xl flex flex-col justify-between aspect-square md:aspect-auto h-64">
+<span class="text-primary material-symbols-outlined text-4xl">speed</span>
+<div>
+<div class="text-4xl font-headline text-white">9K+</div>
+<div class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">Receipts/Sec</div>
+</div>
+</div>
+<div class="glass-card p-8 rounded-xl flex flex-col justify-between h-64">
+<span class="text-primary material-symbols-outlined text-4xl">analytics</span>
+<div>
+<div class="text-4xl font-headline text-white">0–100</div>
+<div class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">NTS Score Range</div>
+</div>
+</div>
+<div class="glass-card p-8 rounded-xl flex flex-col justify-between h-64">
+<span class="text-primary material-symbols-outlined text-4xl">verified</span>
+<div>
+<div class="text-4xl font-headline text-white">21</div>
+<div class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">Tests Passing</div>
+</div>
+</div>
+<div class="glass-card p-8 rounded-xl flex flex-col justify-between h-64 bg-primary-container/10">
+<span class="text-primary material-symbols-outlined text-4xl">check_circle</span>
+<div>
+<div class="text-4xl font-headline text-white">CORE</div>
+<div class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">Phase 1 Complete</div>
+</div>
+</div>
+</div>
+</section>
+<!-- NTS Score System -->
+<section class="px-8 pb-32 max-w-screen-2xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div>
+<span class="font-mono text-primary text-xs tracking-widest uppercase mb-4 block">Deterministic Trust</span>
+<h2 class="text-5xl md:text-7xl font-headline text-white mb-8 leading-none">NTS SCORING ALGORITHM</h2>
+<p class="text-on-surface-variant text-lg font-light leading-relaxed mb-12">
+                        The Node Trust Score (NTS) is a mathematical representation of a node's computational integrity. Every AI execution generates a cryptographic receipt that is cross-verified across the Bittensor network.
+                    </p>
+<div class="space-y-6">
+<div class="flex items-center gap-6 p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-lg bg-error/10 flex items-center justify-center text-error font-mono">0-30</div>
+<div>
+<h4 class="font-headline text-white text-lg">Untrusted</h4>
+<p class="text-on-surface-variant text-sm font-mono">High latency, checksum failures, execution mismatch.</p>
+</div>
+</div>
+<div class="flex items-center gap-6 p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-lg bg-yellow-500/10 flex items-center justify-center text-yellow-500 font-mono">31-60</div>
+<div>
+<h4 class="font-headline text-white text-lg">Neutral</h4>
+<p class="text-on-surface-variant text-sm font-mono">Intermittent verification, low stake participation.</p>
+</div>
+</div>
+<div class="flex items-center gap-6 p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
+<div class="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center text-green-500 font-mono">61-85</div>
+<div>
+<h4 class="font-headline text-white text-lg">Trusted</h4>
+<p class="text-on-surface-variant text-sm font-mono">Consistent uptime, deterministic proof alignment.</p>
+</div>
+</div>
+<div class="flex items-center gap-6 p-4 rounded-xl bg-primary/5 border border-primary/20 group shadow-[0_0_20px_rgba(234,179,8,0.05)]">
+<div class="w-12 h-12 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-mono font-bold">86+</div>
+<div>
+<h4 class="font-headline text-primary text-lg">Verified Elite</h4>
+<p class="text-on-surface-variant text-sm font-mono">Perfect cryptographic history, high TAO incentive.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative flex justify-center items-center">
+<div class="relative w-full aspect-square max-w-md">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 200 200">
+<!-- Background Gauge -->
+<circle cx="100" cy="100" fill="none" r="80" stroke="#1B1B1B" stroke-dasharray="377" stroke-dashoffset="125" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Active Gauge (Animated feel) -->
+<circle class="drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]" cx="100" cy="100" fill="none" r="80" stroke="#EAB308" stroke-dasharray="310" stroke-dashoffset="125" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center pt-8">
+<span class="text-7xl font-headline text-white tracking-tighter">98.4</span>
+<span class="font-mono text-primary text-sm tracking-widest">CURRENT AVG NTS</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Architecture -->
+<section class="px-8 pb-32 max-w-screen-2xl mx-auto">
+<h3 class="text-4xl font-headline text-white mb-16 text-center uppercase tracking-tighter">Protocol Architecture</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-surface-container-low p-10 rounded-xl hover:bg-surface-container-high transition-all duration-500">
+<div class="mb-10 text-primary">
+<span class="material-symbols-outlined text-5xl">layers</span>
+</div>
+<h4 class="text-2xl font-headline text-white mb-4">Execution Layer</h4>
+<p class="text-on-surface-variant font-light leading-relaxed">AI task submission gateway. Handles deterministic model output generation with sandboxed execution environments.</p>
+</div>
+<div class="bg-surface-container-low p-10 rounded-xl hover:bg-surface-container-high transition-all duration-500">
+<div class="mb-10 text-primary">
+<span class="material-symbols-outlined text-5xl">receipt_long</span>
+</div>
+<h4 class="text-2xl font-headline text-white mb-4">Receipt Layer</h4>
+<p class="text-on-surface-variant font-light leading-relaxed">Cryptographic receipt generation. Utilizes the NTS algorithm to verify execution proofs in real-time.</p>
+</div>
+<div class="bg-surface-container-low p-10 rounded-xl hover:bg-surface-container-high transition-all duration-500">
+<div class="mb-10 text-primary">
+<span class="material-symbols-outlined text-5xl">hub</span>
+</div>
+<h4 class="text-2xl font-headline text-white mb-4">Bittensor Layer</h4>
+<p class="text-on-surface-variant font-light leading-relaxed">Direct subnet integration. Manages TAO incentive alignment and validator consensus protocol.</p>
+</div>
+</div>
+</section>
+<!-- Phase Roadmap -->
+<section class="px-8 pb-32 max-w-screen-2xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="relative p-8 rounded-xl bg-surface-container-low border border-primary/20">
+<span class="font-mono text-primary text-[10px] uppercase mb-4 block">Phase 1</span>
+<h5 class="text-white font-headline text-xl mb-4">Core NTS</h5>
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-mono text-[10px] uppercase">Done</span>
+</div>
+</div>
+<div class="relative p-8 rounded-xl glass-card">
+<span class="font-mono text-on-surface-variant text-[10px] uppercase mb-4 block">Phase 2</span>
+<h5 class="text-white font-headline text-xl mb-4">Subnet Reg</h5>
+<div class="flex items-center gap-2 text-yellow-500">
+<span class="material-symbols-outlined text-sm">charging_station</span>
+<span class="font-mono text-[10px] uppercase">Active</span>
+</div>
+</div>
+<div class="relative p-8 rounded-xl glass-card opacity-60">
+<span class="font-mono text-on-surface-variant text-[10px] uppercase mb-4 block">Phase 3</span>
+<h5 class="text-white font-headline text-xl mb-4">Validator Intel</h5>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="font-mono text-[10px] uppercase">Pending</span>
+</div>
+</div>
+<div class="relative p-8 rounded-xl glass-card opacity-60">
+<span class="font-mono text-on-surface-variant text-[10px] uppercase mb-4 block">Phase 4</span>
+<h5 class="text-white font-headline text-xl mb-4">Cross-chain</h5>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">lock</span>
+<span class="font-mono text-[10px] uppercase">Locked</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Tech Stack -->
+<section class="bg-surface-container-lowest py-24 px-8">
+<div class="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+<div class="max-w-md">
+<h3 class="text-3xl font-headline text-white mb-4">ENGINEERED FOR SOVEREIGNTY</h3>
+<p class="text-on-surface-variant font-body">The protocol is built with low-level systems languages to ensure maximum performance and deterministic safety.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-8">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-mono text-white text-sm">Rust</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-mono text-white text-sm">Bittensor SDK</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-mono text-white text-sm">NTS Algorithm</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-mono text-white text-sm">Async Processing</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-mono text-white text-sm">Merkle Receipts</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="font-mono text-white text-sm">WASM Runtime</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-black full-width py-20 border-t border-neutral-900 tonal-shift surface-container-low">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 px-8 max-w-screen-2xl mx-auto items-end">
+<div>
+<div class="text-lg font-black text-white mb-4 font-headline uppercase">ORTHONODE SYSTEMS</div>
+<p class="font-mono text-sm text-neutral-500 mb-8 max-w-sm">Sovereign Infrastructure for the decentralized intelligence layer.</p>
+<p class="font-mono text-[10px] text-neutral-700 uppercase tracking-widest">© 2024 ORTHONODE SYSTEMS. Sovereign Infrastructure.</p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-4 md:justify-end">
+<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="#">Protocol Docs</a>
+<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="#">Smart Contracts</a>
+<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="#">Audit Reports</a>
+<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="#">GitHub</a>
+<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="#">Status</a>
+<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="#">Terms</a>
+</div>
+</div>
+</footer>
+</body></html>

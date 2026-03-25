@@ -1,0 +1,22 @@
+{
+  "name": "projects/6750793866077486664",
+  "projectId": "6750793866077486664",
+  "title": "ORTHONODE SYSTEMS™",
+  "visibility": "PRIVATE",
+  "createTime": "2026-03-25T17:46:00.722509Z",
+  "updateTime": "2026-03-25T17:46:00.722509Z",
+  "projectType": "PROJECT_DESIGN",
+  "origin": "STITCH",
+  "deviceType": "DESKTOP",
+  "designTheme": {
+    "colorMode": "DARK",
+    "font": "INTER",
+    "roundness": "ROUND_EIGHT",
+    "customColor": "#E6007A",
+    "saturation": 3
+  },
+  "screens": {},
+  "metadata": {
+    "userRole": "OWNER"
+  }
+}
