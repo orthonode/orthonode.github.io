@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MANTIS — AI Prediction Market Intelligence</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="MANTIS is an autonomous Polymarket AI trading agent. Triple-AI consensus pipeline (Groq + Gemini + Claude). Rust + Tokio runtime. Multi-strategy: market making, new-market entry, AI taker, internal arb.">
+<meta name="keywords" content="MANTIS, Polymarket AI, prediction market trading, autonomous trading agent, Triple-AI consensus, Groq Gemini Claude, Rust trading bot, DeFi AI">
+<meta name="author" content="Arhant Barmate">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://orthonode.xyz/mantis.html">
+<meta name="geo.region" content="IN-MP">
+<meta name="geo.placename" content="Bhopal, Madhya Pradesh, India">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://orthonode.xyz/mantis.html">
+<meta property="og:title" content="MANTIS — Autonomous Polymarket AI Trading Agent | ORTHONODE SYSTEMS™">
+<meta property="og:description" content="Triple-AI consensus pipeline. Rust + Tokio. Multi-strategy autonomous prediction market trading. Code complete, running on DigitalOcean London.">
+<meta property="og:image" content="https://orthonode.xyz/banner.png">
+<meta property="og:site_name" content="ORTHONODE SYSTEMS™">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@OrthonodeSys">
+<meta name="twitter:title" content="MANTIS — Autonomous Polymarket AI Trading Agent | ORTHONODE SYSTEMS™">
+<meta name="twitter:description" content="Triple-AI consensus pipeline. Rust + Tokio. Multi-strategy autonomous prediction market trading.">
+<meta name="twitter:image" content="https://orthonode.xyz/banner.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"MANTIS","applicationCategory":"FinanceApplication","operatingSystem":"Rust/Tokio","description":"Autonomous Polymarket AI trading agent with Triple-AI consensus pipeline (Groq + Gemini + Claude). Multi-strategy: market making, new-market entry, AI taker, internal arb scanner.","author":{"@type":"Person","name":"Arhant Barmate"},"publisher":{"@type":"Organization","name":"ORTHONODE SYSTEMS™","url":"https://orthonode.xyz"}}
+</script>
+<meta name="theme-color" content="#020208">
+<link rel="icon" type="image/png" href="/site-logo.png">
+<link rel="apple-touch-icon" href="/site-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#020208;--bg2:#06060f;--bg3:#0a0a1c;
+  --green:#00ff88;--green2:rgba(0,255,136,.12);--green3:rgba(0,255,136,.06);
+  --cyan:#00d4ff;--cyan2:rgba(0,212,255,.12);
+  --gold:#f5a800;--gold2:rgba(245,168,0,.1);
+  --purple:#8b5cf6;--red:#ff4466;
+  --text:#eef2ff;--text2:#c4cde8;--muted:#6b7a99;
+  --glass:rgba(255,255,255,.028);--glass2:rgba(255,255,255,.055);
+  --border:rgba(255,255,255,.055);--border2:rgba(255,255,255,.1);
+  --r:16px;--r-sm:10px;--r-lg:24px;
+}
+html{scroll-behavior:smooth;cursor:none}
+/* ── CUSTOM CURSOR ── */
+.c-cursor{width:12px;height:12px;background:#fff;border-radius:50%;position:fixed;top:0;left:0;transform:translate(-50%,-50%);pointer-events:none;z-index:999999;mix-blend-mode:difference;transition:width .2s,height .2s}
+.c-cursor.is-hover{width:44px;height:44px}
+@media(hover:none){html{cursor:auto}.c-cursor{display:none}}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── NOISE GRAIN ── */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");opacity:.025;pointer-events:none;z-index:9999;mix-blend-mode:overlay}
+
+/* ── AURORA BLOBS ── */
+.aurora{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.blob{position:absolute;border-radius:50%;filter:blur(120px);opacity:.12;animation:float 20s ease-in-out infinite}
+.blob-1{width:700px;height:700px;background:radial-gradient(circle,var(--green),transparent 70%);top:-200px;left:-200px;animation-delay:0s;animation-duration:18s}
+.blob-2{width:600px;height:600px;background:radial-gradient(circle,var(--cyan),transparent 70%);top:30%;right:-150px;animation-delay:-6s;animation-duration:22s}
+.blob-3{width:500px;height:500px;background:radial-gradient(circle,var(--purple),transparent 70%);bottom:-100px;left:30%;animation-delay:-12s;animation-duration:26s}
+.blob-4{width:400px;height:400px;background:radial-gradient(circle,var(--gold),transparent 70%);top:60%;left:10%;animation-delay:-9s;animation-duration:20s;opacity:.07}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,-40px) scale(1.08)}66%{transform:translate(-40px,50px) scale(.94)}}
+
+/* ── GRID OVERLAY ── */
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:80px 80px;opacity:.3;pointer-events:none;z-index:1;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%)}
+
+
+/* ── LOADER ── */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:99998;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+.loader-logo{font-family:'Orbitron',monospace;font-size:clamp(36px,6vw,72px);font-weight:900;letter-spacing:.15em;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.loader-bar-wrap{width:280px;height:2px;background:var(--border2);border-radius:2px;overflow:hidden}
+.loader-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:2px;transition:width .05s linear}
+.loader-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 40px;height:72px;display:flex;align-items:center;justify-content:space-between;background:rgba(2,2,8,.7);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:all .3s}
+.nav-logo{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;letter-spacing:.12em;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:none}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:.06em;transition:color .2s;cursor:none}
+.nav-links a:hover{color:var(--text)}
+.nav-pill{background:var(--green2);border:1px solid rgba(0,255,136,.25);color:var(--green);padding:8px 20px;border-radius:40px;font-size:13px;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:.04em;cursor:none;transition:all .25s}
+.nav-pill:hover{background:var(--green);color:#000;box-shadow:0 0 24px rgba(0,255,136,.4)}
+.nav-status{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);letter-spacing:.08em}
+.status-dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+/* ── HERO ── */
+#hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 80px 80px;overflow:hidden;z-index:2}
+.hero-left{display:flex;flex-direction:column;gap:28px;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:var(--green2);border:1px solid rgba(0,255,136,.2);color:var(--green);padding:8px 16px;border-radius:40px;font-size:12px;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:.1em;width:fit-content}
+.hero-badge svg{width:14px;height:14px}
+h1.hero-h1{font-family:'Orbitron',monospace;font-size:clamp(56px,7vw,110px);font-weight:900;line-height:1.0;letter-spacing:-0.02em}
+h1.hero-h1 .line1{display:block;background:linear-gradient(135deg,#fff 0%,var(--text2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+h1.hero-h1 .line2{display:block;background:linear-gradient(135deg,var(--green) 0%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(16px,1.4vw,20px);color:var(--muted);max-width:480px;line-height:1.7;font-weight:300}
+.hero-metrics{display:flex;gap:32px;padding:24px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.hm{display:flex;flex-direction:column;gap:4px}
+.hm-val{font-family:'Orbitron',monospace;font-size:26px;font-weight:700;color:var(--green)}
+.hm-label{font-size:12px;color:var(--muted);letter-spacing:.08em;font-family:'JetBrains Mono',monospace}
+.hero-ctas{display:flex;gap:16px;align-items:center}
+.btn-primary{background:linear-gradient(135deg,var(--green),#00cc6e);color:#000;font-weight:700;font-size:14px;padding:14px 28px;border-radius:40px;border:none;cursor:none;letter-spacing:.04em;transition:all .25s;box-shadow:0 0 0 rgba(0,255,136,0)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,255,136,.35)}
+.btn-ghost{background:var(--glass2);border:1px solid var(--border2);color:var(--text2);font-size:14px;font-weight:500;padding:13px 28px;border-radius:40px;cursor:none;letter-spacing:.04em;transition:all .25s}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* Hero right - mantis */
+.hero-right{display:flex;align-items:center;justify-content:center;position:relative;z-index:2}
+#mantis-wrap{position:relative;width:340px;height:420px}
+.mantis-ring{position:absolute;border-radius:50%;border:1px solid;animation:spin-ring linear infinite}
+.ring1{width:380px;height:380px;border-color:rgba(0,255,136,.12);top:50%;left:50%;transform:translate(-50%,-50%);animation-duration:40s}
+.ring2{width:300px;height:300px;border-color:rgba(0,212,255,.1);top:50%;left:50%;transform:translate(-50%,-50%);animation-duration:28s;animation-direction:reverse}
+.ring3{width:220px;height:220px;border-color:rgba(139,92,246,.1);top:50%;left:50%;transform:translate(-50%,-50%);animation-duration:18s}
+@keyframes spin-ring{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.ring1::before,.ring2::before{content:'';position:absolute;width:8px;height:8px;border-radius:50%;top:0;left:50%;transform:translateX(-50%)}
+.ring1::before{background:var(--green);box-shadow:0 0 16px var(--green)}
+.ring2::before{background:var(--cyan);box-shadow:0 0 16px var(--cyan)}
+#mantis-svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:240px;height:312px;filter:drop-shadow(0 0 30px rgba(0,255,136,.4)) drop-shadow(0 0 60px rgba(0,255,136,.15));overflow:visible}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2}
+.scroll-line{width:1px;height:60px;background:linear-gradient(var(--green),transparent);animation:scroll-drop 1.8s ease-in-out infinite}
+.scroll-txt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.2em;text-transform:uppercase}
+@keyframes scroll-drop{0%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1}100%{opacity:0;transform:scaleY(1);transform-origin:top}}
+
+/* ── TICKER ── */
+.ticker-wrap{position:relative;z-index:2;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(0,255,136,.03);padding:14px 0}
+.ticker-track{display:flex;gap:0;white-space:nowrap;animation:ticker 28s linear infinite}
+.ticker-item{display:inline-flex;align-items:center;gap:10px;padding:0 40px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);border-right:1px solid var(--border)}
+.ticker-item span.lbl{color:var(--muted)}
+.ticker-item span.val{color:var(--text2);font-weight:500}
+.ticker-item span.pos{color:var(--green)}
+.ticker-item span.neg{color:var(--red)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTIONS BASE ── */
+section{position:relative;z-index:2;padding:120px 80px}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);letter-spacing:.25em;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.section-label::before{content:'';width:24px;height:1px;background:var(--green)}
+h2.section-h2{font-family:'Syne',sans-serif;font-size:clamp(32px,3.5vw,56px);font-weight:800;line-height:1.1;margin-bottom:20px}
+h2.section-h2 .hl{background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section-desc{font-size:18px;color:var(--muted);max-width:580px;line-height:1.7;margin-bottom:60px;font-weight:300}
+
+/* ── METRICS GRID ── */
+#metrics{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.metric-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r-lg);padding:32px 28px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;transform-style:preserve-3d;cursor:none}
+.metric-card::before{content:'';position:absolute;inset:0;border-radius:var(--r-lg);opacity:0;transition:opacity .3s}
+.metric-card.green::before{background:radial-gradient(circle at 30% 30%,rgba(0,255,136,.08),transparent 60%)}
+.metric-card.cyan::before{background:radial-gradient(circle at 30% 30%,rgba(0,212,255,.08),transparent 60%)}
+.metric-card.gold::before{background:radial-gradient(circle at 30% 30%,rgba(245,168,0,.08),transparent 60%)}
+.metric-card.purple::before{background:radial-gradient(circle at 30% 30%,rgba(139,92,246,.08),transparent 60%)}
+.metric-card:hover{transform:translateY(-4px);box-shadow:0 0 30px rgba(0,255,136,.12)}
+.metric-card:hover::before{opacity:1}
+.metric-card:hover.green{border-color:rgba(0,255,136,.3)}
+.metric-card:hover.cyan{border-color:rgba(0,212,255,.3)}
+.metric-card:hover.gold{border-color:rgba(245,168,0,.3)}
+.metric-card:hover.purple{border-color:rgba(139,92,246,.3)}
+.mc-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.mc-icon.green{background:rgba(0,255,136,.1);color:var(--green)}
+.mc-icon.cyan{background:rgba(0,212,255,.1);color:var(--cyan)}
+.mc-icon.gold{background:rgba(245,168,0,.1);color:var(--gold)}
+.mc-icon.purple{background:rgba(139,92,246,.1);color:var(--purple)}
+.mc-val{font-family:'Orbitron',monospace;font-size:40px;font-weight:700;line-height:1;margin-bottom:8px;display:flex;align-items:baseline;gap:6px}
+.mc-val.green{color:var(--green)}
+.mc-val.cyan{color:var(--cyan)}
+.mc-val.gold{color:var(--gold)}
+.mc-val.purple{color:var(--purple)}
+.mc-sfx{font-size:22px;opacity:.7}
+.mc-label{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.mc-sub{font-size:13px;color:var(--text2)}
+
+/* ── AI ENGINE ── */
+#ai-engine{background:var(--bg2)}
+.pipeline-container{display:flex;flex-direction:column;gap:16px;position:relative}
+.pipeline-container::before{content:'';position:absolute;left:36px;top:60px;bottom:60px;width:1px;background:linear-gradient(var(--green),var(--cyan),var(--purple));opacity:.3}
+.pnode{display:grid;grid-template-columns:72px 1fr;gap:0;align-items:start;opacity:0;transform:translateX(-20px)}
+.pnode-icon{width:72px;display:flex;flex-direction:column;align-items:center;gap:8px;padding-top:20px}
+.pnode-circle{width:44px;height:44px;border-radius:50%;border:1px solid;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.05em}
+.pnode-circle.pre{border-color:var(--gold);color:var(--gold);background:rgba(245,168,0,.08)}
+.pnode-circle.res{border-color:var(--cyan);color:var(--cyan);background:rgba(0,212,255,.08)}
+.pnode-circle.orc{border-color:var(--purple);color:var(--purple);background:rgba(139,92,246,.08)}
+.pnode-circle.trade{border-color:var(--green);color:var(--green);background:rgba(0,255,136,.08)}
+.pnode-body{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px;margin-left:8px;margin-bottom:16px;transition:border-color .3s}
+.pnode-body:hover{border-color:var(--border2)}
+.pnode-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.pnode-name{font-family:'Syne',sans-serif;font-size:18px;font-weight:700}
+.pnode-thresh{font-family:'JetBrains Mono',monospace;font-size:12px;padding:4px 12px;border-radius:20px}
+.pnode-thresh.pre{background:rgba(245,168,0,.1);color:var(--gold);border:1px solid rgba(245,168,0,.2)}
+.pnode-thresh.res{background:rgba(0,212,255,.1);color:var(--cyan);border:1px solid rgba(0,212,255,.2)}
+.pnode-thresh.orc{background:rgba(139,92,246,.1);color:var(--purple);border:1px solid rgba(139,92,246,.2)}
+.pnode-thresh.trade{background:rgba(0,255,136,.1);color:var(--green);border:1px solid rgba(0,255,136,.2)}
+.pnode-desc{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.pnode-model{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2);background:var(--bg3);padding:6px 12px;border-radius:6px;display:inline-block}
+.pnode-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.ptag{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted);background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:4px;padding:3px 9px}
+
+/* ── BACKTEST ── */
+#backtest{background:var(--bg)}
+.backtest-grid{display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:start}
+.win-rate-wrap{display:flex;flex-direction:column;align-items:center;gap:20px}
+.win-donut{position:relative;width:220px;height:220px}
+.win-donut svg{transform:rotate(-90deg)}
+.donut-track{fill:none;stroke:rgba(255,255,255,.06);stroke-width:16}
+.donut-fill{fill:none;stroke:url(#donutGrad);stroke-width:16;stroke-linecap:round;stroke-dasharray:566;stroke-dashoffset:566;transition:stroke-dashoffset 2s cubic-bezier(.4,0,.2,1)}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.donut-pct{font-family:'Orbitron',monospace;font-size:36px;font-weight:900;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.donut-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
+.win-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
+.ws-item{background:var(--glass);border:1px solid var(--border);border-radius:var(--r-sm);padding:16px;text-align:center}
+.ws-val{font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:var(--text)}
+.ws-lbl{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.08em;margin-top:4px}
+
+/* Category bars */
+.cat-bars{display:flex;flex-direction:column;gap:20px}
+.cat-bar-item{display:flex;flex-direction:column;gap:8px}
+.cat-bar-head{display:flex;align-items:center;justify-content:space-between}
+.cat-bar-name{font-size:13px;color:var(--text2);font-weight:500}
+.cat-bar-val{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600}
+.cat-bar-track{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.cat-bar-fill{height:100%;border-radius:3px;width:0%;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+
+/* P&L Table */
+.pnl-table-wrap{margin-top:60px}
+.pnl-table{width:100%;border-collapse:collapse}
+.pnl-table th{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;padding:12px 20px;text-align:left;border-bottom:1px solid var(--border)}
+.pnl-table td{padding:16px 20px;border-bottom:1px solid var(--border);font-size:14px;color:var(--text2)}
+.pnl-table tr:hover td{background:rgba(255,255,255,.02)}
+.pnl-table td.month{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:13px}
+.pnl-table td.cons{color:var(--text2)}
+.pnl-table td.target{color:var(--green);font-weight:600}
+.pnl-table td.stretch{color:var(--cyan)}
+
+/* ── STRATEGY TERMINAL ── */
+#strategy{background:var(--bg2)}
+.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.terminal{background:#010108;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;font-family:'JetBrains Mono',monospace}
+.terminal-bar{background:rgba(255,255,255,.04);padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
+.tb-dot{width:10px;height:10px;border-radius:50%}
+.tb-dot:nth-child(1){background:#ff5f57}
+.tb-dot:nth-child(2){background:#ffbd2e}
+.tb-dot:nth-child(3){background:#28c840}
+.terminal-title{font-size:11px;color:var(--muted);letter-spacing:.1em;margin-left:8px}
+.terminal-body{padding:24px;font-size:13px;line-height:2;color:var(--text2)}
+.t-comment{color:#4b5563}
+.t-key{color:var(--cyan)}
+.t-val{color:var(--green)}
+.t-op{color:var(--muted)}
+.t-num{color:var(--gold)}
+.t-str{color:var(--purple)}
+
+/* ── RISK ── */
+#risk{background:var(--bg)}
+.risk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.risk-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:24px;display:flex;gap:16px;align-items:flex-start;transition:border-color .25s,background .25s;cursor:none}
+.risk-card:hover{border-color:rgba(255,68,102,.25);background:rgba(255,68,102,.03);box-shadow:0 0 30px rgba(0,255,136,.12)}
+.risk-num{font-family:'Orbitron',monospace;font-size:32px;font-weight:900;color:rgba(255,255,255,.06);line-height:1;min-width:48px}
+.risk-content{flex:1}
+.risk-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.risk-desc{font-size:13px;color:var(--muted);line-height:1.6}
+.risk-amount{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--red);font-weight:600;margin-top:8px}
+
+/* ── ARCHITECTURE ── */
+#architecture{background:var(--bg2)}
+.arch-diagram{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
+.arch-col{display:flex;flex-direction:column;gap:12px;align-items:center}
+.arch-col-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px;padding:6px 16px;background:var(--glass);border:1px solid var(--border);border-radius:20px}
+.arch-node{background:var(--glass);border:1px solid var(--border);border-radius:var(--r-sm);padding:14px 18px;text-align:center;width:100%;transition:border-color .25s,transform .25s;cursor:none}
+.arch-node:hover{transform:translateY(-3px)}
+.arch-node.data:hover{border-color:rgba(0,212,255,.3)}
+.arch-node.signal:hover{border-color:rgba(139,92,246,.3)}
+.arch-node.exec:hover{border-color:rgba(0,255,136,.3)}
+.arch-node-title{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;margin-bottom:4px}
+.arch-node.data .arch-node-title{color:var(--cyan)}
+.arch-node.signal .arch-node-title{color:var(--purple)}
+.arch-node.exec .arch-node-title{color:var(--green)}
+.arch-node-sub{font-size:11px;color:var(--muted);line-height:1.4}
+.arch-arrows{position:absolute;inset:0;pointer-events:none}
+
+/* ── ROADMAP ── */
+#roadmap{background:var(--bg)}
+.roadmap-track{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.roadmap-track::before{content:'';position:absolute;top:28px;left:60px;right:60px;height:1px;background:linear-gradient(90deg,var(--green),var(--cyan),var(--purple),rgba(139,92,246,.2));opacity:.3}
+.rm-item{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.rm-dot{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid;position:relative;z-index:1}
+.rm-dot.done{background:var(--green2);border-color:rgba(0,255,136,.4);color:var(--green)}
+.rm-dot.active{background:var(--cyan2);border-color:rgba(0,212,255,.4);color:var(--cyan);box-shadow:0 0 20px rgba(0,212,255,.25)}
+.rm-dot.soon{background:var(--glass);border-color:var(--border);color:var(--muted)}
+.rm-dot svg{width:22px;height:22px}
+.rm-phase{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase}
+.rm-phase.done{color:var(--green)}
+.rm-phase.active{color:var(--cyan)}
+.rm-phase.soon{color:var(--muted)}
+.rm-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text)}
+.rm-desc{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ── CONTACT ── */
+#contact{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%)}
+.contact-inner{max-width:680px;margin:0 auto;text-align:center}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px}
+.contact-card{background:var(--glass);border:1px solid var(--border);border-radius:var(--r);padding:28px;text-align:left;transition:border-color .25s,transform .25s;cursor:none}
+.contact-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 0 30px rgba(0,255,136,.12)}
+.contact-card-icon{color:var(--green);margin-bottom:12px}
+.contact-card-label{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.1em;margin-bottom:6px}
+.contact-card-val{font-size:14px;color:var(--text2);font-weight:500}
+.contact-card-val a{color:inherit;text-decoration:none;transition:color .2s;cursor:none}
+.contact-card-val a:hover{color:var(--green)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-items:center;justify-content:space-between;z-index:2;position:relative}
+.footer-logo{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;letter-spacing:.15em;background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.footer-right{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.08em;text-align:right;line-height:1.8}
+
+/* ── DIVIDER ── */
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:0 80px;position:relative;z-index:2}
+
+/* ── REVEAL BASE ── */
+.reveal{opacity:0;transform:translateY(30px)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  #hero{grid-template-columns:1fr;padding:100px 40px 60px;text-align:center}
+  .hero-right{display:none}
+  .hero-metrics{justify-content:center}
+  .hero-ctas{justify-content:center}
+  section{padding:80px 40px}
+  .metrics-grid{grid-template-columns:repeat(2,1fr)}
+  .backtest-grid{grid-template-columns:1fr}
+  .strategy-grid{grid-template-columns:1fr}
+  .arch-diagram{grid-template-columns:1fr}
+  .roadmap-track{grid-template-columns:repeat(2,1fr)}
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  footer{flex-direction:column;gap:16px;text-align:center;padding:32px 40px}
+  .footer-right{text-align:center}
+}
+@media(max-width:640px){
+  .metrics-grid{grid-template-columns:1fr}
+  .risk-grid{grid-template-columns:1fr}
+  .contact-grid{grid-template-columns:1fr}
+  .roadmap-track{grid-template-columns:1fr}
+  .hero-metrics{flex-direction:column;gap:16px}
+  section{padding:60px 24px}
+  .section-divider{margin:0 24px}
+  footer{padding:24px}
+}
+</style>
+</head>
+<body>
+
+<!-- Aurora -->
+<div class="aurora" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+</div>
+
+<!-- Grid -->
+<div class="grid-bg" aria-hidden="true"></div>
+
+<!-- Custom cursor -->
+<div class="c-cursor" id="cCursor"></div>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-logo" id="loaderLogo">MANTIS</div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+  <div class="loader-label" id="loaderLabel">INITIALISING SIGNAL ENGINE</div>
+</div>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="nav-logo">MANTIS</div>
+  <div class="nav-links">
+    <a href="#ai-engine">AI Engine</a>
+    <a href="#backtest">Backtest</a>
+    <a href="#strategy">Strategy</a>
+    <a href="#risk">Risk</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#contact" class="nav-pill">Contact</a>
+  </div>
+  <div class="nav-status">
+    <div class="status-dot"></div>
+    LIVE · LONDON
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="particle-canvas" style="position:absolute;inset:0;z-index:0;pointer-events:none"></canvas>
+
+  <div class="hero-left">
+    <div class="hero-badge" id="heroBadge">
+      <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="3" fill="currentColor"/><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5" opacity=".4"/></svg>
+      APEX PREDATOR · POLYMARKET · LONDON
+    </div>
+
+    <h1 class="hero-h1" id="heroH1">
+      <span class="line1">HUNT.</span>
+      <span class="line2">STRIKE. WIN.</span>
+    </h1>
+
+    <p class="hero-sub" id="heroSub">In a jungle of predatory markets, MANTIS waits perfectly still. Pre-screen filters the noise, Oracle locks the edge. One precise strike.</p>
+
+    <div class="hero-metrics" id="heroMetrics">
+      <div class="hm">
+        <div class="hm-val" data-count="71.6" data-sfx="%">0%</div>
+        <div class="hm-label">Win Rate</div>
+      </div>
+      <div class="hm">
+        <div class="hm-val" data-count="194">0</div>
+        <div class="hm-label">Markets Backtested</div>
+      </div>
+      <div class="hm">
+        <div class="hm-val" data-count="2">0</div>
+        <div class="hm-label">AI Pipeline Stages</div>
+      </div>
+    </div>
+
+    <div class="hero-ctas" id="heroCtas">
+      <button class="btn-primary" onclick="document.getElementById('backtest').scrollIntoView({behavior:'smooth'})">View Backtest Results</button>
+      <button class="btn-ghost" onclick="document.getElementById('ai-engine').scrollIntoView({behavior:'smooth'})">Explore AI Engine</button>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div id="mantis-wrap">
+      <div class="mantis-ring ring1"></div>
+      <div class="mantis-ring ring2"></div>
+      <div class="mantis-ring ring3"></div>
+      <svg id="mantis-svg" viewBox="0 0 220 300" fill="none" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+        <defs>
+          <!-- Glow filters -->
+          <filter id="mGlow" x="-120%" y="-120%" width="340%" height="340%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="mGlowHot" x="-200%" y="-200%" width="500%" height="500%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="predGlow" x="-120%" y="-120%" width="340%" height="340%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <!-- Body gradient — top bright, fades to dim -->
+          <linearGradient id="gBody" x1="0.5" y1="0" x2="0.5" y2="1">
+            <stop offset="0%"   stop-color="#00ff88"/>
+            <stop offset="100%" stop-color="#00cc6e" stop-opacity="0.55"/>
+          </linearGradient>
+          <!-- Arm gradient — green→cyan→purple -->
+          <linearGradient id="gArm" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%"   stop-color="#00ff88"/>
+            <stop offset="58%"  stop-color="#00d4ff"/>
+            <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.75"/>
+          </linearGradient>
+          <!-- Eye fill -->
+          <radialGradient id="gEyeCore" cx="38%" cy="35%" r="65%">
+            <stop offset="0%"   stop-color="#00eeff"/>
+            <stop offset="100%" stop-color="#0044cc" stop-opacity="0.85"/>
+          </radialGradient>
+        </defs>
+
+        <!-- ── Jungle floor silhouette ── -->
+        <g opacity="0.16">
+          <path d="M 0 278 Q 12 258 26 272 Q 38 252 52 268 Q 62 246 74 264 L 74 300 L 0 300 Z" fill="#00ff88"/>
+          <path d="M 146 268 Q 158 248 170 264 Q 180 254 192 270 Q 202 254 216 270 L 220 270 L 220 300 L 146 300 Z" fill="#00ff88"/>
+          <line x1="0" y1="280" x2="74" y2="280" stroke="#00ff88" stroke-width="0.6" opacity="0.4"/>
+          <line x1="146" y1="280" x2="220" y2="280" stroke="#00ff88" stroke-width="0.6" opacity="0.4"/>
+        </g>
+
+        <!-- ══ MANTIS (whole unit tilts for dodge) ══ -->
+        <g id="m-mantis-whole">
+
+          <!-- ─ BODY (static sub-group) ─ -->
+          <g id="m-body">
+
+            <!-- ABDOMEN — segmented, tapering to tip -->
+            <path d="M 104 148 C 100 165 98 188 99 210 C 100 228 103 244 110 258 C 117 244 120 228 121 210 C 122 188 120 165 116 148 Z"
+                  fill="rgba(0,255,136,0.07)" stroke="url(#gBody)" stroke-width="1.6"/>
+            <line x1="101" y1="164" x2="119" y2="164" stroke="#00ff88" stroke-width="0.8" opacity="0.42"/>
+            <line x1="99"  y1="181" x2="121" y2="181" stroke="#00ff88" stroke-width="0.7" opacity="0.35"/>
+            <line x1="98"  y1="197" x2="122" y2="197" stroke="#00ff88" stroke-width="0.7" opacity="0.28"/>
+            <line x1="99"  y1="213" x2="121" y2="213" stroke="#00ff88" stroke-width="0.6" opacity="0.22"/>
+            <line x1="100" y1="228" x2="120" y2="228" stroke="#00ff88" stroke-width="0.6" opacity="0.16"/>
+            <!-- Centre spine line -->
+            <line x1="110" y1="148" x2="110" y2="254" stroke="#00ff88" stroke-width="0.5" opacity="0.17"/>
+            <!-- Hex segment detail -->
+            <path d="M 106 168 L 110 163 L 114 168 L 114 177 L 110 182 L 106 177 Z"
+                  fill="none" stroke="#00d4ff" stroke-width="0.6" opacity="0.28"/>
+            <!-- Tip -->
+            <path d="M 107 252 Q 110 262 113 252" stroke="#00ff88" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+
+            <!-- PROTHORAX — blade-like elongated segment -->
+            <path d="M 107 92 L 103 108 L 101 128 L 105 148 L 115 148 L 119 128 L 117 108 L 113 92 Z"
+                  fill="rgba(0,255,136,0.09)" stroke="url(#gBody)" stroke-width="1.6"/>
+            <line x1="105" y1="110" x2="115" y2="110" stroke="#00d4ff" stroke-width="0.8" opacity="0.35"/>
+            <line x1="104" y1="126" x2="116" y2="126" stroke="#00d4ff" stroke-width="0.7" opacity="0.26"/>
+            <line x1="104" y1="139" x2="116" y2="139" stroke="#00d4ff" stroke-width="0.6" opacity="0.20"/>
+            <line x1="110" y1="94"  x2="110" y2="146" stroke="#00ff88" stroke-width="0.5" opacity="0.22"/>
+
+            <!-- HEAD — angular diamond facets -->
+            <path d="M 110 50 L 133 67 L 131 87 L 110 93 L 89 87 L 87 67 Z"
+                  fill="rgba(0,255,136,0.09)" stroke="#00ff88" stroke-width="1.6"/>
+            <!-- Inner facet -->
+            <path d="M 110 58 L 126 70 L 110 82 L 94 70 Z"
+                  fill="none" stroke="#00d4ff" stroke-width="0.7" opacity="0.32"/>
+            <!-- LEFT compound eye -->
+            <circle cx="93"  cy="70" r="10.5" fill="rgba(0,180,255,0.07)" stroke="#00d4ff" stroke-width="1.5" filter="url(#mGlow)"/>
+            <circle cx="93"  cy="70" r="6.5"  fill="url(#gEyeCore)" opacity="0.88"/>
+            <circle cx="93"  cy="70" r="3"    fill="#00eeff" opacity="0.95" filter="url(#mGlow)"/>
+            <circle cx="91"  cy="68" r="1.2"  fill="white"  opacity="0.75"/>
+            <!-- RIGHT compound eye -->
+            <circle cx="127" cy="70" r="10.5" fill="rgba(0,180,255,0.07)" stroke="#00d4ff" stroke-width="1.5" filter="url(#mGlow)"/>
+            <circle cx="127" cy="70" r="6.5"  fill="url(#gEyeCore)" opacity="0.88"/>
+            <circle cx="127" cy="70" r="3"    fill="#00eeff" opacity="0.95" filter="url(#mGlow)"/>
+            <circle cx="125" cy="68" r="1.2"  fill="white"  opacity="0.75"/>
+            <!-- Antennae -->
+            <path d="M 103 55 Q 84 36 66 21" stroke="#00ff88" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.62"/>
+            <path d="M 117 55 Q 136 36 154 21" stroke="#00ff88" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.62"/>
+            <circle cx="66"  cy="21" r="2.5" fill="#00ff88" filter="url(#mGlow)" opacity="0.9"/>
+            <circle cx="154" cy="21" r="2.5" fill="#00ff88" filter="url(#mGlow)" opacity="0.9"/>
+
+            <!-- WALKING LEGS (3 pairs, delicate) -->
+            <g opacity="0.48">
+              <polyline points="101,114 72,130 55,150" stroke="#00ff88" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="119,114 148,130 165,150" stroke="#00ff88" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="102,132 70,150 54,173" stroke="#00ff88" stroke-width="1.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="118,132 150,150 166,173" stroke="#00ff88" stroke-width="1.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="103,146 74,170 59,196" stroke="#00ff88" stroke-width="1"   fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="117,146 146,170 161,196" stroke="#00ff88" stroke-width="1"   fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </g><!-- /#m-body -->
+
+          <!-- ══ RAPTORIAL ARMS — rotate independently for strike ══ -->
+
+          <!-- LEFT ARM: shoulder (100,118) → femur to (60,76) → tibia back to (80,112) -->
+          <g id="m-arm-l">
+            <circle cx="100" cy="118" r="4.5" fill="rgba(0,255,136,0.28)" stroke="#00ff88" stroke-width="1.3"/>
+            <!-- Femur (thick, up-left) -->
+            <path d="M 100 118 L 60 76" stroke="url(#gArm)" stroke-width="3.8" stroke-linecap="round"/>
+            <line x1="88" y1="110" x2="70" y2="88" stroke="#00d4ff" stroke-width="0.9" opacity="0.38"/>
+            <!-- Tibia joint -->
+            <circle cx="60" cy="76" r="3.2" fill="rgba(0,212,255,0.22)" stroke="#00d4ff" stroke-width="1"/>
+            <!-- Tibia (folds back) -->
+            <path d="M 60 76 L 80 112" stroke="url(#gArm)" stroke-width="3" stroke-linecap="round"/>
+            <!-- Spines -->
+            <line x1="65" y1="85"  x2="56"  y2="95"  stroke="#00d4ff" stroke-width="1.4" opacity="0.78" stroke-linecap="round"/>
+            <line x1="70" y1="91"  x2="61"  y2="101" stroke="#00d4ff" stroke-width="1.2" opacity="0.66" stroke-linecap="round"/>
+            <line x1="74" y1="97"  x2="65"  y2="107" stroke="#00d4ff" stroke-width="1.1" opacity="0.55" stroke-linecap="round"/>
+            <!-- Claw -->
+            <circle cx="80" cy="112" r="3.2" fill="#00d4ff" filter="url(#mGlow)" opacity="0.96"/>
+          </g>
+
+          <!-- RIGHT ARM: shoulder (120,118) → femur to (160,76) → tibia back to (140,112) -->
+          <g id="m-arm-r">
+            <circle cx="120" cy="118" r="4.5" fill="rgba(0,255,136,0.28)" stroke="#00ff88" stroke-width="1.3"/>
+            <!-- Femur -->
+            <path d="M 120 118 L 160 76" stroke="url(#gArm)" stroke-width="3.8" stroke-linecap="round"/>
+            <line x1="132" y1="110" x2="150" y2="88" stroke="#00d4ff" stroke-width="0.9" opacity="0.38"/>
+            <!-- Tibia joint -->
+            <circle cx="160" cy="76" r="3.2" fill="rgba(0,212,255,0.22)" stroke="#00d4ff" stroke-width="1"/>
+            <!-- Tibia -->
+            <path d="M 160 76 L 140 112" stroke="url(#gArm)" stroke-width="3" stroke-linecap="round"/>
+            <!-- Spines -->
+            <line x1="155" y1="85"  x2="164" y2="95"  stroke="#00d4ff" stroke-width="1.4" opacity="0.78" stroke-linecap="round"/>
+            <line x1="150" y1="91"  x2="159" y2="101" stroke="#00d4ff" stroke-width="1.2" opacity="0.66" stroke-linecap="round"/>
+            <line x1="146" y1="97"  x2="155" y2="107" stroke="#00d4ff" stroke-width="1.1" opacity="0.55" stroke-linecap="round"/>
+            <!-- Claw -->
+            <circle cx="140" cy="112" r="3.2" fill="#00d4ff" filter="url(#mGlow)" opacity="0.96"/>
+          </g>
+
+        </g><!-- /#m-mantis-whole -->
+
+        <!-- ══ PREDATOR THREATS ══ -->
+
+        <!-- WOLF THREAT — amber slit eyes + LOSS label, rushes from left -->
+        <g id="m-pred-wolf" opacity="0">
+          <ellipse cx="32" cy="94" rx="6"   ry="5"   fill="#f5a800" filter="url(#predGlow)" opacity="0.95"/>
+          <ellipse cx="47" cy="94" rx="6"   ry="5"   fill="#f5a800" filter="url(#predGlow)" opacity="0.95"/>
+          <ellipse cx="32" cy="94" rx="1.6" ry="4"   fill="#000" opacity="0.85"/>
+          <ellipse cx="47" cy="94" rx="1.6" ry="4"   fill="#000" opacity="0.85"/>
+          <!-- Mane hint -->
+          <path d="M 20 86 Q 14 100 22 108" stroke="#f5a800" stroke-width="1" fill="none" opacity="0.35" stroke-linecap="round"/>
+          <rect x="14" y="106" width="52" height="17" rx="3.5" fill="rgba(255,68,102,0.14)" stroke="#ff4466" stroke-width="0.9"/>
+          <text x="40" y="119" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#ff4466" text-anchor="middle" letter-spacing="2" font-weight="700">LOSS</text>
+        </g>
+
+        <!-- LION THREAT — deep amber round eyes + LOSS label, rushes from right -->
+        <g id="m-pred-lion" opacity="0">
+          <circle cx="174" cy="93" r="6.5" fill="#ff8800" filter="url(#predGlow)" opacity="0.95"/>
+          <circle cx="190" cy="93" r="6.5" fill="#ff8800" filter="url(#predGlow)" opacity="0.95"/>
+          <circle cx="174" cy="93" r="2.8" fill="#000" opacity="0.85"/>
+          <circle cx="190" cy="93" r="2.8" fill="#000" opacity="0.85"/>
+          <!-- Mane arc hint -->
+          <path d="M 202 84 Q 208 98 200 108" stroke="#ff8800" stroke-width="1" fill="none" opacity="0.35" stroke-linecap="round"/>
+          <rect x="156" y="106" width="52" height="17" rx="3.5" fill="rgba(255,68,102,0.14)" stroke="#ff4466" stroke-width="0.9"/>
+          <text x="182" y="119" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#ff4466" text-anchor="middle" letter-spacing="2" font-weight="700">LOSS</text>
+        </g>
+
+        <!-- KILL FLASH — red ring burst on elimination -->
+        <g id="m-kill-flash" opacity="0">
+          <circle cx="110" cy="100" r="38" fill="none" stroke="#ff4466" stroke-width="2.5" opacity="0.8"/>
+          <circle cx="110" cy="100" r="22" fill="rgba(255,68,102,0.10)"/>
+          <text x="110" y="104" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#ff4466" text-anchor="middle" letter-spacing="1.5" font-weight="700">ELIMINATED</text>
+        </g>
+
+        <!-- PROFIT TARGET — gold rotating reticle -->
+        <g id="m-target" opacity="0">
+          <circle id="m-target-outer" cx="110" cy="70" r="22" fill="none" stroke="#f5a800" stroke-width="1.3" stroke-dasharray="5 3.5" opacity="0.78"/>
+          <circle cx="110" cy="70" r="13" fill="none" stroke="#f5a800" stroke-width="0.9" opacity="0.48"/>
+          <circle cx="110" cy="70" r="4.5" fill="rgba(245,168,0,0.18)" stroke="#f5a800" stroke-width="1" opacity="0.92"/>
+          <line x1="86"  y1="70" x2="101" y2="70" stroke="#f5a800" stroke-width="1" opacity="0.68"/>
+          <line x1="119" y1="70" x2="134" y2="70" stroke="#f5a800" stroke-width="1" opacity="0.68"/>
+          <line x1="110" y1="46" x2="110" y2="61" stroke="#f5a800" stroke-width="1" opacity="0.68"/>
+          <line x1="110" y1="79" x2="110" y2="94" stroke="#f5a800" stroke-width="1" opacity="0.68"/>
+          <text x="110" y="74.5" font-family="'JetBrains Mono',monospace" font-size="9" fill="#f5a800" text-anchor="middle" font-weight="700" opacity="0.92">×</text>
+        </g>
+
+        <!-- SECURED — appears after double strike -->
+        <g id="m-secured" opacity="0">
+          <rect x="62" y="52" width="96" height="26" rx="5" fill="rgba(0,255,136,0.12)" stroke="#00ff88" stroke-width="1.6"/>
+          <text x="110" y="69" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#00ff88" text-anchor="middle" letter-spacing="1.2" font-weight="700">✓ SECURED</text>
+        </g>
+
+      </svg>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-txt">Scroll</div>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker">
+    <div class="ticker-item"><span class="lbl">PREDATORS NEUTRALISED</span><span class="val pos">71.6%</span></div>
+    <div class="ticker-item"><span class="lbl">HUNTS EXECUTED</span><span class="val">194</span></div>
+    <div class="ticker-item"><span class="lbl">PRE-SCREEN</span><span class="val">noise filtered · fast-pass gate</span></div>
+    <div class="ticker-item"><span class="lbl">ORACLE CONVICTION</span><span class="val">deep verify · strike threshold</span></div>
+    <div class="ticker-item"><span class="lbl">MAX EXPOSURE</span><span class="val">$40</span></div>
+    <div class="ticker-item"><span class="lbl">ESCAPE LIMIT</span><span class="val neg">−$15 / day</span></div>
+    <div class="ticker-item"><span class="lbl">KILL SPEED</span><span class="val pos">&lt; 50ms order</span></div>
+    <div class="ticker-item"><span class="lbl">TERRITORY</span><span class="val">London · EU</span></div>
+    <div class="ticker-item"><span class="lbl">CAPITAL</span><span class="val">$100 USDC</span></div>
+    <div class="ticker-item"><span class="lbl">PREY</span><span class="val">Polymarket · YES 10–45¢</span></div>
+    <div class="ticker-item"><span class="lbl">TAKER FEE</span><span class="val">1% standard · 0% geopolitical</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item"><span class="lbl">PREDATORS NEUTRALISED</span><span class="val pos">71.6%</span></div>
+    <div class="ticker-item"><span class="lbl">HUNTS EXECUTED</span><span class="val">194</span></div>
+    <div class="ticker-item"><span class="lbl">PRE-SCREEN</span><span class="val">noise filtered · fast-pass gate</span></div>
+    <div class="ticker-item"><span class="lbl">ORACLE CONVICTION</span><span class="val">deep verify · strike threshold</span></div>
+    <div class="ticker-item"><span class="lbl">MAX EXPOSURE</span><span class="val">$40</span></div>
+    <div class="ticker-item"><span class="lbl">ESCAPE LIMIT</span><span class="val neg">−$15 / day</span></div>
+    <div class="ticker-item"><span class="lbl">KILL SPEED</span><span class="val pos">&lt; 50ms order</span></div>
+    <div class="ticker-item"><span class="lbl">TERRITORY</span><span class="val">London · EU</span></div>
+    <div class="ticker-item"><span class="lbl">CAPITAL</span><span class="val">$100 USDC</span></div>
+    <div class="ticker-item"><span class="lbl">PREY</span><span class="val">Polymarket · YES 10–45¢</span></div>
+    <div class="ticker-item"><span class="lbl">TAKER FEE</span><span class="val">1% standard · 0% geopolitical</span></div>
+  </div>
+</div>
+
+<!-- METRICS -->
+<section id="metrics">
+  <div class="section-label reveal">Performance Snapshot</div>
+  <h2 class="section-h2 reveal">Numbers that <span class="hl">don't lie.</span></h2>
+  <div class="metrics-grid">
+    <div class="metric-card green reveal">
+      <div class="mc-icon green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+      <div class="mc-label">Win Rate</div>
+      <div class="mc-val green"><span data-count="71.6" data-sfx="%">0</span></div>
+      <div class="mc-sub">Across 194 backtested markets — validated against real Polymarket resolution data</div>
+    </div>
+    <div class="metric-card cyan reveal">
+      <div class="mc-icon cyan"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+      <div class="mc-label">Markets Backtested</div>
+      <div class="mc-val cyan"><span data-count="194">0</span></div>
+      <div class="mc-sub">Politics, Crypto, Sports, Economics, Geopolitical, Tech and more — all categories covered</div>
+    </div>
+    <div class="metric-card gold reveal">
+      <div class="mc-icon gold"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div class="mc-label">Daily API Cost</div>
+      <div class="mc-val gold"><span data-pfx="~$" data-count="0.10" data-decimals="2">~$0</span></div>
+      <div class="mc-sub">Prompt caching cuts Oracle input costs significantly. Pre-screen stage runs at minimal cost. Pipeline optimised for capital efficiency.</div>
+    </div>
+    <div class="metric-card purple reveal">
+      <div class="mc-icon purple"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+      <div class="mc-label">Latency to CLOB</div>
+      <div class="mc-val purple"><span data-count="3" data-sfx="ms">0</span></div>
+      <div class="mc-sub">London execution node co-located with Polymarket's matching engine for sub-5ms connectivity</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- AI ENGINE -->
+<section id="ai-engine">
+  <div class="section-label reveal">Signal Generation</div>
+  <h2 class="section-h2 reveal">The Signal <span class="hl">Pipeline.</span></h2>
+  <p class="section-desc reveal">Two stages. Each eliminates noise before the next fires. Only the highest-confidence signals reach execution — maximising edge while preserving capital.</p>
+
+  <div class="pipeline-container" id="pipeline">
+    <div class="pnode" id="pn0">
+      <div class="pnode-icon"><div class="pnode-circle pre">PRE</div></div>
+      <div class="pnode-body">
+        <div class="pnode-head">
+          <div class="pnode-name" style="color:var(--gold)">Pre-Screen Fast-Pass</div>
+          <div class="pnode-thresh pre">Low-signal markets filtered</div>
+        </div>
+        <div class="pnode-desc">Sub-100ms inference. Acts as the first gate, eliminating obvious low-signal markets before the deep-verify stage runs. Scores question clarity, price edge, and time-to-resolve — only strong candidates proceed.</div>
+        <div class="pnode-model">Fast-pass · Stage 1</div>
+        <div class="pnode-tags"><span class="ptag">LPU Inference</span><span class="ptag">&lt;100ms</span><span class="ptag">Noise Filter</span><span class="ptag">Rate-limited</span></div>
+      </div>
+    </div>
+
+    <div class="pnode" id="pn1">
+      <div class="pnode-icon"><div class="pnode-circle res">RES</div></div>
+      <div class="pnode-body">
+        <div class="pnode-head">
+          <div class="pnode-name" style="color:var(--cyan)">Resilience Layer</div>
+          <div class="pnode-thresh res">Emergency fallback only</div>
+        </div>
+        <div class="pnode-desc">A secondary AI layer activates automatically if the primary deep-verify stage is unreachable. Provides category-aware context and domain base rates. The normal execution path is Pre-Screen → Oracle; this layer ensures zero signal loss during outages.</div>
+        <div class="pnode-model">Redundant AI · Fail-Safe</div>
+        <div class="pnode-tags"><span class="ptag">Auto-Activate</span><span class="ptag">Category Context</span><span class="ptag">Zero Signal Loss</span><span class="ptag">Fail-Safe Bypass</span></div>
+      </div>
+    </div>
+
+    <div class="pnode" id="pn2">
+      <div class="pnode-icon"><div class="pnode-circle orc">ORC</div></div>
+      <div class="pnode-body">
+        <div class="pnode-head">
+          <div class="pnode-name" style="color:var(--purple)">Oracle Deep-Verify</div>
+          <div class="pnode-thresh orc">High conviction threshold to trade</div>
+        </div>
+        <div class="pnode-desc">The primary decision stage carries dominant consensus weight. Applies 13 category-aware rules and fee awareness. Consensus scoring combines Oracle and Pre-Screen weights. Prompt caching cuts input cost significantly.</div>
+        <div class="pnode-model">Deep-verify · Stage 2</div>
+        <div class="pnode-tags"><span class="ptag">Primary Weight</span><span class="ptag">Prompt Caching</span><span class="ptag">13 Category Rules</span><span class="ptag">Weighted Consensus</span></div>
+      </div>
+    </div>
+
+    <div class="pnode" id="pn3">
+      <div class="pnode-icon"><div class="pnode-circle trade">EXEC</div></div>
+      <div class="pnode-body">
+        <div class="pnode-head">
+          <div class="pnode-name" style="color:var(--green)">Risk Gate → Execution</div>
+          <div class="pnode-thresh trade">8 rules · Kelly sizing</div>
+        </div>
+        <div class="pnode-desc">Every passing signal hits 8 hard risk rules before touching the CLOB. Kelly sizing with category multipliers (Political 0.7×, Sports 0.8×, Standard 0.9×). Fail-closed — any risk violation drops the order with no exception.</div>
+        <div class="pnode-model">Polymarket CLOB REST + WS</div>
+        <div class="pnode-tags"><span class="ptag">Kelly Criterion</span><span class="ptag">8 Risk Rules</span><span class="ptag">Fail-Closed</span><span class="ptag">&lt;50ms Order</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- BACKTEST -->
+<section id="backtest">
+  <div class="section-label reveal">Validation</div>
+  <h2 class="section-h2 reveal">Backtest <span class="hl">Results.</span></h2>
+  <p class="section-desc reveal">194 resolved Polymarket markets replayed through the live signal engine. Real resolution data. No curve fitting. The same thresholds running in production.</p>
+
+  <div class="backtest-grid">
+    <div>
+      <div class="win-rate-wrap">
+        <div class="win-donut">
+          <svg width="220" height="220" viewBox="0 0 220 220">
+            <defs>
+              <linearGradient id="donutGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#00ff88"/>
+                <stop offset="100%" stop-color="#00d4ff"/>
+              </linearGradient>
+            </defs>
+            <circle class="donut-track" cx="110" cy="110" r="90"/>
+            <circle class="donut-fill" id="donutFill" cx="110" cy="110" r="90"/>
+          </svg>
+          <div class="donut-center">
+            <div class="donut-pct" data-count="71.6" data-sfx="%">0%</div>
+            <div class="donut-sub">Win Rate</div>
+          </div>
+        </div>
+        <div class="win-stats">
+          <div class="ws-item"><div class="ws-val" data-count="194">0</div><div class="ws-lbl">Total Markets</div></div>
+          <div class="ws-item"><div class="ws-val" data-count="139">0</div><div class="ws-lbl">Wins</div></div>
+          <div class="ws-item"><div class="ws-val" data-count="55">0</div><div class="ws-lbl">Losses</div></div>
+          <div class="ws-item"><div class="ws-val" style="color:var(--green)">+EV</div><div class="ws-lbl">Expected Value</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="cat-bars" id="catBars">
+        <div class="cat-bar-item reveal">
+          <div class="cat-bar-head"><span class="cat-bar-name">Politics</span><span class="cat-bar-val" style="color:var(--green)">76%</span></div>
+          <div class="cat-bar-track"><div class="cat-bar-fill" data-w="76" style="background:linear-gradient(90deg,var(--green),#00cc6e)"></div></div>
+        </div>
+        <div class="cat-bar-item reveal">
+          <div class="cat-bar-head"><span class="cat-bar-name">Geopolitical</span><span class="cat-bar-val" style="color:var(--green)">74%</span></div>
+          <div class="cat-bar-track"><div class="cat-bar-fill" data-w="74" style="background:linear-gradient(90deg,var(--green),#00cc6e)"></div></div>
+        </div>
+        <div class="cat-bar-item reveal">
+          <div class="cat-bar-head"><span class="cat-bar-name">Economics</span><span class="cat-bar-val" style="color:var(--cyan)">72%</span></div>
+          <div class="cat-bar-track"><div class="cat-bar-fill" data-w="72" style="background:linear-gradient(90deg,var(--cyan),#0099dd)"></div></div>
+        </div>
+        <div class="cat-bar-item reveal">
+          <div class="cat-bar-head"><span class="cat-bar-name">Crypto</span><span class="cat-bar-val" style="color:var(--cyan)">70%</span></div>
+          <div class="cat-bar-track"><div class="cat-bar-fill" data-w="70" style="background:linear-gradient(90deg,var(--cyan),#0099dd)"></div></div>
+        </div>
+        <div class="cat-bar-item reveal">
+          <div class="cat-bar-head"><span class="cat-bar-name">Tech</span><span class="cat-bar-val" style="color:var(--gold)">68%</span></div>
+          <div class="cat-bar-track"><div class="cat-bar-fill" data-w="68" style="background:linear-gradient(90deg,var(--gold),#cc8800)"></div></div>
+        </div>
+        <div class="cat-bar-item reveal">
+          <div class="cat-bar-head"><span class="cat-bar-name">Sports</span><span class="cat-bar-val" style="color:var(--gold)">64%</span></div>
+          <div class="cat-bar-track"><div class="cat-bar-fill" data-w="64" style="background:linear-gradient(90deg,var(--gold),#cc8800)"></div></div>
+        </div>
+        <div class="cat-bar-item reveal">
+          <div class="cat-bar-head"><span class="cat-bar-name">Entertainment</span><span class="cat-bar-val" style="color:var(--muted)">61%</span></div>
+          <div class="cat-bar-track"><div class="cat-bar-fill" data-w="61" style="background:linear-gradient(90deg,var(--muted),#4b5a72)"></div></div>
+        </div>
+      </div>
+
+      <div class="pnl-table-wrap reveal">
+        <div class="section-label" style="margin-bottom:20px">Theoretical Compounding · $100 Starting Capital</div>
+        <table class="pnl-table">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Conservative (+10%/mo)</th>
+              <th>Target (+20%/mo)</th>
+              <th>Stretch (+30%/mo)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="month">Month 1</td><td class="cons">$110</td><td class="target">$120</td><td class="stretch">$130</td></tr>
+            <tr><td class="month">Month 3</td><td class="cons">$133</td><td class="target">$173</td><td class="stretch">$220</td></tr>
+            <tr><td class="month">Month 6</td><td class="cons">$177</td><td class="target">$299</td><td class="stretch">$485</td></tr>
+            <tr><td class="month">Month 12</td><td class="cons">$314</td><td class="target">$892</td><td class="stretch">$2,353</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:11px;color:var(--muted);margin-top:12px;font-family:'JetBrains Mono',monospace">Theoretical projections based solely on 194-market backtest assumptions. Conservative scenario includes daily loss limit triggered 3×/month. Figures do not account for market regime changes, liquidity shifts, or execution slippage. Not financial advice — prediction markets carry risk of total loss.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- STRATEGY -->
+<section id="strategy">
+  <div class="section-label reveal">Entry Logic</div>
+  <h2 class="section-h2 reveal">Precision <span class="hl">Entry Rules.</span></h2>
+  <p class="section-desc reveal">No guessing. Every trade passes a deterministic checklist. MANTIS stays in cash when conditions aren't perfect — idle hours are not wasted hours.</p>
+
+  <div class="strategy-grid">
+    <div class="reveal">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="tb-dot"></div><div class="tb-dot"></div><div class="tb-dot"></div>
+          <div class="terminal-title">standard_entry.rs</div>
+        </div>
+        <div class="terminal-body">
+<span class="t-comment">// All conditions must be true</span>
+<br><span class="t-key">is_flash_market</span> <span class="t-op">==</span> <span class="t-val">false</span>
+<br><span class="t-key">consensus_score</span> <span class="t-op">>=</span> <span class="t-num">68</span>
+<br><span class="t-key">hours_to_resolve</span> <span class="t-op"><=</span> <span class="t-num">24.0</span>
+<br><span class="t-key">market_volume</span> <span class="t-op">>=</span> <span class="t-num">$1,000</span>
+<br><span class="t-key">yes_price</span> <span class="t-op">between</span> <span class="t-num">0.05</span> <span class="t-op">and</span> <span class="t-num">0.55</span>
+<br><span class="t-key">total_exposure</span> <span class="t-op">+</span> <span class="t-key">bet</span> <span class="t-op"><=</span> <span class="t-num">$40.00</span>
+<br><span class="t-key">today_pnl</span> <span class="t-op">></span> <span class="t-num">-$15.00</span>
+<br>
+<br><span class="t-comment">// Kelly-capped bet size</span>
+<br><span class="t-key">bet_usd</span> <span class="t-op">=</span> <span class="t-val">kelly(</span><span class="t-key">score</span><span class="t-op">,</span> <span class="t-key">category_mult</span><span class="t-val">)</span>
+<br><span class="t-key">max_bet</span> <span class="t-op">=</span> <span class="t-num">$10.00</span> <span class="t-comment">// hard cap</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="tb-dot"></div><div class="tb-dot"></div><div class="tb-dot"></div>
+          <div class="terminal-title">kelly.rs — category multipliers</div>
+        </div>
+        <div class="terminal-body">
+<span class="t-comment">// Fraction of capital per trade</span>
+<br><span class="t-key">max_fraction</span> <span class="t-op">=</span> <span class="t-num">0.15</span>
+<br><span class="t-key">min_bet</span> <span class="t-op">=</span> <span class="t-num">$1.00</span>
+<br>
+<br><span class="t-comment">// Category confidence multipliers</span>
+<br><span class="t-key">Standard</span>      <span class="t-op">×</span> <span class="t-num">0.90</span>
+<br><span class="t-key">Geopolitical</span>  <span class="t-op">×</span> <span class="t-num">1.00</span> <span class="t-comment">// 0% fee</span>
+<br><span class="t-key">Political</span>     <span class="t-op">×</span> <span class="t-num">0.70</span>
+<br><span class="t-key">Sports</span>        <span class="t-op">×</span> <span class="t-num">0.80</span> <span class="t-comment">// no live scores</span>
+<br>
+<br><span class="t-comment">// Exit strategy</span>
+<br><span class="t-key">profit_lock</span>  <span class="t-op">=</span> <span class="t-num">40%</span> <span class="t-comment">// trailing stop</span>
+<br><span class="t-key">losing_exit</span>  <span class="t-op">=</span> <span class="t-num">20%</span> <span class="t-comment">// cut losses</span>
+<br><span class="t-key">rescore_interval</span> <span class="t-op">=</span> <span class="t-num">300s</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- RISK -->
+<section id="risk">
+  <div class="section-label reveal">Capital Protection</div>
+  <h2 class="section-h2 reveal">8 Hard Risk <span class="hl">Rules.</span></h2>
+  <p class="section-desc reveal">Every order passes through <code style="font-family:'JetBrains Mono',monospace;color:var(--cyan);font-size:14px">risk::check()</code> before any execution. A single violation kills the order. No workarounds. No exceptions.</p>
+
+  <div class="risk-grid">
+    <div class="risk-card reveal">
+      <div class="risk-num">01</div>
+      <div class="risk-content">
+        <div class="risk-title">Exposure Cap</div>
+        <div class="risk-desc">Total open positions must not exceed $40 including the new bet. Any order that would breach this is rejected.</div>
+        <div class="risk-amount">Hard cap: $40.00</div>
+      </div>
+    </div>
+    <div class="risk-card reveal">
+      <div class="risk-num">02</div>
+      <div class="risk-content">
+        <div class="risk-title">Bet Size Cap</div>
+        <div class="risk-desc">Standard bets truncated to $10 max. Oversize is silently corrected before placement — never rejected, never crashes.</div>
+        <div class="risk-amount">Max: $10 standard</div>
+      </div>
+    </div>
+    <div class="risk-card reveal">
+      <div class="risk-num">03</div>
+      <div class="risk-content">
+        <div class="risk-title">Daily Loss Limit</div>
+        <div class="risk-desc">If today's realised P&amp;L drops below -$15, ALL orders halt for the rest of the UTC day. Logged as DAILY_LOSS_LIMIT_HIT.</div>
+        <div class="risk-amount">Limit: -$15.00 / day</div>
+      </div>
+    </div>
+    <div class="risk-card reveal">
+      <div class="risk-num">04</div>
+      <div class="risk-content">
+        <div class="risk-title">Liquidity Filter</div>
+        <div class="risk-desc">Standard markets must show &gt;$1,000 total volume. Thin markets have wide spreads and poor price discovery — not worth the risk.</div>
+        <div class="risk-amount">Min volume: $1,000</div>
+      </div>
+    </div>
+    <div class="risk-card reveal">
+      <div class="risk-num">05</div>
+      <div class="risk-content">
+        <div class="risk-title">Minimum Edge</div>
+        <div class="risk-desc">Consensus score must clear the conviction threshold. Below this threshold the signal is uncertain — MANTIS stays in cash.</div>
+        <div class="risk-amount">Minimum conviction threshold</div>
+      </div>
+    </div>
+    <div class="risk-card reveal">
+      <div class="risk-num">06</div>
+      <div class="risk-content">
+        <div class="risk-title">No Duplicate Positions</div>
+        <div class="risk-desc">One position per condition_id. Never average down. Never add to a winner. A matching open position returns RiskError::DuplicatePosition.</div>
+        <div class="risk-amount">1 position per market</div>
+      </div>
+    </div>
+    <div class="risk-card reveal">
+      <div class="risk-num">07</div>
+      <div class="risk-content">
+        <div class="risk-title">Price Zone Filter</div>
+        <div class="risk-desc">YES price must be 0.05–0.55. Markets priced outside this range carry excessive house edge or are near-resolved with negligible reward.</div>
+        <div class="risk-amount">Zone: $0.05 – $0.55</div>
+      </div>
+    </div>
+    <div class="risk-card reveal">
+      <div class="risk-num">08</div>
+      <div class="risk-content">
+        <div class="risk-title">Geoblock Guard</div>
+        <div class="risk-desc">On startup MANTIS performs a connectivity check. If the deployment server is blocked from the exchange: immediate hard stop. No silent failures, no partial operation.</div>
+        <div class="risk-amount">Fail-closed · exit(1)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="section-label reveal">System Design</div>
+  <h2 class="section-h2 reveal">Rust Architecture <span class="hl">Overview.</span></h2>
+  <p class="section-desc reveal">Tokio async runtime. Zero-copy channels. DashMap shared state. Sub-50ms order placement. Built to run unattended 24/7.</p>
+
+  <div class="arch-diagram reveal">
+    <div class="arch-col">
+      <div class="arch-col-label" style="color:var(--cyan)">Data Feeds</div>
+      <div class="arch-node data"><div class="arch-node-title">Gamma API</div><div class="arch-node-sub">Market discovery · 60s poll</div></div>
+      <div class="arch-node data"><div class="arch-node-title">CLOB WebSocket</div><div class="arch-node-sub">Orderbook · price_change · trades</div></div>
+      <div class="arch-node data"><div class="arch-node-title">Price Feed WS</div><div class="arch-node-sub">BTC/USD · real-time tick</div></div>
+      <div class="arch-node data"><div class="arch-node-title">On-Chain</div><div class="arch-node-sub">Polygon RPC · whale tracker</div></div>
+      <div class="arch-node data"><div class="arch-node-title">News Feed</div><div class="arch-node-sub">Tier-1 · Tier-2 · 60–90s poll</div></div>
+    </div>
+    <div class="arch-col">
+      <div class="arch-col-label" style="color:var(--purple)">Signal Engine</div>
+      <div class="arch-node signal"><div class="arch-node-title">Market State</div><div class="arch-node-sub">Shared state · zero-lock reads</div></div>
+      <div class="arch-node signal"><div class="arch-node-title">Pre-Screen</div><div class="arch-node-sub">Fast-pass · noise filter</div></div>
+      <div class="arch-node signal"><div class="arch-node-title">Oracle</div><div class="arch-node-sub">Deep verify · primary weight</div></div>
+      <div class="arch-node signal"><div class="arch-node-title">Consensus</div><div class="arch-node-sub">Weighted score · direction</div></div>
+    </div>
+    <div class="arch-col">
+      <div class="arch-col-label" style="color:var(--green)">Execution</div>
+      <div class="arch-node exec"><div class="arch-node-title">Risk Gate</div><div class="arch-node-sub">8 hard rules · fail-closed</div></div>
+      <div class="arch-node exec"><div class="arch-node-title">Kelly Sizer</div><div class="arch-node-sub">Category mult · max 15%</div></div>
+      <div class="arch-node exec"><div class="arch-node-title">CLOB Executor</div><div class="arch-node-sub">Place · cancel · cancel-all</div></div>
+      <div class="arch-node exec"><div class="arch-node-title">Exit Monitor</div><div class="arch-node-sub">Trailing stop · rescore 5min</div></div>
+      <div class="arch-node exec"><div class="arch-node-title">TUI Dashboard</div><div class="arch-node-sub">terminal UI · positions · P&amp;L</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-label reveal">Progress</div>
+  <h2 class="section-h2 reveal">Development <span class="hl">Roadmap.</span></h2>
+
+  <div class="roadmap-track">
+    <div class="rm-item reveal">
+      <div class="rm-dot done">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div class="rm-phase done">Phase 1–4</div>
+      <div class="rm-title">Build &amp; Validate</div>
+      <div class="rm-desc">Scaffold, feeds, triple-AI pipeline, risk gate, 194-market backtest — all complete</div>
+    </div>
+    <div class="rm-item reveal">
+      <div class="rm-dot active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      </div>
+      <div class="rm-phase active">Current</div>
+      <div class="rm-title">Capital Deploy</div>
+      <div class="rm-desc">Fund wallet with $100 USDC · run CLOB approvals · enable live trading at conservative limits</div>
+    </div>
+    <div class="rm-item reveal">
+      <div class="rm-dot soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M16 8h-6a2 2 0 100 4h4a2 2 0 110 4H8"/><path d="M12 6v2M12 16v2"/></svg>
+      </div>
+      <div class="rm-phase soon">Q2 2026</div>
+      <div class="rm-title">Scale Capital</div>
+      <div class="rm-desc">Increase bet sizes after 4-week live track record · add maker strategy · ARB against Kalshi</div>
+    </div>
+    <div class="rm-item reveal">
+      <div class="rm-dot soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="rm-phase soon">Q3 2026</div>
+      <div class="rm-title">Multi-Account</div>
+      <div class="rm-desc">Separate wallets per strategy · copy-trading signals · institutional position sizing</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label reveal" style="justify-content:center">Get In Touch</div>
+    <h2 class="section-h2 reveal" style="text-align:center">Questions about <span class="hl">MANTIS?</span></h2>
+    <p class="section-desc reveal" style="text-align:center;margin:0 auto 0">Built by Orthonode Infrastructure Labs. Research, collaboration, and partnership enquiries welcome.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="contact-card-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-card-label">Email</div>
+        <div class="contact-card-val"><a href="mailto:infrastructure@orthonode.xyz">infrastructure@orthonode.xyz</a></div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-card-icon" style="color:var(--cyan)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </div>
+        <div class="contact-card-label">GitHub</div>
+        <div class="contact-card-val"><a href="https://github.com/orthonode" target="_blank" rel="noopener">github.com/orthonode</a></div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-card-icon" style="color:var(--gold)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+        </div>
+        <div class="contact-card-label">Website</div>
+        <div class="contact-card-val"><a href="https://orthonode.xyz" target="_blank" rel="noopener">orthonode.xyz</a></div>
+      </div>
+      <div class="contact-card reveal">
+        <div class="contact-card-icon" style="color:var(--purple)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+        </div>
+        <div class="contact-card-label">Twitter / X</div>
+        <div class="contact-card-val"><a href="https://x.com/OrthonodeSys" target="_blank" rel="noopener">@OrthonodeSys</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">MANTIS</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:6px;font-family:'JetBrains Mono',monospace">Orthonode Infrastructure Labs</div>
+  </div>
+  <div class="footer-right">
+    <div>Pre-Screen · Oracle · Polygon PoS</div>
+    <div>EU Infrastructure · Fail-Closed Architecture</div>
+    <div style="margin-top:8px;color:rgba(107,122,153,.5)">Not financial advice. Prediction markets carry risk of total loss.</div>
+  </div>
+</footer>
+
+<!-- ── SCRIPTS ── -->
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── CURSOR ── */
+const cur=document.querySelector('.c-cursor');
+let cx=0,cy=0,tx=0,ty=0;
+document.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY});
+(function f(){cx+=(tx-cx)*.12;cy+=(ty-cy)*.12;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(f)})();
+document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('is-hover'));el.addEventListener('mouseleave',()=>cur.classList.remove('is-hover'))});
+
+/* ── LOADER ── */
+const loaderLabels = ['INITIALISING SIGNAL ENGINE','CONNECTING TO CLOB','LOADING AI MODELS','CALIBRATING KELLY','VERIFYING CONNECTIVITY','SYSTEM READY'];
+const bar = document.getElementById('loaderBar');
+const lbl = document.getElementById('loaderLabel');
+let pct = 0, li = 0;
+const iv = setInterval(() => {
+  pct += Math.random() * 18 + 4;
+  if(pct >= 100){ pct = 100; clearInterval(iv); }
+  bar.style.width = Math.min(pct,100) + '%';
+  li = Math.floor((pct/100) * (loaderLabels.length-1));
+  lbl.textContent = loaderLabels[Math.min(li, loaderLabels.length-1)];
+  if(pct >= 100){
+    setTimeout(() => {
+      gsap.to('#loader', { opacity:0, duration:.6, ease:'power2.in', onComplete:() => {
+        document.getElementById('loader').style.display = 'none';
+        startAnimations();
+      }});
+    }, 300);
+  }
+}, 80);
+
+/* ── PARTICLE CANVAS ── */
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let pts = [];
+function resizeCanvas(){
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+for(let i=0; i<70; i++){
+  pts.push({
+    x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+    vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4,
+    r: Math.random()*1.5+.5,
+    a: Math.random()*.6+.2,
+    c: Math.random()>.5 ? '0,255,136' : '0,212,255'
+  });
+}
+function drawParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  pts.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
+    if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = `rgba(${p.c},${p.a})`;
+    ctx.fill();
+  });
+  pts.forEach((a,i) => pts.slice(i+1).forEach(b => {
+    const d = Math.hypot(a.x-b.x,a.y-b.y);
+    if(d < 120){
+      ctx.beginPath();
+      ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+      ctx.strokeStyle = `rgba(0,255,136,${.06*(1-d/120)})`;
+      ctx.lineWidth = .5;
+      ctx.stroke();
+    }
+  }));
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+/* ── MANTIS CINEMATIC SEQUENCE — jungle predator theme ── */
+(function(){
+  // Rotation origins in SVG viewport coordinates
+  gsap.set('#m-mantis-whole', { svgOrigin:'110 120' });
+  gsap.set('#m-arm-l',        { svgOrigin:'100 118' });
+  gsap.set('#m-arm-r',        { svgOrigin:'120 118' });
+  gsap.set('#m-target-outer', { svgOrigin:'110 70'  });
+  gsap.set(['#m-pred-wolf','#m-pred-lion','#m-kill-flash','#m-target','#m-secured'], { opacity:0 });
+
+  const tl = gsap.timeline({ repeat:-1, defaults:{ ease:'power3.out' } });
+
+  // ─ P1 IDLE: breathing float (0–2.8s) ─
+  tl.to('#mantis-svg', { y:-10, duration:2.0, ease:'sine.inOut' }, 0)
+    .to('#mantis-svg', { y:0,   duration:2.0, ease:'sine.inOut' }, 2.0)
+    // Eye pulse
+    .to('#m-body circle', { opacity:0.4, duration:0.6, yoyo:true, repeat:2, ease:'sine.inOut', stagger:0.08 }, 0.3);
+
+  // ─ P2 WOLF THREAT from left — dodge right (3.0–5.5s) ─
+  tl.fromTo('#m-pred-wolf', { opacity:0, x:-28 }, { opacity:1, x:0, duration:0.4, ease:'power2.out' }, 3.0)
+    .to('#m-mantis-whole',  { rotation:14, duration:0.38 }, 3.3)
+    .to('#m-arm-r',         { rotation:-14, duration:0.35 }, 3.3)
+    // Dodge — wolf clears past
+    .to('#m-pred-wolf',     { opacity:0, x:30, duration:0.32, ease:'power2.in' }, 4.45)
+    .to('#m-mantis-whole',  { rotation:0, duration:0.55, ease:'elastic.out(1,0.5)' }, 4.55)
+    .to('#m-arm-r',         { rotation:0, duration:0.45 }, 4.65);
+
+  // ─ P3 LION THREAT from right — LEFT ARM STRIKE, eliminate (5.9–8.2s) ─
+  tl.fromTo('#m-pred-lion', { opacity:0, x:28 }, { opacity:1, x:0, duration:0.4, ease:'power2.out' }, 5.9)
+    .to('#m-mantis-whole',  { rotation:-7, duration:0.3 }, 6.15)
+    // Arm coils back…
+    .to('#m-arm-l',         { rotation:-22, duration:0.28, ease:'power2.in' }, 6.2)
+    // …then SNAPS
+    .to('#m-arm-l',         { rotation:50,  duration:0.13, ease:'power4.in' }, 6.6)
+    // Kill flash + lion vanishes
+    .to('#m-kill-flash',    { opacity:1, scale:1.18, duration:0.12, ease:'power4.out' }, 6.73)
+    .to('#m-pred-lion',     { opacity:0, duration:0.14 }, 6.73)
+    .to('#m-kill-flash',    { opacity:0, scale:1, duration:0.38, ease:'power2.out' }, 6.88)
+    .to('#m-arm-l',         { rotation:0, duration:0.55, ease:'elastic.out(1,0.55)' }, 6.9)
+    .to('#m-mantis-whole',  { rotation:0, duration:0.45 }, 6.95);
+
+  // ─ P4 TARGET LOCK — profit reticle appears (8.3–9.7s) ─
+  tl.to('#m-target',        { opacity:1, duration:0.4 }, 8.3)
+    .to('#m-target-outer',  { rotation:360, duration:1.15, ease:'linear' }, 8.3)
+    // Arms coil back for double strike
+    .to('#m-arm-l',         { rotation:-22, duration:0.42, ease:'power2.inOut' }, 8.5)
+    .to('#m-arm-r',         { rotation:22,  duration:0.42, ease:'power2.inOut' }, 8.5)
+    // Lean forward
+    .to('#m-mantis-whole',  { y:-7, duration:0.42, ease:'power2.inOut' }, 8.5);
+
+  // ─ P5 DOUBLE STRIKE — both arms snap (9.75–11s) ─
+  tl.to('#m-arm-l',   { rotation:52,  duration:0.13, ease:'power4.in' }, 9.75)
+    .to('#m-arm-r',   { rotation:-52, duration:0.13, ease:'power4.in' }, 9.75)
+    .to('#m-target',  { opacity:0, duration:0.12 }, 9.88)
+    // SECURED banner
+    .to('#m-secured', { opacity:1, scale:1.14, duration:0.22, ease:'back.out(2)' }, 9.88)
+    .to('#m-secured', { scale:1, duration:0.3 }, 10.1)
+    // Flash burst on whole SVG
+    .to('#mantis-svg', { filter:'drop-shadow(0 0 55px rgba(0,255,136,.95)) drop-shadow(0 0 100px rgba(0,255,136,.4))', duration:0.14 }, 9.75)
+    .to('#mantis-svg', { filter:'drop-shadow(0 0 30px rgba(0,255,136,.4)) drop-shadow(0 0 60px rgba(0,255,136,.15))', duration:0.9 }, 9.9);
+
+  // ─ P6 RESET (11.1–13.6s) ─
+  tl.to('#m-arm-l',         { rotation:0, duration:0.72, ease:'elastic.out(1,0.6)' }, 11.1)
+    .to('#m-arm-r',         { rotation:0, duration:0.72, ease:'elastic.out(1,0.6)' }, 11.1)
+    .to('#m-mantis-whole',  { y:0, duration:0.5 }, 11.1)
+    .to('#m-secured',       { opacity:0, duration:0.4 }, 11.9)
+    .to('#mantis-svg',      { y:-10, duration:1.3, ease:'sine.inOut' }, 12.0)
+    .to('#mantis-svg',      { y:0,   duration:1.3, ease:'sine.inOut' }, 13.3);
+})();
+
+/* ── COUNTER ── */
+function animateCounter(el){
+  const target = parseFloat(el.dataset.count);
+  const pfx = el.dataset.pfx || '';
+  const sfx = el.dataset.sfx || '';
+  const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals) : (target%1!==0?1:0);
+  let start = null;
+  const dur = 1800;
+  function step(ts){
+    if(!start) start = ts;
+    const p = Math.min((ts-start)/dur,1);
+    const ease = 1-Math.pow(1-p,3);
+    const val = target * ease;
+    el.textContent = pfx + (decimals ? val.toFixed(decimals) : Math.round(val)) + sfx;
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ── MAIN ANIMATIONS ── */
+function startAnimations(){
+  // Hero entrance
+  gsap.from('#heroBadge', { opacity:0, y:20, duration:.7, delay:.1, ease:'power3.out' });
+  gsap.from('#heroH1 .line1', { opacity:0, y:40, duration:.8, delay:.25, ease:'power3.out' });
+  gsap.from('#heroH1 .line2', { opacity:0, y:40, duration:.8, delay:.4, ease:'power3.out' });
+  gsap.from('#heroSub', { opacity:0, y:30, duration:.7, delay:.55, ease:'power3.out' });
+  gsap.from('#heroMetrics', { opacity:0, y:20, duration:.6, delay:.7, ease:'power3.out', onComplete:() => {
+    document.querySelectorAll('#heroMetrics [data-count]').forEach(animateCounter);
+  }});
+  gsap.from('#heroCtas', { opacity:0, y:20, duration:.6, delay:.85, ease:'power3.out' });
+  gsap.from('#mantis-wrap', { opacity:0, scale:.85, duration:1, delay:.5, ease:'back.out(1.3)' });
+
+  // Scroll reveals
+  gsap.utils.toArray('.reveal').forEach(el => {
+    gsap.to(el, {
+      opacity:1, y:0, duration:.7, ease:'power3.out',
+      scrollTrigger:{ trigger:el, start:'top 88%', toggleActions:'play none none none' }
+    });
+  });
+
+  // Metric card counters
+  document.querySelectorAll('.metric-card [data-count]').forEach(el => {
+    ScrollTrigger.create({
+      trigger: el.closest('.metric-card'),
+      start: 'top 85%',
+      onEnter: () => animateCounter(el),
+      once: true
+    });
+  });
+
+  // Win stats counters
+  document.querySelectorAll('.ws-item [data-count],.donut-center [data-count]').forEach(el => {
+    ScrollTrigger.create({
+      trigger: '#backtest',
+      start: 'top 70%',
+      onEnter: () => animateCounter(el),
+      once: true
+    });
+  });
+
+  // Donut animation
+  ScrollTrigger.create({
+    trigger: '#backtest',
+    start: 'top 70%',
+    onEnter: () => {
+      const circ = 2 * Math.PI * 90; // r=90
+      const offset = circ - (71.6/100 * circ);
+      document.getElementById('donutFill').style.strokeDashoffset = offset;
+    },
+    once: true
+  });
+
+  // Category bars
+  document.querySelectorAll('.cat-bar-fill').forEach(fill => {
+    ScrollTrigger.create({
+      trigger: fill.closest('.cat-bar-item'),
+      start: 'top 85%',
+      onEnter: () => { fill.style.width = fill.dataset.w + '%'; },
+      once: true
+    });
+  });
+
+  // Pipeline nodes
+  document.querySelectorAll('.pnode').forEach((node, i) => {
+    gsap.to(node, {
+      opacity:1, x:0, duration:.6, ease:'power3.out', delay: i * .15,
+      scrollTrigger:{ trigger:'#pipeline', start:'top 80%', toggleActions:'play none none none' }
+    });
+  });
+
+  // 3D tilt on cards
+  document.querySelectorAll('.metric-card,.risk-card,.contact-card,.pnode-body').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width  - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform = `perspective(1000px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
+</script>
+
+<script type="module">
+import { animate, inView, spring, stagger } from 'https://cdn.jsdelivr.net/npm/motion@latest/+esm';
+
+// Extra micro-interactions on cards
+inView('.metric-card', ({ target }) => {
+  animate(target, { boxShadow: ['0 0 0 rgba(0,255,136,0)', '0 0 40px rgba(0,255,136,0.04)'] },
+    { duration: 0.8, easing: spring({ stiffness: 60, damping: 15 }) });
+});
+
+// Risk card stagger on scroll
+inView('.risk-grid', ({ target }) => {
+  animate(target.querySelectorAll('.risk-card'), { opacity: [0, 1], x: [-20, 0] },
+    { duration: 0.5, delay: stagger(0.07), easing: spring({ stiffness: 80, damping: 16 }) });
+});
+
+// Arch nodes stagger
+inView('.arch-diagram', ({ target }) => {
+  animate(target.querySelectorAll('.arch-node'), { opacity: [0, 1], y: [20, 0] },
+    { duration: 0.45, delay: stagger(0.04), easing: spring({ stiffness: 90, damping: 18 }) });
+});
+
+// Roadmap items
+inView('.roadmap-track', ({ target }) => {
+  animate(target.querySelectorAll('.rm-item'), { opacity: [0, 1], y: [24, 0] },
+    { duration: 0.5, delay: stagger(0.12), easing: spring({ stiffness: 75, damping: 15 }) });
+});
+
+// Nav shrink on scroll
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  if (window.scrollY > 60) {
+    nav.style.height = '60px';
+    nav.style.background = 'rgba(2,2,8,0.92)';
+  } else {
+    nav.style.height = '72px';
+    nav.style.background = 'rgba(2,2,8,0.7)';
+  }
+}, { passive: true });
+</script>
+</body>
+</html>

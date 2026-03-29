@@ -1,523 +1,1046 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="INVARIANT — Cryptographic AI execution receipt verification on Bittensor. NTS (Neural Trust Score) subnet proves what every AI agent did, when, and how.">
+<meta property="og:title" content="INVARIANT — AI Execution Receipt Verification | ORTHONODE SYSTEMS™">
+<meta property="og:description" content="Every AI agent execution produces a receipt. INVARIANT verifies it on Bittensor. NTS trust scores are immutable proof.">
+<meta property="og:image" content="https://orthonode.xyz/orthonode-banner.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/site-logo.png" type="image/png">
+<title>INVARIANT — AI Execution Receipt Verification | ORTHONODE SYSTEMS™</title>
 
-<html class="dark" lang="en"><head><meta name="description" content="Deterministic AI execution receipts with 0-100 NTS scoring at 9K+ receipts/sec on Bittensor. SHA + TON-SHA + OAP trust stack."><meta property="og:title" content="INVARIANT — Node Trust Score Protocol on Bittensor | ORTHONODE SYSTEMS™"><link rel="icon" href="/site-logo.png" type="image/png">
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>INVARIANT | AI Execution Receipt Verification</title>
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=DM+Sans:ital,wght@0,300;0,400;0,500&amp;display=swap" rel="stylesheet"/>
-<!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-primary-fixed": "#251a00",
-              "primary": "#ffd165",
-              "on-secondary-container": "#bab8b7",
-              "on-primary-container": "#604700",
-              "secondary": "#c8c6c5",
-              "surface-variant": "#353535",
-              "surface-dim": "#131313",
-              "error": "#ffb4ab",
-              "error-container": "#93000a",
-              "tertiary-container": "#60c5ff",
-              "background": "#000000",
-              "on-surface-variant": "#d3c5ac",
-              "on-secondary": "#313030",
-              "on-tertiary-fixed-variant": "#004c6c",
-              "outline-variant": "#4f4633",
-              "on-tertiary-fixed": "#001e2e",
-              "surface-container": "#1f1f1f",
-              "tertiary-fixed-dim": "#83cfff",
-              "surface-container-high": "#2a2a2a",
-              "surface-tint": "#f7be1d",
-              "primary-container": "#eab308",
-              "surface-bright": "#393939",
-              "tertiary-fixed": "#c7e7ff",
-              "inverse-primary": "#785a00",
-              "outline": "#9b8f79",
-              "surface-container-highest": "#353535",
-              "tertiary": "#adddff",
-              "secondary-container": "#4a4949",
-              "surface": "#131313",
-              "on-surface": "#e2e2e2",
-              "on-error": "#690005",
-              "on-error-container": "#ffdad6",
-              "on-tertiary": "#00344c",
-              "secondary-fixed": "#e5e2e1",
-              "on-tertiary-container": "#005072",
-              "on-background": "#e2e2e2",
-              "on-secondary-fixed": "#1c1b1b",
-              "surface-container-lowest": "#0e0e0e",
-              "on-primary-fixed-variant": "#5a4300",
-              "primary-fixed": "#ffdf9a",
-              "on-secondary-fixed-variant": "#474646",
-              "surface-container-low": "#1b1b1b",
-              "inverse-on-surface": "#303030",
-              "secondary-fixed-dim": "#c8c6c5",
-              "on-primary": "#3f2e00",
-              "inverse-surface": "#e2e2e2",
-              "primary-fixed-dim": "#f7be1d"
-            },
-            fontFamily: {
-              "headline": ["Syne", "sans-serif"],
-              "body": ["DM Sans", "sans-serif"],
-              "label": ["IBM Plex Mono", "monospace"]
-            },
-            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
-          },
-        },
-      }
-    </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Lexend:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+
 <style>
-        body { font-family: 'DM Sans', sans-serif; background-color: #000000; color: #e2e2e2; overflow-x: hidden; }
-        .font-syne { font-family: 'Syne', sans-serif; font-weight: 800; }
-        .font-mono { font-family: 'IBM Plex Mono', monospace; }
-        
-        /* Protocol/Feature Card Micro-animations */
-        .glass-card, .bg-surface-container-low {
-            background: rgba(19, 19, 19, 0.6);
-            backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .glass-card:hover, .bg-surface-container-low:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px -10px rgba(234, 179, 8, 0.3);
-            border-color: rgba(234, 179, 8, 0.3);
-        }
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
-        }
-        
-        .text-shadow-gold {
-            text-shadow: 0 0 30px rgba(234, 179, 8, 0.3);
-        }
+/* ── TOKENS ── */
+:root{
+  --bg:#060010;
+  --bg2:#0C0018;
+  --primary:#A855F7;
+  --accent:#D946EF;
+  --verified:#22C55E;
+  --danger:#FF4466;
+  --text:#EDE0FF;
+  --muted:#7A5A9A;
+  --card:rgba(12,0,24,0.9);
+  --card-border:rgba(168,85,247,0.2);
+  --card-hover:rgba(217,70,239,0.5);
+  --font-head:'Space Grotesk',sans-serif;
+  --font-body:'Lexend',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+}
 
-        /* Shimmer Animation for Headline */
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        .shimmer-text {
-            background: linear-gradient(90deg, #ffd165 0%, #ffffff 50%, #ffd165 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shimmer 3s infinite linear;
-        }
+/* ── CURSOR ── */
+html{cursor:none}
+.c-cursor{width:12px;height:12px;background:#fff;border-radius:50%;position:fixed;top:0;left:0;transform:translate(-50%,-50%);pointer-events:none;z-index:999999;mix-blend-mode:difference;transition:width .2s,height .2s}
+.c-cursor.is-hover{width:44px;height:44px}
+@media(hover:none){html{cursor:auto}.c-cursor{display:none}}
 
-        /* Particle Sparks Background */
-        .particle-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .particle-container::before, .particle-container::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #EAB308;
-            border-radius: 50%;
-            opacity: 0;
-            animation: drift-up 4s infinite linear;
-        }
-        @keyframes drift-up {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.6; }
-            100% { transform: translateY(-10vh) translateX(20px); opacity: 0; }
-        }
-        /* Randomized particle clusters */
-        .particle-container::after { animation-delay: 2s; left: 30%; }
-        .particle-seed-1 { position: absolute; left: 15%; animation: drift-up 5s infinite 1s; }
-        .particle-seed-2 { position: absolute; left: 65%; animation: drift-up 6s infinite 0.5s; }
-        .particle-seed-3 { position: absolute; left: 85%; animation: drift-up 4.5s infinite 2.5s; }
+/* ── BASE ── */
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
 
-        /* Roadmap Entrance Animation */
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        .roadmap-item {
-            opacity: 0;
-            animation: slideInLeft 0.6s ease-out forwards;
-        }
+/* ── NOISE ── */
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.02;
+  pointer-events:none;
+  z-index:9997;
+  mix-blend-mode:overlay;
+}
 
-        /* Gauge Animation */
-        .gauge-active {
-            stroke-dasharray: 502; /* 2 * PI * 80 */
-            stroke-dashoffset: 502;
-            transition: stroke-dashoffset 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-    </style>
-<script>const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null}},init(){},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","bittensor_tao",7);const b=document.getElementById("cookie-banner");if(!ON.cookie.get("on_banner")&&b)b.style.display="flex"});</script>
+/* ── GRID OVERLAY ── */
+.grid-bg{
+  position:fixed;inset:0;
+  background-image:linear-gradient(rgba(168,85,247,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,0.05) 1px,transparent 1px);
+  background-size:80px 80px;
+  pointer-events:none;z-index:1;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);
+}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <style>
-    @view-transition { navigation: auto; }
-    ::view-transition-old(root){animation:250ms ease-out both vtOut}
-    ::view-transition-new(root){animation:250ms ease-in both vtIn}
-    @keyframes vtOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-10px)}}
-    @keyframes vtIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    .nav-link{position:relative}
-    .nav-link::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 0.25s ease}
-    .nav-link:hover::after{transform:scaleX(1)}
-    .proto-card{transition:transform 0.3s cubic-bezier(0.22,1,0.36,1),box-shadow 0.3s ease}
-    .proto-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(230,0,122,0.2)}
-    </style>
-    <script src="/nav.js" defer></script>
+/* ── AURORA BLOBS ── */
+.aurora{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.blob{position:absolute;border-radius:50%;filter:blur(130px);animation:blobfloat 22s ease-in-out infinite}
+.blob-1{width:700px;height:700px;background:radial-gradient(circle,rgba(168,85,247,0.18),transparent 70%);top:-200px;left:-150px;animation-duration:20s}
+.blob-2{width:600px;height:600px;background:radial-gradient(circle,rgba(217,70,239,0.14),transparent 70%);top:40%;right:-200px;animation-delay:-8s;animation-duration:25s}
+.blob-3{width:500px;height:500px;background:radial-gradient(circle,rgba(168,85,247,0.1),transparent 70%);bottom:-100px;left:35%;animation-delay:-14s;animation-duration:28s}
+@keyframes blobfloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(50px,-35px) scale(1.07)}66%{transform:translate(-35px,45px) scale(0.95)}}
+
+/* ── NEURAL CANVAS ── */
+#neural{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none}
+
+/* ── LOADER ── */
+#loader{
+  position:fixed;inset:0;
+  background:var(--bg);
+  z-index:99999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+  transition:opacity 0.7s ease,visibility 0.7s ease;
+}
+#loader.out{opacity:0;visibility:hidden}
+.loader-word{
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:clamp(24px,5vw,48px);
+  letter-spacing:0.25em;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  opacity:0;
+}
+.loader-bar-wrap{width:220px;height:1.5px;background:rgba(168,85,247,0.2);border-radius:2px;overflow:hidden}
+.loader-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:2px}
+.loader-pct{font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:0.15em}
+
+/* ── LAYOUT ── */
+.container{width:100%;max-width:1160px;margin:0 auto;padding:0 24px}
+main{position:relative;z-index:3}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:64px;padding:0 32px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(6,0,16,0.8);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(168,85,247,0.15);
+}
+.nav-logo{
+  font-family:var(--font-mono);font-size:12px;font-weight:500;
+  color:var(--text);text-decoration:none;
+  display:flex;align-items:center;gap:4px;min-height:44px;
+}
+.nav-logo .brand{color:var(--muted)}
+.nav-logo .sl{color:var(--primary);margin:0 3px}
+.nav-logo .proj{color:var(--primary)}
+.nav-links{display:flex;align-items:center;gap:4px;list-style:none}
+.nav-links a{
+  font-family:var(--font-mono);font-size:11px;color:var(--muted);
+  text-decoration:none;padding:6px 10px;border-radius:4px;
+  transition:color 0.2s,background 0.2s;min-height:44px;display:inline-flex;align-items:center;
+}
+.nav-links a:hover{color:var(--text);background:rgba(168,85,247,0.08)}
+.nav-links a.nav-cta{color:var(--primary);border:1px solid rgba(168,85,247,0.3);margin-left:6px}
+.nav-links a.nav-cta:hover{background:rgba(168,85,247,0.15);border-color:var(--primary)}
+
+/* hamburger */
+.nav-ham{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+  padding:10px;min-width:44px;min-height:44px;align-items:center;justify-content:center;
+  background:none;border:none;z-index:1001;
+}
+.nav-ham span{display:block;width:20px;height:1.5px;background:var(--text);transition:all 0.3s}
+.nav-ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-ham.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-drawer{
+  display:none;position:fixed;top:64px;left:0;right:0;
+  background:rgba(6,0,16,0.97);backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(168,85,247,0.15);
+  z-index:999;padding:16px 24px 24px;flex-direction:column;gap:4px;
+  transform:translateY(-10px);opacity:0;transition:transform 0.3s,opacity 0.3s;
+}
+.nav-drawer.open{display:flex;transform:translateY(0);opacity:1}
+.nav-drawer a{
+  font-family:var(--font-mono);font-size:13px;color:var(--muted);
+  text-decoration:none;padding:10px 8px;border-radius:4px;
+  min-height:44px;display:flex;align-items:center;transition:color 0.2s,background 0.2s;
+}
+.nav-drawer a:hover{color:var(--text);background:rgba(168,85,247,0.08)}
+@media(max-width:860px){.nav-links{display:none}.nav-ham{display:flex}}
+
+/* ── HERO ── */
+.hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:100px 24px 80px;
+  position:relative;
+}
+.hero-badges{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:36px}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;
+  color:var(--primary);border:1px solid rgba(168,85,247,0.3);
+  background:rgba(168,85,247,0.06);padding:5px 14px;border-radius:100px;
+  opacity:0;
+}
+.badge .dot{width:5px;height:5px;border-radius:50%;background:var(--primary);animation:pdot 2.2s infinite}
+.badge.green{color:var(--verified);border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.06)}
+.badge.green .dot{background:var(--verified)}
+.badge.accent{color:var(--accent);border-color:rgba(217,70,239,0.3);background:rgba(217,70,239,0.06)}
+.badge.accent .dot{background:var(--accent)}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.6)}}
+
+.hero-h1{
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(44px,9vw,108px);
+  line-height:1.0;letter-spacing:-0.03em;
+  margin-bottom:24px;opacity:0;
+}
+.hero-h1 .line-grad{
+  background:linear-gradient(135deg,#fff 30%,var(--primary) 60%,var(--accent));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-sub{
+  font-family:var(--font-body);font-weight:300;
+  font-size:clamp(16px,2.2vw,22px);
+  color:rgba(237,224,255,0.65);
+  max-width:600px;margin:0 auto 48px;line-height:1.55;opacity:0;
+}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;opacity:0}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-head);font-weight:500;font-size:14px;
+  padding:13px 28px;border-radius:8px;text-decoration:none;
+  transition:all 0.25s;min-height:44px;cursor:none;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  color:#fff;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(168,85,247,0.4)}
+.btn-ghost{
+  border:1px solid rgba(168,85,247,0.35);
+  color:var(--primary);background:rgba(168,85,247,0.06);
+}
+.btn-ghost:hover{border-color:var(--primary);background:rgba(168,85,247,0.14);transform:translateY(-2px)}
+
+/* ── SECTION BASE ── */
+section{padding:100px 0;position:relative}
+.section-tag{
+  display:inline-block;
+  font-family:var(--font-mono);font-size:10px;letter-spacing:0.18em;
+  color:var(--primary);text-transform:uppercase;margin-bottom:16px;
+}
+.section-h2{
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(28px,4vw,52px);line-height:1.1;
+  letter-spacing:-0.02em;margin-bottom:16px;
+}
+.section-lead{
+  font-weight:300;font-size:clamp(15px,1.8vw,18px);
+  color:rgba(237,224,255,0.6);max-width:560px;
+}
+
+/* ── CARD ── */
+.card{
+  background:var(--bg2);
+  border:1px solid var(--card-border);
+  border-radius:16px;padding:32px;
+  transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s;
+  transform-style:preserve-3d;
+}
+.card:hover{
+  border-color:rgba(217,70,239,0.5);
+  box-shadow:0 0 40px rgba(168,85,247,0.15),0 0 80px rgba(168,85,247,0.06);
+  transform:translateY(-4px);
+}
+
+/* ── PROBLEM ── */
+#problem .inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:56px;
+}
+.prob-list{padding:28px}
+.prob-list h3{
+  font-family:var(--font-head);font-weight:700;font-size:18px;
+  margin-bottom:20px;
+}
+.prob-list h3.bad{color:var(--danger)}
+.prob-list h3.good{color:var(--verified)}
+.prob-list ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.prob-list li{
+  font-size:14px;color:rgba(237,224,255,0.7);
+  display:flex;align-items:flex-start;gap:10px;line-height:1.5;
+}
+.prob-list li .ic{
+  font-family:var(--font-mono);font-size:12px;font-weight:500;
+  flex-shrink:0;margin-top:2px;
+}
+.prob-list li .ic.x{color:var(--danger)}
+.prob-list li .ic.v{color:var(--verified)}
+
+/* ── HOW IT WORKS ── */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
+.step{text-align:center;padding:32px 20px;position:relative}
+.step-num{
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.15em;
+  color:var(--muted);margin-bottom:12px;
+}
+.step-icon{
+  width:64px;height:64px;border-radius:16px;
+  background:rgba(168,85,247,0.1);border:1px solid var(--card-border);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;font-size:26px;
+  transition:background 0.3s,border-color 0.3s;
+}
+.step:hover .step-icon{background:rgba(168,85,247,0.2);border-color:rgba(168,85,247,0.5)}
+.step h4{font-family:var(--font-head);font-weight:700;font-size:15px;margin-bottom:8px}
+.step p{font-size:13px;color:rgba(237,224,255,0.55);line-height:1.55}
+.step-connector{
+  position:absolute;top:60px;right:-10px;
+  width:20px;height:1px;background:rgba(168,85,247,0.3);
+}
+.step:last-child .step-connector{display:none}
+
+/* Animated receipt preview in how-it-works */
+.receipt-preview{
+  max-width:440px;margin:56px auto 0;
+  opacity:0;transform:scale(0.94) translateY(24px);
+  transition:all 0.6s ease;
+}
+.receipt-preview.visible{opacity:1;transform:scale(1) translateY(0)}
+
+/* ── EXECUTION RECEIPT ── */
+#receipt{background:linear-gradient(180deg,var(--bg) 0%,rgba(12,0,24,0.6) 100%)}
+.receipt-card{
+  max-width:520px;margin:0 auto;
+  background:var(--bg2);
+  border:1px solid rgba(168,85,247,0.25);
+  border-radius:20px;overflow:hidden;
+  opacity:0;transform:scale(0.9) translateY(40px);
+}
+.receipt-card.visible{opacity:1;transform:scale(1) translateY(0);transition:all 0.7s cubic-bezier(0.16,1,0.3,1)}
+.receipt-head{
+  padding:20px 28px;
+  background:linear-gradient(135deg,rgba(168,85,247,0.12),rgba(217,70,239,0.08));
+  border-bottom:1px solid rgba(168,85,247,0.15);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.receipt-head .rt{font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:0.12em}
+.receipt-head .rs{
+  font-family:var(--font-mono);font-size:11px;font-weight:500;
+  color:var(--verified);background:rgba(34,197,94,0.1);
+  border:1px solid rgba(34,197,94,0.3);padding:3px 10px;border-radius:100px;
+  display:flex;align-items:center;gap:5px;
+}
+.receipt-head .rs::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--verified);display:inline-block;animation:pdot 2s infinite}
+.receipt-body{padding:28px}
+.r-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;gap:16px}
+.r-row:last-child{margin-bottom:0}
+.r-label{font-family:var(--font-mono);font-size:11px;color:var(--muted);letter-spacing:0.08em;flex-shrink:0}
+.r-val{font-family:var(--font-mono);font-size:12px;color:var(--text);text-align:right;word-break:break-all}
+.r-val.hash{color:rgba(168,85,247,0.7);font-size:11px}
+.r-val.score{
+  font-family:var(--font-head);font-size:22px;font-weight:700;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.r-divider{height:1px;background:rgba(168,85,247,0.1);margin:8px 0 24px}
+.receipt-foot{
+  padding:16px 28px;
+  background:rgba(34,197,94,0.04);
+  border-top:1px solid rgba(34,197,94,0.1);
+  display:flex;align-items:center;gap:10px;
+}
+.receipt-foot svg{color:var(--verified);flex-shrink:0}
+.receipt-foot p{font-family:var(--font-mono);font-size:11px;color:rgba(34,197,94,0.8);line-height:1.5}
+
+/* NTS dial */
+.nts-dial-wrap{text-align:center;margin-bottom:48px}
+.nts-dial{position:relative;width:180px;height:180px;margin:0 auto 16px}
+.nts-dial svg{width:100%;height:100%;transform:rotate(-90deg)}
+.nts-arc-bg{fill:none;stroke:rgba(168,85,247,0.15);stroke-width:8;stroke-linecap:round}
+.nts-arc{fill:none;stroke:url(#arcGrad);stroke-width:8;stroke-linecap:round;stroke-dasharray:440;stroke-dashoffset:440;transition:stroke-dashoffset 1.8s cubic-bezier(0.16,1,0.3,1)}
+.nts-inner{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+.nts-score{font-family:var(--font-head);font-weight:700;font-size:42px;line-height:1;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.nts-label{font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:0.15em;margin-top:4px}
+
+/* ── SUBNET ARCHITECTURE ── */
+#subnet .arch{
+  margin-top:56px;
+  background:var(--bg2);border:1px solid var(--card-border);
+  border-radius:20px;padding:48px 40px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;
+  position:relative;
+}
+.arch-node{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:24px 16px;position:relative;
+}
+.arch-node::after{
+  content:'→';
+  position:absolute;right:-18px;top:50%;transform:translateY(-50%);
+  color:rgba(168,85,247,0.4);font-size:22px;
+}
+.arch-node:last-child::after{display:none}
+.arch-icon{
+  width:72px;height:72px;border-radius:18px;
+  border:1px solid var(--card-border);
+  background:rgba(168,85,247,0.06);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;font-size:30px;
+  transition:all 0.3s;
+}
+.arch-node:hover .arch-icon{
+  border-color:rgba(217,70,239,0.5);
+  background:rgba(168,85,247,0.15);
+  box-shadow:0 0 30px rgba(168,85,247,0.2);
+}
+.arch-node h4{font-family:var(--font-head);font-weight:700;font-size:15px;margin-bottom:6px}
+.arch-node p{font-size:12px;color:rgba(237,224,255,0.5);line-height:1.5}
+.arch-chip{
+  display:inline-block;font-family:var(--font-mono);font-size:9px;
+  padding:2px 8px;border-radius:100px;margin-top:8px;
+  background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);
+  color:var(--primary);letter-spacing:0.1em;
+}
+.arch-chip.green{background:rgba(34,197,94,0.08);border-color:rgba(34,197,94,0.25);color:var(--verified)}
+
+/* ── COMPETITION ── */
+#competition .comp-card{
+  max-width:680px;margin:0 auto;
+  padding:48px;text-align:center;
+}
+.comp-badge-big{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;
+  color:var(--accent);border:1px solid rgba(217,70,239,0.3);
+  background:rgba(217,70,239,0.06);padding:7px 18px;border-radius:100px;
+  margin-bottom:28px;
+}
+.comp-card h3{
+  font-family:var(--font-head);font-weight:700;font-size:clamp(22px,3vw,36px);
+  margin-bottom:16px;
+}
+.comp-card p{
+  font-size:15px;color:rgba(237,224,255,0.6);line-height:1.65;
+  max-width:500px;margin:0 auto;
+}
+.sandbox-note{
+  margin-top:24px;
+  font-family:var(--font-mono);font-size:11px;
+  color:var(--muted);background:rgba(168,85,247,0.05);
+  border:1px solid rgba(168,85,247,0.12);padding:10px 20px;border-radius:8px;
+  display:inline-block;
+}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid rgba(168,85,247,0.1);
+  padding:48px 0;
+  position:relative;z-index:3;
+}
+.footer-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:20px;
+}
+.footer-brand{font-family:var(--font-mono);font-size:12px;color:var(--muted)}
+.footer-brand strong{color:var(--primary)}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{
+  font-family:var(--font-mono);font-size:11px;color:var(--muted);
+  text-decoration:none;transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--primary)}
+.footer-copy{
+  width:100%;text-align:center;
+  font-family:var(--font-mono);font-size:10px;
+  color:rgba(122,90,154,0.5);margin-top:8px;letter-spacing:0.1em;
+}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(32px)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  #problem .inner{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .step-connector{display:none}
+  #subnet .arch{grid-template-columns:1fr;gap:0}
+  .arch-node::after{display:none}
+  section{padding:72px 0}
+  .receipt-card{margin:0 16px}
+}
+@media(max-width:480px){
+  .steps{grid-template-columns:1fr}
+  #subnet .arch{padding:28px 20px}
+  .comp-card{padding:32px 20px}
+}
+</style>
 </head>
-<body class="bg-background selection:bg-primary-container selection:text-on-primary-container"><canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas><script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script><div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;align-items:center;gap:20px;max-width:520px;width:90vw;"><p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">Cookies used. <a href="/cookies.html" style="color:#EAB308;">Learn more</a></p><button onclick="ON.acceptCookies()" style="background:#EAB308;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button></div>
-<!-- Background Particles -->
-<div class="particle-container">
-<div class="particle-seed-1 w-1 h-1 bg-primary rounded-full opacity-40"></div>
-<div class="particle-seed-2 w-0.5 h-0.5 bg-primary rounded-full opacity-30"></div>
-<div class="particle-seed-3 w-1.5 h-1.5 bg-primary rounded-full opacity-20"></div>
+<body>
+
+<!-- Custom cursor -->
+<div class="c-cursor" id="cursor"></div>
+
+<!-- Aurora + grid -->
+<div class="aurora">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
 </div>
-<!-- TopNavBar -->
-<nav class="bg-black/60 backdrop-blur-xl docked full-width top-0 sticky z-50 tonal-shift bg-neutral-900/50 shadow-[0_20px_40px_rgba(234,179,8,0.04)]">
-<div class="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
-<div class="flex items-center gap-4">
-<span class="text-xl font-bold tracking-tighter text-white uppercase font-headline">ORTHONODE</span>
-<span class="text-xl font-bold tracking-tighter text-yellow-500 uppercase font-headline">INVARIANT</span>
+<div class="grid-bg"></div>
+
+<!-- Neural mesh canvas -->
+<canvas id="neural"></canvas>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-word" id="loaderWord">INVARIANT</div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+  <div class="loader-pct" id="loaderPct">INITIALISING — 0%</div>
 </div>
-<div class="flex items-center gap-8">
-<a class="text-yellow-500 border-b-2 border-yellow-500 pb-1 font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Network</a>
-<a class="text-neutral-400 font-mono hover:text-white transition-colors text-sm" href="https://github.com/orthonode/invariant" target="_blank">GitHub ↗</a>
-<a class="text-neutral-400 font-mono hover:text-white transition-colors text-sm" href="https://bittensor.com" target="_blank">Bittensor ↗</a>
-<a class="hidden md:block text-neutral-400 font-mono hover:text-white transition-colors text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Lending</a>
-</div>
-</div>
+
+<!-- Nav -->
+<nav>
+  <a href="/" class="nav-logo">
+    <span class="brand">ORTHONODE</span><span class="sl">/</span><span class="proj">INVARIANT</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#receipt">Receipt</a></li>
+    <li><a href="#subnet">Subnet</a></li>
+    <li><a href="#competition">Ideathon</a></li>
+    <li><a href="https://orthonode.xyz" class="nav-cta">orthonode.xyz</a></li>
+  </ul>
+  <button class="nav-ham" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-<main class="relative">
-<!-- Hero Section -->
-<section class="pt-32 pb-20 px-8 max-w-screen-2xl mx-auto overflow-hidden">
-<div class="relative z-10">
-<div class="flex flex-wrap gap-3 mb-8">
-<span class="bg-surface-container-high px-3 py-1 text-[10px] font-mono tracking-widest text-primary border border-outline-variant/30 rounded-lg">PHASE 1 COMPLETE</span>
-<span class="bg-surface-container-high px-3 py-1 text-[10px] font-mono tracking-widest text-on-surface-variant border border-outline-variant/30 rounded-lg">BITTENSOR TAO</span>
-<span class="bg-surface-container-high px-3 py-1 text-[10px] font-mono tracking-widest text-on-surface-variant border border-outline-variant/30 rounded-lg">NTS SCORING</span>
+<div class="nav-drawer" id="navDrawer">
+  <a href="#problem">Problem</a>
+  <a href="#how">How It Works</a>
+  <a href="#receipt">Execution Receipt</a>
+  <a href="#subnet">Subnet Architecture</a>
+  <a href="#competition">Ideathon</a>
+  <a href="https://orthonode.xyz">orthonode.xyz</a>
+  <a href="https://github.com/orthonode">GitHub</a>
+  <a href="https://x.com/OrthonodeSys">@OrthonodeSys</a>
 </div>
-<h1 class="text-[12vw] md:text-[10rem] leading-[0.85] font-headline mb-8 tracking-tighter text-shadow-gold shimmer-text">
-                    INVARIANT
-                </h1>
-<div class="max-w-4xl">
-<h2 class="text-3xl md:text-5xl font-headline text-white mb-6 uppercase leading-tight">
-                        Node Trust Score Protocol on Bittensor
-                    </h2>
-<p class="text-xl text-on-surface-variant font-body font-light mb-10 max-w-2xl">
-                        Deterministic AI execution receipts with 0–100 NTS scoring — 9,000+ receipts per second throughput on Bittensor subnet.
-                    </p>
-<div class="flex flex-wrap gap-4">
-<a class="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-headline text-lg hover:scale-105 transition-transform flex items-center gap-2" href="https://github.com/orthonode/invariant" target="_blank">
-                            Explore Subnet <span class="material-symbols-outlined">north_east</span>
-</a>
-<a class="border border-white/10 hover:bg-surface-container-highest transition-all px-8 py-4 rounded-lg font-headline text-lg flex items-center gap-2" href="https://github.com/orthonode/invariant" target="_blank">
-                            GitHub <span class="material-symbols-outlined">north_east</span>
-</a>
-</div>
-</div>
-</div>
-<!-- Background Aesthetic -->
-<div class="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
-<div class="w-full h-full bg-gradient-to-l from-primary/20 to-transparent blur-[120px]"></div>
-</div>
+
+<main>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+  <div class="hero-badges">
+    <span class="badge"><span class="dot"></span>BITTENSOR SUBNET</span>
+    <span class="badge accent"><span class="dot"></span>NTS SCORE</span>
+    <span class="badge green"><span class="dot"></span>IMMUTABLE</span>
+    <span class="badge"><span class="dot"></span>IDEATHON 2026</span>
+  </div>
+  <h1 class="hero-h1">
+    <span class="line-grad">PROVE WHAT AI DID</span>
+  </h1>
+  <p class="hero-sub">Cryptographic execution receipts for every agent action on Bittensor</p>
+  <div class="hero-ctas">
+    <a href="#how" class="btn btn-primary">How It Works ↓</a>
+    <a href="https://github.com/orthonode" target="_blank" rel="noopener" class="btn btn-ghost">View on GitHub</a>
+  </div>
 </section>
-<!-- Key Metrics Bento -->
-<section class="px-8 pb-32 max-w-screen-2xl mx-auto">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-<div class="glass-card p-8 rounded-xl flex flex-col justify-between aspect-square md:aspect-auto h-64">
-<span class="text-primary material-symbols-outlined text-4xl">speed</span>
-<div>
-<div class="text-4xl font-headline text-white"><span data-count="9000">0</span>+</div>
-<div class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">Receipts/Sec</div>
-</div>
-</div>
-<div class="glass-card p-8 rounded-xl flex flex-col justify-between h-64">
-<span class="text-primary material-symbols-outlined text-4xl">analytics</span>
-<div>
-<div class="text-4xl font-headline text-white">0–100</div>
-<div class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">NTS Score Range</div>
-</div>
-</div>
-<div class="glass-card p-8 rounded-xl flex flex-col justify-between h-64">
-<span class="text-primary material-symbols-outlined text-4xl">verified</span>
-<div>
-<div class="text-4xl font-headline text-white" data-count="21">0</div>
-<div class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">Tests Passing</div>
-</div>
-</div>
-<div class="glass-card p-8 rounded-xl flex flex-col justify-between h-64 bg-primary-container/10">
-<span class="text-primary material-symbols-outlined text-4xl">check_circle</span>
-<div>
-<div class="text-4xl font-headline text-white">CORE</div>
-<div class="font-mono text-xs text-on-surface-variant uppercase tracking-widest">Phase 1 Complete</div>
-</div>
-</div>
-</div>
+
+<!-- ── THE PROBLEM ── -->
+<section id="problem">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">01 / THE PROBLEM</div>
+      <h2 class="section-h2">AI agents act.<br>No one can verify.</h2>
+      <p class="section-lead">Decentralised AI networks execute millions of agent decisions daily. None of them produce auditable proof.</p>
+    </div>
+    <div class="inner reveal" style="transition-delay:0.1s">
+      <div class="card prob-list">
+        <h3 class="bad">✗ Traditional Systems</h3>
+        <ul>
+          <li><span class="ic x">✗</span><span>Agent actions are opaque — no execution log on-chain</span></li>
+          <li><span class="ic x">✗</span><span>Trust is assumed, not proven — outputs accepted blindly</span></li>
+          <li><span class="ic x">✗</span><span>No cryptographic link between input, execution, and output</span></li>
+          <li><span class="ic x">✗</span><span>Disputed actions have no canonical source of truth</span></li>
+          <li><span class="ic x">✗</span><span>Slashing / reward logic vulnerable to unverified claims</span></li>
+          <li><span class="ic x">✗</span><span>No composable trust primitive for downstream protocols</span></li>
+        </ul>
+      </div>
+      <div class="card prob-list">
+        <h3 class="good">✓ INVARIANT</h3>
+        <ul>
+          <li><span class="ic v">✓</span><span>Every execution produces a cryptographically signed receipt</span></li>
+          <li><span class="ic v">✓</span><span>NTS score (0–100) encodes trust in a single verifiable integer</span></li>
+          <li><span class="ic v">✓</span><span>Input hash + output hash + timestamp bound to a Bittensor block</span></li>
+          <li><span class="ic v">✓</span><span>Disputed actions have an immutable canonical receipt on-subnet</span></li>
+          <li><span class="ic v">✓</span><span>Validator logic can read NTS directly — no manual auditing</span></li>
+          <li><span class="ic v">✓</span><span>Composable trust primitive any subnet can consume</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- NTS Score System -->
-<section class="px-8 pb-32 max-w-screen-2xl mx-auto">
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-<div>
-<span class="font-mono text-primary text-xs tracking-widest uppercase mb-4 block">Deterministic Trust</span>
-<h2 class="text-5xl md:text-7xl font-headline text-white mb-8 leading-none">NTS SCORING ALGORITHM</h2>
-<p class="text-on-surface-variant text-lg font-light leading-relaxed mb-12">
-                        The Node Trust Score (NTS) is a mathematical representation of a node's computational integrity. Every AI execution generates a cryptographic receipt that is cross-verified across the Bittensor network.
-                    </p>
-<div class="space-y-6">
-<div class="flex items-center gap-6 p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
-<div class="w-12 h-12 rounded-lg bg-error/10 flex items-center justify-center text-error font-mono">0-30</div>
-<div>
-<h4 class="font-headline text-white text-lg">Untrusted</h4>
-<p class="text-on-surface-variant text-sm font-mono">High latency, checksum failures, execution mismatch.</p>
-</div>
-</div>
-<div class="flex items-center gap-6 p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
-<div class="w-12 h-12 rounded-lg bg-yellow-500/10 flex items-center justify-center text-yellow-500 font-mono">31-60</div>
-<div>
-<h4 class="font-headline text-white text-lg">Neutral</h4>
-<p class="text-on-surface-variant text-sm font-mono">Intermittent verification, low stake participation.</p>
-</div>
-</div>
-<div class="flex items-center gap-6 p-4 rounded-xl hover:bg-surface-container-low transition-colors group">
-<div class="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center text-green-500 font-mono">61-85</div>
-<div>
-<h4 class="font-headline text-white text-lg">Trusted</h4>
-<p class="text-on-surface-variant text-sm font-mono">Consistent uptime, deterministic proof alignment.</p>
-</div>
-</div>
-<div class="flex items-center gap-6 p-4 rounded-xl bg-primary/5 border border-primary/20 group shadow-[0_0_20px_rgba(234,179,8,0.05)]">
-<div class="w-12 h-12 rounded-lg bg-primary-container text-on-primary-container flex items-center justify-center font-mono font-bold">86+</div>
-<div>
-<h4 class="font-headline text-primary text-lg">Verified Elite</h4>
-<p class="text-on-surface-variant text-sm font-mono">Perfect cryptographic history, high TAO incentive.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="relative flex justify-center items-center">
-<div class="relative w-full aspect-square max-w-md">
-<svg class="w-full h-full transform -rotate-90" viewbox="0 0 200 200">
-<!-- Background Gauge -->
-<circle cx="100" cy="100" fill="none" r="80" stroke="#1B1B1B" stroke-dasharray="502" stroke-dashoffset="0" stroke-linecap="round" stroke-width="12"></circle>
-<!-- Active Gauge -->
-<circle class="gauge-active drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]" cx="100" cy="100" fill="none" id="nts-gauge" r="80" stroke="#EAB308" stroke-linecap="round" stroke-width="12"></circle>
-</svg>
-<div class="absolute inset-0 flex flex-col items-center justify-center text-center pt-8">
-<span class="text-7xl font-headline text-white tracking-tighter">98.4</span>
-<span class="font-mono text-primary text-sm tracking-widest">CURRENT AVG NTS</span>
-</div>
-</div>
-</div>
-</div>
+
+<!-- ── HOW NTS WORKS ── -->
+<section id="how">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <div class="section-tag">02 / HOW NTS WORKS</div>
+      <h2 class="section-h2">Four steps to proof</h2>
+      <p class="section-lead" style="margin:0 auto">From raw agent execution to an immutable on-subnet trust score in under a second.</p>
+    </div>
+    <div class="steps">
+      <div class="card step reveal">
+        <div class="step-num">01</div>
+        <div class="step-icon">⚡</div>
+        <h4>Execute</h4>
+        <p>Agent receives task, runs inference or action logic, produces output bytes</p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="card step reveal" style="transition-delay:0.1s">
+        <div class="step-num">02</div>
+        <div class="step-icon">🔐</div>
+        <h4>Capture Context</h4>
+        <p>INVARIANT captures input hash, output hash, model ID, latency, and block height</p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="card step reveal" style="transition-delay:0.2s">
+        <div class="step-num">03</div>
+        <div class="step-icon">🧮</div>
+        <h4>Score (0–100)</h4>
+        <p>Multi-factor NTS algorithm weights determinism, latency, consistency, and provenance</p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="card step reveal" style="transition-delay:0.3s">
+        <div class="step-num">04</div>
+        <div class="step-icon">🔗</div>
+        <h4>Post to Subnet</h4>
+        <p>Signed receipt committed to Bittensor subnet — immutable, queryable, composable</p>
+      </div>
+    </div>
+
+    <!-- Animated receipt preview -->
+    <div class="receipt-preview" id="receiptPreview">
+      <div class="card" style="padding:24px 28px">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:0.15em;margin-bottom:16px">LIVE RECEIPT PREVIEW</div>
+        <div class="r-row">
+          <span class="r-label">AGENT_ID</span>
+          <span class="r-val hash">0xA3f9…2B71</span>
+        </div>
+        <div class="r-row">
+          <span class="r-label">ACTION</span>
+          <span class="r-val" style="font-size:12px;color:rgba(237,224,255,0.5)">text_inference</span>
+        </div>
+        <div class="r-row">
+          <span class="r-label">NTS</span>
+          <span class="r-val score" id="previewScore">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Architecture -->
-<section class="px-8 pb-32 max-w-screen-2xl mx-auto">
-<h3 class="text-4xl font-headline text-white mb-16 text-center uppercase tracking-tighter">Protocol Architecture</h3>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="bg-surface-container-low p-10 rounded-xl hover:bg-surface-container-high transition-all duration-500">
-<div class="mb-10 text-primary">
-<span class="material-symbols-outlined text-5xl">layers</span>
-</div>
-<h4 class="text-2xl font-headline text-white mb-4">Execution Layer</h4>
-<p class="text-on-surface-variant font-light leading-relaxed">AI task submission gateway. Handles deterministic model output generation with sandboxed execution environments.</p>
-</div>
-<div class="bg-surface-container-low p-10 rounded-xl hover:bg-surface-container-high transition-all duration-500">
-<div class="mb-10 text-primary">
-<span class="material-symbols-outlined text-5xl">receipt_long</span>
-</div>
-<h4 class="text-2xl font-headline text-white mb-4">Receipt Layer</h4>
-<p class="text-on-surface-variant font-light leading-relaxed">Cryptographic receipt generation. Utilizes the NTS algorithm to verify execution proofs in real-time.</p>
-</div>
-<div class="bg-surface-container-low p-10 rounded-xl hover:bg-surface-container-high transition-all duration-500">
-<div class="mb-10 text-primary">
-<span class="material-symbols-outlined text-5xl">hub</span>
-</div>
-<h4 class="text-2xl font-headline text-white mb-4">Bittensor Layer</h4>
-<p class="text-on-surface-variant font-light leading-relaxed">Direct subnet integration. Manages TAO incentive alignment and validator consensus protocol.</p>
-</div>
-</div>
+
+<!-- ── EXECUTION RECEIPT ── -->
+<section id="receipt">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:12px">
+      <div class="section-tag">03 / EXECUTION RECEIPT</div>
+      <h2 class="section-h2">Every action. Proven.</h2>
+    </div>
+
+    <!-- NTS Dial -->
+    <div class="nts-dial-wrap reveal">
+      <div class="nts-dial">
+        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#A855F7"/>
+              <stop offset="100%" stop-color="#D946EF"/>
+            </linearGradient>
+          </defs>
+          <circle class="nts-arc-bg" cx="80" cy="80" r="70"/>
+          <circle class="nts-arc" id="ntsArc" cx="80" cy="80" r="70"/>
+        </svg>
+        <div class="nts-inner">
+          <div class="nts-score" id="ntsScore">0</div>
+          <div class="nts-label">NTS SCORE</div>
+        </div>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:11px;color:var(--muted)">Neural Trust Score — computed on-chain</div>
+    </div>
+
+    <!-- Receipt card -->
+    <div class="receipt-card" id="receiptCard">
+      <div class="receipt-head">
+        <span class="rt">INVARIANT RECEIPT v1.0</span>
+        <span class="rs">VERIFIED</span>
+      </div>
+      <div class="receipt-body">
+        <div class="r-row">
+          <span class="r-label">AGENT_ID</span>
+          <span class="r-val hash">0xA3f9c2d1e4b87f0a3c91d2e5b4f7a8c9d0e1f2b3a4c5d6e7f8a9b0c1d2e3f4</span>
+        </div>
+        <div class="r-divider"></div>
+        <div class="r-row">
+          <span class="r-label">ACTION_HASH</span>
+          <span class="r-val hash">sha256:7f3d2a…c9e1b4</span>
+        </div>
+        <div class="r-row">
+          <span class="r-label">INPUT_HASH</span>
+          <span class="r-val hash">sha256:1a2b3c…4d5e6f</span>
+        </div>
+        <div class="r-row">
+          <span class="r-label">OUTPUT_HASH</span>
+          <span class="r-val hash">sha256:9f8e7d…6c5b4a</span>
+        </div>
+        <div class="r-divider"></div>
+        <div class="r-row">
+          <span class="r-label">TIMESTAMP</span>
+          <span class="r-val" style="font-size:12px">2026-03-29T04:17:33Z</span>
+        </div>
+        <div class="r-row">
+          <span class="r-label">BLOCK_HEIGHT</span>
+          <span class="r-val" style="font-size:12px">3,847,291</span>
+        </div>
+        <div class="r-row">
+          <span class="r-label">LATENCY_MS</span>
+          <span class="r-val" style="font-size:12px">247</span>
+        </div>
+        <div class="r-divider"></div>
+        <div class="r-row">
+          <span class="r-label">NTS_SCORE</span>
+          <span class="r-val score">94 / 100</span>
+        </div>
+        <div class="r-row">
+          <span class="r-label">SUBNET_ID</span>
+          <span class="r-val" style="font-size:12px;color:var(--primary)">τ bittensor::nts</span>
+        </div>
+      </div>
+      <div class="receipt-foot">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        <p>Cryptographically signed. Immutably committed to Bittensor at block 3,847,291. This receipt cannot be altered or revoked.</p>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Phase Roadmap -->
-<section class="px-8 pb-32 max-w-screen-2xl mx-auto">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-<div class="roadmap-item relative p-8 rounded-xl bg-surface-container-low border border-primary/20" style="animation-delay: 0ms;">
-<span class="font-mono text-primary text-[10px] uppercase mb-4 block">Phase 1</span>
-<h5 class="text-white font-headline text-xl mb-4">Core NTS</h5>
-<div class="flex items-center gap-2 text-primary">
-<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span class="font-mono text-[10px] uppercase">Done</span>
-</div>
-</div>
-<div class="roadmap-item relative p-8 rounded-xl glass-card" style="animation-delay: 200ms;">
-<span class="font-mono text-on-surface-variant text-[10px] uppercase mb-4 block">Phase 2</span>
-<h5 class="text-white font-headline text-xl mb-4">Subnet Reg</h5>
-<div class="flex items-center gap-2 text-yellow-500">
-<span class="material-symbols-outlined text-sm">charging_station</span>
-<span class="font-mono text-[10px] uppercase">Active</span>
-</div>
-</div>
-<div class="roadmap-item relative p-8 rounded-xl glass-card opacity-60" style="animation-delay: 400ms;">
-<span class="font-mono text-on-surface-variant text-[10px] uppercase mb-4 block">Phase 3</span>
-<h5 class="text-white font-headline text-xl mb-4">Validator Intel</h5>
-<div class="flex items-center gap-2 text-on-surface-variant">
-<span class="material-symbols-outlined text-sm">schedule</span>
-<span class="font-mono text-[10px] uppercase">Pending</span>
-</div>
-</div>
-<div class="roadmap-item relative p-8 rounded-xl glass-card opacity-60" style="animation-delay: 600ms;">
-<span class="font-mono text-on-surface-variant text-[10px] uppercase mb-4 block">Phase 4</span>
-<h5 class="text-white font-headline text-xl mb-4">Cross-chain</h5>
-<div class="flex items-center gap-2 text-on-surface-variant">
-<span class="material-symbols-outlined text-sm">lock</span>
-<span class="font-mono text-[10px] uppercase">Locked</span>
-</div>
-</div>
-</div>
+
+<!-- ── SUBNET ARCHITECTURE ── -->
+<section id="subnet">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">04 / SUBNET ARCHITECTURE</div>
+      <h2 class="section-h2">Bittensor-native from day one</h2>
+      <p class="section-lead">INVARIANT operates as a dedicated Bittensor subnet — miners generate receipts, validators verify NTS scores, consensus makes them immutable.</p>
+    </div>
+    <div class="arch reveal" style="transition-delay:0.1s">
+      <div class="arch-node">
+        <div class="arch-icon">🤖</div>
+        <h4>AI Agent</h4>
+        <p>Executes task on any Bittensor miner. All I/O captured automatically by INVARIANT hook.</p>
+        <span class="arch-chip">ANY SUBNET</span>
+      </div>
+      <div class="arch-node">
+        <div class="arch-icon">📋</div>
+        <h4>NTS Engine</h4>
+        <p>Determinism, latency, provenance, and consistency factors computed into a 0–100 score.</p>
+        <span class="arch-chip">τ INVARIANT</span>
+      </div>
+      <div class="arch-node">
+        <div class="arch-icon">🔒</div>
+        <h4>On-Chain Receipt</h4>
+        <p>Signed receipt posted to INVARIANT subnet. Queryable by any validator or downstream protocol.</p>
+        <span class="arch-chip green">IMMUTABLE</span>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Tech Stack -->
-<section class="bg-surface-container-lowest py-24 px-8">
-<div class="max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
-<div class="max-w-md">
-<h3 class="text-3xl font-headline text-white mb-4">ENGINEERED FOR SOVEREIGNTY</h3>
-<p class="text-on-surface-variant font-body">The protocol is built with low-level systems languages to ensure maximum performance and deterministic safety.</p>
-</div>
-<div class="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-8">
-<div class="flex items-center gap-3">
-<div class="w-2 h-2 rounded-full bg-primary"></div>
-<span class="font-mono text-white text-sm">Rust</span>
-</div>
-<div class="flex items-center gap-3">
-<div class="w-2 h-2 rounded-full bg-primary"></div>
-<span class="font-mono text-white text-sm">Bittensor SDK</span>
-</div>
-<div class="flex items-center gap-3">
-<div class="w-2 h-2 rounded-full bg-primary"></div>
-<span class="font-mono text-white text-sm">NTS Algorithm</span>
-</div>
-<div class="flex items-center gap-3">
-<div class="w-2 h-2 rounded-full bg-primary"></div>
-<span class="font-mono text-white text-sm">Async Processing</span>
-</div>
-<div class="flex items-center gap-3">
-<div class="w-2 h-2 rounded-full bg-primary"></div>
-<span class="font-mono text-white text-sm">Merkle Receipts</span>
-</div>
-<div class="flex items-center gap-3">
-<div class="w-2 h-2 rounded-full bg-primary"></div>
-<span class="font-mono text-white text-sm">WASM Runtime</span>
-</div>
-</div>
-</div>
+
+<!-- ── COMPETITION ── -->
+<section id="competition">
+  <div class="container" style="display:flex;justify-content:center">
+    <div class="card comp-card reveal">
+      <div class="comp-badge-big">⚡ BITTENSOR IDEATHON 2026</div>
+      <h3>Proof-of-concept.<br>Built to compete.</h3>
+      <p>INVARIANT was designed and built for the Bittensor Ideathon 2026 — a sandboxed proof-of-concept demonstrating that cryptographic AI execution receipts are technically feasible as a Bittensor subnet primitive.</p>
+      <div class="sandbox-note">TYPE B — SANDBOXED // No integration without Arhant Barmate decision</div>
+    </div>
+  </div>
 </section>
+
 </main>
+
 <!-- Footer -->
-<footer class="bg-black full-width py-20 border-t border-neutral-900 tonal-shift surface-container-low">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-12 px-8 max-w-screen-2xl mx-auto items-end">
-<div>
-<div class="text-lg font-black text-white mb-4 font-headline uppercase">ORTHONODE SYSTEMS</div>
-<p class="font-mono text-sm text-neutral-500 mb-8 max-w-sm">Sovereign Infrastructure for the decentralized intelligence layer.</p>
-<p class="font-mono text-[10px] text-neutral-700 uppercase tracking-widest">© 2024 ORTHONODE SYSTEMS. Sovereign Infrastructure.</p>
-</div>
-<div class="flex flex-wrap gap-x-12 gap-y-4 md:justify-end">
-<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Protocol Docs</a>
-<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Smart Contracts</a>
-<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Audit Reports</a>
-<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank">GitHub</a>
-<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Status</a>
-<a class="text-neutral-500 hover:text-white transition-colors font-mono text-sm" href="https://github.com/orthonode/invariant" target="_blank" rel="noopener">Terms</a>
-</div>
-</div>
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <strong>ORTHONODE SYSTEMS™</strong><br>
+        Infrastructure Labs // Physical Verification Layer
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="https://orthonode.xyz" target="_blank" rel="noopener">orthonode.xyz</a>
+        <a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://x.com/OrthonodeSys" target="_blank" rel="noopener">@OrthonodeSys</a>
+      </div>
+    </div>
+    <div class="footer-copy">INVARIANT — ORTHONODE SYSTEMS™ — Bittensor Ideathon 2026 — Sandboxed proof-of-concept</div>
+  </div>
 </footer>
+
 <script>
-        // Animations on load
-        window.addEventListener('load', () => {
-            // Gauge animation
-            const gauge = document.getElementById('nts-gauge');
-            const circumference = 2 * Math.PI * 80;
-            const targetScore = 98.4;
-            const percentage = targetScore / 100;
-            // The gauge is a partial circle visually in the original design (approx 3/4)
-            // But if we want it to reach 98.4% of the full circle:
-            const offset = circumference - (percentage * circumference);
-            gauge.style.strokeDashoffset = offset;
+/* ── CURSOR ── */
+const cur = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,.card,.btn,.step,.arch-node').forEach(el => {
+  el.addEventListener('mouseenter', () => cur.classList.add('is-hover'));
+  el.addEventListener('mouseleave', () => cur.classList.remove('is-hover'));
+});
 
-            // Counter animations
-            const animateCounter = (element, target, duration) => {
-                let start = 0;
-                const increment = target / (duration / 16); // 16ms per frame
-                const update = () => {
-                    start += increment;
-                    if (start >= target) {
-                        element.innerText = Math.floor(target);
-                    } else {
-                        element.innerText = Math.floor(start);
-                        requestAnimationFrame(update);
-                    }
-                };
-                update();
-            };
+/* ── NEURAL MESH ── */
+const canvas = document.getElementById('neural');
+const ctx = canvas.getContext('2d');
+let W, H, nodes = [], animId;
+const IS_MOBILE = () => window.innerWidth < 768;
 
-            const counterElements = document.querySelectorAll('[data-count]');
-            counterElements.forEach(el => {
-                const targetValue = parseInt(el.getAttribute('data-count'));
-                const duration = targetValue > 100 ? 1200 : 800;
-                animateCounter(el, targetValue, duration);
-            });
-        });
-    </script>
-<script>document.querySelectorAll("button,a").forEach(el=>{if(el.textContent.trim().toLowerCase().includes("connect wallet"))el.remove()});document.querySelectorAll("button").forEach(btn=>{const icon=btn.querySelector(".material-symbols-outlined");if(icon&&(icon.textContent.trim()==="add"||icon.textContent.trim()==="remove")){btn.addEventListener("click",()=>{const p=btn.nextElementSibling;if(!p)return;if(p.style.display==="block"){p.style.display="none";icon.textContent="add";}else{p.style.display="block";icon.textContent="remove";}});}});</script>
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
 
-    <script>
-    document.addEventListener("DOMContentLoaded",()=>{
-      if(typeof gsap!=="undefined"){
-        gsap.registerPlugin(ScrollTrigger);
-        // Nav entrance
-        gsap.fromTo("nav,header",[{y:-60,opacity:0}],[{y:0,opacity:1,duration:0.5,ease:"power3.out"}]);
-        // Hero text
-        gsap.fromTo("h1",{opacity:0,y:30},{opacity:1,y:0,duration:0.8,ease:"power3.out",delay:0.15});
-        // Cards staggered
-        gsap.utils.toArray(".glass,.card,[class*='rounded-xl']").forEach((el,i)=>{
-          gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:0.6,ease:"power2.out",
-            scrollTrigger:{trigger:el,start:"top 88%",once:true},delay:i*0.05>0.4?0.4:i*0.05
-          });
-        });
-        // Counter animation
-        document.querySelectorAll("[data-target]").forEach(el=>{
-          const t=parseInt(el.dataset.target);
-          ScrollTrigger.create({trigger:el,start:"top 85%",once:true,
-            onEnter:()=>gsap.to({v:0},{v:t,duration:1.2,ease:"power2.out",
-              onUpdate:function(){el.textContent=(this.targets()[0].v<10?"0":"")+Math.round(this.targets()[0].v)}})
-          });
-        });
-        // View transition polyfill
-        if(!document.startViewTransition){
-          document.addEventListener("click",e=>{
-            const a=e.target.closest("a[href]");
-            if(!a||a.target==="_blank"||a.href.includes("://")&&!a.href.includes(location.hostname)||a.href.startsWith("mailto:"))return;
-            e.preventDefault();document.body.style.opacity="0";
-            document.body.style.transition="opacity 0.2s";
-            setTimeout(()=>{location.href=a.href},200);
-          });
-        }
-      }
+function initNodes() {
+  const count = IS_MOBILE() ? 35 : 60;
+  nodes = [];
+  for (let i = 0; i < count; i++) {
+    const isVerified = Math.random() < 0.3;
+    nodes.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.35,
+      vy: (Math.random() - 0.5) * 0.35,
+      r: Math.random() * 2.5 + 1.5,
+      verified: isVerified,
+      pulse: Math.random() * Math.PI * 2,
+      pulseSpeed: Math.random() * 0.03 + 0.01,
+      glowing: false,
+      glowTimer: Math.floor(Math.random() * 200),
     });
-    </script>
-</body></html>
+  }
+}
+
+function drawFrame() {
+  ctx.clearRect(0, 0, W, H);
+  const CONNECT = IS_MOBILE() ? 100 : 120;
+
+  for (let i = 0; i < nodes.length; i++) {
+    const a = nodes[i];
+    for (let j = i + 1; j < nodes.length; j++) {
+      const b = nodes[j];
+      const dx = a.x - b.x, dy = a.y - b.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < CONNECT) {
+        const alpha = (1 - dist / CONNECT) * 0.18;
+        const isVerifiedLine = a.verified || b.verified;
+        ctx.beginPath();
+        ctx.strokeStyle = isVerifiedLine
+          ? `rgba(34,197,94,${alpha * 0.8})`
+          : `rgba(168,85,247,${alpha})`;
+        ctx.lineWidth = 0.7;
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+    }
+  }
+
+  for (const n of nodes) {
+    n.pulse += n.pulseSpeed;
+    n.glowTimer--;
+    if (n.glowTimer <= 0) {
+      n.glowing = !n.glowing;
+      n.glowTimer = Math.floor(Math.random() * 180 + 60);
+    }
+    const pulseFactor = 0.5 + 0.5 * Math.sin(n.pulse);
+    const glowAlpha = n.glowing ? 0.25 + pulseFactor * 0.35 : 0.12 + pulseFactor * 0.1;
+
+    if (n.verified) {
+      // Glow
+      const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
+      grd.addColorStop(0, `rgba(34,197,94,${glowAlpha})`);
+      grd.addColorStop(1, 'rgba(34,197,94,0)');
+      ctx.beginPath();
+      ctx.fillStyle = grd;
+      ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+      ctx.fill();
+      // Core
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(34,197,94,${0.7 + pulseFactor * 0.3})`;
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      if (n.glowing) {
+        const grd2 = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 5);
+        grd2.addColorStop(0, `rgba(168,85,247,${glowAlpha})`);
+        grd2.addColorStop(1, 'rgba(168,85,247,0)');
+        ctx.beginPath();
+        ctx.fillStyle = grd2;
+        ctx.arc(n.x, n.y, n.r * 5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(168,85,247,${0.4 + pulseFactor * 0.4})`;
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Move
+    n.x += n.vx;
+    n.y += n.vy;
+    if (n.x < -20) n.x = W + 20;
+    if (n.x > W + 20) n.x = -20;
+    if (n.y < -20) n.y = H + 20;
+    if (n.y > H + 20) n.y = -20;
+  }
+
+  animId = requestAnimationFrame(drawFrame);
+}
+
+window.addEventListener('resize', () => { resize(); initNodes(); });
+resize();
+initNodes();
+
+/* ── LOADER + CANVAS FIRE UP ── */
+const loader = document.getElementById('loader');
+const lBar = document.getElementById('loaderBar');
+const lPct = document.getElementById('loaderPct');
+const lWord = document.getElementById('loaderWord');
+
+// Animate wordmark in
+gsap.to(lWord, { opacity: 1, duration: 0.6, delay: 0.2 });
+
+let pct = 0;
+const interval = setInterval(() => {
+  pct += Math.floor(Math.random() * 8 + 3);
+  if (pct >= 100) { pct = 100; clearInterval(interval); }
+  lBar.style.width = pct + '%';
+  lPct.textContent = 'INITIALISING — ' + pct + '%';
+  if (pct === 100) {
+    setTimeout(() => {
+      drawFrame(); // start canvas
+      loader.classList.add('out');
+      revealHero();
+    }, 300);
+  }
+}, 60);
+
+/* ── HERO ANIMATION ── */
+function revealHero() {
+  const tl = gsap.timeline();
+  tl.to('.hero-badges .badge', { opacity: 1, y: 0, stagger: 0.1, duration: 0.5, ease: 'power2.out' })
+    .to('.hero-h1', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.2')
+    .to('.hero-sub', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
+    .to('.hero-ctas', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3');
+}
+
+/* ── SCROLL REVEALS ── */
+gsap.registerPlugin(ScrollTrigger);
+
+document.querySelectorAll('.reveal').forEach(el => {
+  gsap.fromTo(el,
+    { opacity: 0, y: 36 },
+    {
+      opacity: 1, y: 0, duration: 0.75, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+    }
+  );
+});
+
+/* ── NTS DIAL ANIMATION ── */
+const ntsArc = document.getElementById('ntsArc');
+const ntsScoreEl = document.getElementById('ntsScore');
+const TARGET = 94;
+const CIRC = 2 * Math.PI * 70; // r=70
+
+ScrollTrigger.create({
+  trigger: '#receipt',
+  start: 'top 70%',
+  once: true,
+  onEnter() {
+    // Count score
+    let curr = 0;
+    const step = () => {
+      curr++;
+      ntsScoreEl.textContent = curr;
+      if (curr < TARGET) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+
+    // Arc
+    const offset = CIRC - (TARGET / 100) * CIRC;
+    ntsArc.style.strokeDashoffset = offset;
+
+    // Receipt card
+    const rc = document.getElementById('receiptCard');
+    rc.classList.add('visible');
+  }
+});
+
+/* ── RECEIPT PREVIEW in HOW IT WORKS ── */
+ScrollTrigger.create({
+  trigger: '#how',
+  start: 'top 60%',
+  once: true,
+  onEnter() {
+    document.getElementById('receiptPreview').classList.add('visible');
+    let s = 0;
+    const el = document.getElementById('previewScore');
+    const go = () => {
+      s++;
+      el.textContent = s;
+      if (s < 94) requestAnimationFrame(go);
+    };
+    setTimeout(() => requestAnimationFrame(go), 600);
+  }
+});
+
+/* ── NAV HAMBURGER ── */
+const ham = document.getElementById('hamburger');
+const drawer = document.getElementById('navDrawer');
+ham.addEventListener('click', () => {
+  ham.classList.toggle('open');
+  drawer.classList.toggle('open');
+});
+drawer.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    ham.classList.remove('open');
+    drawer.classList.remove('open');
+  });
+});
+
+/* ── 3D CARD TILT ── */
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `translateY(-4px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+</script>
+</body>
+</html>

@@ -11,6 +11,7 @@
     { label: "TON-SHA",  href: "/ton-sha.html",        key: "ton-sha" },
     { label: "INVARIANT",href: "/invariant.html",      key: "invariant" },
     { label: "TIX-DAO",  href: "/tix-dao.html",        key: "tix-dao" },
+    { label: "MANTIS",   href: "/mantis.html",         key: "mantis" },
     { label: "Nexus",    href: "/nexus.html",           key: "nexus" },
     { label: "Research", href: "/iotex-research.html",  key: "iotex-research" },
     { label: "GitHub ↗", href: "https://github.com/orthonode", key: "_ext", external: true },
@@ -150,10 +151,7 @@
       #on-drawer { display: none; }
     }
 
-    /* Ensure all pages start below nav */
-    body { padding-top: 64px !important; }
-    /* Prevent double padding if page already has pt-32 on main */
-    main[class*="pt-"] { padding-top: 48px !important; }
+
   `;
 
   // Inject CSS
@@ -201,36 +199,26 @@
   // Insert nav as first child of body
   document.body.insertAdjacentHTML("afterbegin", navHTML);
 
-  // Remove any old duplicate nav/header elements (Stitch-generated ones)
-  document.querySelectorAll("nav:not(#on-nav), header").forEach(el => el.remove());
-  // Remove old back-nav strips
-  document.querySelectorAll("div[style*='position:fixed']").forEach(el => {
-    if (el.id === "on-nav" || el.id === "on-drawer" || el.id === "gate" || el.id === "cookie-banner" || el.id === "star-field") return;
-    const txt = el.innerText || "";
-    if (txt.includes("HOME") || txt.includes("← ") || txt.includes("ORTHONODE")) {
-      if (!el.querySelector("#on-logo")) el.remove();
-    }
-  });
-  // Remove old back-nav divs on sub-pages
-  document.querySelectorAll("[style*='position:fixed'][style*='top:0'][style*='left:0']:not(#on-nav):not(#on-drawer):not(#gate)").forEach(el => {
-    if (el.querySelector("a") && el.querySelector("a").textContent.includes("HOME")) el.remove();
-  });
-
   // Mobile toggle
   window.onNavToggle = function() {
     const btn = document.getElementById("on-hamburger");
     const drawer = document.getElementById("on-drawer");
-    btn.classList.toggle("open");
-    drawer.classList.toggle("open");
+    if (btn) btn.classList.toggle("open");
+    if (drawer) drawer.classList.toggle("open");
   };
 
   // Close drawer on link click
-  document.getElementById("on-drawer").querySelectorAll("a").forEach(a => {
-    a.addEventListener("click", () => {
-      document.getElementById("on-hamburger").classList.remove("open");
-      document.getElementById("on-drawer").classList.remove("open");
+  const drawerEl = document.getElementById("on-drawer");
+  if (drawerEl) {
+    drawerEl.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        const btn = document.getElementById("on-hamburger");
+        const drawer = document.getElementById("on-drawer");
+        if (btn) btn.classList.remove("open");
+        if (drawer) drawer.classList.remove("open");
+      });
     });
-  });
+  }
 
   // View Transitions polyfill for same-site links
   if (!document.startViewTransition) {

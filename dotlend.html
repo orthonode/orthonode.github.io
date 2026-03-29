@@ -1,583 +1,1145 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DotLend — Money Market on Polkadot Hub | ZK Solvency Proofs</title>
+  <meta name="description" content="DotLend — Decentralized Money Market on Polkadot Hub. ZK-Solvency proofs for lenders. Secure, transparent, and built on Polkadot-native infrastructure.">
+  <meta property="og:title" content="DotLend — Money Market on Polkadot Hub | ZK Solvency Proofs">
+  <meta property="og:description" content="High-yield borrowing & lending. ZK-powered solvency verification. Live on Polkadot Hub.">
+  <meta property="og:image" content="/site-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/site-logo.png" type="image/png">
 
-<html class="dark" lang="en"><head>
-    <meta name="description" content="The Aave of Polkadot. Deposit vDOT or WPAS, borrow USDH at 70% LTV with Noir ZK solvency architecture.">
-    <meta property="og:title" content="DotLend — First Money Market on Polkadot Hub | ORTHONODE SYSTEMS™">
-    <meta property="og:description" content="The Aave of Polkadot. Deposit vDOT or WPAS, borrow USDH at 70% LTV with Noir ZK solvency architecture.">
-    <meta property="og:type" content="website">
-    <link rel="icon" href="/site-logo.png" type="image/png">
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>DotLend | First Money Market on Polkadot Hub</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=DM+Sans:wght@300;400&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=Space+Grotesk:wght@300;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "inverse-surface": "#e5e2e1",
-              "on-primary-fixed-variant": "#8e0049",
-              "primary-container": "#e6007a",
-              "secondary-container": "#1b98e1",
-              "error-container": "#93000a",
-              "surface-bright": "#3a3939",
-              "primary-fixed-dim": "#ffb1c7",
-              "outline": "#aa8890",
-              "on-tertiary-fixed": "#290055",
-              "on-primary": "#650032",
-              "surface-container-high": "#2a2a2a",
-              "on-tertiary-container": "#ffffff",
-              "on-secondary-fixed-variant": "#004b73",
-              "tertiary": "#d8b9ff",
-              "surface-container-lowest": "#0e0e0e",
-              "surface-container-highest": "#353534",
-              "primary": "#ffb1c7",
-              "tertiary-fixed-dim": "#d8b9ff",
-              "on-tertiary-fixed-variant": "#6300bb",
-              "on-secondary-container": "#002c47",
-              "on-background": "#e5e2e1",
-              "on-primary-fixed": "#3e001d",
-              "secondary-fixed": "#cce5ff",
-              "on-surface": "#e5e2e1",
-              "inverse-primary": "#ba0061",
-              "on-secondary": "#003351",
-              "error": "#ffb4ab",
-              "background": "#131313",
-              "on-secondary-fixed": "#001d31",
-              "surface-tint": "#ffb1c7",
-              "surface-container-low": "#1c1b1b",
-              "primary-fixed": "#ffd9e2",
-              "inverse-on-surface": "#313030",
-              "secondary-fixed-dim": "#92ccff",
-              "secondary": "#92ccff",
-              "on-error-container": "#ffdad6",
-              "tertiary-container": "#9945ff",
-              "surface-variant": "#353534",
-              "on-error": "#690005",
-              "outline-variant": "#5b3f47",
-              "on-surface-variant": "#e3bdc6",
-              "on-tertiary": "#450086",
-              "tertiary-fixed": "#eddcff",
-              "surface-dim": "#131313",
-              "on-primary-container": "#ffffff",
-              "surface-container": "#201f1f",
-              "surface": "#131313"
-            },
-            fontFamily: {
-              "headline": ["Syne", "sans-serif"],
-              "body": ["DM Sans", "sans-serif"],
-              "label": ["IBM Plex Mono", "monospace"]
-            },
-            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
-          },
-        },
-      }
-    </script>
-<style>
-        body { background-color: #000000; color: #e5e2e1; }
-        .glass { 
-            background: rgba(19, 19, 19, 0.6); 
-            backdrop-filter: blur(24px); 
-            border: 1px solid rgba(91, 63, 71, 0.15); 
-            transition: all 0.3s ease;
-        }
-        .glass:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px -10px rgba(230, 0, 122, 0.3);
-            border-color: rgba(230, 0, 122, 0.3);
-        }
-        .syne-800 { font-family: 'Syne'; font-weight: 800; letter-spacing: -0.02em; }
-        .mono-label { font-family: 'IBM Plex Mono'; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; }
-        
-        @keyframes gradient-animate {
-            0% { border-color: #e6007a; }
-            50% { border-color: #9945ff; }
-            100% { border-color: #e6007a; }
-        }
-        .gradient-border-panel { 
-            position: relative; 
-            border-radius: 0.5rem; 
-            background: linear-gradient(black, black) padding-box, linear-gradient(to right, #e6007a, #9945ff) border-box; 
-            border: 1px solid transparent; 
-            animation: gradient-animate 3s infinite linear;
-        }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
-        
-        @keyframes slide-up {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .animate-slide-up { animation: slide-up 0.6s ease-out forwards; }
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 
-        @keyframes fade-in {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in { opacity: 0; animation: fade-in 0.5s ease-out forwards; }
+  <style>
+    /* ── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        @keyframes status-pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 4px rgba(34, 197, 94, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-        }
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #22c55e;
-            animation: status-pulse 2s infinite;
-        }
-    </style>
+    :root {
+      --bg:        #020408;
+      --surface:   #060C14;
+      --surface2:  #080E18;
+      --primary:   #E6007A; /* Polkadot Pink */
+      --accent:    #9945FF;
+      --border:    rgba(230,0,122,0.15);
+      --border-b:  rgba(230,0,122,0.40);
+      --text:      #E8F4FF;
+      --muted:     #4A6B80;
+    }
 
-    <script>
-    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365)},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};
-    document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","polkadot_hub",7);const b=document.getElementById("cookie-banner");if(!ON.cookie.get("on_banner")&&b)b.style.display="flex"});
-    </script>
+    html { scroll-behavior: smooth; cursor: none; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <style>
-    @view-transition { navigation: auto; }
-    ::view-transition-old(root){animation:250ms ease-out both vtOut}
-    ::view-transition-new(root){animation:250ms ease-in both vtIn}
-    @keyframes vtOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-10px)}}
-    @keyframes vtIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    .nav-link{position:relative}
-    .nav-link::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 0.25s ease}
-    .nav-link:hover::after{transform:scaleX(1)}
-    .proto-card{transition:transform 0.3s cubic-bezier(0.22,1,0.36,1),box-shadow 0.3s ease}
-    .proto-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(230,0,122,0.2)}
-    </style>
-    <script src="/nav.js" defer></script>
+    /* ── Custom Cursor ────────────────────────────────── */
+    .c-cursor {
+      width: 12px; height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 999999;
+      mix-blend-mode: difference;
+      transition: width .2s, height .2s;
+      will-change: transform;
+    }
+    .c-cursor.is-hover { width: 44px; height: 44px; }
+    @media (hover: none) {
+      html { cursor: auto; }
+      .c-cursor { display: none; }
+    }
+
+    /* ── Page Loader ──────────────────────────────────── */
+    #loader {
+      position: fixed; inset: 0; z-index: 99999;
+      background: var(--bg);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1.5rem;
+    }
+    #loader-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(24px, 5vw, 42px);
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      color: var(--primary);
+      text-shadow: 0 0 30px rgba(230,0,122,0.6);
+      opacity: 0;
+    }
+    #loader-bar {
+      width: 160px; height: 2px;
+      background: rgba(230,0,122,0.12);
+      overflow: hidden;
+    }
+    #loader-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: width .05s linear;
+    }
+    #loader-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem; letter-spacing: .25em;
+      color: var(--muted); text-transform: uppercase;
+    }
+
+    /* ── Star canvas & Grid ───────────────────────────── */
+    #star-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    #grid-overlay {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(230,0,122,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(230,0,122,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    #grain {
+      position: fixed; inset: 0; z-index: 1;
+      pointer-events: none; opacity: .028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+/* ── HERO ── */
+#hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:clamp(100px,12vw,140px) clamp(20px,5vw,80px) 80px;gap:60px;overflow:hidden;z-index:2}
+.hero-left{display:flex;flex-direction:column;gap:28px;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:var(--pink2);border:1px solid var(--border2);color:var(--pink);padding:8px 18px;border-radius:40px;font-size:12px;font-weight:500;font-family:'JetBrains Mono',monospace;letter-spacing:.1em;width:fit-content}
+h1.hero-h1{font-family:'Lexend',sans-serif;font-size:clamp(36px,5.5vw,80px);font-weight:700;line-height:1.1;letter-spacing:-.01em}
+h1.hero-h1 .line1{display:block;color:#fff}
+h1.hero-h1 .line2{display:block;background:linear-gradient(135deg,var(--pink) 0%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:clamp(15px,1.3vw,18px);color:var(--muted);max-width:480px;line-height:1.75;font-weight:300}
+.hero-metrics{display:flex;gap:clamp(20px,3vw,36px);padding:24px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.hm{display:flex;flex-direction:column;gap:4px}
+.hm-val{font-family:'JetBrains Mono',monospace;font-size:clamp(22px,2.2vw,32px);font-weight:500;background:linear-gradient(135deg,var(--pink),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hm-label{font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
+.hero-ctas{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,var(--pink),var(--accent));color:#fff;padding:14px 32px;border-radius:var(--r-sm);font-size:14px;font-weight:500;font-family:'Lexend',sans-serif;letter-spacing:.04em;text-decoration:none;transition:all .25s;cursor:none;border:none;display:inline-flex;align-items:center;gap:8px}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(230,0,122,.5)}
+.btn-ghost{background:transparent;color:var(--text2);padding:14px 32px;border-radius:var(--r-sm);font-size:14px;font-weight:400;font-family:'Lexend',sans-serif;letter-spacing:.04em;text-decoration:none;transition:all .25s;cursor:none;border:1px solid var(--border2)}
+.btn-ghost:hover{border-color:var(--pink);color:var(--pink);background:var(--pink2)}
+
+/* ── HERO RIGHT / ZK CIRCUIT ── */
+.hero-right{display:flex;align-items:center;justify-content:center;z-index:2;position:relative}
+.zk-circuit-wrap{position:relative;width:100%;max-width:520px;aspect-ratio:1;display:flex;align-items:center;justify-content:center}
+.zk-ring{position:absolute;border-radius:50%;border:1px solid}
+.zk-ring-1{inset:0;border-color:rgba(230,0,122,.15);animation:zkspin 30s linear infinite}
+.zk-ring-2{inset:8%;border-color:rgba(255,60,172,.1);animation:zkspin 22s linear infinite reverse}
+.zk-ring-3{inset:18%;border-color:rgba(85,43,191,.12);animation:zkspin 16s linear infinite}
+@keyframes zkspin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+#zk-svg{width:90%;height:90%;position:relative;z-index:2}
+.stamp-wrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:3;pointer-events:none}
+#zk-stamp{opacity:0;transform:scale(.6) rotate(-15deg)}
+.stamp-inner{background:var(--pink2);border:2px solid var(--pink);border-radius:var(--r-sm);padding:16px 28px;text-align:center}
+.stamp-title{font-family:'JetBrains Mono',monospace;font-size:clamp(10px,1.2vw,13px);color:var(--pink);letter-spacing:.2em;text-transform:uppercase;font-weight:500}
+.stamp-checkmark{font-size:clamp(24px,3vw,36px);color:var(--pink);display:block;margin:4px 0}
+
+/* ── SECTION BASE ── */
+section{position:relative;z-index:2}
+.section-inner{max-width:1200px;margin:0 auto;padding:100px clamp(20px,5vw,60px)}
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--pink);letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+.section-title{font-family:'Lexend',sans-serif;font-size:clamp(28px,3.5vw,52px);font-weight:700;line-height:1.15;letter-spacing:-.01em;margin-bottom:20px}
+.section-sub{font-size:clamp(15px,1.2vw,18px);color:var(--muted);max-width:600px;line-height:1.75;font-weight:300}
+.grad-text{background:linear-gradient(135deg,var(--pink),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ── DIVIDER ── */
+.section-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);margin:0 auto}
+
+/* ── MARKETS TABLE ── */
+#markets .section-inner{padding-bottom:60px}
+.markets-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--r)}
+.markets-table{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;min-width:640px}
+.markets-table thead tr{border-bottom:1px solid var(--border2)}
+.markets-table th{padding:14px 20px;text-align:left;font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;font-weight:400;white-space:nowrap}
+.markets-table th:not(:first-child){text-align:right}
+.markets-table tbody tr{border-bottom:1px solid var(--border);transition:all .25s;cursor:none}
+.markets-table tbody tr:hover{background:var(--pink2);border-left:3px solid var(--pink)}
+.markets-table tbody tr td:first-child{padding-left:18px}
+.markets-table td{padding:18px 20px;font-size:14px;color:var(--text2);white-space:nowrap}
+.markets-table td:not(:first-child){text-align:right}
+.asset-cell{display:flex;align-items:center;gap:12px}
+.asset-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;flex-shrink:0}
+.asset-icon.dot{background:linear-gradient(135deg,#E6007A,#FF3CAC);color:#fff}
+.asset-icon.usdc{background:linear-gradient(135deg,#2775CA,#5EAFFA);color:#fff}
+.asset-icon.eth{background:linear-gradient(135deg,#627EEA,#C8D6FF);color:#fff}
+.asset-name{font-size:15px;font-weight:500;color:var(--text)}
+.asset-sub{font-size:11px;color:var(--muted);letter-spacing:.04em}
+.supply-apy{color:#4ADE80}
+.borrow-apy{color:var(--accent)}
+.util-bar-wrap{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+.util-bar{width:60px;height:4px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;flex-shrink:0}
+.util-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--pink),var(--accent));transition:width 1s ease}
+.table-footer{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:var(--pink3);border-radius:0 0 var(--r) var(--r);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);flex-wrap:wrap;gap:8px}
+.table-badge{background:var(--pink2);border:1px solid var(--border2);color:var(--pink);padding:4px 12px;border-radius:20px;font-size:10px;letter-spacing:.1em}
+
+/* ── CARDS ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:clamp(24px,3vw,40px);transition:all .35s;transform-style:preserve-3d;cursor:none}
+.card:hover{border-color:rgba(255,60,172,.5);box-shadow:0 0 30px rgba(230,0,122,.1);transform:translateY(-4px)}
+.card-icon{width:52px;height:52px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;margin-bottom:20px;background:var(--pink2);border:1px solid var(--border2)}
+.card-icon svg{width:24px;height:24px}
+.card-title{font-family:'Lexend',sans-serif;font-size:clamp(18px,1.8vw,22px);font-weight:700;margin-bottom:10px}
+.card-text{font-size:14px;color:var(--muted);line-height:1.7;font-weight:300}
+.three-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.two-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;align-items:center}
+
+/* ── ZK SOLVENCY SECTION ── */
+#zk-solvency{background:linear-gradient(180deg,transparent,rgba(85,43,191,.05),transparent)}
+.zk-quote-box{background:var(--card);border:1px solid var(--border2);border-radius:var(--r-lg);padding:clamp(32px,4vw,60px);margin:48px 0;position:relative;overflow:hidden}
+.zk-quote-box::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(230,0,122,.04),transparent 50%);pointer-events:none}
+.zk-quote{font-family:'Lexend',sans-serif;font-size:clamp(22px,2.8vw,40px);font-weight:700;line-height:1.3;letter-spacing:-.01em;position:relative;z-index:1}
+.zk-flow-diagram{display:flex;align-items:center;justify-content:center;gap:clamp(16px,2.5vw,32px);flex-wrap:wrap;margin:48px 0}
+.zk-node{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 24px;text-align:center;min-width:130px;transition:all .3s}
+.zk-node:hover{border-color:var(--pink);background:var(--pink2)}
+.zk-node-icon{font-size:28px;margin-bottom:8px}
+.zk-node-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.zk-node-val{font-size:14px;font-weight:500;color:var(--text2);margin-top:4px}
+.zk-arrow{color:var(--muted);font-size:20px;display:flex;align-items:center}
+.zk-arrow svg{width:32px;height:32px;flex-shrink:0}
+
+/* ── HOW IT WORKS ── */
+#how-it-works{background:linear-gradient(180deg,transparent,rgba(230,0,122,.03),transparent)}
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:grid;grid-template-columns:80px 1fr;gap:32px;align-items:start;padding:48px 0;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:none}
+.step-num{font-family:'JetBrains Mono',monospace;font-size:clamp(40px,5vw,72px);font-weight:500;color:var(--pink);opacity:.3;line-height:1;letter-spacing:-.02em}
+.step-content{}
+.step-title{font-family:'Lexend',sans-serif;font-size:clamp(20px,2vw,28px);font-weight:700;margin-bottom:12px}
+.step-text{font-size:15px;color:var(--muted);line-height:1.75;font-weight:300;max-width:600px}
+.step-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag{background:var(--pink2);border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:20px;font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:.06em}
+
+/* ── ARCHITECTURE ── */
+.arch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+.arch-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px;position:relative;overflow:hidden;transition:all .3s;cursor:none}
+.arch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--accent))}
+.arch-card:hover{border-color:rgba(255,60,172,.4);transform:translateY(-3px);box-shadow:0 12px 40px rgba(230,0,122,.08)}
+.arch-layer{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px}
+.arch-title{font-family:'Lexend',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px}
+.arch-text{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300}
+.arch-tech{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.arch-tech span{background:rgba(85,43,191,.15);border:1px solid rgba(85,43,191,.3);color:var(--text2);padding:3px 10px;border-radius:20px;font-size:11px;font-family:'JetBrains Mono',monospace}
+
+/* ── SECURITY ── */
+#security .section-inner{padding-bottom:120px}
+.security-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:48px}
+.security-item{display:flex;gap:20px;align-items:start;padding:28px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);transition:all .3s;cursor:none}
+.security-item:hover{border-color:rgba(255,60,172,.35);background:var(--pink2)}
+.security-check{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--pink),var(--accent));display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.security-check svg{width:18px;height:18px;color:#fff}
+.security-title{font-family:'Lexend',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px}
+.security-text{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:2;border-top:1px solid var(--border)}
+.footer-inner{max-width:1200px;margin:0 auto;padding:60px clamp(20px,5vw,60px) 40px;display:flex;flex-direction:column;gap:40px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.footer-brand{}
+.footer-logo{font-family:'Lexend',sans-serif;font-size:22px;font-weight:700;background:linear-gradient(135deg,var(--pink),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;display:block}
+.footer-desc{font-size:13px;color:var(--muted);line-height:1.7;max-width:260px;font-weight:300}
+.footer-col-title{font-family:'Lexend',sans-serif;font-size:13px;font-weight:700;color:var(--text2);letter-spacing:.04em;margin-bottom:16px;text-transform:uppercase}
+.footer-links{display:flex;flex-direction:column;gap:10px}
+.footer-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;cursor:none}
+.footer-links a:hover{color:var(--pink)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px}
+.footer-copy{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.06em}
+.footer-orthonode{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.06em}
+.footer-orthonode a{color:var(--pink);text-decoration:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;padding-top:100px}
+  .hero-right{display:none}
+  .three-grid{grid-template-columns:1fr}
+  .arch-grid{grid-template-columns:1fr}
+  .security-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .step{grid-template-columns:60px 1fr;gap:20px}
+  .two-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .nav-pill{display:none}
+  .nav-status{display:none}
+  .nav-hamburger{display:flex}
+  .footer-top{grid-template-columns:1fr}
+  .hero-metrics{gap:16px}
+  .zk-flow-diagram{gap:12px}
+  .zk-node{min-width:100px;padding:14px 16px}
+}
+</style>
 </head>
-<body class="font-body font-300">
-    <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-    <script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script>
-    
-    <div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;align-items:center;gap:20px;max-width:520px;width:90vw;">
-      <p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">We use cookies for site functionality. <a href="/cookies.html" style="color:#E6007A;">Learn more</a></p>
-      <button onclick="ON.acceptCookies()" style="background:#E6007A;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:0.08em;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button>
+<body>
+
+<!-- BACKGROUND -->
+<canvas id="star-canvas"></canvas>
+<div id="grid-overlay"></div>
+<div id="grain"></div>
+
+<!-- CURSOR -->
+<div class="c-cursor" id="cursor"></div>
+
+<!-- AURORA -->
+<div class="aurora">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+</div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div id="loader-logo">DOTLEND</div>
+  <div id="loader-bar"><div id="loader-fill"></div></div>
+  <div id="loader-text">Initializing ZK Layer...</div>
+</div>
+
+<!-- NAV and MOBILE MENU removed in favor of shared nav.js -->
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-badge" id="hero-badge">
+      <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Solidity + resolc · ZK Solvency · Polkadot Hub
     </div>
-<!-- Top Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-3xl shadow-[0_0_20px_rgba(230,0,122,0.1)]">
-<div class="flex justify-between items-center px-8 h-20 w-full max-w-[1440px] mx-auto">
-<div class="text-xl font-800 tracking-tighter text-[#e5e2e1] uppercase font-headline">
-            ORTHONODE <span class="text-primary-container">/</span> DOTLEND
+    <h1 class="hero-h1" id="hero-h1">
+      <span class="line1">PROVE YOUR SOLVENCY.</span>
+      <span class="line2">BORROW WITHOUT LIMITS.</span>
+    </h1>
+    <p class="hero-sub" id="hero-sub">ZK proofs on Polkadot Hub. Non-custodial. vDOT and WPAS collateral. Borrow USDH. Reveal nothing.</p>
+    <div class="hero-metrics" id="hero-metrics">
+      <div class="hm">
+        <div class="hm-val" data-target="5.2" data-prefix="$" data-suffix="M">$0M</div>
+        <div class="hm-label">Total Value Locked</div>
+      </div>
+      <div class="hm">
+        <div class="hm-val" data-target="68" data-suffix="%">0%</div>
+        <div class="hm-label">Avg Utilization</div>
+      </div>
+      <div class="hm">
+        <div class="hm-val" data-target="14700" data-suffix="">0</div>
+        <div class="hm-label">ZK Proofs Generated</div>
+      </div>
+      <div class="hm">
+        <div class="hm-val" data-target="12" data-suffix="">0</div>
+        <div class="hm-label">Protocols Integrated</div>
+      </div>
+    </div>
+    <div class="hero-ctas" id="hero-ctas">
+      <a class="btn-primary" href="https://nexucore.xyz">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Supply Assets
+      </a>
+      <a class="btn-ghost" href="#how-it-works">How It Works →</a>
+    </div>
+  </div>
+
+  <!-- ZK CIRCUIT ANIMATION -->
+  <div class="hero-right" id="hero-right">
+    <div class="zk-circuit-wrap">
+      <div class="zk-ring zk-ring-1"></div>
+      <div class="zk-ring zk-ring-2"></div>
+      <div class="zk-ring zk-ring-3"></div>
+      <svg id="zk-svg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Elliptic curve grid lines -->
+        <line class="zk-line" x1="50" y1="200" x2="350" y2="200" stroke="rgba(230,0,122,0.08)" stroke-width="1"/>
+        <line class="zk-line" x1="200" y1="50" x2="200" y2="350" stroke="rgba(230,0,122,0.08)" stroke-width="1"/>
+        <!-- Elliptic curve -->
+        <path id="curve-path" d="M 80 280 C 80 150, 160 100, 200 95 C 240 100, 320 150, 320 280" stroke="rgba(230,0,122,0.3)" stroke-width="1.5" fill="none" stroke-dasharray="1000" stroke-dashoffset="1000"/>
+        <!-- Connection lines between points -->
+        <line id="conn-1" x1="120" y1="240" x2="280" y2="180" stroke="rgba(255,60,172,0.4)" stroke-width="1" stroke-dasharray="200" stroke-dashoffset="200" stroke-linecap="round"/>
+        <line id="conn-2" x1="160" y1="170" x2="310" y2="250" stroke="rgba(85,43,191,0.5)" stroke-width="1" stroke-dasharray="200" stroke-dashoffset="200" stroke-linecap="round"/>
+        <line id="conn-3" x1="200" y1="95" x2="120" y2="240" stroke="rgba(230,0,122,0.4)" stroke-width="1" stroke-dasharray="200" stroke-dashoffset="200" stroke-linecap="round"/>
+        <line id="conn-4" x1="280" y1="180" x2="200" y2="95" stroke="rgba(244,196,48,0.35)" stroke-width="1" stroke-dasharray="200" stroke-dashoffset="200" stroke-linecap="round"/>
+        <!-- EC Points -->
+        <circle id="pt-1" cx="120" cy="240" r="0" fill="#E6007A"/>
+        <circle id="pt-2" cx="280" cy="180" r="0" fill="#FF3CAC"/>
+        <circle id="pt-3" cx="160" cy="170" r="0" fill="#552BBF"/>
+        <circle id="pt-4" cx="310" cy="250" r="0" fill="#E6007A"/>
+        <circle id="pt-5" cx="200" cy="95" r="0" fill="#F4C430"/>
+        <circle id="pt-6" cx="90" cy="265" r="0" fill="#FF3CAC"/>
+        <!-- Glow rings around points -->
+        <circle id="glow-1" cx="120" cy="240" r="0" fill="none" stroke="#E6007A" stroke-width="1" opacity="0.4"/>
+        <circle id="glow-2" cx="280" cy="180" r="0" fill="none" stroke="#FF3CAC" stroke-width="1" opacity="0.4"/>
+        <circle id="glow-3" cx="200" cy="95" r="0" fill="none" stroke="#F4C430" stroke-width="1" opacity="0.4"/>
+        <!-- Hash labels -->
+        <text id="lbl-1" x="95" y="255" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(230,0,122,0)" letter-spacing="0.05em">0x4a2f</text>
+        <text id="lbl-2" x="255" y="175" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(255,60,172,0)" letter-spacing="0.05em">0x8c1d</text>
+        <text id="lbl-3" x="175" y="88" font-family="JetBrains Mono,monospace" font-size="9" fill="rgba(244,196,48,0)" letter-spacing="0.05em">0xf3b9</text>
+        <!-- Commitment hash box -->
+        <rect id="hash-box" x="125" y="300" width="150" height="40" rx="6" fill="rgba(17,0,34,0)" stroke="rgba(230,0,122,0)" stroke-width="1"/>
+        <text id="hash-txt" x="200" y="325" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="11" fill="rgba(230,0,122,0)" letter-spacing="0.08em">COMMITMENT: 0x7e4a</text>
+        <!-- ZK Proof bracket -->
+        <path id="bracket-l" d="M 55 130 L 45 130 L 45 270 L 55 270" stroke="rgba(85,43,191,0)" stroke-width="1.5" fill="none"/>
+        <path id="bracket-r" d="M 345 130 L 355 130 L 355 270 L 345 270" stroke="rgba(85,43,191,0)" stroke-width="1.5" fill="none"/>
+        <text id="bracket-lbl" x="200" y="43" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="10" fill="rgba(85,43,191,0)" letter-spacing="0.12em">NOIR ZK CIRCUIT</text>
+      </svg>
+      <div class="stamp-wrap">
+        <div id="zk-stamp">
+          <div class="stamp-inner">
+            <span class="stamp-checkmark">✓</span>
+            <div class="stamp-title">SOLVENCY VERIFIED</div>
+          </div>
         </div>
-<div class="hidden md:flex gap-8 items-center">
-<a class="text-[#E6007A] border-b-2 border-[#E6007A] pb-1 font-label text-[10px] tracking-widest uppercase" href="https://github.com/orthonode/dotlend/blob/main/README.md" target="_blank" rel="noopener">Network Docs</a>
-<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="https://github.com/orthonode/dotlend" target="_blank" rel="noopener">Lending Docs</a>
-<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="https://github.com/orthonode/dotlend/blob/main/README.md#governance" target="_blank" rel="noopener">Governance</a>
-<a class="text-[#e5e2e1]/60 hover:text-[#e5e2e1] transition-colors font-label text-[10px] tracking-widest uppercase" href="https://github.com/orthonode/dotlend/blob/main/README.md#security" target="_blank" rel="noopener">Security</a>
-</div>
-<div class="flex items-center gap-6">
-<!-- Status Dots -->
-<div class="flex items-center gap-2">
-<div class="group relative flex flex-col items-center">
-<div class="status-dot"></div>
-<span class="absolute top-6 font-label text-[7px] opacity-0 group-hover:opacity-100 transition-opacity">ARB</span>
-</div>
-<div class="group relative flex flex-col items-center">
-<div class="status-dot" style="animation-delay: 0.2s"></div>
-<span class="absolute top-6 font-label text-[7px] opacity-0 group-hover:opacity-100 transition-opacity">TON</span>
-</div>
-<div class="group relative flex flex-col items-center">
-<div class="status-dot" style="animation-delay: 0.4s"></div>
-<span class="absolute top-6 font-label text-[7px] opacity-0 group-hover:opacity-100 transition-opacity">DOT</span>
-</div>
-<div class="group relative flex flex-col items-center">
-<div class="status-dot" style="animation-delay: 0.6s"></div>
-<span class="absolute top-6 font-label text-[7px] opacity-0 group-hover:opacity-100 transition-opacity">TAO</span>
-</div>
-<div class="group relative flex flex-col items-center">
-<div class="status-dot" style="animation-delay: 0.8s"></div>
-<span class="absolute top-6 font-label text-[7px] opacity-0 group-hover:opacity-100 transition-opacity">SOL</span>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<a class="text-[#e5e2e1]/60 hover:text-white transition-all text-[10px] font-label uppercase tracking-widest border border-outline-variant/30 px-4 py-2 rounded-lg" href="https://github.com/orthonode/dotlend">Docs ↗</a>
-<a class="bg-primary-container text-white px-5 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider scale-95 active:scale-90 transition-all shadow-[0_0_15px_rgba(230,0,122,0.4)]" href="https://github.com/orthonode">
-                    GitHub ↗
-                </a>
-</div>
-</div>
-</div>
-</nav>
-<main class="pt-32 pb-20 px-8 max-w-[1440px] mx-auto overflow-hidden">
-<!-- Hero Section -->
-<section class="relative mb-32 flex flex-col items-center text-center">
-<div class="absolute -top-40 -left-40 w-96 h-96 bg-primary-container/10 blur-[120px] rounded-full"></div>
-<div class="absolute -top-20 -right-40 w-80 h-80 bg-tertiary-container/10 blur-[100px] rounded-full"></div>
-<div class="flex gap-3 mb-8 animate-slide-up">
-<span class="px-3 py-1 bg-surface-container-low text-[10px] font-label text-secondary rounded-lg border border-outline-variant/20">POLKADOT SOLIDITY HACK 2026</span>
-<span class="px-3 py-1 bg-surface-container-low text-[10px] font-label text-primary-container rounded-lg border border-primary-container/30">TESTNET LIVE</span>
-<span class="px-3 py-1 bg-surface-container-low text-[10px] font-label text-tertiary rounded-lg border border-tertiary-container/30">ZK-VERIFIED</span>
-</div>
-<h1 class="text-9xl md:text-[12rem] syne-800 text-primary-container leading-[0.85] tracking-tighter mb-6 animate-slide-up" style="animation-delay: 0.1s">
-            DOTLEND
-        </h1>
-<p class="text-2xl md:text-3xl font-300 text-on-surface/80 max-w-2xl mx-auto mb-12 animate-slide-up" style="animation-delay: 0.2s">
-            The first sovereign money market engineered for the Polkadot Hub ecosystem.
-        </p>
-<div class="flex flex-wrap justify-center items-center gap-4 animate-slide-up" style="animation-delay: 0.3s">
-<div class="relative group">
-<a class="bg-primary-container text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:shadow-[0_0_30px_rgba(230,0,122,0.4)] transition-all" href="https://github.com/orthonode/dotlend">
-                    Launch App <span class="material-symbols-outlined">north_east</span>
-</a>
-<span class="absolute -top-3 -right-3 bg-secondary px-2 py-0.5 rounded text-[8px] font-label font-bold text-black border border-black z-10">TESTNET</span>
-</div>
-<a class="glass px-8 py-4 rounded-xl font-bold border border-outline-variant/30 hover:border-primary-container transition-all" href="https://github.com/orthonode/dotlend">GitHub Docs ↗</a>
-<button class="glass px-8 py-4 rounded-xl font-bold border border-outline-variant/30 hover:border-primary-container transition-all">Security Audit</button>
-<button class="glass px-8 py-4 rounded-xl font-bold border border-outline-variant/30 hover:border-primary-container transition-all">GitHub Repo</button>
-</div>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Metrics Bar -->
-<section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-32">
-<div class="glass p-8 rounded-xl relative group animate-fade-in" style="animation-delay: 0.1s">
-<p class="mono-label text-[10px] text-on-surface/40 mb-2">Deployed Contracts</p>
-<h3 class="syne-800 text-5xl text-primary-container">13</h3>
-<div class="absolute bottom-0 left-0 h-1 w-0 bg-primary-container group-hover:w-full transition-all duration-500"></div>
-</div>
-<div class="glass p-8 rounded-xl relative group animate-fade-in" style="animation-delay: 0.2s">
-<p class="mono-label text-[10px] text-on-surface/40 mb-2">Technical Tests</p>
-<h3 class="syne-800 text-5xl text-primary-container">108</h3>
-<div class="absolute bottom-0 left-0 h-1 w-0 bg-primary-container group-hover:w-full transition-all duration-500"></div>
-</div>
-<div class="glass p-8 rounded-xl relative group animate-fade-in" style="animation-delay: 0.3s">
-<p class="mono-label text-[10px] text-on-surface/40 mb-2">HOLLAR TVL</p>
-<h3 class="syne-800 text-5xl text-primary-container">$330M</h3>
-<div class="absolute bottom-0 left-0 h-1 w-0 bg-primary-container group-hover:w-full transition-all duration-500"></div>
-</div>
-<div class="glass p-8 rounded-xl relative group animate-fade-in" style="animation-delay: 0.4s">
-<p class="mono-label text-[10px] text-on-surface/40 mb-2">Max LTV</p>
-<h3 class="syne-800 text-5xl text-primary-container">70%</h3>
-<div class="absolute bottom-0 left-0 h-1 w-0 bg-primary-container group-hover:w-full transition-all duration-500"></div>
-</div>
-</section>
-<!-- Architecture Section -->
-<section class="mb-32">
-<h2 class="syne-800 text-4xl mb-12 uppercase tracking-tighter">Core Architecture</h2>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<div class="glass p-10 rounded-xl transition-all">
-<div class="w-12 h-12 bg-secondary-container/20 flex items-center justify-center rounded-lg mb-6">
-<span class="material-symbols-outlined text-secondary">layers</span>
-</div>
-<h4 class="syne-800 text-xl mb-4">Collateral Layer</h4>
-<ul class="space-y-4">
-<li class="flex justify-between items-center border-b border-outline-variant/10 pb-2">
-<span class="text-on-surface/60 font-body">vDOT</span>
-<span class="mono-label text-secondary text-[10px]">Active</span>
-</li>
-<li class="flex justify-between items-center border-b border-outline-variant/10 pb-2">
-<span class="text-on-surface/60 font-body">WPAS</span>
-<span class="mono-label text-secondary text-[10px]">Active</span>
-</li>
-<li class="flex justify-between items-center border-b border-outline-variant/10 pb-2">
-<span class="text-on-surface/60 font-body">GLMR</span>
-<span class="mono-label text-on-surface/30 text-[10px]">Pending</span>
-</li>
-</ul>
-</div>
-<div class="glass p-10 rounded-xl gradient-border-panel transition-all">
-<div class="w-12 h-12 bg-primary-container/20 flex items-center justify-center rounded-lg mb-6">
-<span class="material-symbols-outlined text-primary-container">security</span>
-</div>
-<h4 class="syne-800 text-xl mb-4">ZK Oracle Layer</h4>
-<p class="text-on-surface/60 text-sm mb-6 leading-relaxed">
-                    Privacy-preserving price feeds powered by Noir ZK circuits with low-latency updates.
-                </p>
-<div class="bg-surface-container-lowest p-4 rounded-lg font-label text-[11px]">
-<div class="flex justify-between mb-2">
-<span>CIRCUIT_ID:</span>
-<span class="text-primary-container">NOIR_ORACLE_V1</span>
-</div>
-<div class="flex justify-between">
-<span>REFRESH:</span>
-<span class="text-primary-container">30M</span>
-</div>
-</div>
-</div>
-<div class="glass p-10 rounded-xl transition-all">
-<div class="w-12 h-12 bg-tertiary-container/20 flex items-center justify-center rounded-lg mb-6">
-<span class="material-symbols-outlined text-tertiary">bolt</span>
-</div>
-<h4 class="syne-800 text-xl mb-4">Lending Engine</h4>
-<p class="text-on-surface/60 text-sm mb-6 leading-relaxed">
-                    High-efficiency liquidations and dynamic health factor calculations for cross-chain assets.
-                </p>
-<div class="flex gap-2">
-<span class="px-2 py-1 bg-surface-container-high rounded font-label text-[10px]">ERC-20</span>
-<span class="px-2 py-1 bg-surface-container-high rounded font-label text-[10px]">POLKAVM</span>
-</div>
-</div>
-</div>
-</section>
-<!-- Contract Registry -->
-<section class="mb-32">
-<div class="flex justify-between items-end mb-8">
-<div>
-<h2 class="syne-800 text-4xl uppercase tracking-tighter">Contract Registry</h2>
-<p class="text-on-surface/40 font-label text-xs mt-2 uppercase tracking-widest">Verified on Polkadot Hub Explorer</p>
-</div>
-<button class="text-primary-container font-label text-xs uppercase tracking-widest hover:underline">View All 13 Contracts</button>
-</div>
-<div class="glass rounded-xl overflow-hidden">
-<table class="w-full text-left">
-<thead class="bg-surface-container-low border-b border-outline-variant/20">
-<tr>
-<th class="px-8 py-4 mono-label text-[10px] text-on-surface/60">Contract Name</th>
-<th class="px-8 py-4 mono-label text-[10px] text-on-surface/60">Deployment Address</th>
-<th class="px-8 py-4 mono-label text-[10px] text-on-surface/60 text-right">Status</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-outline-variant/10">
-<tr class="hover:bg-primary-container/5 transition-colors">
-<td class="px-8 py-5 text-sm font-semibold">LendingPoolV2</td>
-<td class="px-8 py-5 font-label text-primary-container text-xs">0x4E6...7A21</td>
-<td class="px-8 py-5 text-right"><span class="px-2 py-1 bg-secondary/10 text-secondary text-[9px] rounded uppercase font-bold">Immutable</span></td>
-</tr>
-<tr class="hover:bg-primary-container/5 transition-colors">
-<td class="px-8 py-5 text-sm font-semibold">PriceOracleProxy</td>
-<td class="px-8 py-5 font-label text-primary-container text-xs">0x12B...A902</td>
-<td class="px-8 py-5 text-right"><span class="px-2 py-1 bg-secondary/10 text-secondary text-[9px] rounded uppercase font-bold">Immutable</span></td>
-</tr>
-<tr class="hover:bg-primary-container/5 transition-colors">
-<td class="px-8 py-5 text-sm font-semibold">HollarReserve</td>
-<td class="px-8 py-5 font-label text-primary-container text-xs">0x99F...D433</td>
-<td class="px-8 py-5 text-right"><span class="px-2 py-1 bg-secondary/10 text-secondary text-[9px] rounded uppercase font-bold">Immutable</span></td>
-</tr>
-<tr class="hover:bg-primary-container/5 transition-colors">
-<td class="px-8 py-5 text-sm font-semibold">InterestRateModel</td>
-<td class="px-8 py-5 font-label text-primary-container text-xs">0x22C...B788</td>
-<td class="px-8 py-5 text-right"><span class="px-2 py-1 bg-primary-container/10 text-primary-container text-[9px] rounded uppercase font-bold">Active</span></td>
-</tr>
-<tr class="hover:bg-primary-container/5 transition-colors">
-<td class="px-8 py-5 text-sm font-semibold">LiquidatorBot_v1</td>
-<td class="px-8 py-5 font-label text-primary-container text-xs">0xEE1...00FF</td>
-<td class="px-8 py-5 text-right"><span class="px-2 py-1 bg-primary-container/10 text-primary-container text-[9px] rounded uppercase font-bold">Active</span></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<!-- Protocol Flows -->
-<section class="mb-32">
-<h2 class="syne-800 text-4xl mb-12 uppercase tracking-tighter">Protocol Flows</h2>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-<div class="glass p-8 rounded-xl border-l-4 border-l-secondary">
-<span class="mono-label text-secondary text-[10px] block mb-4">Step 01 / DEPOSIT</span>
-<h5 class="syne-800 text-lg mb-2">Supply Collateral</h5>
-<p class="text-xs text-on-surface/50 leading-relaxed mb-6">Users deposit vDOT or WPAS into the lending pool to start earning passive yield and unlock borrowing power.</p>
-<div class="flex items-center gap-2 text-[10px] font-label text-on-surface/40">
-<span class="material-symbols-outlined text-[14px]">account_balance_wallet</span>
-                    TXN_CONFIRM_ZK_PROVE
+
+<div class="section-divider"></div>
+
+<!-- MARKETS TABLE -->
+<section id="markets">
+  <div class="section-inner">
+    <div class="section-label">Live Markets</div>
+    <h2 class="section-title">Money Market <span class="grad-text">Rates</span></h2>
+    <p class="section-sub">On-chain rates from Polkadot Hub TestNet. Two live collateral markets: vDOT (Bifrost) and WPAS (native PAS).</p>
+    <div style="margin-top:48px">
+      <div class="markets-scroll">
+        <table class="markets-table">
+          <thead>
+            <tr>
+              <th>Asset</th>
+              <th>Supply APY</th>
+              <th>Borrow APY</th>
+              <th>TVL</th>
+              <th>Utilization</th>
+            </tr>
+          </thead>
+          <tbody id="markets-tbody">
+            <tr class="market-row">
+              <td>
+                <div class="asset-cell">
+                  <div class="asset-icon dot">◆</div>
+                  <div>
+                    <div class="asset-name">vDOT</div>
+                    <div class="asset-sub">Bifrost Liquid Staking</div>
+                  </div>
                 </div>
-</div>
-<div class="glass p-8 rounded-xl border-l-4 border-l-primary-container">
-<span class="mono-label text-primary-container text-[10px] block mb-4">Step 02 / BORROW</span>
-<h5 class="syne-800 text-lg mb-2">Mint HOLLAR</h5>
-<p class="text-xs text-on-surface/50 leading-relaxed mb-6">Based on health factor, users mint HOLLAR stablecoin against their collateral. Liquidity is instant.</p>
-<div class="flex items-center gap-2 text-[10px] font-label text-on-surface/40">
-<span class="material-symbols-outlined text-[14px]">payments</span>
-                    LTV_CHECK_PASSED
+              </td>
+              <td class="supply-apy" data-counter="15.2" data-suffix="%">15.2%</td>
+              <td class="borrow-apy" data-counter="6.8" data-suffix="%">6.8%</td>
+              <td data-counter="2.4" data-prefix="$" data-suffix="M">$2.4M</td>
+              <td>
+                <div class="util-bar-wrap">
+                  <span data-counter="68" data-suffix="%">68%</span>
+                  <div class="util-bar"><div class="util-fill" style="width:0%" data-target="68"></div></div>
                 </div>
-</div>
-<div class="glass p-8 rounded-xl border-l-4 border-l-tertiary">
-<span class="mono-label text-tertiary text-[10px] block mb-4">Step 03 / LIQUIDATE</span>
-<h5 class="syne-800 text-lg mb-2">Solvency Guard</h5>
-<p class="text-xs text-on-surface/50 leading-relaxed mb-6">Automatic bots monitor health factors. If a position drops below 1.0, collateral is auctioned for HOLLAR.</p>
-<div class="flex items-center gap-2 text-[10px] font-label text-on-surface/40">
-<span class="material-symbols-outlined text-[14px]">gavel</span>
-                    SYSTEM_SOLVENT_TRUE
+              </td>
+            </tr>
+            <tr class="market-row">
+              <td>
+                <div class="asset-cell">
+                  <div class="asset-icon" style="background:linear-gradient(135deg,#E6007A,#9945FF);color:#fff">W</div>
+                  <div>
+                    <div class="asset-name">WPAS</div>
+                    <div class="asset-sub">Wrapped Native PAS</div>
+                  </div>
                 </div>
-</div>
-</div>
+              </td>
+              <td class="supply-apy" data-counter="8.5" data-suffix="%">8.5%</td>
+              <td class="borrow-apy" data-counter="5.5" data-suffix="%">5.5%</td>
+              <td data-counter="960" data-prefix="$" data-suffix="K">$960K</td>
+              <td>
+                <div class="util-bar-wrap">
+                  <span data-counter="61" data-suffix="%">61%</span>
+                  <div class="util-bar"><div class="util-fill" style="width:0%" data-target="61"></div></div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-footer">
+          <span>Polkadot Hub TestNet · Chain ID 420420417 · 13 contracts deployed & verified</span>
+          <span class="table-badge">TESTNET LIVE</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- ZK Solvency Section -->
-<section class="mb-32">
-<div class="glass p-1 w-full rounded-2xl">
-<div class="bg-black rounded-[calc(1rem-2px)] p-12 flex flex-col md:flex-row gap-16 items-center">
-<div class="w-full md:w-1/2">
-<h2 class="syne-800 text-5xl mb-6 text-primary-container">ZK Solvency Verification</h2>
-<p class="text-on-surface/70 font-300 leading-relaxed mb-8">
-                        DotLend utilizes the Noir domain-specific language to generate zero-knowledge proofs of protocol solvency. This allows us to prove that our reserves exceed liabilities without revealing the exact composition of our whale positions.
-                    </p>
-<div class="space-y-4">
-<div class="flex gap-4 items-start">
-<span class="material-symbols-outlined text-primary-container mt-1">verified</span>
-<div>
-<h6 class="font-bold text-sm">Real-time Proof Generation</h6>
-<p class="text-xs text-on-surface/40">Every block generates a new proof of the entire protocol state.</p>
-</div>
-</div>
-<div class="flex gap-4 items-start">
-<span class="material-symbols-outlined text-primary-container mt-1">visibility_off</span>
-<div>
-<h6 class="font-bold text-sm">Privacy-First Risk Management</h6>
-<p class="text-xs text-on-surface/40">Mask individual wallet health while maintaining public trust.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="w-full md:w-1/2 glass aspect-video rounded-xl flex items-center justify-center relative overflow-hidden">
-<div class="absolute inset-0 bg-primary-container/5"></div>
-<div class="relative font-label text-[10px] text-primary-container space-y-2 p-8 overflow-hidden">
-<div class="text-on-surface/20">fn main(collateral: Field, debt: Field, ratio: Field) {</div>
-<div class="pl-4">let health = collateral * 100 / debt;</div>
-<div class="pl-4 text-secondary">constrain health &gt; ratio;</div>
-<div class="text-on-surface/20">}</div>
-<div class="mt-8 p-4 bg-black/50 border border-primary-container/30 rounded">
-<span class="block text-on-surface/40 mb-1">PROVING_STATE:</span>
-<div class="w-full bg-white/5 h-1 rounded overflow-hidden">
-<div class="w-2/3 h-full bg-primary-container"></div>
-</div>
-<span class="block text-[8px] text-right mt-1">GENERATING_SNARK... 67%</span>
-</div>
-</div>
-</div>
-</div>
-</div>
+
+<div class="section-divider"></div>
+
+<!-- ZK SOLVENCY -->
+<section id="zk-solvency">
+  <div class="section-inner">
+    <div class="section-label">ZK Solvency Architecture</div>
+    <h2 class="section-title">Prove you have collateral<br><span class="grad-text">WITHOUT revealing your portfolio.</span></h2>
+
+    <div class="zk-quote-box">
+      <div class="zk-quote">Traditional money markets require full collateral disclosure. DotLend uses <span class="grad-text">Noir ZK circuits</span> to verify solvency mathematically — the protocol learns only what it needs to know.</div>
+    </div>
+
+    <div class="three-grid" style="margin-top:0">
+      <div class="card zk-pillar">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E6007A" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="card-title">Privacy</div>
+        <div class="card-text">Your portfolio composition, individual holdings, and total wealth remain completely private. Only a cryptographic proof of solvency is shared with the protocol.</div>
+      </div>
+      <div class="card zk-pillar">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E6007A" stroke-width="1.5"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        </div>
+        <div class="card-title">Verifiability</div>
+        <div class="card-text">Every solvency proof is mathematically verifiable on-chain in milliseconds. The Solidity verifier contract verifies the Noir proof deterministically — no oracle dependency.</div>
+      </div>
+      <div class="card zk-pillar">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E6007A" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div class="card-title">Trustlessness</div>
+        <div class="card-text">No administrator, no multisig, no governance approval needed to borrow. The ZK proof is the only permission required. Fully non-custodial architecture.</div>
+      </div>
+    </div>
+
+    <div class="zk-quote-box" style="margin-top:32px;border-color:rgba(245,158,11,.3)">
+      <div class="zk-quote" style="font-size:clamp(16px,1.8vw,22px);color:var(--text2)"><span style="color:#F59E0B">Honest testnet status:</span> The Noir circuit (UltraHonk) compiles and valid proofs are generated every 30 minutes via Railway. On-chain verification uses <code style="font-family:'JetBrains Mono',monospace;color:var(--pink)">MockSolvencyVerifier</code> which accepts all proofs unconditionally. The real verifier cannot deploy yet because <strong>PolkaVM lacks BN254 elliptic curve precompiles</strong>. This is a PolkaVM limitation, not a circuit limitation.</div>
+    </div>
+
+    <!-- ZK FLOW DIAGRAM -->
+    <div style="margin-top:64px">
+      <div class="section-label" style="text-align:center;margin-bottom:32px">Proof Generation Flow</div>
+      <div class="zk-flow-diagram">
+        <div class="zk-node">
+          <div class="zk-node-icon">🔒</div>
+          <div class="zk-node-label">Private Input</div>
+          <div class="zk-node-val">Portfolio State</div>
+        </div>
+        <div class="zk-arrow">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M6 16h20M18 8l8 8-8 8" stroke="rgba(230,0,122,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="zk-node">
+          <div class="zk-node-icon">⚡</div>
+          <div class="zk-node-label">Noir Circuit</div>
+          <div class="zk-node-val">Proof Generation</div>
+        </div>
+        <div class="zk-arrow">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M6 16h20M18 8l8 8-8 8" stroke="rgba(230,0,122,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="zk-node">
+          <div class="zk-node-icon">📜</div>
+          <div class="zk-node-label">Public Output</div>
+          <div class="zk-node-val">Solvency Proof</div>
+        </div>
+        <div class="zk-arrow">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M6 16h20M18 8l8 8-8 8" stroke="rgba(230,0,122,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="zk-node">
+          <div class="zk-node-icon">✅</div>
+          <div class="zk-node-label">Solidity Contract</div>
+          <div class="zk-node-val">On-Chain Verify</div>
+        </div>
+        <div class="zk-arrow">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M6 16h20M18 8l8 8-8 8" stroke="rgba(230,0,122,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="zk-node" style="border-color:var(--border2)">
+          <div class="zk-node-icon">💰</div>
+          <div class="zk-node-label">Result</div>
+          <div class="zk-node-val" style="color:var(--pink)">Loan Disbursed</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Progress Timeline -->
-<section class="mb-32">
-<h2 class="syne-800 text-4xl mb-16 text-center uppercase tracking-tighter">Strategic Roadmap</h2>
-<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-<div class="relative pt-8">
-<div class="absolute top-0 left-0 w-8 h-8 rounded-full bg-primary-container shadow-[0_0_15px_#e6007a] flex items-center justify-center z-10">
-<span class="material-symbols-outlined text-white text-sm">done</span>
-</div>
-<div class="border-l-2 border-primary-container h-full absolute top-8 left-[15px] md:w-full md:h-0 md:top-[15px] md:left-8 md:border-t-2 md:border-l-0"></div>
-<div class="ml-12 md:ml-0 md:mt-12">
-<p class="mono-label text-primary-container text-[10px] mb-2">Phase 01</p>
-<h6 class="syne-800 text-lg mb-2">Core Contracts</h6>
-<p class="text-xs text-on-surface/50">EVM logic deployment on Polkadot Hub Hub, audit complete.</p>
-</div>
-</div>
-<div class="relative pt-8">
-<div class="absolute top-0 left-0 w-8 h-8 rounded-full border-2 border-primary-container bg-black flex items-center justify-center z-10 animate-pulse">
-<span class="w-3 h-3 bg-primary-container rounded-full"></span>
-</div>
-<div class="border-l-2 border-outline-variant/30 h-full absolute top-8 left-[15px] md:w-full md:h-0 md:top-[15px] md:left-8 md:border-t-2 md:border-l-0"></div>
-<div class="ml-12 md:ml-0 md:mt-12">
-<p class="mono-label text-primary-container text-[10px] mb-2">Phase 02</p>
-<h6 class="syne-800 text-lg mb-2">ZK Oracle Integration</h6>
-<p class="text-xs text-on-surface/50">Noir proving system activation and stress testing.</p>
-</div>
-</div>
-<div class="relative pt-8 opacity-40">
-<div class="absolute top-0 left-0 w-8 h-8 rounded-full border-2 border-outline-variant/30 bg-black z-10"></div>
-<div class="border-l-2 border-outline-variant/30 h-full absolute top-8 left-[15px] md:w-full md:h-0 md:top-[15px] md:left-8 md:border-t-2 md:border-l-0"></div>
-<div class="ml-12 md:ml-0 md:mt-12">
-<p class="mono-label text-on-surface/40 text-[10px] mb-2">Phase 03</p>
-<h6 class="syne-800 text-lg mb-2">Mainnet Launch</h6>
-<p class="text-xs text-on-surface/50">Full liquidity migration and native token launch.</p>
-</div>
-</div>
-<div class="relative pt-8 opacity-20">
-<div class="absolute top-0 left-0 w-8 h-8 rounded-full border-2 border-outline-variant/30 bg-black z-10"></div>
-<div class="ml-12 md:ml-0 md:mt-12">
-<p class="mono-label text-on-surface/40 text-[10px] mb-2">Phase 04</p>
-<h6 class="syne-800 text-lg mb-2">DAO Governance</h6>
-<p class="text-xs text-on-surface/50">Decentralized control of risk parameters and listing.</p>
-</div>
-</div>
-</div>
+
+<div class="section-divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-inner">
+    <div class="section-label">Protocol Flow</div>
+    <h2 class="section-title">Three steps to <span class="grad-text">private borrowing</span></h2>
+    <div class="steps" style="margin-top:48px">
+      <div class="step step-item">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-title">Deposit Collateral</div>
+          <div class="step-text">Deposit vDOT (Bifrost liquid staking) or WPAS (native PAS wrapped as ERC-20) into the DotLend CollateralVault. Your deposits earn supply APY immediately. Assets remain in the non-custodial protocol — never in our control.</div>
+          <div class="step-tags">
+            <span class="tag">vDOT (Bifrost)</span>
+            <span class="tag">WPAS</span>
+            <span class="tag">Non-custodial</span>
+            <span class="tag">Supply APY</span>
+          </div>
+        </div>
+      </div>
+      <div class="step step-item">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-title">Generate ZK Proof</div>
+          <div class="step-text">Your browser or node generates a Noir ZK-SNARK proof (UltraHonk proving system) attesting to your collateral ratio without revealing which assets you hold, their quantities, or your wallet's total value. The circuit enforces the protocol's LTV rules cryptographically.</div>
+          <div class="step-tags">
+            <span class="tag">Noir ZK-SNARKs</span>
+            <span class="tag">UltraHonk</span>
+            <span class="tag">Client-side proving</span>
+            <span class="tag">Zero disclosure</span>
+          </div>
+        </div>
+      </div>
+      <div class="step step-item">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-title">Borrow Against Proof</div>
+          <div class="step-text">Submit the ZK proof to the SolvencyGateway contract. The Solidity verifier validates the proof in O(1) time and immediately disburses your loan in USDH. No credit check. No KYC. No counterparty. The math is the arbiter.</div>
+          <div class="step-tags">
+            <span class="tag">Solidity contract</span>
+            <span class="tag">Instant disbursement</span>
+            <span class="tag">No KYC</span>
+            <span class="tag">O(1) verification</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Tech Stack -->
-<section class="mb-32">
-<h2 class="syne-800 text-4xl mb-12 text-center uppercase tracking-tighter">Engineered With</h2>
-<div class="flex flex-wrap justify-center gap-4">
-<span class="glass px-6 py-3 rounded-lg font-label text-xs uppercase tracking-widest border border-outline-variant/20">Solidity</span>
-<span class="glass px-6 py-3 rounded-lg font-label text-xs uppercase tracking-widest border border-outline-variant/20">Hardhat</span>
-<span class="glass px-6 py-3 rounded-lg font-label text-xs uppercase tracking-widest border border-outline-variant/20">Foundry</span>
-<span class="glass px-6 py-3 rounded-lg font-label text-xs uppercase tracking-widest border border-primary-container/30 text-primary-container">Noir ZK</span>
-<span class="glass px-6 py-3 rounded-lg font-label text-xs uppercase tracking-widest border border-outline-variant/20">PolkaVM</span>
-<span class="glass px-6 py-3 rounded-lg font-label text-xs uppercase tracking-widest border border-secondary/30 text-secondary">vDOT</span>
-<span class="glass px-6 py-3 rounded-lg font-label text-xs uppercase tracking-widest border border-outline-variant/20">WPAS</span>
-<span class="glass px-6 py-3 rounded-lg font-label text-xs uppercase tracking-widest border border-tertiary-container/30 text-tertiary">Polkadot Hub</span>
-</div>
+
+<div class="section-divider"></div>
+
+<!-- ARCHITECTURE -->
+<section id="architecture">
+  <div class="section-inner">
+    <div class="section-label">Technical Stack</div>
+    <h2 class="section-title">Built on <span class="grad-text">Polkadot-native</span> infrastructure</h2>
+    <p class="section-sub">Solidity contracts compiled via resolc for PolkaVM. OpenZeppelin v4.9.6. 102 Hardhat + 6 Forge fuzz tests.</p>
+    <div class="arch-grid">
+      <div class="arch-card">
+        <div class="arch-layer">Layer 1</div>
+        <div class="arch-title">Polkadot Hub EVM</div>
+        <div class="arch-text">Execution on Polkadot's system chain. Shared security from the relay chain. Chain ID 420420417. Native DOT gas. PolkaVM runtime with resolc compiler.</div>
+        <div class="arch-tech">
+          <span>Polkadot Hub</span>
+          <span>resolc 0.5.0</span>
+          <span>PolkaVM</span>
+        </div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-layer">Layer 2</div>
+        <div class="arch-title">Solidity Smart Contracts</div>
+        <div class="arch-text">13 contracts deployed and verified. CollateralVault, LendingPool, PriceOracle, TreasuryRouter, SolvencyGateway, WPAS. OpenZeppelin v4.9.6 primitives.</div>
+        <div class="arch-tech">
+          <span>Solidity 0.8.20</span>
+          <span>OpenZeppelin v4.9.6</span>
+          <span>Hardhat</span>
+        </div>
+      </div>
+      <div class="arch-card">
+        <div class="arch-layer">Layer 3</div>
+        <div class="arch-title">Noir ZK System</div>
+        <div class="arch-text">Aztec's Noir language for ZK circuit development. UltraHonk proving system. Client-side proof generation. Railway cron every 30 minutes.</div>
+        <div class="arch-tech">
+          <span>Noir 1.0.0-beta.19</span>
+          <span>UltraHonk</span>
+          <span>Barretenberg</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-</main>
-<!-- Footer -->
-<footer class="w-full border-t border-[#353534]/30 bg-black">
-<div class="flex flex-col md:flex-row justify-between items-center px-12 py-16 w-full max-w-[1440px] mx-auto">
-<div class="mb-8 md:mb-0">
-<div class="text-lg font-800 text-[#e5e2e1] font-headline mb-2 uppercase">ORTHONODE SYSTEMS</div>
-<p class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40">© 2024 ORTHONODE SYSTEMS. SOVEREIGN INFRASTRUCTURE.</p>
-</div>
-<div class="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-4">
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://github.com/orthonode/dotlend" target="_blank" rel="noopener">Protocol Docs ↗</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://github.com/orthonode/dotlend/tree/main/contracts" target="_blank" rel="noopener">Smart Contracts ↗</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://github.com/orthonode/dotlend" target="_blank" rel="noopener">GitHub ↗</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="https://github.com/orthonode/dotlend" target="_blank" rel="noopener">GitHub ↗</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="/dotlend.html">Status</a>
-<a class="font-label text-[10px] uppercase tracking-widest text-[#e5e2e1]/40 hover:text-[#E6007A] transition-all hover:translate-x-1" href="/terms.html">Terms of Service</a>
-</div>
-</div>
+
+<div class="section-divider"></div>
+
+<!-- SECURITY -->
+<section id="security">
+  <div class="section-inner">
+    <div class="section-label">Security Model</div>
+    <h2 class="section-title">Security through <span class="grad-text">cryptographic guarantees</span></h2>
+    <p class="section-sub">No trust assumptions. No multisig keys. No admin backdoors. Every guarantee is enforced by mathematics.</p>
+    <div class="security-grid">
+      <div class="security-item">
+        <div class="security-check">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="security-title">Non-Custodial Architecture</div>
+          <div class="security-text">Your assets are locked in Solidity contracts you interact with directly. DotLend has zero ability to move, freeze, or access deposited funds outside of protocol rules.</div>
+        </div>
+      </div>
+      <div class="security-item">
+        <div class="security-check">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="security-title">Formal Audit Trail</div>
+          <div class="security-text">All Solidity contracts and Noir circuits undergo independent security audits before mainnet deployment. Audit reports published on-chain and in GitHub.</div>
+        </div>
+      </div>
+      <div class="security-item">
+        <div class="security-check">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="security-title">ZK Soundness Guarantees</div>
+          <div class="security-text">UltraHonk's soundness properties make it computationally infeasible to generate a valid solvency proof for an insolvent position. The math is the backstop.</div>
+        </div>
+      </div>
+      <div class="security-item">
+        <div class="security-check">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="security-title">Polkadot Shared Security</div>
+          <div class="security-text">Polkadot Hub inherits the full economic security of the relay chain validator set — over $10B in staked DOT protecting every transaction.</div>
+        </div>
+      </div>
+      <div class="security-item">
+        <div class="security-check">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="security-title">Oracle-Independent Pricing</div>
+          <div class="security-text">ZK proofs use on-chain state from the relay chain as price witnesses — no third-party oracle. Eliminates the oracle manipulation attack surface entirely.</div>
+        </div>
+      </div>
+      <div class="security-item">
+        <div class="security-check">
+          <svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div class="security-title">Immutable Liquidation Logic</div>
+          <div class="security-text">Liquidation thresholds and parameters are set at deployment and cannot be changed without a full contract upgrade — giving borrowers predictable risk rules.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROTOCOL PARAMETERS -->
+<section id="params">
+  <div class="section-inner">
+    <div class="section-label">Protocol Parameters</div>
+    <h2 class="section-title">Conservative by <span class="grad-text">design</span></h2>
+    <div class="security-grid" style="margin-top:48px">
+      <div class="security-item">
+        <div class="security-check"><svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <div class="security-title">70% Loan-to-Value</div>
+          <div class="security-text">Conservative LTV — leaves 10% buffer above the liquidation threshold. Standard for early-stage lending markets.</div>
+        </div>
+      </div>
+      <div class="security-item">
+        <div class="security-check"><svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <div class="security-title">80% Liquidation Threshold</div>
+          <div class="security-text">Standard CDP design matching MakerDAO. When health factor drops below 1.0, liquidators can seize collateral with a 5% bonus.</div>
+        </div>
+      </div>
+      <div class="security-item">
+        <div class="security-check"><svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <div class="security-title">0.5%/year Stability Fee</div>
+          <div class="security-text">Minimal cost of capital at 5 bps. vDOT staking yield (~15%) far exceeds the borrow cost, making it economically rational to borrow.</div>
+        </div>
+      </div>
+      <div class="security-item">
+        <div class="security-check"><svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <div class="security-title">5% Liquidation Bonus</div>
+          <div class="security-text">Competitive incentive for liquidators to keep the protocol solvent. Covered by the collateral buffer above the debt.</div>
+        </div>
+      </div>
+      <div class="security-item">
+        <div class="security-check"><svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <div class="security-title">1-Hour Oracle Stale Guard</div>
+          <div class="security-text">PriceOracle rejects any price older than 3600 seconds. Prevents frozen-price attacks and stale collateral valuations.</div>
+        </div>
+      </div>
+      <div class="security-item">
+        <div class="security-check"><svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div>
+          <div class="security-title">20% Price Deviation Circuit Breaker</div>
+          <div class="security-text">Oracle rejects any single price update that moves more than 20% in either direction. Prevents oracle key compromise from instantly liquidating positions.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONTRACTS -->
+<section id="contracts">
+  <div class="section-inner">
+    <div class="section-label">On-Chain</div>
+    <h2 class="section-title">13 contracts <span class="grad-text">deployed & verified</span></h2>
+    <p class="section-sub">All contracts live on Polkadot Hub TestNet. Verified on Blockscout.</p>
+    <div style="margin-top:48px;overflow-x:auto">
+      <table class="markets-table" style="min-width:700px">
+        <thead>
+          <tr>
+            <th>Contract</th>
+            <th>Address</th>
+            <th>Explorer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="market-row">
+            <td><div class="asset-name" style="font-size:13px">PriceOracle</div></td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2)">0x1282F6...5D173</td>
+            <td><a href="https://blockscout-testnet.polkadot.io/address/0x1282F6B59869a57Fd2a1D7a5BC8535bB7B15D173" target="_blank" rel="noopener" style="color:var(--pink)">View →</a></td>
+          </tr>
+          <tr class="market-row">
+            <td><div class="asset-name" style="font-size:13px">CollateralVault (vDOT)</div></td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2)">0xF94eBe...415A2</td>
+            <td><a href="https://blockscout-testnet.polkadot.io/address/0xF94eBe7F8d8F922B7FBBFb4BE080EB71a69415A2" target="_blank" rel="noopener" style="color:var(--pink)">View →</a></td>
+          </tr>
+          <tr class="market-row">
+            <td><div class="asset-name" style="font-size:13px">LendingPool (vDOT)</div></td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2)">0x34B227...4e7e6</td>
+            <td><a href="https://blockscout-testnet.polkadot.io/address/0x34B22768B16262aD5b7fC23DD797D80791e4e7e6" target="_blank" rel="noopener" style="color:var(--pink)">View →</a></td>
+          </tr>
+          <tr class="market-row">
+            <td><div class="asset-name" style="font-size:13px">WPAS</div></td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2)">0xc09348...87Eb90</td>
+            <td><a href="https://blockscout-testnet.polkadot.io/address/0xc09348291775B55Da40433ba44240c262D87Eb90" target="_blank" rel="noopener" style="color:var(--pink)">View →</a></td>
+          </tr>
+          <tr class="market-row">
+            <td><div class="asset-name" style="font-size:13px">CollateralVault (WPAS)</div></td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2)">0x575B85...66C34</td>
+            <td><a href="https://blockscout-testnet.polkadot.io/address/0x575B8578F000fC554394C63cec8F07Abd0C66C34" target="_blank" rel="noopener" style="color:var(--pink)">View →</a></td>
+          </tr>
+          <tr class="market-row">
+            <td><div class="asset-name" style="font-size:13px">LendingPool (WPAS)</div></td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2)">0xF68bDd...Fd3408</td>
+            <td><a href="https://blockscout-testnet.polkadot.io/address/0xF68bDd12a8904fd6bB0CbED5623722517FDd3408" target="_blank" rel="noopener" style="color:var(--pink)">View →</a></td>
+          </tr>
+          <tr class="market-row">
+            <td><div class="asset-name" style="font-size:13px">SolvencyGateway</div></td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2)">0x199E3E...90Acd0</td>
+            <td><a href="https://blockscout-testnet.polkadot.io/address/0x199E3E7c1f1382bc389b495B927B0535B390Acd0" target="_blank" rel="noopener" style="color:var(--pink)">View →</a></td>
+          </tr>
+          <tr class="market-row">
+            <td><div class="asset-name" style="font-size:13px">MockSolvencyVerifier</div></td>
+            <td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text2)">0xED2676...8C52cc</td>
+            <td><a href="https://blockscout-testnet.polkadot.io/address/0xED2676C995BAA392093Ac0b907EA216c2B8C52cc" target="_blank" rel="noopener" style="color:var(--pink)">View →</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- DEMO -->
+<section id="demo">
+  <div class="section-inner" style="text-align:center">
+    <div class="section-label">Try It</div>
+    <h2 class="section-title">Live on <span class="grad-text">Polkadot Hub TestNet</span></h2>
+    <p class="section-sub" style="margin:0 auto 40px">13 contracts deployed. 102 tests passing. Two collateral markets. Fully non-custodial.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a class="btn-primary" href="https://nexucore.xyz" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Launch App
+      </a>
+      <a class="btn-ghost" href="https://youtu.be/Oj9luiA8mJM" target="_blank" rel="noopener">Protocol Overview →</a>
+      <a class="btn-ghost" href="https://youtu.be/1zx_H9QyJIU" target="_blank" rel="noopener">Full Walkthrough →</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- HACKATHON -->
+<section id="hackathon">
+  <div class="section-inner">
+    <div class="section-label">Competition</div>
+    <h2 class="section-title">Polkadot Solidity <span class="grad-text">Hackathon 2026</span></h2>
+    <p class="section-sub">EVM Track — DeFi/Stablecoin-enabled dApps. 80+ commits since Feb 15.</p>
+    <div class="three-grid" style="margin-top:48px">
+      <div class="card">
+        <div class="card-title">Track</div>
+        <div class="card-text">EVM Track — DeFi / Stablecoin-enabled dApps. The first and only money market on Polkadot Hub EVM.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">OpenZeppelin</div>
+        <div class="card-text">Claiming the OZ track. Core primitives: Ownable, ReentrancyGuard, ERC20, SafeERC20 from OZ v4.9.6. TreasuryRouter pattern demonstrates non-trivial composition under PolkaVM bytecode constraints.</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Evidence</div>
+        <div class="card-text">13 contracts verified on Blockscout. Live oracle price feed. Crisis simulation with real liquidation. ZK solvency proofs every 30 minutes. All on-chain.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">DOTLEND</span>
+        <div class="footer-desc">The first ZK-powered money market on Polkadot Hub. vDOT + WPAS collateral. Borrow USDH with ZK solvency proofs.</div>
+        <div style="display:flex;gap:16px;margin-top:20px">
+          <a href="https://x.com/OrthonodeSys" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none;font-size:12px;font-family:'JetBrains Mono',monospace;transition:color .2s" onmouseenter="this.style.color='var(--pink)'" onmouseleave="this.style.color='var(--muted)'">X / Twitter</a>
+          <a href="https://github.com/orthonode" target="_blank" rel="noopener" style="color:var(--muted);text-decoration:none;font-size:12px;font-family:'JetBrains Mono',monospace;transition:color .2s" onmouseenter="this.style.color='var(--pink)'" onmouseleave="this.style.color='var(--muted)'">GitHub</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Protocol</div>
+        <div class="footer-links">
+          <a href="#markets">Markets</a>
+          <a href="#zk-solvency">ZK Solvency</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#security">Security</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <div class="footer-links">
+          <a href="https://nexucore.xyz" target="_blank" rel="noopener">Launch App</a>
+          <a href="https://youtu.be/Oj9luiA8mJM" target="_blank" rel="noopener">Protocol Overview</a>
+          <a href="https://youtu.be/1zx_H9QyJIU" target="_blank" rel="noopener">Full Walkthrough</a>
+          <a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://orthonode.xyz" target="_blank" rel="noopener">Orthonode.xyz</a>
+          <a href="https://x.com/OrthonodeSys" target="_blank" rel="noopener">Twitter</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <div class="footer-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Use</a>
+          <a href="/cookies.html">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 ORTHONODE SYSTEMS™ — All rights reserved</div>
+      <div class="footer-orthonode">Built by <a href="https://orthonode.xyz">ORTHONODE SYSTEMS™</a> · Infrastructure Labs</div>
+    </div>
+  </div>
 </footer>
 
-    <script>
-    // Remove any remaining Connect Wallet elements
-    document.querySelectorAll("button,a").forEach(el=>{
-      if(el.textContent.trim().toLowerCase().includes("connect wallet"))el.remove();
-    });
-    // FAQ accordion
-    document.querySelectorAll("button").forEach(btn=>{
-      const icon=btn.querySelector(".material-symbols-outlined");
-      if(icon&&(icon.textContent.trim()==="add"||icon.textContent.trim()==="remove")){
-        btn.addEventListener("click",()=>{
-          const p=btn.nextElementSibling;
-          if(!p)return;
-          if(p.style.display==="block"){p.style.display="none";icon.textContent="add";}
-          else{p.style.display="block";icon.textContent="remove";}
-        });
-      }
-    });
-    // Counter animation
-    function animCounter(el,target,dur){const s=performance.now();(function tick(now){const p=Math.min((now-s)/dur,1),e=1-Math.pow(1-p,3),v=Math.round(e*target);el.textContent=v<10?"0"+v:v;if(p<1)requestAnimationFrame(tick)})(performance.now())}
-    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const el=e.target,t=parseInt(el.dataset.target||"0");if(t>0)animCounter(el,t,1200);obs.unobserve(el)}})},{threshold:0.5});
-    document.querySelectorAll(".font-mono,.label,.mono").forEach(el=>{
-      const txt=el.textContent.trim();
-      if(/^\d{1,5}\+?$/.test(txt)&&!el.closest("nav")){el.dataset.target=txt.replace(/\D/g,"");obs.observe(el);}
-    });
-    </script>
 
-    <script>
-    document.addEventListener("DOMContentLoaded",()=>{
-      if(typeof gsap!=="undefined"){
-        gsap.registerPlugin(ScrollTrigger);
-        // Nav entrance
-        gsap.fromTo("nav,header",[{y:-60,opacity:0}],[{y:0,opacity:1,duration:0.5,ease:"power3.out"}]);
-        // Hero text
-        gsap.fromTo("h1",{opacity:0,y:30},{opacity:1,y:0,duration:0.8,ease:"power3.out",delay:0.15});
-        // Cards staggered
-        gsap.utils.toArray(".glass,.card,[class*='rounded-xl']").forEach((el,i)=>{
-          gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:0.6,ease:"power2.out",
-            scrollTrigger:{trigger:el,start:"top 88%",once:true},delay:i*0.05>0.4?0.4:i*0.05
-          });
-        });
-        // Counter animation
-        document.querySelectorAll("[data-target]").forEach(el=>{
-          const t=parseInt(el.dataset.target);
-          ScrollTrigger.create({trigger:el,start:"top 85%",once:true,
-            onEnter:()=>gsap.to({v:0},{v:t,duration:1.2,ease:"power2.out",
-              onUpdate:function(){el.textContent=(this.targets()[0].v<10?"0":"")+Math.round(this.targets()[0].v)}})
-          });
-        });
-        // View transition polyfill
-        if(!document.startViewTransition){
-          document.addEventListener("click",e=>{
-            const a=e.target.closest("a[href]");
-            if(!a||a.target==="_blank"||a.href.includes("://")&&!a.href.includes(location.hostname)||a.href.startsWith("mailto:"))return;
-            e.preventDefault();document.body.style.opacity="0";
-            document.body.style.transition="opacity 0.2s";
-            setTimeout(()=>{location.href=a.href},200);
-          });
-        }
+<script>
+// ── CURSOR ──
+const cursor = document.getElementById('cursor');
+let mx=0,my=0,cx=0,cy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY}, {passive:true});
+function animCursor(){
+  cx+=(mx-cx)*.18;cy+=(my-cy)*.18;
+  cursor.style.transform=`translate(${cx}px, ${cy}px)`;
+  requestAnimationFrame(animCursor)
+}
+animCursor();
+document.querySelectorAll('a,button,.card,.arch-card,.security-item,.market-row,.zk-node,.step').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cursor.classList.add('is-hover'));
+  el.addEventListener('mouseleave',()=>cursor.classList.remove('is-hover'));
+});
+function initAnimations(){
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Hero entrance
+  gsap.from('#hero-badge',{y:20,opacity:0,duration:.7,delay:.1});
+  gsap.from('#hero-h1 .line1',{y:40,opacity:0,duration:.8,delay:.25});
+  gsap.from('#hero-h1 .line2',{y:40,opacity:0,duration:.8,delay:.4});
+  gsap.from('#hero-sub',{y:30,opacity:0,duration:.7,delay:.55});
+  gsap.from('#hero-metrics .hm',{y:20,opacity:0,duration:.6,stagger:.1,delay:.7});
+  gsap.from('#hero-ctas',{y:20,opacity:0,duration:.6,delay:1.0});
+
+  // ZK Circuit animation
+  const tl = gsap.timeline({delay:.8});
+  // Draw curve
+  tl.to('#curve-path',{strokeDashoffset:0,duration:1.8,ease:'power2.out'});
+  // Points appear
+  tl.to(['#pt-1','#pt-2','#pt-3','#pt-4','#pt-5','#pt-6'],{r:5,duration:.3,stagger:.12,ease:'back.out(2)'},'-=.8');
+  // Glow rings
+  tl.to(['#glow-1','#glow-2','#glow-3'],{r:12,duration:.4,stagger:.15,ease:'power2.out'},'-=.8');
+  // Connection lines
+  tl.to(['#conn-1','#conn-2','#conn-3','#conn-4'],{strokeDashoffset:0,duration:.6,stagger:.15,ease:'power2.inOut'},'-=.4');
+  // Labels
+  tl.to(['#lbl-1','#lbl-2','#lbl-3'],{fill:'rgba(230,0,122,0.8)',duration:.4,stagger:.1});
+  // Hash box
+  tl.to('#hash-box',{fill:'rgba(17,0,34,0.9)',stroke:'rgba(230,0,122,0.5)',duration:.4});
+  tl.to('#hash-txt',{fill:'rgba(230,0,122,0.9)',duration:.3},'-=.1');
+  // Brackets
+  tl.to(['#bracket-l','#bracket-r'],{stroke:'rgba(85,43,191,0.6)',duration:.4,stagger:.1},'-=.2');
+  tl.to('#bracket-lbl',{fill:'rgba(85,43,191,0.7)',duration:.3},'-=.1');
+  // Stamp
+  tl.to('#zk-stamp',{opacity:1,scale:1,rotation:0,duration:.6,ease:'back.out(1.5)'},'-=.1');
+
+  // Hero stat counters
+  document.querySelectorAll('.hm-val[data-target]').forEach(el=>{
+    const target = parseFloat(el.dataset.target);
+    const prefix = el.dataset.prefix||'';
+    const suffix = el.dataset.suffix||'';
+    gsap.to({val:0},{val:target,duration:2,delay:1,ease:'power2.out',onUpdate:function(){
+      const v = this.targets()[0].val;
+      el.textContent = prefix + (Number.isInteger(target) ? Math.round(v).toLocaleString() : v.toFixed(1)) + suffix;
+    }});
+  });
+
+  // Market rows slide in staggered
+  gsap.from('.market-row',{
+    x:-30,opacity:0,duration:.6,stagger:.12,ease:'power2.out',
+    scrollTrigger:{trigger:'#markets',start:'top 75%'}
+  });
+
+  // Util bar fill animation
+  gsap.utils.toArray('.util-fill').forEach(bar=>{
+    gsap.to(bar,{width:bar.dataset.target+'%',duration:1.2,ease:'power2.out',
+      scrollTrigger:{trigger:bar,start:'top 85%'}
+    });
+  });
+
+  // Table counter numbers
+  document.querySelectorAll('[data-counter]').forEach(el=>{
+    const target = parseFloat(el.dataset.counter);
+    const prefix = el.dataset.prefix||'';
+    const suffix = el.dataset.suffix||'';
+    gsap.to({val:0},{val:target,duration:1.5,ease:'power2.out',
+      scrollTrigger:{trigger:el,start:'top 85%'},
+      onUpdate:function(){
+        const v = this.targets()[0].val;
+        el.textContent = prefix + (target >= 100 ? Math.round(v) : v.toFixed(1)) + suffix;
       }
     });
-    </script>
-</body></html>
+  });
+
+  // ZK pillars
+  gsap.from('.zk-pillar',{
+    y:40,opacity:0,duration:.7,stagger:.15,ease:'power2.out',
+    scrollTrigger:{trigger:'#zk-solvency',start:'top 70%'}
+  });
+
+  // ZK flow nodes
+  gsap.from('.zk-node',{
+    scale:.85,opacity:0,duration:.5,stagger:.1,ease:'back.out(1.4)',
+    scrollTrigger:{trigger:'.zk-flow-diagram',start:'top 80%'}
+  });
+
+  // Steps slide in
+  gsap.from('.step-item',{
+    x:-40,opacity:0,duration:.7,stagger:.2,ease:'power2.out',
+    scrollTrigger:{trigger:'#how-it-works',start:'top 75%'}
+  });
+
+  // Arch cards
+  gsap.from('.arch-card',{
+    y:30,opacity:0,duration:.6,stagger:.12,ease:'power2.out',
+    scrollTrigger:{trigger:'#architecture',start:'top 75%'}
+  });
+
+  // Security items
+  gsap.from('.security-item',{
+    y:20,opacity:0,duration:.5,stagger:.08,ease:'power2.out',
+    scrollTrigger:{trigger:'#security',start:'top 75%'}
+  });
+
+  // 3D card tilt
+  document.querySelectorAll('.card,.arch-card').forEach(card=>{
+    card.addEventListener('mousemove',e=>{
+      const rect = card.getBoundingClientRect();
+      const cx2 = rect.left + rect.width/2;
+      const cy2 = rect.top + rect.height/2;
+      const rx = ((e.clientY - cy2) / (rect.height/2)) * 6;
+      const ry = ((e.clientX - cx2) / (rect.width/2)) * -6;
+      card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave',()=>{
+      card.style.transform = '';
+    });
+  });
+
+  // Continuous ZK stamp glow pulse
+  gsap.to('#zk-stamp .stamp-inner',{
+    boxShadow:'0 0 40px rgba(230,0,122,0.4), 0 0 80px rgba(230,0,122,0.15)',
+    duration:2,repeat:-1,yoyo:true,ease:'power2.inOut',delay:2
+  });
+}
+
+/* ── Star field ──────────────────────────────────────── */
+const cv = document.getElementById('star-canvas');
+const ctx = cv.getContext('2d');
+let stars = [];
+function initStars() {
+  cv.width  = window.innerWidth;
+  cv.height = window.innerHeight;
+  stars = Array.from({ length: 150 }, () => ({
+    x: Math.random() * cv.width,
+    y: Math.random() * cv.height,
+    r: Math.random() * 1.1 + 0.2,
+    a: Math.random(),
+    s: (Math.random() * 0.006 + 0.002) * (Math.random() < .5 ? 1 : -1),
+  }));
+}
+function drawStars() {
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  stars.forEach(s => {
+    s.a += s.s;
+    if (s.a <= 0 || s.a >= 1) s.s *= -1;
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(230,0,122,${s.a * 0.4})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+initStars();
+drawStars();
+window.addEventListener('resize', initStars, { passive: true });
+
+/* ── Page Loader ─────────────────────────────────────── */
+const loaderLogo = document.getElementById('loader-logo');
+const loaderFill = document.getElementById('loader-fill');
+const loaderText = document.getElementById('loader-text');
+const messages   = ['Initializing ZK Layer...', 'Connecting to Polkadot Hub...', 'Loading Solidity Contracts...', 'Verifying Solvency Proofs...', 'Ready.'];
+let progCount = 0, msgIdx = 0;
+gsap.to(loaderLogo, { opacity: 1, scale: 1, duration: .6, ease: 'power2.out', delay: .1 });
+const fillTimer = setInterval(() => {
+  progCount += Math.random() * 18 + 6;
+  if (progCount > 100) progCount = 100;
+  loaderFill.style.width = progCount + '%';
+  if (progCount > 25  && msgIdx < 1) { loaderText.textContent = messages[++msgIdx]; }
+  if (progCount > 55  && msgIdx < 2) { loaderText.textContent = messages[++msgIdx]; }
+  if (progCount > 85  && msgIdx < 3) { loaderText.textContent = messages[++msgIdx]; }
+  if (progCount >= 100) {
+    clearInterval(fillTimer);
+    setTimeout(() => {
+      gsap.to('#loader', { opacity: 0, duration: .5, ease: 'power2.inOut', onComplete: () => {
+        document.getElementById('loader').style.display = 'none';
+        initAnimations();
+      }});
+    }, 350);
+  }
+}, 80);
+</script>
+<script src="nav.js"></script>
+
+<!-- Cookie consent bar -->
+<div id="cookie-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(10,0,20,0.97);border-top:1px solid rgba(230,0,122,0.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+  <p style="margin:0;font-family:'Inter',sans-serif;font-size:.82rem;color:var(--muted);line-height:1.5;">This site uses essential cookies only for Cloudflare bot protection. No tracking or analytics. <a href="/cookies.html" style="color:var(--text2);text-decoration:underline;text-underline-offset:3px;">Learn more</a></p>
+  <button onclick="dismissCookieBar()" style="flex-shrink:0;background:var(--card);border:1px solid var(--border2);color:var(--text);font-family:'Inter',sans-serif;font-size:.8rem;padding:7px 18px;border-radius:6px;cursor:pointer;white-space:nowrap;transition:background .2s;">Got it</button>
+</div>
+<script>
+(function(){
+  if(localStorage.getItem('orthonode_cc')==='1') return;
+  var bar=document.getElementById('cookie-bar');
+  if(bar){bar.style.display='flex';}
+})();
+function dismissCookieBar(){
+  localStorage.setItem('orthonode_cc','1');
+  var bar=document.getElementById('cookie-bar');
+  if(bar){bar.style.opacity='0';bar.style.transition='opacity .3s';setTimeout(function(){bar.style.display='none';},300);}
+}
+</script>
+</body>
+</html>

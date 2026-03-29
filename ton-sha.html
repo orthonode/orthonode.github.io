@@ -1,460 +1,1937 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>TON-SHA — Cryptographic Agent Trust Primitive for the TON Ecosystem | ORTHONODE SYSTEMS™</title>
-    <meta name="description" content="TON-SHA is a four-gate cryptographic trust primitive for TON agents and DePIN nodes. SHA-256 digest verification, replay protection, firmware governance. 0.03 TON/op. Tact 1.6. Testnet live.">
-    <meta name="keywords" content="TON-SHA agent trust, TON blockchain verification, Tact 1.6 contract, SHA-256 digest TON, DePIN agent trust primitive, cryptographic receipt TON, four-gate verifier TON, Arhant Barmate, Orthonode Labs">
-    <meta name="author" content="Arhant Barmate">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-    <link rel="canonical" href="https://orthonode.xyz/ton-sha.html">
-    <meta name="geo.region" content="IN-MP">
-    <meta name="geo.placename" content="Bhopal, Madhya Pradesh, India">
-    <meta name="geo.position" content="23.2599;77.4126">
-    <meta name="ICBM" content="23.2599, 77.4126">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://orthonode.xyz/ton-sha.html">
-    <meta property="og:title" content="TON-SHA — Cryptographic Agent Trust Primitive for the TON Ecosystem">
-    <meta property="og:description" content="Four-gate SHA-256 verification for TON agents. Device authorization, firmware approval, replay protection, digest verification. 0.03 TON per operation. Testnet live.">
-    <meta property="og:image" content="https://orthonode.xyz/banner.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="ORTHONODE SYSTEMS™">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@OrthonodeSys">
-    <meta name="twitter:creator" content="@OrthonodeSys">
-    <meta name="twitter:title" content="TON-SHA — Agent Trust Primitive for TON | ORTHONODE SYSTEMS™">
-    <meta name="twitter:description" content="Four-gate SHA-256 cryptographic trust for TON agents. 0.03 TON/op. Tact 1.6. Testnet live. No trusted intermediary.">
-    <meta name="twitter:image" content="https://orthonode.xyz/banner.png">
-    <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"TON-SHA","applicationCategory":"DeveloperApplication","operatingSystem":"TON Blockchain","description":"Cryptographic agent trust primitive for the TON ecosystem. Four sequential gates: device authorization, firmware approval, replay protection, SHA-256 digest verification. 0.03 TON per operation. Tact 1.6. TON Testnet live.","author":{"@type":"Person","name":"Arhant Barmate"},"publisher":{"@type":"Organization","name":"ORTHONODE SYSTEMS™","url":"https://orthonode.xyz"}}
-    </script>
-    <meta name="theme-color" content="#000000">
-    <link rel="icon" type="image/png" sizes="96x96" href="/site-logo.png">
-    <link rel="apple-touch-icon" href="/site-logo.png">
-    <link rel="shortcut icon" href="/site-logo.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --void:#000000; --bg:#000000; --bg-1:#070707; --bg-2:#0D0D0D; --bg-card:#0D0D0D; --bg-raised:#141414;
-            --border:rgba(255,255,255,0.06); --border-md:rgba(255,255,255,0.10); --border-hi:rgba(255,255,255,0.18);
-            --tx-1:#F5F5F5; --tx-2:#8C8C8C; --tx-3:#404040; --tx-4:#1C1C1C;
-            --silver:#D0D0D0; --chrome:#A8A8A8; --plasma:#C8C8C8;
-            --sha:#2A9FE8; --ton:#0098EA; --nexus:#00D084; --oap:#F59E0B; --inv:#EAB308; --tix:#9945FF; --red:#EF4444; --green:#22C55E;
-            --accent:#0ECFB1;
-            --font-head:'Syne',sans-serif; --font-body:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif; --font-mono:'IBM Plex Mono','Courier New',monospace;
-            --ease:cubic-bezier(0.22,1,0.36,1);
-        }
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-        body{background:var(--bg);color:var(--tx-2);font-family:var(--font-body);font-size:16px;line-height:1.65;overflow-x:hidden}
-        body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.012) 2px,rgba(255,255,255,.012) 4px);pointer-events:none;z-index:-1}
-        body::after{content:'';position:fixed;top:-20vh;right:-10vw;width:55vw;height:55vw;background:radial-gradient(ellipse,rgba(255,255,255,.015) 0%,transparent 65%);pointer-events:none;z-index:-2}
-        a{color:var(--tx-2);text-decoration:none;transition:color .2s}
-        a:hover{color:var(--tx-1)}
-        ::selection{background:rgba(14,207,177,.2)}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>TON-SHA — Agent Trust Primitive for TON | ORTHONODE SYSTEMS™</title>
+<meta name="description" content="TON-SHA is a four-gate cryptographic trust primitive for autonomous AI agents on TON. Hardware-anchored identity. SHA-256 digest verification. Replay protection. 0.03 TON/op. Live on TON Testnet.">
+<meta name="keywords" content="TON-SHA, TON agent identity, cryptographic trust primitive, AI agent verification, hardware-anchored identity, SHA-256 TON, four-gate verification, Orthonode Systems, Tact contract, DePIN TON">
+<meta name="author" content="Arhant Barmate">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://orthonode.xyz/ton-sha.html">
+<meta name="geo.region" content="IN-MP">
+<meta name="geo.placename" content="Bhopal, Madhya Pradesh, India">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://orthonode.xyz/ton-sha.html">
+<meta property="og:title" content="TON-SHA — AI Agents Get Silicon Passports | ORTHONODE SYSTEMS™">
+<meta property="og:description" content="Hardware-anchored cryptographic identity for autonomous AI agents on TON. Four-gate verification. 0.03 TON/op. Live on testnet.">
+<meta property="og:image" content="https://orthonode.xyz/banner.png">
+<meta property="og:site_name" content="ORTHONODE SYSTEMS™">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@OrthonodeSys">
+<meta name="twitter:title" content="TON-SHA — Agent Trust Primitive for TON | ORTHONODE SYSTEMS™">
+<meta name="twitter:description" content="Four-gate cryptographic trust. Hardware-anchored AI agent identity on TON. 0.03 TON/op. Live testnet.">
+<meta name="twitter:image" content="https://orthonode.xyz/banner.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"TON-SHA","applicationCategory":"DeveloperApplication","operatingSystem":"TON Blockchain","description":"Four-gate cryptographic trust primitive for autonomous AI agents on TON. Hardware-anchored identity, SHA-256 digest verification, replay protection. 0.03 TON per operation. Live on TON Testnet.","author":{"@type":"Person","name":"Arhant Barmate"},"publisher":{"@type":"Organization","name":"ORTHONODE SYSTEMS™","url":"https://orthonode.xyz"}}
+</script>
+<meta name="theme-color" content="#000414">
+<link rel="icon" type="image/png" href="/site-logo.png">
+<link rel="apple-touch-icon" href="/site-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+<style>
+/* ── RESET & ROOT ──────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#000414;
+  --primary:#0098EA;
+  --accent:#5C9FFF;
+  --purple:#7C5CFF;
+  --text:#E8F4FF;
+  --muted:#5A7A9A;
+  --card:rgba(0,152,234,0.07);
+  --border:rgba(0,152,234,0.2);
+  --font-head:'Space Grotesk',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --font-body:'Inter',sans-serif;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+}
+html{
+  scroll-behavior:smooth;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  cursor:none;
+}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(0,152,234,0.3)}
+img{display:block;max-width:100%}
 
-        header{position:fixed;top:0;width:100%;z-index:1000;backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);background:rgba(0,0,0,.85);border-bottom:1px solid var(--border)}
-        header::after{content:'';position:absolute;bottom:-1px;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(200,200,200,.25) 40%,rgba(200,200,200,.15) 60%,transparent)}
-        .nav-inner{max-width:1360px;margin:0 auto;padding:.7rem 2rem;display:flex;justify-content:space-between;align-items:center}
-        .nav-left{display:flex;align-items:center;gap:1rem;font-family:var(--font-mono);font-size:.68rem}
-        .nav-back{display:flex;align-items:center;gap:.45rem;color:var(--tx-3);transition:color .2s}
-        .nav-back:hover{color:var(--accent)}
-        .nav-back img{border-radius:3px;display:block}
-        .nav-sep{color:var(--tx-4)}
-        .nav-status{display:flex;align-items:center;gap:.45rem;color:var(--tx-3);font-family:var(--font-mono);font-size:.68rem}
-        .live-dot{width:5px;height:5px;background:var(--green);border-radius:50%;box-shadow:0 0 6px rgba(34,197,94,.6);animation:blink 2s ease-in-out infinite;flex-shrink:0}
-        @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-        .nav-right{display:flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.65rem}
-        .tag{padding:.18rem .55rem;border:1px solid var(--border);color:var(--tx-3);transition:border-color .2s,color .2s}
-        .tag:hover{border-color:var(--border-md);color:var(--tx-2)}
-        .tag-ton{color:var(--accent);border-color:rgba(14,207,177,.2)}
-        .tag-ton:hover{border-color:rgba(14,207,177,.4)}
-        .tag-green{color:var(--green);border-color:rgba(34,197,94,.2);background:rgba(34,197,94,.04)}
+/* ── PREMIUM MIX-BLEND CURSOR ──────────────────────────────── */
+.c-cursor{
+  width:12px;height:12px;
+  background:#fff;
+  border-radius:50%;
+  position:fixed;
+  top:0;left:0;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  z-index:999999;
+  mix-blend-mode:difference;
+  transition:width 0.2s cubic-bezier(0.23,1,0.32,1),height 0.2s cubic-bezier(0.23,1,0.32,1);
+}
+.c-cursor.is-hover{width:44px;height:44px;}
+@media(hover:none){html{cursor:auto;}.c-cursor{display:none;}}
 
-        .wrap{max-width:1360px;margin:0 auto;padding:0 2rem}
-        .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
-        .reveal.in{opacity:1;transform:translateY(0)}
+/* ── STAR FIELD CANVAS ─────────────────────────────────────── */
+#star-canvas{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;
+  z-index:0;
+}
 
-        .hero{min-height:88vh;padding-top:9rem;padding-bottom:5rem;display:flex;flex-direction:column;justify-content:center;position:relative}
-        .hero-glow{position:absolute;top:0;right:-5%;width:min(500px,50vw);height:min(500px,50vw);background:radial-gradient(ellipse,rgba(14,207,177,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;animation:float 16s ease-in-out infinite}
-        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-28px)}}
-        .breadcrumb{font-family:var(--font-mono);font-size:.65rem;color:var(--tx-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2rem}
-        .breadcrumb .bc-cur{color:var(--accent)}
-        .hero-badge{display:inline-flex;align-items:center;gap:.6rem;padding:.3rem .8rem;border:1px solid rgba(14,207,177,.25);background:rgba(14,207,177,.05);font-family:var(--font-mono);font-size:.62rem;color:var(--accent);letter-spacing:.08em;margin-bottom:1.75rem}
-        .hero h1{font-family:var(--font-head);font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:800;line-height:1.0;letter-spacing:-.03em;color:var(--tx-1);max-width:900px;margin-bottom:1.5rem}
-        .hero h1 .accent{color:var(--accent)}
-        .hero-sub{font-size:clamp(1rem,1.6vw,1.2rem);color:var(--tx-2);max-width:720px;margin-bottom:.75rem;line-height:1.65}
-        .hero-mono{font-family:var(--font-mono);font-size:.65rem;color:var(--accent);letter-spacing:.06em;margin-bottom:3rem;opacity:.8}
+/* ── LOADER ────────────────────────────────────────────────── */
+#loader{
+  position:fixed;inset:0;
+  background:var(--bg);
+  z-index:9999;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:24px;
+}
+#loader-text{
+  font-family:var(--font-mono);
+  font-size:clamp(18px,3vw,28px);
+  font-weight:400;
+  letter-spacing:0.2em;
+  color:var(--primary);
+  min-height:2em;
+  display:flex;align-items:center;
+}
+#loader-cursor{
+  display:inline-block;
+  width:2px;height:1.1em;
+  background:var(--primary);
+  margin-left:2px;
+  animation:blink-cur 0.8s step-end infinite;
+  vertical-align:middle;
+}
+@keyframes blink-cur{0%,100%{opacity:1}50%{opacity:0}}
+#loader-bar-track{
+  width:220px;height:1px;
+  background:rgba(0,152,234,0.15);
+}
+#loader-bar-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  transition:width 0.05s linear;
+}
+#loader-sub{
+  font-family:var(--font-mono);
+  font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
 
-        .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-        .stat{background:var(--bg-card);padding:1.25rem 1.5rem;text-align:center;transition:background .25s}
-        .stat:hover{background:var(--bg-raised)}
-        .stat-n{font-family:var(--font-mono);font-size:1.6rem;font-weight:600;color:var(--accent);display:block;line-height:1;margin-bottom:.4rem}
-        .stat-l{font-family:var(--font-mono);font-size:.6rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.1em}
+/* ── MAIN CONTENT ──────────────────────────────────────────── */
+#page{opacity:0;transition:opacity 0.6s var(--ease)}
+#page.visible{opacity:1}
 
-        .sec-label{font-family:var(--font-mono);font-size:.65rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.75rem;padding-bottom:.85rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
-        .sec-label::before{content:'';width:2px;height:12px;background:linear-gradient(180deg,var(--accent),var(--ton));flex-shrink:0}
-        .section{margin:5rem 0}
+/* ── SECTION WRAPPER ───────────────────────────────────────── */
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,60px)}
 
-        .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-        .card{background:var(--bg-card);padding:2rem 2.25rem;transition:background .25s}
-        .card:hover{background:var(--bg-raised)}
-        .card.span2{grid-column:span 2}
-        .card-label{font-family:var(--font-mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:1rem}
-        .card h3{font-family:var(--font-head);font-size:1.25rem;font-weight:700;color:var(--tx-1);margin-bottom:.875rem;line-height:1.2}
-        .card p{color:var(--tx-2);font-size:.925rem;line-height:1.68;margin-bottom:.75rem}
-        .card p:last-child{margin-bottom:0}
-        .card strong{color:var(--tx-1);font-weight:600}
+/* ── REVEAL ANIMATION ──────────────────────────────────────── */
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity 0.7s var(--ease),transform 0.7s var(--ease);
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+.reveal-delay-4{transition-delay:0.4s}
 
-        .gate-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-        .gate-card{background:var(--bg-card);padding:1.75rem 1.5rem;transition:background .25s;border-top:2px solid transparent}
-        .gate-card:hover{background:var(--bg-raised)}
-        .gate-num{font-family:var(--font-mono);font-size:.6rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem}
-        .gate-title{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--tx-1);margin-bottom:.5rem}
-        .gate-desc{font-size:.85rem;color:var(--tx-2);line-height:1.65;margin-bottom:.75rem}
-        .gate-blocks{font-family:var(--font-mono);font-size:.65rem;color:var(--tx-3);padding:.3rem .6rem;background:var(--bg);border:1px solid var(--border);display:inline-block}
+/* ── HERO ──────────────────────────────────────────────────── */
+#hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:clamp(100px,15vh,160px) clamp(20px,5vw,60px) clamp(60px,8vh,100px);
+  z-index:1;
+  overflow:hidden;
+}
 
-        .receipt-block{border:1px solid rgba(14,207,177,.2);background:rgba(14,207,177,.03);padding:2rem 2.5rem;border-left:2px solid rgba(14,207,177,.5)}
-        .receipt-label{font-family:var(--font-mono);font-size:.62rem;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.875rem}
-        .receipt-block h3{font-family:var(--font-head);font-size:1.2rem;font-weight:700;color:var(--tx-1);margin-bottom:.75rem}
-        .receipt-block p{color:var(--tx-2);font-size:.9rem;line-height:1.68;margin-bottom:.75rem}
-        .code-line{font-family:var(--font-mono);font-size:.72rem;color:var(--tx-2);background:var(--bg);border:1px solid var(--border);padding:.6rem 1rem;margin:.5rem 0;display:block;word-break:break-all}
-        .code-line .k{color:var(--accent)}
-        .code-line .v{color:var(--tx-1)}
+/* Agent constellation canvas */
+#agent-canvas{
+  position:absolute;
+  inset:0;width:100%;height:100%;
+  pointer-events:none;
+  z-index:0;
+}
 
-        .evidence-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-        .evidence-card{background:var(--bg-card);padding:1.75rem;transition:background .25s}
-        .evidence-card:hover{background:var(--bg-raised)}
-        .evidence-label{font-family:var(--font-mono);font-size:.6rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem}
-        .evidence-value{font-family:var(--font-mono);font-size:.72rem;color:var(--tx-2);word-break:break-all;line-height:1.6;margin-bottom:.5rem}
-        .evidence-meta{font-family:var(--font-mono);font-size:.68rem;color:var(--tx-3);display:flex;gap:1.5rem;margin-bottom:.75rem;flex-wrap:wrap}
-        .evidence-link{font-family:var(--font-mono);font-size:.68rem;color:var(--accent);transition:color .2s}
-        .evidence-link:hover{color:#5fffdf}
+/* Scan beam overlay */
+.scan-beam{
+  position:absolute;
+  left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,rgba(0,152,234,0.6),transparent);
+  animation:scan 3s ease-in-out infinite;
+  pointer-events:none;
+  z-index:1;
+}
+@keyframes scan{
+  0%{top:0%;opacity:0;}
+  10%{opacity:1;}
+  90%{opacity:1;}
+  100%{top:100%;opacity:0;}
+}
 
-        .faq{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border)}
-        .faq-item{background:var(--bg-card);padding:1.5rem 2rem;transition:background .2s}
-        .faq-item:hover{background:var(--bg-raised)}
-        .faq-item h3{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--tx-1);margin-bottom:.6rem}
-        .faq-item p{color:var(--tx-2);font-size:.9rem;line-height:1.65}
+.hero-inner{
+  position:relative;
+  z-index:2;
+  max-width:960px;
+  width:100%;
+}
 
-        .cta{background:var(--bg-card);border:1px solid var(--border);padding:3.5rem;text-align:center;position:relative;overflow:hidden}
-        .cta::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(14,207,177,.55),transparent)}
-        .cta h2{font-family:var(--font-head);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:var(--tx-1);margin-bottom:.875rem}
-        .cta p{color:var(--tx-2);max-width:520px;margin:0 auto 2rem}
-        .cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
-        .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.4rem;font-family:var(--font-mono);font-size:.75rem;font-weight:600;border:1px solid var(--border-md);color:var(--tx-2);background:transparent;text-decoration:none;transition:all .22s var(--ease);letter-spacing:.03em}
-        .btn:hover{color:var(--tx-1);border-color:var(--border-hi);background:rgba(255,255,255,.03)}
-        .btn-primary{background:var(--accent);color:#04060A;border-color:var(--accent)}
-        .btn-primary:hover{background:#5fffdf;border-color:#5fffdf;color:#04060A;box-shadow:0 0 24px rgba(14,207,177,.35)}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;gap:10px;
+  padding:8px 18px;
+  border:1px solid rgba(0,152,234,0.35);
+  background:rgba(0,152,234,0.08);
+  font-family:var(--font-mono);
+  font-size:11px;letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:32px;
+  border-radius:2px;
+}
+.hero-badge-dot{
+  width:6px;height:6px;
+  background:var(--primary);
+  border-radius:50%;
+  box-shadow:0 0 8px var(--primary);
+  animation:pulse-dot 2s ease-in-out infinite;
+}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.75)}}
 
-        #citation{background:var(--bg-1);border:1px solid var(--border);border-left:2px solid rgba(14,207,177,.3);padding:1.5rem 2rem;margin-top:2rem}
-        #citation h2{font-family:var(--font-mono);font-size:.62rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:.75rem}
-        #citation p{font-family:var(--font-mono);font-size:.72rem;color:var(--tx-3);line-height:1.7}
+.hero-badge-rune{
+  color:var(--primary);
+  font-size:13px;
+}
 
-        footer{margin-top:8rem;padding:4rem 0 2rem;border-top:1px solid var(--border);position:relative}
-        footer::before{content:'';position:absolute;top:-1px;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(14,207,177,.35) 35%,rgba(0,152,234,.2) 65%,transparent)}
-        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3rem}
-        .footer-brand h4{font-family:var(--font-head);font-size:1rem;font-weight:800;color:var(--tx-1);margin-bottom:.875rem;letter-spacing:.04em}
-        .footer-brand p{color:var(--tx-3);font-size:.875rem;line-height:1.6}
-        .footer-col h5{font-family:var(--font-mono);font-size:.62rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.1rem}
-        .footer-col ul{list-style:none}
-        .footer-col li{margin-bottom:.65rem}
-        .footer-col a{color:var(--tx-3);font-size:.875rem;transition:color .2s}
-        .footer-col a:hover{color:var(--tx-1)}
-        .footer-bottom{padding-top:1.75rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.65rem;color:var(--tx-3)}
-        .footer-legal{display:flex;gap:1.5rem}
-        .footer-legal a{color:var(--tx-3);font-size:.65rem}
-        .footer-legal a:hover{color:var(--tx-1)}
+h1.hero-h1{
+  font-family:var(--font-head);
+  font-size:clamp(52px,7vw,96px);
+  font-weight:800;
+  line-height:1.0;
+  letter-spacing:-0.02em;
+  color:var(--text);
+  margin-bottom:28px;
+}
+h1.hero-h1 .slash{
+  color:rgba(0,152,234,0.4);
+  margin:0 12px;
+  font-weight:300;
+}
+h1.hero-h1 .word-ton{
+  background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+h1.hero-h1 .word-anchored{
+  background:linear-gradient(135deg,var(--accent) 0%,var(--purple) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
 
-        @media(max-width:1024px){.gate-grid{grid-template-columns:repeat(2,1fr)}.evidence-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.footer-brand{grid-column:span 2}}
-        @media(max-width:768px){.nav-inner{padding:.7rem 1rem}.grid-2{grid-template-columns:1fr}.card.span2{grid-column:span 1}.stats-bar{grid-template-columns:repeat(2,1fr)}.gate-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.footer-brand{grid-column:span 1}.footer-bottom{flex-direction:column;gap:1rem;text-align:center}.cta{padding:2.5rem 1.5rem}.receipt-block{padding:1.5rem}}
-        @media(max-width:480px){.stats-bar{grid-template-columns:1fr 1fr}}
+.hero-sub{
+  font-size:clamp(15px,1.6vw,19px);
+  color:var(--muted);
+  max-width:680px;
+  margin:0 auto 48px;
+  line-height:1.7;
+  font-weight:300;
+}
+.hero-sub strong{color:var(--text);font-weight:400}
 
-        /* ── MOBILE ──────────────────────────────── */
-        @media(max-width:1024px){
-          .hero-layout,.hero-grid,.content-grid,.two-col{grid-template-columns:1fr!important;}
-          .side-panel,.hero-aside,.status-panel{display:none!important;}
-        }
-        @media(max-width:768px){
-          :root{--nav-h:52px;}
-          h1,.page-title{font-size:clamp(1.6rem,7vw,2.4rem)!important;}
-          h2,.section-title{font-size:clamp(1.2rem,5vw,1.8rem)!important;}
-          .hero-title,.h1{font-size:clamp(1.8rem,8vw,2.8rem)!important;}
-          .card-grid,.metrics-grid,.stat-row,.feature-grid{grid-template-columns:1fr!important;gap:12px!important;}
-          .gate-box,.gate-inner{padding:24px 16px!important;}
-          section,.section{padding:48px 0!important;}
-          .container,.wrap{padding:0 16px!important;}
-          table{font-size:.8rem;}
-          table td,table th{padding:8px 10px!important;}
-        }
-        @media(max-width:480px){
-          h1,.page-title,.hero-title{font-size:clamp(1.4rem,8vw,2rem)!important;}
-          .badge,.tag{font-size:.65rem!important;padding:3px 8px!important;}
-          .btn,.cta-btn,.btn-primary{padding:10px 20px!important;font-size:.85rem!important;}
-          .stat-n,[data-count]{font-size:1.8rem!important;}
-          nav .nav-tags{display:none!important;}
-        }
-        @media(max-width:360px){
-          .container,.wrap{padding:0 12px!important;}
-          h1,.hero-title{font-size:1.4rem!important;}
-        }
-    </style>
-    <script src="/nav.js" defer></script>
+/* Identity hash stream */
+.hash-stream{
+  font-family:var(--font-mono);
+  font-size:11px;
+  color:rgba(0,152,234,0.45);
+  letter-spacing:0.08em;
+  margin-bottom:40px;
+  height:18px;
+  overflow:hidden;
+}
+.hash-item{
+  display:block;
+  animation:hash-fade 0s linear forwards;
+}
+@keyframes hash-fade{0%{opacity:0}10%{opacity:1}80%{opacity:1}100%{opacity:0}}
+
+/* Stats row */
+.hero-stats{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:clamp(12px,3vw,48px);
+  flex-wrap:wrap;
+  margin-bottom:48px;
+}
+.hero-stat{
+  display:flex;flex-direction:column;
+  align-items:center;gap:6px;
+}
+.hero-stat-val{
+  font-family:var(--font-mono);
+  font-size:clamp(11px,1.2vw,13px);
+  font-weight:500;
+  color:var(--accent);
+  letter-spacing:0.06em;
+  white-space:nowrap;
+}
+.hero-stat-label{
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:rgba(90,122,154,0.7);
+}
+.hero-stat-divider{
+  width:1px;height:32px;
+  background:rgba(0,152,234,0.2);
+}
+
+/* CTAs */
+.hero-ctas{
+  display:flex;align-items:center;justify-content:center;
+  gap:16px;flex-wrap:wrap;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;
+  background:var(--primary);
+  color:#fff;
+  font-family:var(--font-mono);
+  font-size:12px;letter-spacing:0.1em;
+  font-weight:500;
+  text-transform:uppercase;
+  border:1px solid var(--primary);
+  transition:background 0.25s,box-shadow 0.25s,transform 0.2s;
+  min-height:44px;
+  cursor:none;
+  border-radius:2px;
+  text-decoration:none;
+}
+.btn-primary:hover{
+  background:var(--accent);
+  border-color:var(--accent);
+  box-shadow:0 0 28px rgba(0,152,234,0.4);
+  transform:translateY(-1px);
+  color:#fff;
+}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;
+  background:transparent;
+  color:var(--accent);
+  font-family:var(--font-mono);
+  font-size:12px;letter-spacing:0.1em;
+  font-weight:500;
+  text-transform:uppercase;
+  border:1px solid rgba(0,152,234,0.35);
+  transition:border-color 0.25s,background 0.25s,transform 0.2s;
+  min-height:44px;
+  cursor:none;
+  border-radius:2px;
+  text-decoration:none;
+}
+.btn-ghost:hover{
+  border-color:var(--accent);
+  background:rgba(0,152,234,0.08);
+  transform:translateY(-1px);
+  color:var(--accent);
+}
+
+/* Scroll indicator */
+.scroll-hint{
+  position:absolute;
+  bottom:32px;left:50%;transform:translateX(-50%);
+  font-family:var(--font-mono);font-size:9px;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:rgba(90,122,154,0.5);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  z-index:2;
+}
+.scroll-arrow{
+  width:1px;height:32px;
+  background:linear-gradient(to bottom,rgba(0,152,234,0.6),transparent);
+  animation:scroll-drop 2s ease-in-out infinite;
+}
+@keyframes scroll-drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ── SECTION SHARED ────────────────────────────────────────── */
+section{
+  position:relative;
+  z-index:1;
+  padding:clamp(64px,10vh,120px) 0;
+}
+.section-label{
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.section-label::before{
+  content:'';
+  display:block;width:24px;height:1px;
+  background:var(--primary);
+  flex-shrink:0;
+}
+.section-heading{
+  font-family:var(--font-head);
+  font-size:clamp(32px,4vw,64px);
+  font-weight:800;
+  letter-spacing:-0.02em;
+  color:var(--text);
+  line-height:1.1;
+  margin-bottom:20px;
+}
+.section-heading .accent{
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.section-sub{
+  font-size:clamp(14px,1.4vw,17px);
+  color:var(--muted);
+  max-width:600px;
+  line-height:1.7;
+  font-weight:300;
+}
+
+/* Divider line */
+.divider{
+  width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+  margin:0;
+}
+
+/* ── CARD GRADIENT GLOW (global) ───────────────────────────── */
+[class*="card"]:hover,[class*="gate"]:hover,[class*="use-card"]:hover,[class*="stat"]:hover{
+  border-color:rgba(0,152,234,0.5) !important;
+  box-shadow:0 0 30px rgba(0,152,234,0.12),0 8px 40px rgba(0,0,0,0.4) !important;
+}
+
+/* ── SECTION 1 — PROBLEM ───────────────────────────────────── */
+#problem{background:transparent}
+
+.problem-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(32px,5vw,80px);
+  align-items:center;
+  margin-top:clamp(40px,5vw,64px);
+}
+.problem-text-col{}
+.problem-text-col p{
+  font-size:clamp(14px,1.3vw,16px);
+  color:var(--muted);
+  line-height:1.75;
+  margin-bottom:20px;
+}
+.problem-text-col p strong{color:var(--text);font-weight:500}
+
+.problem-list{
+  margin-top:28px;
+  display:flex;flex-direction:column;gap:12px;
+}
+.problem-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;
+  border:1px solid rgba(0,152,234,0.1);
+  background:rgba(0,152,234,0.03);
+  border-radius:4px;
+  font-size:13px;
+  color:var(--muted);
+  transition:border-color 0.25s,background 0.25s;
+}
+.problem-item:hover{
+  border-color:rgba(0,152,234,0.25);
+  background:rgba(0,152,234,0.07);
+}
+.problem-item-icon{
+  width:20px;height:20px;
+  flex-shrink:0;
+  margin-top:1px;
+}
+.problem-item.bad .problem-item-icon path{stroke:#ff4466}
+.problem-item.good .problem-item-icon path{stroke:#22c55e}
+.problem-item.bad{border-left:2px solid rgba(255,68,102,0.4)}
+.problem-item.good{border-left:2px solid rgba(34,197,94,0.4)}
+.problem-item span{line-height:1.5}
+.problem-item strong{color:var(--text);font-weight:500}
+
+.problem-visual-col{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  min-height:320px;
+}
+
+/* Trust comparison SVG panel */
+.trust-panel{
+  width:100%;max-width:400px;
+  padding:28px;
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:8px;
+  position:relative;
+  overflow:hidden;
+}
+.trust-panel::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--primary),transparent);
+}
+.trust-panel-title{
+  font-family:var(--font-mono);
+  font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:24px;
+  text-align:center;
+}
+.agent-comparison{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.agent-col-head{
+  font-family:var(--font-mono);
+  font-size:9px;letter-spacing:0.14em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+  text-align:center;
+  padding-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.agent-col-head.bad-head{color:#ff4466}
+.agent-col-head.good-head{color:#22c55e}
+.agent-node-row{
+  display:flex;flex-direction:column;gap:8px;
+}
+.agent-node{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 10px;
+  border-radius:4px;
+  font-family:var(--font-mono);
+  font-size:10px;
+  transition:transform 0.2s;
+}
+.agent-node:hover{transform:translateX(3px)}
+.agent-node.fake{
+  background:rgba(255,68,102,0.07);
+  border:1px solid rgba(255,68,102,0.2);
+  color:#ff4466;
+}
+.agent-node.verified{
+  background:rgba(0,152,234,0.07);
+  border:1px solid rgba(0,152,234,0.25);
+  color:var(--accent);
+}
+.node-marker{
+  width:8px;height:8px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+.agent-node.fake .node-marker{background:#ff4466;box-shadow:0 0 6px rgba(255,68,102,0.5)}
+.agent-node.verified .node-marker{background:var(--primary);box-shadow:0 0 6px rgba(0,152,234,0.5);animation:pulse-dot 2s ease-in-out infinite}
+.node-hash{
+  font-size:9px;
+  opacity:0.7;
+  overflow:hidden;text-overflow:ellipsis;
+  white-space:nowrap;
+  max-width:80px;
+}
+
+/* ── SECTION 2 — FOUR GATES ────────────────────────────────── */
+#four-gates{
+  background:rgba(0,4,20,0.8);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.gates-header{
+  text-align:center;
+  margin-bottom:clamp(40px,6vw,72px);
+}
+.gates-header .section-label{justify-content:center}
+.gates-header .section-label::before{display:none}
+.gates-header .section-sub{margin:0 auto}
+
+.gates-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  position:relative;
+}
+
+/* Connecting line between gates */
+.gates-row::before{
+  content:'';
+  position:absolute;
+  top:40px;left:calc(12.5% + 20px);
+  right:calc(12.5% + 20px);
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),var(--border),var(--border),transparent);
+  z-index:0;
+}
+
+.gate-card{
+  position:relative;
+  z-index:1;
+  padding:clamp(20px,3vw,36px) clamp(16px,2vw,24px);
+  text-align:center;
+  transition:background 0.3s,transform 0.15s ease;
+}
+.gate-card:hover{background:rgba(0,152,234,0.04);box-shadow:0 0 30px rgba(0,152,234,0.12),0 8px 40px rgba(0,0,0,0.4)}
+
+.gate-number-wrap{
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;
+}
+.gate-circle{
+  width:64px;height:64px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:var(--bg);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:4px;
+  transition:border-color 0.3s,box-shadow 0.3s;
+  position:relative;
+}
+.gate-card:hover .gate-circle{
+  border-color:rgba(0,152,234,0.5);
+  box-shadow:0 0 24px rgba(0,152,234,0.2);
+}
+.gate-circle::before{
+  content:'';
+  position:absolute;inset:-4px;
+  border-radius:50%;
+  border:1px solid transparent;
+  background:linear-gradient(135deg,rgba(0,152,234,0.15),transparent,rgba(124,92,255,0.15)) border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:destination-out;
+  mask-composite:exclude;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.gate-card:hover .gate-circle::before{opacity:1}
+.gate-n{
+  font-family:var(--font-mono);
+  font-size:9px;letter-spacing:0.14em;
+  color:var(--muted);
+  text-transform:uppercase;
+  line-height:1;
+}
+.gate-num{
+  font-family:var(--font-mono);
+  font-size:20px;font-weight:500;
+  color:var(--primary);
+  line-height:1;
+}
+.gate-icon-wrap{
+  width:48px;height:48px;
+  margin:0 auto 16px;
+}
+.gate-icon-wrap svg{width:100%;height:100%}
+.gate-name{
+  font-family:var(--font-head);
+  font-size:13px;font-weight:700;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color:var(--text);
+  margin-bottom:10px;
+}
+.gate-desc{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.6;
+}
+.gate-code{
+  margin-top:12px;
+  font-family:var(--font-mono);
+  font-size:10px;
+  color:rgba(92,159,255,0.7);
+  padding:6px 10px;
+  background:rgba(0,152,234,0.05);
+  border:1px solid rgba(0,152,234,0.12);
+  border-radius:3px;
+  line-height:1.5;
+  word-break:break-all;
+}
+.gate-fail{
+  display:inline-block;
+  margin-top:8px;
+  font-family:var(--font-mono);
+  font-size:9px;
+  color:rgba(255,68,102,0.6);
+  letter-spacing:0.08em;
+}
+
+/* Arrow between gates */
+.gate-arrow{
+  position:absolute;
+  right:-12px;top:40px;
+  width:24px;height:24px;
+  z-index:2;
+  transform:translateY(-50%);
+}
+.gate-arrow svg path{stroke:rgba(0,152,234,0.4)}
+
+/* ── SECTION 3 — TON INTEGRATION ───────────────────────────── */
+#ton-integration{}
+
+.integration-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(32px,5vw,80px);
+  align-items:start;
+  margin-top:clamp(40px,5vw,64px);
+}
+
+.integration-text{}
+.integration-text p{
+  font-size:clamp(14px,1.3vw,16px);
+  color:var(--muted);
+  line-height:1.75;
+  margin-bottom:16px;
+}
+.integration-text p strong{color:var(--text);font-weight:500}
+
+.integration-code-block{
+  margin-top:24px;
+  border:1px solid var(--border);
+  background:rgba(0,4,20,0.9);
+  border-radius:6px;
+  overflow:hidden;
+}
+.code-block-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;
+  border-bottom:1px solid var(--border);
+  background:rgba(0,152,234,0.05);
+}
+.code-block-lang{
+  font-family:var(--font-mono);
+  font-size:10px;letter-spacing:0.12em;
+  color:var(--muted);
+}
+.code-block-dots{
+  display:flex;gap:6px;
+}
+.code-dot{
+  width:8px;height:8px;border-radius:50%;
+}
+.code-dot-r{background:rgba(255,68,102,0.4)}
+.code-dot-y{background:rgba(245,168,0,0.4)}
+.code-dot-g{background:rgba(34,197,94,0.4)}
+pre.code-content{
+  padding:20px 20px;
+  font-family:var(--font-mono);
+  font-size:11px;
+  line-height:1.8;
+  color:rgba(232,244,255,0.7);
+  overflow-x:auto;
+  white-space:pre;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(0,152,234,0.2) transparent;
+}
+pre.code-content .kw{color:var(--purple)}
+pre.code-content .fn{color:var(--accent)}
+pre.code-content .str{color:#7ec8a0}
+pre.code-content .cm{color:rgba(90,122,154,0.7)}
+pre.code-content .num{color:#f8c06b}
+pre.code-content .type{color:var(--primary)}
+
+.integration-visual{
+  display:flex;flex-direction:column;gap:16px;
+}
+
+/* Layer stack diagram */
+.layer-stack{
+  display:flex;flex-direction:column;
+  gap:0;
+  border:1px solid var(--border);
+  border-radius:8px;
+  overflow:hidden;
+}
+.layer{
+  padding:16px 20px;
+  border-bottom:1px solid rgba(0,152,234,0.1);
+  transition:background 0.25s;
+  position:relative;
+}
+.layer:last-child{border-bottom:none}
+.layer:hover{background:rgba(0,152,234,0.05)}
+.layer-tag{
+  font-family:var(--font-mono);
+  font-size:9px;letter-spacing:0.16em;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.layer-name{
+  font-family:var(--font-head);
+  font-size:13px;font-weight:700;
+  color:var(--text);
+  margin-bottom:4px;
+}
+.layer-detail{
+  font-size:11px;
+  color:var(--muted);
+  font-family:var(--font-mono);
+  opacity:0.8;
+}
+.layer-badge{
+  position:absolute;right:16px;top:50%;transform:translateY(-50%);
+  font-family:var(--font-mono);
+  font-size:9px;letter-spacing:0.12em;
+  padding:3px 8px;
+  border-radius:2px;
+}
+.layer-0{background:rgba(0,152,234,0.06)}
+.layer-0 .layer-tag{color:var(--primary)}
+.layer-0 .layer-badge{background:rgba(0,152,234,0.1);border:1px solid rgba(0,152,234,0.25);color:var(--accent)}
+.layer-1{background:rgba(124,92,255,0.05)}
+.layer-1 .layer-tag{color:var(--purple)}
+.layer-1 .layer-badge{background:rgba(124,92,255,0.1);border:1px solid rgba(124,92,255,0.25);color:var(--purple)}
+.layer-2{background:rgba(34,197,94,0.03)}
+.layer-2 .layer-tag{color:#22c55e}
+.layer-2 .layer-badge{background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);color:#22c55e}
+
+/* TON Network indicator */
+.ton-network-panel{
+  padding:20px 20px;
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:6px;
+  position:relative;
+  overflow:hidden;
+}
+.ton-network-panel::after{
+  content:'';
+  position:absolute;
+  bottom:-20px;right:-20px;
+  width:80px;height:80px;
+  border-radius:50%;
+  border:1px solid rgba(0,152,234,0.15);
+  box-shadow:0 0 0 16px rgba(0,152,234,0.05),0 0 0 32px rgba(0,152,234,0.03);
+}
+.ton-network-head{
+  font-family:var(--font-mono);
+  font-size:10px;letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+.ton-stat-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 0;
+  border-bottom:1px solid rgba(0,152,234,0.08);
+  font-family:var(--font-mono);
+  font-size:11px;
+}
+.ton-stat-row:last-child{border-bottom:none}
+.ton-stat-key{color:var(--muted)}
+.ton-stat-val{
+  color:var(--accent);
+  font-weight:500;
+}
+.ton-stat-val.live{color:#22c55e}
+.ton-stat-val a{
+  color:inherit;
+  text-decoration:none;
+  border-bottom:1px solid rgba(34,197,94,0.3);
+  transition:border-color 0.2s;
+}
+.ton-stat-val a:hover{border-color:rgba(34,197,94,0.7)}
+
+/* ── SECTION 4 — USE CASES ─────────────────────────────────── */
+#use-cases{
+  background:rgba(0,4,20,0.6);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.use-cases-header{
+  margin-bottom:clamp(40px,5vw,64px);
+}
+
+.use-cases-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:clamp(16px,2.5vw,28px);
+}
+
+.use-card{
+  padding:clamp(24px,3vw,36px) clamp(20px,2.5vw,28px);
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:8px;
+  position:relative;
+  overflow:hidden;
+  transition:border-color 0.3s,transform 0.15s ease,box-shadow 0.3s;
+}
+.use-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;
+  height:2px;
+  transition:opacity 0.3s;
+  opacity:0.6;
+}
+.use-card-defi::before{background:linear-gradient(90deg,var(--primary),var(--accent))}
+.use-card-oracle::before{background:linear-gradient(90deg,var(--purple),var(--accent))}
+.use-card-cross::before{background:linear-gradient(90deg,var(--accent),#22c55e)}
+.use-card-icon{
+  width:48px;height:48px;
+  margin-bottom:20px;
+}
+.use-card-icon svg{width:100%;height:100%}
+.use-card-title{
+  font-family:var(--font-head);
+  font-size:20px;font-weight:700;
+  color:var(--text);
+  margin-bottom:10px;
+  letter-spacing:-0.01em;
+}
+.use-card-desc{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.65;
+  margin-bottom:20px;
+}
+.use-card-snippet{
+  font-family:var(--font-mono);
+  font-size:10px;
+  color:rgba(92,159,255,0.7);
+  padding:10px 12px;
+  background:rgba(0,4,20,0.8);
+  border:1px solid rgba(0,152,234,0.12);
+  border-radius:4px;
+  line-height:1.7;
+  white-space:pre;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.use-card-snippet::-webkit-scrollbar{display:none}
+.use-card-snippet .kw{color:var(--purple)}
+.use-card-snippet .fn{color:var(--accent)}
+.use-card-snippet .str{color:#7ec8a0}
+.use-card-snippet .cm{color:rgba(90,122,154,0.55)}
+
+/* ── FOOTER ────────────────────────────────────────────────── */
+footer{
+  position:relative;
+  z-index:1;
+  padding:clamp(48px,8vh,80px) 0 clamp(32px,4vh,48px);
+  border-top:1px solid var(--border);
+  background:rgba(0,4,20,0.95);
+}
+.footer-inner{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;
+  gap:clamp(32px,5vw,64px);
+  margin-bottom:clamp(40px,5vh,60px);
+}
+.footer-brand{}
+.footer-logo{
+  font-family:var(--font-head);
+  font-size:16px;font-weight:800;
+  letter-spacing:-0.02em;
+  color:var(--text);
+  text-transform:uppercase;
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.footer-logo-sep{color:rgba(0,152,234,0.4);font-weight:300}
+.footer-logo-project{color:var(--primary)}
+.footer-tagline{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.6;
+  max-width:280px;
+  margin-bottom:20px;
+}
+.footer-contact{
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:0.1em;
+  color:rgba(90,122,154,0.7);
+}
+.footer-contact a{
+  color:var(--muted);
+  text-decoration:none;
+  transition:color 0.2s;
+}
+.footer-contact a:hover{color:var(--accent)}
+.footer-col-head{
+  font-family:var(--font-mono);
+  font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:16px;
+  padding-bottom:10px;
+  border-bottom:1px solid rgba(0,152,234,0.12);
+}
+.footer-links{
+  display:flex;flex-direction:column;gap:8px;
+}
+.footer-links a{
+  font-size:13px;color:rgba(90,122,154,0.8);
+  text-decoration:none;
+  transition:color 0.2s;
+  padding:2px 0;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.footer-links a:hover{color:var(--accent)}
+.footer-links a.active{color:var(--primary)}
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+  padding-top:clamp(20px,3vh,32px);
+  border-top:1px solid rgba(0,152,234,0.08);
+}
+.footer-copy{
+  font-family:var(--font-mono);
+  font-size:10px;letter-spacing:0.12em;
+  color:rgba(90,122,154,0.5);
+}
+.footer-meta{
+  display:flex;align-items:center;gap:16px;
+}
+.footer-status{
+  display:flex;align-items:center;gap:6px;
+  font-family:var(--font-mono);
+  font-size:9px;letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:rgba(34,197,94,0.7);
+}
+.footer-status-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:#22c55e;
+  box-shadow:0 0 6px rgba(34,197,94,0.5);
+  animation:pulse-dot 2s ease-in-out infinite;
+}
+.footer-chain{
+  font-family:var(--font-mono);
+  font-size:9px;letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:rgba(90,122,154,0.4);
+}
+
+/* ── RESPONSIVE ────────────────────────────────────────────── */
+@media(max-width:900px){
+  .problem-grid{grid-template-columns:1fr}
+  .problem-visual-col{display:none}
+  .gates-row{grid-template-columns:1fr 1fr;gap:16px}
+  .gates-row::before{display:none}
+  .gate-arrow{display:none}
+  .integration-layout{grid-template-columns:1fr}
+  .use-cases-grid{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr 1fr}
+  .footer-brand{grid-column:1/-1}
+}
+@media(max-width:600px){
+  .gates-row{grid-template-columns:1fr}
+  .hero-stat-divider{display:none}
+  .hero-stats{gap:20px}
+  .footer-inner{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:12px}
+  pre.code-content{font-size:10px}
+}
+</style>
 </head>
 <body>
-<canvas id="star-field" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
 
+<!-- Premium cursor -->
+<div class="c-cursor" aria-hidden="true"></div>
 
+<!-- Star field -->
+<canvas id="star-canvas" aria-hidden="true"></canvas>
 
-<main class="wrap">
+<!-- Loader -->
+<div id="loader" aria-hidden="true">
+  <div id="loader-text"><span id="loader-typed"></span><span id="loader-cursor"></span></div>
+  <div id="loader-bar-track"><div id="loader-bar-fill"></div></div>
+  <div id="loader-sub">Initializing trust layer</div>
+</div>
 
-<section class="hero">
-    <div class="hero-glow" aria-hidden="true"></div>
-    <p class="breadcrumb">ORTHONODE SYSTEMS / <span class="bc-cur">TON-SHA</span></p>
-    <div class="hero-badge"><span class="live-dot"></span>TESTNET LIVE · TON FAST GRANTS · TACT 1.6</div>
-    <h1>Agent Trust<br><span class="accent">Primitive for TON</span></h1>
-    <p class="hero-sub">TON-SHA is the cryptographic primitive that gives TON agents verifiable identity and provable execution. Four sequential gates — device authorization, firmware approval, replay protection, and SHA-256 digest verification — enforced by a single Tact contract. No trusted intermediary.</p>
-    <p class="hero-mono">// CONTRACT: kQBVqAhPv_ANWm0hfjJdLnQmvvC8_rQ_NEryVX3uFOUF05OP · TON TESTNET</p>
-    <div class="stats-bar reveal">
-        <div class="stat"><span class="stat-n">4</span><span class="stat-l">Verification Gates</span></div>
-        <div class="stat"><span class="stat-n">0.03</span><span class="stat-l">TON per Operation</span></div>
-        <div class="stat"><span class="stat-n">136</span><span class="stat-l">Byte Receipt</span></div>
-        <div class="stat"><span class="stat-n">17+</span><span class="stat-l">Live Transactions</span></div>
+<!-- Main page -->
+<div id="page">
+
+  <!-- HERO -->
+  <section id="hero" aria-label="Hero">
+    <canvas id="agent-canvas" aria-hidden="true"></canvas>
+    <div class="scan-beam" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-badge reveal" data-hover>
+        <span class="hero-badge-rune">◈</span>
+        <span class="hero-badge-dot"></span>
+        TON-SHA&nbsp;&nbsp;·&nbsp;&nbsp;LIVE&nbsp;&nbsp;·&nbsp;&nbsp;TON TESTNET
+      </div>
+      <h1 class="hero-h1 reveal reveal-delay-1">
+        <span class="word-ton">AGENTS</span><span class="slash">/</span><span class="word-anchored">ANCHORED</span><span class="slash">/</span>IN&nbsp;SILICON
+      </h1>
+      <p class="hero-sub reveal reveal-delay-2">
+        Hardware-anchored identity registry for <strong>autonomous AI agents</strong> on TON.
+        Each agent receives a <strong>four-gate cryptographic proof</strong> anchored to real silicon —
+        unforgeable, sovereign, on-chain.
+      </p>
+      <div class="hash-stream reveal reveal-delay-2" id="hash-stream" aria-hidden="true">
+        <span class="hash-item" id="hash-display">0x4F2A9BE1 — IDENTITY MINTED</span>
+      </div>
+      <div class="hero-stats reveal reveal-delay-3">
+        <div class="hero-stat">
+          <span class="hero-stat-val">4 GATES</span>
+          <span class="hero-stat-label">Sequential</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-val">TON TESTNET</span>
+          <span class="hero-stat-label">Live Contract</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-val">0.03 TON/OP</span>
+          <span class="hero-stat-label">Gas Optimized</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-val">SHA-256</span>
+          <span class="hero-stat-label">AI Native</span>
+        </div>
+      </div>
+      <div class="hero-ctas reveal reveal-delay-4">
+        <a class="btn-primary" href="https://github.com/orthonode/ton-sha" target="_blank" rel="noopener">Explore on GitHub &nbsp;→</a>
+        <a class="btn-ghost" href="#four-gates">View Architecture</a>
+      </div>
     </div>
-</section>
-
-<section class="section reveal" role="region" aria-labelledby="overview-head">
-    <p class="sec-label" id="overview-head">// PROTOCOL_OVERVIEW : THE_TON_TRUST_PROBLEM</p>
-    <div class="grid-2">
-        <div class="card">
-            <span class="card-label" style="color:var(--red);">THE_PROBLEM</span>
-            <h3>TON Agents Have No Verifiable Identity</h3>
-            <p>TON agents currently have no verifiable identity and no proof of execution integrity. Any agent can claim to be any other. Any output can be fabricated without cryptographic proof of the computation that produced it. There is no protocol-level primitive for agent trust on TON.</p>
-            <p>TON-SHA is the cryptographic primitive that changes that.</p>
-        </div>
-        <div class="card">
-            <span class="card-label" style="color:var(--accent);">THE_SOLUTION</span>
-            <h3>One Call — Trust or Reject</h3>
-            <p>The canonical TON-SHA loop: one contract call tells any protocol whether the agent on the other side should be trusted. Four gates execute sequentially — identity, firmware, counter, digest. All four must pass. Any single failure reverts.</p>
-            <p><strong>Composable with</strong> agent marketplaces, oracle networks, DeFi protocols, DAOs, and DePIN reward systems on TON.</p>
-        </div>
-        <div class="card">
-            <span class="card-label" style="color:var(--ton);">TON_FAST_GRANTS</span>
-            <h3>Built for the TON Ecosystem</h3>
-            <p>TON-SHA was built with TON Fast Grants support. It targets the growing TON agent economy — Telegram bots, automated trading agents, DePIN hardware nodes, and any protocol that requires provable execution on the TON blockchain.</p>
-            <p>Implemented in Tact 1.6 — the production-grade smart contract language for TON. Gas cost: 0.03 TON per four-gate verification operation.</p>
-        </div>
-        <div class="card">
-            <span class="card-label" style="color:var(--green);">STATUS</span>
-            <h3>Testnet Live · 17+ Transactions</h3>
-            <p>TON-SHA is live on TON Testnet with 17+ on-chain transactions recorded. The four-gate verification contract is deployed and callable. Integration documentation is available. The contract address is: <code style="color:var(--accent);font-family:var(--font-mono);font-size:.72rem;word-break:break-all;">kQBVqAhPv_ANWm0hfjJdLnQmvvC8_rQ_NEryVX3uFOUF05OP</code></p>
-        </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="scroll-arrow"></div>
     </div>
-</section>
+  </section>
 
-<section class="section reveal" role="region" aria-labelledby="gates-head">
-    <p class="sec-label" id="gates-head">// FOUR_GATE_VERIFIER : SEQUENTIAL_TRUST_CHECK</p>
-    <div class="gate-grid">
-        <div class="gate-card" style="border-top-color:var(--sha);">
-            <div class="gate-num">Gate 1 — Identity</div>
-            <div class="gate-title">Device Authorization</div>
-            <p class="gate-desc"><code>agent_id</code> must be in the authorized registry. The agent_id is bound to the TON wallet key — cannot be forged or transferred without on-chain action.</p>
-            <span class="gate-blocks">Blocks: Sybil · Impersonation</span>
-        </div>
-        <div class="gate-card" style="border-top-color:var(--green);">
-            <div class="gate-num">Gate 2 — Firmware</div>
-            <div class="gate-title">Firmware Approval</div>
-            <p class="gate-desc"><code>firmware_hash</code> must match a hash in the contract's approved firmware registry. Blocks agents running unauthorized or tampered software versions.</p>
-            <span class="gate-blocks">Blocks: Firmware Tamper</span>
-        </div>
-        <div class="gate-card" style="border-top-color:var(--oap);">
-            <div class="gate-num">Gate 3 — Counter</div>
-            <div class="gate-title">Replay Protection</div>
-            <p class="gate-desc"><code>counter</code> must be strictly greater than the last accepted counter for this agent. Monotonic enforcement — mathematically airtight replay prevention.</p>
-            <span class="gate-blocks">Blocks: Replay · Rollback</span>
-        </div>
-        <div class="gate-card" style="border-top-color:var(--accent);">
-            <div class="gate-num">Gate 4 — Digest</div>
-            <div class="gate-title">SHA-256 Verification</div>
-            <p class="gate-desc"><code>SHA-256(agent_id ‖ firmware_hash ‖ execution_hash ‖ counter) == digest</code>. Cannot be faked without running the actual computation that produced the execution_hash.</p>
-            <span class="gate-blocks">Blocks: Fabrication · Cache</span>
-        </div>
-    </div>
-</section>
+  <div class="divider"></div>
 
-<section class="section reveal" role="region" aria-labelledby="receipt-head">
-    <p class="sec-label" id="receipt-head">// RECEIPT_STRUCTURE : 136_BYTE_TRUST_PROOF</p>
-    <div class="receipt-block">
-        <div class="receipt-label">// ton_sha_receipt_v1</div>
-        <h3>136-Byte Verifiable Execution Receipt</h3>
-        <p>Every TON-SHA verification produces a 136-byte on-chain receipt encoding the full execution proof. The receipt is composable — any TON contract can verify a receipt and gate downstream actions on the result.</p>
-        <span class="code-line"><span class="k">agent_id</span>     <span class="v">bytes32</span>  // authorized identity, wallet-bound</span>
-        <span class="code-line"><span class="k">firmware_hash</span> <span class="v">bytes32</span>  // approved software version hash</span>
-        <span class="code-line"><span class="k">execution_hash</span><span class="v">bytes32</span>  // hash of the actual computation output</span>
-        <span class="code-line"><span class="k">counter</span>       <span class="v">uint32</span>   // monotonic, replay-safe</span>
-        <span class="code-line"><span class="k">digest</span>        <span class="v">bytes32</span>  // SHA-256(agent_id ‖ firmware_hash ‖ execution_hash ‖ counter)</span>
-        <span class="code-line"><span class="k">timestamp</span>     <span class="v">uint32</span>   // TON block time at submission</span>
-        <p style="margin-top:1rem;">Total: <strong style="color:var(--tx-1);">136 bytes</strong>. Gas cost per four-gate operation: <strong style="color:var(--accent);">0.03 TON</strong>. No trusted oracle. No off-chain co-signer.</p>
-    </div>
-</section>
-
-<section class="section reveal" role="region" aria-labelledby="evidence-head">
-    <p class="sec-label" id="evidence-head">// ON_CHAIN_EVIDENCE : TON_TESTNET</p>
-    <div class="evidence-grid">
-        <div class="evidence-card">
-            <div class="evidence-label">TON-SHA Contract — TON Testnet</div>
-            <div class="evidence-value">kQBVqAhPv_ANWm0hfjJdLnQmvvC8_rQ_NEryVX3uFOUF05OP</div>
-            <div class="evidence-meta"><span>17+ transactions</span><span>0.03 TON/op</span><span>Tact 1.6</span></div>
-            <a class="evidence-link" href="https://testnet.tonscan.org/address/kQBVqAhPv_ANWm0hfjJdLnQmvvC8_rQ_NEryVX3uFOUF05OP" target="_blank" rel="noopener">View on TONScan →</a>
-        </div>
-        <div class="evidence-card">
-            <div class="evidence-label">Integration in INVARIANT</div>
-            <div class="evidence-value">TON-SHA serves as the receipt layer (Layer 2) in the INVARIANT three-layer trust stack for Bittensor miners.</div>
-            <div class="evidence-meta"><span>Layer 2 of 3</span><span>17+ TX recorded</span></div>
-            <a class="evidence-link" href="/invariant.html">View INVARIANT →</a>
-        </div>
-    </div>
-</section>
-
-<section class="section reveal" role="region" aria-labelledby="faq-head">
-    <p class="sec-label" id="faq-head">// FREQUENTLY_ASKED_QUESTIONS</p>
-    <div class="faq">
-        <div class="faq-item">
-            <h3>What is TON-SHA and who is it for?</h3>
-            <p>TON-SHA is a cryptographic agent trust primitive for the TON blockchain. It provides four-gate verification — device authorization, firmware approval, replay protection, and SHA-256 digest validation — in a single Tact 1.6 contract call at 0.03 TON per operation. It is designed for TON agents (Telegram bots, automated trading agents, DePIN nodes) and any TON protocol that requires provable execution. No trusted intermediary is involved — all verification is deterministic and on-chain.</p>
-        </div>
-        <div class="faq-item">
-            <h3>How does TON-SHA relate to SHA on Arbitrum?</h3>
-            <p>TON-SHA is the TON ecosystem equivalent of SHA (Stylus Hardware Anchor) on Arbitrum. SHA uses Keccak-256 on Arbitrum Stylus (Rust/WASM) for hardware-bound identity. TON-SHA uses SHA-256 in Tact 1.6 on TON for agent identity and execution receipts. Both enforce four-gate verification: identity, firmware, replay, digest. In INVARIANT, SHA provides Layer 1 (hardware identity) and TON-SHA provides Layer 2 (execution receipts) of the trust stack.</p>
-        </div>
-        <div class="faq-item">
-            <h3>What makes TON-SHA replay-safe?</h3>
-            <p>Gate 3 enforces monotonic counter replay protection. Each agent maintains a counter that must be strictly greater than the last accepted value for that agent. The contract stores the last accepted counter per agent and rejects any submission where the counter is not strictly increasing. This makes it mathematically impossible to replay a previously accepted receipt — even if an attacker captures the exact bytes of a past valid submission, re-submitting it will fail Gate 3.</p>
-        </div>
-        <div class="faq-item">
-            <h3>What is the contract address and where can I verify it?</h3>
-            <p>TON-SHA is deployed on TON Testnet at: <code style="font-family:var(--font-mono);color:var(--accent);">kQBVqAhPv_ANWm0hfjJdLnQmvvC8_rQ_NEryVX3uFOUF05OP</code>. You can verify the deployment, transaction history, and contract state on TONScan at testnet.tonscan.org. 17+ transactions are recorded on-chain. The contract is implemented in Tact 1.6 — source code available via the ORTHONODE GitHub organization.</p>
-        </div>
-    </div>
-</section>
-
-<section class="section reveal">
-    <div class="cta">
-        <h2>Bring Verifiable Trust to TON Agents</h2>
-        <p>Four gates. One call. 0.03 TON. The trust primitive the TON agent economy has been missing.</p>
-        <div class="cta-row">
-            <a href="https://github.com/orthonode/ton-sha" class="btn btn-primary" target="_blank" rel="noopener">GitHub → ton-sha ↗</a>
-            <a href="https://testnet.tonscan.org/address/kQBVqAhPv_ANWm0hfjJdLnQmvvC8_rQ_NEryVX3uFOUF05OP" class="btn" target="_blank" rel="noopener" style="border-color:rgba(14,207,177,.25);color:var(--accent);">Verify on TONScan ↗</a>
-            <a href="/invariant.html" class="btn" style="border-color:rgba(234,179,8,.25);color:var(--inv);">INVARIANT — Layer 2</a>
-            <a href="/" class="btn">← Back to Orthonode</a>
-        </div>
-    </div>
-</section>
-
-</main>
-
-<footer role="contentinfo">
+  <!-- SECTION 1 — PROBLEM -->
+  <section id="problem">
     <div class="wrap">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <h4>ORTHONODE SYSTEMS™</h4>
-                <p>Building deterministic physical verification infrastructure for decentralized systems. TON-SHA brings cryptographic agent trust to the TON ecosystem. SHA anchors hardware identity on Arbitrum. INVARIANT provides the complete trust stack for Bittensor.</p>
-                <p style="margin-top:.875rem;color:var(--tx-3);"><strong style="color:var(--tx-2);">Founder:</strong> Arhant Barmate<br><strong style="color:var(--tx-2);">Location:</strong> Bhopal, Madhya Pradesh, India<br><strong style="color:var(--tx-2);">Contact:</strong> infrastructure@orthonode.xyz</p>
+      <div class="reveal">
+        <div class="section-label">The Identity Problem</div>
+        <h2 class="section-heading">AI Agents Have <span class="accent">No Passport</span></h2>
+        <p class="section-sub">TON agents currently lack verifiable identity and execution integrity. Anyone can fake an agent, replay its actions, or forge its outputs. TON-SHA changes this.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-text-col reveal reveal-delay-1">
+          <p>In the emerging agent economy on TON, <strong>autonomous agents coordinate, transact, and execute</strong> without human oversight. The missing primitive: a way to verify that an agent is what it claims to be.</p>
+          <p>Without verifiable identity, every multi-agent interaction is a trust problem. Fake agents can impersonate legitimate services, replay old receipts, or submit forged execution proofs — silently corrupting the outputs agents depend on.</p>
+          <div class="problem-list">
+            <div class="problem-item bad">
+              <svg class="problem-item-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l8 8M14 6l-8 8" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span><strong>No identity verification</strong> — any agent can claim to be authorized</span>
             </div>
-            <div class="footer-col">
-                <h5>Products</h5>
-                <ul>
-                    <li><a href="/sha.html" style="color:var(--sha);">SHA — Hardware Attestation</a></li>
-                    <li><a href="/oap.html" style="color:var(--oap);">OAP — Integrity Governance</a></li>
-                    <li><a href="/nexus.html">Nexus — Zero-Trust Gateway</a></li>
-                    <li><a href="/ton-sha.html" style="color:var(--accent);">TON-SHA — Agent Trust Layer</a></li>
-                    <li><a href="/invariant.html" style="color:var(--inv);">INVARIANT — Bittensor Subnet</a></li>
-                    <li><a href="/tix-dao.html" style="color:var(--tix);">TIX-DAO — Venue Governance</a></li>
-                </ul>
+            <div class="problem-item bad">
+              <svg class="problem-item-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l8 8M14 6l-8 8" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span><strong>No replay protection</strong> — stale receipts accepted as fresh</span>
             </div>
-            <div class="footer-col">
-                <h5>Connect</h5>
-                <ul>
-                    <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X / Twitter</a></li>
-                    <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
-                    <li><a href="https://github.com/orthonode/ton-sha" target="_blank" rel="noopener">GitHub (Org)</a></li>
-                    <li><a href="mailto:infrastructure@orthonode.xyz">infrastructure@orthonode.xyz</a></li>
-                </ul>
+            <div class="problem-item bad">
+              <svg class="problem-item-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l8 8M14 6l-8 8" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span><strong>No execution integrity</strong> — results can be tampered post-run</span>
             </div>
+            <div class="problem-item good">
+              <svg class="problem-item-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10l4.5 4.5L16 6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span><strong>TON-SHA</strong> — cryptographic four-gate proof anchored to silicon</span>
+            </div>
+          </div>
         </div>
-        <div id="citation">
-            <h2>About</h2>
-            <p>ORTHONODE SYSTEMS™ — TON-SHA by Arhant Barmate. Cryptographic agent trust primitive for TON. Tact 1.6. Contract: kQBVqAhPv_ANWm0hfjJdLnQmvvC8_rQ_NEryVX3uFOUF05OP (TON Testnet). 0.03 TON/op. Website: https://orthonode.xyz | @OrthonodeSys | infrastructure@orthonode.xyz</p>
+        <div class="problem-visual-col reveal reveal-delay-2">
+          <div class="trust-panel">
+            <div class="trust-panel-title">— Agent Identity Comparison —</div>
+            <div class="agent-comparison">
+              <div>
+                <div class="agent-col-head bad-head">Unverified</div>
+                <div class="agent-node-row">
+                  <div class="agent-node fake">
+                    <div class="node-marker"></div>
+                    <div>
+                      <div>Agent #1</div>
+                      <div class="node-hash">NO_RECEIPT</div>
+                    </div>
+                  </div>
+                  <div class="agent-node fake">
+                    <div class="node-marker"></div>
+                    <div>
+                      <div>Agent #2</div>
+                      <div class="node-hash">FORGED_ID</div>
+                    </div>
+                  </div>
+                  <div class="agent-node fake">
+                    <div class="node-marker"></div>
+                    <div>
+                      <div>Agent #3</div>
+                      <div class="node-hash">REPLAYED</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="agent-col-head good-head">SHA-Verified</div>
+                <div class="agent-node-row">
+                  <div class="agent-node verified">
+                    <div class="node-marker"></div>
+                    <div>
+                      <div>Agent #A</div>
+                      <div class="node-hash">0x4F2A9BE1</div>
+                    </div>
+                  </div>
+                  <div class="agent-node verified">
+                    <div class="node-marker"></div>
+                    <div>
+                      <div>Agent #B</div>
+                      <div class="node-hash">0x7C3E1D88</div>
+                    </div>
+                  </div>
+                  <div class="agent-node verified">
+                    <div class="node-marker"></div>
+                    <div>
+                      <div>Agent #C</div>
+                      <div class="node-hash">0xA91F4C02</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="footer-bottom">
-            <div>© 2026 ORTHONODE SYSTEMS™. All Rights Reserved.</div>
-            <div class="footer-legal"><a href="/terms.html">Terms of Service</a><a href="/privacy.html">Privacy Policy</a></div>
-        </div>
+      </div>
     </div>
-</footer>
+  </section>
 
+  <div class="divider"></div>
+
+  <!-- SECTION 2 — FOUR GATES -->
+  <section id="four-gates" aria-label="Four Gates of Trust">
+    <div class="wrap">
+      <div class="gates-header reveal">
+        <div class="section-label">Architecture</div>
+        <h2 class="section-heading">Four <span class="accent">Gates of Trust</span></h2>
+        <p class="section-sub">Every verification receipt passes four sequential gates. All must pass. Failure at any gate emits a rejection event on-chain. No partial trust.</p>
+      </div>
+      <div class="gates-row">
+
+        <!-- Gate 1 — eFUSE Identity -->
+        <div class="gate-card reveal" data-hover>
+          <div class="gate-number-wrap">
+            <div class="gate-circle">
+              <span class="gate-n">Gate</span>
+              <span class="gate-num">01</span>
+            </div>
+          </div>
+          <div class="gate-icon-wrap">
+            <!-- Realistic eFUSE / hardware lock icon -->
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Outer lock body -->
+              <rect x="8" y="22" width="32" height="22" rx="3" fill="rgba(0,152,234,0.10)" stroke="#0098EA" stroke-width="1.4"/>
+              <!-- Lock shackle -->
+              <path d="M16 22V16a8 8 0 0116 0v6" stroke="#5C9FFF" stroke-width="1.4" stroke-linecap="round"/>
+              <!-- eFUSE chip inside lock -->
+              <rect x="18" y="28" width="12" height="10" rx="1.5" fill="rgba(0,152,234,0.2)" stroke="#0098EA" stroke-width="1"/>
+              <!-- Chip pins left -->
+              <line x1="14" y1="31" x2="18" y2="31" stroke="#5C9FFF" stroke-width="1" stroke-linecap="round"/>
+              <line x1="14" y1="34" x2="18" y2="34" stroke="#5C9FFF" stroke-width="1" stroke-linecap="round"/>
+              <!-- Chip pins right -->
+              <line x1="30" y1="31" x2="34" y2="31" stroke="#5C9FFF" stroke-width="1" stroke-linecap="round"/>
+              <line x1="30" y1="34" x2="34" y2="34" stroke="#5C9FFF" stroke-width="1" stroke-linecap="round"/>
+              <!-- eFUSE dot in chip center -->
+              <circle cx="24" cy="33" r="2" fill="#0098EA" opacity="0.9"/>
+              <!-- Burned indicator -->
+              <circle cx="36" cy="13" r="4" fill="rgba(245,158,11,0.2)" stroke="#F59E0B" stroke-width="1"/>
+              <path d="M34.5 13.5l1 1 2-2" stroke="#F59E0B" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="gate-name">eFUSE Identity</div>
+          <div class="gate-desc">Manufacturer-burned hardware identifier verified against the authorized devices registry. Only enrolled silicon passes.</div>
+          <div class="gate-code">authorized_devices[hw_id] == true</div>
+          <span class="gate-fail">Fail → reason: 1</span>
+        </div>
+
+        <!-- Gate 2 — Firmware Approval -->
+        <div class="gate-card reveal reveal-delay-1" data-hover>
+          <div class="gate-number-wrap">
+            <div class="gate-circle">
+              <span class="gate-n">Gate</span>
+              <span class="gate-num">02</span>
+            </div>
+          </div>
+          <div class="gate-icon-wrap">
+            <!-- Realistic firmware/code hash icon -->
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Document body -->
+              <rect x="7" y="6" width="28" height="36" rx="2.5" fill="rgba(0,152,234,0.08)" stroke="#0098EA" stroke-width="1.4"/>
+              <!-- Dog-ear fold -->
+              <path d="M28 6l7 7h-7V6z" fill="rgba(0,152,234,0.2)" stroke="#0098EA" stroke-width="1"/>
+              <!-- Code lines in document -->
+              <line x1="13" y1="18" x2="23" y2="18" stroke="#5C9FFF" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="13" y1="22" x2="27" y2="22" stroke="#5C9FFF" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+              <line x1="13" y1="26" x2="20" y2="26" stroke="#5C9FFF" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+              <line x1="13" y1="30" x2="25" y2="30" stroke="#5C9FFF" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+              <!-- SHA hash badge (bottom right) -->
+              <rect x="22" y="33" width="16" height="8" rx="1.5" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="1"/>
+              <text x="30" y="39" text-anchor="middle" fill="#22c55e" font-size="4.5" font-family="monospace" font-weight="700">SHA-256</text>
+              <!-- Checkmark overlay -->
+              <circle cx="37" cy="12" r="5" fill="rgba(34,197,94,0.2)" stroke="#22c55e" stroke-width="1"/>
+              <path d="M34.5 12l1.8 1.8 3-3.3" stroke="#22c55e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="gate-name">Firmware Approval</div>
+          <div class="gate-desc">SHA-256 hash of the agent's firmware binary must match an owner-approved code hash. Prevents rogue code from passing.</div>
+          <div class="gate-code">approved_firmware[fw_hash] == true</div>
+          <span class="gate-fail">Fail → reason: 2</span>
+        </div>
+
+        <!-- Gate 3 — Replay Shield -->
+        <div class="gate-card reveal reveal-delay-2" data-hover>
+          <div class="gate-number-wrap">
+            <div class="gate-circle">
+              <span class="gate-n">Gate</span>
+              <span class="gate-num">03</span>
+            </div>
+          </div>
+          <div class="gate-icon-wrap">
+            <!-- Realistic monotonic counter / shield icon -->
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Shield outer -->
+              <path d="M24 5L8 12v12c0 9 7.2 16.5 16 19 8.8-2.5 16-10 16-19V12L24 5z" fill="rgba(0,152,234,0.10)" stroke="#0098EA" stroke-width="1.4" stroke-linejoin="round"/>
+              <!-- Clock face inside shield -->
+              <circle cx="24" cy="22" r="9" fill="none" stroke="#5C9FFF" stroke-width="1" opacity="0.8"/>
+              <!-- Clock tick marks -->
+              <line x1="24" y1="14" x2="24" y2="16" stroke="#5C9FFF" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="24" y1="28" x2="24" y2="30" stroke="#5C9FFF" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="16" y1="22" x2="18" y2="22" stroke="#5C9FFF" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="30" y1="22" x2="32" y2="22" stroke="#5C9FFF" stroke-width="1.2" stroke-linecap="round"/>
+              <!-- Clock hands -->
+              <line x1="24" y1="22" x2="24" y2="17" stroke="#0098EA" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="24" y1="22" x2="28" y2="24" stroke="#0098EA" stroke-width="1.4" stroke-linecap="round"/>
+              <!-- Center dot -->
+              <circle cx="24" cy="22" r="1.5" fill="#0098EA"/>
+              <!-- Counter badge -->
+              <rect x="18" y="33" width="12" height="6" rx="1" fill="rgba(0,152,234,0.2)" stroke="#0098EA" stroke-width="0.8"/>
+              <text x="24" y="37.5" text-anchor="middle" fill="#5C9FFF" font-size="4" font-family="monospace">N+1</text>
+            </svg>
+          </div>
+          <div class="gate-name">Replay Shield</div>
+          <div class="gate-desc">Strictly increasing monotonic counter stored on-chain per agent. Replayed receipts with stale counters are permanently rejected.</div>
+          <div class="gate-code">counter &gt; last_counter[hw_id]</div>
+          <span class="gate-fail">Fail → reason: 3</span>
+        </div>
+
+        <!-- Gate 4 — Digest Verification -->
+        <div class="gate-card reveal reveal-delay-3" data-hover>
+          <div class="gate-number-wrap">
+            <div class="gate-circle">
+              <span class="gate-n">Gate</span>
+              <span class="gate-num">04</span>
+            </div>
+          </div>
+          <div class="gate-icon-wrap">
+            <!-- Realistic SHA digest / cryptographic seal icon -->
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Hexagonal agent body (matches brand agent icon) -->
+              <polygon points="24,4 38,12 38,28 24,36 10,28 10,12" fill="rgba(124,92,255,0.10)" stroke="#7C5CFF" stroke-width="1.4"/>
+              <!-- Internal circuit ring -->
+              <circle cx="24" cy="20" r="7" fill="none" stroke="#7C5CFF" stroke-width="1" opacity="0.7"/>
+              <!-- Inner core -->
+              <circle cx="24" cy="20" r="2.5" fill="#7C5CFF" opacity="0.9"/>
+              <!-- Connection lines from hex vertices to ring -->
+              <line x1="24" y1="4" x2="24" y2="13" stroke="#5C9FFF" stroke-width="0.8" opacity="0.5"/>
+              <line x1="38" y1="12" x2="31" y2="16" stroke="#5C9FFF" stroke-width="0.8" opacity="0.5"/>
+              <line x1="38" y1="28" x2="31" y2="24" stroke="#5C9FFF" stroke-width="0.8" opacity="0.5"/>
+              <!-- Node dots at vertices -->
+              <circle cx="24" cy="4" r="2" fill="#5C9FFF"/>
+              <circle cx="38" cy="12" r="2" fill="#5C9FFF"/>
+              <circle cx="38" cy="28" r="2" fill="#5C9FFF"/>
+              <circle cx="24" cy="36" r="2" fill="#5C9FFF"/>
+              <circle cx="10" cy="28" r="2" fill="#5C9FFF"/>
+              <circle cx="10" cy="12" r="2" fill="#5C9FFF"/>
+              <!-- Seal badge at bottom -->
+              <rect x="17" y="38" width="14" height="7" rx="1.5" fill="rgba(124,92,255,0.2)" stroke="#7C5CFF" stroke-width="0.8"/>
+              <text x="24" y="43.5" text-anchor="middle" fill="#7C5CFF" font-size="4" font-family="monospace" font-weight="700">SEALED</text>
+            </svg>
+          </div>
+          <div class="gate-name">Digest Verification</div>
+          <div class="gate-desc">SHA-256 of the packed receipt cell must equal the submitted digest. Binds hw_id, fw_hash, ex_hash, and counter into a tamper-evident seal.</div>
+          <div class="gate-code">sha256(hw_id ++ fw_hash ++ ex_hash ++ counter) == digest</div>
+          <span class="gate-fail">Fail → reason: 4</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 3 — TON INTEGRATION -->
+  <section id="ton-integration" aria-label="TON Integration">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="section-label">How It Connects</div>
+        <h2 class="section-heading">TON <span class="accent">Integration</span></h2>
+        <p class="section-sub">TON-SHA plugs into TON's actor model as a trust primitive layer. Agents integrate a single call. The contract handles all verification complexity on-chain.</p>
+      </div>
+      <div class="integration-layout">
+        <div class="integration-text reveal reveal-delay-1">
+          <p>TON-SHA ports the SHA four-gate model to TON using <strong>Tact 1.6</strong> — a type-safe smart contract language built for TON's actor architecture. One deliberate difference from the Arbitrum implementation: TON-SHA uses <strong>SHA-256</strong> (native to TVM) rather than Keccak-256. This reduces gas cost to 0.03 TON per operation.</p>
+          <p>The canonical agent loop is a single async call. If verification fails, the agent halts. If it passes, the counter advances permanently on-chain — the receipt cannot be replayed.</p>
+          <div class="integration-code-block">
+            <div class="code-block-header">
+              <span class="code-block-lang">TypeScript · Agent Integration</span>
+              <div class="code-block-dots">
+                <div class="code-dot code-dot-r"></div>
+                <div class="code-dot code-dot-y"></div>
+                <div class="code-dot code-dot-g"></div>
+              </div>
+            </div>
+            <pre class="code-content"><span class="kw">import</span> { <span class="type">createAgentTrust</span> } <span class="kw">from</span> <span class="str">'@orthonode/ton-sha'</span>;
+
+<span class="kw">const</span> agentTrust = <span class="fn">createAgentTrust</span>(
+  contractAddress,
+  provider
+);
+
+<span class="cm">// THE CANONICAL AGENT VERIFICATION</span>
+<span class="kw">if</span> (!(<span class="kw">await</span> agentTrust.<span class="fn">verifyAgent</span>(agentId))) {
+  <span class="kw">throw new</span> <span class="type">Error</span>(<span class="str">"Untrusted agent"</span>);
+}
+
+<span class="cm">// Proceeds only if all four gates pass</span>
+<span class="kw">await</span> <span class="fn">collaborate</span>();</pre>
+          </div>
+        </div>
+        <div class="integration-visual reveal reveal-delay-2">
+          <div class="layer-stack">
+            <div class="layer layer-0">
+              <div class="layer-tag">Identity Layer</div>
+              <div class="layer-name">TON-SHA Contract</div>
+              <div class="layer-detail">kQBVq...05OP · Tact 1.6</div>
+              <div class="layer-badge">ACTIVE</div>
+            </div>
+            <div class="layer layer-1">
+              <div class="layer-tag">Actor Model</div>
+              <div class="layer-name">TON VM / TVM</div>
+              <div class="layer-detail">Built-in sha256() opcode</div>
+              <div class="layer-badge">NATIVE</div>
+            </div>
+            <div class="layer layer-2">
+              <div class="layer-tag">Consensus</div>
+              <div class="layer-name">TON Shardchain</div>
+              <div class="layer-detail">Testnet · Workchain 0</div>
+              <div class="layer-badge">LIVE</div>
+            </div>
+          </div>
+          <div class="ton-network-panel">
+            <div class="ton-network-head">— Live Contract State —</div>
+            <div class="ton-stat-row">
+              <span class="ton-stat-key">Contract</span>
+              <span class="ton-stat-val">
+                <a href="https://testnet.tonscan.org/address/kQBVqAhPv_ANWm0hfjJdLnQmvvC8_rQ_NEryVX3uFOUF05OP" target="_blank" rel="noopener">kQBVq...05OP</a>
+              </span>
+            </div>
+            <div class="ton-stat-row">
+              <span class="ton-stat-key">Network</span>
+              <span class="ton-stat-val live">TON Testnet ✓</span>
+            </div>
+            <div class="ton-stat-row">
+              <span class="ton-stat-key">Counter (min)</span>
+              <span class="ton-stat-val">17+</span>
+            </div>
+            <div class="ton-stat-row">
+              <span class="ton-stat-key">Gas / op</span>
+              <span class="ton-stat-val">0.03 TON</span>
+            </div>
+            <div class="ton-stat-row">
+              <span class="ton-stat-key">Language</span>
+              <span class="ton-stat-val">Tact 1.6</span>
+            </div>
+            <div class="ton-stat-row">
+              <span class="ton-stat-key">Hash fn</span>
+              <span class="ton-stat-val">SHA-256 (TVM native)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 4 — USE CASES -->
+  <section id="use-cases" aria-label="Agent Use Cases">
+    <div class="wrap">
+      <div class="use-cases-header reveal">
+        <div class="section-label">Applications</div>
+        <h2 class="section-heading">Agent <span class="accent">Use Cases</span></h2>
+        <p class="section-sub">TON-SHA is the missing trust primitive that other TON agent SDKs can plug into. It does not replace agent SDKs — it provides the foundational verification layer they depend on.</p>
+      </div>
+      <div class="use-cases-grid">
+
+        <div class="use-card use-card-defi reveal" data-hover>
+          <div class="use-card-icon">
+            <!-- Realistic DeFi chart icon -->
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="20" fill="rgba(0,152,234,0.08)" stroke="#0098EA" stroke-width="1.4"/>
+              <!-- Candlestick chart -->
+              <line x1="13" y1="18" x2="13" y2="32" stroke="#0098EA" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+              <rect x="11" y="21" width="4" height="8" rx="0.5" fill="rgba(0,152,234,0.3)" stroke="#0098EA" stroke-width="1"/>
+              <line x1="20" y1="16" x2="20" y2="30" stroke="#0098EA" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+              <rect x="18" y="19" width="4" height="7" rx="0.5" fill="rgba(34,197,94,0.3)" stroke="#22c55e" stroke-width="1"/>
+              <line x1="27" y1="20" x2="27" y2="34" stroke="#0098EA" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+              <rect x="25" y="22" width="4" height="9" rx="0.5" fill="rgba(0,152,234,0.3)" stroke="#0098EA" stroke-width="1"/>
+              <line x1="34" y1="14" x2="34" y2="28" stroke="#0098EA" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+              <rect x="32" y="17" width="4" height="8" rx="0.5" fill="rgba(34,197,94,0.3)" stroke="#22c55e" stroke-width="1"/>
+              <!-- Trend arrow -->
+              <path d="M12 30l8-6 6 4 8-10" stroke="#5C9FFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="use-card-title">DeFi Bots</div>
+          <div class="use-card-desc">Verified identity for autonomous trading bots. DeFi protocols can verify bot identity before executing trades, preventing rogue bot attacks and ensuring execution integrity for on-chain strategies.</div>
+          <div class="use-card-snippet"><span class="cm">// Verify trading bot before execution</span>
+<span class="kw">if</span> (<span class="kw">await</span> agentTrust.<span class="fn">verifyAgent</span>(botId)) {
+  <span class="kw">await</span> protocol.<span class="fn">executeTrade</span>(botId, params);
+}</div>
+        </div>
+
+        <div class="use-card use-card-oracle reveal reveal-delay-1" data-hover>
+          <div class="use-card-icon">
+            <!-- Realistic oracle/data node icon -->
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Server rack body -->
+              <rect x="10" y="8" width="28" height="32" rx="2.5" fill="rgba(124,92,255,0.08)" stroke="#7C5CFF" stroke-width="1.4"/>
+              <!-- Server slots -->
+              <rect x="14" y="13" width="20" height="5" rx="1" fill="rgba(124,92,255,0.15)" stroke="#7C5CFF" stroke-width="0.8"/>
+              <rect x="14" y="21" width="20" height="5" rx="1" fill="rgba(124,92,255,0.15)" stroke="#7C5CFF" stroke-width="0.8"/>
+              <rect x="14" y="29" width="20" height="5" rx="1" fill="rgba(124,92,255,0.15)" stroke="#7C5CFF" stroke-width="0.8"/>
+              <!-- LED indicators -->
+              <circle cx="30" cy="15.5" r="1.5" fill="#22c55e" opacity="0.9"/>
+              <circle cx="33" cy="15.5" r="1.5" fill="#22c55e" opacity="0.6"/>
+              <circle cx="30" cy="23.5" r="1.5" fill="#5C9FFF" opacity="0.9"/>
+              <circle cx="33" cy="23.5" r="1.5" fill="#5C9FFF" opacity="0.6"/>
+              <circle cx="30" cy="31.5" r="1.5" fill="#22c55e" opacity="0.9"/>
+              <circle cx="33" cy="31.5" r="1.5" fill="rgba(255,68,102,0.7)" opacity="0.8"/>
+              <!-- Verified checkmark badge -->
+              <circle cx="38" cy="10" r="6" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="1"/>
+              <path d="M35.5 10l1.8 1.8 3-3.3" stroke="#22c55e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="use-card-title">Oracle Nodes</div>
+          <div class="use-card-desc">Hardware-backed proof for oracle data providers. Consumers can verify that the oracle node submitting data runs approved firmware on enrolled hardware — not a spoofed endpoint.</div>
+          <div class="use-card-snippet"><span class="cm">// Verify oracle before consuming data</span>
+<span class="kw">if</span> (<span class="kw">await</span> agentTrust.<span class="fn">verifyAgent</span>(oracleId)) {
+  <span class="kw">const</span> data = <span class="kw">await</span> oracle.<span class="fn">getData</span>();
+  <span class="kw">return</span> data; <span class="cm">// trusted</span>
+}</div>
+        </div>
+
+        <div class="use-card use-card-cross reveal reveal-delay-2" data-hover>
+          <div class="use-card-icon">
+            <!-- Realistic cross-chain bridge icon -->
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Left chain node — TON diamond -->
+              <path d="M10 18L16 12L22 18L16 24Z" fill="rgba(0,152,234,0.12)" stroke="#0098EA" stroke-width="1.3" stroke-linejoin="round"/>
+              <!-- Left node internal -->
+              <line x1="13" y1="18" x2="19" y2="18" stroke="#0098EA" stroke-width="1" opacity="0.7"/>
+              <line x1="16" y1="15" x2="16" y2="21" stroke="#0098EA" stroke-width="1" opacity="0.7"/>
+              <!-- Right chain node — hexagon -->
+              <polygon points="32,12 38,15.5 38,22.5 32,26 26,22.5 26,15.5" fill="rgba(34,197,94,0.10)" stroke="#22c55e" stroke-width="1.3"/>
+              <!-- Right node internal -->
+              <circle cx="32" cy="19" r="3.5" fill="none" stroke="#22c55e" stroke-width="1" opacity="0.8"/>
+              <circle cx="32" cy="19" r="1.5" fill="#22c55e" opacity="0.7"/>
+              <!-- Bridge connection -->
+              <path d="M22 18h4M22 19h4" stroke="#5C9FFF" stroke-width="1.5" stroke-linecap="round"/>
+              <!-- Bridge pillars -->
+              <line x1="24" y1="19" x2="24" y2="34" stroke="#5C9FFF" stroke-width="1" opacity="0.4" stroke-dasharray="2 2"/>
+              <!-- Data packet moving across -->
+              <rect x="22.5" y="17" width="3" height="3" rx="0.5" fill="#5C9FFF" opacity="0.7"/>
+              <!-- Bottom chain labels -->
+              <text x="16" y="30" text-anchor="middle" fill="#0098EA" font-size="4" font-family="monospace" font-weight="600">TON</text>
+              <text x="32" y="30" text-anchor="middle" fill="#22c55e" font-size="4" font-family="monospace" font-weight="600">ARB</text>
+            </svg>
+          </div>
+          <div class="use-card-title">Cross-Chain Agents</div>
+          <div class="use-card-desc">Sovereign agent identities that persist across chains. The receipt format is compatible with the Arbitrum SHA implementation — one agent identity, verifiable on TON and Arbitrum.</div>
+          <div class="use-card-snippet"><span class="cm">// Agent marketplace: verify before listing</span>
+<span class="kw">if</span> (<span class="kw">await</span> agentTrust.<span class="fn">verifyAgent</span>(providerId)) {
+  marketplace.<span class="fn">listProvider</span>(providerId);
+}</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            ORTHONODE<span class="footer-logo-sep">/</span><span class="footer-logo-project">TON-SHA</span>
+          </div>
+          <p class="footer-tagline">Cryptographic trust primitives for autonomous AI agents. Hardware-anchored identity on TON blockchain.</p>
+          <div class="footer-contact">
+            <a href="mailto:infrastructure@orthonode.xyz">infrastructure@orthonode.xyz</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-head">Projects</div>
+          <div class="footer-links">
+            <a href="/index.html">Home</a>
+            <a href="/sha.html">SHA — Stylus Hardware Anchor</a>
+            <a href="/ton-sha.html" class="active">TON-SHA — Agent Identity</a>
+            <a href="/oap.html">OAP — Attestation</a>
+            <a href="/nexus.html">Nexus — Gateway</a>
+            <a href="/invariant.html">INVARIANT</a>
+            <a href="/tix-dao.html">TIX-DAO</a>
+            <a href="/mantis.html">MANTIS</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-head">Resources</div>
+          <div class="footer-links">
+            <a href="https://github.com/orthonode/ton-sha" target="_blank" rel="noopener">GitHub Repository ↗</a>
+            <a href="https://testnet.tonscan.org/address/kQBVqAhPv_ANWm0hfjJdLnQmvvC8_rQ_NEryVX3uFOUF05OP" target="_blank" rel="noopener">Live Contract ↗</a>
+            <a href="https://youtu.be/a3MKPu_0Duk" target="_blank" rel="noopener">Demo Video ↗</a>
+            <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">@OrthonodeSys ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 ORTHONODE SYSTEMS™ — Arhant Barmate, Bhopal, India</div>
+        <div class="footer-meta">
+          <div class="footer-status">
+            <div class="footer-status-dot"></div>
+            Testnet Live
+          </div>
+          <div class="footer-chain">TON · Tact 1.6</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- end #page -->
+
+<!-- Shared nav -->
+<script src="/nav.js" defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 <script>
-(function(){const items=document.querySelectorAll('.reveal');if(!items.length)return;const obs=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('in'),i*55);obs.unobserve(en.target);}});},{threshold:.06,rootMargin:'0px 0px -36px 0px'});items.forEach(el=>obs.observe(el));})();
-(function(){document.querySelectorAll('.stat-n').forEach(el=>{const txt=el.textContent.trim();const m=txt.match(/[\d,]+/);if(!m)return;const target=parseInt(m[0].replace(/,/g,''));if(target<5)return;const prefix=txt.slice(0,txt.search(/\d/));const suffix=txt.slice(txt.search(/[\d,]+/)+m[0].length);const obs2=new IntersectionObserver(ents=>{if(!ents[0].isIntersecting)return;obs2.disconnect();const t0=performance.now(),dur=1200;(function tick(now){const p=Math.min((now-t0)/dur,1);const e=1-Math.pow(1-p,3);el.textContent=prefix+Math.round(e*target).toLocaleString()+suffix;if(p<1)requestAnimationFrame(tick);})(t0);},{threshold:.5});obs2.observe(el);});})();
-</script>
-<script>
-(function(){
-  var c=document.getElementById('star-field');
-  if(!c)return;
-  var ctx=c.getContext('2d');
-  var dpr=window.devicePixelRatio||1;
-  var W,H,stars=[];
-  var isMob=window.innerWidth<768;
-  var N=isMob?60:130;
-  var ML=isMob?90:130;
-  function resize(){W=window.innerWidth;H=window.innerHeight;c.width=W*dpr;c.height=H*dpr;ctx.scale(dpr,dpr);c.style.width=W+'px';c.style.height=H+'px';}
-  function init(){resize();stars=[];for(var i=0;i<N;i++)stars.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*1.2+.3,a:Math.random(),tw:Math.random()*Math.PI*2,ts:Math.random()*.015+.005});}
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    for(var i=0;i<stars.length;i++){
-      var s=stars[i];
-      s.x+=s.vx;s.y+=s.vy;
-      if(s.x<0)s.x=W;if(s.x>W)s.x=0;
-      if(s.y<0)s.y=H;if(s.y>H)s.y=0;
-      s.tw+=s.ts;
-      var al=.35+.45*Math.sin(s.tw);
-      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(200,200,200,'+al+')';ctx.fill();
-      for(var j=i+1;j<stars.length;j++){
-        var q=stars[j];
-        var dx=s.x-q.x,dy=s.y-q.y;
-        var d=Math.sqrt(dx*dx+dy*dy);
-        if(d<ML){ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle='rgba(180,180,180,'+(0.12*(1-d/ML))+')';ctx.lineWidth=.5;ctx.stroke();}
+/* ── PREMIUM CURSOR ──────────────────────────────────────── */
+(function() {
+  const cursor = document.querySelector('.c-cursor');
+  if (!cursor) return;
+  let cx = 0, cy = 0, tx = 0, ty = 0;
+  document.addEventListener('mousemove', function(e) { tx = e.clientX; ty = e.clientY; });
+  (function animCursor() {
+    cx += (tx - cx) * 0.12;
+    cy += (ty - cy) * 0.12;
+    cursor.style.left = cx + 'px';
+    cursor.style.top = cy + 'px';
+    requestAnimationFrame(animCursor);
+  })();
+  document.querySelectorAll('a,button,[data-hover]').forEach(function(el) {
+    el.addEventListener('mouseenter', function() { cursor.classList.add('is-hover'); });
+    el.addEventListener('mouseleave', function() { cursor.classList.remove('is-hover'); });
+  });
+})();
+
+/* ── STAR FIELD ──────────────────────────────────────── */
+(function() {
+  const canvas = document.getElementById('star-canvas');
+  const ctx = canvas.getContext('2d');
+  const isMobile = window.innerWidth < 768;
+  const NUM_STARS = isMobile ? 100 : 250;
+
+  let stars = [];
+  let W, H;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < NUM_STARS; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.2 + 0.2,
+        alpha: Math.random() * 0.5 + 0.1,
+        blinkSpeed: Math.random() * 0.008 + 0.002,
+        blinkDir: Math.random() > 0.5 ? 1 : -1,
+        blinking: Math.random() > 0.7,
+        parallaxFactor: Math.random() * 0.3 + 0.05,
+      });
+    }
+  }
+
+  let scrollY = 0;
+  window.addEventListener('scroll', function() { scrollY = window.scrollY; }, { passive: true });
+
+  function drawStars() {
+    ctx.clearRect(0, 0, W, H);
+    const parallaxOffset = scrollY * 0.05;
+    stars.forEach(function(s) {
+      if (s.blinking) {
+        s.alpha += s.blinkSpeed * s.blinkDir;
+        if (s.alpha >= 0.7) { s.alpha = 0.7; s.blinkDir = -1; }
+        if (s.alpha <= 0.05) { s.alpha = 0.05; s.blinkDir = 1; }
+      }
+      const py = (s.y - parallaxOffset * s.parallaxFactor + H) % H;
+      ctx.beginPath();
+      ctx.arc(s.x, py, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,' + s.alpha + ')';
+      ctx.fill();
+    });
+    requestAnimationFrame(drawStars);
+  }
+
+  resize();
+  initStars();
+  drawStars();
+  window.addEventListener('resize', function() { resize(); initStars(); });
+})();
+
+/* ── AGENT CONSTELLATION CANVAS ──────────────────────── */
+(function() {
+  const canvas = document.getElementById('agent-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, nodes = [], frame = 0;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function initNodes() {
+    nodes = [];
+    const count = window.innerWidth < 768 ? 5 : 8;
+    for (let i = 0; i < count; i++) {
+      nodes.push({
+        x: W * 0.15 + Math.random() * W * 0.7,
+        y: H * 0.1 + Math.random() * H * 0.8,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        r: Math.random() * 3 + 2,
+        hue: Math.random() > 0.5 ? '0,152,234' : '124,92,255',
+        pulseOffset: Math.random() * Math.PI * 2,
+      });
+    }
+  }
+
+  function drawNodes() {
+    ctx.clearRect(0, 0, W, H);
+    frame++;
+
+    // Draw connecting lines
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[j].x - nodes[i].x;
+        const dy = nodes[j].y - nodes[i].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const maxDist = W * 0.28;
+        if (dist < maxDist) {
+          const alpha = (1 - dist / maxDist) * 0.15;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.strokeStyle = 'rgba(0,152,234,' + alpha + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
       }
     }
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize',function(){init();});
-  init();draw();
-})();
-</script>
 
-<!-- Cookie consent bar -->
-<div id="cookie-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(10,10,10,0.97);border-top:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-  <p style="margin:0;font-family:'DM Sans',sans-serif;font-size:.82rem;color:#8C8C8C;line-height:1.5;">This site uses essential cookies only for Cloudflare bot protection. No tracking or analytics. <a href="/cookies.html" style="color:#D0D0D0;text-decoration:underline;text-underline-offset:3px;">Learn more</a></p>
-  <button onclick="dismissCookieBar()" style="flex-shrink:0;background:#141414;border:1px solid rgba(255,255,255,0.15);color:#F5F5F5;font-family:'DM Sans',sans-serif;font-size:.8rem;padding:7px 18px;border-radius:6px;cursor:pointer;white-space:nowrap;transition:background .2s;">Got it</button>
-</div>
-<script>
-(function(){
-  if(localStorage.getItem('orthonode_cc')==='1') return;
-  var bar=document.getElementById('cookie-bar');
-  if(bar){bar.style.display='flex';}
+    // Draw nodes
+    nodes.forEach(function(n) {
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+
+      const pulse = Math.sin(frame * 0.03 + n.pulseOffset) * 0.4 + 0.6;
+      const glowR = n.r * 6 * pulse;
+
+      const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, glowR);
+      grad.addColorStop(0, 'rgba(' + n.hue + ',' + (0.35 * pulse) + ')');
+      grad.addColorStop(1, 'rgba(' + n.hue + ',0)');
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, glowR, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + n.hue + ',' + (0.7 * pulse) + ')';
+      ctx.fill();
+    });
+
+    requestAnimationFrame(drawNodes);
+  }
+
+  resize();
+  initNodes();
+  drawNodes();
+  window.addEventListener('resize', function() { resize(); initNodes(); });
 })();
-function dismissCookieBar(){
-  localStorage.setItem('orthonode_cc','1');
-  var bar=document.getElementById('cookie-bar');
-  if(bar){bar.style.opacity='0';bar.style.transition='opacity .3s';setTimeout(function(){bar.style.display='none';},300);}
+
+/* ── LOADER ──────────────────────────────────────────── */
+(function() {
+  const text = 'TON-SHA';
+  const typedEl = document.getElementById('loader-typed');
+  const barFill = document.getElementById('loader-bar-fill');
+  const loader = document.getElementById('loader');
+  const page = document.getElementById('page');
+  let i = 0;
+
+  function typeChar() {
+    if (i < text.length) {
+      typedEl.textContent = text.slice(0, i + 1);
+      barFill.style.width = ((i + 1) / text.length * 60) + '%';
+      i++;
+      setTimeout(typeChar, 90 + Math.random() * 60);
+    } else {
+      barFill.style.width = '100%';
+      setTimeout(fadeOut, 500);
+    }
+  }
+
+  function fadeOut() {
+    loader.style.transition = 'opacity 0.5s ease';
+    loader.style.opacity = '0';
+    page.classList.add('visible');
+    setTimeout(function() {
+      loader.style.display = 'none';
+      revealHero();
+    }, 500);
+  }
+
+  setTimeout(typeChar, 300);
+})();
+
+/* ── HERO REVEAL ──────────────────────────────────────── */
+function revealHero() {
+  const heroReveal = document.querySelectorAll('#hero .reveal');
+  heroReveal.forEach(function(el, i) {
+    setTimeout(function() { el.classList.add('in'); }, i * 120);
+  });
 }
+
+/* ── SCROLL REVEAL ────────────────────────────────────── */
+(function() {
+  function onScroll() {
+    const elements = document.querySelectorAll('.reveal:not(.in)');
+    elements.forEach(function(el) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.88) {
+        el.classList.add('in');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* ── HASH STREAM ──────────────────────────────────────── */
+(function() {
+  const hashes = [
+    '0x4F2A9BE1 — IDENTITY MINTED',
+    '0x7C3E1D88 — GATE 4 PASS',
+    '0xA91F4C02 — COUNTER: 18',
+    '0x2D8B3F67 — RECEIPT VERIFIED',
+    '0xE5C47A1B — AGENT TRUSTED',
+    '0x91D2F8C3 — GATE 1 PASS',
+    '0x3B6E5D29 — FIRMWARE OK',
+    '0xF7A08E44 — REPLAY BLOCKED',
+  ];
+  const display = document.getElementById('hash-display');
+  let idx = 0;
+
+  setInterval(function() {
+    idx = (idx + 1) % hashes.length;
+    display.style.transition = 'opacity 0.3s';
+    display.style.opacity = '0';
+    setTimeout(function() {
+      display.textContent = hashes[idx];
+      display.style.opacity = '1';
+    }, 300);
+  }, 2800);
+})();
+
+/* ── 3D CARD TILT ─────────────────────────────────────── */
+(function() {
+  document.querySelectorAll('[class*="card"],[class*="gate-card"],[class*="use-card"],[class*="trust-panel"],[class*="layer"],[class*="ton-network-panel"],[class*="hero-stat"]').forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = 'perspective(1000px) rotateX(' + (-y * 6) + 'deg) rotateY(' + (x * 6) + 'deg) translateZ(8px)';
+    });
+    card.addEventListener('mouseleave', function() {
+      card.style.transform = '';
+    });
+  });
+})();
+
+/* ── GSAP SCROLL ANIMATIONS ───────────────────────────── */
+window.addEventListener('load', function() {
+  if (typeof gsap === 'undefined') return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Gate cards stagger
+  gsap.from('.gate-card', {
+    scrollTrigger: { trigger: '.gates-row', start: 'top 80%' },
+    y: 40, opacity: 0, duration: 0.7,
+    stagger: 0.12, ease: 'power2.out',
+  });
+
+  // Use case cards
+  gsap.from('.use-card', {
+    scrollTrigger: { trigger: '.use-cases-grid', start: 'top 80%' },
+    y: 32, opacity: 0, duration: 0.65,
+    stagger: 0.15, ease: 'power2.out',
+  });
+
+  // Layer stack
+  gsap.from('.layer', {
+    scrollTrigger: { trigger: '.layer-stack', start: 'top 80%' },
+    x: -20, opacity: 0, duration: 0.55,
+    stagger: 0.1, ease: 'power2.out',
+  });
+});
 </script>
 </body>
 </html>

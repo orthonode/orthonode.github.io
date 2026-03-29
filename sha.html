@@ -1,564 +1,1673 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="en"><head><meta name="description" content="Silicon-level ESP32 eFuse identity burned into Arbitrum Stylus smart contracts via Rust/WASM. Contract: 0xD661...615."><meta property="og:title" content="SHA — Secure Hardware Attestation on Arbitrum Stylus | ORTHONODE SYSTEMS™"><link rel="icon" href="/site-logo.png" type="image/png">
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>SHA | Secure Hardware Attestation</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=DM+Sans:wght@300&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "surface-container-highest": "#353535",
-                        "outline": "#89929c",
-                        "inverse-surface": "#e2e2e2",
-                        "surface-container": "#1f1f1f",
-                        "on-error-container": "#ffdad6",
-                        "primary-fixed": "#cce5ff",
-                        "on-secondary": "#313030",
-                        "secondary": "#c8c6c5",
-                        "on-tertiary-container": "#462900",
-                        "secondary-fixed-dim": "#c8c6c5",
-                        "on-background": "#e2e2e2",
-                        "on-secondary-fixed-variant": "#474646",
-                        "on-primary-fixed": "#001d31",
-                        "surface-dim": "#131313",
-                        "secondary-fixed": "#e5e2e1",
-                        "on-tertiary-fixed": "#2b1700",
-                        "tertiary-fixed": "#ffddb9",
-                        "surface-container-low": "#1b1b1b",
-                        "surface": "#131313",
-                        "error-container": "#93000a",
-                        "surface-container-high": "#2a2a2a",
-                        "background": "#131313",
-                        "surface-variant": "#353535",
-                        "on-secondary-fixed": "#1c1b1b",
-                        "inverse-primary": "#006397",
-                        "tertiary-container": "#d48600",
-                        "error": "#ffb4ab",
-                        "secondary-container": "#4a4949",
-                        "surface-tint": "#92ccff",
-                        "on-primary-container": "#003350",
-                        "on-surface": "#e2e2e2",
-                        "on-tertiary": "#472a00",
-                        "surface-container-lowest": "#0e0e0e",
-                        "inverse-on-surface": "#303030",
-                        "on-primary": "#003351",
-                        "on-surface-variant": "#bfc7d2",
-                        "surface-bright": "#393939",
-                        "tertiary": "#ffb961",
-                        "tertiary-fixed-dim": "#ffb961",
-                        "on-secondary-container": "#bab8b7",
-                        "primary-container": "#2a9fe8",
-                        "primary-fixed-dim": "#92ccff",
-                        "on-primary-fixed-variant": "#004b73",
-                        "on-error": "#690005",
-                        "primary": "#92ccff",
-                        "outline-variant": "#3f4851",
-                        "on-tertiary-fixed-variant": "#663e00"
-                    },
-                    fontFamily: {
-                        "syne": ["Syne", "sans-serif"],
-                        "dm-sans": ["DM Sans", "sans-serif"],
-                        "mono": ["IBM Plex Mono", "monospace"]
-                    },
-                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
-                },
-            },
-        }
-    </script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Stylus Hardware Anchor — ESP32-S3 eFuse silicon identity bound to Arbitrum Stylus smart contracts. 4-gate cryptographic verification primitive. Live on Arbitrum Sepolia. $25K Arbitrum Stylus Sprint grant.">
+<meta property="og:title" content="SHA — Silicon Identity on Arbitrum | ORTHONODE SYSTEMS™">
+<meta property="og:description" content="ESP32-S3 eFuse gates anchored to Arbitrum Stylus via Rust/WASM. Contract: 0xD661a1aB8CEFaaCd78F4B968670C3bC438415615. 4-gate silicon-to-chain proof. Live on Sepolia.">
+<meta property="og:image" content="/orthonode-banner.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/site-logo.png" type="image/png">
+<title>SHA — Silicon Identity on Arbitrum | ORTHONODE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;500&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 <style>
-        body { background-color: #000000; color: #bfc7d2; font-family: 'DM Sans', sans-serif; font-weight: 300; }
-        .font-syne { font-family: 'Syne', sans-serif; }
-        .font-mono { font-family: 'IBM Plex Mono', monospace; }
-        .glass-panel { background: rgba(53, 53, 53, 0.4); backdrop-filter: blur(24px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .glow-hover:hover { box-shadow: 0 0 40px rgba(42, 159, 232, 0.15); border-color: rgba(42, 159, 232, 0.4); }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+/* ─── RESET ─────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;cursor:none}
 
-        @keyframes glitch {
-            0% { transform: translate(0); text-shadow: none; opacity: 1; }
-            20% { transform: translate(-2px, 2px); text-shadow: 2px 0 #2A9FE8, -2px 0 #ff0000; opacity: 0.8; }
-            40% { transform: translate(-2px, -2px); text-shadow: -2px 0 #2A9FE8, 2px 0 #ff0000; opacity: 1; }
-            60% { transform: translate(2px, 2px); text-shadow: 2px 0 #2A9FE8, -2px 0 #ff0000; opacity: 0.9; }
-            80% { transform: translate(2px, -2px); text-shadow: -2px 0 #2A9FE8, 2px 0 #ff0000; opacity: 1; }
-            100% { transform: translate(0); text-shadow: none; opacity: 1; }
-        }
-        .animate-glitch { animation: glitch 0.3s cubic-bezier(.25,.46,.45,.94) both; }
+/* ─── CUSTOM CURSOR ──────────────────────────── */
+.c-cursor{width:12px;height:12px;background:#fff;border-radius:50%;position:fixed;top:0;left:0;transform:translate(-50%,-50%);pointer-events:none;z-index:999999;mix-blend-mode:difference;transition:width .2s,height .2s}.c-cursor.is-hover{width:44px;height:44px}@media(hover:none){html{cursor:auto}.c-cursor{display:none}}
+img,svg{max-width:100%;display:block}
 
-        @keyframes scanline {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
-        }
-        .scanline-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, transparent 0%, rgba(42, 159, 232, 0.05) 50%, transparent 100%);
-            animation: scanline 8s linear infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
+/* ─── DESIGN TOKENS ─────────────────────────── */
+:root{
+  --bg:#040810;
+  --primary:#1A6EFF;
+  --accent:#FF6B35;
+  --cyan:#00D4FF;
+  --danger:#FF3333;
+  --text:#E8EEF8;
+  --muted:#6B7A9A;
+  --card:rgba(26,110,255,0.06);
+  --border:rgba(26,110,255,0.18);
+  --card-solid:#070d1a;
+}
 
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 0 0 rgba(42, 159, 232, 0.4); }
-            70% { box-shadow: 0 0 0 6px rgba(42, 159, 232, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(42, 159, 232, 0); }
-        }
-        .status-pulse { animation: pulse-glow 2s infinite; }
+/* ─── BASE ───────────────────────────────────── */
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Exo 2',sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
 
-        .fade-in-step { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-        .fade-in-step.visible { opacity: 1; transform: translateY(0); }
-    </style>
-<script>const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null}},init(){},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};document.addEventListener("DOMContentLoaded",()=>{ON.cookie.set("on_chain","arbitrum_sepolia",7);const b=document.getElementById("cookie-banner");if(!ON.cookie.get("on_banner")&&b)b.style.display="flex"});</script>
+/* ─── SILICON DIE GRID BACKGROUND ────────────── */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px),
+    linear-gradient(rgba(26,110,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,110,255,0.04) 1px, transparent 1px);
+  background-size: 160px 160px, 160px 160px, 40px 40px, 40px 40px;
+  opacity:0.55;
+  pointer-events:none;
+  z-index:0;
+  mask-image:radial-gradient(ellipse 90% 90% at 50% 30%, black 20%, transparent 80%);
+}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <style>
-    @view-transition { navigation: auto; }
-    ::view-transition-old(root){animation:250ms ease-out both vtOut}
-    ::view-transition-new(root){animation:250ms ease-in both vtIn}
-    @keyframes vtOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-10px)}}
-    @keyframes vtIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    .nav-link{position:relative}
-    .nav-link::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform 0.25s ease}
-    .nav-link:hover::after{transform:scaleX(1)}
-    .proto-card{transition:transform 0.3s cubic-bezier(0.22,1,0.36,1),box-shadow 0.3s ease}
-    .proto-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(230,0,122,0.2)}
-    </style>
-    <script src="/nav.js" defer></script>
+/* ─── LOADER ─────────────────────────────────── */
+#loader{
+  position:fixed;inset:0;
+  background:var(--bg);
+  z-index:99000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:32px;
+}
+.loader-svg-wrap{position:relative;width:220px;height:220px;display:flex;align-items:center;justify-content:center;}
+.loader-text{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(40px,6vw,68px);
+  font-weight:900;
+  letter-spacing:0.22em;
+  color:var(--text);
+  position:relative;z-index:2;
+  text-shadow:0 0 40px rgba(26,110,255,0.6);
+}
+.loader-circuit{position:absolute;inset:0;}
+.loader-bar-wrap{width:240px;height:2px;background:rgba(26,110,255,0.2);border-radius:2px;overflow:hidden;}
+.loader-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--cyan));border-radius:2px;transition:width 0.04s linear;}
+.loader-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+}
+
+/* ─── NAVIGATION ─────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:10000;
+  padding:0 clamp(16px,4vw,48px);
+  height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(4,8,16,0.88);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Orbitron',monospace;
+  font-size:15px;font-weight:700;
+  letter-spacing:0.1em;
+  text-decoration:none;
+  display:flex;align-items:center;gap:6px;
+  flex-shrink:0;
+}
+.nav-logo-on{color:var(--text);}
+.nav-logo-slash{color:var(--muted);margin:0 2px;}
+.nav-logo-sha{color:var(--primary);}
+.nav-links{
+  display:flex;align-items:center;gap:4px;
+  flex:1;justify-content:center;
+}
+.nav-links a{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:400;
+  color:var(--muted);
+  text-decoration:none;
+  padding:6px 10px;border-radius:6px;
+  letter-spacing:0.04em;
+  transition:color 0.2s,background 0.2s;
+  white-space:nowrap;
+}
+.nav-links a:hover{color:var(--text);background:rgba(26,110,255,0.1);}
+.nav-links a.active{
+  color:var(--primary);
+  background:rgba(26,110,255,0.12);
+  font-weight:500;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.nav-links a.ext{color:rgba(108,120,154,0.7);}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.nav-status{
+  display:flex;align-items:center;gap:7px;
+  background:rgba(26,110,255,0.08);
+  border:1px solid rgba(26,110,255,0.22);
+  border-radius:99px;padding:5px 12px;
+}
+.nav-status-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--primary);
+  box-shadow:0 0 8px var(--primary);
+  animation:dot-pulse 2s ease-in-out infinite;
+}
+@keyframes dot-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+.nav-status span{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--primary);
+}
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  cursor:pointer;padding:10px;background:none;border:none;
+  min-width:44px;min-height:44px;align-items:center;justify-content:center;
+}
+.hamburger span{
+  display:block;width:22px;height:2px;
+  background:var(--text);
+  border-radius:2px;
+  transition:transform 0.3s,opacity 0.3s;
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{
+  position:fixed;top:64px;left:0;right:0;
+  background:rgba(4,8,16,0.97);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  z-index:9999;
+  transform:translateY(-110%);
+  transition:transform 0.32s cubic-bezier(0.22,1,0.36,1);
+  padding:24px clamp(16px,4vw,48px);
+  display:flex;flex-direction:column;gap:4px;
+}
+.mobile-menu.open{transform:translateY(0);}
+.mobile-menu a{
+  font-family:'Orbitron',monospace;
+  font-size:16px;font-weight:700;
+  color:var(--muted);
+  text-decoration:none;letter-spacing:0.08em;
+  padding:12px 0;
+  border-bottom:1px solid rgba(26,110,255,0.1);
+  transition:color 0.2s;
+}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--primary);}
+.mobile-menu .mobile-email{
+  margin-top:16px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--muted);letter-spacing:0.08em;
+}
+
+/* ─── HERO ───────────────────────────────────── */
+#hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:100px clamp(16px,4vw,80px) 60px;
+  overflow:hidden;
+  z-index:2;
+}
+.hero-circuit-bg{
+  position:absolute;inset:0;
+  z-index:0;pointer-events:none;overflow:hidden;
+}
+.hero-grid{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;gap:40px;
+  width:100%;
+}
+.hero-left{display:flex;flex-direction:column;gap:28px;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(26,110,255,0.1);
+  border:1px solid rgba(26,110,255,0.3);
+  color:var(--primary);
+  padding:8px 16px;border-radius:40px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:500;letter-spacing:0.12em;
+  width:fit-content;
+}
+.badge-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--primary);
+  box-shadow:0 0 10px var(--primary);
+  animation:dot-pulse 1.8s ease-in-out infinite;
+}
+h1.hero-h1{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(32px,8vw,88px);
+  font-weight:900;
+  line-height:1.0;
+  letter-spacing:0.04em;
+}
+h1.hero-h1 .line{display:block;}
+h1.hero-h1 .line-1{color:var(--text);}
+h1.hero-h1 .line-2{color:var(--primary);text-shadow:0 0 40px rgba(26,110,255,0.45);}
+h1.hero-h1 .line-3{
+  background:linear-gradient(90deg,var(--accent),var(--primary));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-sub{
+  font-size:clamp(16px,1.4vw,19px);
+  color:var(--muted);
+  max-width:560px;
+  line-height:1.75;
+  font-weight:300;
+}
+.stats-row{
+  display:flex;flex-wrap:wrap;gap:clamp(16px,3vw,32px);
+  padding:24px 0;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.stat-item{display:flex;flex-direction:column;gap:5px;}
+.stat-val{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(18px,2.5vw,26px);
+  font-weight:700;
+  color:var(--text);
+}
+.stat-val.accent{color:var(--accent);}
+.stat-val.cyan{color:var(--cyan);}
+.stat-val.primary{color:var(--primary);}
+.stat-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--muted);letter-spacing:0.14em;text-transform:uppercase;
+}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;align-items:center;}
+.btn-primary{
+  background:var(--primary);
+  color:#fff;font-weight:600;font-size:14px;
+  padding:13px 28px;border-radius:6px;border:none;cursor:pointer;
+  letter-spacing:0.04em;transition:all 0.22s;
+  text-decoration:none;display:inline-flex;align-items:center;gap:9px;
+  font-family:'Exo 2',sans-serif;
+  clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+.btn-primary:hover{background:#2478ff;transform:translateY(-2px);box-shadow:0 8px 32px rgba(26,110,255,0.4);}
+.btn-ghost{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text);font-size:14px;font-weight:500;
+  padding:12px 28px;border-radius:6px;cursor:pointer;
+  letter-spacing:0.04em;transition:all 0.22s;
+  text-decoration:none;display:inline-flex;align-items:center;gap:9px;
+  font-family:'Exo 2',sans-serif;
+}
+.btn-ghost:hover{border-color:var(--primary);color:var(--primary);}
+
+/* Hero diagram side */
+.hero-right{
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.chip-diagram{
+  position:relative;
+  width:100%;max-width:340px;
+}
+
+/* ─── SECTION COMMON ─────────────────────────── */
+section{
+  position:relative;z-index:2;
+  padding:clamp(60px,8vw,120px) clamp(16px,4vw,80px);
+}
+.section-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:500;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--primary);
+  margin-bottom:12px;display:flex;align-items:center;gap:10px;
+}
+.section-label::before{
+  content:'';display:block;width:24px;height:1px;background:var(--primary);
+}
+.section-title{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(24px,3.5vw,46px);
+  font-weight:900;letter-spacing:0.04em;
+  color:var(--text);margin-bottom:16px;
+}
+.section-sub{
+  font-size:clamp(15px,1.2vw,18px);
+  color:var(--muted);max-width:600px;line-height:1.75;font-weight:300;
+}
+.section-header{margin-bottom:clamp(40px,5vw,64px);}
+
+/* Reveal animation base */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:0.1s;}
+.reveal-delay-2{transition-delay:0.2s;}
+.reveal-delay-3{transition-delay:0.3s;}
+.reveal-delay-4{transition-delay:0.4s;}
+
+/* ─── FOUR GATES ─────────────────────────────── */
+#gates{background:transparent;}
+.gates-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:clamp(12px,2vw,24px);
+}
+.gate-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:clamp(20px,3vw,36px);
+  position:relative;overflow:hidden;
+  transition:border-color 0.3s,box-shadow 0.3s;
+  /* chip corner notch */
+  clip-path:polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+}
+.gate-card::before{
+  content:'';position:absolute;
+  top:0;right:0;
+  width:20px;height:20px;
+  background:linear-gradient(225deg, rgba(26,110,255,0.3) 50%, transparent 50%);
+}
+.gate-card:hover{
+  border-color:rgba(26,110,255,0.45);
+  box-shadow:0 0 32px rgba(26,110,255,0.12);
+}
+.gate-number{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;font-weight:500;letter-spacing:0.2em;
+  color:var(--accent);margin-bottom:12px;display:block;
+}
+.gate-name{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(14px,1.6vw,18px);font-weight:700;
+  color:var(--text);letter-spacing:0.06em;margin-bottom:12px;
+}
+.gate-desc{font-size:14px;color:var(--muted);line-height:1.65;font-weight:300;}
+.gate-tag{
+  margin-top:16px;display:inline-flex;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:0.1em;
+  color:var(--primary);background:rgba(26,110,255,0.1);
+  border:1px solid rgba(26,110,255,0.2);
+  padding:3px 10px;border-radius:3px;
+}
+/* Circuit trace top-left on gate cards */
+.gate-card::after{
+  content:'';position:absolute;
+  top:16px;right:16px;
+  width:30px;height:30px;
+  border-top:1px solid rgba(26,110,255,0.2);
+  border-right:1px solid rgba(26,110,255,0.2);
+}
+
+/* ─── SILICON PROBLEM ────────────────────────── */
+#problem{
+  background:transparent;
+}
+.problem-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:clamp(32px,5vw,64px);
+  position:relative;overflow:hidden;
+  max-width:920px;
+  clip-path:polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
+}
+.problem-card::before{
+  content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(90deg, transparent 39px, rgba(26,110,255,0.06) 39px, rgba(26,110,255,0.06) 40px, transparent 40px) left top / 80px 80px,
+    linear-gradient(180deg, transparent 39px, rgba(26,110,255,0.06) 39px, rgba(26,110,255,0.06) 40px, transparent 40px) left top / 80px 80px;
+  pointer-events:none;
+}
+.problem-card::after{
+  content:'';position:absolute;
+  top:0;right:0;
+  width:28px;height:28px;
+  background:linear-gradient(225deg, rgba(255,107,53,0.4) 50%, transparent 50%);
+}
+.problem-quote{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(20px,2.8vw,34px);
+  font-weight:700;letter-spacing:0.03em;
+  color:var(--text);line-height:1.3;
+  margin-bottom:32px;
+}
+.problem-quote .highlight{color:var(--accent);}
+.problem-body{
+  font-size:clamp(15px,1.2vw,18px);
+  color:var(--muted);line-height:1.8;font-weight:300;max-width:720px;
+}
+.problem-body strong{color:var(--text);font-weight:500;}
+.circuit-border{
+  position:absolute;
+  bottom:24px;right:24px;
+  width:60px;height:60px;
+  border-bottom:1px solid rgba(26,110,255,0.25);
+  border-right:1px solid rgba(26,110,255,0.25);
+}
+
+/* ─── ARCHITECTURE ───────────────────────────── */
+#architecture{background:transparent;}
+.arch-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:24px;
+}
+.terminal{
+  background:#050b16;
+  border:1px solid rgba(26,110,255,0.22);
+  border-radius:4px;overflow:hidden;
+  font-family:'JetBrains Mono',monospace;
+}
+.terminal-bar{
+  display:flex;align-items:center;gap:8px;
+  padding:12px 18px;
+  background:rgba(26,110,255,0.07);
+  border-bottom:1px solid rgba(26,110,255,0.15);
+}
+.t-dot{width:11px;height:11px;border-radius:50%;}
+.t-dot-red{background:#FF3333;}
+.t-dot-yellow{background:#FF9500;}
+.t-dot-green{background:#30D158;}
+.terminal-title{
+  margin-left:8px;
+  font-size:11px;letter-spacing:0.1em;color:var(--muted);
+}
+.terminal-body{padding:24px 28px;font-size:13px;line-height:1.9;overflow-x:auto;}
+.t-comment{color:rgba(107,122,154,0.8);}
+.t-keyword{color:#569CD6;}
+.t-type{color:var(--cyan);}
+.t-fn{color:#DCDCAA;}
+.t-str{color:#CE9178;}
+.t-num{color:#B5CEA8;}
+.t-attr{color:var(--accent);}
+.t-punc{color:rgba(232,238,248,0.5);}
+.t-indent{display:block;padding-left:24px;}
+
+/* Arch layers */
+.arch-layers{display:flex;flex-direction:column;gap:16px;}
+.arch-layer{
+  display:flex;align-items:flex-start;gap:20px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:4px;padding:clamp(16px,2.5vw,28px);
+  position:relative;overflow:hidden;
+  transition:border-color 0.3s;
+}
+.arch-layer:hover{border-color:rgba(26,110,255,0.4);}
+.arch-layer-num{
+  font-family:'Orbitron',monospace;
+  font-size:32px;font-weight:900;
+  color:rgba(26,110,255,0.15);
+  letter-spacing:0.04em;
+  flex-shrink:0;line-height:1;
+  min-width:48px;
+}
+.arch-layer-content{flex:1;}
+.arch-layer-title{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(13px,1.5vw,16px);font-weight:700;
+  color:var(--text);letter-spacing:0.06em;margin-bottom:8px;
+}
+.arch-layer-sub{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300;}
+.arch-layer-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.arch-tag{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:0.08em;
+  color:var(--cyan);background:rgba(0,212,255,0.08);
+  border:1px solid rgba(0,212,255,0.2);
+  padding:3px 10px;border-radius:3px;
+}
+.arch-tag.orange{color:var(--accent);background:rgba(255,107,53,0.08);border-color:rgba(255,107,53,0.2);}
+.arch-tag.blue{color:var(--primary);background:rgba(26,110,255,0.08);border-color:rgba(26,110,255,0.2);}
+
+/* ─── BENCHMARKS ─────────────────────────────── */
+#benchmarks{background:transparent;}
+.bench-table-wrap{overflow-x:auto;border-radius:4px;border:1px solid var(--border);}
+.bench-table{
+  width:100%;border-collapse:collapse;
+  font-family:'JetBrains Mono',monospace;font-size:13px;
+  background:#050b16;
+}
+.bench-table thead tr{background:rgba(26,110,255,0.1);border-bottom:1px solid var(--border);}
+.bench-table th{
+  padding:14px 20px;text-align:left;
+  font-size:10px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--primary);font-weight:500;white-space:nowrap;
+}
+.bench-table td{
+  padding:13px 20px;
+  border-bottom:1px solid rgba(26,110,255,0.08);
+  color:var(--muted);font-size:12px;
+}
+.bench-table tr:last-child td{border-bottom:none;}
+.bench-table tr:hover td{background:rgba(26,110,255,0.05);}
+.bench-val{color:var(--text);font-weight:500;}
+.bench-good{color:#30D158;}
+.bench-warn{color:var(--accent);}
+.bench-tx{
+  font-size:11px;word-break:break-all;
+  color:var(--primary);text-decoration:none;
+}
+.bench-tx:hover{text-decoration:underline;}
+.bench-meta{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;margin-top:24px;
+}
+.bench-meta-item{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:4px;padding:20px 24px;
+}
+.bench-meta-val{
+  font-family:'Orbitron',monospace;
+  font-size:22px;font-weight:700;color:var(--text);margin-bottom:4px;
+}
+.bench-meta-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;
+}
+
+/* ─── GRANT ──────────────────────────────────── */
+#grant{background:transparent;}
+.grant-card{
+  background:linear-gradient(135deg,rgba(255,107,53,0.08),rgba(26,110,255,0.06));
+  border:1px solid rgba(255,107,53,0.3);
+  border-radius:4px;
+  padding:clamp(32px,5vw,64px);
+  position:relative;overflow:hidden;
+  clip-path:polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
+}
+.grant-card::after{
+  content:'';position:absolute;
+  top:0;right:0;
+  width:28px;height:28px;
+  background:linear-gradient(225deg, rgba(255,107,53,0.6) 50%, transparent 50%);
+}
+/* eFuse burn glow */
+.grant-card::before{
+  content:'';position:absolute;
+  top:-80px;right:-80px;
+  width:300px;height:300px;
+  background:radial-gradient(circle, rgba(255,107,53,0.18) 0%, transparent 70%);
+  pointer-events:none;
+  animation:fuse-glow 3s ease-in-out infinite alternate;
+}
+@keyframes fuse-glow{0%{opacity:0.6;transform:scale(1);}100%{opacity:1;transform:scale(1.1);}}
+.grant-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
+  display:flex;align-items:center;gap:10px;
+}
+.grant-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--accent);}
+.grant-amount{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(36px,6vw,72px);font-weight:900;
+  color:var(--accent);letter-spacing:0.04em;
+  text-shadow:0 0 40px rgba(255,107,53,0.4);
+  margin-bottom:8px;
+}
+.grant-name{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(16px,2vw,24px);font-weight:700;
+  color:var(--text);letter-spacing:0.06em;margin-bottom:24px;
+}
+.grant-body{
+  font-size:clamp(15px,1.2vw,17px);color:var(--muted);
+  line-height:1.8;font-weight:300;max-width:660px;margin-bottom:32px;
+}
+.grant-body strong{color:var(--text);font-weight:500;}
+.grant-milestones{display:flex;flex-wrap:wrap;gap:16px;}
+.grant-ms{
+  background:rgba(255,107,53,0.08);
+  border:1px solid rgba(255,107,53,0.2);
+  border-radius:4px;padding:16px 22px;
+}
+.grant-ms-title{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:4px;
+}
+.grant-ms-body{font-size:13px;color:var(--muted);line-height:1.55;}
+
+/* ─── ZKP SECTION ────────────────────────────── */
+#zkp{background:transparent;}
+.zkp-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:4px;padding:clamp(24px,4vw,48px);
+  position:relative;overflow:hidden;
+}
+.zkp-layers{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+  margin-top:32px;
+}
+.zkp-layer{
+  background:rgba(26,110,255,0.05);
+  border:1px solid var(--border);border-radius:4px;
+  padding:20px 22px;
+}
+.zkp-layer-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:8px;
+}
+.zkp-layer-title{
+  font-family:'Orbitron',monospace;
+  font-size:13px;font-weight:700;letter-spacing:0.04em;
+  color:var(--text);margin-bottom:6px;
+}
+.zkp-layer-body{font-size:13px;color:var(--muted);line-height:1.55;font-weight:300;}
+.zkp-status-live{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:0.1em;
+  color:#30D158;margin-top:10px;
+}
+.zkp-status-live::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:#30D158;box-shadow:0 0 8px #30D158;
+}
+.zkp-status-pending{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;letter-spacing:0.1em;
+  color:var(--accent);margin-top:10px;
+}
+.zkp-status-pending::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+}
+
+/* ─── GITHUB CTA ─────────────────────────────── */
+#github-cta{background:transparent;}
+.github-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:clamp(40px,6vw,80px) clamp(24px,4vw,64px);
+  text-align:center;
+  position:relative;overflow:hidden;
+  clip-path:polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
+}
+.github-card::before{
+  content:'';position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:500px;height:500px;
+  background:radial-gradient(circle, rgba(26,110,255,0.07) 0%, transparent 65%);
+  pointer-events:none;
+}
+.github-card::after{
+  content:'';position:absolute;
+  top:0;right:0;
+  width:28px;height:28px;
+  background:linear-gradient(225deg, rgba(26,110,255,0.4) 50%, transparent 50%);
+}
+.github-title{
+  font-family:'Orbitron',monospace;
+  font-size:clamp(22px,3.5vw,42px);font-weight:900;
+  color:var(--text);letter-spacing:0.04em;margin-bottom:16px;
+}
+.github-sub{
+  font-size:clamp(15px,1.2vw,18px);color:var(--muted);
+  line-height:1.75;max-width:580px;margin:0 auto 32px;font-weight:300;
+}
+.github-contract{
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;color:var(--primary);
+  background:rgba(26,110,255,0.08);border:1px solid rgba(26,110,255,0.2);
+  padding:10px 20px;border-radius:4px;
+  display:inline-block;margin-bottom:28px;
+  word-break:break-all;
+}
+.github-ctas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+
+/* ─── FOOTER ─────────────────────────────────── */
+footer{
+  position:relative;z-index:2;
+  background:rgba(4,8,16,0.9);
+  border-top:1px solid var(--border);
+  padding:clamp(32px,4vw,56px) clamp(16px,4vw,80px);
+}
+.footer-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:32px;
+}
+.footer-brand{
+  font-family:'Orbitron',monospace;
+  font-size:14px;font-weight:700;letter-spacing:0.1em;
+  color:var(--text);margin-bottom:8px;
+}
+.footer-tagline{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--muted);letter-spacing:0.08em;margin-bottom:4px;
+}
+.footer-email a{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--primary);text-decoration:none;letter-spacing:0.06em;
+}
+.footer-email a:hover{text-decoration:underline;}
+.footer-links{display:flex;flex-wrap:wrap;gap:8px;}
+.footer-links a{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:0.06em;
+  padding:4px 8px;border-radius:3px;
+  transition:color 0.2s;
+}
+.footer-links a:hover,.footer-links a.active{color:var(--primary);}
+.footer-social{display:flex;gap:12px;align-items:center;}
+.footer-social a{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:0.06em;
+  display:flex;align-items:center;gap:6px;
+  transition:color 0.2s;
+}
+.footer-social a:hover{color:var(--text);}
+.footer-disclaimer{
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:rgba(107,122,154,0.6);letter-spacing:0.06em;
+  padding-top:24px;border-top:1px solid rgba(26,110,255,0.1);margin-top:16px;
+}
+
+/* ─── MOBILE RESPONSIVE ──────────────────────── */
+@media (max-width:767px){
+  nav{padding:0 16px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .nav-status{display:none;}
+
+  .hero-grid{gap:32px;}
+  .stats-row{gap:20px;}
+  .hero-ctas{gap:10px;}
+  .btn-primary,.btn-ghost{padding:12px 20px;font-size:13px;}
+
+  .gates-grid{grid-template-columns:1fr 1fr;gap:12px;}
+  .gate-card{padding:18px 14px;}
+  .gate-name{font-size:13px;}
+
+  .problem-card{padding:24px 20px;}
+  .problem-quote{font-size:clamp(18px,5vw,26px);}
+
+  .arch-layer{flex-direction:column;gap:8px;}
+  .arch-layer-num{font-size:24px;min-width:auto;}
+
+  .bench-table th,.bench-table td{padding:10px 12px;}
+
+  .grant-card{padding:28px 20px;}
+  .grant-milestones{flex-direction:column;}
+
+  footer{padding:32px 16px;}
+  .footer-grid{gap:24px;}
+}
+
+@media (min-width:768px){
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:center;
+    gap:40px;
+  }
+  .hero-left{gap:28px;}
+  .gates-grid{grid-template-columns:repeat(4,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr 1fr;}
+}
+
+@media (min-width:1024px){
+  #hero{padding:120px 80px 80px;}
+  section{padding:100px 80px;}
+  .arch-grid{grid-template-columns:1fr 1fr;gap:32px;}
+}
+
+/* ─── CIRCUIT TRACE ANIMATION ────────────────── */
+.circuit-trace{
+  stroke-dasharray:400;
+  stroke-dashoffset:400;
+  animation:draw-trace 2.5s ease forwards;
+}
+.circuit-trace-2{animation-delay:0.4s;}
+.circuit-trace-3{animation-delay:0.8s;}
+.circuit-trace-4{animation-delay:1.2s;}
+.circuit-trace-5{animation-delay:1.6s;}
+@keyframes draw-trace{to{stroke-dashoffset:0;}}
+
+/* Traveling dots on chip diagram */
+.travel-dot{
+  animation:travel-down 2.2s ease-in-out infinite;
+}
+.travel-dot-2{animation-delay:0.7s;}
+.travel-dot-3{animation-delay:1.4s;}
+@keyframes travel-down{
+  0%{opacity:0;transform:translateY(-8px);}
+  15%{opacity:1;}
+  85%{opacity:1;}
+  100%{opacity:0;transform:translateY(8px);}
+}
+
+/* eFuse burn glow on stats */
+.efuse-glow{
+  animation:efuse 2.5s ease-in-out infinite alternate;
+}
+@keyframes efuse{
+  0%{text-shadow:0 0 20px rgba(255,107,53,0.3);}
+  100%{text-shadow:0 0 40px rgba(255,107,53,0.7),0 0 80px rgba(255,107,53,0.2);}
+}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:rgba(26,110,255,0.3);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--primary);}
+</style>
 </head>
-<body class="selection:bg-primary-container selection:text-on-primary-container"><canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas><script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:80},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.8+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script><div id="cookie-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:20px 28px;align-items:center;gap:20px;max-width:520px;width:90vw;"><p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">Cookies used. <a href="/cookies.html" style="color:#2A9FE8;">Learn more</a></p><button onclick="ON.acceptCookies()" style="background:#2A9FE8;color:#fff;border:none;padding:9px 18px;font-family:IBM Plex Mono,monospace;font-size:11px;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button></div>
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-white/5 shadow-[0_0_20px_rgba(42,159,232,0.08)]">
-<div class="flex justify-between items-center px-8 py-4 max-w-[1920px] mx-auto">
-<div class="flex items-center gap-6">
-<span class="text-[#2A9FE8] font-syne font-extrabold text-2xl tracking-tighter bg-[#2A9FE8]/10 px-2 py-0.5 rounded-sm">SHA</span>
-<div class="hidden md:flex gap-8">
-<a class="text-[#2A9FE8] font-mono text-sm border-b border-[#2A9FE8]" href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">Network</a>
+<body>
 
+<!-- ─── LOADER ──────────────────────────────── -->
+<div id="loader">
+  <div class="loader-svg-wrap">
+    <!-- Animated circuit traces around "SHA" -->
+    <svg class="loader-circuit" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- Outer rectangle -->
+      <path class="circuit-trace" d="M20 20 L200 20" stroke="rgba(26,110,255,0.5)" stroke-width="1.5"/>
+      <path class="circuit-trace circuit-trace-2" d="M200 20 L200 200" stroke="rgba(26,110,255,0.5)" stroke-width="1.5"/>
+      <path class="circuit-trace circuit-trace-3" d="M200 200 L20 200" stroke="rgba(26,110,255,0.5)" stroke-width="1.5"/>
+      <path class="circuit-trace circuit-trace-4" d="M20 200 L20 20" stroke="rgba(26,110,255,0.5)" stroke-width="1.5"/>
+      <!-- Corner nodes -->
+      <circle cx="20" cy="20" r="3" fill="rgba(255,107,53,0.8)" class="circuit-trace"/>
+      <circle cx="200" cy="20" r="3" fill="rgba(255,107,53,0.8)" class="circuit-trace circuit-trace-2"/>
+      <circle cx="200" cy="200" r="3" fill="rgba(255,107,53,0.8)" class="circuit-trace circuit-trace-3"/>
+      <circle cx="20" cy="200" r="3" fill="rgba(255,107,53,0.8)" class="circuit-trace circuit-trace-4"/>
+      <!-- Inner circuit details -->
+      <path class="circuit-trace circuit-trace-2" d="M20 60 L50 60 L50 110 M200 60 L170 60 L170 110" stroke="rgba(26,110,255,0.3)" stroke-width="1"/>
+      <path class="circuit-trace circuit-trace-3" d="M20 160 L50 160 L50 110 M200 160 L170 160 L170 110" stroke="rgba(26,110,255,0.3)" stroke-width="1"/>
+      <path class="circuit-trace circuit-trace-4" d="M50 110 L80 110 M170 110 L140 110" stroke="rgba(0,212,255,0.4)" stroke-width="1"/>
+      <circle cx="50" cy="110" r="2.5" fill="rgba(0,212,255,0.6)" class="circuit-trace circuit-trace-2"/>
+      <circle cx="170" cy="110" r="2.5" fill="rgba(0,212,255,0.6)" class="circuit-trace circuit-trace-3"/>
+    </svg>
+    <span class="loader-text">SHA</span>
+  </div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="loader-bar"></div></div>
+  <span class="loader-label">Initializing Silicon Layer</span>
+</div>
 
-
-</div>
-</div>
-<div class="flex items-center gap-6">
-<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors flex items-center gap-1" href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener">
-                GitHub <span class="text-[10px]">↗</span>
-</a>
-<a class="text-gray-400 font-mono text-sm hover:text-white transition-colors flex items-center gap-1" href="https://sepolia.arbiscan.io" target="_blank">
-                Explorer <span class="text-[10px]">↗</span>
-</a>
-</div>
-</div>
+<!-- ─── NAVIGATION ──────────────────────────── -->
+<nav id="main-nav" aria-label="Main navigation">
+  <a href="/index.html" class="nav-logo" aria-label="ORTHONODE home">
+    <span class="nav-logo-on">ORTHONODE</span>
+    <span class="nav-logo-slash">/</span>
+    <span class="nav-logo-sha">SHA</span>
+  </a>
+  <div class="nav-links" role="navigation">
+    <a href="/index.html">Home</a>
+    <a href="/sha.html" class="active">SHA</a>
+    <a href="/ton-sha.html">TON-SHA</a>
+    <a href="/oap.html">OAP</a>
+    <a href="/nexus.html">Nexus</a>
+    <a href="/invariant.html">INVARIANT</a>
+    <a href="/tix-dao.html">TIX-DAO</a>
+    <a href="/mantis.html">MANTIS</a>
+    <a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener" class="ext">GitHub ↗</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-status" aria-label="System status">
+      <div class="nav-status-dot" aria-hidden="true"></div>
+      <span>Sepolia Live</span>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </button>
+  </div>
 </nav>
-<main class="pt-32 pb-24 px-8 max-w-[1440px] mx-auto overflow-hidden">
-<!-- Hero Section -->
-<section class="relative mb-40">
-<div class="absolute -top-40 -left-40 w-[600px] h-[600px] bg-[#2A9FE8]/5 rounded-full blur-[120px]"></div>
-<div class="relative z-10 flex flex-col items-start gap-8">
-<div class="flex flex-wrap gap-3">
-<span class="font-mono text-[10px] tracking-widest uppercase bg-surface-container-high px-3 py-1 text-[#2A9FE8] border border-[#2A9FE8]/20 rounded-sm">LIVE ON ARBITRUM SEPOLIA</span>
-<span class="font-mono text-[10px] tracking-widest uppercase bg-surface-container-high px-3 py-1 text-on-surface-variant rounded-sm">RUST/WASM</span>
-<span class="font-mono text-[10px] tracking-widest uppercase bg-surface-container-high px-3 py-1 text-on-surface-variant rounded-sm">EFUSE IDENTITY</span>
+
+<div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+  <a href="/index.html">Home</a>
+  <a href="/sha.html" class="active">SHA</a>
+  <a href="/ton-sha.html">TON-SHA</a>
+  <a href="/oap.html">OAP</a>
+  <a href="/nexus.html">Nexus</a>
+  <a href="/invariant.html">INVARIANT</a>
+  <a href="/tix-dao.html">TIX-DAO</a>
+  <a href="/mantis.html">MANTIS</a>
+  <a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener">GitHub ↗</a>
+  <span class="mobile-email">infrastructure@orthonode.xyz</span>
 </div>
-<h1 class="text-[12rem] md:text-[16rem] leading-[0.85] font-syne font-extrabold tracking-tighter text-[#2A9FE8] animate-glitch">
-                    SHA
-                </h1>
-<div class="max-w-3xl space-y-6">
-<h2 class="text-4xl md:text-5xl font-syne font-extrabold text-white tracking-tight">
-                        Secure Hardware Attestation on Arbitrum Stylus
-                    </h2>
-<p class="text-xl md:text-2xl font-dm-sans font-light text-on-surface-variant leading-relaxed">
-                        Silicon-level identity for the decentralized stack — burning ESP32 eFuse data into Arbitrum Stylus contracts via Rust programs.
-                    </p>
-</div>
-<div class="flex flex-wrap gap-4 pt-8">
-<a class="bg-primary-container text-on-primary-container px-8 py-4 rounded-lg font-mono text-sm flex items-center gap-2 hover:opacity-90 transition-all" href="https://sepolia.arbiscan.io" target="_blank">
-                        View on Explorer <span class="material-symbols-outlined text-sm">north_east</span>
-</a>
-<a class="glass-panel text-white px-8 py-4 rounded-lg font-mono text-sm flex items-center gap-2 hover:bg-white/5 transition-all" href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener">
-                        GitHub <span class="material-symbols-outlined text-sm">north_east</span>
-</a>
-<button class="border border-white/10 text-on-surface-variant px-8 py-4 rounded-lg font-mono text-sm flex items-center gap-2 hover:text-white transition-all">
-                        Read Architecture <span class="material-symbols-outlined text-sm">north_east</span>
-</button>
-</div>
-</div>
+
+<!-- ─── HERO ─────────────────────────────────── -->
+<section id="hero" aria-labelledby="hero-title">
+
+  <!-- Animated circuit trace background SVG -->
+  <div class="hero-circuit-bg" aria-hidden="true">
+    <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Horizontal backbone traces -->
+      <path d="M0 200 L300 200 L320 220 L720 220" stroke="rgba(26,110,255,0.18)" stroke-width="1.5" stroke-dasharray="600" stroke-dashoffset="600" style="animation:draw-trace 3s 0.3s ease forwards"/>
+      <path d="M1440 200 L1100 200 L1080 220 L720 220" stroke="rgba(26,110,255,0.14)" stroke-width="1.5" stroke-dasharray="500" stroke-dashoffset="500" style="animation:draw-trace 3s 0.5s ease forwards"/>
+      <!-- Vertical routing -->
+      <path d="M240 0 L240 160 L300 220 L300 400" stroke="rgba(26,110,255,0.12)" stroke-width="1" stroke-dasharray="460" stroke-dashoffset="460" style="animation:draw-trace 3s 0.8s ease forwards"/>
+      <path d="M1200 0 L1200 160 L1140 220 L1140 400" stroke="rgba(26,110,255,0.1)" stroke-width="1" stroke-dasharray="460" stroke-dashoffset="460" style="animation:draw-trace 3s 1s ease forwards"/>
+      <!-- Cyan data lines -->
+      <path d="M0 450 L400 450 L440 490 L640 490" stroke="rgba(0,212,255,0.1)" stroke-width="1" stroke-dasharray="700" stroke-dashoffset="700" style="animation:draw-trace 3.5s 1.2s ease forwards"/>
+      <path d="M1440 450 L1040 450 L1000 490 L800 490" stroke="rgba(0,212,255,0.08)" stroke-width="1" stroke-dasharray="700" stroke-dashoffset="700" style="animation:draw-trace 3.5s 1.4s ease forwards"/>
+      <!-- Bottom area traces -->
+      <path d="M0 700 L200 700 L240 740 L600 740 L640 780 L1440 780" stroke="rgba(26,110,255,0.09)" stroke-width="1" stroke-dasharray="1700" stroke-dashoffset="1700" style="animation:draw-trace 4s 1.6s ease forwards"/>
+      <!-- Via dots (connection points on PCB) -->
+      <circle cx="300" cy="220" r="4" fill="rgba(255,107,53,0.5)" style="animation:dot-pulse 2s 1.5s ease-in-out infinite"/>
+      <circle cx="1140" cy="220" r="4" fill="rgba(255,107,53,0.5)" style="animation:dot-pulse 2s 1.8s ease-in-out infinite"/>
+      <circle cx="240" cy="160" r="3" fill="rgba(0,212,255,0.4)" style="animation:dot-pulse 2.5s 2s ease-in-out infinite"/>
+      <circle cx="640" cy="490" r="3" fill="rgba(0,212,255,0.4)" style="animation:dot-pulse 2.5s 2.2s ease-in-out infinite"/>
+      <circle cx="800" cy="490" r="3" fill="rgba(0,212,255,0.4)" style="animation:dot-pulse 2.5s 2.4s ease-in-out infinite"/>
+    </svg>
+  </div>
+
+  <div class="hero-grid">
+    <!-- Left: Text content -->
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        SHA &bull; LIVE &bull; ARBITRUM SEPOLIA
+      </div>
+
+      <h1 class="hero-h1" id="hero-title">
+        <span class="line line-1">SILICON</span>
+        <span class="line line-2">IDENTITY</span>
+        <span class="line line-3">ON-CHAIN</span>
+      </h1>
+
+      <p class="hero-sub">
+        ESP32-S3 eFuse gates anchored to Arbitrum Stylus. Four cryptographic proofs from silicon to chain — unforgeable hardware identity for the decentralized stack.
+      </p>
+
+      <div class="stats-row" role="list" aria-label="Key statistics">
+        <div class="stat-item" role="listitem">
+          <span class="stat-val accent efuse-glow">$25K</span>
+          <span class="stat-label">Arbitrum Grant</span>
+        </div>
+        <div class="stat-item" role="listitem">
+          <span class="stat-val">4</span>
+          <span class="stat-label">Crypto Gates</span>
+        </div>
+        <div class="stat-item" role="listitem">
+          <span class="stat-val cyan">12.6K</span>
+          <span class="stat-label">Gas / Receipt</span>
+        </div>
+        <div class="stat-item" role="listitem">
+          <span class="stat-val primary">10K+</span>
+          <span class="stat-label">Test Vectors</span>
+        </div>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener" class="btn-primary" aria-label="View SHA on GitHub (opens in new tab)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          View on GitHub
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 10L10 2M10 2H4M10 2V8"/></svg>
+        </a>
+        <a href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener" class="btn-ghost" aria-label="View contract on Arbiscan (opens in new tab)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          View Contract
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Chip diagram SVG -->
+    <div class="hero-right">
+      <div class="chip-diagram" aria-hidden="true">
+        <svg viewBox="0 0 340 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SHA gate chain diagram from ESP32-S3 chip to Arbitrum">
+
+          <!-- Background glow -->
+          <defs>
+            <radialGradient id="chip-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(26,110,255,0.15)"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </radialGradient>
+            <radialGradient id="arb-glow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(255,107,53,0.2)"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </radialGradient>
+            <filter id="blur-glow">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+            </filter>
+          </defs>
+
+          <!-- Glow backdrop -->
+          <ellipse cx="170" cy="100" rx="100" ry="80" fill="url(#chip-glow)" filter="url(#blur-glow)"/>
+          <ellipse cx="170" cy="380" rx="80" ry="60" fill="url(#arb-glow)" filter="url(#blur-glow)"/>
+
+          <!-- ESP32-S3 chip package -->
+          <!-- Chip body with corner notch (clip-path feel) -->
+          <polygon points="100,10 240,10 260,30 260,140 100,140" fill="rgba(26,110,255,0.06)" stroke="rgba(26,110,255,0.55)" stroke-width="1.5"/>
+          <!-- Corner cut indicator -->
+          <line x1="240" y1="10" x2="260" y2="30" stroke="rgba(255,107,53,0.7)" stroke-width="1.5"/>
+
+          <!-- Chip pins left -->
+          <line x1="100" y1="45" x2="80" y2="45" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+          <line x1="100" y1="65" x2="80" y2="65" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+          <line x1="100" y1="85" x2="80" y2="85" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+          <line x1="100" y1="105" x2="80" y2="105" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+          <line x1="100" y1="125" x2="80" y2="125" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+          <!-- Chip pins right -->
+          <line x1="260" y1="50" x2="280" y2="50" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+          <line x1="260" y1="70" x2="280" y2="70" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+          <line x1="260" y1="90" x2="280" y2="90" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+          <line x1="260" y1="110" x2="280" y2="110" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+          <line x1="260" y1="130" x2="280" y2="130" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+
+          <!-- Chip label -->
+          <text x="180" y="65" text-anchor="middle" fill="rgba(232,238,248,0.9)" font-family="JetBrains Mono, monospace" font-size="11" font-weight="500" letter-spacing="0.12em">ESP32-S3</text>
+          <text x="180" y="82" text-anchor="middle" fill="rgba(107,122,154,0.9)" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="0.1em">eFUSE BLOCK</text>
+          <!-- Die grid markings inside chip -->
+          <line x1="110" y1="95" x2="250" y2="95" stroke="rgba(26,110,255,0.15)" stroke-width="0.5"/>
+          <line x1="110" y1="110" x2="250" y2="110" stroke="rgba(26,110,255,0.15)" stroke-width="0.5"/>
+          <line x1="160" y1="95" x2="160" y2="140" stroke="rgba(26,110,255,0.15)" stroke-width="0.5"/>
+          <line x1="200" y1="95" x2="200" y2="140" stroke="rgba(26,110,255,0.15)" stroke-width="0.5"/>
+
+          <!-- Vertical chain connector -->
+          <line x1="170" y1="140" x2="170" y2="165" stroke="rgba(26,110,255,0.5)" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+          <!-- GATE 1: eFUSE BURN -->
+          <rect x="105" y="165" width="130" height="48" rx="2" fill="rgba(26,110,255,0.08)" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+          <!-- Corner notch -->
+          <polygon points="219,165 235,165 235,175" fill="rgba(255,107,53,0.5)"/>
+          <text x="170" y="185" text-anchor="middle" fill="rgba(107,122,154,0.8)" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.15em">GATE 01</text>
+          <text x="170" y="203" text-anchor="middle" fill="rgba(232,238,248,0.95)" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="0.08em">eFUSE BURN</text>
+          <!-- Traveling dot -->
+          <circle cx="170" cy="158" r="3" fill="var(--accent)" class="travel-dot">
+            <animate attributeName="cy" from="148" to="168" dur="1.8s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- Connector line -->
+          <line x1="170" y1="213" x2="170" y2="238" stroke="rgba(26,110,255,0.5)" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+          <!-- GATE 2: HASH SIGN -->
+          <rect x="105" y="238" width="130" height="48" rx="2" fill="rgba(26,110,255,0.08)" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+          <polygon points="219,238 235,238 235,248" fill="rgba(255,107,53,0.5)"/>
+          <text x="170" y="258" text-anchor="middle" fill="rgba(107,122,154,0.8)" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.15em">GATE 02</text>
+          <text x="170" y="276" text-anchor="middle" fill="rgba(232,238,248,0.95)" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="0.08em">HASH SIGN</text>
+          <circle cx="170" cy="231" r="3" fill="var(--accent)" class="travel-dot travel-dot-2">
+            <animate attributeName="cy" from="221" to="241" dur="1.8s" begin="0.6s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.6s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- Connector line -->
+          <line x1="170" y1="286" x2="170" y2="311" stroke="rgba(26,110,255,0.5)" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+          <!-- GATE 3: ATTEST -->
+          <rect x="105" y="311" width="130" height="48" rx="2" fill="rgba(26,110,255,0.08)" stroke="rgba(26,110,255,0.4)" stroke-width="1.5"/>
+          <polygon points="219,311 235,311 235,321" fill="rgba(255,107,53,0.5)"/>
+          <text x="170" y="331" text-anchor="middle" fill="rgba(107,122,154,0.8)" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.15em">GATE 03</text>
+          <text x="170" y="349" text-anchor="middle" fill="rgba(232,238,248,0.95)" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="0.08em">ATTEST</text>
+          <circle cx="170" cy="304" r="3" fill="var(--accent)" class="travel-dot travel-dot-3">
+            <animate attributeName="cy" from="294" to="314" dur="1.8s" begin="1.2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="1.2s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- Connector line -->
+          <line x1="170" y1="359" x2="170" y2="384" stroke="rgba(255,107,53,0.6)" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+          <!-- GATE 4: ANCHOR (Arbitrum) -->
+          <rect x="90" y="384" width="160" height="48" rx="2" fill="rgba(255,107,53,0.08)" stroke="rgba(255,107,53,0.55)" stroke-width="1.5"/>
+          <polygon points="234,384 250,384 250,394" fill="rgba(255,107,53,0.7)"/>
+          <text x="170" y="404" text-anchor="middle" fill="rgba(255,107,53,0.8)" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.15em">GATE 04</text>
+          <text x="170" y="422" text-anchor="middle" fill="rgba(232,238,248,0.95)" font-family="JetBrains Mono, monospace" font-size="10" font-weight="500" letter-spacing="0.08em">ANCHOR · ARBITRUM</text>
+
+          <!-- Arbitrum Sepolia label -->
+          <text x="170" y="440" text-anchor="middle" fill="rgba(255,107,53,0.6)" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="0.12em">0xD661...615 · SEPOLIA</text>
+
+          <!-- Side circuit decorations -->
+          <path d="M75 165 L55 165 L55 290 L75 290" stroke="rgba(26,110,255,0.2)" stroke-width="1"/>
+          <circle cx="55" cy="228" r="3" fill="rgba(0,212,255,0.5)"/>
+          <path d="M265 165 L285 165 L285 290 L265 290" stroke="rgba(26,110,255,0.2)" stroke-width="1"/>
+          <circle cx="285" cy="228" r="3" fill="rgba(0,212,255,0.5)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Key Metrics Bento -->
-<section class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-40" id="metrics-grid">
-<div class="col-span-1 md:col-span-2 glass-panel p-8 rounded-lg glow-hover transition-all">
-<span class="material-symbols-outlined text-[#2A9FE8] mb-4">local_fire_department</span>
-<div class="font-mono text-4xl text-white mb-2"><span class="counter" data-target="100">0</span>%</div>
-<div class="font-mono text-xs uppercase tracking-widest text-on-surface-variant">eFuse Burn Rate</div>
-</div>
-<div class="glass-panel p-8 rounded-lg glow-hover transition-all">
-<span class="material-symbols-outlined text-[#2A9FE8] mb-4">account_tree</span>
-<div class="font-mono text-xl text-white mb-2"><span class="counter-text" data-text="EVM">---</span></div>
-<div class="font-mono text-xs uppercase tracking-widest text-on-surface-variant">Compatible</div>
-</div>
-<div class="glass-panel p-8 rounded-lg glow-hover transition-all">
-<span class="material-symbols-outlined text-[#2A9FE8] mb-4">fingerprint</span>
-<div class="font-mono text-xl text-white mb-2"><span class="counter-ratio" data-target="1">0</span>:1</div>
-<div class="font-mono text-xs uppercase tracking-widest text-on-surface-variant">Device ID</div>
-</div>
-<div class="glass-panel p-8 rounded-lg glow-hover transition-all">
-<span class="material-symbols-outlined text-[#2A9FE8] mb-4">speed</span>
-<div class="font-mono text-xl text-white mb-2">&lt;<span class="counter" data-target="1">0</span>s</div>
-<div class="font-mono text-xs uppercase tracking-widest text-on-surface-variant">Verification</div>
-</div>
-<div class="col-span-1 md:col-span-5 glass-panel p-8 rounded-lg flex flex-col md:flex-row justify-between items-center gap-4 border-primary/20">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center">
-<span class="material-symbols-outlined text-on-primary-container">memory</span>
-</div>
-<div>
-<div class="font-syne font-extrabold text-white">Arbitrum Stylus (Rust)</div>
-<div class="text-sm opacity-60">High-performance WebAssembly verification core</div>
-</div>
-</div>
-<div class="font-mono text-xs text-[#2A9FE8]">OPTIMIZED FOR WASM RUNTIME</div>
-</div>
+
+<!-- ─── SECTION 1: FOUR GATES ─────────────────── -->
+<section id="gates" aria-labelledby="gates-title">
+  <div class="section-header reveal">
+    <p class="section-label">Core Primitive</p>
+    <h2 class="section-title" id="gates-title">THE FOUR GATES</h2>
+    <p class="section-sub">Every device identity passes through four sequential cryptographic verification stages. All must succeed. One failure collapses the chain.</p>
+  </div>
+
+  <div class="gates-grid">
+    <div class="gate-card reveal">
+      <span class="gate-number">01</span>
+      <div class="gate-name">eFUSE BURN</div>
+      <p class="gate-desc">Extracts manufacturer-burned identifiers from ESP32-S3 silicon — Base MAC address plus Chip Model ID. These values are physically immutable, fused into the die at factory. No firmware can alter them.</p>
+      <span class="gate-tag">SILICON LAYER</span>
+    </div>
+    <div class="gate-card reveal reveal-delay-1">
+      <span class="gate-number">02</span>
+      <div class="gate-name">HASH SIGN</div>
+      <p class="gate-desc">Generates a 32-byte Hardware Identity (HW_ID) via on-device Keccak-256 using Ethereum-compatible 0x01 padding. Deterministic and reproducible — same silicon always produces the same digest.</p>
+      <span class="gate-tag">CRYPTO LAYER</span>
+    </div>
+    <div class="gate-card reveal reveal-delay-2">
+      <span class="gate-number">03</span>
+      <div class="gate-name">ATTEST</div>
+      <p class="gate-desc">Stylus Rust contract reconstructs receipt digests, enforces monotonic counter replay protection, and validates approved firmware hash gating. Execution is restricted to whitelisted firmware versions.</p>
+      <span class="gate-tag">VERIFICATION LAYER</span>
+    </div>
+    <div class="gate-card reveal reveal-delay-3">
+      <span class="gate-number">04</span>
+      <div class="gate-name">ANCHOR</div>
+      <p class="gate-desc">Verified identity anchored to Arbitrum Sepolia via Stylus WASM execution. One physical device maps to one on-chain identity. The contract address is public, immutable, and verifiable by anyone.</p>
+      <span class="gate-tag">ARBITRUM STYLUS</span>
+    </div>
+  </div>
 </section>
-<!-- How SHA Works -->
-<section class="mb-40 relative py-16 px-4">
-<div class="scanline-overlay"></div>
-<div class="relative z-10">
-<div class="mb-16">
-<h3 class="text-xs font-mono uppercase tracking-[0.4em] text-[#2A9FE8] mb-4">Protocol Workflow</h3>
-<h2 class="text-5xl font-syne font-extrabold text-white">How SHA Works</h2>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative" id="workflow-steps">
-<!-- Step 1 -->
-<div class="flex flex-col gap-6 fade-in-step">
-<div class="font-mono text-6xl text-white/5 font-bold">01</div>
-<div class="h-1 w-12 bg-[#2A9FE8]"></div>
-<h4 class="text-2xl font-syne font-extrabold text-white">Silicon Extraction</h4>
-<p class="text-on-surface-variant leading-relaxed">
-                        The ESP32 microcontroller performs a low-level read of the internal <strong>eFuse blocks</strong>, extracting the factory-assigned MAC and unique hardware keys.
-                    </p>
-</div>
-<!-- Step 2 -->
-<div class="flex flex-col gap-6 fade-in-step">
-<div class="font-mono text-6xl text-white/5 font-bold">02</div>
-<div class="h-1 w-12 bg-[#2A9FE8]"></div>
-<h4 class="text-2xl font-syne font-extrabold text-white">Stylus Burning</h4>
-<p class="text-on-surface-variant leading-relaxed">
-                        A dedicated <strong>Rust/Wasm</strong> Stylus contract receives the payload, cryptographically verifying the origin and permanently "burning" the ID into global state.
-                    </p>
-</div>
-<!-- Step 3 -->
-<div class="flex flex-col gap-6 fade-in-step">
-<div class="font-mono text-6xl text-white/5 font-bold">03</div>
-<div class="h-1 w-12 bg-[#2A9FE8]"></div>
-<h4 class="text-2xl font-syne font-extrabold text-white">Permanent Proof</h4>
-<p class="text-on-surface-variant leading-relaxed">
-                        The hardware identity is now verified on-chain. Any third-party protocol can query the SHA registry to confirm device authenticity with <strong>sub-second latency</strong>.
-                    </p>
-</div>
-</div>
-</div>
+
+<!-- ─── SECTION 2: SILICON PROBLEM ───────────── -->
+<section id="problem" aria-labelledby="problem-title">
+  <div class="section-header reveal">
+    <p class="section-label">The Problem</p>
+    <h2 class="section-title" id="problem-title">THE SILICON PROBLEM</h2>
+  </div>
+
+  <div class="problem-card reveal">
+    <p class="problem-quote">
+      "Every DePIN node claims to be <span class="highlight">real hardware.</span><br>
+      Most are software lying."
+    </p>
+    <p class="problem-body">
+      Decentralized physical infrastructure networks (DePIN) require proof that nodes are genuine hardware — not software simulations, VMs, or spoofed identities. Without silicon-level verification, any DePIN network can be gamed by attackers running software impersonations of physical nodes. <strong>SHA solves this at the identity root.</strong>
+    </p>
+    <p class="problem-body" style="margin-top:16px;">
+      By binding immutable ESP32-S3 eFuse values — written once in the factory, physically unalterable — to Arbitrum Stylus smart contracts via Keccak-256 cryptographic proofs, SHA creates <strong>unforgeable device identity</strong>. The chain of trust runs from silicon atoms to on-chain bytes. No software layer can forge it.
+    </p>
+    <div class="circuit-border" aria-hidden="true"></div>
+  </div>
 </section>
-<!-- Architecture Deep Dive -->
-<section class="mb-40">
-<div class="flex justify-between items-end mb-16">
-<div>
-<h3 class="text-xs font-mono uppercase tracking-[0.4em] text-[#2A9FE8] mb-4">System Architecture</h3>
-<h2 class="text-5xl font-syne font-extrabold text-white">Layered Integrity</h2>
-</div>
-<div class="hidden md:block font-mono text-[10px] text-white/20 text-right uppercase">
-                    v1.0.4-beta<br/>Arbitrum Stylus v2
-                </div>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-1 bg-white/5 rounded-lg overflow-hidden border border-white/5">
-<!-- Layer 1 -->
-<div class="bg-surface p-10 flex flex-col gap-8 glow-hover transition-all">
-<div class="flex justify-between items-start">
-<span class="material-symbols-outlined text-[#2A9FE8] text-4xl">hardware</span>
-<div class="px-2 py-0.5 bg-[#2A9FE8]/10 text-[#2A9FE8] font-mono text-[10px] rounded-sm">L1</div>
-</div>
-<div>
-<h4 class="text-xl font-syne font-extrabold text-white mb-4">Hardware Layer</h4>
-<ul class="space-y-4 font-mono text-sm">
-<li class="flex items-center gap-3 text-on-surface-variant">
-<span class="w-1.5 h-1.5 bg-[#2A9FE8] rounded-full"></span> ESP32-S3 Core
-                            </li>
-<li class="flex items-center gap-3 text-on-surface-variant">
-<span class="w-1.5 h-1.5 bg-[#2A9FE8] rounded-full"></span> eFuse BLK3 Read
-                            </li>
-<li class="flex items-center gap-3 text-on-surface-variant">
-<span class="w-1.5 h-1.5 bg-[#2A9FE8] rounded-full"></span> MAC Address extraction
-                            </li>
-</ul>
-</div>
-<img class="mt-auto rounded opacity-50 grayscale hover:grayscale-0 transition-all border border-white/5" data-alt="Technical schematic showing a microchip circuit board with highlights on eFuse registers and silicon pathways in blueprint style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB0Pi7KUifN-HnSuLBWtubr1rLDmXBWyLFdHJSEPEw4F7-7PkIuvndOWAsl4OGwth3jJ5jCAMl4j2jXgdAetYnfevLRF1KXcYhev6Zb04AfQIJrEzYU7pKsG_Vm4NzoZ4JBBcdg8BjquMU6XpXvM6_5e8Hq9-VLahYJhv-L0T_uH-ecm-KvOmcvjjkpzOGeeSSgNBZR0AJZZTS-5I9zb8hfD1GI14vCXiakpRI8ZMJ5mBRulz8UwyDbhXOLr2Tt9YMezG1Xisw-I8"/>
-</div>
-<!-- Layer 2 -->
-<div class="bg-surface p-10 flex flex-col gap-8 glow-hover transition-all">
-<div class="flex justify-between items-start">
-<span class="material-symbols-outlined text-[#2A9FE8] text-4xl">terminal</span>
-<div class="px-2 py-0.5 bg-[#2A9FE8]/10 text-[#2A9FE8] font-mono text-[10px] rounded-sm">L2</div>
-</div>
-<div>
-<h4 class="text-xl font-syne font-extrabold text-white mb-4">Smart Contract Layer</h4>
-<ul class="space-y-4 font-mono text-sm">
-<li class="flex items-center gap-3 text-on-surface-variant">
-<span class="w-1.5 h-1.5 bg-[#2A9FE8] rounded-full"></span> Rust Stylus SDK
-                            </li>
-<li class="flex items-center gap-3 text-on-surface-variant">
-<span class="w-1.5 h-1.5 bg-[#2A9FE8] rounded-full"></span> ABI-compatible WASM
-                            </li>
-<li class="flex items-center gap-3 text-on-surface-variant">
-<span class="w-1.5 h-1.5 bg-[#2A9FE8] rounded-full"></span> EVM callable methods
-                            </li>
-</ul>
-</div>
-<img class="mt-auto rounded opacity-50 grayscale hover:grayscale-0 transition-all border border-white/5" data-alt="Abstract visualization of cascading binary code lines flowing into a glowing central blue node on a black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5ulHC3LVWPxhO2sZSKidGNa_kQQYRNDhTtdCQRy80-YTYG4jyiQZ9tJaWybcsdlhziOw_k6Lejp9auvixyMBnUA_Buy_I7yt2E1QLGo4hHBAQwgXHwitDToAM5B-x9nIQ6oD6xvRafrr-y3PxhkRFsdm-GU_ZonArKIDbCpHS0DF0C4DRs2Vng3KwqeNr6L0R6wp1KcQw_MAZTzEUOF6bmeM8vggv9TWLlWsxYj3E_CjzZjNC1vk3w0zvJE6kcO9fgijgYHIjTjA"/>
-</div>
-<!-- Layer 3 -->
-<div class="bg-surface p-10 flex flex-col gap-8 glow-hover transition-all">
-<div class="flex justify-between items-start">
-<span class="material-symbols-outlined text-[#2A9FE8] text-4xl">verified_user</span>
-<div class="px-2 py-0.5 bg-[#2A9FE8]/10 text-[#2A9FE8] font-mono text-[10px] rounded-sm">L3</div>
-</div>
-<div>
-<h4 class="text-xl font-syne font-extrabold text-white mb-4">Verification Layer</h4>
-<ul class="space-y-4 font-mono text-sm">
-<li class="flex items-center gap-3 text-on-surface-variant">
-<span class="w-1.5 h-1.5 bg-[#2A9FE8] rounded-full"></span> On-chain Registry Query
-                            </li>
-<li class="flex items-center gap-3 text-on-surface-variant">
-<span class="w-1.5 h-1.5 bg-[#2A9FE8] rounded-full"></span> Arbitrum Explorer Sync
-                            </li>
-<li class="flex items-center gap-3 text-on-surface-variant">
-<span class="w-1.5 h-1.5 bg-[#2A9FE8] rounded-full"></span> Sub-second Latency
-                            </li>
-</ul>
-</div>
-<img class="mt-auto rounded opacity-50 grayscale hover:grayscale-0 transition-all border border-white/5" data-alt="UI interface mockup showing a green checkmark success screen with technical validation logs in a sleek dark interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALhS_UKoUdY2Ddv8zxyA3kZphXAhFQBFOU2lOt__9kzqeTfSwjLnQt02r3AlRqt-v3s2WfS4ZicFckvnIl21zLhE7UGzEVl065x3rExO4bTff5AYEZvECH4PokChdz-R7PJi6zaNw7aMLK-jf9q8EAAtGNP2zcn8-Vt9HdniWFnfaXQV3xvKQ8dJb24aDxpVxIZFB0qWmx1YTyQameWAZw4zbeds7YuDvOnCRdYBt21QUdo8t7cuclj0SJSA_C3nL4Ovq8b1qbm6Y"/>
-</div>
-</div>
+
+<!-- ─── SECTION 3: TECHNICAL ARCHITECTURE ─────── -->
+<section id="architecture" aria-labelledby="arch-title">
+  <div class="section-header reveal">
+    <p class="section-label">System Design</p>
+    <h2 class="section-title" id="arch-title">TECHNICAL ARCHITECTURE</h2>
+    <p class="section-sub">Three-layer stack. Silicon feeds cryptographic identity upward through verification to permanent on-chain state.</p>
+  </div>
+
+  <div class="arch-grid">
+    <!-- Terminal code block -->
+    <div class="terminal reveal" role="region" aria-label="SHA Stylus contract interface">
+      <div class="terminal-bar">
+        <span class="t-dot t-dot-red"></span>
+        <span class="t-dot t-dot-yellow"></span>
+        <span class="t-dot t-dot-green"></span>
+        <span class="terminal-title">sha_anchor.rs — Stylus Interface</span>
+      </div>
+      <div class="terminal-body">
+        <span class="t-comment">// SHA Stylus Contract — Arbitrum Sepolia</span><br>
+        <span class="t-comment">// Contract: 0xD661a1aB8CEFaaCd78F4B968670C3bC438415615</span><br>
+        <br>
+        <span class="t-attr">#[stylus_sdk::external]</span><br>
+        <span class="t-keyword">impl</span> <span class="t-type">StylusHardwareAnchor</span> <span class="t-punc">{</span><br>
+        <span class="t-indent">
+          <span class="t-comment">/// Verify single device receipt</span><br>
+          <span class="t-keyword">pub fn</span> <span class="t-fn">verify_receipt</span><span class="t-punc">(</span><br>
+          &nbsp;&nbsp;<span class="t-keyword">&amp;self</span><span class="t-punc">,</span><br>
+          &nbsp;&nbsp;<span class="t-type">hw_id</span><span class="t-punc">:</span> <span class="t-type">B256</span><span class="t-punc">,</span>      <span class="t-comment">// eFuse digest</span><br>
+          &nbsp;&nbsp;<span class="t-type">exec_hash</span><span class="t-punc">:</span> <span class="t-type">B256</span><span class="t-punc">,</span>  <span class="t-comment">// execution hash</span><br>
+          &nbsp;&nbsp;<span class="t-type">fw_hash</span><span class="t-punc">:</span> <span class="t-type">B256</span><span class="t-punc">,</span>    <span class="t-comment">// firmware hash</span><br>
+          &nbsp;&nbsp;<span class="t-type">counter</span><span class="t-punc">:</span> <span class="t-type">u64</span><span class="t-punc">,</span>     <span class="t-comment">// monotonic counter</span><br>
+          &nbsp;&nbsp;<span class="t-type">receipt</span><span class="t-punc">:</span> <span class="t-type">B256</span><span class="t-punc">,</span>   <span class="t-comment">// receipt digest</span><br>
+          <span class="t-punc">) -&gt;</span> <span class="t-type">Result</span><span class="t-punc">&lt;</span><span class="t-type">bool</span><span class="t-punc">, </span><span class="t-type">Vec</span><span class="t-punc">&lt;</span><span class="t-type">u8</span><span class="t-punc">&gt;&gt; {</span><br>
+          &nbsp;&nbsp;<span class="t-comment">// Verify hw_id on allowlist</span><br>
+          &nbsp;&nbsp;<span class="t-comment">// Enforce monotonic counter</span><br>
+          &nbsp;&nbsp;<span class="t-comment">// Validate firmware hash gate</span><br>
+          &nbsp;&nbsp;<span class="t-comment">// Reconstruct &amp; compare digest</span><br>
+          <span class="t-punc">}</span>
+        </span><br>
+        <br>
+        <span class="t-indent">
+          <span class="t-comment">/// Batch verification — WASM amortization</span><br>
+          <span class="t-keyword">pub fn</span> <span class="t-fn">verify_receipts_batch</span><span class="t-punc">(</span><br>
+          &nbsp;&nbsp;<span class="t-keyword">&amp;self</span><span class="t-punc">,</span><br>
+          &nbsp;&nbsp;<span class="t-type">receipts</span><span class="t-punc">:</span> <span class="t-type">Bytes</span><span class="t-punc">,</span>   <span class="t-comment">// packed receipt blob</span><br>
+          <span class="t-punc">) -&gt;</span> <span class="t-type">Result</span><span class="t-punc">&lt;</span><span class="t-type">B256</span><span class="t-punc">, </span><span class="t-type">Vec</span><span class="t-punc">&lt;</span><span class="t-type">u8</span><span class="t-punc">&gt;&gt; {</span><br>
+          &nbsp;&nbsp;<span class="t-comment">// Batch N=50: ~12.6k gas/receipt</span><br>
+          &nbsp;&nbsp;<span class="t-comment">// Returns bitset of pass/fail results</span><br>
+          <span class="t-punc">}</span>
+        </span><br>
+        <span class="t-punc">}</span>
+      </div>
+    </div>
+
+    <!-- Architecture layers -->
+    <div class="arch-layers reveal reveal-delay-1">
+      <div class="arch-layer">
+        <div class="arch-layer-num">01</div>
+        <div class="arch-layer-content">
+          <div class="arch-layer-title">SILICON LAYER</div>
+          <div class="arch-layer-sub">ESP32-S3 firmware extracts Base MAC + Chip Model from eFuse block. On-device Keccak-256 (0x01 Ethereum padding) produces the 32-byte HW_ID. Values are physically immutable — burned into silicon at manufacture.</div>
+          <div class="arch-layer-tags">
+            <span class="arch-tag orange">ESP32-S3</span>
+            <span class="arch-tag orange">eFUSE</span>
+            <span class="arch-tag orange">Keccak-256</span>
+          </div>
+        </div>
+      </div>
+      <div class="arch-layer">
+        <div class="arch-layer-num">02</div>
+        <div class="arch-layer-content">
+          <div class="arch-layer-title">VERIFICATION LAYER</div>
+          <div class="arch-layer-sub">Stylus Rust/WASM contract on Arbitrum Sepolia. Reconstructs receipt digests, enforces monotonic counter replay protection, validates firmware hash gating. Gas: 12.5k–29.7k per receipt (batch amortized). Deterministic on-chain execution.</div>
+          <div class="arch-layer-tags">
+            <span class="arch-tag blue">Rust / WASM</span>
+            <span class="arch-tag blue">Arbitrum Stylus</span>
+            <span class="arch-tag blue">Replay Protection</span>
+          </div>
+        </div>
+      </div>
+      <div class="arch-layer">
+        <div class="arch-layer-num">03</div>
+        <div class="arch-layer-content">
+          <div class="arch-layer-title">MIDDLEWARE LAYER</div>
+          <div class="arch-layer-sub">Python SDK (Early Access) handles device authorization flows, receipt generation utilities, and on-chain submission helpers. Async interface with configurable RPC. Target: published to PyPI in Milestone 2.</div>
+          <div class="arch-layer-tags">
+            <span class="arch-tag">Python SDK</span>
+            <span class="arch-tag">anchor-verifier</span>
+            <span class="arch-tag">PyPI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-<!-- Contract Details & Use Cases -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-40">
-<!-- Contract Details -->
-<div class="glass-panel p-12 rounded-lg flex flex-col justify-center">
-<div class="flex items-center gap-3 mb-8">
-<div class="w-2 h-2 rounded-full bg-[#2A9FE8] status-pulse"></div>
-<span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant">Contract Manifest</span>
-</div>
-<div class="space-y-8">
-<div>
-<div class="text-[10px] font-mono text-white/40 uppercase mb-2">Deployed Address</div>
-<div class="text-2xl font-mono text-[#2A9FE8] break-all">0x6a...4b2</div>
-</div>
-<div class="grid grid-cols-2 gap-8">
-<div>
-<div class="text-[10px] font-mono text-white/40 uppercase mb-2">Network</div>
-<div class="text-white font-mono">Arbitrum Sepolia</div>
-</div>
-<div>
-<div class="text-[10px] font-mono text-white/40 uppercase mb-2">Environment</div>
-<div class="text-white font-mono">Rust / WASM</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Use Cases -->
-<div class="grid grid-cols-2 gap-4">
-<div class="bg-surface-container-low p-6 rounded-lg glow-hover transition-all">
-<span class="material-symbols-outlined text-[#2A9FE8] mb-4">router</span>
-<h5 class="text-white font-syne font-extrabold text-sm mb-2">IoT Device Identity</h5>
-<p class="text-xs text-on-surface-variant leading-relaxed">Secure registration for edge devices without central authorities.</p>
-</div>
-<div class="bg-surface-container-low p-6 rounded-lg glow-hover transition-all">
-<span class="material-symbols-outlined text-[#2A9FE8] mb-4">currency_exchange</span>
-<h5 class="text-white font-syne font-extrabold text-sm mb-2">DeFi Collateral</h5>
-<p class="text-xs text-on-surface-variant leading-relaxed">Proof of physical asset custody via non-spoofable silicon ID.</p>
-</div>
-<div class="bg-surface-container-low p-6 rounded-lg glow-hover transition-all">
-<span class="material-symbols-outlined text-[#2A9FE8] mb-4">local_shipping</span>
-<h5 class="text-white font-syne font-extrabold text-sm mb-2">Supply Chain</h5>
-<p class="text-xs text-on-surface-variant leading-relaxed">Verified tracking from factory floor to end user on-chain.</p>
-</div>
-<div class="bg-surface-container-low p-6 rounded-lg glow-hover transition-all">
-<span class="material-symbols-outlined text-[#2A9FE8] mb-4">lock_open</span>
-<h5 class="text-white font-syne font-extrabold text-sm mb-2">Access Control</h5>
-<p class="text-xs text-on-surface-variant leading-relaxed">Hardware-based permissioning for high-security environments.</p>
-</div>
-</div>
-</div>
-<!-- TON Connection Section -->
-<section class="glass-panel p-16 rounded-lg border-primary/20 relative overflow-hidden">
-<div class="absolute top-0 right-0 w-[400px] h-[400px] bg-[#2A9FE8]/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2"></div>
-<div class="max-w-4xl relative z-10">
-<div class="flex items-center gap-4 mb-8">
-<span class="text-3xl font-syne font-extrabold text-white">TON-SHA</span>
-<span class="material-symbols-outlined text-[#2A9FE8]">sync_alt</span>
-<span class="text-3xl font-syne font-extrabold text-white">Multichain Trust</span>
-</div>
-<h2 class="text-4xl font-syne font-extrabold text-white mb-6">Extending SHA to the TON Ecosystem</h2>
-<p class="text-xl font-dm-sans text-on-surface-variant leading-relaxed mb-8">
-                    The TON-SHA bridge enables the verification of physical hardware identities on the TON blockchain. This provides a decentralized trust anchor for TON-based agents and micro-services, ensuring that autonomous software is executing on authorized silicon.
-                </p>
-<div class="flex gap-4">
-<div class="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-full border border-white/5">
-<div class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#2A9FE8] status-pulse"></div>
-<span class="font-mono text-[10px] uppercase tracking-wider text-white">Cross-Chain Sync</span>
-</div>
-<div class="flex items-center gap-2 bg-black/40 px-4 py-2 rounded-full border border-white/5">
-<div class="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#2A9FE8] status-pulse"></div>
-<span class="font-mono text-[10px] uppercase tracking-wider text-white">Agent Validation</span>
-</div>
-</div>
-</div>
+
+<!-- ─── SECTION 4: BENCHMARKS ─────────────────── -->
+<section id="benchmarks" aria-labelledby="bench-title">
+  <div class="section-header reveal">
+    <p class="section-label">On-Chain Evidence</p>
+    <h2 class="section-title" id="bench-title">GAS BENCHMARKS</h2>
+    <p class="section-sub">Reproducible benchmark results from Arbitrum Sepolia. Network: chain-id 421614. Contract verified and activated on-chain.</p>
+  </div>
+
+  <div class="bench-table-wrap reveal">
+    <table class="bench-table" aria-label="SHA gas benchmark results">
+      <thead>
+        <tr>
+          <th scope="col">Operation</th>
+          <th scope="col">Gas Used</th>
+          <th scope="col">Gas / Receipt</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>verifyReceiptsBatch</code> N=5</td>
+          <td class="bench-val">148,741</td>
+          <td class="bench-warn">29,748</td>
+          <td class="bench-good">PASS</td>
+        </tr>
+        <tr>
+          <td><code>verifyReceiptsBatch</code> N=10</td>
+          <td class="bench-val">202,090</td>
+          <td class="bench-warn">20,209</td>
+          <td class="bench-good">PASS</td>
+        </tr>
+        <tr>
+          <td><code>verifyReceiptsBatch</code> N=20</td>
+          <td class="bench-val">308,387</td>
+          <td class="bench-good">15,419</td>
+          <td class="bench-good">PASS</td>
+        </tr>
+        <tr>
+          <td><code>verifyReceiptsBatch</code> N=50</td>
+          <td class="bench-val">628,201</td>
+          <td class="bench-good">12,564</td>
+          <td class="bench-good">PASS</td>
+        </tr>
+        <tr>
+          <td><code>verifyReceipt</code> (single, success)</td>
+          <td class="bench-val">118,935</td>
+          <td class="bench-val">118,935</td>
+          <td class="bench-good">PASS</td>
+        </tr>
+        <tr>
+          <td><code>verifyReceipt</code> (invalid digest)</td>
+          <td class="bench-val">98,631</td>
+          <td class="bench-val">98,631</td>
+          <td style="color:var(--muted)">REVERT (expected)</td>
+        </tr>
+        <tr>
+          <td><code>authorizeNode</code></td>
+          <td class="bench-val">99,288</td>
+          <td>—</td>
+          <td class="bench-good">PASS</td>
+        </tr>
+        <tr>
+          <td><code>approveFirmware</code></td>
+          <td class="bench-val">99,285</td>
+          <td>—</td>
+          <td class="bench-good">PASS</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bench-meta reveal reveal-delay-1">
+    <div class="bench-meta-item">
+      <div class="bench-meta-val">12.6K</div>
+      <div class="bench-meta-label">Min gas / receipt (N=50)</div>
+    </div>
+    <div class="bench-meta-item">
+      <div class="bench-meta-val">3.75M</div>
+      <div class="bench-meta-label">Deploy tx gas used</div>
+    </div>
+    <div class="bench-meta-item">
+      <div class="bench-meta-val">10K+</div>
+      <div class="bench-meta-label">Deterministic test vectors</div>
+    </div>
+    <div class="bench-meta-item">
+      <div class="bench-meta-val">1M+</div>
+      <div class="bench-meta-label">Fuzz execution cycles (target)</div>
+    </div>
+  </div>
+
+  <div class="problem-card reveal reveal-delay-2" style="max-width:100%;margin-top:24px;">
+    <p class="problem-body">
+      <strong>Interpretation:</strong> Stylus WASM batch execution shows strong amortization — gas per receipt drops sharply from 29.7k at N=5 to 12.6k at N=50, demonstrating the advantage of running native-compiled logic in WASM versus per-transaction Solidity dispatch. Batch verification is recommended for DePIN networks verifying many devices per transaction. Deploy TX: <a href="https://sepolia.arbiscan.io/tx/0x1a9eaa02f816d86a71f9bf234425e83b5c090d1f3e4f3691851964b71747a489" target="_blank" rel="noopener" class="bench-tx">0x1a9eaa…489 ↗</a>
+    </p>
+    <div class="circuit-border" aria-hidden="true"></div>
+  </div>
 </section>
-</main>
-<!-- Footer -->
-<footer class="w-full py-12 px-8 border-t border-white/5 bg-[#0e0e0e]">
-<div class="flex flex-col md:flex-row justify-between items-start gap-8 max-w-[1920px] mx-auto">
-<div class="space-y-4">
-<div class="font-syne font-extrabold text-lg text-white">SHA</div>
-<div class="font-mono text-[10px] uppercase tracking-[0.2em] text-gray-600">ORTHONODE SYSTEMS. Sovereign Infrastructure.</div>
-</div>
-<div class="grid grid-cols-2 md:grid-cols-3 gap-12">
-<div class="space-y-4">
-<h6 class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#2A9FE8]">Technical</h6>
-<ul class="space-y-2 font-dm-sans text-xs text-gray-600">
-<li><a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener" class="hover:text-[#2A9FE8] transition-colors">Protocol Docs</a></li>
-<li><a href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener" class="hover:text-[#2A9FE8] transition-colors">Contract on Arbiscan ↗</a></li>
-<li><a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener" class="hover:text-[#2A9FE8] transition-colors">GitHub Repo ↗</a></li>
-</ul>
-</div>
-<div class="space-y-4">
-<h6 class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#2A9FE8]">Resources</h6>
-<ul class="space-y-2 font-dm-sans text-xs text-gray-600">
-<li><a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener" class="hover:text-[#2A9FE8] transition-colors">GitHub ↗</a></li>
-<li><a href="/sha.html" class="hover:text-[#2A9FE8] transition-colors">Status</a></li>
-<li><a href="/terms.html" class="hover:text-[#2A9FE8] transition-colors">Terms</a></li>
-</ul>
-</div>
-<div class="space-y-4">
-<h6 class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#2A9FE8]">Network</h6>
-<div class="font-mono text-[10px] text-white bg-white/5 p-3 rounded">
-                        Arbitrum One Mainnet<br/>
-<span class="text-[#2A9FE8] flex items-center gap-2">
-<span class="w-1 h-1 rounded-full bg-[#2A9FE8] status-pulse"></span>
-                            Active Status: Normal
-                        </span>
-</div>
-</div>
-</div>
-</div>
+
+<!-- ─── SECTION 5: $25K GRANT ─────────────────── -->
+<section id="grant" aria-labelledby="grant-title">
+  <div class="grant-card reveal">
+    <p class="grant-eyebrow">Arbitrum Foundation</p>
+    <div class="grant-amount" id="grant-title">$25,000</div>
+    <div class="grant-name">ARBITRUM STYLUS SPRINT GRANT</div>
+    <p class="grant-body">
+      SHA is funded by the Arbitrum Stylus Sprint — a $25,000 USD grant awarded for Phase 1 development over 6 months on Arbitrum Sepolia (testnet only). The grant covers internal security hardening, reproducible validation artifacts, and developer SDK delivery. <strong>No mainnet deployment is included in Phase 1 scope.</strong>
+    </p>
+    <div class="grant-milestones">
+      <div class="grant-ms">
+        <div class="grant-ms-title">Milestone 1 — Security Hardening</div>
+        <div class="grant-ms-body">Coverage-guided fuzz testing (&ge;1M executions). Cryptographic parity: &ge;10,000 device-contract test vectors. Monotonic counter enforcement. Firmware hash gating. Threat model documentation.</div>
+      </div>
+      <div class="grant-ms">
+        <div class="grant-ms-title">Milestone 2 — Developer SDK</div>
+        <div class="grant-ms-body">Python SDK (<code>anchor-verifier</code>) to PyPI. Rust crate (<code>stylus-hardware-primitives</code>) to crates.io. Three reference integration templates deployable on Sepolia. Minimal developer dashboard with gas analytics.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 6: ZKP EXTENSION ─────────────── -->
+<section id="zkp" aria-labelledby="zkp-title">
+  <div class="section-header reveal">
+    <p class="section-label">Future Extension</p>
+    <h2 class="section-title" id="zkp-title">SHA x VLAYER ZKP</h2>
+    <p class="section-sub">Branch <code>feat/zkp-vlayer-integration</code> adds a fourth security layer: ZK execution correctness. Additive to SHA v1 — preserves all existing guarantees.</p>
+  </div>
+
+  <div class="zkp-card reveal">
+    <p class="problem-body">
+      SHA x vlayer adds <strong>cryptographic execution correctness</strong> to hardware identity verification. This creates a 4-layer security model. Phase 1 architecture and interface design are complete. The vlayer Noir circuit and Stylus verifier are Phase 2.
+    </p>
+    <div class="zkp-layers">
+      <div class="zkp-layer">
+        <div class="zkp-layer-num">Layer 01</div>
+        <div class="zkp-layer-title">Silicon Identity</div>
+        <div class="zkp-layer-body">eFuse &rarr; Keccak &rarr; on-chain allowlist</div>
+        <div class="zkp-status-live">Live on Sepolia</div>
+      </div>
+      <div class="zkp-layer">
+        <div class="zkp-layer-num">Layer 02</div>
+        <div class="zkp-layer-title">Firmware Governance</div>
+        <div class="zkp-layer-body">Approved firmware hash gating. Execution restricted to known-good firmware versions.</div>
+        <div class="zkp-status-live">Live on Sepolia</div>
+      </div>
+      <div class="zkp-layer">
+        <div class="zkp-layer-num">Layer 03</div>
+        <div class="zkp-layer-title">Replay Protection</div>
+        <div class="zkp-layer-body">Monotonic counter enforcement. Prevents receipt reuse across transactions.</div>
+        <div class="zkp-status-live">Live on Sepolia</div>
+      </div>
+      <div class="zkp-layer">
+        <div class="zkp-layer-num">Layer 04</div>
+        <div class="zkp-layer-title">ZK Execution Proof</div>
+        <div class="zkp-layer-body">vlayer Noir circuit + Stylus verifier. Off-chain prover (ESP32 too constrained for ZK generation).</div>
+        <div class="zkp-status-pending">Phase 2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SECTION 7: GITHUB CTA ─────────────────── -->
+<section id="github-cta" aria-labelledby="cta-title">
+  <div class="github-card reveal">
+    <h2 class="github-title" id="cta-title">The protocol is open.<br>The silicon is real.</h2>
+    <p class="github-sub">SHA is fully open-source and reproducible. Contract deployed, activated, and benchmarked on Arbitrum Sepolia. Clone the repo, run the test vectors, verify the deployment yourself.</p>
+    <div class="github-contract">
+      Contract: 0xD661a1aB8CEFaaCd78F4B968670C3bC438415615
+    </div>
+    <div class="github-ctas">
+      <a href="https://github.com/orthonode/Stylus-Hardware-Anchor" target="_blank" rel="noopener" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        View on GitHub
+      </a>
+      <a href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener" class="btn-ghost">
+        Verify on Arbiscan ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────── -->
+<footer role="contentinfo">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">ORTHONODE SYSTEMS™</div>
+      <div class="footer-tagline">Infrastructure Labs // Physical Verification Layer</div>
+      <div class="footer-tagline">Verification Infrastructure for the Decentralized Stack.</div>
+      <div class="footer-email" style="margin-top:10px;">
+        <a href="mailto:infrastructure@orthonode.xyz">infrastructure@orthonode.xyz</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-brand" style="font-size:11px;margin-bottom:12px;">PAGES</div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/index.html">Home</a>
+        <a href="/sha.html" class="active">SHA</a>
+        <a href="/ton-sha.html">TON-SHA</a>
+        <a href="/oap.html">OAP</a>
+        <a href="/nexus.html">Nexus</a>
+        <a href="/invariant.html">INVARIANT</a>
+        <a href="/tix-dao.html">TIX-DAO</a>
+        <a href="/mantis.html">MANTIS</a>
+      </nav>
+    </div>
+    <div>
+      <div class="footer-brand" style="font-size:11px;margin-bottom:12px;">LINKS</div>
+      <div class="footer-social">
+        <a href="https://github.com/orthonode" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          github.com/orthonode
+        </a>
+      </div>
+      <div class="footer-social" style="margin-top:10px;">
+        <a href="https://x.com/OrthonodeSys" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.743l7.73-8.835L1.254 2.25H8.08l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          @OrthonodeSys
+        </a>
+      </div>
+      <div class="footer-social" style="margin-top:10px;">
+        <a href="https://sepolia.arbiscan.io/address/0xD661a1aB8CEFaaCd78F4B968670C3bC438415615" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          0xD661...615 on Arbiscan
+        </a>
+      </div>
+    </div>
+  </div>
+  <p class="footer-disclaimer">
+    Not financial advice. Experimental protocol on testnet (Arbitrum Sepolia). No mainnet deployment. No professional audit conducted. Phase 1 scope only.
+    &copy; 2026 ORTHONODE SYSTEMS™
+  </p>
 </footer>
-<script>
-        // Intersection Observer for Animations
-        const observerOptions = {
-            threshold: 0.2
-        };
 
-        const animationObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    if (entry.target.id === 'metrics-grid') {
-                        startMetricsAnimations();
-                    } else if (entry.target.classList.contains('fade-in-step')) {
-                        // Handled individually below for delay
-                    }
-                    animationObserver.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+<!-- ─── SCRIPTS ───────────────────────────────── -->
+<script type="module">
+import { animate, inView, stagger } from 'https://cdn.jsdelivr.net/npm/motion@latest/+esm';
 
-        // Individual observers for staggered workflow steps
-        const workflowObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    const steps = document.querySelectorAll('.fade-in-step');
-                    steps.forEach((step, i) => {
-                        setTimeout(() => {
-                            step.classList.add('visible');
-                        }, i * 150);
-                    });
-                    workflowObserver.disconnect();
-                }
-            });
-        }, observerOptions);
+// ── LOADER ──────────────────────────────────────
+const loader   = document.getElementById('loader');
+const loaderBar = document.getElementById('loader-bar');
+let progress = 0;
 
-        workflowObserver.observe(document.querySelector('#workflow-steps'));
-        animationObserver.observe(document.querySelector('#metrics-grid'));
+const loaderInterval = setInterval(() => {
+  progress = Math.min(progress + Math.random() * 12 + 4, 100);
+  loaderBar.style.width = progress + '%';
+  if (progress >= 100) {
+    clearInterval(loaderInterval);
+    setTimeout(() => {
+      loader.style.transition = 'opacity 0.6s ease';
+      loader.style.opacity = '0';
+      setTimeout(() => { loader.style.display = 'none'; }, 600);
+    }, 300);
+  }
+}, 60);
 
-        function startMetricsAnimations() {
-            // Number counters
-            document.querySelectorAll('.counter').forEach(counter => {
-                const target = parseInt(counter.dataset.target);
-                const duration = 2000;
-                const startTime = performance.now();
+// ── GSAP HERO ENTRANCE ───────────────────────────
+window.addEventListener('load', () => {
+  if (typeof gsap !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
 
-                function update(currentTime) {
-                    const elapsed = currentTime - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-                    const value = Math.floor(progress * target);
-                    counter.innerText = value;
-                    if (progress < 1) requestAnimationFrame(update);
-                }
-                requestAnimationFrame(update);
-            });
+    // Hero text entrance
+    gsap.from('.hero-badge', { opacity: 0, y: 20, duration: 0.7, delay: 0.5 });
+    gsap.from('.hero-h1 .line', {
+      opacity: 0, y: 40, duration: 0.8, delay: 0.7,
+      stagger: 0.15, ease: 'power3.out'
+    });
+    gsap.from('.hero-sub', { opacity: 0, y: 24, duration: 0.7, delay: 1.2 });
+    gsap.from('.stats-row', { opacity: 0, y: 20, duration: 0.6, delay: 1.4 });
+    gsap.from('.hero-ctas', { opacity: 0, y: 16, duration: 0.6, delay: 1.6 });
+    gsap.from('.chip-diagram', { opacity: 0, x: 30, duration: 1.0, delay: 0.8, ease: 'power3.out' });
 
-            // Ratio counter (1:1)
-            document.querySelectorAll('.counter-ratio').forEach(counter => {
-                const target = parseInt(counter.dataset.target);
-                setTimeout(() => counter.innerText = target, 500);
-            });
-
-            // Text swap (EVM)
-            document.querySelectorAll('.counter-text').forEach(counter => {
-                const text = counter.dataset.text;
-                let i = 0;
-                const interval = setInterval(() => {
-                    counter.innerText = text.substring(0, i + 1);
-                    i++;
-                    if (i === text.length) clearInterval(interval);
-                }, 100);
-            });
-        }
-    </script>
-<script>document.querySelectorAll("button,a").forEach(el=>{if(el.textContent.trim().toLowerCase().includes("connect wallet"))el.remove()});document.querySelectorAll("button").forEach(btn=>{const icon=btn.querySelector(".material-symbols-outlined");if(icon&&(icon.textContent.trim()==="add"||icon.textContent.trim()==="remove")){btn.addEventListener("click",()=>{const p=btn.nextElementSibling;if(!p)return;if(p.style.display==="block"){p.style.display="none";icon.textContent="add";}else{p.style.display="block";icon.textContent="remove";}});}});</script>
-
-    <script>
-    document.addEventListener("DOMContentLoaded",()=>{
-      if(typeof gsap!=="undefined"){
-        gsap.registerPlugin(ScrollTrigger);
-        // Nav entrance
-        gsap.fromTo("nav,header",[{y:-60,opacity:0}],[{y:0,opacity:1,duration:0.5,ease:"power3.out"}]);
-        // Hero text
-        gsap.fromTo("h1",{opacity:0,y:30},{opacity:1,y:0,duration:0.8,ease:"power3.out",delay:0.15});
-        // Cards staggered
-        gsap.utils.toArray(".glass,.card,[class*='rounded-xl']").forEach((el,i)=>{
-          gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:0.6,ease:"power2.out",
-            scrollTrigger:{trigger:el,start:"top 88%",once:true},delay:i*0.05>0.4?0.4:i*0.05
-          });
-        });
-        // Counter animation
-        document.querySelectorAll("[data-target]").forEach(el=>{
-          const t=parseInt(el.dataset.target);
-          ScrollTrigger.create({trigger:el,start:"top 85%",once:true,
-            onEnter:()=>gsap.to({v:0},{v:t,duration:1.2,ease:"power2.out",
-              onUpdate:function(){el.textContent=(this.targets()[0].v<10?"0":"")+Math.round(this.targets()[0].v)}})
-          });
-        });
-        // View transition polyfill
-        if(!document.startViewTransition){
-          document.addEventListener("click",e=>{
-            const a=e.target.closest("a[href]");
-            if(!a||a.target==="_blank"||a.href.includes("://")&&!a.href.includes(location.hostname)||a.href.startsWith("mailto:"))return;
-            e.preventDefault();document.body.style.opacity="0";
-            document.body.style.transition="opacity 0.2s";
-            setTimeout(()=>{location.href=a.href},200);
-          });
-        }
+    // Parallax on hero diagram
+    gsap.to('.chip-diagram', {
+      y: -40,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1
       }
     });
-    </script>
-</body></html>
+  }
+});
+
+// ── MOTION.JS SCROLL REVEALS ─────────────────────
+// Reveal elements with .reveal class on scroll
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+// Gate cards stagger reveal via Motion.js
+inView('#gates .gates-grid', ({ target }) => {
+  animate(
+    target.querySelectorAll('.gate-card'),
+    { opacity: [0, 1], y: [32, 0] },
+    { delay: stagger(0.12), duration: 0.65, easing: [0.25, 0, 0.35, 1] }
+  );
+}, { amount: 0.15 });
+
+// Bench table rows
+inView('.bench-table tbody', ({ target }) => {
+  animate(
+    target.querySelectorAll('tr'),
+    { opacity: [0, 1], x: [-16, 0] },
+    { delay: stagger(0.07), duration: 0.5 }
+  );
+}, { amount: 0.1 });
+
+// ZKP layers
+inView('.zkp-layers', ({ target }) => {
+  animate(
+    target.querySelectorAll('.zkp-layer'),
+    { opacity: [0, 1], y: [24, 0] },
+    { delay: stagger(0.1), duration: 0.6 }
+  );
+}, { amount: 0.15 });
+
+// Arch layer items
+inView('.arch-layers', ({ target }) => {
+  animate(
+    target.querySelectorAll('.arch-layer'),
+    { opacity: [0, 1], x: [24, 0] },
+    { delay: stagger(0.12), duration: 0.6 }
+  );
+}, { amount: 0.1 });
+
+// Stats counter animation on hero
+inView('.stats-row', ({ target }) => {
+  const statVals = target.querySelectorAll('.stat-val');
+  animate(
+    statVals,
+    { opacity: [0, 1], scale: [0.85, 1] },
+    { delay: stagger(0.1), duration: 0.5, easing: 'spring(1, 80, 10, 0)' }
+  );
+}, { amount: 0.5 });
+</script>
+
+<script>
+// ── HAMBURGER TOGGLE ──────────────────────────────
+const hamburger   = document.getElementById('hamburger');
+const mobileMenu  = document.getElementById('mobile-menu');
+
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  hamburger.setAttribute('aria-expanded', isOpen.toString());
+});
+
+// Close on nav link click
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// Close on outside click
+document.addEventListener('click', e => {
+  if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+});
+
+// ── NAV SCROLL EFFECT ─────────────────────────────
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) {
+    nav.style.background = 'rgba(4,8,16,0.97)';
+    nav.style.borderBottomColor = 'rgba(26,110,255,0.25)';
+  } else {
+    nav.style.background = 'rgba(4,8,16,0.88)';
+    nav.style.borderBottomColor = 'rgba(26,110,255,0.18)';
+  }
+}, { passive: true });
+</script>
+
+</body>
+</html>

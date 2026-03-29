@@ -1,727 +1,1186 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-site-verification" content="73e927487bf1b8db">
+  <title>ORTHONODE SYSTEMS™ | Verification Infrastructure</title>
+  <meta name="description" content="ORTHONODE SYSTEMS™ — Verification Infrastructure for the Decentralized Stack. 8 protocols across Arbitrum, TON, Bittensor, Solana, Polygon, and Polkadot.">
+  <meta property="og:title" content="ORTHONODE SYSTEMS™ | Verification Infrastructure">
+  <meta property="og:description" content="8 protocols. 4 chains. One attestation layer. Trust primitives for the decentralized stack.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://orthonode.xyz">
+  <meta property="og:image" content="https://orthonode.xyz/site-logo.png">
+  <link rel="canonical" href="https://orthonode.xyz">
+  <link rel="icon" href="/site-logo.png" type="image/png">
 
-<html class="dark" lang="en"><head>
-    <meta name="description" content="ORTHONODE SYSTEMS™ — Verification infrastructure for the decentralized stack. 7 protocols across Arbitrum, Polkadot, TON, Bittensor, and Solana.">
-    <meta property="og:title" content="ORTHONODE SYSTEMS™ | Sovereign Infrastructure">
-    <meta property="og:description" content="7 protocols. 5 chains. One sovereign verification stack.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://orthonode.xyz">
-    <link rel="canonical" href="https://orthonode.xyz">
-    <link rel="icon" href="/site-logo.png" type="image/png">
-    <!-- GSAP + ScrollTrigger for professional animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
-    <style>
-    /* ── View Transitions ─────────────────────────────────── */
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* ── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #020408;
+      --surface:   #060C14;
+      --surface2:  #080E18;
+      --primary:   #00D4FF;
+      --gold:      #F4C430;
+      --border:    rgba(0,212,255,0.15);
+      --border-b:  rgba(0,212,255,0.40);
+      --text:      #E8F4FF;
+      --muted:     #4A6B80;
+      --sha:       #1A6EFF;
+      --ton:       #0098EA;
+      --oap:       #7C3AED;
+      --nexus:     #F59E0B;
+      --invariant: #A855F7;
+      --tix:       #9945FF;
+      --mantis:    #00FF88;
+      --dotlend:   #E6007A;
+    }
+
+    html { scroll-behavior: smooth; cursor: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── View Transitions ─────────────────────────────── */
     @view-transition { navigation: auto; }
-    ::view-transition-old(root) {
-      animation: 300ms ease-out both vtFadeOut;
-    }
-    ::view-transition-new(root) {
-      animation: 300ms ease-in both vtFadeIn;
-    }
-    @keyframes vtFadeOut {
-      from { opacity:1; transform:translateY(0); }
-      to   { opacity:0; transform:translateY(-12px); }
-    }
-    @keyframes vtFadeIn {
-      from { opacity:0; transform:translateY(12px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
+    ::view-transition-old(root) { animation: 300ms ease-out both vtOut; }
+    ::view-transition-new(root) { animation: 300ms ease-in  both vtIn;  }
+    @keyframes vtOut { from{opacity:1;transform:translateY(0)}    to{opacity:0;transform:translateY(-12px)} }
+    @keyframes vtIn  { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 
-    /* ── Hero word reveal ─────────────────────────────────── */
-    .word-reveal-outer { display:inline-block; overflow:hidden; vertical-align:bottom; }
-    .word-reveal-inner { display:inline-block; transform:translateY(110%); }
-
-    /* ── Animated dot-grid background ────────────────────── */
-    .dot-grid-bg {
-      background-image: radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
-      background-size: 32px 32px;
-      animation: gridDrift 80s linear infinite;
+    /* ── Custom Cursor ────────────────────────────────── */
+    html { cursor: none; }
+    .c-cursor {
+      width: 12px; height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 999999;
+      mix-blend-mode: difference;
+      transition: width .2s, height .2s;
+      will-change: transform;
     }
-    @keyframes gridDrift {
-      0%   { background-position: 0 0; }
-      100% { background-position: 64px 64px; }
+    .c-cursor.is-hover { width: 44px; height: 44px; }
+    @media (hover: none) {
+      html { cursor: auto; }
+      .c-cursor { display: none; }
     }
 
-    /* ── Gradient border sweep on DotLend card ────────────── */
-    .sweep-card {
-      position:relative; border-radius:12px; padding:2px;
-      background: linear-gradient(135deg,#E6007A,#9945FF,#2A9FE8,#E6007A);
-      background-size: 300% 300%;
-      animation: gradSweep 4s ease infinite;
+    /* ── Page Loader ──────────────────────────────────── */
+    #loader {
+      position: fixed; inset: 0; z-index: 99999;
+      background: var(--bg);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1.5rem;
     }
-    @keyframes gradSweep {
-      0%,100%  { background-position: 0% 50%; }
-      50%      { background-position: 100% 50%; }
-    }
-    .sweep-card-inner { background:#131313; border-radius:10px; }
-
-    /* ── Shimmer text for CTA ──────────────────────────────── */
-    .shimmer-text {
-      background: linear-gradient(90deg, #ffffff 0%, #E6007A 40%, #9945FF 60%, #ffffff 100%);
-      background-size: 300% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 4s linear infinite;
-    }
-    @keyframes shimmer {
-      0%   { background-position: 300% center; }
-      100% { background-position: 0% center; }
-    }
-
-    /* ── Protocol card hover ───────────────────────────────── */
-    .proto-card {
-      transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease;
-      cursor:pointer;
-    }
-    .proto-card:hover { transform: translateY(-8px); }
-    .proto-card[data-chain="dot"]:hover { box-shadow: 0 16px 40px rgba(230,0,122,0.25); }
-    .proto-card[data-chain="arb"]:hover { box-shadow: 0 16px 40px rgba(42,159,232,0.25); }
-    .proto-card[data-chain="tao"]:hover { box-shadow: 0 16px 40px rgba(234,179,8,0.25); }
-    .proto-card[data-chain="sol"]:hover { box-shadow: 0 16px 40px rgba(153,69,255,0.25); }
-    .proto-card[data-chain="ton"]:hover { box-shadow: 0 16px 40px rgba(0,152,234,0.25); }
-    .proto-card[data-chain="multi"]:hover { box-shadow: 0 16px 40px rgba(0,212,138,0.25); }
-
-    /* ── Nav link underline ────────────────────────────────── */
-    .nav-link { position:relative; text-decoration:none; }
-    .nav-link::after {
-      content:''; position:absolute; bottom:-2px; left:0; right:0;
-      height:1px; background:#E6007A;
-      transform:scaleX(0); transform-origin:left;
-      transition: transform 0.25s ease;
-    }
-    .nav-link:hover::after { transform:scaleX(1); }
-
-    /* ── Hero overflow fix ─────────────────────────────────── */
-    .hero-headline {
-      font-size: clamp(40px, 7vw, 88px);
-      line-height: 0.92;
-      letter-spacing: -0.03em;
-      text-transform: uppercase;
-      font-weight: 800;
-      word-break: break-word;
-      overflow-wrap: break-word;
-      hyphens: auto;
-    }
-
-    /* ── Floating pill nav (mobile) ────────────────────────── */
-    .mobile-fab {
-      position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
-      z-index:500; background:rgba(19,19,19,0.9); backdrop-filter:blur(16px);
-      border:1px solid rgba(255,255,255,0.1); border-radius:99px;
-      padding:10px 20px; display:flex; gap:16px; align-items:center;
-    }
-    @media(min-width:768px){ .mobile-fab { display:none; } }
-
-    /* ── Status dot pulse ──────────────────────────────────── */
-    @keyframes statusPulse {
-      0%,100% { opacity:1; box-shadow:0 0 0 0 currentColor; }
-      50%      { opacity:0.7; box-shadow:0 0 0 6px transparent; }
-    }
-    .status-dot { animation: statusPulse 2s ease-in-out infinite; }
-
-    /* ── Scroll bounce ─────────────────────────────────────── */
-    @keyframes chevronBounce {
-      0%,100% { transform:translateY(0); }
-      50%      { transform:translateY(10px); }
-    }
-    .scroll-indicator { animation: chevronBounce 1.8s ease-in-out infinite; }
-    </style>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ORTHONODE SYSTEMS™ | Verification Infrastructure</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&amp;family=DM+Sans:ital,wght@0,300;0,500;1,300&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Space+Grotesk:wght@300;700&amp;family=Manrope:wght@300;500&amp;family=Inter:wght@400&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "primary": "#E6007A",
-              "surface": "#131313",
-              "background": "#000000",
-            },
-            fontFamily: {
-              "headline": ["Syne", "sans-serif"],
-              "body": ["DM Sans", "sans-serif"],
-              "label": ["IBM Plex Mono", "monospace"]
-            },
-          },
-        },
-      }
-    </script>
-<style>
-        body { background-color: #000000; color: #e2e2e2; }
-        
-        /* B. BACKGROUND GRID */
-        .bg-grid {
-            background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
-            background-size: 32px 32px;
-            animation: gridDrift 60s linear infinite;
-        }
-        @keyframes gridDrift {
-            from { background-position: 0 0; }
-            to { background-position: 32px 32px; }
-        }
-
-        /* A. HERO REVEAL */
-        .word-reveal {
-            display: inline-block;
-            transform: translateY(100%);
-            animation: wordRevealAnim 0.8s cubic-bezier(0.2, 1, 0.3, 1) forwards;
-        }
-        @keyframes wordRevealAnim {
-            to { transform: translateY(0); }
-        }
-
-        /* D. BUTTON HOVERS */
-        .btn-primary:hover {
-            box-shadow: 0 0 24px rgba(230,0,122,0.5);
-            transform: translateY(-2px);
-            background-color: #ff1a8c;
-        }
-        .btn-ghost:hover {
-            box-shadow: 0 0 15px rgba(255,255,255,0.2);
-            background-color: rgba(255,255,255,0.05);
-        }
-
-        /* E. PROTOCOL CARDS */
-        .protocol-card {
-            clip-path: inset(100% 0 0 0);
-            transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1), clip-path 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-        }
-        .protocol-card.revealed {
-            clip-path: inset(0% 0 0 0);
-        }
-        .protocol-card:hover {
-            transform: translateY(-8px);
-        }
-        .card-dot:hover { box-shadow: 0 10px 30px -10px rgba(230, 0, 122, 0.3); }
-        .card-arb:hover { box-shadow: 0 10px 30px -10px rgba(45, 175, 255, 0.3); }
-
-        /* F. FEATURED CARD BORDER ROTATE */
-        .sweep-border {
-            position: relative;
-            padding: 1px;
-            overflow: hidden;
-            border-radius: 0.75rem;
-        }
-        .sweep-border::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(from 0deg, #E6007A, #303030, #E6007A);
-            animation: rotateBorder 4s linear infinite;
-            z-index: -1;
-        }
-        @keyframes rotateBorder {
-            100% { transform: rotate(360deg); }
-        }
-
-        /* G. TICKER */
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .animate-ticker {
-            animation: ticker 40s linear infinite;
-        }
-
-        /* H. NAV UNDERLINE */
-        .nav-link {
-            position: relative;
-            padding-bottom: 4px;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #E6007A;
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s ease;
-        }
-        .nav-link:hover::after, .nav-link.active::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        /* I. CTA SHIMMER */
-        .shimmer-text {
-            background: linear-gradient(90deg, #ffffff 0%, #E6007A 50%, #ffffff 100%);
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: textShimmer 4s linear infinite;
-        }
-        @keyframes textShimmer {
-            to { background-position: 200% center; }
-        }
-
-        /* J. SCROLL INDICATOR */
-        @keyframes bounce-slow {
-            0%, 100% { transform: translateY(-25%) translateX(-50%); animation-timing-function: cubic-bezier(0.8,0,1,1); }
-            50% { transform: translateY(0) translateX(-50%); animation-timing-function: cubic-bezier(0,0,0.2,1); }
-        }
-    </style>
-
-    <script>
-    const ON={cookie:{set(k,v,days){const d=new Date();d.setTime(d.getTime()+days*86400000);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},get(k){return document.cookie.split(";").map(c=>c.trim()).find(c=>c.startsWith(k+"="))?.split("=")[1]||null}},init(){if(!this.cookie.get("on_theme"))this.cookie.set("on_theme","dark",365);const b=document.getElementById("cookie-banner");if(!this.cookie.get("on_banner")&&b)b.style.display="flex"},acceptCookies(){ON.cookie.set("on_banner","1",365);const b=document.getElementById("cookie-banner");if(b)b.style.display="none"}};
-    window.onHumanVerified=function(t){ON.cookie.set("on_verified",t,1/24);const g=document.getElementById("gate");g.style.transition="opacity 0.6s,transform 0.6s";g.style.opacity="0";g.style.transform="scale(1.04)";setTimeout(()=>{g.style.display="none";document.getElementById("app").style.display="block";initAnimations();ON.init()},600)};
-    document.addEventListener("DOMContentLoaded",()=>{if(ON.cookie.get("on_verified")){document.getElementById("gate")?.remove();document.getElementById("app").style.display="block";initAnimations();ON.init()}});
-    </script>
-
-    <style>
-    /* Hero fallback: ensure words reveal even without GSAP */
-    .word-reveal {
-      animation-fill-mode: both !important;
-      animation-duration: 0.7s !important;
-      animation-timing-function: cubic-bezier(0.22,1,0.36,1) !important;
-    }
-    /* Hero h1 text always visible if JS word-wrap fails */
-    #hero-headline:empty::after {
-      content: "VERIFICATION INFRASTRUCTURE\A FOR THE DECENTRALIZED STACK.";
-      white-space: pre;
-      color: white;
-    }
-    /* Fix hero section height */
-    #hero-headline { min-height: 1em; }
-    /* Ensure app is shown after any gate close */
-    </style>
-
-    <style>
-    /* Protocol cards: visible by default, animate on scroll reveal */
-    .protocol-card {
-      opacity: 1 !important;
-      transform: none !important;
-    }
-    /* word-reveal: start hidden, JS animates to visible */
-    .word-reveal {
-      display: inline-block;
-      transform: translateY(100%);
+    #loader-logo {
+      width: clamp(72px, 12vw, 130px); height: auto;
       opacity: 0;
+      filter: drop-shadow(0 0 40px rgba(0,212,255,.9));
     }
-    /* Fallback: if JS fails, show hero text after 2s */
-    @keyframes heroFallback {
-      0%   { opacity:0; transform:translateY(20px); }
-      100% { opacity:1; transform:translateY(0); }
+    #loader-bar {
+      width: 160px; height: 2px;
+      background: rgba(0,212,255,.12);
+      overflow: hidden;
     }
-    #hero-headline:not(:empty) .word-reveal {
-      animation: heroFallback 0.6s ease forwards;
+    #loader-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--primary), rgba(0,212,255,.4));
+      transition: width .05s linear;
     }
-    </style>
-    <script src="/nav.js" defer></script>
+    #loader-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem; letter-spacing: .25em;
+      color: var(--muted); text-transform: uppercase;
+    }
 
-    <style id="on-card-override">
-    /* Force protocol cards visible — Stitch IntersectionObserver fails after display:none */
-    .protocol-card,
-    .protocol-card.revealed {
-      opacity: 1 !important;
-      transform: translateY(0) !important;
-      transition: box-shadow 0.3s ease, border-color 0.3s ease !important;
+    /* ── Star canvas ──────────────────────────────────── */
+    #star-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    /* ── Noise grain ──────────────────────────────────── */
+    #grain {
+      position: fixed; inset: 0; z-index: 1;
+      pointer-events: none; opacity: .028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 160px 160px;
     }
-    .protocol-card:hover {
-      border-color: rgba(255,255,255,0.15) !important;
-      transform: translateY(-6px) !important;
+
+    /* ── Grid overlay ─────────────────────────────────── */
+    #grid-overlay {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
     }
-    </style>
+
+    /* ── Aurora ───────────────────────────────────────── */
+    #aurora {
+      position: fixed; top: -20%; left: 50%;
+      transform: translateX(-50%);
+      width: 120vw; height: 70vh;
+      pointer-events: none; z-index: 0;
+      background: radial-gradient(ellipse at 50% 30%,
+        rgba(0,212,255,.07) 0%, rgba(0,212,255,.03) 30%, transparent 70%);
+      animation: auroraPulse 8s ease-in-out infinite;
+    }
+    @keyframes auroraPulse {
+      0%,100% { opacity:.6; transform:translateX(-50%) scaleX(1); }
+      50%     { opacity:1;  transform:translateX(-50%) scaleX(1.08); }
+    }
+
+    /* ── Typography helpers ───────────────────────────── */
+    .font-orbitron { font-family: 'Orbitron', monospace; }
+    .font-mono     { font-family: 'JetBrains Mono', monospace; }
+
+    /* ── Nav ──────────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 clamp(1rem,4vw,3rem); height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(2,4,8,.72);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      transition: background .3s;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-brand-logo { width: 30px; height: auto; filter: drop-shadow(0 0 6px rgba(0,212,255,.5)); flex-shrink: 0; }
+    .nav-brand-text {
+      font-family: 'Orbitron', monospace; font-weight: 900;
+      font-size: clamp(.78rem,1.8vw,.92rem);
+      color: var(--primary); letter-spacing: .08em;
+    }
+    .nav-brand-text span { color: var(--gold); }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Exo 2', sans-serif; font-size: .8rem; font-weight: 500;
+      color: var(--muted); text-decoration: none;
+      letter-spacing: .06em; text-transform: uppercase;
+      position: relative; transition: color .2s; cursor: none;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+      height: 1px; background: var(--primary);
+      transform: scaleX(0); transform-origin: left; transition: transform .25s ease;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: none; padding: 8px; background: none; border: none;
+    }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--text); transition: all .3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    #nav-overlay {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(2,4,8,.97); backdrop-filter: blur(20px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+    }
+    #nav-overlay.open { display: flex; }
+    #nav-overlay a {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.2rem,5vw,1.8rem);
+      color: var(--text); text-decoration: none;
+      letter-spacing: .12em; text-transform: uppercase;
+      transition: color .2s; cursor: none;
+    }
+    #nav-overlay a:hover { color: var(--primary); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ── Hero ─────────────────────────────────────────── */
+    #hero {
+      position: relative; z-index: 2; min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 80px clamp(1rem,4vw,3rem) 3rem;
+      text-align: center; overflow: hidden;
+    }
+    .hero-radial {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,212,255,.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .scan-line {
+      position: absolute; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
+      opacity: .3; animation: scanDown 10s linear infinite; pointer-events: none;
+    }
+    @keyframes scanDown {
+      0%   { top:0%;   opacity:0; }
+      5%   { opacity:.3; }
+      95%  { opacity:.3; }
+      100% { top:100%; opacity:0; }
+    }
+
+    /* ── LOGO (exact spec) ────────────────────────────── */
+    .logo-img {
+      width: clamp(80px,10vw,140px); height: auto;
+      display: block; margin: 0 auto 28px;
+      filter: drop-shadow(0 0 30px rgba(0,212,255,.6));
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(.58rem,1.4vw,.72rem);
+      color: var(--primary); letter-spacing: .28em;
+      text-transform: uppercase; margin-bottom: 1rem; opacity: 0;
+    }
+    .hero-title {
+      font-family: 'Orbitron', monospace; font-weight: 900;
+      font-size: clamp(2.2rem,6.5vw,5.5rem);
+      letter-spacing: .04em; text-transform: uppercase;
+      line-height: 1.05; color: var(--text);
+      margin-bottom: .5rem; opacity: 0;
+    }
+    .hero-title .systems { display: block; font-size: .55em; letter-spacing: .18em; color: var(--muted); font-weight: 400; }
+    .hero-title .tm { font-size: .42em; vertical-align: super; color: var(--gold); }
+    .hero-tagline {
+      font-family: 'Exo 2', sans-serif; font-style: italic;
+      font-size: clamp(.95rem,2.2vw,1.25rem); color: var(--muted);
+      margin-bottom: 2.5rem; max-width: 600px; opacity: 0;
+    }
+    .hero-ctas {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      justify-content: center; margin-bottom: 4rem; opacity: 0;
+    }
+
+    .btn-primary {
+      font-family: 'Orbitron', monospace; font-size: .72rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: .9rem 2.2rem; background: var(--primary); color: #020408;
+      border: none; cursor: none; text-decoration: none;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: background .2s, transform .2s, box-shadow .2s; display: inline-block;
+      min-height: 44px;
+    }
+    .btn-primary:hover { background: #33DDFF; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,212,255,.35); }
+
+    .btn-ghost {
+      font-family: 'Orbitron', monospace; font-size: .72rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: .9rem 2.2rem; background: transparent; color: var(--primary);
+      border: 1px solid var(--border-b); cursor: none; text-decoration: none;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: border-color .2s, color .2s, transform .2s, box-shadow .2s; display: inline-block;
+      min-height: 44px;
+    }
+    .btn-ghost:hover { border-color: var(--primary); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,212,255,.2); }
+
+    /* ── Orbital SVG ──────────────────────────────────── */
+    #orbital-wrap { width: clamp(280px,78vw,680px); position: relative; opacity: 0; }
+    #orbital-svg { width: 100%; height: auto; overflow: visible; }
+    .orbit-ring { fill: none; stroke: rgba(0,212,255,.12); stroke-width: .5; stroke-dasharray: 4 8; }
+    .core-glow { animation: corePulse 3s ease-in-out infinite; }
+    .core-ring { animation: coreRingPulse 3s ease-in-out infinite; }
+    @keyframes corePulse     { 0%,100%{r:18;opacity:1}    50%{r:22;opacity:.8} }
+    @keyframes coreRingPulse { 0%,100%{r:30;opacity:.4}   50%{r:38;opacity:.15} }
+    .conn-line {
+      stroke: var(--primary); stroke-width: .6; opacity: .2;
+      stroke-dasharray: 3 6; animation: dashFlow 2.5s linear infinite;
+    }
+    @keyframes dashFlow { to { stroke-dashoffset: -18; } }
+    .orbit-group { transform-origin: 350px 350px; }
+    .orbit-1 { animation: orbit-cw  28s linear infinite; }
+    .orbit-2 { animation: orbit-ccw 34s linear infinite; }
+    .orbit-3 { animation: orbit-cw  22s linear infinite; }
+    .orbit-4 { animation: orbit-ccw 40s linear infinite; }
+    .orbit-5 { animation: orbit-cw  32s linear infinite; }
+    .orbit-6 { animation: orbit-ccw 26s linear infinite; }
+    .orbit-7 { animation: orbit-cw  36s linear infinite; }
+    .orbit-8 { animation: orbit-ccw 30s linear infinite; }
+    @keyframes orbit-cw  { from{transform:rotate(0deg)}   to{transform:rotate(360deg)} }
+    @keyframes orbit-ccw { from{transform:rotate(0deg)}   to{transform:rotate(-360deg)} }
+    .orbit-1 .nc { animation: nc-cw  28s linear infinite; transform-origin: 0px -220px; }
+    .orbit-2 .nc { animation: nc-ccw 34s linear infinite; transform-origin: -240px 70px; }
+    .orbit-3 .nc { animation: nc-cw  22s linear infinite; transform-origin: -260px -80px; }
+    .orbit-4 .nc { animation: nc-ccw 40s linear infinite; transform-origin: -50px -235px; }
+    .orbit-5 .nc { animation: nc-cw  32s linear infinite; transform-origin: 195px -215px; }
+    .orbit-6 .nc { animation: nc-ccw 26s linear infinite; transform-origin: 245px -5px; }
+    .orbit-7 .nc { animation: nc-cw  36s linear infinite; transform-origin: 172px 167px; }
+    .orbit-8 .nc { animation: nc-ccw 30s linear infinite; transform-origin: -152px 212px; }
+    @keyframes nc-cw  { from{transform:rotate(0)}   to{transform:rotate(-360deg)} }
+    @keyframes nc-ccw { from{transform:rotate(0)}   to{transform:rotate(360deg)} }
+    .node-circle { stroke-width: 1.5; fill: rgba(6,12,20,.9); transition: fill .3s; }
+    .node-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 7px; font-weight: 500;
+      text-anchor: middle; dominant-baseline: central; letter-spacing: .04em; pointer-events: none;
+    }
+    .orbit-node:hover .node-circle { fill: rgba(6,12,20,.6); filter: brightness(1.3); }
+
+    /* ── Sections common ──────────────────────────────── */
+    section { position: relative; z-index: 2; }
+    .section-inner { max-width: 1240px; margin: 0 auto; padding: 0 clamp(1rem,4vw,3rem); }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace; font-size: .66rem;
+      letter-spacing: .3em; text-transform: uppercase; color: var(--primary); margin-bottom: .6rem;
+    }
+    .section-title {
+      font-family: 'Orbitron', monospace; font-weight: 700;
+      font-size: clamp(1.3rem,3.2vw,2.3rem); letter-spacing: .04em;
+      text-transform: uppercase; color: var(--text); margin-bottom: .85rem;
+    }
+    .section-sub {
+      font-size: clamp(.88rem,1.8vw,1rem); color: var(--muted);
+      max-width: 580px; margin-bottom: 3rem; line-height: 1.7;
+    }
+
+    /* ── Stats Bar ────────────────────────────────────── */
+    #stats-bar {
+      position: relative; z-index: 2;
+      padding: 1.75rem 0;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: rgba(6,12,20,.8); backdrop-filter: blur(12px);
+    }
+    .stats-inner {
+      max-width: 1240px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+      gap: clamp(1.5rem,5vw,5rem); flex-wrap: wrap;
+      padding: 0 clamp(1rem,4vw,3rem);
+    }
+    .stat-item { display: flex; flex-direction: column; align-items: center; gap: .2rem; text-align: center; }
+    .stat-value {
+      font-family: 'Orbitron', monospace; font-weight: 900;
+      font-size: clamp(1.5rem,3vw,2.2rem); color: var(--primary); letter-spacing: .04em;
+    }
+    .stat-value.gold { color: var(--gold); }
+    .stat-label {
+      font-family: 'JetBrains Mono', monospace; font-size: .58rem;
+      letter-spacing: .22em; text-transform: uppercase; color: var(--muted);
+    }
+    .stat-divider { width: 1px; height: 2.5rem; background: var(--border); flex-shrink: 0; }
+    @media (max-width: 480px) { .stat-divider { display: none; } }
+
+    /* ── Protocol Grid ────────────────────────────────── */
+    #protocols { padding: 6rem 0; }
+    .protocol-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+      gap: 1.25rem;
+    }
+    .proto-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.6rem;
+      position: relative; overflow: hidden;
+      text-decoration: none; color: var(--text);
+      transition: border-color .3s, box-shadow .3s, transform .3s;
+      cursor: none;
+      will-change: transform;
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+    }
+    .proto-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 0% 0%, rgba(var(--card-rgb),.06) 0%, transparent 70%);
+      opacity: 0; transition: opacity .3s;
+    }
+    .proto-card:hover::before { opacity: 1; }
+    .proto-card:hover {
+      border-color: rgba(var(--card-rgb),.5);
+      box-shadow: 0 0 24px rgba(var(--card-rgb),.15), inset 0 0 24px rgba(var(--card-rgb),.04);
+    }
+    .proto-card .card-corner {
+      position: absolute; top: 0; right: 0; width: 18px; height: 18px;
+      background: var(--surface); border-left: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .card-name {
+      font-family: 'Orbitron', monospace; font-weight: 700;
+      font-size: clamp(.9rem,2vw,1rem); letter-spacing: .06em; text-transform: uppercase;
+      color: rgb(var(--card-rgb));
+    }
+    .card-chain-badge {
+      font-family: 'JetBrains Mono', monospace; font-size: .56rem;
+      font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      padding: .2rem .5rem;
+      border: 1px solid rgba(var(--card-rgb),.3);
+      color: rgb(var(--card-rgb)); opacity: .75;
+    }
+    .card-desc { font-size: .88rem; color: var(--muted); line-height: 1.5; margin-bottom: 1rem; }
+    .card-status {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-family: 'JetBrains Mono', monospace; font-size: .56rem;
+      letter-spacing: .14em; text-transform: uppercase;
+    }
+    .card-status .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgb(var(--card-rgb)); flex-shrink: 0;
+    }
+    .card-status.live .dot { animation: blink 1.4s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .card-status-text { color: rgb(var(--card-rgb)); }
+
+    .card-arrow {
+      position: absolute; bottom: 1.2rem; right: 1.4rem;
+      font-size: .7rem; color: rgba(var(--card-rgb),.4);
+      transition: color .2s, transform .2s;
+    }
+    .proto-card:hover .card-arrow { color: rgb(var(--card-rgb)); transform: translate(3px,-3px); }
+
+    /* ── Architecture ─────────────────────────────────── */
+    #architecture { padding: 6rem 0; }
+    .arch-flow {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 0; margin-top: 3rem;
+    }
+    .arch-node {
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 1.2rem 1.6rem; text-align: center;
+      clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+      position: relative; overflow: visible;
+    }
+    .arch-node-label {
+      font-family: 'JetBrains Mono', monospace; font-size: .6rem;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: .25rem;
+    }
+    .arch-node-name {
+      font-family: 'Orbitron', monospace; font-weight: 700;
+      font-size: clamp(.75rem,1.6vw,.88rem); letter-spacing: .05em; text-transform: uppercase;
+    }
+    .arch-node-sub {
+      font-size: .68rem; color: var(--muted); margin-top: .2rem;
+      font-family: 'JetBrains Mono', monospace; font-size: .58rem;
+    }
+    .arch-arrow {
+      display: flex; align-items: center; padding: 0 .5rem;
+      flex-shrink: 0;
+    }
+    .arch-arrow svg { overflow: visible; }
+    .arch-arrow-line {
+      stroke: var(--primary); stroke-width: 1;
+      stroke-dasharray: 4 6; opacity: .5;
+      animation: archFlow 2s linear infinite;
+    }
+    @keyframes archFlow { to { stroke-dashoffset: -20; } }
+    .arch-group { display: flex; flex-direction: column; align-items: center; gap: .6rem; }
+    .arch-group-label {
+      font-family: 'JetBrains Mono', monospace; font-size: .55rem;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--primary); opacity: .5;
+    }
+    .arch-group-nodes { display: flex; gap: .6rem; flex-wrap: wrap; justify-content: center; }
+    .arch-v-arrow { width: 1px; height: 2rem; background: linear-gradient(to bottom, var(--primary), transparent); opacity: .4; }
+
+    @media (max-width: 900px) {
+      .arch-flow { flex-direction: column; }
+      .arch-arrow { transform: rotate(90deg); padding: .4rem 0; }
+    }
+
+    /* ── Footer ───────────────────────────────────────── */
+    footer {
+      position: relative; z-index: 2;
+      padding: 3rem clamp(1rem,4vw,3rem);
+      border-top: 1px solid var(--border);
+      background: rgba(6,12,20,.8); backdrop-filter: blur(12px);
+    }
+    .footer-inner {
+      max-width: 1240px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-brand { display: flex; align-items: center; gap: .75rem; }
+    .footer-brand img { width: 28px; height: auto; opacity: .7; }
+    .footer-brand-text {
+      font-family: 'Orbitron', monospace; font-weight: 900;
+      font-size: .78rem; letter-spacing: .1em;
+      color: var(--muted);
+    }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
+    .footer-links a {
+      font-family: 'JetBrains Mono', monospace; font-size: .62rem;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      transition: color .2s; cursor: none;
+    }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-copy {
+      font-family: 'JetBrains Mono', monospace; font-size: .58rem;
+      letter-spacing: .1em; color: var(--muted); opacity: .6;
+    }
+
+    /* ── Scroll reveal helpers ────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(32px); }
+
+    /* ── Horizontal dividers ──────────────────────────── */
+    .h-div { height: 1px; background: var(--border); }
+  </style>
 </head>
-<body class="font-body font-light overflow-x-hidden bg-background">
-    <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-    <script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let S=[],W,H;function rs(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){S=Array.from({length:140},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.1+0.1,a:Math.random(),v:Math.random()*0.003+0.001,speed:Math.random()*0.2+0.05}))}function draw(){ctx.clearRect(0,0,W,H);S.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;s.y-=s.speed;if(s.y<0)s.y=H;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{rs();init()});rs();init();draw()})();</script>
-    <div id="gate" style="position:fixed;inset:0;z-index:9999;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;">
-      <img src="/site-logo.png" alt="ORTHONODE SYSTEMS™" style="height:52px;object-fit:contain;margin-bottom:8px;">
-      <div style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(208,208,208,0.85)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.6 9.4 8 10 4.4-.6 8-5 8-10V6L12 2z"/><polyline points="9 12 11 14 15 10"/></svg>
-      </div>
-      <div style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.12em;text-transform:uppercase;">Human Verification Required</div>
-      <div class="cf-turnstile" data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb" data-callback="onHumanVerified" data-theme="dark" data-size="flexible" data-appearance="always" style="width:min(300px,90vw);"></div>
-      <div style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(255,255,255,0.3);">Powered by Cloudflare Turnstile</div>
-    </div>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-    <div id="cookie-banner" style="display:none;position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:9000;background:rgba(13,13,13,0.95);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(24px);border-radius:8px;padding:18px 24px;align-items:center;gap:16px;max-width:480px;width:90vw;">
-      <p style="font-family:DM Sans,sans-serif;font-size:13px;color:rgba(229,226,225,0.8);margin:0;flex:1;">Cookies: <code style="color:#E6007A;font-size:11px;font-family:monospace;">on_verified</code>, <code style="color:#E6007A;font-size:11px;font-family:monospace;">on_theme</code>, <code style="color:#E6007A;font-size:11px;font-family:monospace;">on_chain</code>, <code style="color:#E6007A;font-size:11px;font-family:monospace;">on_banner</code>. <a href="/cookies.html" style="color:#E6007A;">Policy ↗</a></p>
-      <button onclick="ON.acceptCookies()" style="background:#E6007A;color:#fff;border:none;padding:8px 16px;font-family:IBM Plex Mono,monospace;font-size:11px;letter-spacing:0.08em;border-radius:4px;cursor:pointer;white-space:nowrap;">Accept</button>
-    </div>
-    <div id="app" style="display:none;position:relative;z-index:1">
-<!-- Navigation -->
-<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 h-24 bg-black/80 backdrop-blur-xl border-b border-white/5">
-<div class="text-2xl font-headline tracking-tighter text-white uppercase">
-        ORTHONODE SYSTEMS™
-    </div>
-<div class="hidden md:flex items-center space-x-10">
-<a class="nav-link" href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:#E6007A;letter-spacing:0.08em;margin-right:4px;border-bottom:1px solid #E6007A;padding-bottom:2px;">HOME</a><a class="nav-link" style="font-family:DM Sans,sans-serif;font-size:14px;color:rgba(255,255,255,0.6);" href="dotlend.html" >DotLend</a>
-<a class="nav-link text-white/60 font-headline uppercase text-sm tracking-tight hover:text-white transition-colors" href="sha.html" >SHA</a>
-<a class="nav-link text-white/60 font-headline uppercase text-sm tracking-tight hover:text-white transition-colors" href="ton-sha.html" >TON-SHA</a>
-<a class="nav-link text-white/60 font-headline uppercase text-sm tracking-tight hover:text-white transition-colors" href="invariant.html" >INVARIANT</a>
-<a class="nav-link text-white/60 font-headline uppercase text-sm tracking-tight hover:text-white transition-colors" href="tix-dao.html" >TIX-DAO</a>
-<a class="nav-link text-white/60 font-headline uppercase text-sm tracking-tight hover:text-white transition-colors" href="https://github.com/orthonode" target="_blank">GitHub ↗</a>
+<body>
+
+<!-- Custom cursor -->
+<div class="c-cursor" id="cursor"></div>
+
+<!-- Page loader -->
+<div id="loader">
+  <img id="loader-logo" src="/site-logo.png" alt="Orthonode">
+  <div id="loader-bar"><div id="loader-fill"></div></div>
+  <div id="loader-text">Initialising systems...</div>
 </div>
-<div class="flex items-center space-x-2 bg-white/5 px-4 py-2 rounded-full border border-white/10">
-<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-<span class="font-label text-[10px] tracking-widest text-white/70 uppercase">OPERATIONAL</span>
-</div>
+
+<!-- Background layers -->
+<canvas id="star-canvas"></canvas>
+<div id="grain"></div>
+<div id="grid-overlay"></div>
+<div id="aurora"></div>
+
+<!-- Nav -->
+<nav id="nav">
+  <a href="/" class="nav-brand">
+    <img src="/site-logo.png" alt="Orthonode logo" class="nav-brand-logo">
+    <span class="nav-brand-text">ORTHONODE<span>™</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#protocols">Protocols</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="mailto:infrastructure@orthonode.xyz">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-<!-- Status Ticker -->
-<div class="fixed top-24 left-0 w-full z-40 flex items-center h-10 px-8 bg-black/50 backdrop-blur-sm border-b border-white/5 overflow-hidden">
-<div class="flex space-x-12 animate-ticker whitespace-nowrap">
-<span class="font-label text-[10px] tracking-[0.2em] uppercase text-primary">SHA_ARB_SEPOLIA: LIVE ◆</span>
-<span class="font-label text-[10px] tracking-[0.2em] uppercase text-white/40">DOTLEND_POLKADOT_HUB: TESTNET_LIVE ◆</span>
-<span class="font-label text-[10px] tracking-[0.2em] uppercase text-primary">INVARIANT_PROTOCOL: AUDIT_COMPLETE ◆</span>
-<span class="font-label text-[10px] tracking-[0.2em] uppercase text-white/40">TIX_DAO_UPGRADE: PENDING ◆</span>
-<span class="font-label text-[10px] tracking-[0.2em] uppercase text-primary">TON_SHA_MAINNET: SYNCING ◆</span>
-<!-- Duplicate for loop -->
-<span class="font-label text-[10px] tracking-[0.2em] uppercase text-primary">SHA_ARB_SEPOLIA: LIVE ◆</span>
-<span class="font-label text-[10px] tracking-[0.2em] uppercase text-white/40">DOTLEND_POLKADOT_HUB: TESTNET_LIVE ◆</span>
-<span class="font-label text-[10px] tracking-[0.2em] uppercase text-primary">INVARIANT_PROTOCOL: AUDIT_COMPLETE ◆</span>
-<span class="font-label text-[10px] tracking-[0.2em] uppercase text-white/40">TIX_DAO_UPGRADE: PENDING ◆</span>
-<span class="font-label text-[10px] tracking-[0.2em] uppercase text-primary">TON_SHA_MAINNET: SYNCING ◆</span>
+
+<!-- Mobile nav overlay -->
+<div id="nav-overlay">
+  <a href="#protocols"    id="mo-protocols">Protocols</a>
+  <a href="#architecture" id="mo-arch">Architecture</a>
+  <a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub</a>
+  <a href="mailto:infrastructure@orthonode.xyz">Contact</a>
 </div>
-</div>
-<main class="relative pt-32">
-<!-- Hero Section -->
-<section class="min-h-[90vh] flex flex-col justify-center px-8 md:px-20 relative">
-<div class="absolute inset-0 bg-grid z-0"></div>
-<div class="relative z-10 max-w-6xl">
-<h1 class="hero-headline" id="hero-headline" style="font-size: clamp(48px, 8vw, 96px); line-height: 1.1; word-break: break-word; overflow-wrap: break-word;">
-<!-- Word Reveal Triggered via JS -->
-</h1>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 max-w-2xl">
-<div class="flex flex-col">
-<span class="font-headline text-5xl text-white stat-counter" data-target="7">0</span>
-<span class="font-label text-[10px] uppercase tracking-widest text-white/40">Projects</span>
-</div>
-<div class="flex flex-col">
-<span class="font-headline text-5xl text-white stat-counter" data-target="5">0</span>
-<span class="font-label text-[10px] uppercase tracking-widest text-white/40">Chains</span>
-</div>
-<div class="flex flex-col">
-<span class="font-headline text-5xl text-white stat-counter" data-target="13">0</span>
-<span class="font-label text-[10px] uppercase tracking-widest text-white/40">Contracts</span>
-</div>
-<div class="flex flex-col">
-<span class="font-headline text-5xl text-white stat-counter" data-target="108">0</span>
-<span class="font-label text-[10px] uppercase tracking-widest text-white/40">Tests</span>
-</div>
-</div>
-<div class="flex flex-wrap gap-6">
-<a class="btn-primary bg-primary text-white px-10 py-5 rounded-lg font-headline uppercase tracking-tight transition-all duration-300" href="https://nexucore.xyz">Launch DotLend ↗</a>
-<a class="btn-ghost border border-white/20 text-white px-10 py-5 rounded-lg font-headline uppercase tracking-tight transition-all duration-300" href="https://github.com/orthonode">GitHub ↗</a>
-</div>
-</div>
-<!-- J. SCROLL INDICATOR -->
-<div class="absolute bottom-12 left-1/2 animate-[bounce-slow_2s_infinite]">
-<span class="material-symbols-outlined text-white/20 text-5xl">expand_more</span>
-</div>
+
+<!-- ── Hero ───────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-radial"></div>
+  <div class="scan-line"></div>
+
+  <!-- LOGO with GSAP animation -->
+  <img src="/site-logo.png" alt="Orthonode Systems logo" class="logo-img" id="hero-logo">
+
+  <p class="hero-eyebrow">Infrastructure Labs // Physical Verification Layer</p>
+  <h1 class="hero-title">
+    ORTHONODE<sup class="tm">™</sup>
+    <span class="systems">SYSTEMS</span>
+  </h1>
+  <p class="hero-tagline">Verification Infrastructure for the Decentralized Stack</p>
+  <div class="hero-ctas">
+    <a href="#protocols" class="btn-primary">Explore Protocols</a>
+    <a href="https://github.com/orthonode" target="_blank" rel="noopener" class="btn-ghost">View GitHub</a>
+  </div>
+
+  <!-- Orbital diagram -->
+  <div id="orbital-wrap">
+    <svg id="orbital-svg" viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
+      <!-- Orbit rings -->
+      <circle class="orbit-ring" cx="350" cy="350" r="120"/>
+      <circle class="orbit-ring" cx="350" cy="350" r="165"/>
+      <circle class="orbit-ring" cx="350" cy="350" r="210"/>
+      <circle class="orbit-ring" cx="350" cy="350" r="255"/>
+
+      <!-- Connection lines from center -->
+      <line class="conn-line" x1="350" y1="350" x2="350" y2="130"/>
+      <line class="conn-line" x1="350" y1="350" x2="110" y2="420"/>
+      <line class="conn-line" x1="350" y1="350" x2="590" y2="280"/>
+      <line class="conn-line" x1="350" y1="350" x2="300" y2="115"/>
+
+      <!-- Core -->
+      <circle class="core-ring" cx="350" cy="350" fill="none" stroke="rgba(0,212,255,.18)" stroke-width="1"/>
+      <circle class="core-glow" cx="350" cy="350" fill="rgba(0,212,255,.12)" stroke="rgba(0,212,255,.6)" stroke-width="1.5"/>
+      <image href="/site-logo.png" x="330" y="330" width="40" height="40" style="filter:drop-shadow(0 0 8px rgba(0,212,255,.8))"/>
+
+      <!-- SHA — orbit 1 — r=120 -->
+      <g class="orbit-group orbit-1">
+        <g class="nc" transform="translate(350,230)">
+          <a class="orbit-node" href="sha.html">
+            <circle class="node-circle" r="26" stroke="#1A6EFF"/>
+            <text class="node-label" fill="#1A6EFF">SHA</text>
+          </a>
+        </g>
+      </g>
+
+      <!-- TON — orbit 2 — r=120, offset -->
+      <g class="orbit-group orbit-2">
+        <g class="nc" transform="translate(110,420)">
+          <a class="orbit-node" href="ton-sha.html">
+            <circle class="node-circle" r="26" stroke="#0098EA"/>
+            <text class="node-label" fill="#0098EA">TON</text>
+          </a>
+        </g>
+      </g>
+
+      <!-- OAP — orbit 3 — r=165 -->
+      <g class="orbit-group orbit-3">
+        <g class="nc" transform="translate(90,270)">
+          <a class="orbit-node" href="oap.html">
+            <circle class="node-circle" r="26" stroke="#7C3AED"/>
+            <text class="node-label" fill="#7C3AED">OAP</text>
+          </a>
+        </g>
+      </g>
+
+      <!-- NEXUS — orbit 4 — r=165 -->
+      <g class="orbit-group orbit-4">
+        <g class="nc" transform="translate(300,115)">
+          <a class="orbit-node" href="nexus.html">
+            <circle class="node-circle" r="26" stroke="#F59E0B"/>
+            <text class="node-label" fill="#F59E0B">NEXUS</text>
+          </a>
+        </g>
+      </g>
+
+      <!-- INVARIANT — orbit 5 — r=210 -->
+      <g class="orbit-group orbit-5">
+        <g class="nc" transform="translate(545,135)">
+          <a class="orbit-node" href="invariant.html">
+            <circle class="node-circle" r="28" stroke="#A855F7"/>
+            <text class="node-label" fill="#A855F7">INV</text>
+          </a>
+        </g>
+      </g>
+
+      <!-- TIX — orbit 6 — r=210 -->
+      <g class="orbit-group orbit-6">
+        <g class="nc" transform="translate(595,345)">
+          <a class="orbit-node" href="tix-dao.html">
+            <circle class="node-circle" r="26" stroke="#9945FF"/>
+            <text class="node-label" fill="#9945FF">TIX</text>
+          </a>
+        </g>
+      </g>
+
+      <!-- MANTIS — orbit 7 — r=255 -->
+      <g class="orbit-group orbit-7">
+        <g class="nc" transform="translate(522,517)">
+          <a class="orbit-node" href="mantis.html">
+            <circle class="node-circle" r="28" stroke="#00FF88"/>
+            <text class="node-label" fill="#00FF88">MANTIS</text>
+          </a>
+        </g>
+      </g>
+
+      <!-- DOTLEND — orbit 8 — r=255 -->
+      <g class="orbit-group orbit-8">
+        <g class="nc" transform="translate(198,562)">
+          <a class="orbit-node" href="dotlend.html">
+            <circle class="node-circle" r="28" stroke="#E6007A"/>
+            <text class="node-label" fill="#E6007A">DOTLEND</text>
+          </a>
+        </g>
+      </g>
+    </svg>
+  </div>
 </section>
-<!-- Featured Section -->
-<section class="px-8 md:px-20 py-32">
-<div class="sweep-border">
-<div class="bg-zinc-950 p-12 rounded-xl grid grid-cols-1 lg:grid-cols-2 gap-16">
-<div class="flex flex-col justify-center">
-<div class="inline-block bg-primary/10 border border-primary/20 text-primary px-3 py-1 rounded-sm mb-8 font-label text-[10px] tracking-[0.2em] w-fit">FEATURED PROTOCOL</div>
-<h2 class="font-headline text-5xl uppercase tracking-tighter mb-6 text-white">DotLend — First Money Market on Polkadot Hub</h2>
-<p class="text-white/60 text-lg mb-8 leading-relaxed font-light">
-                        A next-generation lending primitives layer utilizing <span class="text-white font-medium">Noir ZK proofs</span> for sovereign verification. Deterministic yield curves with multi-asset collateral support across the Polkadot ecosystem.
-                    </p>
-<div class="flex flex-wrap gap-3">
-<span class="font-label text-[10px] bg-white/5 px-4 py-2 rounded-full border border-white/10 uppercase tracking-widest">Noir ZK</span>
-<span class="font-label text-[10px] bg-white/5 px-4 py-2 rounded-full border border-white/10 uppercase tracking-widest">Substrate</span>
-<span class="font-label text-[10px] bg-white/5 px-4 py-2 rounded-full border border-white/10 uppercase tracking-widest">XCM v3</span>
+
+<!-- ── Stats Bar ──────────────────────────────────────── -->
+<div id="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-value" data-count="8">0</span>
+      <span class="stat-label">Protocols</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-value" data-count="4">0</span>
+      <span class="stat-label">Chains</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-value" data-count="1">0</span>
+      <span class="stat-label">Attestation Layer</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-value gold" data-prefix="$" data-count="25000" data-suffix="">$0</span>
+      <span class="stat-label">Grant Awarded</span>
+    </div>
+  </div>
 </div>
-</div>
-<div class="flex items-center justify-center">
-<div class="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-xl w-full max-w-sm">
-<div class="space-y-6">
-<div class="flex justify-between items-center border-b border-white/5 pb-4">
-<span class="text-white/40 font-label text-[10px] uppercase">Total Value Locked</span>
-<span class="text-white font-headline text-2xl">$330M Simulated</span>
-</div>
-<div class="flex justify-between items-center border-b border-white/5 pb-4">
-<span class="text-white/40 font-label text-[10px] uppercase">Active Wallets</span>
-<span class="text-white font-headline text-xl">Testnet Live</span>
-</div>
-<div class="flex justify-between items-center">
-<span class="text-white/40 font-label text-[10px] uppercase">Security Level</span>
-<span class="text-emerald-500 font-label text-[10px] uppercase font-bold tracking-widest">SHIELD_MAX</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Protocol Registry -->
-<section class="px-8 md:px-20 py-32">
-<h2 class="font-headline text-4xl uppercase tracking-tighter mb-16 text-white border-b border-white/10 pb-4">Protocol Registry</h2>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!-- Card 1 -->
-<a class="protocol-card card-dot group bg-zinc-900/50 p-10 rounded-xl border border-white/5 block relative overflow-hidden" href="invariant.html" >
-<div class="absolute top-0 left-0 w-full h-1 bg-primary/40"></div>
-<span class="font-label text-[10px] text-white/30 uppercase block mb-4">Registry_001</span>
-<h3 class="font-headline text-3xl uppercase tracking-tighter mb-8 text-white group-hover:text-primary transition-colors">INVARIANT</h3>
-<div class="space-y-4">
-<div class="flex justify-between border-b border-white/5 pb-2">
-<span class="font-label text-[10px] text-white/40 uppercase">Verification</span>
-<span class="font-label text-[10px] text-primary">ZK_PROOF</span>
-</div>
-<div class="flex justify-between">
-<span class="font-label text-[10px] text-white/40 uppercase">Status</span>
-<span class="font-label text-[10px] text-white">MAINNET</span>
-</div>
-</div>
-</a>
-<!-- Card 2 -->
-<a class="protocol-card card-arb group bg-zinc-900/50 p-10 rounded-xl border border-white/5 block relative overflow-hidden" href="sha.html" >
-<div class="absolute top-0 left-0 w-full h-1 bg-blue-500/40"></div>
-<span class="font-label text-[10px] text-white/30 uppercase block mb-4">Registry_002</span>
-<h3 class="font-headline text-3xl uppercase tracking-tighter mb-8 text-white group-hover:text-blue-400 transition-colors">SHA</h3>
-<div class="space-y-4">
-<div class="flex justify-between border-b border-white/5 pb-2">
-<span class="font-label text-[10px] text-white/40 uppercase">Verification</span>
-<span class="font-label text-[10px] text-blue-400">STARK_HASH</span>
-</div>
-<div class="flex justify-between">
-<span class="font-label text-[10px] text-white/40 uppercase">Status</span>
-<span class="font-label text-[10px] text-white">AUDITED</span>
-</div>
-</div>
-</a>
-<!-- Card 3 -->
-<a class="protocol-card group bg-zinc-900/50 p-10 rounded-xl border border-white/5 block relative overflow-hidden" href="tix-dao.html" >
-<div class="absolute top-0 left-0 w-full h-1 bg-white/20"></div>
-<span class="font-label text-[10px] text-white/30 uppercase block mb-4">Registry_003</span>
-<h3 class="font-headline text-3xl uppercase tracking-tighter mb-8 text-white group-hover:text-white/70 transition-colors">TIX-DAO</h3>
-<div class="space-y-4">
-<div class="flex justify-between border-b border-white/5 pb-2">
-<span class="font-label text-[10px] text-white/40 uppercase">Verification</span>
-<span class="font-label text-[10px] text-white">MULTISIG</span>
-</div>
-<div class="flex justify-between">
-<span class="font-label text-[10px] text-white/40 uppercase">Status</span>
-<span class="font-label text-[10px] text-white">STABLE</span>
-</div>
-</div>
-</a>
-</div>
-</section>
-<!-- Architecture Section -->
-<section class="bg-zinc-950/50 py-32 px-8 md:px-20 border-y border-white/5">
-<div class="max-w-4xl mx-auto">
-<h2 class="font-headline text-5xl uppercase tracking-tighter mb-20 text-white text-center">The Architecture of Certainty</h2>
-<div class="space-y-24">
-<div class="flex flex-col md:flex-row gap-12 items-start group">
-<span class="font-headline text-8xl text-white/5 group-hover:text-primary/20 transition-colors duration-500">01</span>
-<div>
-<h4 class="font-headline text-2xl uppercase tracking-tight mb-4 text-white">Provable State Transitions</h4>
-<p class="text-white/50 leading-relaxed text-lg font-light">Every transaction within the Orthonode ecosystem is cryptographically verifiable at the silicon layer, ensuring zero trust between counter-parties.</p>
-</div>
-</div>
-<div class="flex flex-col md:flex-row gap-12 items-start group">
-<span class="font-headline text-8xl text-white/5 group-hover:text-primary/20 transition-colors duration-500">02</span>
-<div>
-<h4 class="font-headline text-2xl uppercase tracking-tight mb-4 text-white">Deterministic Infrastructure</h4>
-<p class="text-white/50 leading-relaxed text-lg font-light">Logic that executes exactly as written. We strip away the ambiguity of legacy VM architectures to provide mathematical finality.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- CTA Section -->
-<section class="py-60 px-8 text-center relative overflow-hidden bg-black">
-<div class="absolute inset-0 bg-grid opacity-20"></div>
-<div class="max-w-4xl mx-auto relative z-10">
-<h2 class="shimmer-text font-headline uppercase tracking-tighter leading-none mb-16" style="font-size:clamp(32px,5vw,76px);word-break:break-word;overflow-wrap:break-word;hyphens:auto;">BUILD ON VERIFIED INFRASTRUCTURE
-            </h2>
-<div class="flex flex-col md:flex-row justify-center gap-6">
-<a class="btn-primary bg-primary text-white px-12 py-6 rounded-lg font-headline text-xl uppercase tracking-tight transition-all duration-300" href="dotlend.html" >Explore DotLend</a>
-<a class="btn-ghost border border-white/20 text-white px-12 py-6 rounded-lg font-headline text-xl uppercase tracking-tight transition-all duration-300" href="https://github.com/orthonode">Read Docs</a>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="w-full py-24 px-12 bg-black border-t border-white/5">
-<div class="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
-<div class="col-span-1 md:col-span-2">
-<div class="text-4xl font-headline text-white mb-6 uppercase tracking-tighter">ORTHONODE™</div>
-<p class="font-body font-light text-white/50 text-base mb-8 leading-relaxed max-w-sm">
-                Sovereign verification layers for the decentralized stack. Engineered for deterministic finality across Polkadot, TON, and Solana.
-            </p>
-<div class="flex space-x-6">
-<a class="text-white/30 hover:text-primary transition-colors" href="https://twitter.com/orthonode">Twitter</a>
-<a class="text-white/30 hover:text-primary transition-colors" href="https://github.com/orthonode">GitHub</a>
-<a class="text-white/30 hover:text-primary transition-colors" href="mailto:infrastructure@orthonode.xyz">Email</a>
-</div>
-</div>
-<div>
-<h5 class="font-headline text-xs tracking-widest text-white uppercase mb-8 opacity-40">PROTOCOLS</h5>
-<div class="flex flex-col space-y-4">
-<a class="text-white/60 hover:text-primary transition-all text-sm uppercase tracking-tight" href="dotlend.html" >DotLend</a>
-<a class="text-white/60 hover:text-primary transition-all text-sm uppercase tracking-tight" href="sha.html" >SHA</a>
-<a class="text-white/60 hover:text-primary transition-all text-sm uppercase tracking-tight" href="invariant.html" >INVARIANT</a>
-<a class="text-white/60 hover:text-primary transition-all text-sm uppercase tracking-tight" href="iotex-research.html">IoTeX Research</a>
-<a class="text-white/60 hover:text-primary transition-all text-sm uppercase tracking-tight" href="tix-dao.html" >TIX-DAO</a>
-</div>
-</div>
-<div>
-<h5 class="font-headline text-xs tracking-widest text-white uppercase mb-8 opacity-40">NETWORK</h5>
-<div class="space-y-4">
-<div class="flex items-center space-x-3">
-<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-<span class="font-label text-[10px] text-white/40 tracking-widest uppercase">UPTIME 99.98%</span>
-</div>
-<div class="flex items-center space-x-3">
-<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-<span class="font-label text-[10px] text-white/40 tracking-widest uppercase">LATENCY 12ms</span>
-</div>
-</div>
-</div>
-</div>
-<div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-<div class="font-label text-[10px] tracking-widest text-white/20 uppercase">
-            ORTHONODE SYSTEMS™ © 2024 · ARB · SOL · DOT · TON · TAO
+
+<!-- ── Protocol Grid ──────────────────────────────────── -->
+<section id="protocols">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">// protocol index</p>
+      <h2 class="section-title">8 Protocols. One Trust Primitive.</h2>
+      <p class="section-sub">From silicon identity to AI execution receipts — each protocol is a verification layer in the decentralized stack.</p>
+    </div>
+
+    <div class="protocol-grid">
+
+      <!-- SHA -->
+      <a href="sha.html" class="proto-card reveal" style="--card-rgb:26,110,255">
+        <div class="card-corner"></div>
+        <div class="card-header">
+          <span class="card-name">SHA</span>
+          <span class="card-chain-badge">Arbitrum</span>
         </div>
-<div class="font-label text-[10px] tracking-widest text-white/20 uppercase">
-            Sovereign Identity Layer v2.0.4-PROD
+        <p class="card-desc">ESP32-S3 eFuse 4-gate hardware identity, live on Arbitrum Sepolia. Stylus Rust contracts.</p>
+        <div class="card-status live">
+          <span class="dot"></span>
+          <span class="card-status-text">Live Sepolia</span>
         </div>
-</div>
+        <span class="card-arrow">↗</span>
+      </a>
+
+      <!-- TON-SHA -->
+      <a href="ton-sha.html" class="proto-card reveal" style="--card-rgb:0,152,234">
+        <div class="card-corner"></div>
+        <div class="card-header">
+          <span class="card-name">TON-SHA</span>
+          <span class="card-chain-badge">TON</span>
+        </div>
+        <p class="card-desc">4-gate agent trust primitive on TON. Hardware-anchored identity for autonomous agents.</p>
+        <div class="card-status live">
+          <span class="dot"></span>
+          <span class="card-status-text">Live Testnet</span>
+        </div>
+        <span class="card-arrow">↗</span>
+      </a>
+
+      <!-- OAP -->
+      <a href="oap.html" class="proto-card reveal" style="--card-rgb:124,58,237">
+        <div class="card-corner"></div>
+        <div class="card-header">
+          <span class="card-name">OAP</span>
+          <span class="card-chain-badge">Chain-Agnostic</span>
+        </div>
+        <p class="card-desc">Deterministic hardware attestation pipeline. Proprietary. Consumed by NEXUS gateway.</p>
+        <div class="card-status">
+          <span class="dot"></span>
+          <span class="card-status-text">Proprietary</span>
+        </div>
+        <span class="card-arrow">↗</span>
+      </a>
+
+      <!-- NEXUS -->
+      <a href="nexus.html" class="proto-card reveal" style="--card-rgb:245,158,11">
+        <div class="card-corner"></div>
+        <div class="card-header">
+          <span class="card-name">NEXUS</span>
+          <span class="card-chain-badge">Chain-Agnostic</span>
+        </div>
+        <p class="card-desc">Zero-trust edge gateway. Verify-then-execute. Consumes SHA, TON-SHA, and OAP attestations.</p>
+        <div class="card-status">
+          <span class="dot"></span>
+          <span class="card-status-text">Private Beta</span>
+        </div>
+        <span class="card-arrow">↗</span>
+      </a>
+
+      <!-- INVARIANT -->
+      <a href="invariant.html" class="proto-card reveal" style="--card-rgb:168,85,247">
+        <div class="card-corner"></div>
+        <div class="card-header">
+          <span class="card-name">INVARIANT</span>
+          <span class="card-chain-badge">Bittensor</span>
+        </div>
+        <p class="card-desc">NTS trust score subnet for Bittensor. Ideathon project — sandboxed until integration decision.</p>
+        <div class="card-status">
+          <span class="dot"></span>
+          <span class="card-status-text">Competition</span>
+        </div>
+        <span class="card-arrow">↗</span>
+      </a>
+
+      <!-- TIX-DAO -->
+      <a href="tix-dao.html" class="proto-card reveal" style="--card-rgb:153,69,255">
+        <div class="card-corner"></div>
+        <div class="card-header">
+          <span class="card-name">TIX-DAO</span>
+          <span class="card-chain-badge">Solana</span>
+        </div>
+        <p class="card-desc">SPL-Governance venue ticketing DAO. Graveyard Hackathon 2026. On-chain venue governance.</p>
+        <div class="card-status">
+          <span class="dot"></span>
+          <span class="card-status-text">Competition</span>
+        </div>
+        <span class="card-arrow">↗</span>
+      </a>
+
+      <!-- MANTIS -->
+      <a href="mantis.html" class="proto-card reveal" style="--card-rgb:0,255,136">
+        <div class="card-corner"></div>
+        <div class="card-header">
+          <span class="card-name">MANTIS</span>
+          <span class="card-chain-badge">Polygon</span>
+        </div>
+        <p class="card-desc">Autonomous prediction market trading agent. Triple-AI signal engine. Polymarket USDC.</p>
+        <div class="card-status live">
+          <span class="dot"></span>
+          <span class="card-status-text">Operational</span>
+        </div>
+        <span class="card-arrow">↗</span>
+      </a>
+
+      <!-- DOTLEND -->
+      <a href="dotlend.html" class="proto-card reveal" style="--card-rgb:230,0,122">
+        <div class="card-corner"></div>
+        <div class="card-header">
+          <span class="card-name">DotLend</span>
+          <span class="card-chain-badge">Polkadot</span>
+        </div>
+        <p class="card-desc">ZK-powered money market on Polkadot. Privacy-preserving collateral and lending protocol.</p>
+        <div class="card-status">
+          <span class="dot"></span>
+          <span class="card-status-text">In Development</span>
+        </div>
+        <span class="card-arrow">↗</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Architecture ────────────────────────────────────── -->
+<section id="architecture">
+  <div class="section-inner">
+    <div class="reveal">
+      <p class="section-label">// dependency chain</p>
+      <h2 class="section-title">Stack Architecture</h2>
+      <p class="section-sub">Every layer is verified before the next executes. Identity feeds attestation. Attestation gates the gateway. Zero shortcuts.</p>
+    </div>
+
+    <div class="arch-flow reveal">
+      <!-- Identity layer -->
+      <div class="arch-group">
+        <span class="arch-group-label">Identity</span>
+        <div class="arch-group-nodes">
+          <div class="arch-node" style="border-color:rgba(26,110,255,.4)">
+            <div class="arch-node-label">Arbitrum</div>
+            <div class="arch-node-name" style="color:#1A6EFF">SHA</div>
+            <div class="arch-node-sub">eFuse 4-Gate</div>
+          </div>
+          <div class="arch-node" style="border-color:rgba(0,152,234,.4)">
+            <div class="arch-node-label">TON</div>
+            <div class="arch-node-name" style="color:#0098EA">TON-SHA</div>
+            <div class="arch-node-sub">Agent Trust</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="arch-arrow">
+        <svg width="60" height="20" viewBox="0 0 60 20">
+          <line class="arch-arrow-line" x1="0" y1="10" x2="50" y2="10" marker-end="url(#ah)"/>
+          <defs>
+            <marker id="ah" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="rgba(0,212,255,.5)"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Attestation -->
+      <div class="arch-group">
+        <span class="arch-group-label">Attestation</span>
+        <div class="arch-group-nodes">
+          <div class="arch-node" style="border-color:rgba(124,58,237,.4)">
+            <div class="arch-node-label">Chain-Agnostic</div>
+            <div class="arch-node-name" style="color:#7C3AED">OAP</div>
+            <div class="arch-node-sub">Deterministic</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="arch-arrow">
+        <svg width="60" height="20" viewBox="0 0 60 20">
+          <line class="arch-arrow-line" x1="0" y1="10" x2="50" y2="10" marker-end="url(#ah2)"/>
+          <defs>
+            <marker id="ah2" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="rgba(0,212,255,.5)"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Gateway -->
+      <div class="arch-group">
+        <span class="arch-group-label">Gateway</span>
+        <div class="arch-group-nodes">
+          <div class="arch-node" style="border-color:rgba(245,158,11,.4)">
+            <div class="arch-node-label">Chain-Agnostic</div>
+            <div class="arch-node-name" style="color:#F59E0B">NEXUS</div>
+            <div class="arch-node-sub">Zero-Trust Edge</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrow -->
+      <div class="arch-arrow">
+        <svg width="60" height="20" viewBox="0 0 60 20">
+          <line class="arch-arrow-line" x1="0" y1="10" x2="50" y2="10" marker-end="url(#ah3)"/>
+          <defs>
+            <marker id="ah3" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="rgba(0,212,255,.5)"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Applications -->
+      <div class="arch-group">
+        <span class="arch-group-label">Applications</span>
+        <div class="arch-group-nodes">
+          <div class="arch-node" style="border-color:rgba(0,255,136,.4)">
+            <div class="arch-node-label">Polygon</div>
+            <div class="arch-node-name" style="color:#00FF88">MANTIS</div>
+            <div class="arch-node-sub">AI Trading</div>
+          </div>
+          <div class="arch-node" style="border-color:rgba(230,0,122,.4)">
+            <div class="arch-node-label">Polkadot</div>
+            <div class="arch-node-name" style="color:#E6007A">DotLend</div>
+            <div class="arch-node-sub">ZK Lending</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ──────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/site-logo.png" alt="Orthonode">
+      <span class="footer-brand-text">ORTHONODE SYSTEMS™</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://orthonode.xyz">orthonode.xyz</a>
+      <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">@OrthonodeSys</a>
+      <a href="mailto:infrastructure@orthonode.xyz">infrastructure@orthonode.xyz</a>
+      <a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Orthonode Systems. All rights reserved.</p>
+  </div>
 </footer>
+
+<!-- ── Google Search Console verification ──────────────── -->
+<!-- Served as HTML file at /google73e927487bf1b8db.html -->
+
 <script>
-    // A. HERO REVEAL ANIMATION
-    const headline = "VERIFICATION INFRASTRUCTURE FOR THE DECENTRALIZED STACK.";
-    const heroEl = document.getElementById('hero-headline');
-    
-    heroEl.innerHTML = headline.split(' ').map((word, i) => {
-        return `<span style="display:inline-block; overflow:hidden;">
-            <span class="word-reveal" style="animation-delay: ${i * 80}ms">${word}</span>
-        </span>`;
-    }).join(' ');
+(function () {
+  'use strict';
+  gsap.registerPlugin(ScrollTrigger);
 
-    // C. STAT COUNTERS
-    const stats = document.querySelectorAll('.stat-counter');
-    const observerOptions = { threshold: 0.5 };
+  /* ── Cursor ──────────────────────────────────────────── */
+  const cursor = document.getElementById('cursor');
+  let mx = 0, my = 0, cx = 0, cy = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
+  (function animCursor() {
+    cx += (mx - cx) * 0.18;
+    cy += (my - cy) * 0.18;
+    cursor.style.transform = `translate(${cx - 6}px, ${cy - 6}px)`;
+    requestAnimationFrame(animCursor);
+  })();
+  document.querySelectorAll('a, button, .proto-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('is-hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('is-hover'));
+  });
 
-    const animateCounter = (el) => {
-        const target = +el.getAttribute('data-target');
-        let current = 0;
-        const duration = 1500;
-        const stepTime = Math.abs(Math.floor(duration / target));
-        
-        const update = () => {
-            current += Math.ceil(target / 60);
-            if (current >= target) {
-                el.innerText = target;
-            } else {
-                el.innerText = current;
-                requestAnimationFrame(update);
-            }
-        };
-        requestAnimationFrame(update);
-    };
+  /* ── Star field ──────────────────────────────────────── */
+  const cv = document.getElementById('star-canvas');
+  const ctx = cv.getContext('2d');
+  let stars = [];
+  function initStars() {
+    cv.width  = window.innerWidth;
+    cv.height = window.innerHeight;
+    stars = Array.from({ length: 150 }, () => ({
+      x: Math.random() * cv.width,
+      y: Math.random() * cv.height,
+      r: Math.random() * 1.1 + 0.2,
+      a: Math.random(),
+      s: (Math.random() * 0.006 + 0.002) * (Math.random() < .5 ? 1 : -1),
+    }));
+  }
+  function drawStars() {
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    stars.forEach(s => {
+      s.a += s.s;
+      if (s.a <= 0 || s.a >= 1) s.s *= -1;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180,220,255,${s.a * 0.7})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(drawStars);
+  }
+  initStars();
+  drawStars();
+  window.addEventListener('resize', initStars, { passive: true });
 
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                animateCounter(entry.target);
-                statsObserver.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
+  /* ── Page Loader ─────────────────────────────────────── */
+  const loaderLogo = document.getElementById('loader-logo');
+  const loaderFill = document.getElementById('loader-fill');
+  const loaderText = document.getElementById('loader-text');
+  const messages   = ['Initialising systems...', 'Loading protocols...', 'Verifying identity...', 'Stack online.'];
+  let prog = 0, msgIdx = 0;
+  gsap.to(loaderLogo, { opacity: 1, scale: 1, duration: .6, ease: 'power2.out', delay: .1 });
+  const fillTimer = setInterval(() => {
+    prog += Math.random() * 18 + 6;
+    if (prog > 100) prog = 100;
+    loaderFill.style.width = prog + '%';
+    if (prog > 25  && msgIdx < 1) { loaderText.textContent = messages[++msgIdx]; }
+    if (prog > 55  && msgIdx < 2) { loaderText.textContent = messages[++msgIdx]; }
+    if (prog > 85  && msgIdx < 3) { loaderText.textContent = messages[++msgIdx]; }
+    if (prog >= 100) {
+      clearInterval(fillTimer);
+      setTimeout(() => {
+        gsap.to('#loader', { opacity: 0, duration: .5, ease: 'power2.inOut', onComplete: () => {
+          document.getElementById('loader').style.display = 'none';
+          runHeroAnim();
+        }});
+      }, 350);
+    }
+  }, 80);
 
-    stats.forEach(stat => statsObserver.observe(stat));
+  /* ── Hero GSAP ───────────────────────────────────────── */
+  function runHeroAnim() {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    // E. PROTOCOL CARDS INTERSECTION OBSERVER
-    const cards = document.querySelectorAll('.protocol-card');
-    const cardObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-                cardObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-
-    cards.forEach(card => cardObserver.observe(card));
-</script>
-
-    </div><!-- /#app -->
-    
-    <script>
-    function initAnimations(){
-      setTimeout(()=>ScrollTrigger && ScrollTrigger.refresh(), 300);
-      gsap.registerPlugin(ScrollTrigger, TextPlugin);
-
-      // ── Hero word reveal ──────────────────────────────────
-      gsap.to(".word-reveal", {
-        y: 0, opacity: 1, duration: 0.7,
-        ease: "power4.out", stagger: 0.07, delay: 0.1,
-        clearProps: "transform"
+    /* Logo: scale 0.5→1, opacity 0→1, blur 20→0, then pulse glow */
+    tl.fromTo('#hero-logo',
+      { scale: .5, opacity: 0, filter: 'drop-shadow(0 0 30px rgba(0,212,255,.6)) blur(20px)' },
+      { scale: 1,  opacity: 1, filter: 'drop-shadow(0 0 30px rgba(0,212,255,.6)) blur(0px)', duration: 1.1 }
+    );
+    /* Continuous pulse glow after intro */
+    tl.call(() => {
+      gsap.to('#hero-logo', {
+        filter: 'drop-shadow(0 0 50px rgba(0,212,255,.9)) blur(0px)',
+        duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1,
       });
+    });
+
+    tl.fromTo('.hero-eyebrow',
+      { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .7 }, '-=.5'
+    );
+    tl.fromTo('.hero-title',
+      { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: .8 }, '-=.4'
+    );
+    tl.fromTo('.hero-tagline',
+      { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .7 }, '-=.4'
+    );
+    tl.fromTo('.hero-ctas',
+      { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: .6 }, '-=.3'
+    );
+    tl.fromTo('#orbital-wrap',
+      { opacity: 0, scale: .88 }, { opacity: 1, scale: 1, duration: 1 }, '-=.4'
+    );
+  }
+
+  /* ── Stats count-up ──────────────────────────────────── */
+  ScrollTrigger.create({
+    trigger: '#stats-bar',
+    start: 'top 85%',
+    once: true,
+    onEnter: () => {
+      document.querySelectorAll('.stat-value[data-count]').forEach(el => {
+        const target  = parseInt(el.dataset.count, 10);
+        const prefix  = el.dataset.prefix  || '';
+        const suffix  = el.dataset.suffix  !== undefined ? el.dataset.suffix : '';
+        const dur     = target > 100 ? 1.8 : 1.2;
+        gsap.fromTo({ v: 0 }, { v: 0 }, {
+          v: target, duration: dur, ease: 'power2.out',
+          onUpdate: function () {
+            const v = Math.round(this.targets()[0].v);
+            el.textContent = prefix + (target > 100 ? v.toLocaleString() : v) + suffix;
+          }
+        });
+        /* Actually animate using gsap proxy */
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: target, duration: dur, ease: 'power2.out',
+          onUpdate: () => {
+            const v = Math.round(obj.val);
+            el.textContent = prefix + (target > 100 ? v.toLocaleString() : v) + suffix;
+          }
+        });
+      });
+    }
+  });
+
+  /* ── ScrollTrigger reveals ───────────────────────────── */
+  gsap.utils.toArray('.reveal').forEach((el, i) => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 32 },
+      {
+        opacity: 1, y: 0, duration: .8, ease: 'power2.out',
+        delay: (i % 4) * .08,
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true }
       }
+    );
+  });
 
-      // ── Fade-in sections on scroll ────────────────────────
-      gsap.utils.toArray("section:not(:first-child)").forEach(sec => {
-        gsap.fromTo(sec, {opacity:0, y:40}, {
-          opacity:1, y:0, duration:0.9, ease:"power3.out",
-          scrollTrigger:{ trigger:sec, start:"top 85%", once:true }
-        });
+  /* ── 3D card tilt ────────────────────────────────────── */
+  document.querySelectorAll('.proto-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r  = card.getBoundingClientRect();
+      const x  = (e.clientX - r.left) / r.width  - .5;
+      const y  = (e.clientY - r.top)  / r.height - .5;
+      gsap.to(card, {
+        rotateX: -y * 10, rotateY: x * 10,
+        transformPerspective: 800, ease: 'power1.out', duration: .25
       });
+    });
+    card.addEventListener('mouseleave', () => {
+      gsap.to(card, { rotateX: 0, rotateY: 0, duration: .5, ease: 'power2.out' });
+    });
+  });
 
-      // ── Protocol card stagger on scroll ──────────────────
-      // proto-card animation handled by CSS hover (removed GSAP fromTo which caused opacity stuck at 0)
-      });
+  /* ── Hamburger nav ───────────────────────────────────── */
+  const hamburger = document.getElementById('hamburger');
+  const overlay   = document.getElementById('nav-overlay');
+  hamburger.addEventListener('click', () => {
+    const open = overlay.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  overlay.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      overlay.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
 
-      // ── Counter animation ─────────────────────────────────
-      document.querySelectorAll("[data-target]").forEach(el => {
-        const target = parseInt(el.dataset.target);
-        ScrollTrigger.create({
-          trigger: el, start:"top 85%", once:true,
-          onEnter: () => gsap.to({val:0},{val:target,duration:1.4,ease:"power2.out",
-            onUpdate:function(){ el.textContent = (this.targets()[0].val < 10 ? "0" : "") + Math.round(this.targets()[0].val); }
-          })
-        });
-      });
-
-      // ── Featured card entrance ────────────────────────────
-      gsap.fromTo(".sweep-card", {opacity:0, scale:0.96}, {
-        opacity:1, scale:1, duration:1, ease:"power3.out",
-        scrollTrigger:{ trigger:".sweep-card", start:"top 80%", once:true }
-      });
-
-      // ── Nav entrance ─────────────────────────────────────
-      gsap.fromTo("nav", {y:-80, opacity:0}, {y:0, opacity:1, duration:0.6, ease:"power3.out", delay:0.1});
-
-      // ── Ticker fade-in ────────────────────────────────────
-      gsap.fromTo(".ticker-bar", {opacity:0}, {opacity:1, duration:0.5, delay:0.4});
-    }
-
-    // ── View Transitions intercept ────────────────────────────
-    if(!document.startViewTransition){
-      // Polyfill: add fade to all internal links
-      document.addEventListener("click", e => {
-        const a = e.target.closest("a[href]");
-        if(!a) return;
-        const url = a.href;
-        if(!url || url.startsWith("mailto:") || url.includes("://") && !url.includes(location.hostname)) return;
-        if(a.target==="_blank") return;
-        e.preventDefault();
-        document.body.style.opacity="0";
-        document.body.style.transition="opacity 0.2s ease";
-        setTimeout(()=>{ location.href=url; },200);
-      });
-    }
-    </script>
-</body></html>
+})();
+</script>
+</body>
+</html>

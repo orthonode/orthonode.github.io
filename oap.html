@@ -1,479 +1,1607 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>OAP — Integrity Governance Engine for DePIN & Mobility | ORTHONODE SYSTEMS™</title>
-    <meta name="description" content="OAP (Orthonode Assurance Platform) is a chain-agnostic integrity governance engine for DePIN hardware. Physics compliance, lifecycle trust scoring, clone containment. PROPRIETARY.">
-    <meta name="keywords" content="OAP Orthonode Assurance Platform, DePIN integrity governance, lifecycle trust scoring, physics compliance, chain-agnostic hardware attestation, clone containment, autonomous systems trust, Arhant Barmate">
-    <meta name="author" content="Arhant Barmate">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
-    <link rel="canonical" href="https://orthonode.xyz/oap.html">
-    <meta name="geo.region" content="IN-MP">
-    <meta name="geo.placename" content="Bhopal, Madhya Pradesh, India">
-    <meta name="geo.position" content="23.2599;77.4126">
-    <meta name="ICBM" content="23.2599, 77.4126">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://orthonode.xyz/oap.html">
-    <meta property="og:title" content="OAP — Integrity Governance Engine for DePIN & Mobility">
-    <meta property="og:description" content="Deterministic physics compliance and lifecycle trust governance for autonomous systems. OAP emits verifiable integrity state. Partners apply economic logic. PROPRIETARY.">
-    <meta property="og:image" content="https://orthonode.xyz/banner.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="ORTHONODE SYSTEMS™">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@OrthonodeSys">
-    <meta name="twitter:creator" content="@OrthonodeSys">
-    <meta name="twitter:title" content="OAP — Integrity Governance Engine | ORTHONODE SYSTEMS™">
-    <meta name="twitter:description" content="Deterministic physics compliance and lifecycle trust governance for DePIN hardware. Chain-agnostic. PROPRIETARY.">
-    <meta name="twitter:image" content="https://orthonode.xyz/banner.png">
-    <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"SoftwareApplication","name":"OAP — Orthonode Assurance Platform","applicationCategory":"DeveloperApplication","description":"Chain-agnostic integrity governance engine for DePIN hardware. Physics compliance, lifecycle trust scoring 0–100, clone containment, adaptive anchoring, override governance.","author":{"@type":"Person","name":"Arhant Barmate"},"publisher":{"@type":"Organization","name":"ORTHONODE SYSTEMS™","url":"https://orthonode.xyz"}}
-    </script>
-    <meta name="theme-color" content="#000000">
-    <link rel="icon" type="image/png" sizes="96x96" href="/site-logo.png">
-    <link rel="apple-touch-icon" href="/site-logo.png">
-    <link rel="shortcut icon" href="/site-logo.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --void:#000000; --bg:#000000; --bg-1:#070707; --bg-2:#0D0D0D; --bg-card:#0D0D0D; --bg-raised:#141414;
-            --border:rgba(255,255,255,0.06); --border-md:rgba(255,255,255,0.10); --border-hi:rgba(255,255,255,0.18);
-            --tx-1:#F5F5F5; --tx-2:#8C8C8C; --tx-3:#404040; --tx-4:#1C1C1C;
-            --silver:#D0D0D0; --chrome:#A8A8A8; --plasma:#C8C8C8;
-            --sha:#2A9FE8; --ton:#0098EA; --nexus:#00D084; --oap:#F59E0B; --inv:#EAB308; --tix:#9945FF; --red:#EF4444; --green:#22C55E;
-            --accent:#F59E0B;
-            --font-head:'Syne',sans-serif; --font-body:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif; --font-mono:'IBM Plex Mono','Courier New',monospace;
-            --ease:cubic-bezier(0.22,1,0.36,1);
-        }
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-        body{background:var(--bg);color:var(--tx-2);font-family:var(--font-body);font-size:16px;line-height:1.65;overflow-x:hidden}
-        body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,.012) 2px,rgba(255,255,255,.012) 4px);pointer-events:none;z-index:-1}
-        body::after{content:'';position:fixed;top:-20vh;right:-10vw;width:55vw;height:55vw;background:radial-gradient(ellipse,rgba(255,255,255,.015) 0%,transparent 65%);pointer-events:none;z-index:-2}
-        a{color:var(--tx-2);text-decoration:none;transition:color .2s}
-        a:hover{color:var(--tx-1)}
-        ::selection{background:rgba(245,158,11,.2)}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OAP — Orthonode Assurance Platform | Proprietary Hardware Attestation</title>
+  <meta name="description" content="OAP — Chain-agnostic deterministic hardware attestation. Proprietary. Not open source. Competitive advantage by design.">
+  <meta property="og:title" content="OAP — Orthonode Assurance Platform">
+  <meta property="og:description" content="Deterministic hardware attestation across any blockchain. The proof layer for physical trust.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://orthonode.xyz/oap.html">
+  <link rel="canonical" href="https://orthonode.xyz/oap.html">
+  <link rel="icon" href="/site-logo.png" type="image/png">
 
-        header{position:fixed;top:0;width:100%;z-index:1000;backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%);background:rgba(0,0,0,.85);border-bottom:1px solid var(--border)}
-        header::after{content:'';position:absolute;bottom:-1px;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(200,200,200,.25) 40%,rgba(200,200,200,.15) 60%,transparent)}
-        .nav-inner{max-width:1360px;margin:0 auto;padding:.7rem 2rem;display:flex;justify-content:space-between;align-items:center}
-        .nav-left{display:flex;align-items:center;gap:1rem;font-family:var(--font-mono);font-size:.68rem}
-        .nav-back{display:flex;align-items:center;gap:.45rem;color:var(--tx-3);transition:color .2s}
-        .nav-back:hover{color:var(--accent)}
-        .nav-back img{border-radius:3px;display:block}
-        .nav-sep{color:var(--tx-4)}
-        .nav-status{display:flex;align-items:center;gap:.45rem;color:var(--tx-3);font-family:var(--font-mono);font-size:.68rem}
-        .live-dot{width:5px;height:5px;background:var(--oap);border-radius:50%;box-shadow:0 0 6px rgba(245,158,11,.6);animation:blink 2.5s ease-in-out infinite;flex-shrink:0}
-        @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-        .nav-right{display:flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.65rem}
-        .tag{padding:.18rem .55rem;border:1px solid var(--border);color:var(--tx-3);transition:border-color .2s,color .2s}
-        .tag:hover{border-color:var(--border-md);color:var(--tx-2)}
-        .tag-oap{color:var(--oap);border-color:rgba(245,158,11,.2)}
-        .tag-oap:hover{border-color:rgba(245,158,11,.4)}
-        .tag-prop{color:var(--tx-3);border-color:rgba(245,158,11,.15);background:rgba(245,158,11,.04)}
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-        .wrap{max-width:1360px;margin:0 auto;padding:0 2rem}
-        .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
-        .reveal.in{opacity:1;transform:translateY(0)}
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
 
-        .hero{min-height:88vh;padding-top:9rem;padding-bottom:5rem;display:flex;flex-direction:column;justify-content:center;position:relative}
-        .hero-glow{position:absolute;top:0;right:-5%;width:min(500px,50vw);height:min(500px,50vw);background:radial-gradient(ellipse,rgba(245,158,11,.07) 0%,transparent 70%);border-radius:50%;pointer-events:none;animation:float 16s ease-in-out infinite}
-        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-28px)}}
-        .breadcrumb{font-family:var(--font-mono);font-size:.65rem;color:var(--tx-3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2rem}
-        .breadcrumb .bc-cur{color:var(--accent)}
-        .hero-badge{display:inline-flex;align-items:center;gap:.6rem;padding:.3rem .8rem;border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.05);font-family:var(--font-mono);font-size:.62rem;color:var(--oap);letter-spacing:.08em;margin-bottom:1.75rem}
-        .hero h1{font-family:var(--font-head);font-size:clamp(2.6rem,5.5vw,4.8rem);font-weight:800;line-height:1.0;letter-spacing:-.03em;color:var(--tx-1);max-width:900px;margin-bottom:1.5rem}
-        .hero h1 .accent{color:var(--accent)}
-        .hero-sub{font-size:clamp(1rem,1.6vw,1.2rem);color:var(--tx-2);max-width:720px;margin-bottom:.75rem;line-height:1.65}
-        .hero-mono{font-family:var(--font-mono);font-size:.65rem;color:var(--oap);letter-spacing:.06em;margin-bottom:3rem;opacity:.8}
+  <style>
+    /* ── Reset ───────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-        .stat{background:var(--bg-card);padding:1.25rem 1.5rem;text-align:center;transition:background .25s}
-        .stat:hover{background:var(--bg-raised)}
-        .stat-n{font-family:var(--font-mono);font-size:1.6rem;font-weight:600;color:var(--accent);display:block;line-height:1;margin-bottom:.4rem}
-        .stat-l{font-family:var(--font-mono);font-size:.6rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.1em}
+    :root {
+      --bg: #04020A;
+      --surface: #0A0618;
+      --surface2: #100820;
+      --primary: #7C3AED;
+      --accent: #A855F7;
+      --gold: #F4C430;
+      --red: #EF4444;
+      --text: #EDE9FE;
+      --muted: #7C6B9E;
+      --border: rgba(124,58,237,0.2);
+      --border-bright: rgba(168,85,247,0.4);
+      --classified-red: #DC2626;
+    }
 
-        .sec-label{font-family:var(--font-mono);font-size:.65rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.75rem;padding-bottom:.85rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem}
-        .sec-label::before{content:'';width:2px;height:12px;background:linear-gradient(180deg,var(--oap),var(--inv));flex-shrink:0}
-        .section{margin:5rem 0}
-
-        .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-        .card{background:var(--bg-card);padding:2rem 2.25rem;transition:background .25s}
-        .card:hover{background:var(--bg-raised)}
-        .card.span2{grid-column:span 2}
-        .card-label{font-family:var(--font-mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:1rem}
-        .card h3{font-family:var(--font-head);font-size:1.25rem;font-weight:700;color:var(--tx-1);margin-bottom:.875rem;line-height:1.2}
-        .card p{color:var(--tx-2);font-size:.925rem;line-height:1.68;margin-bottom:.75rem}
-        .card p:last-child{margin-bottom:0}
-        .card strong{color:var(--tx-1);font-weight:600}
-
-        .primitives-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-        .prim-card{background:var(--bg-card);padding:1.75rem;transition:background .25s}
-        .prim-card:hover{background:var(--bg-raised)}
-        .prim-num{font-family:var(--font-mono);font-size:.6rem;color:var(--oap);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
-        .prim-card h3{font-family:var(--font-head);font-size:1.05rem;font-weight:700;color:var(--tx-1);margin-bottom:.5rem}
-        .prim-card p{font-size:.875rem;color:var(--tx-2);line-height:1.65}
-
-        .domains-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border)}
-        .domain-item{background:var(--bg-card);padding:1.25rem 1.5rem;transition:background .2s}
-        .domain-item:hover{background:var(--bg-raised)}
-        .domain-item h4{font-family:var(--font-mono);font-size:.75rem;font-weight:600;color:var(--tx-1);margin-bottom:.35rem;letter-spacing:.04em}
-        .domain-item p{font-size:.8rem;color:var(--tx-3);line-height:1.55}
-
-        .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem}
-        .chip{font-family:var(--font-mono);font-size:.6rem;padding:.18rem .5rem;border:1px solid var(--border);color:var(--tx-3)}
-        .chip-oap{border-color:rgba(245,158,11,.25);color:var(--oap);background:rgba(245,158,11,.04)}
-
-        .faq{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border)}
-        .faq-item{background:var(--bg-card);padding:1.5rem 2rem;transition:background .2s}
-        .faq-item:hover{background:var(--bg-raised)}
-        .faq-item h3{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--tx-1);margin-bottom:.6rem}
-        .faq-item p{color:var(--tx-2);font-size:.9rem;line-height:1.65}
-
-        .cta{background:var(--bg-card);border:1px solid var(--border);padding:3.5rem;text-align:center;position:relative;overflow:hidden}
-        .cta::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:50%;height:1px;background:linear-gradient(90deg,transparent,rgba(245,158,11,.55),transparent)}
-        .cta h2{font-family:var(--font-head);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:var(--tx-1);margin-bottom:.875rem}
-        .cta p{color:var(--tx-2);max-width:520px;margin:0 auto 2rem}
-        .cta-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
-        .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.7rem 1.4rem;font-family:var(--font-mono);font-size:.75rem;font-weight:600;border:1px solid var(--border-md);color:var(--tx-2);background:transparent;text-decoration:none;transition:all .22s var(--ease);letter-spacing:.03em}
-        .btn:hover{color:var(--tx-1);border-color:var(--border-hi);background:rgba(255,255,255,.03)}
-        .btn-primary{background:var(--oap);color:#04060A;border-color:var(--oap)}
-        .btn-primary:hover{background:#fbbf24;border-color:#fbbf24;color:#04060A;box-shadow:0 0 24px rgba(245,158,11,.35)}
-
-        #citation{background:var(--bg-1);border:1px solid var(--border);border-left:2px solid rgba(245,158,11,.3);padding:1.5rem 2rem;margin-top:2rem}
-        #citation h2{font-family:var(--font-mono);font-size:.62rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:.75rem}
-        #citation p{font-family:var(--font-mono);font-size:.72rem;color:var(--tx-3);line-height:1.7}
-
-        footer{margin-top:8rem;padding:4rem 0 2rem;border-top:1px solid var(--border);position:relative}
-        footer::before{content:'';position:absolute;top:-1px;left:0;width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(245,158,11,.35) 35%,rgba(234,179,8,.2) 65%,transparent)}
-        .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3rem}
-        .footer-brand h4{font-family:var(--font-head);font-size:1rem;font-weight:800;color:var(--tx-1);margin-bottom:.875rem;letter-spacing:.04em}
-        .footer-brand p{color:var(--tx-3);font-size:.875rem;line-height:1.6}
-        .footer-col h5{font-family:var(--font-mono);font-size:.62rem;color:var(--tx-3);text-transform:uppercase;letter-spacing:.14em;margin-bottom:1.1rem}
-        .footer-col ul{list-style:none}
-        .footer-col li{margin-bottom:.65rem}
-        .footer-col a{color:var(--tx-3);font-size:.875rem;transition:color .2s}
-        .footer-col a:hover{color:var(--tx-1)}
-        .footer-bottom{padding-top:1.75rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:.65rem;color:var(--tx-3)}
-        .footer-legal{display:flex;gap:1.5rem}
-        .footer-legal a{color:var(--tx-3);font-size:.65rem}
-        .footer-legal a:hover{color:var(--tx-1)}
-
-        @media(max-width:1024px){.primitives-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}.footer-brand{grid-column:span 2}}
-        @media(max-width:768px){.nav-inner{padding:.7rem 1rem}.grid-2{grid-template-columns:1fr}.card.span2{grid-column:span 1}.stats-bar{grid-template-columns:repeat(2,1fr)}.primitives-grid{grid-template-columns:1fr}.domains-grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr}.footer-brand{grid-column:span 1}.footer-bottom{flex-direction:column;gap:1rem;text-align:center}.cta{padding:2.5rem 1.5rem}}
-        @media(max-width:480px){.stats-bar{grid-template-columns:1fr 1fr}.domains-grid{grid-template-columns:1fr}}
-
-        /* ── MOBILE ──────────────────────────────── */
-        @media(max-width:1024px){
-          .hero-layout,.hero-grid,.content-grid,.two-col{grid-template-columns:1fr!important;}
-          .side-panel,.hero-aside,.status-panel{display:none!important;}
-        }
-        @media(max-width:768px){
-          :root{--nav-h:52px;}
-          h1,.page-title{font-size:clamp(1.6rem,7vw,2.4rem)!important;}
-          h2,.section-title{font-size:clamp(1.2rem,5vw,1.8rem)!important;}
-          .hero-title,.h1{font-size:clamp(1.8rem,8vw,2.8rem)!important;}
-          .card-grid,.metrics-grid,.stat-row,.feature-grid{grid-template-columns:1fr!important;gap:12px!important;}
-          .gate-box,.gate-inner{padding:24px 16px!important;}
-          section,.section{padding:48px 0!important;}
-          .container,.wrap{padding:0 16px!important;}
-          table{font-size:.8rem;}
-          table td,table th{padding:8px 10px!important;}
-        }
-        @media(max-width:480px){
-          h1,.page-title,.hero-title{font-size:clamp(1.4rem,8vw,2rem)!important;}
-          .badge,.tag{font-size:.65rem!important;padding:3px 8px!important;}
-          .btn,.cta-btn,.btn-primary{padding:10px 20px!important;font-size:.85rem!important;}
-          .stat-n,[data-count]{font-size:1.8rem!important;}
-          nav .nav-tags{display:none!important;}
-        }
-        @media(max-width:360px){
-          .container,.wrap{padding:0 12px!important;}
-          h1,.hero-title{font-size:1.4rem!important;}
-        }
-    </style>
-    <script src="/nav.js" defer></script>
-</head>
-<body>
-<canvas id="star-field" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
-
-<header role="banner">
-    <div class="nav-inner">
-        <div class="nav-left">
-            <a href="/" class="nav-back"><img src="/site-logo.png" alt="ORTHONODE SYSTEMS™" width="24" height="24" style="border-radius:4px;vertical-align:middle;margin-right:6px;"> orthonode.xyz</a>
-            <span class="nav-sep">/</span>
-            <div class="nav-status"><span class="live-dot"></span><span>OAP</span></div>
-        </div>
-        <div class="nav-right">
-            <span class="tag tag-prop">PROPRIETARY</span>
-            <span class="tag tag-oap">CHAIN_AGNOSTIC</span>
-            <span class="tag">PUBLISHED</span>
-        </div>
-    </div>
-</header>
-
-<main class="wrap">
-
-<section class="hero">
-    <div class="hero-glow" aria-hidden="true"></div>
-    <p class="breadcrumb">ORTHONODE SYSTEMS / <span class="bc-cur">OAP</span></p>
-    <div class="hero-badge"><span class="live-dot"></span>PROPRIETARY · CHAIN-AGNOSTIC · ARCHITECTURE PUBLISHED</div>
-    <h1>Integrity <span class="accent">Governance</span><br>Engine</h1>
-    <p class="hero-sub">OAP (Orthonode Assurance Platform) governs device trust over its full operational lifecycle — enforcing physics compliance, managing integrity scores, detecting clones, and issuing verifiable signals. No blockchain dependency. No economic control. Chain-agnostic by design.</p>
-    <p class="hero-mono">// OAP_EMITS_VERIFIABLE_INTEGRITY_STATE · PARTNERS_APPLY_ECONOMIC_LOGIC</p>
-    <div class="stats-bar reveal">
-        <div class="stat"><span class="stat-n">5</span><span class="stat-l">Core Primitives</span></div>
-        <div class="stat"><span class="stat-n">0–100</span><span class="stat-l">Integrity Score</span></div>
-        <div class="stat"><span class="stat-n">2/yr</span><span class="stat-l">Override Cap</span></div>
-        <div class="stat"><span class="stat-n">Any</span><span class="stat-l">Chain Target</span></div>
-    </div>
-</section>
-
-<section class="section reveal" role="region" aria-labelledby="overview-head">
-    <p class="sec-label" id="overview-head">// PROTOCOL_OVERVIEW : WHAT_OAP_GOVERNS</p>
-    <div class="grid-2">
-        <div class="card">
-            <span class="card-label" style="color:var(--red);">THE_GAP</span>
-            <h3>SHA Anchors Identity. OAP Governs What Happens Next.</h3>
-            <p>SHA verifies <em>what</em> a device is at a single point in time. But devices operate over months or years — firmware changes, behavior drifts, clones appear, sensors degrade. No existing protocol governs device trust across its full lifecycle.</p>
-            <p>OAP closes that gap: append-only behavioral history, deterministic physics compliance checks, and lifecycle trust scoring that cannot be reset or manipulated.</p>
-        </div>
-        <div class="card">
-            <span class="card-label" style="color:var(--oap);">THE_PRIMITIVE</span>
-            <h3>Verifiable Integrity State, Not Economic Control</h3>
-            <p>OAP produces one output: a verifiable integrity signal representing the device's current trust state on a 0–100 scale. <strong>Partners apply economic logic</strong> — reward multipliers, access gates, compliance reports — on top of that signal.</p>
-            <p>OAP does not control rewards, governance, or economic decisions. It produces the truth. What you do with it is yours.</p>
-        </div>
-        <div class="card">
-            <span class="card-label" style="color:var(--tx-3);">WHAT_OAP_IS_NOT</span>
-            <h3>No Oracle, No Centralized Authority</h3>
-            <p>OAP is not a centralized reputation system, an oracle service, or a blockchain-specific module. It carries no economic stake, issues no tokens, and maintains no privileged keys. All governance logic is deterministic and auditable. Designed to compose with SHA on Arbitrum, TON-SHA on TON, and any future verification layer.</p>
-        </div>
-        <div class="card">
-            <span class="card-label" style="color:var(--green);">STATUS</span>
-            <h3>Architecture Published — PROPRIETARY</h3>
-            <p>OAP architecture is published. The implementation is PROPRIETARY — internals are not open-sourced. Surface-level integration documentation is available for qualified partners. Deployment targets are chain-agnostic; integration discussions are open.</p>
-            <p><a href="mailto:infrastructure@orthonode.xyz" style="color:var(--oap);">infrastructure@orthonode.xyz ↗</a></p>
-        </div>
-    </div>
-</section>
-
-<section class="section reveal" role="region" aria-labelledby="primitives-head">
-    <p class="sec-label" id="primitives-head">// CORE_PRIMITIVES : FIVE_GOVERNANCE_MODULES</p>
-    <div class="primitives-grid">
-        <div class="prim-card">
-            <div class="prim-num">Primitive 01</div>
-            <h3>Physics Profiles</h3>
-            <p>Deterministic motion validation against hardware-specific physics envelopes. Each device class has a profile defining legal motion bounds — acceleration, angular rate, thermal range. Violations flag immediately and contribute to lifecycle scoring.</p>
-        </div>
-        <div class="prim-card">
-            <div class="prim-num">Primitive 02</div>
-            <h3>Trust Lifecycle Scoring</h3>
-            <p>Append-only behavioral history produces a 0–100 integrity score across the device's full operational life. Each event — compliance, violation, override — is logged immutably. Past behavior permanently shapes future trust. Cannot be reset.</p>
-        </div>
-        <div class="prim-card">
-            <div class="prim-num">Primitive 03</div>
-            <h3>Clone Containment</h3>
-            <p>Cross-reference detection flags devices that share identity claims with concurrently active units. Statistical behavioral divergence analysis identifies hardware-level impersonation — cloned silicon cannot maintain the same behavioral fingerprint across independent physics channels.</p>
-        </div>
-        <div class="prim-card">
-            <div class="prim-num">Primitive 04</div>
-            <h3>Adaptive Anchoring</h3>
-            <p>Trust anchors recalibrate dynamically as the device ages and its behavioral baseline evolves. New calibration requires verified SHA receipt sequences — preventing arbitrary anchor reset. Adaptive anchoring accounts for legitimate sensor drift without opening a reset attack vector.</p>
-        </div>
-        <div class="prim-card">
-            <div class="prim-num">Primitive 05</div>
-            <h3>Override Governance</h3>
-            <p>A maximum of two operator overrides per device per year are permitted. Each override is logged immutably with timestamp, operator identity, and justification hash. Overrides cannot be cleared, backdated, or issued anonymously. The cap is protocol-enforced.</p>
-        </div>
-        <div class="prim-card" style="background:rgba(245,158,11,.03);border-left:2px solid rgba(245,158,11,.25);">
-            <div class="prim-num" style="color:var(--tx-3);">Composition</div>
-            <h3>OAP + SHA = Complete Trust Stack</h3>
-            <p>SHA provides the identity root — immutable at the silicon layer. OAP governs what that identity does over time. Together they produce a complete hardware trust primitive: point-in-time verification plus lifecycle behavioral governance.</p>
-            <div class="chips">
-                <span class="chip chip-oap">SHA → IDENTITY</span>
-                <span class="chip chip-oap">OAP → LIFECYCLE</span>
-                <span class="chip chip-oap">COMPOSED → FULL_TRUST</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="section reveal" role="region" aria-labelledby="domains-head">
-    <p class="sec-label" id="domains-head">// APPLICATION_DOMAINS : WHERE_INTEGRITY_GOVERNANCE_MATTERS</p>
-    <div class="domains-grid">
-        <div class="domain-item">
-            <h4>DePIN Reward Networks</h4>
-            <p>Proof that nodes are real, compliant, and active — not simulated for reward extraction.</p>
-        </div>
-        <div class="domain-item">
-            <h4>Mobility & Fleet</h4>
-            <p>Per-vehicle physics compliance and lifecycle trust. Odometer fraud and sensor spoofing produce OAP violations.</p>
-        </div>
-        <div class="domain-item">
-            <h4>Drone Operations</h4>
-            <p>Airspace physics profiling and geofence compliance. Mission boundary violations create permanent integrity events.</p>
-        </div>
-        <div class="domain-item">
-            <h4>Robotics & IIoT</h4>
-            <p>Lifecycle governance for industrial robots and connected sensors in critical automation loops.</p>
-        </div>
-        <div class="domain-item">
-            <h4>Autonomous Logistics</h4>
-            <p>End-to-end chain-of-custody integrity for autonomous delivery and warehouse systems.</p>
-        </div>
-        <div class="domain-item">
-            <h4>Mapping & Sensors</h4>
-            <p>Physics profile violations flag tampered or repositioned sensors without physical inspection.</p>
-        </div>
-        <div class="domain-item">
-            <h4>Arbitrum Orbit Chains</h4>
-            <p>Composable with SHA on Arbitrum for hardware-gated DePIN applications requiring identity plus behavioral proof.</p>
-        </div>
-        <div class="domain-item">
-            <h4>Partner Integrations</h4>
-            <p>OAP signals integrate via REST, gRPC, or on-chain event feeds. Partners own the economic layer.</p>
-        </div>
-    </div>
-</section>
-
-<section class="section reveal" role="region" aria-labelledby="faq-head">
-    <p class="sec-label" id="faq-head">// FREQUENTLY_ASKED_QUESTIONS</p>
-    <div class="faq">
-        <div class="faq-item">
-            <h3>What is OAP and how does it differ from SHA?</h3>
-            <p>OAP (Orthonode Assurance Platform) is a chain-agnostic integrity governance engine for DePIN hardware. SHA verifies <em>what</em> a device is at a single moment — immutable silicon identity bound to a smart contract. OAP governs <em>how</em> that device behaves over its full operational lifetime — physics compliance, behavioral history, trust scoring 0–100, clone detection. They compose: SHA provides the identity root that OAP's lifecycle engine references. Together they form a complete hardware trust stack.</p>
-        </div>
-        <div class="faq-item">
-            <h3>Is OAP open-source? Can I integrate it today?</h3>
-            <p>OAP architecture is published and the surface-level integration model is documented. The implementation is PROPRIETARY — internals are not open-sourced. Integration discussions are open for qualified partners. Contact infrastructure@orthonode.xyz with your use case. OAP is chain-agnostic by design — it does not require Arbitrum, TON, or any specific blockchain to operate, though it composes naturally with SHA on Arbitrum and TON-SHA on TON.</p>
-        </div>
-        <div class="faq-item">
-            <h3>What does "OAP emits verifiable integrity state" mean in practice?</h3>
-            <p>OAP's output is a cryptographically verifiable integrity signal on a 0–100 scale representing the device's current trust state based on its full behavioral history. OAP does not control rewards, governance tokens, or economic decisions — those belong to the protocol or application layer above. Partners consume the OAP signal and apply their own economic logic: reward multipliers, access gating, compliance reporting. OAP is a trust primitive, not an economic protocol.</p>
-        </div>
-        <div class="faq-item">
-            <h3>What is the Override Governance cap and why does it exist?</h3>
-            <p>A maximum of two operator overrides per device per year are permitted by protocol. Each override is logged immutably — timestamp, operator identity, justification hash — and cannot be cleared, backdated, or issued anonymously. The cap prevents override abuse as an attack vector (e.g., repeatedly resetting a compromised device's trust score). Override governance is enforced at the protocol level, not via policy — it is not configurable.</p>
-        </div>
-    </div>
-</section>
-
-<section class="section reveal">
-    <div class="cta">
-        <h2>Integrate OAP with Your Protocol</h2>
-        <p>OAP emits verifiable integrity state. You apply economic logic. Partnership inquiries welcome.</p>
-        <div class="cta-row">
-            <a href="mailto:infrastructure@orthonode.xyz" class="btn btn-primary">Contact for Integration →</a>
-            <a href="/sha.html" class="btn" style="border-color:rgba(42,159,232,.25);color:var(--sha);">Explore SHA</a>
-            <a href="/invariant.html" class="btn" style="border-color:rgba(234,179,8,.25);color:var(--inv);">Explore INVARIANT</a>
-            <a href="/" class="btn">← Back to Orthonode</a>
-        </div>
-    </div>
-</section>
-
-</main>
-
-<footer role="contentinfo">
-    <div class="wrap">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <h4>ORTHONODE SYSTEMS™</h4>
-                <p>Building deterministic physical verification infrastructure for autonomous systems, DePIN networks, and mobility platforms. OAP governs lifecycle integrity. SHA anchors hardware identity on Arbitrum. TON-SHA brings agent trust to the TON ecosystem.</p>
-                <p style="margin-top:.875rem;color:var(--tx-3);"><strong style="color:var(--tx-2);">Founder:</strong> Arhant Barmate<br><strong style="color:var(--tx-2);">Location:</strong> Bhopal, Madhya Pradesh, India<br><strong style="color:var(--tx-2);">Contact:</strong> infrastructure@orthonode.xyz</p>
-            </div>
-            <div class="footer-col">
-                <h5>Products</h5>
-                <ul>
-                    <li><a href="/sha.html" style="color:var(--sha);">SHA — Hardware Attestation</a></li>
-                    <li><a href="/oap.html" style="color:var(--oap);">OAP — Integrity Governance</a></li>
-                    <li><a href="/nexus.html">Nexus — Zero-Trust Gateway</a></li>
-                    <li><a href="/ton-sha.html" style="color:var(--ton);">TON-SHA — Agent Trust Layer</a></li>
-                    <li><a href="/invariant.html" style="color:var(--inv);">INVARIANT — Bittensor Subnet</a></li>
-                    <li><a href="/tix-dao.html" style="color:var(--tix);">TIX-DAO — Venue Governance</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h5>Connect</h5>
-                <ul>
-                    <li><a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">X / Twitter</a></li>
-                    <li><a href="https://www.linkedin.com/in/arhant-barmate-5710163aa/" target="_blank" rel="noopener">LinkedIn</a></li>
-                    <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub (Org)</a></li>
-                    <li><a href="mailto:infrastructure@orthonode.xyz">infrastructure@orthonode.xyz</a></li>
-                </ul>
-            </div>
-        </div>
-        <div id="citation">
-            <h2>About</h2>
-            <p>ORTHONODE SYSTEMS™ — OAP (Orthonode Assurance Platform) by Arhant Barmate. Chain-agnostic integrity governance engine for DePIN hardware. PROPRIETARY implementation. Architecture published 2026. Website: https://orthonode.xyz | @OrthonodeSys | infrastructure@orthonode.xyz</p>
-        </div>
-        <div class="footer-bottom">
-            <div>© 2026 ORTHONODE SYSTEMS™. All Rights Reserved.</div>
-            <div class="footer-legal"><a href="/terms.html">Terms of Service</a><a href="/privacy.html">Privacy Policy</a></div>
-        </div>
-    </div>
-</footer>
-
-<script>
-(function(){const items=document.querySelectorAll('.reveal');if(!items.length)return;const obs=new IntersectionObserver((e)=>{e.forEach((en,i)=>{if(en.isIntersecting){setTimeout(()=>en.target.classList.add('in'),i*55);obs.unobserve(en.target);}});},{threshold:.06,rootMargin:'0px 0px -36px 0px'});items.forEach(el=>obs.observe(el));})();
-</script>
-<script>
-(function(){
-  var c=document.getElementById('star-field');
-  if(!c)return;
-  var ctx=c.getContext('2d');
-  var dpr=window.devicePixelRatio||1;
-  var W,H,stars=[];
-  var isMob=window.innerWidth<768;
-  var N=isMob?60:130;
-  var ML=isMob?90:130;
-  function resize(){W=window.innerWidth;H=window.innerHeight;c.width=W*dpr;c.height=H*dpr;ctx.scale(dpr,dpr);c.style.width=W+'px';c.style.height=H+'px';}
-  function init(){resize();stars=[];for(var i=0;i<N;i++)stars.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.18,vy:(Math.random()-.5)*.18,r:Math.random()*1.2+.3,a:Math.random(),tw:Math.random()*Math.PI*2,ts:Math.random()*.015+.005});}
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    for(var i=0;i<stars.length;i++){
-      var s=stars[i];
-      s.x+=s.vx;s.y+=s.vy;
-      if(s.x<0)s.x=W;if(s.x>W)s.x=0;
-      if(s.y<0)s.y=H;if(s.y>H)s.y=0;
-      s.tw+=s.ts;
-      var al=.35+.45*Math.sin(s.tw);
-      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(200,200,200,'+al+')';ctx.fill();
-      for(var j=i+1;j<stars.length;j++){
-        var q=stars[j];
-        var dx=s.x-q.x,dy=s.y-q.y;
-        var d=Math.sqrt(dx*dx+dy*dy);
-        if(d<ML){ctx.beginPath();ctx.moveTo(s.x,s.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle='rgba(180,180,180,'+(0.12*(1-d/ML))+')';ctx.lineWidth=.5;ctx.stroke();}
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
       }
     }
-    requestAnimationFrame(draw);
-  }
-  window.addEventListener('resize',function(){init();});
-  init();draw();
-})();
-</script>
 
-<!-- Cookie consent bar -->
-<div id="cookie-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(10,10,10,0.97);border-top:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-  <p style="margin:0;font-family:'DM Sans',sans-serif;font-size:.82rem;color:#8C8C8C;line-height:1.5;">This site uses essential cookies only for Cloudflare bot protection. No tracking or analytics. <a href="/cookies.html" style="color:#D0D0D0;text-decoration:underline;text-underline-offset:3px;">Learn more</a></p>
-  <button onclick="dismissCookieBar()" style="flex-shrink:0;background:#141414;border:1px solid rgba(255,255,255,0.15);color:#F5F5F5;font-family:'DM Sans',sans-serif;font-size:.8rem;padding:7px 18px;border-radius:6px;cursor:pointer;white-space:nowrap;transition:background .2s;">Got it</button>
+    html { scroll-behavior: smooth; cursor: none; }
+    @media (hover: none) { html { cursor: auto; } }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Custom Cursor ──────────────────────────────────────────── */
+    .c-cursor {
+      width: 12px; height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      position: fixed;
+      top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 999999;
+      mix-blend-mode: difference;
+      transition: width 0.2s cubic-bezier(0.23,1,0.32,1), height 0.2s cubic-bezier(0.23,1,0.32,1);
+      will-change: transform;
+    }
+    .c-cursor.is-hover { width: 44px; height: 44px; }
+    @media (hover: none) { .c-cursor { display: none; } }
+
+    /* ── Loader ─────────────────────────────────────────────────── */
+    #loader {
+      position: fixed; inset: 0; z-index: 99999;
+      background: #020008;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1.25rem;
+    }
+    #loader-logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 700;
+      font-size: clamp(0.7rem,2vw,0.85rem);
+      color: rgba(168,85,247,0.4);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    #loader-text {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(0.72rem,2vw,0.9rem);
+      color: #A855F7;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      min-height: 1.4em;
+      min-width: 320px;
+      text-align: left;
+    }
+    #loader-bar-wrap {
+      width: clamp(240px, 44vw, 400px);
+      height: 1px;
+      background: rgba(124,58,237,0.18);
+      overflow: hidden;
+    }
+    #loader-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #7C3AED, #A855F7, #C084FC);
+      transition: width 0.22s linear;
+    }
+    #loader-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: rgba(168,85,247,0.35);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    /* ── Grain / Grid / Scan overlays ──────────────────────────── */
+    .grain-overlay {
+      position: fixed; inset: 0; z-index: 1;
+      pointer-events: none; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+    }
+    .grid-overlay {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(124,58,237,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,58,237,0.035) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+    .scan-lines {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(0,0,0,0.035) 2px, rgba(0,0,0,0.035) 4px
+      );
+    }
+
+    /* ── Aurora ─────────────────────────────────────────────────── */
+    .aurora {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .aurora-blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); opacity: 0.1;
+      animation: auroraDrift 22s ease-in-out infinite alternate;
+    }
+    .aurora-blob:nth-child(1) {
+      width: 65vw; height: 65vw;
+      background: radial-gradient(circle, #7C3AED, transparent 70%);
+      top: -20%; left: -12%; animation-duration: 28s;
+    }
+    .aurora-blob:nth-child(2) {
+      width: 55vw; height: 55vw;
+      background: radial-gradient(circle, #4C1D95, transparent 70%);
+      bottom: -12%; right: -8%;
+      animation-duration: 20s; animation-direction: alternate-reverse;
+    }
+    .aurora-blob:nth-child(3) {
+      width: 35vw; height: 35vw;
+      background: radial-gradient(circle, #A855F7, transparent 70%);
+      top: 38%; left: 48%;
+      animation-duration: 34s; opacity: 0.05;
+    }
+    @keyframes auroraDrift {
+      0%   { transform: translate(0,0) scale(1); }
+      100% { transform: translate(5vw, 4vh) scale(1.12); }
+    }
+
+    /* ── Classification Banner ──────────────────────────────────── */
+    #class-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1002;
+      background: var(--classified-red);
+      text-align: center;
+      padding: 5px 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(0.5rem,1.5vw,0.62rem);
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    /* ── Nav ────────────────────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 27px; left: 0; right: 0; z-index: 1001;
+      padding: 0 clamp(1rem, 4vw, 3rem);
+      height: 62px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(4,2,10,0.82);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      font-family: 'IBM Plex Mono', monospace; font-weight: 700;
+      font-size: clamp(0.68rem,1.8vw,0.84rem);
+      color: var(--accent); letter-spacing: 0.1em;
+      text-decoration: none; text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .nav-logo-badge {
+      font-size: 0.52rem; background: var(--classified-red);
+      color: #fff; padding: 2px 7px; letter-spacing: 0.14em;
+      border-radius: 2px; text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+      font-weight: 500; color: var(--muted);
+      text-decoration: none; letter-spacing: 0.1em;
+      text-transform: uppercase; position: relative;
+      transition: color 0.2s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1px; background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 8px; background: none; border: none;
+      min-width: 44px; min-height: 44px;
+      align-items: center; justify-content: center;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text); transition: all 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    #nav-overlay {
+      display: none; position: fixed; inset: 0; z-index: 998;
+      background: rgba(4,2,10,0.97); backdrop-filter: blur(20px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+    }
+    #nav-overlay.open { display: flex; }
+    #nav-overlay a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(1.2rem,5vw,1.8rem);
+      color: var(--text); text-decoration: none;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      transition: color 0.2s; min-height: 44px;
+      display: flex; align-items: center;
+    }
+    #nav-overlay a:hover { color: var(--accent); }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ── Layout helpers ─────────────────────────────────────────── */
+    section { position: relative; z-index: 2; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 clamp(1rem,4vw,3rem); }
+    .s { padding: clamp(4rem,8vw,7rem) 0; }
+    .section-divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* ── Section headers ────────────────────────────────────────── */
+    .section-header { margin-bottom: clamp(2.5rem,5vw,4rem); padding-left: 1.25rem; border-left: 3px solid var(--primary); }
+    .section-eyebrow {
+      font-family: 'JetBrains Mono', monospace; font-size: clamp(0.58rem,1.4vw,0.68rem);
+      color: var(--muted); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'IBM Plex Mono', monospace; font-weight: 700;
+      font-size: clamp(1.2rem,3.5vw,2.2rem);
+      letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--text); line-height: 1.15;
+    }
+    .section-title .accent { color: var(--accent); }
+
+    /* ── Hero ───────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: clamp(130px,22vh,180px) clamp(1rem,4vw,3rem) 5rem;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      width: 100%; max-width: 1100px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem,5vw,4rem); align-items: center;
+    }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-right { order: -1; }
+      .hero-clearance { justify-content: center; }
+      .hero-stats { justify-content: center; }
+    }
+
+    .hero-left { display: flex; flex-direction: column; gap: 0; }
+
+    .hero-clearance {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.58rem,1.4vw,0.7rem);
+      color: var(--classified-red); letter-spacing: 0.3em;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+      opacity: 0;
+      display: flex; align-items: center; gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .hero-clearance::before, .hero-clearance::after {
+      content: '▓▓▓'; opacity: 0.45;
+    }
+
+    .hero-title {
+      font-family: 'IBM Plex Mono', monospace; font-weight: 700;
+      font-size: clamp(2rem,5vw,4.2rem);
+      letter-spacing: 0.03em; text-transform: uppercase;
+      line-height: 1.08; color: var(--text); margin-bottom: 1rem; opacity: 0;
+    }
+
+    .hero-title .word-redact {
+      position: relative; display: inline-block;
+      background: #000; padding: 0 8px 0 4px;
+    }
+    .hero-title .word-redact > span { visibility: hidden; }
+    .hero-title .word-redact::after {
+      content: '[REDACTED]';
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.38em; letter-spacing: 0.25em;
+      color: var(--classified-red);
+      border: 1px solid rgba(220,38,38,0.5);
+      background: rgba(0,0,0,0.9);
+    }
+
+    .hero-sub {
+      font-family: 'Inter', sans-serif; font-weight: 300;
+      font-size: clamp(0.9rem,2.5vw,1.05rem);
+      color: var(--muted); margin-bottom: 2.5rem;
+      max-width: 100%; opacity: 0; line-height: 1.75;
+    }
+    .hero-right {
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    .hero-stats {
+      display: flex; gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem; opacity: 0;
+    }
+    .hero-stat {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.6rem,1.2vw,0.7rem);
+      color: var(--accent); letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: rgba(124,58,237,0.08);
+      border: 1px solid rgba(124,58,237,0.28);
+      border-radius: 4px; padding: 5px 12px;
+      white-space: nowrap;
+    }
+    .hero-stat::before {
+      content: ''; display: inline-block; width: 5px; height: 5px;
+      background: var(--accent); border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* ── Attestation SVG ────────────────────────────────────────── */
+    #attest-wrap {
+      width: 100%; max-width: 560px; opacity: 0;
+    }
+    #attest-svg { width: 100%; height: auto; overflow: visible; }
+
+    #proof-stamp {
+      font-family: 'IBM Plex Mono', monospace; font-weight: 700;
+      font-size: clamp(0.55rem,1.2vw,0.7rem);
+      letter-spacing: 0.25em; color: #10B981;
+      border: 2px solid #10B981; padding: 5px 16px;
+      border-radius: 4px; text-transform: uppercase;
+      opacity: 0; margin-top: 1.5rem; display: inline-block;
+    }
+
+    /* ── Classification stamp ───────────────────────────────────── */
+    .class-stamp {
+      display: inline-block;
+      border: 2px solid var(--classified-red);
+      padding: 4px 14px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(0.52rem,1.4vw,0.66rem);
+      font-weight: 700; letter-spacing: 0.3em;
+      color: var(--classified-red); text-transform: uppercase;
+      transform: rotate(-2deg); opacity: 0.8;
+    }
+
+    /* ── Blinking cursor ────────────────────────────────────────── */
+    .cursor-blink {
+      display: inline-block; width: 2px; height: 0.9em;
+      background: var(--accent); margin-left: 2px; vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── Redaction elements ─────────────────────────────────────── */
+    .redact-inline, .redacted {
+      background: #0d0d0d; color: transparent;
+      padding: 1px 8px; border-radius: 2px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.82em;
+      position: relative; display: inline-block; cursor: default;
+      border: 1px solid rgba(220,38,38,0.3);
+      vertical-align: middle;
+    }
+    .redact-inline::after, .redacted::after {
+      content: '[REDACTED]';
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65em; letter-spacing: 0.12em;
+      color: var(--classified-red);
+    }
+
+    /* ── OAP Cards ──────────────────────────────────────────────── */
+    .oap-card {
+      background: rgba(10,6,24,1); border: 1px solid var(--border);
+      border-radius: 12px; position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      padding: clamp(1.25rem,3vw,2rem);
+    }
+    .oap-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(124,58,237,0.1), transparent 60%);
+      opacity: 0; transition: opacity 0.3s; pointer-events: none;
+    }
+    .oap-card:hover { border-color: rgba(168,85,247,0.5); box-shadow: 0 0 30px rgba(124,58,237,0.1); }
+    .oap-card:hover::after { opacity: 1; }
+
+    .card-icon { margin-bottom: 1.25rem; width: 48px; height: 48px; }
+    .card-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+      color: var(--muted); letter-spacing: 0.22em;
+      text-transform: uppercase; margin-bottom: 0.4rem;
+    }
+    .card-title {
+      font-family: 'IBM Plex Mono', monospace; font-weight: 700;
+      font-size: clamp(0.88rem,1.8vw,1.05rem);
+      color: var(--text); letter-spacing: 0.05em;
+      text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .card-body { font-size: clamp(0.8rem,1.7vw,0.9rem); color: var(--muted); line-height: 1.62; }
+
+    /* ── Grids ──────────────────────────────────────────────────── */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1rem,2.5vw,1.5rem); }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(1rem,2.5vw,1.5rem); }
+
+    /* ── Doc block ──────────────────────────────────────────────── */
+    .doc-block {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: clamp(1.5rem,3vw,2.5rem);
+      position: relative; overflow: hidden;
+    }
+    .doc-block::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+    .doc-id {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+      color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 1.25rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .doc-stamp {
+      background: var(--classified-red); color: #fff;
+      padding: 2px 9px; font-size: 0.54rem;
+      letter-spacing: 0.15em; border-radius: 2px;
+    }
+
+    /* ── Architecture flow ──────────────────────────────────────── */
+    .arch-flow {
+      display: flex; align-items: center; justify-content: center;
+      gap: clamp(0.4rem,2vw,1.25rem); flex-wrap: wrap;
+      padding: clamp(1.5rem,3vw,2.5rem);
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; margin-top: 2rem;
+    }
+    .arch-node {
+      background: var(--surface); border: 1px solid var(--border-bright);
+      border-radius: 8px; padding: 0.75rem 1.1rem;
+      text-align: center; min-width: 90px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .arch-node:hover { border-color: var(--accent); box-shadow: 0 0 18px rgba(168,85,247,0.15); }
+    .arch-node-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 0.35rem;
+    }
+    .arch-node-name {
+      font-family: 'IBM Plex Mono', monospace; font-weight: 700;
+      font-size: clamp(0.68rem,1.4vw,0.82rem);
+      color: var(--text); text-transform: uppercase; letter-spacing: 0.07em;
+    }
+    .arch-node.classified { border-color: rgba(220,38,38,0.3); background: rgba(220,38,38,0.04); }
+    .arch-node.classified .arch-node-name { color: rgba(220,38,38,0.65); }
+    .arch-arrow { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--muted); flex-shrink: 0; }
+
+    /* ── Code block ─────────────────────────────────────────────── */
+    .code-wrap { background: #050211; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .code-header {
+      padding: 0.6rem 1.25rem; background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+      color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .code-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .code-dot-r { background: #EF4444; }
+    .code-dot-y { background: #F59E0B; }
+    .code-dot-g { background: #10B981; }
+    pre {
+      padding: 1.5rem; overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(0.7rem,1.5vw,0.8rem); line-height: 1.72; color: var(--text);
+    }
+    .code-comment { color: #4A3D6A; }
+    .code-keyword { color: #A855F7; }
+    .code-string { color: #86EFAC; }
+    .code-func { color: #7DD3FC; }
+    .code-type { color: #F4C430; }
+    .code-hash { color: #FB923C; font-family: 'JetBrains Mono', monospace; }
+
+    /* ── Integration pills ──────────────────────────────────────── */
+    .integration-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
+    .int-pill {
+      display: flex; align-items: center; gap: 0.75rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.75rem 1.25rem;
+      transition: border-color 0.3s;
+    }
+    .int-pill { cursor: default; }
+    .int-pill:hover { border-color: var(--border-bright); }
+    .int-pill-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .int-pill-dot.red { background: rgba(220,38,38,0.55); }
+    .int-pill-name {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
+      font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .int-pill-chain {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+      color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
+    }
+
+    /* ── Security grid ──────────────────────────────────────────── */
+    .security-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+    .security-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .security-icon-wrap {
+      width: 40px; height: 40px;
+      background: rgba(124,58,237,0.1); border: 1px solid var(--border);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .security-text-title {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem;
+      font-weight: 700; color: var(--text); text-transform: uppercase;
+      letter-spacing: 0.08em; margin-bottom: 0.35rem;
+    }
+    .security-text-body { font-size: 0.82rem; color: var(--muted); line-height: 1.58; }
+
+    /* ── Status banners ─────────────────────────────────────────── */
+    .status-banner {
+      background: rgba(124,58,237,0.05); border: 1px solid var(--border);
+      border-left: 3px solid var(--primary); border-radius: 8px;
+      padding: clamp(1.25rem,3vw,2rem);
+      display: flex; gap: 1.25rem; align-items: flex-start; flex-wrap: wrap;
+    }
+    .status-badge {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.18em; padding: 4px 11px; border-radius: 4px;
+      text-transform: uppercase; white-space: nowrap; flex-shrink: 0;
+    }
+    .status-badge.proprietary { background: rgba(244,196,48,0.08); color: var(--gold); border: 1px solid rgba(244,196,48,0.28); }
+    .status-badge.not-oss { background: rgba(220,38,38,0.08); color: var(--classified-red); border: 1px solid rgba(220,38,38,0.28); }
+    .status-content-title {
+      font-family: 'IBM Plex Mono', monospace; font-weight: 700;
+      font-size: clamp(0.82rem,1.8vw,0.96rem);
+      color: var(--text); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem;
+    }
+    .status-content-body { font-size: clamp(0.8rem,1.7vw,0.9rem); color: var(--muted); line-height: 1.68; }
+
+    /* ── Proof invariant box ────────────────────────────────────── */
+    .proof-invariant {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: clamp(0.78rem,1.8vw,0.96rem);
+      color: var(--accent); line-height: 1.8;
+      padding: 1.25rem 1.5rem;
+      background: rgba(124,58,237,0.06);
+      border-radius: 6px; border-left: 2px solid var(--primary);
+      margin: 1rem 0 1.25rem;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────────── */
+    #footer {
+      position: relative; z-index: 2;
+      border-top: 1px solid var(--border);
+      padding: clamp(2rem,5vw,3.5rem) clamp(1rem,4vw,3rem);
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'IBM Plex Mono', monospace; font-weight: 700;
+      font-size: 0.8rem; color: var(--muted); text-transform: uppercase;
+      letter-spacing: 0.1em; text-decoration: none;
+    }
+    .footer-logo span { color: var(--accent); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+    .footer-links a {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+      color: var(--muted); text-decoration: none; letter-spacing: 0.12em;
+      text-transform: uppercase; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+      color: rgba(124,107,158,0.45); text-transform: uppercase; letter-spacing: 0.12em;
+    }
+
+    /* ── View transitions ───────────────────────────────────────── */
+    @view-transition { navigation: auto; }
+    ::view-transition-old(root) { animation: 300ms ease-out both vtOut; }
+    ::view-transition-new(root) { animation: 300ms ease-in both vtIn; }
+    @keyframes vtOut { from{opacity:1;transform:translateY(0)} to{opacity:0;transform:translateY(-12px)} }
+    @keyframes vtIn  { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── Scroll reveal ──────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="c-cursor" id="cursor"></div>
+
+<!-- Overlays -->
+<div class="grain-overlay"></div>
+<div class="grid-overlay"></div>
+<div class="scan-lines"></div>
+<div class="aurora">
+  <div class="aurora-blob"></div>
+  <div class="aurora-blob"></div>
+  <div class="aurora-blob"></div>
 </div>
-<script>
-(function(){
-  if(localStorage.getItem('orthonode_cc')==='1') return;
-  var bar=document.getElementById('cookie-bar');
-  if(bar){bar.style.display='flex';}
-})();
-function dismissCookieBar(){
-  localStorage.setItem('orthonode_cc','1');
-  var bar=document.getElementById('cookie-bar');
-  if(bar){bar.style.opacity='0';bar.style.transition='opacity .3s';setTimeout(function(){bar.style.display='none';},300);}
+
+<!-- Loader -->
+<div id="loader">
+  <div id="loader-logo">ORTHONODE SYSTEMS™ // OAP</div>
+  <div id="loader-text">INITIALIZING SECURE TERMINAL...</div>
+  <div id="loader-bar-wrap"><div id="loader-bar"></div></div>
+  <div id="loader-status">ORTHONODE ASSURANCE PLATFORM — OAP-v1 — EYES ONLY</div>
+</div>
+
+<!-- Classification Banner -->
+<div id="class-banner">PROPRIETARY // ORTHONODE SYSTEMS™ // CHAIN-AGNOSTIC</div>
+
+<!-- Nav -->
+<nav id="nav" role="navigation" aria-label="Primary navigation">
+  <a href="/" class="nav-logo">
+    ORTHONODE <span class="nav-logo-badge">TOP SECRET</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/">Hub</a></li>
+    <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="https://x.com/OrthonodeSys" target="_blank" rel="noopener">Twitter</a></li>
+    <li><a href="mailto:infrastructure@orthonode.xyz">Contact</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div id="nav-overlay" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+  <a href="/">Hub</a>
+  <a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub</a>
+  <a href="https://x.com/OrthonodeSys" target="_blank" rel="noopener">Twitter</a>
+  <a href="mailto:infrastructure@orthonode.xyz">Contact</a>
+</div>
+
+<!-- ─────────────────── HERO ─────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-inner">
+    <!-- LEFT: headline, sub, stats -->
+    <div class="hero-left">
+      <p class="hero-clearance" id="hero-clearance">EYES ONLY // CLEARANCE LEVEL 4 // OAP-DOC-001</p>
+
+      <h1 class="hero-title" id="hero-title">
+        ORTHONODE<br>ASSURANCE<br>
+        <span class="word-redact"><span>PLATFORM</span></span>
+      </h1>
+
+      <p class="hero-sub" id="hero-sub">
+        Deterministic hardware attestation across any blockchain. The proof layer that bridges physical silicon to on-chain trust — without revealing device internal state.<span class="cursor-blink"></span>
+      </p>
+
+      <div class="hero-stats" id="hero-stats">
+        <span class="hero-stat">4-Gate Verification</span>
+        <span class="hero-stat">Chain-Agnostic</span>
+        <span class="hero-stat">Deterministic Output</span>
+        <span class="hero-stat">Hardware-Anchored</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: Attestation proof chain SVG -->
+    <div class="hero-right">
+  <div id="attest-wrap">
+    <svg id="attest-svg" viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="gpurp">
+          <feGaussianBlur stdDeviation="3.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="ggreen">
+          <feGaussianBlur stdDeviation="2.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <marker id="arr" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto">
+          <polygon points="0 0, 7 2.5, 0 5" fill="rgba(168,85,247,0.55)"/>
+        </marker>
+      </defs>
+
+      <!-- Connector lines (animated in by JS) -->
+      <line class="attest-line" x1="148" y1="115" x2="213" y2="115"
+        stroke="rgba(168,85,247,0.5)" stroke-width="1.5" stroke-dasharray="4 3"
+        marker-end="url(#arr)" opacity="0"/>
+      <line class="attest-line" x1="320" y1="115" x2="383" y2="115"
+        stroke="rgba(168,85,247,0.5)" stroke-width="1.5" stroke-dasharray="4 3"
+        marker-end="url(#arr)" opacity="0"/>
+      <line class="attest-line" x1="488" y1="115" x2="552" y2="115"
+        stroke="rgba(168,85,247,0.5)" stroke-width="1.5" stroke-dasharray="4 3"
+        marker-end="url(#arr)" opacity="0"/>
+
+      <!-- Node 1: Hardware Device -->
+      <g class="attest-node" opacity="0" transform="translate(18,65)">
+        <rect x="0" y="0" width="130" height="100" rx="8"
+          fill="rgba(10,6,24,0.95)" stroke="rgba(124,58,237,0.55)" stroke-width="1.2"/>
+        <!-- Circuit board PCB detail -->
+        <rect x="18" y="14" width="94" height="62" rx="4"
+          fill="none" stroke="rgba(124,58,237,0.3)" stroke-width="0.8"/>
+        <!-- ICs -->
+        <rect x="26" y="20" width="24" height="18" rx="2"
+          fill="rgba(124,58,237,0.18)" stroke="rgba(124,58,237,0.5)" stroke-width="0.9"/>
+        <rect x="56" y="20" width="16" height="12" rx="1.5"
+          fill="rgba(124,58,237,0.12)" stroke="rgba(124,58,237,0.4)" stroke-width="0.8"/>
+        <rect x="78" y="20" width="26" height="18" rx="2"
+          fill="rgba(124,58,237,0.18)" stroke="rgba(124,58,237,0.5)" stroke-width="0.9"/>
+        <!-- Trace lines -->
+        <line x1="38" y1="38" x2="38" y2="52" stroke="rgba(124,58,237,0.35)" stroke-width="0.8"/>
+        <line x1="64" y1="32" x2="64" y2="52" stroke="rgba(124,58,237,0.35)" stroke-width="0.8"/>
+        <line x1="91" y1="38" x2="91" y2="52" stroke="rgba(124,58,237,0.35)" stroke-width="0.8"/>
+        <line x1="26" y1="52" x2="104" y2="52" stroke="rgba(124,58,237,0.25)" stroke-width="0.8"/>
+        <!-- eFuse core -->
+        <circle cx="65" cy="60" r="6" fill="rgba(168,85,247,0.22)"
+          stroke="rgba(168,85,247,0.7)" stroke-width="1.2" filter="url(#gpurp)"/>
+        <!-- eFuse OTP bits -->
+        <circle cx="30" cy="68" r="2.2" fill="rgba(168,85,247,0.7)"/>
+        <circle cx="38" cy="68" r="2.2" fill="rgba(168,85,247,0.7)"/>
+        <circle cx="46" cy="68" r="2.2" fill="rgba(168,85,247,0.25)"/>
+        <circle cx="54" cy="68" r="2.2" fill="rgba(168,85,247,0.7)"/>
+        <circle cx="62" cy="68" r="2.2" fill="rgba(168,85,247,0.25)"/>
+        <circle cx="70" cy="68" r="2.2" fill="rgba(168,85,247,0.7)"/>
+        <!-- pin left -->
+        <line x1="18" y1="25" x2="12" y2="25" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+        <line x1="18" y1="35" x2="12" y2="35" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+        <line x1="18" y1="45" x2="12" y2="45" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+        <line x1="18" y1="55" x2="12" y2="55" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+        <!-- pin right -->
+        <line x1="112" y1="25" x2="118" y2="25" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+        <line x1="112" y1="35" x2="118" y2="35" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+        <line x1="112" y1="45" x2="118" y2="45" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+        <line x1="112" y1="55" x2="118" y2="55" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+        <text x="65" y="92" text-anchor="middle"
+          font-family="JetBrains Mono" font-size="7.5" fill="rgba(168,85,247,0.8)" letter-spacing="1">HARDWARE</text>
+      </g>
+
+      <!-- Node 2: OAP Engine (classified) -->
+      <g class="attest-node" opacity="0" transform="translate(218,55)">
+        <rect x="0" y="0" width="162" height="120" rx="8"
+          fill="rgba(10,6,24,0.95)" stroke="rgba(220,38,38,0.45)" stroke-width="1.2"/>
+        <!-- Classified header bar -->
+        <rect x="0" y="0" width="162" height="20" rx="8"
+          fill="rgba(220,38,38,0.07)"/>
+        <rect x="0" y="8" width="162" height="12"
+          fill="rgba(220,38,38,0.07)"/>
+        <text x="81" y="14" text-anchor="middle"
+          font-family="IBM Plex Mono" font-size="6.5" font-weight="700"
+          fill="rgba(220,38,38,0.75)" letter-spacing="2.5">TOP SECRET</text>
+        <!-- Redacted content bars -->
+        <rect x="12" y="28" width="138" height="11" rx="2" fill="rgba(0,0,0,0.9)"/>
+        <text x="81" y="37.5" text-anchor="middle"
+          font-family="JetBrains Mono" font-size="5.5" fill="rgba(220,38,38,0.55)" letter-spacing="1">[REDACTED]</text>
+        <rect x="12" y="44" width="90" height="9" rx="1.5" fill="rgba(0,0,0,0.9)"/>
+        <rect x="108" y="44" width="42" height="9" rx="1.5" fill="rgba(0,0,0,0.9)"/>
+        <rect x="12" y="58" width="60" height="9" rx="1.5" fill="rgba(0,0,0,0.9)"/>
+        <rect x="78" y="58" width="72" height="9" rx="1.5" fill="rgba(0,0,0,0.9)"/>
+        <rect x="12" y="72" width="138" height="9" rx="1.5" fill="rgba(0,0,0,0.9)"/>
+        <rect x="12" y="86" width="105" height="9" rx="1.5" fill="rgba(0,0,0,0.9)"/>
+        <text x="81" y="112" text-anchor="middle"
+          font-family="JetBrains Mono" font-size="7.5" fill="rgba(220,38,38,0.6)" letter-spacing="1">OAP ENGINE</text>
+      </g>
+
+      <!-- Node 3: Proof / Merkle tree -->
+      <g class="attest-node" opacity="0" transform="translate(390,62)">
+        <rect x="0" y="0" width="148" height="106" rx="8"
+          fill="rgba(10,6,24,0.95)" stroke="rgba(168,85,247,0.55)" stroke-width="1.2"/>
+        <!-- Merkle tree nodes -->
+        <circle cx="74" cy="18" r="9" fill="rgba(168,85,247,0.18)"
+          stroke="rgba(168,85,247,0.7)" stroke-width="1.3" filter="url(#gpurp)"/>
+        <text x="74" y="21.5" text-anchor="middle"
+          font-family="JetBrains Mono" font-size="6" fill="rgba(168,85,247,0.9)">R</text>
+        <line x1="74" y1="27" x2="46" y2="44" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+        <line x1="74" y1="27" x2="102" y2="44" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+        <circle cx="46" cy="50" r="7" fill="rgba(124,58,237,0.15)"
+          stroke="rgba(124,58,237,0.55)" stroke-width="1"/>
+        <circle cx="102" cy="50" r="7" fill="rgba(124,58,237,0.15)"
+          stroke="rgba(124,58,237,0.55)" stroke-width="1"/>
+        <text x="46" y="53.5" text-anchor="middle"
+          font-family="JetBrains Mono" font-size="5.5" fill="rgba(168,85,247,0.7)">H1</text>
+        <text x="102" y="53.5" text-anchor="middle"
+          font-family="JetBrains Mono" font-size="5.5" fill="rgba(168,85,247,0.7)">H2</text>
+        <line x1="46" y1="57" x2="28" y2="70" stroke="rgba(168,85,247,0.3)" stroke-width="0.9"/>
+        <line x1="46" y1="57" x2="62" y2="70" stroke="rgba(168,85,247,0.3)" stroke-width="0.9"/>
+        <line x1="102" y1="57" x2="86" y2="70" stroke="rgba(168,85,247,0.3)" stroke-width="0.9"/>
+        <line x1="102" y1="57" x2="118" y2="70" stroke="rgba(168,85,247,0.3)" stroke-width="0.9"/>
+        <circle cx="28" cy="74" r="5" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.4)" stroke-width="0.9"/>
+        <circle cx="62" cy="74" r="5" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.4)" stroke-width="0.9"/>
+        <circle cx="86" cy="74" r="5" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.4)" stroke-width="0.9"/>
+        <circle cx="118" cy="74" r="5" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.4)" stroke-width="0.9"/>
+        <text x="74" y="97" text-anchor="middle"
+          font-family="JetBrains Mono" font-size="7.5" fill="rgba(168,85,247,0.8)" letter-spacing="1">PROOF</text>
+      </g>
+
+      <!-- Node 4: Any Chain -->
+      <g class="attest-node" opacity="0" transform="translate(558,62)">
+        <rect x="0" y="0" width="148" height="106" rx="8"
+          fill="rgba(10,6,24,0.95)" stroke="rgba(16,185,129,0.45)" stroke-width="1.2"/>
+        <!-- Chain link geometry -->
+        <g transform="translate(26,12)">
+          <rect x="2" y="0" width="30" height="20" rx="10"
+            fill="none" stroke="rgba(16,185,129,0.65)" stroke-width="2.5"/>
+          <rect x="2" y="0" width="30" height="20" rx="10"
+            fill="rgba(16,185,129,0.06)" stroke="none"/>
+          <rect x="42" y="8" width="30" height="20" rx="10"
+            fill="none" stroke="rgba(16,185,129,0.55)" stroke-width="2.5"/>
+          <rect x="42" y="8" width="30" height="20" rx="10"
+            fill="rgba(16,185,129,0.04)" stroke="none"/>
+          <rect x="22" y="10" width="30" height="20" rx="10"
+            fill="none" stroke="rgba(16,185,129,0.45)" stroke-width="1.8"/>
+        </g>
+        <!-- Chain names -->
+        <text x="20" y="64" font-family="JetBrains Mono" font-size="7" fill="rgba(16,185,129,0.75)" letter-spacing="0.5">ARBITRUM</text>
+        <text x="20" y="74" font-family="JetBrains Mono" font-size="7" fill="rgba(16,185,129,0.5)" letter-spacing="0.5">SOLANA</text>
+        <text x="20" y="84" font-family="JetBrains Mono" font-size="7" fill="rgba(16,185,129,0.45)" letter-spacing="0.5">TON</text>
+        <text x="84" y="64" font-family="JetBrains Mono" font-size="7" fill="rgba(16,185,129,0.45)" letter-spacing="0.5">POLYGON</text>
+        <text x="84" y="74" font-family="JetBrains Mono" font-size="7" fill="rgba(16,185,129,0.4)" letter-spacing="0.5">EVM +</text>
+        <text x="74" y="97" text-anchor="middle"
+          font-family="JetBrains Mono" font-size="7.5" fill="rgba(16,185,129,0.8)" letter-spacing="1">ANY CHAIN</text>
+      </g>
+    </svg>
+
+    <div id="proof-stamp">&#10003; PROOF VERIFIED // ATTESTATION COMPLETE</div>
+  </div><!-- /attest-wrap -->
+    </div><!-- /hero-right -->
+  </div><!-- /hero-inner -->
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ─────────────────── WHAT OAP DOES ─────────────────────────────── -->
+<section class="s" id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">OAP-DOC-002 // DECLASSIFIED SUMMARY</p>
+      <h2 class="section-title">WHAT <span class="accent">OAP</span> DOES</h2>
+    </div>
+
+    <div class="doc-block reveal">
+      <div class="doc-id">
+        <span>FILE: OAP-CAPABILITY-001</span>
+        <span>DATE: 2026-03</span>
+        <span>AUTHOR: ORTHONODE SYSTEMS™</span>
+        <span class="doc-stamp">PARTIALLY DECLASSIFIED</span>
+      </div>
+      <p style="font-size:clamp(0.9rem,2vw,1.05rem);color:var(--text);line-height:1.82;margin-bottom:1.25rem;">
+        OAP provides <strong style="color:var(--accent)">deterministic hardware attestation</strong> across any blockchain.
+        The platform proves that a physical device produced a specific cryptographic output —
+        without revealing the device's internal state.
+      </p>
+      <p style="font-size:clamp(0.82rem,1.8vw,0.95rem);color:var(--muted);line-height:1.78;margin-bottom:1.5rem;">
+        Every device enrolled in OAP produces a deterministic, reproducible proof. The same hardware,
+        the same inputs, the same proof — every time. This is not probabilistic. It is cryptographic
+        certainty anchored to physical silicon.
+      </p>
+      <div style="text-align:center;margin-top:1.25rem;">
+        <div class="class-stamp">TOP SECRET // ORTHONODE // OAP-v1</div>
+      </div>
+    </div>
+
+    <div class="grid-3" style="margin-top:2rem;">
+
+      <div class="oap-card reveal">
+        <div class="card-icon">
+          <!-- Deterministic: stopwatch + hash lock -->
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="4" width="32" height="40" rx="4" stroke="rgba(168,85,247,0.6)" stroke-width="1.5"/>
+            <rect x="14" y="10" width="20" height="3" rx="1" fill="rgba(168,85,247,0.3)"/>
+            <rect x="14" y="16" width="12" height="3" rx="1" fill="rgba(168,85,247,0.2)"/>
+            <circle cx="24" cy="31" r="8" stroke="rgba(168,85,247,0.7)" stroke-width="1.5"/>
+            <path d="M24 25v6l3.5 3.5" stroke="rgba(168,85,247,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="24" cy="31" r="1.5" fill="rgba(168,85,247,0.8)"/>
+          </svg>
+        </div>
+        <p class="card-label">CAPABILITY-01</p>
+        <h3 class="card-title">Deterministic Attestation</h3>
+        <p class="card-body">Same device. Same inputs. Same proof. Always. OAP outputs are reproducible and verifiable by any third party without access to the device.</p>
+      </div>
+
+      <div class="oap-card reveal">
+        <div class="card-icon">
+          <!-- Chain-agnostic: overlapping rings, different colors -->
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="20" r="10" stroke="rgba(168,85,247,0.6)" stroke-width="1.5" fill="none"/>
+            <circle cx="30" cy="20" r="10" stroke="rgba(16,185,129,0.5)" stroke-width="1.5" fill="none"/>
+            <circle cx="24" cy="30" r="10" stroke="rgba(244,196,48,0.4)" stroke-width="1.5" fill="none"/>
+            <circle cx="18" cy="20" r="4" fill="rgba(168,85,247,0.12)"/>
+            <circle cx="30" cy="20" r="4" fill="rgba(16,185,129,0.08)"/>
+            <circle cx="24" cy="30" r="4" fill="rgba(244,196,48,0.08)"/>
+          </svg>
+        </div>
+        <p class="card-label">CAPABILITY-02</p>
+        <h3 class="card-title">Chain-Agnostic</h3>
+        <p class="card-body">OAP proofs are blockchain-neutral. Deploy the verifier on Arbitrum, Solana, TON, Polygon, or any EVM chain. The proof format is universal.</p>
+      </div>
+
+      <div class="oap-card reveal">
+        <div class="card-icon">
+          <!-- Hardware binding: chip with pins -->
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="12" y="12" width="24" height="24" rx="3" fill="rgba(124,58,237,0.1)" stroke="rgba(168,85,247,0.6)" stroke-width="1.5"/>
+            <rect x="17" y="17" width="14" height="14" rx="2" fill="rgba(168,85,237,0.12)" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+            <line x1="12" y1="18" x2="7" y2="18" stroke="rgba(168,85,247,0.55)" stroke-width="1.5"/>
+            <line x1="12" y1="23" x2="7" y2="23" stroke="rgba(168,85,247,0.55)" stroke-width="1.5"/>
+            <line x1="12" y1="28" x2="7" y2="28" stroke="rgba(168,85,247,0.55)" stroke-width="1.5"/>
+            <line x1="36" y1="18" x2="41" y2="18" stroke="rgba(168,85,247,0.55)" stroke-width="1.5"/>
+            <line x1="36" y1="23" x2="41" y2="23" stroke="rgba(168,85,247,0.55)" stroke-width="1.5"/>
+            <line x1="36" y1="28" x2="41" y2="28" stroke="rgba(168,85,247,0.55)" stroke-width="1.5"/>
+            <line x1="18" y1="12" x2="18" y2="7" stroke="rgba(168,85,247,0.4)" stroke-width="1.5"/>
+            <line x1="24" y1="12" x2="24" y2="7" stroke="rgba(168,85,247,0.4)" stroke-width="1.5"/>
+            <line x1="30" y1="12" x2="30" y2="7" stroke="rgba(168,85,247,0.4)" stroke-width="1.5"/>
+            <circle cx="21" cy="24" r="2.2" fill="rgba(168,85,247,0.75)"/>
+            <circle cx="27" cy="24" r="2.2" fill="rgba(168,85,247,0.4)"/>
+          </svg>
+        </div>
+        <p class="card-label">CAPABILITY-03</p>
+        <h3 class="card-title">Hardware Binding</h3>
+        <p class="card-body">Attested hardware targets: ESP32-S3 eFuse, TPM 2.0, <span class="redact-inline">REDACTED</span>. The proof binds to the physical device — not a key that can be copied.</p>
+      </div>
+
+      <div class="oap-card reveal">
+        <div class="card-icon">
+          <!-- ZK funnel -->
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 11h30L30 27H18L9 11Z" stroke="rgba(168,85,247,0.6)" stroke-width="1.5" fill="rgba(124,58,237,0.07)" stroke-linejoin="round"/>
+            <rect x="20" y="27" width="8" height="12" rx="2" fill="rgba(124,58,237,0.1)" stroke="rgba(168,85,247,0.5)" stroke-width="1"/>
+            <text x="12" y="20" font-family="JetBrains Mono" font-size="5" fill="rgba(168,85,247,0.65)">3F</text>
+            <text x="22" y="20" font-family="JetBrains Mono" font-size="5" fill="rgba(168,85,247,0.5)">A7</text>
+            <text x="32" y="20" font-family="JetBrains Mono" font-size="5" fill="rgba(168,85,247,0.65)">C1</text>
+            <text x="21" y="38" font-family="JetBrains Mono" font-size="5" fill="rgba(16,185,129,0.85)">OK</text>
+            <path d="M24 39v4" stroke="rgba(16,185,129,0.6)" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="card-label">CAPABILITY-04</p>
+        <h3 class="card-title">ZK-Compatible</h3>
+        <p class="card-body">OAP proof outputs are structured for zero-knowledge system compatibility. Proofs can be consumed by ZK circuits without access to the source device.</p>
+      </div>
+
+      <div class="oap-card reveal">
+        <div class="card-icon">
+          <!-- Lock with internal mechanism detail -->
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9" y="22" width="30" height="22" rx="4" fill="rgba(124,58,237,0.1)" stroke="rgba(168,85,247,0.6)" stroke-width="1.5"/>
+            <path d="M17 22v-7a7 7 0 0114 0v7" stroke="rgba(168,85,247,0.6)" stroke-width="1.5" fill="none"/>
+            <!-- Shackle inner detail -->
+            <path d="M20 15v-2a4 4 0 018 0v2" stroke="rgba(168,85,247,0.3)" stroke-width="0.9" fill="none"/>
+            <!-- Keyway mechanism -->
+            <circle cx="24" cy="33" r="4.5" fill="rgba(168,85,247,0.18)" stroke="rgba(168,85,247,0.65)" stroke-width="1.2"/>
+            <circle cx="24" cy="33" r="1.5" fill="rgba(168,85,247,0.6)"/>
+            <line x1="24" y1="37.5" x2="24" y2="42" stroke="rgba(168,85,247,0.5)" stroke-width="2" stroke-linecap="round"/>
+            <!-- Tumbler pins -->
+            <line x1="14" y1="27" x2="14" y2="31" stroke="rgba(124,58,237,0.45)" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="18" y1="25" x2="18" y2="29" stroke="rgba(124,58,237,0.45)" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="34" y1="27" x2="34" y2="31" stroke="rgba(124,58,237,0.45)" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="30" y1="25" x2="30" y2="29" stroke="rgba(124,58,237,0.45)" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="card-label">CAPABILITY-05</p>
+        <h3 class="card-title">Non-Extractable Keys</h3>
+        <p class="card-body">Device identity keys are burned into write-once hardware memory. They cannot be extracted, exported, or cloned. Physical possession does not imply key access.</p>
+      </div>
+
+      <div class="oap-card reveal">
+        <div class="card-icon">
+          <!-- Shield with circuit traces -->
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 4L8 10v14c0 10.5 7.2 18.5 16 20 8.8-1.5 16-9.5 16-20V10L24 4z"
+              fill="rgba(124,58,237,0.08)" stroke="rgba(168,85,247,0.6)" stroke-width="1.5" stroke-linejoin="round"/>
+            <!-- Circuit traces inside shield -->
+            <path d="M18 25h4v-4h4v4h4" stroke="rgba(168,85,247,0.4)" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 29h5M26 29h5" stroke="rgba(168,85,247,0.3)" stroke-width="1" stroke-linecap="round"/>
+            <circle cx="24" cy="25" r="2.5" fill="rgba(168,85,247,0.35)" stroke="rgba(168,85,247,0.75)" stroke-width="0.9"/>
+            <path d="M20 33h8" stroke="rgba(168,85,247,0.2)" stroke-width="1" stroke-linecap="round"/>
+            <circle cx="24" cy="16" r="2" fill="rgba(168,85,247,0.2)" stroke="rgba(168,85,247,0.5)" stroke-width="0.8"/>
+          </svg>
+        </div>
+        <p class="card-label">CAPABILITY-06</p>
+        <h3 class="card-title">Zero Internal Exposure</h3>
+        <p class="card-body">Attestation proofs are computed such that verifiers confirm device authenticity without learning anything about the device's internal configuration or state.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ─────────────────── ARCHITECTURE ─────────────────────────────── -->
+<section class="s" id="architecture">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">OAP-DOC-003 // LEVEL 3 ACCESS REQUIRED</p>
+      <h2 class="section-title">ARCHITECTURE <span class="accent">[PARTIAL]</span></h2>
+    </div>
+
+    <div class="doc-block reveal">
+      <div class="doc-id">
+        <span>SYSTEM BOUNDARY: EXTERNAL INTERFACE ONLY</span>
+        <span class="doc-stamp">INTERNALS CLASSIFIED</span>
+      </div>
+      <p style="font-size:clamp(0.82rem,1.8vw,0.95rem);color:var(--muted);line-height:1.78;margin-bottom:1.5rem;">
+        The internal architecture of the OAP Attestation Engine is proprietary and classified.
+        What is published here is the <strong style="color:var(--text)">external interface only</strong> —
+        inputs accepted, outputs produced, and the verification pathway available to integrators.
+        Internal gate logic, hash construction, and proof compression algorithms are not disclosed.
+      </p>
+
+      <div class="arch-flow">
+        <div class="arch-node">
+          <div class="arch-node-label">Input</div>
+          <div class="arch-node-name">Hardware<br>Device</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node classified">
+          <div class="arch-node-label">CLASSIFIED</div>
+          <div class="arch-node-name">[REDACTED]<br>Engine</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node classified">
+          <div class="arch-node-label">CLASSIFIED</div>
+          <div class="arch-node-name">[REDACTED]<br>Layer</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node">
+          <div class="arch-node-label">Output</div>
+          <div class="arch-node-name">Attestation<br>Proof</div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node">
+          <div class="arch-node-label">Target</div>
+          <div class="arch-node-name">Any<br>Chain</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-top:2rem;">
+      <div class="oap-card reveal">
+        <p class="card-label">Interface: Input</p>
+        <h3 class="card-title">What OAP Accepts</h3>
+        <div style="display:flex;flex-direction:column;gap:0.55rem;margin-top:0.75rem;">
+          <div style="display:flex;gap:0.75rem;align-items:center;font-size:0.82rem;color:var(--text);">
+            <span style="color:var(--accent);font-family:'JetBrains Mono';font-size:0.68rem;flex-shrink:0;">01</span>
+            Device enrollment request + hardware identity claim
+          </div>
+          <div style="display:flex;gap:0.75rem;align-items:center;font-size:0.82rem;color:var(--text);">
+            <span style="color:var(--accent);font-family:'JetBrains Mono';font-size:0.68rem;flex-shrink:0;">02</span>
+            Challenge nonce (replay-protection)
+          </div>
+          <div style="display:flex;gap:0.75rem;align-items:center;font-size:0.82rem;color:var(--text);">
+            <span style="color:var(--accent);font-family:'JetBrains Mono';font-size:0.68rem;flex-shrink:0;">03</span>
+            Target chain + verifier contract address
+          </div>
+          <div style="display:flex;gap:0.75rem;align-items:center;font-size:0.82rem;color:var(--muted);">
+            <span style="color:var(--classified-red);font-family:'JetBrains Mono';font-size:0.68rem;flex-shrink:0;">04</span>
+            <span class="redact-inline">REDACTED</span>&nbsp;— internal gate parameters
+          </div>
+        </div>
+      </div>
+
+      <div class="oap-card reveal">
+        <p class="card-label">Interface: Output</p>
+        <h3 class="card-title">What OAP Returns</h3>
+        <div style="display:flex;flex-direction:column;gap:0.55rem;margin-top:0.75rem;">
+          <div style="display:flex;gap:0.75rem;align-items:center;font-size:0.82rem;color:var(--text);">
+            <span style="color:var(--accent);font-family:'JetBrains Mono';font-size:0.68rem;flex-shrink:0;">01</span>
+            Deterministic attestation proof (bytes32 root)
+          </div>
+          <div style="display:flex;gap:0.75rem;align-items:center;font-size:0.82rem;color:var(--text);">
+            <span style="color:var(--accent);font-family:'JetBrains Mono';font-size:0.68rem;flex-shrink:0;">02</span>
+            4-gate pass/fail bitmap (public)
+          </div>
+          <div style="display:flex;gap:0.75rem;align-items:center;font-size:0.82rem;color:var(--text);">
+            <span style="color:var(--accent);font-family:'JetBrains Mono';font-size:0.68rem;flex-shrink:0;">03</span>
+            Chain-ready calldata for verifier deployment
+          </div>
+          <div style="display:flex;gap:0.75rem;align-items:center;font-size:0.82rem;color:var(--text);">
+            <span style="color:var(--accent);font-family:'JetBrains Mono';font-size:0.68rem;flex-shrink:0;">04</span>
+            Timestamp + nonce binding (replay-proof)
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ─────────────────── INTEGRATION ──────────────────────────────── -->
+<section class="s" id="integration">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">OAP-DOC-004 // PROTOCOL INTEGRATION</p>
+      <h2 class="section-title">WHO USES <span class="accent">OAP</span></h2>
+    </div>
+
+    <p class="reveal" style="font-size:clamp(0.85rem,2vw,1rem);color:var(--muted);max-width:640px;margin-bottom:2rem;line-height:1.78;">
+      OAP sits at the attestation layer of the Orthonode dependency chain. Protocols that require
+      verified hardware identity consume OAP proofs directly. Additional integrations are
+      undisclosed pending NDA execution.
+    </p>
+
+    <div class="integration-row reveal">
+      <div class="int-pill">
+        <div class="int-pill-dot"></div>
+        <div>
+          <div class="int-pill-name">SHA</div>
+          <div class="int-pill-chain">Arbitrum Stylus</div>
+        </div>
+      </div>
+      <div class="int-pill">
+        <div class="int-pill-dot"></div>
+        <div>
+          <div class="int-pill-name">NEXUS</div>
+          <div class="int-pill-chain">Chain-Agnostic</div>
+        </div>
+      </div>
+      <div class="int-pill">
+        <div class="int-pill-dot red"></div>
+        <div>
+          <div class="int-pill-name" style="color:rgba(220,38,38,0.7)">[REDACTED]</div>
+          <div class="int-pill-chain">CLASSIFIED</div>
+        </div>
+      </div>
+      <div class="int-pill">
+        <div class="int-pill-dot red"></div>
+        <div>
+          <div class="int-pill-name" style="color:rgba(220,38,38,0.7)">[REDACTED]</div>
+          <div class="int-pill-chain">CLASSIFIED</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-wrap reveal" style="margin-top:2.5rem;">
+      <div class="code-header">
+        <div class="code-dot code-dot-r"></div>
+        <div class="code-dot code-dot-y"></div>
+        <div class="code-dot code-dot-g"></div>
+        <span style="margin-left:0.5rem;">OAP PUBLIC INTERFACE // oap-v1.sol — EXTERNAL ONLY</span>
+      </div>
+      <pre><code><span class="code-comment">// OAP public verifier interface — published</span>
+<span class="code-comment">// Internal attestation engine: PROPRIETARY, not shown</span>
+
+<span class="code-keyword">interface</span> <span class="code-type">IOAPVerifier</span> {
+    <span class="code-comment">/// @notice Verify a hardware attestation proof on-chain</span>
+    <span class="code-comment">/// @dev    Internal proof construction: CLASSIFIED</span>
+    <span class="code-keyword">function</span> <span class="code-func">verifyAttestation</span>(
+        <span class="code-keyword">bytes32</span> deviceId,
+        <span class="code-keyword">bytes32</span> proofRoot,   <span class="code-comment">// <span class="code-hash">0xA3F7C1D9</span>... deterministic</span>
+        <span class="code-keyword">bytes4</span>  gateBitmap,  <span class="code-comment">// 4-gate result bitmap</span>
+        <span class="code-keyword">uint256</span> nonce,
+        <span class="code-keyword">bytes</span> <span class="code-keyword">calldata</span> sig
+    ) <span class="code-keyword">external</span> <span class="code-keyword">view</span> <span class="code-keyword">returns</span> (<span class="code-keyword">bool</span> valid);
+
+    <span class="code-comment">/// @notice Get canonical proof root for enrolled device</span>
+    <span class="code-keyword">function</span> <span class="code-func">getProofRoot</span>(
+        <span class="code-keyword">bytes32</span> deviceId
+    ) <span class="code-keyword">external</span> <span class="code-keyword">view</span> <span class="code-keyword">returns</span> (<span class="code-keyword">bytes32</span>);
+
+    <span class="code-comment">// Gate logic:         ████████████████████ [REDACTED]</span>
+    <span class="code-comment">// Hash construction:  ████████████████████ [REDACTED]</span>
+    <span class="code-comment">// Proof compression:  ████████████████████ [REDACTED]</span>
 }
+
+<span class="code-comment">// SHA usage pattern (Arbitrum Stylus)</span>
+<span class="code-keyword">contract</span> <span class="code-type">SHAIdentity</span> {
+    <span class="code-type">IOAPVerifier</span> <span class="code-keyword">public immutable</span> oap;
+
+    <span class="code-keyword">function</span> <span class="code-func">enroll</span>(
+        <span class="code-keyword">bytes32</span> deviceId,
+        <span class="code-keyword">bytes32</span> proof,
+        <span class="code-keyword">bytes4</span>  gates,
+        <span class="code-keyword">uint256</span> nonce,
+        <span class="code-keyword">bytes calldata</span> sig
+    ) <span class="code-keyword">external</span> {
+        <span class="code-keyword">require</span>(
+            oap.<span class="code-func">verifyAttestation</span>(deviceId, proof, gates, nonce, sig),
+            <span class="code-string">"OAP: invalid attestation proof"</span>
+        );
+        _enrollDevice(deviceId);
+    }
+}</code></pre>
+    </div>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ─────────────────── SECURITY ─────────────────────────────────── -->
+<section class="s" id="security">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">OAP-DOC-005 // ZERO PROPRIETARY EXPOSURE</p>
+      <h2 class="section-title">SECURITY <span class="accent">MODEL</span></h2>
+    </div>
+
+    <div class="doc-block reveal">
+      <div class="doc-id">
+        <span>GUARANTEE: PROOF DOES NOT REVEAL DEVICE STATE</span>
+        <span class="doc-stamp">VERIFIED</span>
+      </div>
+      <p style="font-size:clamp(0.85rem,2vw,1rem);color:var(--text);line-height:1.8;margin-bottom:0.75rem;">
+        The OAP attestation proof is designed around a core structural invariant:
+      </p>
+      <div class="proof-invariant">
+        VERIFY(proof, device_id) = TRUE | FALSE<br>
+        &forall; x: EXTRACT(proof, internal_state) = <span style="color:var(--classified-red);">UNDEFINED</span>
+      </div>
+      <p style="font-size:clamp(0.82rem,1.8vw,0.92rem);color:var(--muted);line-height:1.78;">
+        A verifier can confirm authenticity but cannot infer eFuse configuration, firmware version,
+        key material, or any internal device parameter from the proof alone. This is a structural
+        property of the proof system — not a policy or configuration option.
+      </p>
+    </div>
+
+    <div class="security-grid">
+
+      <div class="security-item reveal">
+        <div class="security-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 2L3 5v5c0 4.4 3 8.1 7 9 4-0.9 7-4.6 7-9V5L10 2z"
+              stroke="rgba(168,85,247,0.7)" stroke-width="1.3" fill="rgba(124,58,237,0.1)"/>
+            <path d="M7 10l2 2 4-4" stroke="rgba(168,85,247,0.9)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="security-text-title">Replay Protection</div>
+          <div class="security-text-body">Each proof binds a monotonic nonce. Captured proofs cannot be replayed against a different nonce window.</div>
+        </div>
+      </div>
+
+      <div class="security-item reveal">
+        <div class="security-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="4" y="9" width="12" height="9" rx="2" stroke="rgba(168,85,247,0.7)" stroke-width="1.3" fill="rgba(124,58,237,0.08)"/>
+            <path d="M7 9V7a3 3 0 016 0v2" stroke="rgba(168,85,247,0.6)" stroke-width="1.3" fill="none"/>
+            <circle cx="10" cy="13.5" r="1.5" fill="rgba(168,85,247,0.75)"/>
+            <line x1="10" y1="15" x2="10" y2="17" stroke="rgba(168,85,247,0.5)" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="security-text-title">Non-Extractable Keys</div>
+          <div class="security-text-body">eFuse OTP memory is write-once. Keys burned during manufacturing cannot be read back through any software interface.</div>
+        </div>
+      </div>
+
+      <div class="security-item reveal">
+        <div class="security-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="7" stroke="rgba(168,85,247,0.6)" stroke-width="1.3" fill="rgba(124,58,237,0.07)"/>
+            <path d="M7 10h6M10 7v6" stroke="rgba(168,85,247,0.35)" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="10" cy="10" r="2.2" fill="rgba(168,85,247,0.28)" stroke="rgba(168,85,247,0.75)" stroke-width="0.9"/>
+          </svg>
+        </div>
+        <div>
+          <div class="security-text-title">Deterministic Outputs</div>
+          <div class="security-text-body">Identical inputs always produce identical proofs. Randomness is excluded by design — verification is purely deterministic.</div>
+        </div>
+      </div>
+
+      <div class="security-item reveal">
+        <div class="security-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="3" y="5" width="14" height="10" rx="2" stroke="rgba(168,85,247,0.6)" stroke-width="1.3" fill="rgba(124,58,237,0.07)"/>
+            <line x1="3" y1="8.5" x2="17" y2="8.5" stroke="rgba(168,85,247,0.28)" stroke-width="1"/>
+            <rect x="5.5" y="11" width="3.5" height="2" rx="0.5" fill="rgba(168,85,247,0.45)"/>
+            <rect x="11" y="11" width="3.5" height="2" rx="0.5" fill="rgba(168,85,247,0.45)"/>
+          </svg>
+        </div>
+        <div>
+          <div class="security-text-title">Chain-Portable Verification</div>
+          <div class="security-text-body">The verifier contract is stateless and chain-portable. The same proof validates on any supported runtime with the OAP verifier deployed.</div>
+        </div>
+      </div>
+
+      <div class="security-item reveal">
+        <div class="security-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="7" stroke="rgba(220,38,38,0.5)" stroke-width="1.3" fill="rgba(220,38,38,0.04)"/>
+            <line x1="7" y1="7" x2="13" y2="13" stroke="rgba(220,38,38,0.65)" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="13" y1="7" x2="7" y2="13" stroke="rgba(220,38,38,0.65)" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="security-text-title">Clone-Proof</div>
+          <div class="security-text-body">Hardware binding through OTP eFuse means cloned devices cannot produce valid attestation proofs. Physical device authenticity is required.</div>
+        </div>
+      </div>
+
+      <div class="security-item reveal">
+        <div class="security-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <rect x="2" y="2" width="6" height="6" rx="1" stroke="rgba(168,85,247,0.6)" stroke-width="1.2" fill="rgba(124,58,237,0.1)"/>
+            <rect x="12" y="2" width="6" height="6" rx="1" stroke="rgba(168,85,247,0.5)" stroke-width="1.2" fill="rgba(124,58,237,0.07)"/>
+            <rect x="2" y="12" width="6" height="6" rx="1" stroke="rgba(168,85,247,0.5)" stroke-width="1.2" fill="rgba(124,58,237,0.07)"/>
+            <rect x="12" y="12" width="6" height="6" rx="1" stroke="rgba(168,85,247,0.4)" stroke-width="1.2" fill="rgba(124,58,237,0.05)"/>
+            <line x1="8" y1="5" x2="12" y2="5" stroke="rgba(168,85,247,0.5)" stroke-width="1"/>
+            <line x1="5" y1="8" x2="5" y2="12" stroke="rgba(168,85,247,0.5)" stroke-width="1"/>
+            <line x1="15" y1="8" x2="15" y2="12" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+            <line x1="8" y1="15" x2="12" y2="15" stroke="rgba(168,85,247,0.4)" stroke-width="1"/>
+          </svg>
+        </div>
+        <div>
+          <div class="security-text-title">4-Gate Fail-Closed</div>
+          <div class="security-text-body">All four attestation gates must pass for a valid proof. Partial bypass of any single gate produces an invalid proof — fail-closed by construction.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ─────────────────── STATUS ───────────────────────────────────── -->
+<section class="s" id="status">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">OAP-DOC-006 // RELEASE STATUS</p>
+      <h2 class="section-title">PLATFORM <span class="accent">STATUS</span></h2>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:1.5rem;">
+
+      <div class="status-banner reveal">
+        <span class="status-badge proprietary">PROPRIETARY</span>
+        <div>
+          <div class="status-content-title">Not Open Source — By Design</div>
+          <div class="status-content-body">
+            OAP is a closed, proprietary system. The attestation engine internals, gate logic,
+            and proof construction algorithms are trade secrets. Open-sourcing them would eliminate
+            the competitive advantage that OAP provides to protocols that integrate it. SHA, NEXUS,
+            and undisclosed partners gain a durable edge precisely because the attestation machinery
+            is not reproducible by adversaries.
+          </div>
+        </div>
+      </div>
+
+      <div class="status-banner reveal" style="border-left-color:var(--classified-red);">
+        <span class="status-badge not-oss">ACTIVE</span>
+        <div>
+          <div class="status-content-title">Current Deployment State</div>
+          <div class="status-content-body">
+            OAP is in active use within the Orthonode protocol stack. The public verifier interface
+            is deployed and consumed by SHA on Arbitrum Sepolia. Internal engine: operational on
+            restricted infrastructure. External SDK for integrators: in preparation.
+            Public disclosure of architecture details: no current timeline.
+          </div>
+        </div>
+      </div>
+
+      <div class="status-banner reveal">
+        <span class="status-badge proprietary">INQUIRIES</span>
+        <div>
+          <div class="status-content-title">Protocol Integration Requests</div>
+          <div class="status-content-body">
+            Protocols seeking to integrate OAP attestation may contact
+            <a href="mailto:infrastructure@orthonode.xyz"
+              style="color:var(--accent);text-decoration:none;">infrastructure@orthonode.xyz</a>.
+            Integration is available under a commercial license.
+            NDA required before technical documentation is shared.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ─────────────────── FOOTER ───────────────────────────────────── -->
+<footer id="footer">
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">ORTHONODE <span>SYSTEMS™</span></a>
+    <ul class="footer-links">
+      <li><a href="/">Hub</a></li>
+      <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://x.com/OrthonodeSys" target="_blank" rel="noopener">Twitter</a></li>
+      <li><a href="https://orthonode.xyz">orthonode.xyz</a></li>
+      <li><a href="mailto:infrastructure@orthonode.xyz">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 ORTHONODE SYSTEMS™ — OAP IS PROPRIETARY. ALL RIGHTS RESERVED.</p>
+  </div>
+</footer>
+
+<!-- ─────────────────── SCRIPTS ──────────────────────────────────── -->
+<script>
+(function () {
+  /* ── Lerp Cursor ─────────────────────────────────────────────── */
+  const cursor = document.getElementById('cursor');
+  let mx = 0, my = 0, cx = 0, cy = 0;
+  const lerp = (a, b, t) => a + (b - a) * t;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function tick() {
+    cx = lerp(cx, mx, 0.14);
+    cy = lerp(cy, my, 0.14);
+    cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
+    requestAnimationFrame(tick);
+  })();
+  document.querySelectorAll('a, button, .oap-card, .arch-node, .int-pill').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('is-hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('is-hover'));
+  });
+
+  /* ── Hamburger nav ───────────────────────────────────────────── */
+  const hamburger = document.getElementById('hamburger');
+  const navOverlay = document.getElementById('nav-overlay');
+  hamburger.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('open');
+    navOverlay.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  navOverlay.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navOverlay.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  /* ── Card 3D tilt + radial gradient ─────────────────────────── */
+  document.querySelectorAll('.oap-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      card.style.transform = `perspective(1000px) rotateX(${(y - 0.5) * -6}deg) rotateY(${(x - 0.5) * 6}deg) translateZ(8px)`;
+      card.style.setProperty('--mx', `${x * 100}%`);
+      card.style.setProperty('--my', `${y * 100}%`);
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+
+  /* ── Loader ──────────────────────────────────────────────────── */
+  const loaderEl   = document.getElementById('loader');
+  const loaderText = document.getElementById('loader-text');
+  const loaderBar  = document.getElementById('loader-bar');
+
+  const STEPS = [
+    { msg: 'INITIALIZING SECURE TERMINAL...',   pct: 12,  t: 0    },
+    { msg: 'LOADING ATTESTATION LAYER...',       pct: 30,  t: 380  },
+    { msg: 'VERIFYING HARDWARE IDENTITY...',     pct: 52,  t: 780  },
+    { msg: 'DECRYPTING PROOF CHAIN...',          pct: 70,  t: 1180 },
+    { msg: 'CHECKING CLEARANCE LEVEL...',        pct: 86,  t: 1560 },
+    { msg: 'ACCESS GRANTED.',                    pct: 100, t: 1920 },
+  ];
+
+  // Reduced-motion: skip loader entirely
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    loaderEl.style.display = 'none';
+    window.addEventListener('DOMContentLoaded', runEntrance);
+    return;
+  }
+
+  STEPS.forEach(s => {
+    setTimeout(() => {
+      loaderText.textContent = s.msg;
+      loaderBar.style.width  = s.pct + '%';
+    }, s.t);
+  });
+
+  setTimeout(() => {
+    loaderEl.style.transition = 'opacity 0.55s ease';
+    loaderEl.style.opacity = '0';
+    setTimeout(() => {
+      loaderEl.style.display = 'none';
+      runEntrance();
+    }, 570);
+  }, 2450);
+
+  /* ── Hero entrance ───────────────────────────────────────────── */
+  function runEntrance() {
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.fromTo('#hero-clearance', { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.55, delay: 0.05, ease: 'power2.out' });
+    gsap.fromTo('#hero-title',     { opacity: 0, y: 32  }, { opacity: 1, y: 0, duration: 0.85, delay: 0.25, ease: 'power3.out' });
+    gsap.fromTo('#hero-sub',       { opacity: 0        }, { opacity: 1,        duration: 0.65, delay: 0.65 });
+    gsap.fromTo('#hero-stats',     { opacity: 0        }, { opacity: 1,        duration: 0.55, delay: 0.9  });
+    gsap.fromTo('#attest-wrap',    { opacity: 0        }, { opacity: 1,        duration: 0.65, delay: 1.1  });
+
+    // SVG nodes stagger
+    gsap.to('.attest-node', { opacity: 1, duration: 0.5, stagger: 0.25, delay: 1.3, ease: 'power2.out' });
+    // Lines
+    gsap.to('.attest-line', { opacity: 1, duration: 0.35, stagger: 0.25, delay: 1.55 });
+    // Proof stamp
+    gsap.fromTo('#proof-stamp', { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.45, delay: 2.42, ease: 'back.out(1.6)' });
+
+    // Scroll reveals
+    document.querySelectorAll('.reveal').forEach(el => {
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 88%',
+        onEnter: () => el.classList.add('visible'),
+      });
+    });
+
+    // Classification stamps: rotate in on scroll
+    gsap.utils.toArray('.class-stamp').forEach(stamp => {
+      gsap.fromTo(stamp,
+        { opacity: 0, rotation: 10, scale: 0.88 },
+        {
+          opacity: 0.8, rotation: -2, scale: 1, duration: 0.6, ease: 'back.out(1.4)',
+          scrollTrigger: { trigger: stamp, start: 'top 90%' }
+        }
+      );
+    });
+
+    // Section headers: classification stamp accent pulse
+    gsap.utils.toArray('.doc-stamp').forEach(stamp => {
+      gsap.fromTo(stamp,
+        { opacity: 0, x: 14 },
+        {
+          opacity: 1, x: 0, duration: 0.45, ease: 'power2.out',
+          scrollTrigger: { trigger: stamp, start: 'top 92%' }
+        }
+      );
+    });
+
+    // Hash flicker
+    startHashFlicker();
+  }
+
+  /* ── Hash value flicker ──────────────────────────────────────── */
+  function startHashFlicker() {
+    const hex = '0123456789ABCDEF';
+    const els = document.querySelectorAll('.code-hash');
+    if (!els.length) return;
+    setInterval(() => {
+      els.forEach(el => {
+        if (Math.random() < 0.25) {
+          const t = el.textContent;
+          let s = '';
+          for (let i = 0; i < t.length; i++) {
+            s += (Math.random() < 0.18) ? hex[Math.floor(Math.random() * 16)] : t[i];
+          }
+          el.textContent = s;
+        }
+      });
+    }, 200);
+  }
+}());
 </script>
 </body>
 </html>
