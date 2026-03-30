@@ -30,11 +30,7 @@
 <canvas id="star-field" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
 <script>(function(){const c=document.getElementById("star-field"),ctx=c.getContext("2d");let stars=[],W,H;function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight}function init(){stars=Array.from({length:60},()=>({x:Math.random()*W,y:Math.random()*H,r:Math.random()*0.7+0.1,a:Math.random(),v:Math.random()*0.003+0.001}))}function draw(){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.a+=s.v;if(s.a>1||s.a<0)s.v=-s.v;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle="rgba(255,255,255,"+s.a.toFixed(2)+")";ctx.fill()});requestAnimationFrame(draw)}window.addEventListener("resize",()=>{resize();init()});resize();init();draw()})();</script>
 <div style="position:relative;z-index:1;">
-<nav style="padding:20px 40px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;justify-content:space-between;">
-  <a href="/" style="font-family:Syne,sans-serif;font-weight:800;font-size:16px;letter-spacing:0.08em;text-decoration:none;color:#e5e2e1;">ORTHONODE SYSTEMS™</a>
-  <a href="/" style="font-family:IBM Plex Mono,monospace;font-size:11px;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:0.06em;">← Back</a>
-</nav>
-<main style="max-width:860px;margin:0 auto;padding:80px 40px;">
+<main style="max-width:860px;margin:80px auto 0;padding:80px 40px;">
   <div style="font-family:IBM Plex Mono,monospace;font-size:10px;color:rgba(230,0,122,0.8);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:20px;">// LEGAL / COOKIES</div>
   <h1 style="font-family:Syne,sans-serif;font-weight:800;font-size:clamp(36px,5vw,64px);letter-spacing:-0.02em;line-height:0.95;margin-bottom:40px;">Cookie Policy</h1>
   <p style="font-family:DM Sans,sans-serif;font-size:15px;color:rgba(229,226,225,0.7);line-height:1.75;margin-bottom:48px;">This page explains the cookies used by ORTHONODE SYSTEMS™ (<a href="https://orthonode.xyz" style="color:#E6007A;">orthonode.xyz</a>). We use a small set of essential and functional cookies to operate the site and remember your preferences.</p>

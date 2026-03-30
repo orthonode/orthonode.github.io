@@ -9,12 +9,13 @@
   <meta property="og:description" content="High-yield borrowing & lending. ZK-powered solvency verification. Live on Polkadot Hub.">
   <meta property="og:image" content="/site-logo.png">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://orthonode.xyz/dotlend.html">
   <link rel="icon" href="/site-logo.png" type="image/png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Lexend:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- GSAP -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
@@ -34,6 +35,16 @@
       --border-b:  rgba(230,0,122,0.40);
       --text:      #E8F4FF;
       --muted:     #4A6B80;
+      /* Aliases used throughout */
+      --pink:      #E6007A;
+      --pink2:     rgba(230,0,122,0.08);
+      --pink3:     rgba(230,0,122,0.04);
+      --r:         12px;
+      --r-sm:      8px;
+      --r-lg:      20px;
+      --card:      #080D18;
+      --text2:     #C0CDE0;
+      --border2:   rgba(230,0,122,0.25);
     }
 
     html { scroll-behavior: smooth; cursor: none; }
@@ -112,6 +123,15 @@
       pointer-events: none; opacity: .028;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
+
+/* ── Aurora blobs ── */
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.1}
+.blob-1{width:700px;height:700px;background:#E6007A;top:-250px;left:-150px;animation:blobDrift 18s ease-in-out infinite alternate}
+.blob-2{width:550px;height:550px;background:#9945FF;top:25%;right:-180px;animation:blobDrift 22s ease-in-out infinite alternate-reverse}
+.blob-3{width:450px;height:450px;background:#E6007A;bottom:5%;left:15%;animation:blobDrift 15s ease-in-out infinite alternate}
+.blob-4{width:380px;height:380px;background:#9945FF;bottom:-120px;right:25%;animation:blobDrift 25s ease-in-out infinite alternate-reverse}
+@keyframes blobDrift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,40px) scale(1.12)}}
 
 /* ── HERO ── */
 #hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:clamp(100px,12vw,140px) clamp(20px,5vw,80px) 80px;gap:60px;overflow:hidden;z-index:2}
@@ -394,6 +414,45 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border)}
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROTOCOL OVERVIEW / INFOGRAPHIC -->
+<section id="overview">
+  <div class="section-inner">
+    <div class="section-label">Protocol Overview</div>
+    <h2 class="section-title">How DotLend <span class="grad-text">creates liquidity</span></h2>
+    <p class="section-sub">The full borrowing cycle — deposit, prove solvency, borrow USDH, repay. The flywheel that powers Polkadot-native DeFi.</p>
+
+    <!-- Infographic -->
+    <div style="margin-top:48px;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border2);background:var(--card);">
+      <img
+        src="/DotLend_Infographic.png"
+        alt="DotLend Protocol Overview — The Borrowing Cycle, ZK Solvency Proofs, and Ecosystem Flywheel on Polkadot Hub"
+        style="width:100%;height:auto;display:block;"
+        loading="lazy"
+      >
+    </div>
+
+    <!-- PDF downloads -->
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:28px;">
+      <a href="/DotLend_Protocol.pdf" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:10px;padding:12px 24px;background:var(--pink2);border:1px solid var(--border2);border-radius:var(--r-sm);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--pink);text-decoration:none;transition:background .2s,border-color .2s;"
+         onmouseenter="this.style.background='rgba(230,0,122,0.14)';this.style.borderColor='rgba(230,0,122,0.5)'"
+         onmouseleave="this.style.background='var(--pink2)';this.style.borderColor='var(--border2)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        Protocol Paper (PDF)
+      </a>
+      <a href="/DotLend_Native_Polkadot_Lending.pdf" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:10px;padding:12px 24px;background:var(--pink2);border:1px solid var(--border2);border-radius:var(--r-sm);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--pink);text-decoration:none;transition:background .2s,border-color .2s;"
+         onmouseenter="this.style.background='rgba(230,0,122,0.14)';this.style.borderColor='rgba(230,0,122,0.5)'"
+         onmouseleave="this.style.background='var(--pink2)';this.style.borderColor='var(--border2)'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        Native Polkadot Lending Paper (PDF)
+      </a>
     </div>
   </div>
 </section>
@@ -894,6 +953,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border)}
       <div>
         <div class="footer-col-title">Protocol</div>
         <div class="footer-links">
+          <a href="#overview">Overview</a>
           <a href="#markets">Markets</a>
           <a href="#zk-solvency">ZK Solvency</a>
           <a href="#how-it-works">How It Works</a>

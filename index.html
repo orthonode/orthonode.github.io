@@ -171,7 +171,13 @@
       transition: background .3s;
     }
     .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-brand-logo { width: 30px; height: auto; filter: drop-shadow(0 0 6px rgba(0,212,255,.5)); flex-shrink: 0; }
+    .nav-brand-logo {
+      width: 30px; height: auto;
+      filter: drop-shadow(0 0 6px rgba(0,212,255,.5));
+      flex-shrink: 0;
+      animation: logoSpin 22s linear infinite;
+      transform-origin: center center;
+    }
     .nav-brand-text {
       font-family: 'Orbitron', monospace; font-weight: 900;
       font-size: clamp(.78rem,1.8vw,.92rem);
@@ -250,11 +256,16 @@
       100% { top:100%; opacity:0; }
     }
 
-    /* ── LOGO (exact spec) ────────────────────────────── */
+    /* ── LOGO ──────────────────────────────────────────── */
     .logo-img {
       width: clamp(80px,10vw,140px); height: auto;
       display: block; margin: 0 auto 28px;
       filter: drop-shadow(0 0 30px rgba(0,212,255,.6));
+      transform-origin: center center;
+    }
+    @keyframes logoSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
     }
 
     .hero-eyebrow {
@@ -545,12 +556,39 @@
 </head>
 <body>
 
+<!-- ── Cloudflare Turnstile Gate ─────────────────────────── -->
+<div id="gate" style="position:fixed;inset:0;z-index:200000;background:#020408;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .6s,transform .6s;">
+  <img src="/logo.png" alt="ORTHONODE SYSTEMS™" style="width:72px;height:auto;filter:drop-shadow(0 0 32px rgba(0,212,255,.85));animation:logoSpin 22s linear infinite;transform-origin:center center;">
+  <div style="font-family:'Orbitron',monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(0,212,255,.8);">ORTHONODE SYSTEMS™</div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);">Human Verification Required</div>
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb" data-callback="onHumanVerified" data-theme="dark" data-size="flexible" data-appearance="always" style="width:min(300px,90vw);"></div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.25);letter-spacing:.1em;">Powered by Cloudflare Turnstile</div>
+</div>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+(function(){
+  var _ck={
+    set:function(k,v,days){var d=new Date();d.setTime(d.getTime()+days*864e5);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},
+    get:function(k){return(document.cookie.split(";").map(function(c){return c.trim()}).find(function(c){return c.startsWith(k+"=")})||"").split("=")[1]||null}
+  };
+  window.onHumanVerified=function(t){
+    _ck.set("on_verified",t,1/24);
+    var g=document.getElementById("gate");
+    g.style.opacity="0";g.style.transform="scale(1.04)";
+    setTimeout(function(){g.style.display="none"},620);
+  };
+  document.addEventListener("DOMContentLoaded",function(){
+    if(_ck.get("on_verified")){var g=document.getElementById("gate");if(g)g.style.display="none";}
+  });
+})();
+</script>
+
 <!-- Custom cursor -->
 <div class="c-cursor" id="cursor"></div>
 
 <!-- Page loader -->
 <div id="loader">
-  <img id="loader-logo" src="/site-logo.png" alt="Orthonode">
+  <img id="loader-logo" src="/logo.png" alt="Orthonode">
   <div id="loader-bar"><div id="loader-fill"></div></div>
   <div id="loader-text">Initialising systems...</div>
 </div>
@@ -564,7 +602,7 @@
 <!-- Nav -->
 <nav id="nav">
   <a href="/" class="nav-brand">
-    <img src="/site-logo.png" alt="Orthonode logo" class="nav-brand-logo">
+    <img src="/logo.png" alt="Orthonode logo" class="nav-brand-logo">
     <span class="nav-brand-text">ORTHONODE<span>™</span></span>
   </a>
   <ul class="nav-links">
@@ -592,7 +630,7 @@
   <div class="scan-line"></div>
 
   <!-- LOGO with GSAP animation -->
-  <img src="/site-logo.png" alt="Orthonode Systems logo" class="logo-img" id="hero-logo">
+  <img src="/logo.png" alt="Orthonode Systems logo" class="logo-img" id="hero-logo">
 
   <p class="hero-eyebrow">Infrastructure Labs // Physical Verification Layer</p>
   <h1 class="hero-title">
@@ -623,7 +661,7 @@
       <!-- Core -->
       <circle class="core-ring" cx="350" cy="350" fill="none" stroke="rgba(0,212,255,.18)" stroke-width="1"/>
       <circle class="core-glow" cx="350" cy="350" fill="rgba(0,212,255,.12)" stroke="rgba(0,212,255,.6)" stroke-width="1.5"/>
-      <image href="/site-logo.png" x="330" y="330" width="40" height="40" style="filter:drop-shadow(0 0 8px rgba(0,212,255,.8))"/>
+      <image href="/logo.png" x="330" y="330" width="40" height="40" style="filter:drop-shadow(0 0 8px rgba(0,212,255,.8))"/>
 
       <!-- SHA — orbit 1 — r=120 -->
       <g class="orbit-group orbit-1">
@@ -979,7 +1017,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <img src="/site-logo.png" alt="Orthonode">
+      <img src="/logo.png" alt="Orthonode">
       <span class="footer-brand-text">ORTHONODE SYSTEMS™</span>
     </div>
     <div class="footer-links">
@@ -1075,16 +1113,23 @@
   function runHeroAnim() {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    /* Logo: scale 0.5→1, opacity 0→1, blur 20→0, then pulse glow */
+    /* Logo: scale 0.5→1, opacity 0→1, blur 20→0 */
     tl.fromTo('#hero-logo',
-      { scale: .5, opacity: 0, filter: 'drop-shadow(0 0 30px rgba(0,212,255,.6)) blur(20px)' },
-      { scale: 1,  opacity: 1, filter: 'drop-shadow(0 0 30px rgba(0,212,255,.6)) blur(0px)', duration: 1.1 }
+      { scale: .5, opacity: 0, rotation: -90, filter: 'drop-shadow(0 0 30px rgba(0,212,255,.6)) blur(20px)' },
+      { scale: 1,  opacity: 1, rotation: 0, filter: 'drop-shadow(0 0 30px rgba(0,212,255,.6)) blur(0px)', duration: 1.2, ease: 'power3.out' }
     );
-    /* Continuous pulse glow after intro */
+    /* Continuous spin + pulse glow after intro */
     tl.call(() => {
       gsap.to('#hero-logo', {
-        filter: 'drop-shadow(0 0 50px rgba(0,212,255,.9)) blur(0px)',
-        duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1,
+        filter: 'drop-shadow(0 0 55px rgba(0,212,255,1)) drop-shadow(0 0 20px rgba(0,212,255,.5)) blur(0px)',
+        duration: 2, ease: 'sine.inOut', yoyo: true, repeat: -1,
+      });
+      gsap.to('#hero-logo', {
+        rotation: 360,
+        duration: 22,
+        ease: 'none',
+        repeat: -1,
+        transformOrigin: 'center center',
       });
     });
 

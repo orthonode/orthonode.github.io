@@ -9,6 +9,7 @@
     { label: "DotLend",  href: "/dotlend.html",       key: "dotlend" },
     { label: "SHA",      href: "/sha.html",            key: "sha" },
     { label: "TON-SHA",  href: "/ton-sha.html",        key: "ton-sha" },
+    { label: "OAP",      href: "/oap.html",             key: "oap" },
     { label: "INVARIANT",href: "/invariant.html",      key: "invariant" },
     { label: "TIX-DAO",  href: "/tix-dao.html",        key: "tix-dao" },
     { label: "MANTIS",   href: "/mantis.html",         key: "mantis" },

@@ -841,6 +841,33 @@ footer{
 </head>
 <body>
 
+<!-- ── Cloudflare Turnstile Gate ─────────────────────────── -->
+<div id="gate" style="position:fixed;inset:0;z-index:200000;background:#04060A;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .6s,transform .6s;">
+  <img src="/logo.png" alt="ORTHONODE SYSTEMS™" style="width:72px;height:auto;filter:drop-shadow(0 0 32px rgba(245,158,11,.85));">
+  <div style="font-family:'Orbitron',monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,158,11,.8);">ORTHONODE SYSTEMS™</div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);">Human Verification Required</div>
+  <div class="cf-turnstile" data-sitekey="0x4AAAAAACZs3Wk3UKBEsJUb" data-callback="onHumanVerified" data-theme="dark" data-size="flexible" data-appearance="always" style="width:min(300px,90vw);"></div>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.25);letter-spacing:.1em;">Powered by Cloudflare Turnstile</div>
+</div>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+(function(){
+  var _ck={
+    set:function(k,v,days){var d=new Date();d.setTime(d.getTime()+days*864e5);document.cookie=k+"="+v+";expires="+d.toUTCString()+";path=/;SameSite=Lax"},
+    get:function(k){return(document.cookie.split(";").map(function(c){return c.trim()}).find(function(c){return c.startsWith(k+"=")})||"").split("=")[1]||null}
+  };
+  window.onHumanVerified=function(t){
+    _ck.set("on_verified",t,1/24);
+    var g=document.getElementById("gate");
+    g.style.opacity="0";g.style.transform="scale(1.04)";
+    setTimeout(function(){g.style.display="none"},620);
+  };
+  document.addEventListener("DOMContentLoaded",function(){
+    if(_ck.get("on_verified")){var g=document.getElementById("gate");if(g)g.style.display="none";}
+  });
+})();
+</script>
+
 <!-- CUSTOM CURSOR -->
 <div class="c-cursor" id="cursor"></div>
 
