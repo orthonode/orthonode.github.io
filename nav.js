@@ -15,6 +15,7 @@
     { label: "MANTIS",   href: "/mantis.html",         key: "mantis" },
     { label: "Nexus",    href: "/nexus.html",           key: "nexus" },
     { label: "Research", href: "/iotex-research.html",  key: "iotex-research" },
+    { label: "Index",    href: "/site-index.html",       key: "site-index" },
     { label: "GitHub ↗", href: "https://github.com/orthonode", key: "_ext", external: true },
   ];
 

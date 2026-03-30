@@ -124,110 +124,20 @@
     /* ── Star canvas ──────────────────────────────────── */
     #star-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
 
-    /* ── Noise grain ──────────────────────────────────── */
-    #grain {
-      position: fixed; inset: 0; z-index: 1;
-      pointer-events: none; opacity: .028;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 160px 160px;
-    }
-
     /* ── Grid overlay ─────────────────────────────────── */
     #grid-overlay {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(0,212,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,212,255,.03) 1px, transparent 1px);
+        linear-gradient(rgba(0,212,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,.025) 1px, transparent 1px);
       background-size: 60px 60px;
-    }
-
-    /* ── Aurora ───────────────────────────────────────── */
-    #aurora {
-      position: fixed; top: -20%; left: 50%;
-      transform: translateX(-50%);
-      width: 120vw; height: 70vh;
-      pointer-events: none; z-index: 0;
-      background: radial-gradient(ellipse at 50% 30%,
-        rgba(0,212,255,.07) 0%, rgba(0,212,255,.03) 30%, transparent 70%);
-      animation: auroraPulse 8s ease-in-out infinite;
-    }
-    @keyframes auroraPulse {
-      0%,100% { opacity:.6; transform:translateX(-50%) scaleX(1); }
-      50%     { opacity:1;  transform:translateX(-50%) scaleX(1.08); }
     }
 
     /* ── Typography helpers ───────────────────────────── */
     .font-orbitron { font-family: 'Orbitron', monospace; }
     .font-mono     { font-family: 'JetBrains Mono', monospace; }
 
-    /* ── Nav ──────────────────────────────────────────── */
-    #nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      padding: 0 clamp(1rem,4vw,3rem); height: 64px;
-      display: flex; align-items: center; justify-content: space-between;
-      background: rgba(2,4,8,.72);
-      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--border);
-      transition: background .3s;
-    }
-    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-brand-logo {
-      width: 30px; height: auto;
-      filter: drop-shadow(0 0 6px rgba(0,212,255,.5));
-      flex-shrink: 0;
-      animation: logoSpin 22s linear infinite;
-      transform-origin: center center;
-    }
-    .nav-brand-text {
-      font-family: 'Orbitron', monospace; font-weight: 900;
-      font-size: clamp(.78rem,1.8vw,.92rem);
-      color: var(--primary); letter-spacing: .08em;
-    }
-    .nav-brand-text span { color: var(--gold); }
-
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a {
-      font-family: 'Exo 2', sans-serif; font-size: .8rem; font-weight: 500;
-      color: var(--muted); text-decoration: none;
-      letter-spacing: .06em; text-transform: uppercase;
-      position: relative; transition: color .2s; cursor: none;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
-      height: 1px; background: var(--primary);
-      transform: scaleX(0); transform-origin: left; transition: transform .25s ease;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a:hover::after { transform: scaleX(1); }
-
-    .nav-hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      cursor: none; padding: 8px; background: none; border: none;
-    }
-    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--text); transition: all .3s; }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    #nav-overlay {
-      display: none; position: fixed; inset: 0; z-index: 999;
-      background: rgba(2,4,8,.97); backdrop-filter: blur(20px);
-      flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
-    }
-    #nav-overlay.open { display: flex; }
-    #nav-overlay a {
-      font-family: 'Orbitron', monospace;
-      font-size: clamp(1.2rem,5vw,1.8rem);
-      color: var(--text); text-decoration: none;
-      letter-spacing: .12em; text-transform: uppercase;
-      transition: color .2s; cursor: none;
-    }
-    #nav-overlay a:hover { color: var(--primary); }
-
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-    }
+    /* Nav handled by nav.js — no inline nav styles needed */
 
     /* ── Hero ─────────────────────────────────────────── */
     #hero {
@@ -552,6 +462,26 @@
 
     /* ── Horizontal dividers ──────────────────────────── */
     .h-div { height: 1px; background: var(--border); }
+
+    /* ── Mobile overrides ─────────────────────────────── */
+    @media (max-width: 600px) {
+      #hero { padding: 90px 1rem 2rem; }
+      .logo-img { width: clamp(60px,18vw,100px); margin-bottom: 18px; }
+      .hero-title { font-size: clamp(1.8rem,9vw,3rem); }
+      .hero-tagline { font-size: .9rem; margin-bottom: 1.5rem; }
+      .hero-ctas { flex-direction: column; align-items: center; gap: .75rem; }
+      .btn-primary, .btn-ghost { font-size: .65rem; padding: .75rem 1.4rem; }
+      #orbital-wrap { width: min(100%, 320px); }
+      #stats-bar .stats-inner { gap: 1rem; }
+      .stat-value { font-size: 1.2rem; }
+      .arch-flow { gap: .5rem; }
+      .arch-node { padding: .8rem 1rem; }
+      .arch-node-name { font-size: .7rem; }
+    }
+    @media (max-width: 900px) {
+      #hero { padding-top: 80px; }
+      .stats-inner { gap: 2rem; }
+    }
   </style>
 </head>
 <body>
@@ -595,34 +525,7 @@
 
 <!-- Background layers -->
 <canvas id="star-canvas"></canvas>
-<div id="grain"></div>
 <div id="grid-overlay"></div>
-<div id="aurora"></div>
-
-<!-- Nav -->
-<nav id="nav">
-  <a href="/" class="nav-brand">
-    <img src="/logo.png" alt="Orthonode logo" class="nav-brand-logo">
-    <span class="nav-brand-text">ORTHONODE<span>™</span></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#protocols">Protocols</a></li>
-    <li><a href="#architecture">Architecture</a></li>
-    <li><a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub</a></li>
-    <li><a href="mailto:infrastructure@orthonode.xyz">Contact</a></li>
-  </ul>
-  <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- Mobile nav overlay -->
-<div id="nav-overlay">
-  <a href="#protocols"    id="mo-protocols">Protocols</a>
-  <a href="#architecture" id="mo-arch">Architecture</a>
-  <a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub</a>
-  <a href="mailto:infrastructure@orthonode.xyz">Contact</a>
-</div>
 
 <!-- ── Hero ───────────────────────────────────────────── -->
 <section id="hero">
@@ -766,7 +669,7 @@
     <div class="stat-divider"></div>
     <div class="stat-item">
       <span class="stat-value gold" data-prefix="$" data-count="25000" data-suffix="">$0</span>
-      <span class="stat-label">Grant Awarded</span>
+      <span class="stat-label">Grant Applied</span>
     </div>
   </div>
 </div>
@@ -1015,18 +918,51 @@
 
 <!-- ── Footer ──────────────────────────────────────────── -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <img src="/logo.png" alt="Orthonode">
-      <span class="footer-brand-text">ORTHONODE SYSTEMS™</span>
+  <div class="footer-inner" style="flex-direction:column;gap:2rem;align-items:flex-start;max-width:1240px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr));gap:2rem;width:100%;">
+      <div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:1rem;">
+          <img src="/logo.png" alt="Orthonode" style="width:24px;height:auto;filter:drop-shadow(0 0 6px rgba(0,212,255,.5));animation:logoSpin 22s linear infinite;transform-origin:center center;">
+          <span class="footer-brand-text">ORTHONODE SYSTEMS™</span>
+        </div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;color:var(--muted);line-height:1.7;">Verification Infrastructure<br>for the Decentralized Stack</p>
+      </div>
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--primary);margin-bottom:.75rem;">Protocols</p>
+        <div class="footer-links" style="flex-direction:column;gap:.5rem;">
+          <a href="/sha.html">SHA</a>
+          <a href="/ton-sha.html">TON-SHA</a>
+          <a href="/oap.html">OAP</a>
+          <a href="/nexus.html">Nexus</a>
+          <a href="/dotlend.html">DotLend</a>
+          <a href="/mantis.html">MANTIS</a>
+          <a href="/invariant.html">INVARIANT</a>
+          <a href="/tix-dao.html">TIX-DAO</a>
+        </div>
+      </div>
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--primary);margin-bottom:.75rem;">Resources</p>
+        <div class="footer-links" style="flex-direction:column;gap:.5rem;">
+          <a href="/iotex-research.html">Research Paper</a>
+          <a href="/site-index.html">Site Index</a>
+          <a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">@OrthonodeSys ↗</a>
+          <a href="mailto:infrastructure@orthonode.xyz">Contact</a>
+        </div>
+      </div>
+      <div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--primary);margin-bottom:.75rem;">Legal</p>
+        <div class="footer-links" style="flex-direction:column;gap:.5rem;">
+          <a href="/terms.html">Terms of Use</a>
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/cookies.html">Cookie Policy</a>
+        </div>
+      </div>
     </div>
-    <div class="footer-links">
-      <a href="https://orthonode.xyz">orthonode.xyz</a>
-      <a href="https://twitter.com/OrthonodeSys" target="_blank" rel="noopener">@OrthonodeSys</a>
-      <a href="mailto:infrastructure@orthonode.xyz">infrastructure@orthonode.xyz</a>
-      <a href="https://github.com/orthonode" target="_blank" rel="noopener">GitHub</a>
+    <div style="display:flex;justify-content:space-between;align-items:center;width:100%;border-top:1px solid var(--border);padding-top:1.5rem;flex-wrap:wrap;gap:.75rem;">
+      <p class="footer-copy">&copy; 2026 ORTHONODE SYSTEMS™. All rights reserved.</p>
+      <p class="footer-copy">infrastructure@orthonode.xyz</p>
     </div>
-    <p class="footer-copy">&copy; 2026 Orthonode Systems. All rights reserved.</p>
   </div>
 </footer>
 
@@ -1209,23 +1145,8 @@
     });
   });
 
-  /* ── Hamburger nav ───────────────────────────────────── */
-  const hamburger = document.getElementById('hamburger');
-  const overlay   = document.getElementById('nav-overlay');
-  hamburger.addEventListener('click', () => {
-    const open = overlay.classList.toggle('open');
-    hamburger.classList.toggle('open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-  });
-  overlay.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      overlay.classList.remove('open');
-      hamburger.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-
 })();
 </script>
+<script src="/nav.js"></script>
 </body>
 </html>
