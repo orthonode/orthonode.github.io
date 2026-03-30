@@ -64,7 +64,13 @@ jobs:
 
           echo ""
           echo "── sitemap.xml present"
-          [ -f "sitemap.xml" ] && echo "  ✓ PASS" && PASS=$((PASS+1)) || echo "  ✗ FAIL" && FAIL=$((FAIL+1))
+          if [ -f "sitemap.xml" ]; then
+            echo "  ✓ PASS"
+            PASS=$((PASS+1))
+          else
+            echo "  ✗ FAIL"
+            FAIL=$((FAIL+1))
+          fi
 
           echo ""
           echo "══════════════════════════════"
