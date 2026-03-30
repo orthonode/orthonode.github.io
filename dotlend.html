@@ -34,7 +34,7 @@
       --border:    rgba(230,0,122,0.15);
       --border-b:  rgba(230,0,122,0.40);
       --text:      #E8F4FF;
-      --muted:     #4A6B80;
+      --muted:     #7A9AB4;
       /* Aliases used throughout */
       --pink:      #E6007A;
       --pink2:     rgba(230,0,122,0.08);
@@ -228,6 +228,25 @@ section{position:relative;z-index:2}
 .zk-arrow{color:var(--muted);font-size:20px;display:flex;align-items:center}
 .zk-arrow svg{width:32px;height:32px;flex-shrink:0}
 
+/* ── ZK PIPELINE ── */
+.zk-pipeline{display:flex;align-items:center;gap:0;padding:40px 32px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.zk-pipe-node{flex:1;min-width:140px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:0 8px}
+.zk-pipe-icon{width:64px;height:64px;border-radius:16px;background:rgba(230,0,122,0.1);border:1px solid rgba(230,0,122,0.2);display:flex;align-items:center;justify-content:center;transition:all .3s;flex-shrink:0}
+.zk-pipe-node:hover .zk-pipe-icon{background:rgba(230,0,122,0.18);border-color:rgba(230,0,122,0.5);box-shadow:0 0 20px rgba(230,0,122,0.2)}
+.zk-pipe-step{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--pink);letter-spacing:.2em;font-weight:600}
+.zk-pipe-title{font-family:'Lexend',sans-serif;font-size:14px;font-weight:700;color:var(--text)}
+.zk-pipe-sub{font-size:12px;color:var(--muted);line-height:1.5;max-width:120px}
+.zk-pipe-badge{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;padding:3px 10px;border-radius:20px;background:rgba(230,0,122,0.08);border:1px solid rgba(230,0,122,0.15);color:var(--pink)}
+.zk-pipe-final .zk-pipe-icon{animation:pipeGlow 2s ease-in-out infinite alternate}
+@keyframes pipeGlow{from{box-shadow:0 0 0 rgba(230,0,122,0)}to{box-shadow:0 0 24px rgba(230,0,122,0.4)}}
+.zk-pipe-arrow{display:flex;align-items:center;gap:0;flex-direction:column;gap:6px;flex-shrink:0;padding:0 4px}
+.zk-pipe-line{width:1px;height:32px;background:linear-gradient(180deg,transparent,var(--pink),transparent);opacity:.5}
+@media(max-width:768px){
+  .zk-pipeline{flex-direction:column;padding:28px 20px}
+  .zk-pipe-arrow{flex-direction:row;transform:rotate(90deg)}
+  .zk-pipe-sub{max-width:200px}
+}
+
 /* ── HOW IT WORKS ── */
 #how-it-works{background:linear-gradient(180deg,transparent,rgba(230,0,122,.03),transparent)}
 .steps{display:flex;flex-direction:column;gap:0}
@@ -239,6 +258,28 @@ section{position:relative;z-index:2}
 .step-text{font-size:15px;color:var(--muted);line-height:1.75;font-weight:300;max-width:600px}
 .step-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
 .tag{background:var(--pink2);border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:20px;font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:.06em}
+
+/* ── STACK DIAGRAM ── */
+.stack-diagram{display:flex;flex-direction:column;gap:0;margin-top:48px;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.stack-layer{background:var(--sl-bg,rgba(230,0,122,0.04));border-bottom:1px solid var(--border);padding:28px 32px}
+.stack-layer:last-child{border-bottom:none}
+.stack-layer-badge{display:inline-flex;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--pink);background:rgba(230,0,122,0.08);border:1px solid rgba(230,0,122,0.2);padding:4px 12px;border-radius:20px;margin-bottom:20px}
+.stack-layer-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stack-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:var(--r-sm);transition:border-color .25s,background .25s}
+.stack-item:hover{border-color:rgba(230,0,122,0.3);background:rgba(230,0,122,0.04)}
+.stack-icon{flex-shrink:0;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.04);border-radius:8px}
+.stack-name{font-family:'Lexend',sans-serif;font-size:13px;font-weight:600;color:var(--text)}
+.stack-ver{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.05em;margin-top:2px}
+.stack-connector{display:flex;align-items:center;gap:12px;padding:12px 32px;background:rgba(230,0,122,0.02);border-bottom:1px solid var(--border)}
+.stack-conn-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(230,0,122,0.2),transparent)}
+.stack-connector span{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.1em;white-space:nowrap}
+@media(max-width:768px){
+  .stack-layer-inner{grid-template-columns:repeat(2,1fr)}
+  .stack-layer{padding:20px}
+}
+@media(max-width:480px){
+  .stack-layer-inner{grid-template-columns:1fr}
+}
 
 /* ── ARCHITECTURE ── */
 .arch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
@@ -260,6 +301,20 @@ section{position:relative;z-index:2}
 .security-check svg{width:18px;height:18px;color:#fff}
 .security-title{font-family:'Lexend',sans-serif;font-size:16px;font-weight:700;margin-bottom:6px}
 .security-text{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300}
+
+/* ── PROTOCOL PARAMETERS ── */
+.params-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.param-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:border-color .3s,transform .3s}
+.param-card:hover{border-color:rgba(230,0,122,0.35);transform:translateY(-2px)}
+.param-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px;gap:12px}
+.param-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;line-height:1.4;flex:1}
+.param-value{font-family:'Lexend',sans-serif;font-size:clamp(28px,3vw,44px);font-weight:700;color:var(--pink);line-height:1;flex-shrink:0;background:linear-gradient(135deg,var(--pink),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.param-bar{height:4px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;margin-bottom:16px}
+.param-fill{height:100%;width:0;border-radius:4px;background:var(--pf-color,var(--pink));transition:width 1.2s cubic-bezier(0.16,1,0.3,1)}
+.param-fill.animated{width:var(--pf-w)}
+.param-desc{font-size:13px;color:var(--muted);line-height:1.65;font-weight:300}
+@media(max-width:900px){.params-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.params-grid{grid-template-columns:1fr}}
 
 /* ── FOOTER ── */
 footer{position:relative;z-index:2;border-top:1px solid var(--border)}
@@ -571,44 +626,70 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border)}
 
     <!-- ZK FLOW DIAGRAM -->
     <div style="margin-top:64px">
-      <div class="section-label" style="text-align:center;margin-bottom:32px">Proof Generation Flow</div>
-      <div class="zk-flow-diagram">
-        <div class="zk-node">
-          <div class="zk-node-icon">🔒</div>
-          <div class="zk-node-label">Private Input</div>
-          <div class="zk-node-val">Portfolio State</div>
+      <div class="section-label" style="text-align:center;margin-bottom:40px">Proof Generation Flow</div>
+
+      <!-- Animated pipeline -->
+      <div class="zk-pipeline">
+        <div class="zk-pipe-node" id="zp1">
+          <div class="zk-pipe-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="28" height="28"><rect x="3" y="11" width="18" height="10" rx="2" stroke="#E6007A" stroke-width="1.5"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="#E6007A" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="zk-pipe-step">01</div>
+          <div class="zk-pipe-title">Private Input</div>
+          <div class="zk-pipe-sub">Portfolio balances + prices hashed client-side</div>
+          <div class="zk-pipe-badge">LOCAL ONLY</div>
         </div>
-        <div class="zk-arrow">
-          <svg viewBox="0 0 32 32" fill="none"><path d="M6 16h20M18 8l8 8-8 8" stroke="rgba(230,0,122,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="zk-pipe-arrow">
+          <div class="zk-pipe-line" id="zpl1"></div>
+          <svg viewBox="0 0 16 16" fill="none" width="12" height="12"><path d="M4 8h8M9 4l4 4-4 4" stroke="#E6007A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="zk-node">
-          <div class="zk-node-icon">⚡</div>
-          <div class="zk-node-label">Noir Circuit</div>
-          <div class="zk-node-val">Proof Generation</div>
+        <div class="zk-pipe-node" id="zp2">
+          <div class="zk-pipe-icon" style="background:rgba(153,69,255,0.12);border-color:rgba(153,69,255,0.3)">
+            <svg viewBox="0 0 24 24" fill="none" width="28" height="28"><polygon points="13,2 3,14 12,14 11,22 21,10 12,10" stroke="#9945FF" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="zk-pipe-step" style="color:#9945FF">02</div>
+          <div class="zk-pipe-title">Noir Circuit</div>
+          <div class="zk-pipe-sub">UltraHonk proving system — LTV ratio verified in-circuit</div>
+          <div class="zk-pipe-badge" style="background:rgba(153,69,255,0.1);border-color:rgba(153,69,255,0.25);color:#9945FF">BARRETENBERG</div>
         </div>
-        <div class="zk-arrow">
-          <svg viewBox="0 0 32 32" fill="none"><path d="M6 16h20M18 8l8 8-8 8" stroke="rgba(230,0,122,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="zk-pipe-arrow">
+          <div class="zk-pipe-line" id="zpl2"></div>
+          <svg viewBox="0 0 16 16" fill="none" width="12" height="12"><path d="M4 8h8M9 4l4 4-4 4" stroke="#E6007A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="zk-node">
-          <div class="zk-node-icon">📜</div>
-          <div class="zk-node-label">Public Output</div>
-          <div class="zk-node-val">Solvency Proof</div>
+        <div class="zk-pipe-node" id="zp3">
+          <div class="zk-pipe-icon">
+            <svg viewBox="0 0 24 24" fill="none" width="28" height="28"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke="#E6007A" stroke-width="1.5"/></svg>
+          </div>
+          <div class="zk-pipe-step">03</div>
+          <div class="zk-pipe-title">ZK Proof</div>
+          <div class="zk-pipe-sub">Cryptographic proof: solvent = true, portfolio hidden</div>
+          <div class="zk-pipe-badge">PUBLIC OUTPUT</div>
         </div>
-        <div class="zk-arrow">
-          <svg viewBox="0 0 32 32" fill="none"><path d="M6 16h20M18 8l8 8-8 8" stroke="rgba(230,0,122,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="zk-pipe-arrow">
+          <div class="zk-pipe-line" id="zpl3"></div>
+          <svg viewBox="0 0 16 16" fill="none" width="12" height="12"><path d="M4 8h8M9 4l4 4-4 4" stroke="#E6007A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="zk-node">
-          <div class="zk-node-icon">✅</div>
-          <div class="zk-node-label">Solidity Contract</div>
-          <div class="zk-node-val">On-Chain Verify</div>
+        <div class="zk-pipe-node" id="zp4">
+          <div class="zk-pipe-icon" style="background:rgba(34,197,94,0.1);border-color:rgba(34,197,94,0.25)">
+            <svg viewBox="0 0 24 24" fill="none" width="28" height="28"><path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z" stroke="#22c55e" stroke-width="1.5"/><path d="M16 3v4M8 3v4M16 17v4M8 17v4" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="zk-pipe-step" style="color:#22c55e">04</div>
+          <div class="zk-pipe-title">On-Chain Verify</div>
+          <div class="zk-pipe-sub">SolvencyGateway validates proof · O(1) time</div>
+          <div class="zk-pipe-badge" style="background:rgba(34,197,94,0.1);border-color:rgba(34,197,94,0.25);color:#22c55e">SOLIDITY</div>
         </div>
-        <div class="zk-arrow">
-          <svg viewBox="0 0 32 32" fill="none"><path d="M6 16h20M18 8l8 8-8 8" stroke="rgba(230,0,122,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="zk-pipe-arrow">
+          <div class="zk-pipe-line" id="zpl4"></div>
+          <svg viewBox="0 0 16 16" fill="none" width="12" height="12"><path d="M4 8h8M9 4l4 4-4 4" stroke="#E6007A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="zk-node" style="border-color:var(--border2)">
-          <div class="zk-node-icon">💰</div>
-          <div class="zk-node-label">Result</div>
-          <div class="zk-node-val" style="color:var(--pink)">Loan Disbursed</div>
+        <div class="zk-pipe-node zk-pipe-final" id="zp5">
+          <div class="zk-pipe-icon" style="background:rgba(230,0,122,0.15);border-color:var(--border2)">
+            <svg viewBox="0 0 24 24" fill="none" width="28" height="28"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="#E6007A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="zk-pipe-step">05</div>
+          <div class="zk-pipe-title">Loan Disbursed</div>
+          <div class="zk-pipe-sub">USDH sent to wallet — no KYC, no counterparty</div>
+          <div class="zk-pipe-badge" style="background:rgba(230,0,122,0.15);border-color:var(--border2)">INSTANT</div>
         </div>
       </div>
     </div>
@@ -674,35 +755,144 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border)}
     <div class="section-label">Technical Stack</div>
     <h2 class="section-title">Built on <span class="grad-text">Polkadot-native</span> infrastructure</h2>
     <p class="section-sub">Solidity contracts compiled via resolc for PolkaVM. OpenZeppelin v4.9.6. 102 Hardhat + 6 Forge fuzz tests.</p>
-    <div class="arch-grid">
-      <div class="arch-card">
-        <div class="arch-layer">Layer 1</div>
-        <div class="arch-title">Polkadot Hub EVM</div>
-        <div class="arch-text">Execution on Polkadot's system chain. Shared security from the relay chain. Chain ID 420420417. Native DOT gas. PolkaVM runtime with resolc compiler.</div>
-        <div class="arch-tech">
-          <span>Polkadot Hub</span>
-          <span>resolc 0.5.0</span>
-          <span>PolkaVM</span>
+
+    <!-- Visual stack diagram -->
+    <div class="stack-diagram">
+      <div class="stack-layer" style="--sl-color:#E6007A;--sl-bg:rgba(230,0,122,0.06)">
+        <div class="stack-layer-badge">Layer 3 — ZK Proof Layer</div>
+        <div class="stack-layer-inner">
+          <div class="stack-item">
+            <div class="stack-icon" style="color:#9945FF">
+              <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><path d="M10 2l2.5 5h5l-4 3.5L15 16l-5-3.5L5 16l1.5-5.5L2.5 7h5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <div class="stack-name">Noir Language</div>
+              <div class="stack-ver">v1.0.0-beta.19</div>
+            </div>
+          </div>
+          <div class="stack-item">
+            <div class="stack-icon" style="color:#E6007A">
+              <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M10 6v4l3 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <div class="stack-name">UltraHonk</div>
+              <div class="stack-ver">Proving System</div>
+            </div>
+          </div>
+          <div class="stack-item">
+            <div class="stack-icon" style="color:#C084FC">
+              <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><path d="M3 17l4-8 4 4 3-6 3 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <div class="stack-name">Barretenberg</div>
+              <div class="stack-ver">Backend + WASM</div>
+            </div>
+          </div>
+          <div class="stack-item">
+            <div class="stack-icon" style="color:#F59E0B">
+              <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><rect x="6" y="6" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.2"/></svg>
+            </div>
+            <div>
+              <div class="stack-name">Railway Cron</div>
+              <div class="stack-ver">Every 30 min</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="arch-card">
-        <div class="arch-layer">Layer 2</div>
-        <div class="arch-title">Solidity Smart Contracts</div>
-        <div class="arch-text">13 contracts deployed and verified. CollateralVault, LendingPool, PriceOracle, TreasuryRouter, SolvencyGateway, WPAS. OpenZeppelin v4.9.6 primitives.</div>
-        <div class="arch-tech">
-          <span>Solidity 0.8.20</span>
-          <span>OpenZeppelin v4.9.6</span>
-          <span>Hardhat</span>
+
+      <div class="stack-connector">
+        <div class="stack-conn-line"></div>
+        <span>feeds verified proofs to</span>
+        <div class="stack-conn-line"></div>
+      </div>
+
+      <div class="stack-layer" style="--sl-color:#2775CA;--sl-bg:rgba(39,117,202,0.06)">
+        <div class="stack-layer-badge" style="background:rgba(39,117,202,0.12);border-color:rgba(39,117,202,0.3);color:#60A5FA">Layer 2 — Smart Contracts</div>
+        <div class="stack-layer-inner">
+          <div class="stack-item">
+            <div class="stack-icon" style="color:#60A5FA">
+              <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><path d="M10 2L3 7v6l7 5 7-5V7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <div class="stack-name">Solidity</div>
+              <div class="stack-ver">v0.8.20</div>
+            </div>
+          </div>
+          <div class="stack-item">
+            <div class="stack-icon" style="color:#4ADE80">
+              <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.2"/><path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <div class="stack-name">OpenZeppelin</div>
+              <div class="stack-ver">v4.9.6</div>
+            </div>
+          </div>
+          <div class="stack-item">
+            <div class="stack-icon" style="color:#F59E0B">
+              <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><path d="M4 4h12v12H4z" stroke="currentColor" stroke-width="1.2" rx="1"/><path d="M4 8h12M8 4v12" stroke="currentColor" stroke-width="1.2"/></svg>
+            </div>
+            <div>
+              <div class="stack-name">Hardhat + Forge</div>
+              <div class="stack-ver">108 tests</div>
+            </div>
+          </div>
+          <div class="stack-item">
+            <div class="stack-icon" style="color:#E6007A">
+              <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><circle cx="10" cy="6" r="3" stroke="currentColor" stroke-width="1.2"/><path d="M4 18c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <div class="stack-name">resolc 0.5.0</div>
+              <div class="stack-ver">Solidity → PolkaVM</div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="arch-card">
-        <div class="arch-layer">Layer 3</div>
-        <div class="arch-title">Noir ZK System</div>
-        <div class="arch-text">Aztec's Noir language for ZK circuit development. UltraHonk proving system. Client-side proof generation. Railway cron every 30 minutes.</div>
-        <div class="arch-tech">
-          <span>Noir 1.0.0-beta.19</span>
-          <span>UltraHonk</span>
-          <span>Barretenberg</span>
+
+      <div class="stack-connector">
+        <div class="stack-conn-line"></div>
+        <span>deployed on</span>
+        <div class="stack-conn-line"></div>
+      </div>
+
+      <div class="stack-layer" style="--sl-color:#E6007A;--sl-bg:rgba(230,0,122,0.04)">
+        <div class="stack-layer-badge">Layer 1 — Polkadot Hub EVM</div>
+        <div class="stack-layer-inner">
+          <div class="stack-item">
+            <div class="stack-icon" style="color:#E6007A">
+              <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.2"/><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 2"/></svg>
+            </div>
+            <div>
+              <div class="stack-name">Polkadot Hub</div>
+              <div class="stack-ver">Chain ID 420420417</div>
+            </div>
+          </div>
+          <div class="stack-item">
+            <div class="stack-icon" style="color:#E6007A">
+              <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><rect x="2" y="6" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M6 6V4a4 4 0 018 0v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <div class="stack-name">PolkaVM</div>
+              <div class="stack-ver">RISC-V Runtime</div>
+            </div>
+          </div>
+          <div class="stack-item">
+            <div class="stack-icon" style="color:#F8B4D9">
+              <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <div class="stack-name">DOT Security</div>
+              <div class="stack-ver">$10B+ staked</div>
+            </div>
+          </div>
+          <div class="stack-item">
+            <div class="stack-icon" style="color:#22c55e">
+              <svg viewBox="0 0 20 20" fill="none" width="20" height="20"><path d="M3 6h14l-2 10H5L3 6z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M1 6h18M8 3h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <div class="stack-name">Blockscout</div>
+              <div class="stack-ver">All 13 verified</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -783,48 +973,56 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border)}
   <div class="section-inner">
     <div class="section-label">Protocol Parameters</div>
     <h2 class="section-title">Conservative by <span class="grad-text">design</span></h2>
-    <div class="security-grid" style="margin-top:48px">
-      <div class="security-item">
-        <div class="security-check"><svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div>
-          <div class="security-title">70% Loan-to-Value</div>
-          <div class="security-text">Conservative LTV — leaves 10% buffer above the liquidation threshold. Standard for early-stage lending markets.</div>
+    <p class="section-sub">Every parameter chosen to maximize borrower safety and liquidator incentives.</p>
+
+    <div class="params-grid">
+      <div class="param-card">
+        <div class="param-header">
+          <div class="param-label">Loan-to-Value Ratio</div>
+          <div class="param-value" data-param="70">0%</div>
         </div>
+        <div class="param-bar"><div class="param-fill" style="--pf-w:70%;--pf-color:#E6007A"></div></div>
+        <div class="param-desc">Conservative LTV — leaves 10% buffer above the liquidation threshold. Standard for early-stage lending markets.</div>
       </div>
-      <div class="security-item">
-        <div class="security-check"><svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div>
-          <div class="security-title">80% Liquidation Threshold</div>
-          <div class="security-text">Standard CDP design matching MakerDAO. When health factor drops below 1.0, liquidators can seize collateral with a 5% bonus.</div>
+      <div class="param-card">
+        <div class="param-header">
+          <div class="param-label">Liquidation Threshold</div>
+          <div class="param-value" data-param="80">0%</div>
         </div>
+        <div class="param-bar"><div class="param-fill" style="--pf-w:80%;--pf-color:#F59E0B"></div></div>
+        <div class="param-desc">When health factor drops below 1.0, liquidators can seize collateral with a 5% bonus. Matches MakerDAO CDP design.</div>
       </div>
-      <div class="security-item">
-        <div class="security-check"><svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div>
-          <div class="security-title">0.5%/year Stability Fee</div>
-          <div class="security-text">Minimal cost of capital at 5 bps. vDOT staking yield (~15%) far exceeds the borrow cost, making it economically rational to borrow.</div>
+      <div class="param-card">
+        <div class="param-header">
+          <div class="param-label">Stability Fee</div>
+          <div class="param-value" style="font-size:clamp(20px,2.5vw,36px)">0.5%/yr</div>
         </div>
+        <div class="param-bar"><div class="param-fill" style="--pf-w:5%;--pf-color:#22c55e"></div></div>
+        <div class="param-desc">Minimal cost of capital at 5 bps. vDOT staking yield (~15%) far exceeds borrow cost — economically rational to borrow against staked DOT.</div>
       </div>
-      <div class="security-item">
-        <div class="security-check"><svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div>
-          <div class="security-title">5% Liquidation Bonus</div>
-          <div class="security-text">Competitive incentive for liquidators to keep the protocol solvent. Covered by the collateral buffer above the debt.</div>
+      <div class="param-card">
+        <div class="param-header">
+          <div class="param-label">Liquidation Bonus</div>
+          <div class="param-value" style="font-size:clamp(20px,2.5vw,36px)">+5%</div>
         </div>
+        <div class="param-bar"><div class="param-fill" style="--pf-w:5%;--pf-color:#9945FF"></div></div>
+        <div class="param-desc">Competitive incentive for liquidators. Covered by the collateral buffer. Keeps the protocol solvent without admin intervention.</div>
       </div>
-      <div class="security-item">
-        <div class="security-check"><svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div>
-          <div class="security-title">1-Hour Oracle Stale Guard</div>
-          <div class="security-text">PriceOracle rejects any price older than 3600 seconds. Prevents frozen-price attacks and stale collateral valuations.</div>
+      <div class="param-card">
+        <div class="param-header">
+          <div class="param-label">Oracle Stale Guard</div>
+          <div class="param-value" style="font-size:clamp(20px,2.5vw,36px)">3600s</div>
         </div>
+        <div class="param-bar"><div class="param-fill" style="--pf-w:100%;--pf-color:#60A5FA"></div></div>
+        <div class="param-desc">PriceOracle rejects any price data older than 1 hour. Prevents frozen-price attacks and stale collateral valuations during network outages.</div>
       </div>
-      <div class="security-item">
-        <div class="security-check"><svg viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div>
-          <div class="security-title">20% Price Deviation Circuit Breaker</div>
-          <div class="security-text">Oracle rejects any single price update that moves more than 20% in either direction. Prevents oracle key compromise from instantly liquidating positions.</div>
+      <div class="param-card">
+        <div class="param-header">
+          <div class="param-label">Price Deviation Circuit Breaker</div>
+          <div class="param-value" data-param="20">0%</div>
         </div>
+        <div class="param-bar"><div class="param-fill" style="--pf-w:20%;--pf-color:#F87171"></div></div>
+        <div class="param-desc">Oracle rejects any single price update moving ±20% in one block. Prevents oracle key compromise from instantly liquidating all positions.</div>
       </div>
     </div>
   </div>
@@ -1049,8 +1247,8 @@ function initAnimations(){
 
   // Market rows slide in staggered
   gsap.from('.market-row',{
-    x:-30,opacity:0,duration:.6,stagger:.12,ease:'power2.out',
-    scrollTrigger:{trigger:'#markets',start:'top 75%'}
+    x:-30,duration:.6,stagger:.12,ease:'power2.out',
+    scrollTrigger:{trigger:'#markets',start:'top 80%',once:true}
   });
 
   // Util bar fill animation
@@ -1074,34 +1272,79 @@ function initAnimations(){
     });
   });
 
-  // ZK pillars
-  gsap.from('.zk-pillar',{
-    y:40,opacity:0,duration:.7,stagger:.15,ease:'power2.out',
-    scrollTrigger:{trigger:'#zk-solvency',start:'top 70%'}
+  // Stack layers
+  gsap.from('.stack-layer',{
+    y:24,duration:.6,stagger:.15,ease:'power2.out',
+    scrollTrigger:{trigger:'#architecture',start:'top 80%',once:true}
   });
 
-  // ZK flow nodes
+  // Pipeline nodes
+  gsap.from('.zk-pipe-node',{
+    y:20,duration:.5,stagger:.1,ease:'back.out(1.2)',
+    scrollTrigger:{trigger:'.zk-pipeline',start:'top 85%',once:true}
+  });
+
+  // ZK pillars
+  gsap.from('.zk-pillar',{
+    y:40,duration:.7,stagger:.15,ease:'power2.out',
+    scrollTrigger:{trigger:'#zk-solvency',start:'top 80%',once:true}
+  });
+
+  // ZK flow nodes — scale only, no opacity hide
   gsap.from('.zk-node',{
-    scale:.85,opacity:0,duration:.5,stagger:.1,ease:'back.out(1.4)',
-    scrollTrigger:{trigger:'.zk-flow-diagram',start:'top 80%'}
+    scale:.85,duration:.5,stagger:.1,ease:'back.out(1.4)',
+    scrollTrigger:{trigger:'.zk-flow-diagram',start:'top 85%',once:true}
   });
 
   // Steps slide in
   gsap.from('.step-item',{
-    x:-40,opacity:0,duration:.7,stagger:.2,ease:'power2.out',
-    scrollTrigger:{trigger:'#how-it-works',start:'top 75%'}
+    x:-40,duration:.7,stagger:.2,ease:'power2.out',
+    scrollTrigger:{trigger:'#how-it-works',start:'top 80%',once:true}
   });
 
   // Arch cards
   gsap.from('.arch-card',{
-    y:30,opacity:0,duration:.6,stagger:.12,ease:'power2.out',
-    scrollTrigger:{trigger:'#architecture',start:'top 75%'}
+    y:30,duration:.6,stagger:.12,ease:'power2.out',
+    scrollTrigger:{trigger:'#architecture',start:'top 80%',once:true}
   });
 
   // Security items
   gsap.from('.security-item',{
-    y:20,opacity:0,duration:.5,stagger:.08,ease:'power2.out',
-    scrollTrigger:{trigger:'#security',start:'top 75%'}
+    y:20,duration:.5,stagger:.08,ease:'power2.out',
+    scrollTrigger:{trigger:'#security',start:'top 80%',once:true}
+  });
+
+  // Protocol parameters cards
+  gsap.from('.param-card',{
+    y:20,duration:.5,stagger:.08,ease:'power2.out',
+    scrollTrigger:{trigger:'#params',start:'top 80%',once:true}
+  });
+
+  // Animate param bars and counters when in view
+  const paramObs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      // Animate bars
+      entry.target.querySelectorAll('.param-fill').forEach(bar=>{
+        bar.classList.add('animated');
+      });
+      // Animate counter values
+      entry.target.querySelectorAll('.param-value[data-param]').forEach(el=>{
+        const target = parseFloat(el.dataset.param);
+        gsap.to({v:0},{v:target,duration:1.4,ease:'power2.out',
+          onUpdate:function(){ el.textContent = Math.round(this.targets()[0].v)+'%'; }
+        });
+      });
+      paramObs.unobserve(entry.target);
+    });
+  },{threshold:0.3});
+  const paramsSection = document.getElementById('params');
+  if(paramsSection) paramObs.observe(paramsSection);
+
+  // Contracts table rows
+  gsap.from('#contracts .market-row',{
+    y:10,duration:.4,stagger:.06,ease:'power2.out',
+    scrollTrigger:{trigger:'#contracts',start:'top 80%',once:true}
   });
 
   // 3D card tilt
