@@ -108,18 +108,15 @@ h1.hero-h1 .line2{display:block;background:linear-gradient(135deg,var(--green) 0
 .btn-ghost{background:var(--glass2);border:1px solid var(--border2);color:var(--text2);font-size:14px;font-weight:500;padding:13px 28px;border-radius:40px;cursor:none;letter-spacing:.04em;transition:all .25s}
 .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
 
-/* Hero right - mantis */
+/* ── HERO RIGHT — SIGNAL INTELLIGENCE DISPLAY ── */
 .hero-right{display:flex;align-items:center;justify-content:center;position:relative;z-index:2}
-#mantis-wrap{position:relative;width:340px;height:420px}
-.mantis-ring{position:absolute;border-radius:50%;border:1px solid;animation:spin-ring linear infinite}
-.ring1{width:380px;height:380px;border-color:rgba(0,255,136,.12);top:50%;left:50%;transform:translate(-50%,-50%);animation-duration:40s}
-.ring2{width:300px;height:300px;border-color:rgba(0,212,255,.1);top:50%;left:50%;transform:translate(-50%,-50%);animation-duration:28s;animation-direction:reverse}
-.ring3{width:220px;height:220px;border-color:rgba(139,92,246,.1);top:50%;left:50%;transform:translate(-50%,-50%);animation-duration:18s}
-@keyframes spin-ring{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
-.ring1::before,.ring2::before{content:'';position:absolute;width:8px;height:8px;border-radius:50%;top:0;left:50%;transform:translateX(-50%)}
-.ring1::before{background:var(--green);box-shadow:0 0 16px var(--green)}
-.ring2::before{background:var(--cyan);box-shadow:0 0 16px var(--cyan)}
-#mantis-svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:240px;height:312px;filter:drop-shadow(0 0 30px rgba(0,255,136,.4)) drop-shadow(0 0 60px rgba(0,255,136,.15));overflow:visible}
+#mantis-wrap{position:relative;width:420px;height:440px;transform-style:preserve-3d}
+#radarCanvas{position:absolute;top:0;left:0;width:420px;height:440px;opacity:.82;pointer-events:none}
+#mantis-svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);width:236px;height:308px;filter:drop-shadow(0 0 28px rgba(0,255,136,.38)) drop-shadow(0 0 55px rgba(0,255,136,.12));overflow:visible}
+/* Market scan nodes floating around the radar */
+.mkt-node{position:absolute;font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(0,255,136,.35);background:rgba(0,255,136,.03);border:1px solid rgba(0,255,136,.1);border-radius:3px;padding:3px 7px;letter-spacing:.1em;pointer-events:none;transition:all .5s ease;white-space:nowrap;line-height:1.4}
+.mkt-node.active{color:var(--green);background:rgba(0,255,136,.07);border-color:rgba(0,255,136,.35);box-shadow:0 0 12px rgba(0,255,136,.18);text-shadow:0 0 6px rgba(0,255,136,.4)}
+.mkt-node.locked{color:var(--gold);background:rgba(245,168,0,.06);border-color:rgba(245,168,0,.35);box-shadow:0 0 12px rgba(245,168,0,.18)}
 .hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2}
 .scroll-line{width:1px;height:60px;background:linear-gradient(var(--green),transparent);animation:scroll-drop 1.8s ease-in-out infinite}
 .scroll-txt{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.2em;text-transform:uppercase}
@@ -319,6 +316,54 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
 /* ── REVEAL BASE ── */
 .reveal{opacity:0;transform:translateY(30px)}
 
+/* ── LIVE TERMINAL SECTION ── */
+#live-terminal{background:var(--bg2)}
+.tui-outer{border-radius:14px;overflow:hidden;box-shadow:0 0 80px rgba(0,255,136,.07),0 40px 120px rgba(0,0,0,.6);border:1px solid rgba(0,255,136,.14)}
+.tui-titlebar{background:#0c0c18;padding:12px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,.05)}
+.tui-dots{display:flex;gap:7px}
+.tui-dot{width:12px;height:12px;border-radius:50%}
+.tui-dot.red{background:#ff5f57}.tui-dot.yellow{background:#ffbd2e}.tui-dot.grn{background:#28c840}
+.tui-title-text{flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.06em}
+.tui-live-badge{display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);letter-spacing:.1em}
+.tui-live-dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);animation:pulse 2s ease-in-out infinite}
+.tui-screen{background:#020208;font-family:'JetBrains Mono',monospace;font-size:12px;position:relative}
+.tui-screen::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.09) 3px,rgba(0,0,0,.09) 4px);pointer-events:none;z-index:5}
+.tui-statusbar{display:flex;align-items:center;gap:24px;padding:9px 20px;background:rgba(0,255,136,.022);border-bottom:1px solid rgba(0,255,136,.07);flex-wrap:wrap;row-gap:4px}
+.tui-sb-item{font-size:11px;letter-spacing:.05em}
+.tui-sb-item.sg{color:var(--green)}.tui-sb-item.sc{color:var(--cyan)}.tui-sb-item.sm{color:var(--muted)}
+.tui-sb-time{font-size:11px;color:#2a3040;letter-spacing:.05em;margin-left:auto}
+.tui-main{display:grid;grid-template-columns:1fr 1fr;min-height:340px}
+.tui-panel{padding:16px 20px;position:relative}
+.tui-scan-panel{border-right:1px solid rgba(0,255,136,.07)}
+.tui-panel-head{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(0,255,136,.45);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(0,255,136,.07)}
+.tui-log{list-style:none;display:flex;flex-direction:column;gap:5px;min-height:180px}
+.tui-log-item{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:8px;font-size:11px;animation:tui-in .25s ease forwards;opacity:0}
+@keyframes tui-in{to{opacity:1}}
+.tui-log-id{color:#6b7a99;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px}
+.tui-log-pass{color:var(--green)}.tui-log-filter{color:#2a3040}.tui-log-below{color:#3a4458}
+.tui-log-ts{color:#1e2530;font-size:10px}
+.tui-scan-foot{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid rgba(0,255,136,.05);color:var(--muted);font-size:10px}
+.tui-caret{display:inline-block;width:6px;height:11px;background:var(--green);animation:tui-cursor-blink 1.1s infinite}
+@keyframes tui-cursor-blink{50%{opacity:0}}
+.tui-next-scan{margin-left:auto;color:#2a3040}
+.tui-positions{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.tui-pos-item{background:rgba(0,255,136,.018);border:1px solid rgba(0,255,136,.08);border-radius:6px;padding:9px 12px}
+.tui-pos-id{font-size:10.5px;color:#6b7a99;margin-bottom:5px}
+.tui-pos-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.tui-pos-side{color:var(--cyan);font-size:10.5px}.tui-pos-size{color:#c4cde8;font-size:10.5px}.tui-pos-entry{color:#3a4458;font-size:10px}
+.tui-pos-pnl{font-size:10.5px;font-weight:600;margin-left:auto}.tui-pos-pnl.pos{color:var(--green)}.tui-pos-pnl.neg{color:var(--red)}
+.tui-divider{height:1px;background:rgba(0,255,136,.06);margin:12px 0}
+.tui-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.tui-stat-b{text-align:center}
+.tui-stat-l{font-size:9px;letter-spacing:.14em;color:rgba(0,255,136,.3);text-transform:uppercase;margin-bottom:3px}
+.tui-stat-v{font-size:14px;font-weight:700}.tui-stat-v.sg{color:var(--green)}.tui-stat-v.sc{color:var(--cyan)}
+.tui-exp-wrap{margin-top:8px}
+.tui-exp-label{display:flex;justify-content:space-between;font-size:10px;color:#2a3040;margin-bottom:4px}
+.tui-exp-track{height:3px;background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden}
+.tui-exp-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:2px;width:49%}
+.tui-bottombar{display:flex;justify-content:space-between;padding:7px 20px;background:rgba(0,0,0,.35);border-top:1px solid rgba(0,255,136,.05);font-size:10px;color:#1e2530}
+.tui-bot-status{color:rgba(0,255,136,.4)}
+
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
   #hero{grid-template-columns:1fr;padding:100px 40px 60px;text-align:center}
@@ -335,6 +380,14 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
   .nav-links{display:none}
   footer{flex-direction:column;gap:16px;text-align:center;padding:32px 40px}
   .footer-right{text-align:center}
+  .tui-main{grid-template-columns:1fr}
+  .tui-scan-panel{border-right:none;border-bottom:1px solid rgba(0,255,136,.07)}
+  .tui-sb-time{margin-left:0}
+}
+@media(max-width:768px){
+  .tui-statusbar{gap:12px}
+  .win-donut{width:180px;height:180px}
+  .win-donut svg{width:180px!important;height:180px!important}
 }
 @media(max-width:640px){
   .metrics-grid{grid-template-columns:1fr}
@@ -342,10 +395,96 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
   .contact-grid{grid-template-columns:1fr}
   .roadmap-track{grid-template-columns:1fr}
   .hero-metrics{flex-direction:column;gap:16px}
-  section{padding:60px 24px}
-  .section-divider{margin:0 24px}
-  footer{padding:24px}
+  section{padding:60px 20px}
+  .section-divider{margin:0 20px}
+  footer{padding:24px 20px}
+  nav{padding:0 16px}
+  .tui-outer{border-radius:10px}
+  .tui-main{min-height:auto}
+  .tui-panel{padding:12px 14px}
+  .tui-stats{grid-template-columns:repeat(3,1fr);gap:6px}
+  .tui-stat-v{font-size:12px}
+  .tui-bottombar{flex-direction:column;gap:4px;align-items:flex-start}
+  .pnl-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .pnl-table{min-width:480px}
+  h2.section-h2{font-size:clamp(26px,7vw,40px)}
+  .section-desc{font-size:15px;margin-bottom:40px}
+  .win-donut{width:160px!important;height:160px!important}
+  .win-donut svg{width:160px!important;height:160px!important}
+  .hero-badge{font-size:10px;padding:6px 12px}
+  .btn-primary,.btn-ghost{padding:12px 20px;font-size:13px}
 }
+@media(max-width:400px){
+  section{padding:48px 14px}
+  .section-divider{margin:0 14px}
+  footer{padding:20px 14px}
+  nav{padding:0 14px}
+  .tui-stats{grid-template-columns:1fr 1fr}
+  .tui-stat-b:last-child{grid-column:1/-1}
+  .hero-metrics{gap:12px}
+  .hm-val{font-size:22px}
+}
+
+/* ═══════════════════════════════════════════
+   3D PERSPECTIVE GRID (replaces flat grid)
+═══════════════════════════════════════════ */
+.grid-bg{display:none}
+.grid-3d-wrap{position:fixed;bottom:0;left:0;right:0;height:65vh;perspective:380px;perspective-origin:50% 0%;pointer-events:none;z-index:1;overflow:hidden;-webkit-mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,.4) 45%,transparent 100%);mask-image:linear-gradient(to top,black 0%,rgba(0,0,0,.4) 45%,transparent 100%)}
+.grid-3d-plane{width:320%;height:320%;position:absolute;top:0;left:-110%;transform:rotateX(83deg);transform-origin:center top;background-image:linear-gradient(rgba(0,255,136,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,136,.07) 1px,transparent 1px);background-size:80px 80px;animation:grid-scroll 9s linear infinite}
+@keyframes grid-scroll{from{background-position:0 0}to{background-position:0 80px}}
+
+/* ═══════════════════════════════════
+   HERO GHOST TEXT (background soul)
+═══════════════════════════════════ */
+.hero-bg-txt{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Orbitron',monospace;font-size:clamp(90px,16vw,240px);font-weight:900;color:transparent;-webkit-text-stroke:1px rgba(0,255,136,.03);letter-spacing:.08em;pointer-events:none;user-select:none;z-index:0;white-space:nowrap;animation:ghost-breathe 8s ease-in-out infinite}
+@keyframes ghost-breathe{0%,100%{-webkit-text-stroke-color:rgba(0,255,136,.03)}50%{-webkit-text-stroke-color:rgba(0,255,136,.06)}}
+
+/* ═══════════════════════════════════
+   HERO SCANNER LINE
+═══════════════════════════════════ */
+.hero-scanner{position:absolute;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(0,255,136,.7) 50%,transparent 100%);box-shadow:0 0 20px rgba(0,255,136,.3),0 0 40px rgba(0,255,136,.1);animation:hero-scan 8s ease-in-out infinite;z-index:3;pointer-events:none;top:0;opacity:0}
+@keyframes hero-scan{0%{top:3%;opacity:0}6%{opacity:1}88%{opacity:.4}100%{top:97%;opacity:0}}
+
+/* ═══════════════════════════════════
+   HERO H1 GLITCH
+═══════════════════════════════════ */
+@keyframes hero-glitch{
+  0%,84%,100%{transform:translate(0);filter:none}
+  85%{transform:translate(-4px,1px) skewX(-1.5deg);filter:hue-rotate(30deg) saturate(2)}
+  86%{transform:translate(4px,-2px) skewX(1deg);filter:hue-rotate(-30deg) saturate(1.5)}
+  87%{transform:translate(-2px,3px);filter:none}
+  88%{transform:translate(1px,-1px)}
+  89%{transform:translate(0)}
+}
+.hero-h1{animation:hero-glitch 13s ease-in-out 3s infinite}
+@media(prefers-reduced-motion:reduce){.hero-h1{animation:none}}
+
+/* ═══════════════════════════════════
+   HERO METRIC VALUE GLOW
+═══════════════════════════════════ */
+.hm-val{text-shadow:0 0 24px rgba(0,255,136,.35)}
+
+/* ═══════════════════════════════════
+   MAGNETIC BUTTONS
+═══════════════════════════════════ */
+.btn-primary,.btn-ghost,.nav-pill{will-change:transform}
+
+/* ═══════════════════════════════════
+   ENHANCED CARD TILT (light tracking)
+═══════════════════════════════════ */
+.metric-card,.risk-card,.contact-card,.pnode-body{will-change:transform;transition:transform .06s ease,box-shadow .3s ease,background .2s ease}
+
+/* ═══════════════════════════════════
+   SECTION DIVIDER PULSE
+═══════════════════════════════════ */
+.section-divider{position:relative;overflow:visible}
+.section-divider::after{content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);width:60px;height:2px;background:linear-gradient(90deg,transparent,rgba(0,255,136,.5),transparent);border-radius:2px;animation:div-pulse 4s ease-in-out infinite}
+@keyframes div-pulse{0%,100%{width:60px;opacity:.5}50%{width:160px;opacity:1}}
+
+/* ═══════════════════════════════════
+   DEPTH PARALLAX (will-change prep)
+═══════════════════════════════════ */
+#heroBadge,#heroH1,#heroSub,#heroMetrics,#heroCtas,#mantis-wrap{will-change:transform}
 </style>
 </head>
 <body>
@@ -358,8 +497,10 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
   <div class="blob blob-4"></div>
 </div>
 
-<!-- Grid -->
-<div class="grid-bg" aria-hidden="true"></div>
+<!-- 3D Perspective Grid -->
+<div class="grid-3d-wrap" aria-hidden="true">
+  <div class="grid-3d-plane"></div>
+</div>
 
 <!-- Custom cursor -->
 <div class="c-cursor" id="cCursor"></div>
@@ -377,6 +518,7 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
   <div class="nav-links">
     <a href="#ai-engine">AI Engine</a>
     <a href="#backtest">Backtest</a>
+    <a href="#live-terminal">Live</a>
     <a href="#strategy">Strategy</a>
     <a href="#risk">Risk</a>
     <a href="#roadmap">Roadmap</a>
@@ -391,6 +533,8 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
 <!-- HERO -->
 <section id="hero">
   <canvas id="particle-canvas" style="position:absolute;inset:0;z-index:0;pointer-events:none"></canvas>
+  <div class="hero-bg-txt" aria-hidden="true">MANTIS</div>
+  <div class="hero-scanner" aria-hidden="true"></div>
 
   <div class="hero-left">
     <div class="hero-badge" id="heroBadge">
@@ -415,8 +559,8 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
         <div class="hm-label">Markets Backtested</div>
       </div>
       <div class="hm">
-        <div class="hm-val" data-count="2">0</div>
-        <div class="hm-label">AI Pipeline Stages</div>
+        <div class="hm-val" data-count="4">0</div>
+        <div class="hm-label">Active Strategies</div>
       </div>
     </div>
 
@@ -428,12 +572,17 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
 
   <div class="hero-right">
     <div id="mantis-wrap">
-      <div class="mantis-ring ring1"></div>
-      <div class="mantis-ring ring2"></div>
-      <div class="mantis-ring ring3"></div>
+      <!-- Radar sweep canvas -->
+      <canvas id="radarCanvas" width="420" height="440"></canvas>
+
+      <!-- Floating market scan nodes -->
+      <div class="mkt-node" id="mn0" style="top:9%;left:2%">GEO-UKRAINE-Q2</div>
+      <div class="mkt-node" id="mn1" style="top:36%;right:1%">FED-RATE-JUNE</div>
+      <div class="mkt-node" id="mn2" style="bottom:19%;left:4%">EU-GAS-BAN-Q2</div>
+      <div class="mkt-node" id="mn3" style="top:58%;right:2%">BTC-100K-MAY</div>
+
       <svg id="mantis-svg" viewBox="0 0 220 300" fill="none" xmlns="http://www.w3.org/2000/svg" overflow="visible">
         <defs>
-          <!-- Glow filters -->
           <filter id="mGlow" x="-120%" y="-120%" width="340%" height="340%">
             <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="b"/>
             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -442,43 +591,24 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
             <feGaussianBlur in="SourceGraphic" stdDeviation="7" result="b"/>
             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
-          <filter id="predGlow" x="-120%" y="-120%" width="340%" height="340%">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="4.5" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <!-- Body gradient — top bright, fades to dim -->
           <linearGradient id="gBody" x1="0.5" y1="0" x2="0.5" y2="1">
             <stop offset="0%"   stop-color="#00ff88"/>
             <stop offset="100%" stop-color="#00cc6e" stop-opacity="0.55"/>
           </linearGradient>
-          <!-- Arm gradient — green→cyan→purple -->
           <linearGradient id="gArm" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%"   stop-color="#00ff88"/>
             <stop offset="58%"  stop-color="#00d4ff"/>
             <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.75"/>
           </linearGradient>
-          <!-- Eye fill -->
           <radialGradient id="gEyeCore" cx="38%" cy="35%" r="65%">
             <stop offset="0%"   stop-color="#00eeff"/>
             <stop offset="100%" stop-color="#0044cc" stop-opacity="0.85"/>
           </radialGradient>
         </defs>
 
-        <!-- ── Jungle floor silhouette ── -->
-        <g opacity="0.16">
-          <path d="M 0 278 Q 12 258 26 272 Q 38 252 52 268 Q 62 246 74 264 L 74 300 L 0 300 Z" fill="#00ff88"/>
-          <path d="M 146 268 Q 158 248 170 264 Q 180 254 192 270 Q 202 254 216 270 L 220 270 L 220 300 L 146 300 Z" fill="#00ff88"/>
-          <line x1="0" y1="280" x2="74" y2="280" stroke="#00ff88" stroke-width="0.6" opacity="0.4"/>
-          <line x1="146" y1="280" x2="220" y2="280" stroke="#00ff88" stroke-width="0.6" opacity="0.4"/>
-        </g>
-
-        <!-- ══ MANTIS (whole unit tilts for dodge) ══ -->
         <g id="m-mantis-whole">
-
-          <!-- ─ BODY (static sub-group) ─ -->
           <g id="m-body">
-
-            <!-- ABDOMEN — segmented, tapering to tip -->
+            <!-- ABDOMEN -->
             <path d="M 104 148 C 100 165 98 188 99 210 C 100 228 103 244 110 258 C 117 244 120 228 121 210 C 122 188 120 165 116 148 Z"
                   fill="rgba(0,255,136,0.07)" stroke="url(#gBody)" stroke-width="1.6"/>
             <line x1="101" y1="164" x2="119" y2="164" stroke="#00ff88" stroke-width="0.8" opacity="0.42"/>
@@ -486,46 +616,19 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
             <line x1="98"  y1="197" x2="122" y2="197" stroke="#00ff88" stroke-width="0.7" opacity="0.28"/>
             <line x1="99"  y1="213" x2="121" y2="213" stroke="#00ff88" stroke-width="0.6" opacity="0.22"/>
             <line x1="100" y1="228" x2="120" y2="228" stroke="#00ff88" stroke-width="0.6" opacity="0.16"/>
-            <!-- Centre spine line -->
             <line x1="110" y1="148" x2="110" y2="254" stroke="#00ff88" stroke-width="0.5" opacity="0.17"/>
-            <!-- Hex segment detail -->
             <path d="M 106 168 L 110 163 L 114 168 L 114 177 L 110 182 L 106 177 Z"
                   fill="none" stroke="#00d4ff" stroke-width="0.6" opacity="0.28"/>
-            <!-- Tip -->
             <path d="M 107 252 Q 110 262 113 252" stroke="#00ff88" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-
-            <!-- PROTHORAX — blade-like elongated segment -->
+            <!-- PROTHORAX -->
             <path d="M 107 92 L 103 108 L 101 128 L 105 148 L 115 148 L 119 128 L 117 108 L 113 92 Z"
                   fill="rgba(0,255,136,0.09)" stroke="url(#gBody)" stroke-width="1.6"/>
             <line x1="105" y1="110" x2="115" y2="110" stroke="#00d4ff" stroke-width="0.8" opacity="0.35"/>
             <line x1="104" y1="126" x2="116" y2="126" stroke="#00d4ff" stroke-width="0.7" opacity="0.26"/>
             <line x1="104" y1="139" x2="116" y2="139" stroke="#00d4ff" stroke-width="0.6" opacity="0.20"/>
             <line x1="110" y1="94"  x2="110" y2="146" stroke="#00ff88" stroke-width="0.5" opacity="0.22"/>
-
-            <!-- HEAD — angular diamond facets -->
-            <path d="M 110 50 L 133 67 L 131 87 L 110 93 L 89 87 L 87 67 Z"
-                  fill="rgba(0,255,136,0.09)" stroke="#00ff88" stroke-width="1.6"/>
-            <!-- Inner facet -->
-            <path d="M 110 58 L 126 70 L 110 82 L 94 70 Z"
-                  fill="none" stroke="#00d4ff" stroke-width="0.7" opacity="0.32"/>
-            <!-- LEFT compound eye -->
-            <circle cx="93"  cy="70" r="10.5" fill="rgba(0,180,255,0.07)" stroke="#00d4ff" stroke-width="1.5" filter="url(#mGlow)"/>
-            <circle cx="93"  cy="70" r="6.5"  fill="url(#gEyeCore)" opacity="0.88"/>
-            <circle cx="93"  cy="70" r="3"    fill="#00eeff" opacity="0.95" filter="url(#mGlow)"/>
-            <circle cx="91"  cy="68" r="1.2"  fill="white"  opacity="0.75"/>
-            <!-- RIGHT compound eye -->
-            <circle cx="127" cy="70" r="10.5" fill="rgba(0,180,255,0.07)" stroke="#00d4ff" stroke-width="1.5" filter="url(#mGlow)"/>
-            <circle cx="127" cy="70" r="6.5"  fill="url(#gEyeCore)" opacity="0.88"/>
-            <circle cx="127" cy="70" r="3"    fill="#00eeff" opacity="0.95" filter="url(#mGlow)"/>
-            <circle cx="125" cy="68" r="1.2"  fill="white"  opacity="0.75"/>
-            <!-- Antennae -->
-            <path d="M 103 55 Q 84 36 66 21" stroke="#00ff88" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.62"/>
-            <path d="M 117 55 Q 136 36 154 21" stroke="#00ff88" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.62"/>
-            <circle cx="66"  cy="21" r="2.5" fill="#00ff88" filter="url(#mGlow)" opacity="0.9"/>
-            <circle cx="154" cy="21" r="2.5" fill="#00ff88" filter="url(#mGlow)" opacity="0.9"/>
-
-            <!-- WALKING LEGS (3 pairs, delicate) -->
-            <g opacity="0.48">
+            <!-- WALKING LEGS -->
+            <g opacity="0.45">
               <polyline points="101,114 72,130 55,150" stroke="#00ff88" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
               <polyline points="119,114 148,130 165,150" stroke="#00ff88" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
               <polyline points="102,132 70,150 54,173" stroke="#00ff88" stroke-width="1.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
@@ -533,99 +636,72 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
               <polyline points="103,146 74,170 59,196" stroke="#00ff88" stroke-width="1"   fill="none" stroke-linecap="round" stroke-linejoin="round"/>
               <polyline points="117,146 146,170 161,196" stroke="#00ff88" stroke-width="1"   fill="none" stroke-linecap="round" stroke-linejoin="round"/>
             </g>
-          </g><!-- /#m-body -->
+            <!-- HEAD — separate group so it can rotate independently to track targets -->
+            <g id="m-head">
+              <path d="M 110 50 L 133 67 L 131 87 L 110 93 L 89 87 L 87 67 Z"
+                    fill="rgba(0,255,136,0.09)" stroke="#00ff88" stroke-width="1.6"/>
+              <path d="M 110 58 L 126 70 L 110 82 L 94 70 Z"
+                    fill="none" stroke="#00d4ff" stroke-width="0.7" opacity="0.32"/>
+              <circle cx="93"  cy="70" r="10.5" fill="rgba(0,180,255,0.07)" stroke="#00d4ff" stroke-width="1.5" filter="url(#mGlow)"/>
+              <circle cx="93"  cy="70" r="6.5"  fill="url(#gEyeCore)" opacity="0.88"/>
+              <circle cx="93"  cy="70" r="3"    fill="#00eeff" opacity="0.95" filter="url(#mGlow)"/>
+              <circle cx="91"  cy="68" r="1.2"  fill="white"  opacity="0.75"/>
+              <circle cx="127" cy="70" r="10.5" fill="rgba(0,180,255,0.07)" stroke="#00d4ff" stroke-width="1.5" filter="url(#mGlow)"/>
+              <circle cx="127" cy="70" r="6.5"  fill="url(#gEyeCore)" opacity="0.88"/>
+              <circle cx="127" cy="70" r="3"    fill="#00eeff" opacity="0.95" filter="url(#mGlow)"/>
+              <circle cx="125" cy="68" r="1.2"  fill="white"  opacity="0.75"/>
+              <path d="M 103 55 Q 84 36 66 21" stroke="#00ff88" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.62"/>
+              <path d="M 117 55 Q 136 36 154 21" stroke="#00ff88" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.62"/>
+              <circle cx="66"  cy="21" r="2.5" fill="#00ff88" filter="url(#mGlow)" opacity="0.9"/>
+              <circle cx="154" cy="21" r="2.5" fill="#00ff88" filter="url(#mGlow)" opacity="0.9"/>
+            </g>
+          </g>
 
-          <!-- ══ RAPTORIAL ARMS — rotate independently for strike ══ -->
-
-          <!-- LEFT ARM: shoulder (100,118) → femur to (60,76) → tibia back to (80,112) -->
+          <!-- RAPTORIAL ARMS -->
           <g id="m-arm-l">
             <circle cx="100" cy="118" r="4.5" fill="rgba(0,255,136,0.28)" stroke="#00ff88" stroke-width="1.3"/>
-            <!-- Femur (thick, up-left) -->
             <path d="M 100 118 L 60 76" stroke="url(#gArm)" stroke-width="3.8" stroke-linecap="round"/>
             <line x1="88" y1="110" x2="70" y2="88" stroke="#00d4ff" stroke-width="0.9" opacity="0.38"/>
-            <!-- Tibia joint -->
             <circle cx="60" cy="76" r="3.2" fill="rgba(0,212,255,0.22)" stroke="#00d4ff" stroke-width="1"/>
-            <!-- Tibia (folds back) -->
             <path d="M 60 76 L 80 112" stroke="url(#gArm)" stroke-width="3" stroke-linecap="round"/>
-            <!-- Spines -->
             <line x1="65" y1="85"  x2="56"  y2="95"  stroke="#00d4ff" stroke-width="1.4" opacity="0.78" stroke-linecap="round"/>
             <line x1="70" y1="91"  x2="61"  y2="101" stroke="#00d4ff" stroke-width="1.2" opacity="0.66" stroke-linecap="round"/>
             <line x1="74" y1="97"  x2="65"  y2="107" stroke="#00d4ff" stroke-width="1.1" opacity="0.55" stroke-linecap="round"/>
-            <!-- Claw -->
             <circle cx="80" cy="112" r="3.2" fill="#00d4ff" filter="url(#mGlow)" opacity="0.96"/>
           </g>
-
-          <!-- RIGHT ARM: shoulder (120,118) → femur to (160,76) → tibia back to (140,112) -->
           <g id="m-arm-r">
             <circle cx="120" cy="118" r="4.5" fill="rgba(0,255,136,0.28)" stroke="#00ff88" stroke-width="1.3"/>
-            <!-- Femur -->
             <path d="M 120 118 L 160 76" stroke="url(#gArm)" stroke-width="3.8" stroke-linecap="round"/>
             <line x1="132" y1="110" x2="150" y2="88" stroke="#00d4ff" stroke-width="0.9" opacity="0.38"/>
-            <!-- Tibia joint -->
             <circle cx="160" cy="76" r="3.2" fill="rgba(0,212,255,0.22)" stroke="#00d4ff" stroke-width="1"/>
-            <!-- Tibia -->
             <path d="M 160 76 L 140 112" stroke="url(#gArm)" stroke-width="3" stroke-linecap="round"/>
-            <!-- Spines -->
             <line x1="155" y1="85"  x2="164" y2="95"  stroke="#00d4ff" stroke-width="1.4" opacity="0.78" stroke-linecap="round"/>
             <line x1="150" y1="91"  x2="159" y2="101" stroke="#00d4ff" stroke-width="1.2" opacity="0.66" stroke-linecap="round"/>
             <line x1="146" y1="97"  x2="155" y2="107" stroke="#00d4ff" stroke-width="1.1" opacity="0.55" stroke-linecap="round"/>
-            <!-- Claw -->
             <circle cx="140" cy="112" r="3.2" fill="#00d4ff" filter="url(#mGlow)" opacity="0.96"/>
           </g>
-
-        </g><!-- /#m-mantis-whole -->
-
-        <!-- ══ PREDATOR THREATS ══ -->
-
-        <!-- WOLF THREAT — amber slit eyes + LOSS label, rushes from left -->
-        <g id="m-pred-wolf" opacity="0">
-          <ellipse cx="32" cy="94" rx="6"   ry="5"   fill="#f5a800" filter="url(#predGlow)" opacity="0.95"/>
-          <ellipse cx="47" cy="94" rx="6"   ry="5"   fill="#f5a800" filter="url(#predGlow)" opacity="0.95"/>
-          <ellipse cx="32" cy="94" rx="1.6" ry="4"   fill="#000" opacity="0.85"/>
-          <ellipse cx="47" cy="94" rx="1.6" ry="4"   fill="#000" opacity="0.85"/>
-          <!-- Mane hint -->
-          <path d="M 20 86 Q 14 100 22 108" stroke="#f5a800" stroke-width="1" fill="none" opacity="0.35" stroke-linecap="round"/>
-          <rect x="14" y="106" width="52" height="17" rx="3.5" fill="rgba(255,68,102,0.14)" stroke="#ff4466" stroke-width="0.9"/>
-          <text x="40" y="119" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#ff4466" text-anchor="middle" letter-spacing="2" font-weight="700">LOSS</text>
         </g>
 
-        <!-- LION THREAT — deep amber round eyes + LOSS label, rushes from right -->
-        <g id="m-pred-lion" opacity="0">
-          <circle cx="174" cy="93" r="6.5" fill="#ff8800" filter="url(#predGlow)" opacity="0.95"/>
-          <circle cx="190" cy="93" r="6.5" fill="#ff8800" filter="url(#predGlow)" opacity="0.95"/>
-          <circle cx="174" cy="93" r="2.8" fill="#000" opacity="0.85"/>
-          <circle cx="190" cy="93" r="2.8" fill="#000" opacity="0.85"/>
-          <!-- Mane arc hint -->
-          <path d="M 202 84 Q 208 98 200 108" stroke="#ff8800" stroke-width="1" fill="none" opacity="0.35" stroke-linecap="round"/>
-          <rect x="156" y="106" width="52" height="17" rx="3.5" fill="rgba(255,68,102,0.14)" stroke="#ff4466" stroke-width="0.9"/>
-          <text x="182" y="119" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#ff4466" text-anchor="middle" letter-spacing="2" font-weight="700">LOSS</text>
-        </g>
-
-        <!-- KILL FLASH — red ring burst on elimination -->
-        <g id="m-kill-flash" opacity="0">
-          <circle cx="110" cy="100" r="38" fill="none" stroke="#ff4466" stroke-width="2.5" opacity="0.8"/>
-          <circle cx="110" cy="100" r="22" fill="rgba(255,68,102,0.10)"/>
-          <text x="110" y="104" font-family="'JetBrains Mono',monospace" font-size="8.5" fill="#ff4466" text-anchor="middle" letter-spacing="1.5" font-weight="700">ELIMINATED</text>
-        </g>
-
-        <!-- PROFIT TARGET — gold rotating reticle -->
+        <!-- TARGET RETICLE — precision crosshair, no game text -->
         <g id="m-target" opacity="0">
-          <circle id="m-target-outer" cx="110" cy="70" r="22" fill="none" stroke="#f5a800" stroke-width="1.3" stroke-dasharray="5 3.5" opacity="0.78"/>
-          <circle cx="110" cy="70" r="13" fill="none" stroke="#f5a800" stroke-width="0.9" opacity="0.48"/>
-          <circle cx="110" cy="70" r="4.5" fill="rgba(245,168,0,0.18)" stroke="#f5a800" stroke-width="1" opacity="0.92"/>
-          <line x1="86"  y1="70" x2="101" y2="70" stroke="#f5a800" stroke-width="1" opacity="0.68"/>
-          <line x1="119" y1="70" x2="134" y2="70" stroke="#f5a800" stroke-width="1" opacity="0.68"/>
-          <line x1="110" y1="46" x2="110" y2="61" stroke="#f5a800" stroke-width="1" opacity="0.68"/>
-          <line x1="110" y1="79" x2="110" y2="94" stroke="#f5a800" stroke-width="1" opacity="0.68"/>
-          <text x="110" y="74.5" font-family="'JetBrains Mono',monospace" font-size="9" fill="#f5a800" text-anchor="middle" font-weight="700" opacity="0.92">×</text>
+          <circle id="m-target-outer" cx="110" cy="70" r="20" fill="none" stroke="rgba(245,168,0,.5)" stroke-width="1" stroke-dasharray="4 3"/>
+          <circle cx="110" cy="70" r="11" fill="none" stroke="rgba(245,168,0,.28)" stroke-width="0.7"/>
+          <line x1="90"  y1="70" x2="102" y2="70" stroke="rgba(245,168,0,.55)" stroke-width="0.9"/>
+          <line x1="118" y1="70" x2="130" y2="70" stroke="rgba(245,168,0,.55)" stroke-width="0.9"/>
+          <line x1="110" y1="50" x2="110" y2="62" stroke="rgba(245,168,0,.55)" stroke-width="0.9"/>
+          <line x1="110" y1="78" x2="110" y2="90" stroke="rgba(245,168,0,.55)" stroke-width="0.9"/>
+          <circle cx="110" cy="70" r="2" fill="rgba(245,168,0,.7)"/>
         </g>
 
-        <!-- SECURED — appears after double strike -->
-        <g id="m-secured" opacity="0">
-          <rect x="62" y="52" width="96" height="26" rx="5" fill="rgba(0,255,136,0.12)" stroke="#00ff88" stroke-width="1.6"/>
-          <text x="110" y="69" font-family="'JetBrains Mono',monospace" font-size="9.5" fill="#00ff88" text-anchor="middle" letter-spacing="1.2" font-weight="700">✓ SECURED</text>
+        <!-- SIGNAL LOCK — HUD bracket system, not a game badge -->
+        <g id="m-signal-lock" opacity="0">
+          <path d="M 76 45 L 76 54 L 85 54" stroke="#00ff88" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 144 45 L 144 54 L 135 54" stroke="#00ff88" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 76 95 L 76 86 L 85 86" stroke="#00ff88" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M 144 95 L 144 86 L 135 86" stroke="#00ff88" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="88" y="63" width="44" height="14" rx="2.5" fill="rgba(0,255,136,0.07)" stroke="rgba(0,255,136,0.22)" stroke-width="0.8"/>
+          <text x="110" y="74" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="rgba(0,255,136,0.9)" text-anchor="middle" letter-spacing="1.6">ORDER PLACED</text>
         </g>
-
       </svg>
     </div>
   </div>
@@ -639,28 +715,28 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
 <!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker-track" id="ticker">
-    <div class="ticker-item"><span class="lbl">PREDATORS NEUTRALISED</span><span class="val pos">71.6%</span></div>
-    <div class="ticker-item"><span class="lbl">HUNTS EXECUTED</span><span class="val">194</span></div>
+    <div class="ticker-item"><span class="lbl">WIN RATE</span><span class="val pos">71.6%</span></div>
+    <div class="ticker-item"><span class="lbl">MARKETS BACKTESTED</span><span class="val">194</span></div>
     <div class="ticker-item"><span class="lbl">PRE-SCREEN</span><span class="val">noise filtered · fast-pass gate</span></div>
-    <div class="ticker-item"><span class="lbl">ORACLE CONVICTION</span><span class="val">deep verify · strike threshold</span></div>
+    <div class="ticker-item"><span class="lbl">ORACLE CONSENSUS</span><span class="val">triple-AI · deep verify</span></div>
     <div class="ticker-item"><span class="lbl">MAX EXPOSURE</span><span class="val">$40</span></div>
-    <div class="ticker-item"><span class="lbl">ESCAPE LIMIT</span><span class="val neg">−$15 / day</span></div>
-    <div class="ticker-item"><span class="lbl">KILL SPEED</span><span class="val pos">&lt; 50ms order</span></div>
-    <div class="ticker-item"><span class="lbl">TERRITORY</span><span class="val">London · EU</span></div>
+    <div class="ticker-item"><span class="lbl">DAILY LOSS LIMIT</span><span class="val neg">−$15 / day</span></div>
+    <div class="ticker-item"><span class="lbl">ORDER LATENCY</span><span class="val pos">&lt; 50ms to CLOB</span></div>
+    <div class="ticker-item"><span class="lbl">RUNTIME</span><span class="val">Rust · Tokio · London EU</span></div>
     <div class="ticker-item"><span class="lbl">CAPITAL</span><span class="val">$100 USDC</span></div>
-    <div class="ticker-item"><span class="lbl">PREY</span><span class="val">Polymarket · YES 10–45¢</span></div>
+    <div class="ticker-item"><span class="lbl">ACTIVE STRATEGIES</span><span class="val">4 independent execution paths</span></div>
     <div class="ticker-item"><span class="lbl">TAKER FEE</span><span class="val">1% standard · 0% geopolitical</span></div>
     <!-- duplicate for seamless loop -->
-    <div class="ticker-item"><span class="lbl">PREDATORS NEUTRALISED</span><span class="val pos">71.6%</span></div>
-    <div class="ticker-item"><span class="lbl">HUNTS EXECUTED</span><span class="val">194</span></div>
+    <div class="ticker-item"><span class="lbl">WIN RATE</span><span class="val pos">71.6%</span></div>
+    <div class="ticker-item"><span class="lbl">MARKETS BACKTESTED</span><span class="val">194</span></div>
     <div class="ticker-item"><span class="lbl">PRE-SCREEN</span><span class="val">noise filtered · fast-pass gate</span></div>
-    <div class="ticker-item"><span class="lbl">ORACLE CONVICTION</span><span class="val">deep verify · strike threshold</span></div>
+    <div class="ticker-item"><span class="lbl">ORACLE CONSENSUS</span><span class="val">triple-AI · deep verify</span></div>
     <div class="ticker-item"><span class="lbl">MAX EXPOSURE</span><span class="val">$40</span></div>
-    <div class="ticker-item"><span class="lbl">ESCAPE LIMIT</span><span class="val neg">−$15 / day</span></div>
-    <div class="ticker-item"><span class="lbl">KILL SPEED</span><span class="val pos">&lt; 50ms order</span></div>
-    <div class="ticker-item"><span class="lbl">TERRITORY</span><span class="val">London · EU</span></div>
+    <div class="ticker-item"><span class="lbl">DAILY LOSS LIMIT</span><span class="val neg">−$15 / day</span></div>
+    <div class="ticker-item"><span class="lbl">ORDER LATENCY</span><span class="val pos">&lt; 50ms to CLOB</span></div>
+    <div class="ticker-item"><span class="lbl">RUNTIME</span><span class="val">Rust · Tokio · London EU</span></div>
     <div class="ticker-item"><span class="lbl">CAPITAL</span><span class="val">$100 USDC</span></div>
-    <div class="ticker-item"><span class="lbl">PREY</span><span class="val">Polymarket · YES 10–45¢</span></div>
+    <div class="ticker-item"><span class="lbl">ACTIVE STRATEGIES</span><span class="val">4 independent execution paths</span></div>
     <div class="ticker-item"><span class="lbl">TAKER FEE</span><span class="val">1% standard · 0% geopolitical</span></div>
   </div>
 </div>
@@ -703,7 +779,7 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
 <section id="ai-engine">
   <div class="section-label reveal">Signal Generation</div>
   <h2 class="section-h2 reveal">The Signal <span class="hl">Pipeline.</span></h2>
-  <p class="section-desc reveal">Two stages. Each eliminates noise before the next fires. Only the highest-confidence signals reach execution — maximising edge while preserving capital.</p>
+  <p class="section-desc reveal">Three AI stages. Each eliminates noise before the next fires. Only the highest-confidence signals reach execution — edge maximised, capital protected.</p>
 
   <div class="pipeline-container" id="pipeline">
     <div class="pnode" id="pn0">
@@ -713,7 +789,7 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
           <div class="pnode-name" style="color:var(--gold)">Pre-Screen Fast-Pass</div>
           <div class="pnode-thresh pre">Low-signal markets filtered</div>
         </div>
-        <div class="pnode-desc">Sub-100ms inference. Acts as the first gate, eliminating obvious low-signal markets before the deep-verify stage runs. Scores question clarity, price edge, and time-to-resolve — only strong candidates proceed.</div>
+        <div class="pnode-desc">Sub-100ms inference. Acts as the cost and latency gate — eliminates low-signal markets before the expensive deep-verify stage runs. Scores question clarity, price edge, and time-to-resolve. Only strong candidates advance.</div>
         <div class="pnode-model">Fast-pass · Stage 1</div>
         <div class="pnode-tags"><span class="ptag">LPU Inference</span><span class="ptag">&lt;100ms</span><span class="ptag">Noise Filter</span><span class="ptag">Rate-limited</span></div>
       </div>
@@ -726,7 +802,7 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
           <div class="pnode-name" style="color:var(--cyan)">Resilience Layer</div>
           <div class="pnode-thresh res">Emergency fallback only</div>
         </div>
-        <div class="pnode-desc">A secondary AI layer activates automatically if the primary deep-verify stage is unreachable. Provides category-aware context and domain base rates. The normal execution path is Pre-Screen → Oracle; this layer ensures zero signal loss during outages.</div>
+        <div class="pnode-desc">A secondary AI layer activates automatically when the primary deep-verify stage is unreachable. Provides category-aware context and domain base rates. The normal path is Pre-Screen → Oracle; this layer ensures zero signal loss during outages.</div>
         <div class="pnode-model">Redundant AI · Fail-Safe</div>
         <div class="pnode-tags"><span class="ptag">Auto-Activate</span><span class="ptag">Category Context</span><span class="ptag">Zero Signal Loss</span><span class="ptag">Fail-Safe Bypass</span></div>
       </div>
@@ -739,9 +815,9 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
           <div class="pnode-name" style="color:var(--purple)">Oracle Deep-Verify</div>
           <div class="pnode-thresh orc">High conviction threshold to trade</div>
         </div>
-        <div class="pnode-desc">The primary decision stage carries dominant consensus weight. Applies 13 category-aware rules and fee awareness. Consensus scoring combines Oracle and Pre-Screen weights. Prompt caching cuts input cost significantly.</div>
-        <div class="pnode-model">Deep-verify · Stage 2</div>
-        <div class="pnode-tags"><span class="ptag">Primary Weight</span><span class="ptag">Prompt Caching</span><span class="ptag">13 Category Rules</span><span class="ptag">Weighted Consensus</span></div>
+        <div class="pnode-desc">The primary decision stage carries dominant consensus weight. Applies category-aware reasoning rules and fee awareness. Consensus scoring combines Oracle and Pre-Screen outputs. Prompt caching cuts input cost significantly.</div>
+        <div class="pnode-model">Deep-verify · Stage 2 · Primary</div>
+        <div class="pnode-tags"><span class="ptag">Primary Weight</span><span class="ptag">Prompt Caching</span><span class="ptag">Category Rules</span><span class="ptag">Weighted Consensus</span></div>
       </div>
     </div>
 
@@ -749,11 +825,11 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
       <div class="pnode-icon"><div class="pnode-circle trade">EXEC</div></div>
       <div class="pnode-body">
         <div class="pnode-head">
-          <div class="pnode-name" style="color:var(--green)">Risk Gate → Execution</div>
+          <div class="pnode-name" style="color:var(--green)">Risk Gate → CLOB Execution</div>
           <div class="pnode-thresh trade">8 rules · Kelly sizing</div>
         </div>
-        <div class="pnode-desc">Every passing signal hits 8 hard risk rules before touching the CLOB. Kelly sizing with category multipliers (Political 0.7×, Sports 0.8×, Standard 0.9×). Fail-closed — any risk violation drops the order with no exception.</div>
-        <div class="pnode-model">Polymarket CLOB REST + WS</div>
+        <div class="pnode-desc">Every passing signal passes 8 hard risk rules before any order reaches the CLOB. Fail-closed — a single violation drops the trade entirely. Kelly-based sizing scales per-market risk dynamically. No exceptions, no workarounds.</div>
+        <div class="pnode-model">Polymarket CLOB REST + WebSocket</div>
         <div class="pnode-tags"><span class="ptag">Kelly Criterion</span><span class="ptag">8 Risk Rules</span><span class="ptag">Fail-Closed</span><span class="ptag">&lt;50ms Order</span></div>
       </div>
     </div>
@@ -854,32 +930,143 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
 
 <div class="section-divider"></div>
 
+<!-- LIVE TERMINAL -->
+<section id="live-terminal">
+  <div class="section-label reveal">Signal Intelligence</div>
+  <h2 class="section-h2 reveal">MANTIS <span class="hl">Online.</span></h2>
+  <p class="section-desc reveal">Running 24/7 on EU infrastructure. Every 60 seconds, active markets are screened. Positions held until signal degrades or target hits. No manual intervention required.</p>
+
+  <div class="tui-outer reveal">
+    <!-- macOS-style title bar -->
+    <div class="tui-titlebar">
+      <div class="tui-dots">
+        <span class="tui-dot red"></span>
+        <span class="tui-dot yellow"></span>
+        <span class="tui-dot grn"></span>
+      </div>
+      <div class="tui-title-text">mantis — signal dashboard — EU-WEST-1</div>
+      <div class="tui-live-badge"><span class="tui-live-dot"></span>LIVE</div>
+    </div>
+
+    <!-- TUI screen -->
+    <div class="tui-screen">
+      <!-- Status bar -->
+      <div class="tui-statusbar">
+        <span class="tui-sb-item sg">● SIGNAL ENGINE: ACTIVE</span>
+        <span class="tui-sb-item sc">● RISK GATE: ARMED</span>
+        <span class="tui-sb-item sm">UPTIME: 127h 43m</span>
+        <span class="tui-sb-time" id="tuiTime">--:--:-- UTC</span>
+      </div>
+
+      <!-- Main split -->
+      <div class="tui-main">
+        <!-- Left: scan log -->
+        <div class="tui-panel tui-scan-panel">
+          <div class="tui-panel-head">MARKET SCAN LOG</div>
+          <ul class="tui-log" id="tuiLog"></ul>
+          <div class="tui-scan-foot">
+            <span style="color:rgba(0,255,136,.4)">SCANNING</span>
+            <span class="tui-caret"></span>
+            <span class="tui-next-scan" id="tuiNextScan">next scan: 47s</span>
+          </div>
+        </div>
+
+        <!-- Right: positions + stats -->
+        <div class="tui-panel">
+          <div class="tui-panel-head">OPEN POSITIONS (3)</div>
+          <div class="tui-positions">
+            <div class="tui-pos-item">
+              <div class="tui-pos-id">UKRAINE-CEASEFIRE-Q2-2026</div>
+              <div class="tui-pos-meta">
+                <span class="tui-pos-side">YES</span>
+                <span class="tui-pos-size">$8.40</span>
+                <span class="tui-pos-entry">@ 0.31</span>
+                <span class="tui-pos-pnl pos" id="tpnl0">+$2.10 (+25.0%)</span>
+              </div>
+            </div>
+            <div class="tui-pos-item">
+              <div class="tui-pos-id">FED-RATE-CUT-JUNE-2026</div>
+              <div class="tui-pos-meta">
+                <span class="tui-pos-side">YES</span>
+                <span class="tui-pos-size">$6.20</span>
+                <span class="tui-pos-entry">@ 0.44</span>
+                <span class="tui-pos-pnl pos" id="tpnl1">+$1.30 (+20.9%)</span>
+              </div>
+            </div>
+            <div class="tui-pos-item">
+              <div class="tui-pos-id">EU-GAS-BAN-LIFTED-Q2-2026</div>
+              <div class="tui-pos-meta">
+                <span class="tui-pos-side">YES</span>
+                <span class="tui-pos-size">$5.00</span>
+                <span class="tui-pos-entry">@ 0.22</span>
+                <span class="tui-pos-pnl neg" id="tpnl2">-$0.45 (-9.0%)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="tui-divider"></div>
+
+          <div class="tui-stats">
+            <div class="tui-stat-b">
+              <div class="tui-stat-l">TODAY P&amp;L</div>
+              <div class="tui-stat-v sg" id="tuiDailyPnl">+$2.95</div>
+            </div>
+            <div class="tui-stat-b">
+              <div class="tui-stat-l">EXPOSURE</div>
+              <div class="tui-stat-v sc">$19.60</div>
+            </div>
+            <div class="tui-stat-b">
+              <div class="tui-stat-l">RISK STATUS</div>
+              <div class="tui-stat-v sg">NOMINAL</div>
+            </div>
+          </div>
+
+          <div class="tui-exp-wrap">
+            <div class="tui-exp-label">
+              <span>EXPOSURE $19.60 / $40.00</span>
+              <span>49%</span>
+            </div>
+            <div class="tui-exp-track"><div class="tui-exp-fill"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="tui-bottombar">
+        <span>mantis v2.3.0 · rust/tokio · polymarket clob · eu-west-1</span>
+        <span class="tui-bot-status">system nominal</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <!-- STRATEGY -->
 <section id="strategy">
-  <div class="section-label reveal">Entry Logic</div>
-  <h2 class="section-h2 reveal">Precision <span class="hl">Entry Rules.</span></h2>
-  <p class="section-desc reveal">No guessing. Every trade passes a deterministic checklist. MANTIS stays in cash when conditions aren't perfect — idle hours are not wasted hours.</p>
+  <div class="section-label reveal">Active Strategies</div>
+  <h2 class="section-h2 reveal">Four <span class="hl">Live Strategies.</span></h2>
+  <p class="section-desc reveal">No guessing. Every trade passes a deterministic checklist. MANTIS stays in cash when conditions aren't right — idle hours are never wasted capital.</p>
 
   <div class="strategy-grid">
     <div class="reveal">
       <div class="terminal">
         <div class="terminal-bar">
           <div class="tb-dot"></div><div class="tb-dot"></div><div class="tb-dot"></div>
-          <div class="terminal-title">standard_entry.rs</div>
+          <div class="terminal-title">maker.rs — Market Making</div>
         </div>
         <div class="terminal-body">
-<span class="t-comment">// All conditions must be true</span>
-<br><span class="t-key">is_flash_market</span> <span class="t-op">==</span> <span class="t-val">false</span>
-<br><span class="t-key">consensus_score</span> <span class="t-op">>=</span> <span class="t-num">68</span>
-<br><span class="t-key">hours_to_resolve</span> <span class="t-op"><=</span> <span class="t-num">24.0</span>
-<br><span class="t-key">market_volume</span> <span class="t-op">>=</span> <span class="t-num">$1,000</span>
-<br><span class="t-key">yes_price</span> <span class="t-op">between</span> <span class="t-num">0.05</span> <span class="t-op">and</span> <span class="t-num">0.55</span>
-<br><span class="t-key">total_exposure</span> <span class="t-op">+</span> <span class="t-key">bet</span> <span class="t-op"><=</span> <span class="t-num">$40.00</span>
-<br><span class="t-key">today_pnl</span> <span class="t-op">></span> <span class="t-num">-$15.00</span>
+<span class="t-comment">// Strategy 1 — Passive market making</span>
+<br><span class="t-comment">// Places bid/ask quotes on qualifying markets</span>
+<br><span class="t-comment">// Captures spread as maker rebate</span>
 <br>
-<br><span class="t-comment">// Kelly-capped bet size</span>
-<br><span class="t-key">bet_usd</span> <span class="t-op">=</span> <span class="t-val">kelly(</span><span class="t-key">score</span><span class="t-op">,</span> <span class="t-key">category_mult</span><span class="t-val">)</span>
-<br><span class="t-key">max_bet</span> <span class="t-op">=</span> <span class="t-num">$10.00</span> <span class="t-comment">// hard cap</span>
+<br><span class="t-key">selection</span>   <span class="t-op">=</span> <span class="t-val">reward_rate / volume_score</span>
+<br><span class="t-key">inventory</span>   <span class="t-op">=</span> <span class="t-val">Avellaneda-Stoikov skew</span>
+<br><span class="t-key">resolution</span>  <span class="t-op">=</span> <span class="t-val">spread widens near close</span>
+<br>
+<br><span class="t-comment">// Strategy 1B — First-Mover</span>
+<br><span class="t-comment">// Quotes new markets within 500ms of open</span>
+<br><span class="t-comment">// Captures early-liquidity spread premium</span>
         </div>
       </div>
     </div>
@@ -888,23 +1075,20 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
       <div class="terminal">
         <div class="terminal-bar">
           <div class="tb-dot"></div><div class="tb-dot"></div><div class="tb-dot"></div>
-          <div class="terminal-title">kelly.rs — category multipliers</div>
+          <div class="terminal-title">taker.rs — AI &amp; Arb Execution</div>
         </div>
         <div class="terminal-body">
-<span class="t-comment">// Fraction of capital per trade</span>
-<br><span class="t-key">max_fraction</span> <span class="t-op">=</span> <span class="t-num">0.15</span>
-<br><span class="t-key">min_bet</span> <span class="t-op">=</span> <span class="t-num">$1.00</span>
+<span class="t-comment">// Strategy 2 — Triple-AI Taker</span>
+<br><span class="t-comment">// AI consensus scan, high-conviction only</span>
+<br><span class="t-comment">// Zero-fee markets prioritised</span>
 <br>
-<br><span class="t-comment">// Category confidence multipliers</span>
-<br><span class="t-key">Standard</span>      <span class="t-op">×</span> <span class="t-num">0.90</span>
-<br><span class="t-key">Geopolitical</span>  <span class="t-op">×</span> <span class="t-num">1.00</span> <span class="t-comment">// 0% fee</span>
-<br><span class="t-key">Political</span>     <span class="t-op">×</span> <span class="t-num">0.70</span>
-<br><span class="t-key">Sports</span>        <span class="t-op">×</span> <span class="t-num">0.80</span> <span class="t-comment">// no live scores</span>
+<br><span class="t-comment">// Strategy 3 — YES+NO Internal Arb</span>
+<br><span class="t-comment">// Scans for combined price inefficiencies</span>
+<br><span class="t-comment">// Both legs fired simultaneously (FOK)</span>
 <br>
-<br><span class="t-comment">// Exit strategy</span>
-<br><span class="t-key">profit_lock</span>  <span class="t-op">=</span> <span class="t-num">40%</span> <span class="t-comment">// trailing stop</span>
-<br><span class="t-key">losing_exit</span>  <span class="t-op">=</span> <span class="t-num">20%</span> <span class="t-comment">// cut losses</span>
-<br><span class="t-key">rescore_interval</span> <span class="t-op">=</span> <span class="t-num">300s</span>
+<br><span class="t-comment">// Strategy 4 — BTC TA Taker</span>
+<br><span class="t-comment">// Near-certain markets only (T-10s window)</span>
+<br><span class="t-comment">// Technical confirmation before entry</span>
         </div>
       </div>
     </div>
@@ -971,17 +1155,17 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
     <div class="risk-card reveal">
       <div class="risk-num">07</div>
       <div class="risk-content">
-        <div class="risk-title">Price Zone Filter</div>
-        <div class="risk-desc">YES price must be 0.05–0.55. Markets priced outside this range carry excessive house edge or are near-resolved with negligible reward.</div>
-        <div class="risk-amount">Zone: $0.05 – $0.55</div>
+        <div class="risk-title">Direction Consensus</div>
+        <div class="risk-desc">If Groq and Claude disagree on the direction of the trade, the order is rejected entirely. Both models must agree — no split-signal trades reach execution.</div>
+        <div class="risk-amount">Reject — no consensus</div>
       </div>
     </div>
     <div class="risk-card reveal">
       <div class="risk-num">08</div>
       <div class="risk-content">
-        <div class="risk-title">Geoblock Guard</div>
-        <div class="risk-desc">On startup MANTIS performs a connectivity check. If the deployment server is blocked from the exchange: immediate hard stop. No silent failures, no partial operation.</div>
-        <div class="risk-amount">Fail-closed · exit(1)</div>
+        <div class="risk-title">Maker Position Cap</div>
+        <div class="risk-desc">Maker orders are hard-capped at $5 per side. Any maker order exceeding this is silently truncated before placement — never rejected, never crashes the engine.</div>
+        <div class="risk-amount">Max: $5 per side</div>
       </div>
     </div>
   </div>
@@ -1196,73 +1380,200 @@ function drawParticles(){
 }
 drawParticles();
 
-/* ── MANTIS CINEMATIC SEQUENCE — jungle predator theme ── */
+/* ── RADAR CANVAS ── */
 (function(){
-  // Rotation origins in SVG viewport coordinates
+  const c = document.getElementById('radarCanvas');
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  const CX = W/2, CY = H/2 - 8;
+  const R = 172;
+
+  // Blips positioned to correspond with the 4 market nodes
+  const blips = [
+    { a:-2.75, d:0.44, p:0, active:false }, // upper-left  → mn0
+    { a: 0.35, d:0.60, p:0, active:false }, // right       → mn1
+    { a: 2.05, d:0.48, p:0, active:false }, // lower-left  → mn2
+    { a: 1.20, d:0.56, p:0, active:false }, // lower-right → mn3
+  ];
+
+  let sweep = -Math.PI / 2; // start at 12 o'clock
+
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+
+    // Background tint
+    ctx.beginPath();
+    ctx.arc(CX, CY, R, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,255,136,0.018)';
+    ctx.fill();
+
+    // Range rings
+    [0.30, 0.56, 0.80, 1.0].forEach((f, i) => {
+      ctx.beginPath();
+      ctx.arc(CX, CY, R*f, 0, Math.PI*2);
+      ctx.strokeStyle = i === 3 ? 'rgba(0,255,136,0.22)' : 'rgba(0,255,136,0.055)';
+      ctx.lineWidth   = i === 3 ? 1.3 : 0.7;
+      ctx.stroke();
+    });
+
+    // Crosshair
+    ctx.strokeStyle = 'rgba(0,255,136,0.05)';
+    ctx.lineWidth = 0.7;
+    ctx.setLineDash([3, 10]);
+    ctx.beginPath(); ctx.moveTo(CX-R, CY); ctx.lineTo(CX+R, CY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(CX, CY-R); ctx.lineTo(CX, CY+R); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Sweep trail — fan of wedges fading toward leading edge
+    const TRAIL = Math.PI * 0.65;
+    const STEPS = 22;
+    for(let i = 0; i < STEPS; i++){
+      const a0 = sweep - TRAIL * (1 - i/STEPS);
+      const a1 = sweep - TRAIL * (1 - (i+1)/STEPS);
+      ctx.beginPath();
+      ctx.moveTo(CX, CY);
+      ctx.arc(CX, CY, R * 0.97, a0, a1);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(0,255,136,' + ((i/STEPS)*0.19).toFixed(4) + ')';
+      ctx.fill();
+    }
+
+    // Bright leading line
+    ctx.beginPath();
+    ctx.moveTo(CX, CY);
+    ctx.lineTo(CX + Math.cos(sweep)*R, CY + Math.sin(sweep)*R);
+    ctx.strokeStyle = 'rgba(0,255,136,0.72)';
+    ctx.lineWidth = 1.6;
+    ctx.stroke();
+
+    // Center node — slow pulse
+    const t = Date.now() / 1000;
+    const pulse = 0.5 + 0.5 * Math.sin(t * 2.8);
+    ctx.beginPath(); ctx.arc(CX, CY, 4.5, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,255,136,' + (0.55 + pulse*0.35).toFixed(3) + ')';
+    ctx.fill();
+    ctx.beginPath(); ctx.arc(CX, CY, 8 + pulse*4, 0, Math.PI*2);
+    ctx.strokeStyle = 'rgba(0,255,136,' + (0.10 + pulse*0.10).toFixed(3) + ')';
+    ctx.lineWidth = 1; ctx.stroke();
+
+    // Blips — activate when sweep crosses their angle
+    blips.forEach(b => {
+      const bx = CX + Math.cos(b.a) * R * b.d;
+      const by = CY + Math.sin(b.a) * R * b.d;
+      const norm = ((sweep - b.a) % (Math.PI*2) + Math.PI*2) % (Math.PI*2);
+      if(norm < 0.17){ b.p = 1.0; b.active = true; }
+      if(b.active){
+        const alpha = b.p;
+        ctx.beginPath();
+        ctx.arc(bx, by, 3.5 + (1-b.p)*10, 0, Math.PI*2);
+        ctx.strokeStyle = 'rgba(0,255,136,' + (alpha*0.30).toFixed(3) + ')';
+        ctx.lineWidth = 1; ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(bx, by, 2.8, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,255,136,' + (alpha*0.92).toFixed(3) + ')';
+        ctx.fill();
+        b.p = Math.max(0, b.p - 0.006);
+        if(b.p === 0) b.active = false;
+      }
+    });
+
+    sweep += 0.020;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── MANTIS SIGNAL INTELLIGENCE SEQUENCE ── */
+(function(){
   gsap.set('#m-mantis-whole', { svgOrigin:'110 120' });
   gsap.set('#m-arm-l',        { svgOrigin:'100 118' });
   gsap.set('#m-arm-r',        { svgOrigin:'120 118' });
+  gsap.set('#m-head',         { svgOrigin:'110 70'  });
   gsap.set('#m-target-outer', { svgOrigin:'110 70'  });
-  gsap.set(['#m-pred-wolf','#m-pred-lion','#m-kill-flash','#m-target','#m-secured'], { opacity:0 });
+  gsap.set(['#m-target','#m-signal-lock'], { opacity:0 });
 
-  const tl = gsap.timeline({ repeat:-1, defaults:{ ease:'power3.out' } });
+  const nodeIds = ['#mn0','#mn1','#mn2','#mn3'];
+  let cycle = 0;
 
-  // ─ P1 IDLE: breathing float (0–2.8s) ─
-  tl.to('#mantis-svg', { y:-10, duration:2.0, ease:'sine.inOut' }, 0)
-    .to('#mantis-svg', { y:0,   duration:2.0, ease:'sine.inOut' }, 2.0)
-    // Eye pulse
-    .to('#m-body circle', { opacity:0.4, duration:0.6, yoyo:true, repeat:2, ease:'sine.inOut', stagger:0.08 }, 0.3);
+  function clearNodes(){
+    nodeIds.forEach(id => {
+      const el = document.querySelector(id);
+      if(el){ el.classList.remove('active','locked'); }
+    });
+  }
+  function activateNode(id){
+    const el = document.querySelector(id);
+    if(el){ el.classList.remove('locked'); el.classList.add('active'); }
+  }
+  function lockNode(id){
+    const el = document.querySelector(id);
+    if(el){ el.classList.remove('active'); el.classList.add('locked'); }
+  }
 
-  // ─ P2 WOLF THREAT from left — dodge right (3.0–5.5s) ─
-  tl.fromTo('#m-pred-wolf', { opacity:0, x:-28 }, { opacity:1, x:0, duration:0.4, ease:'power2.out' }, 3.0)
-    .to('#m-mantis-whole',  { rotation:14, duration:0.38 }, 3.3)
-    .to('#m-arm-r',         { rotation:-14, duration:0.35 }, 3.3)
-    // Dodge — wolf clears past
-    .to('#m-pred-wolf',     { opacity:0, x:30, duration:0.32, ease:'power2.in' }, 4.45)
-    .to('#m-mantis-whole',  { rotation:0, duration:0.55, ease:'elastic.out(1,0.5)' }, 4.55)
-    .to('#m-arm-r',         { rotation:0, duration:0.45 }, 4.65);
+  function runCycle(){
+    const nid = nodeIds[cycle % nodeIds.length];
+    cycle++;
+    clearNodes();
 
-  // ─ P3 LION THREAT from right — LEFT ARM STRIKE, eliminate (5.9–8.2s) ─
-  tl.fromTo('#m-pred-lion', { opacity:0, x:28 }, { opacity:1, x:0, duration:0.4, ease:'power2.out' }, 5.9)
-    .to('#m-mantis-whole',  { rotation:-7, duration:0.3 }, 6.15)
-    // Arm coils back…
-    .to('#m-arm-l',         { rotation:-22, duration:0.28, ease:'power2.in' }, 6.2)
-    // …then SNAPS
-    .to('#m-arm-l',         { rotation:50,  duration:0.13, ease:'power4.in' }, 6.6)
-    // Kill flash + lion vanishes
-    .to('#m-kill-flash',    { opacity:1, scale:1.18, duration:0.12, ease:'power4.out' }, 6.73)
-    .to('#m-pred-lion',     { opacity:0, duration:0.14 }, 6.73)
-    .to('#m-kill-flash',    { opacity:0, scale:1, duration:0.38, ease:'power2.out' }, 6.88)
-    .to('#m-arm-l',         { rotation:0, duration:0.55, ease:'elastic.out(1,0.55)' }, 6.9)
-    .to('#m-mantis-whole',  { rotation:0, duration:0.45 }, 6.95);
+    const tl = gsap.timeline({ onComplete: runCycle });
 
-  // ─ P4 TARGET LOCK — profit reticle appears (8.3–9.7s) ─
-  tl.to('#m-target',        { opacity:1, duration:0.4 }, 8.3)
-    .to('#m-target-outer',  { rotation:360, duration:1.15, ease:'linear' }, 8.3)
-    // Arms coil back for double strike
-    .to('#m-arm-l',         { rotation:-22, duration:0.42, ease:'power2.inOut' }, 8.5)
-    .to('#m-arm-r',         { rotation:22,  duration:0.42, ease:'power2.inOut' }, 8.5)
-    // Lean forward
-    .to('#m-mantis-whole',  { y:-7, duration:0.42, ease:'power2.inOut' }, 8.5);
+    // ── P1: IDLE BREATHING (0–3.4s) ──
+    tl.to('#mantis-svg', { y:-9,  duration:1.8, ease:'sine.inOut' }, 0)
+      .to('#mantis-svg', { y:0,   duration:1.8, ease:'sine.inOut' }, 1.8)
+      // Biological head sway — slow, deliberate
+      .to('#m-head', { rotation: 3,  duration:1.5, ease:'sine.inOut' }, 0.3)
+      .to('#m-head', { rotation:-2,  duration:1.5, ease:'sine.inOut' }, 1.8)
+      .to('#m-head', { rotation: 0,  duration:0.6, ease:'sine.out'   }, 3.3);
 
-  // ─ P5 DOUBLE STRIKE — both arms snap (9.75–11s) ─
-  tl.to('#m-arm-l',   { rotation:52,  duration:0.13, ease:'power4.in' }, 9.75)
-    .to('#m-arm-r',   { rotation:-52, duration:0.13, ease:'power4.in' }, 9.75)
-    .to('#m-target',  { opacity:0, duration:0.12 }, 9.88)
-    // SECURED banner
-    .to('#m-secured', { opacity:1, scale:1.14, duration:0.22, ease:'back.out(2)' }, 9.88)
-    .to('#m-secured', { scale:1, duration:0.3 }, 10.1)
-    // Flash burst on whole SVG
-    .to('#mantis-svg', { filter:'drop-shadow(0 0 55px rgba(0,255,136,.95)) drop-shadow(0 0 100px rgba(0,255,136,.4))', duration:0.14 }, 9.75)
-    .to('#mantis-svg', { filter:'drop-shadow(0 0 30px rgba(0,255,136,.4)) drop-shadow(0 0 60px rgba(0,255,136,.15))', duration:0.9 }, 9.9);
+    // ── P2: SIGNAL DETECTED (3.4–5.4s) ──
+    tl.call(() => activateNode(nid), null, 3.4)
+      .to('#m-target', { opacity:1, duration:0.4, ease:'power2.out' }, 3.5)
+      .to('#m-target-outer', { rotation:180, duration:1.7, ease:'linear' }, 3.5)
+      // Head cants toward signal — predator lock-on
+      .to('#m-head', { rotation:6, duration:0.7, ease:'power2.out' }, 3.6)
+      // Arms begin tensioning
+      .to('#m-arm-l', { rotation:-9,  duration:1.1, ease:'power2.inOut' }, 3.7)
+      .to('#m-arm-r', { rotation: 9,  duration:1.1, ease:'power2.inOut' }, 3.7);
 
-  // ─ P6 RESET (11.1–13.6s) ─
-  tl.to('#m-arm-l',         { rotation:0, duration:0.72, ease:'elastic.out(1,0.6)' }, 11.1)
-    .to('#m-arm-r',         { rotation:0, duration:0.72, ease:'elastic.out(1,0.6)' }, 11.1)
-    .to('#m-mantis-whole',  { y:0, duration:0.5 }, 11.1)
-    .to('#m-secured',       { opacity:0, duration:0.4 }, 11.9)
-    .to('#mantis-svg',      { y:-10, duration:1.3, ease:'sine.inOut' }, 12.0)
-    .to('#mantis-svg',      { y:0,   duration:1.3, ease:'sine.inOut' }, 13.3);
+    // ── P3: LOCK ACQUIRED — conviction builds (5.4–7.2s) ──
+    tl.call(() => lockNode(nid), null, 5.4)
+      .to('#m-target-outer', { rotation:360, duration:1.6, ease:'linear' }, 5.4)
+      // Raptorial arms coil — maximum pre-strike tension
+      .to('#m-arm-l', { rotation:-32, duration:0.88, ease:'power3.inOut' }, 5.4)
+      .to('#m-arm-r', { rotation: 32, duration:0.88, ease:'power3.inOut' }, 5.4)
+      // Weight shifts forward
+      .to('#m-mantis-whole', { y:-7, duration:0.88, ease:'power2.inOut' }, 5.4)
+      // Head freezes — predator stillness at peak focus
+      .to('#m-head', { rotation:0, duration:0.52, ease:'power3.out' }, 6.0);
+
+    // ── P4: PRECISION STRIKE (7.2–7.85s) ──
+    tl.to('#m-arm-l', { rotation: 58, duration:0.11, ease:'power4.in' }, 7.20)
+      .to('#m-arm-r', { rotation:-58, duration:0.11, ease:'power4.in' }, 7.20)
+      .to('#m-target', { opacity:0, duration:0.14 }, 7.31)
+      // ORDER PLACED HUD brackets lock on
+      .to('#m-signal-lock', { opacity:1, scale:1.08, duration:0.22, ease:'back.out(2.5)' }, 7.31)
+      .to('#m-signal-lock', { scale:1, duration:0.30 }, 7.53)
+      // Bioluminescent strike flare
+      .to('#mantis-svg', {
+        filter:'drop-shadow(0 0 44px rgba(0,255,136,.92)) drop-shadow(0 0 88px rgba(0,212,255,.38))',
+        duration:0.13
+      }, 7.20)
+      .to('#mantis-svg', {
+        filter:'drop-shadow(0 0 28px rgba(0,255,136,.38)) drop-shadow(0 0 55px rgba(0,255,136,.12))',
+        duration:1.1
+      }, 7.33);
+
+    // ── P5: RESET (7.85–10.4s) ──
+    tl.to('#m-arm-l',        { rotation:0, duration:0.78, ease:'elastic.out(1,0.55)' }, 7.85)
+      .to('#m-arm-r',        { rotation:0, duration:0.78, ease:'elastic.out(1,0.55)' }, 7.85)
+      .to('#m-mantis-whole', { y:0, duration:0.55, ease:'power2.out' }, 7.85)
+      .to('#m-signal-lock',  { opacity:0, duration:0.4 }, 8.6)
+      .to('#mantis-svg',     { y:-8, duration:1.0, ease:'sine.inOut' }, 9.2)
+      .to('#mantis-svg',     { y:0,  duration:1.0, ease:'sine.inOut' }, 10.2);
+  }
+
+  gsap.delayedCall(0.6, runCycle);
 })();
 
 /* ── COUNTER ── */
@@ -1297,11 +1608,11 @@ function startAnimations(){
   gsap.from('#heroCtas', { opacity:0, y:20, duration:.6, delay:.85, ease:'power3.out' });
   gsap.from('#mantis-wrap', { opacity:0, scale:.85, duration:1, delay:.5, ease:'back.out(1.3)' });
 
-  // Scroll reveals
+  // Scroll reveals — spring physics entrance
   gsap.utils.toArray('.reveal').forEach(el => {
     gsap.to(el, {
-      opacity:1, y:0, duration:.7, ease:'power3.out',
-      scrollTrigger:{ trigger:el, start:'top 88%', toggleActions:'play none none none' }
+      opacity:1, y:0, duration:0.95, ease:'back.out(1.5)',
+      scrollTrigger:{ trigger:el, start:'top 87%', toggleActions:'play none none none' }
     });
   });
 
@@ -1355,19 +1666,167 @@ function startAnimations(){
     });
   });
 
-  // 3D tilt on cards
+  // Enhanced 3D tilt — light simulation follows finger
   document.querySelectorAll('.metric-card,.risk-card,.contact-card,.pnode-body').forEach(card => {
     card.addEventListener('mousemove', e => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width  - 0.5;
-      const y = (e.clientY - r.top)  / r.height - 0.5;
-      card.style.transform = `perspective(1000px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 8).toFixed(2)}deg) translateY(-4px)`;
+      const r  = card.getBoundingClientRect();
+      const xp = (e.clientX - r.left) / r.width;
+      const yp = (e.clientY - r.top)  / r.height;
+      const rx = (-(yp - 0.5) * 16).toFixed(2);
+      const ry = ((xp - 0.5)  * 16).toFixed(2);
+      card.style.transform    = `perspective(850px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(10px)`;
+      card.style.background   = `radial-gradient(circle at ${(xp*100).toFixed(0)}% ${(yp*100).toFixed(0)}%, rgba(0,255,136,.1) 0%, transparent 58%), var(--glass)`;
+      card.style.boxShadow    = `0 ${8+Math.abs(rx)}px ${28+Math.abs(ry)*2}px rgba(0,255,136,.12)`;
     });
     card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
+      card.style.cssText += ';transition:transform .55s cubic-bezier(.23,1,.32,1),background .35s ease,box-shadow .35s ease';
+      card.style.transform  = '';
+      card.style.background = '';
+      card.style.boxShadow  = '';
+      setTimeout(()=>{ card.style.transition=''; }, 560);
     });
   });
 }
+
+/* ── HERO DEPTH PARALLAX ── */
+(function(){
+  if(!window.matchMedia('(hover:hover)').matches) return;
+  const layers = [
+    { id:'heroBadge',   d:0.018 },
+    { id:'heroH1',      d:0.032 },
+    { id:'heroSub',     d:0.013 },
+    { id:'heroMetrics', d:0.008 },
+    { id:'heroCtas',    d:0.005 },
+    { id:'mantis-wrap', d:0.058 },
+  ];
+  const els = layers.map(l=>({ el:document.getElementById(l.id), d:l.d })).filter(l=>l.el);
+  let mx=0,my=0,cx=0,cy=0;
+  window.addEventListener('mousemove', e=>{
+    mx = (e.clientX/window.innerWidth  - 0.5)*2;
+    my = (e.clientY/window.innerHeight - 0.5)*2;
+  },{ passive:true });
+  (function tick(){
+    cx += (mx-cx)*0.065;
+    cy += (my-cy)*0.065;
+    els.forEach(({el,d})=>{
+      el.style.transform = `translate(${(cx*d*100).toFixed(2)}px,${(cy*d*100).toFixed(2)}px)`;
+    });
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* ── MAGNETIC BUTTONS ── */
+(function(){
+  if(!window.matchMedia('(hover:hover)').matches) return;
+  document.querySelectorAll('.btn-primary,.btn-ghost,.nav-pill').forEach(btn=>{
+    btn.addEventListener('mousemove', e=>{
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width/2)  * 0.30;
+      const y = (e.clientY - r.top  - r.height/2) * 0.32;
+      btn.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`;
+    });
+    btn.addEventListener('mouseleave', ()=>{
+      btn.style.transition = 'transform .5s cubic-bezier(.23,1,.32,1)';
+      btn.style.transform  = 'translate(0,0)';
+      setTimeout(()=>{ btn.style.transition=''; }, 500);
+    });
+  });
+})();
+
+/* ── MANTIS AWARENESS — the mantis watches your cursor ── */
+(function(){
+  if(!window.matchMedia('(hover:hover)').matches) return;
+  const wrap = document.getElementById('mantis-wrap');
+  if(!wrap) return;
+  let tX=0,tY=0,cX=0,cY=0;
+  window.addEventListener('mousemove', e=>{
+    const r = wrap.getBoundingClientRect();
+    if(r.width === 0) return; // hidden on mobile
+    const mx = (e.clientX - (r.left + r.width/2))  / window.innerWidth;
+    const my = (e.clientY - (r.top  + r.height/2)) / window.innerHeight;
+    tY = mx * 14;  // yaw toward cursor — max ±14°
+    tX = my * -9;  // pitch — max ±9°
+  }, { passive:true });
+  (function tick(){
+    cX += (tX - cX) * 0.042;
+    cY += (tY - cY) * 0.042;
+    wrap.style.transform = `perspective(600px) rotateX(${cX.toFixed(2)}deg) rotateY(${cY.toFixed(2)}deg)`;
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* ── LIVE TERMINAL ── */
+(function(){
+  const MARKETS = [
+    { id:'UKRAINE-CEASEFIRE-Q2-2026',   cls:'tui-log-pass',   lbl:'✓ PASS' },
+    { id:'BTC-ABOVE-100K-MAY-2026',     cls:'tui-log-below',  lbl:'BELOW THRESHOLD' },
+    { id:'FED-RATE-CUT-JUNE-2026',      cls:'tui-log-pass',   lbl:'✓ PASS' },
+    { id:'US-TARIFF-PAUSE-90D',         cls:'tui-log-filter', lbl:'FILTERED' },
+    { id:'EU-RUSSIA-GAS-BAN-Q2-2026',   cls:'tui-log-pass',   lbl:'✓ PASS' },
+    { id:'NBA-FINALS-BOSTON-WIN-26',    cls:'tui-log-filter', lbl:'FILTERED' },
+    { id:'TAIWAN-STRAIT-INCIDENT-Q2',   cls:'tui-log-filter', lbl:'FILTERED' },
+    { id:'EURO-DOLLAR-PARITY-Q2-2026',  cls:'tui-log-below',  lbl:'BELOW THRESHOLD' },
+    { id:'IRAN-DEAL-SIGNED-MAY-2026',   cls:'tui-log-pass',   lbl:'✓ PASS' },
+    { id:'NVIDIA-500B-MCAP-Q2-2026',    cls:'tui-log-pass',   lbl:'✓ PASS' },
+    { id:'MACRO-RECESSION-H1-2026',     cls:'tui-log-below',  lbl:'BELOW THRESHOLD' },
+    { id:'ETH-ABOVE-4K-JUNE-2026',      cls:'tui-log-pass',   lbl:'✓ PASS' },
+  ];
+
+  const log    = document.getElementById('tuiLog');
+  const timeEl = document.getElementById('tuiTime');
+  const nextEl = document.getElementById('tuiNextScan');
+  const pnlEl  = document.getElementById('tuiDailyPnl');
+
+  if(!log) return;
+
+  function pad(n){ return n < 10 ? '0'+n : ''+n; }
+  function utcTime(){ const d=new Date(); return pad(d.getUTCHours())+':'+pad(d.getUTCMinutes())+':'+pad(d.getUTCSeconds())+' UTC'; }
+
+  let idx=0, countdown=47;
+  const MAX=6;
+  const lines=[];
+
+  function addLine(){
+    const m = MARKETS[idx % MARKETS.length]; idx++;
+    const li = document.createElement('li');
+    li.className = 'tui-log-item';
+    li.innerHTML = '<span class="tui-log-id">'+m.id+'</span>'
+                 + '<span class="'+m.cls+'">'+m.lbl+'</span>'
+                 + '<span class="tui-log-ts">'+utcTime()+'</span>';
+    lines.push(li);
+    if(lines.length > MAX){ log.removeChild(lines.shift()); }
+    log.appendChild(li);
+  }
+
+  // Seed with initial lines
+  for(let i=0; i<4; i++){ setTimeout(addLine, i*300); }
+
+  // Stream new market scans
+  setInterval(addLine, 2800);
+
+  // Live clock
+  if(timeEl){ setInterval(()=>{ timeEl.textContent = utcTime(); }, 1000); }
+
+  // Countdown to next scan
+  if(nextEl){
+    setInterval(()=>{
+      countdown--;
+      if(countdown <= 0){ countdown = 60; }
+      nextEl.textContent = 'next scan: '+countdown+'s';
+    }, 1000);
+  }
+
+  // Tick daily P&L slightly to feel alive
+  let pnl = 2.95;
+  setInterval(()=>{
+    pnl += (Math.random() - 0.38) * 0.04;
+    pnl = Math.max(-14.9, pnl);
+    if(pnlEl){
+      pnlEl.textContent = (pnl >= 0 ? '+' : '-') + '$' + Math.abs(pnl).toFixed(2);
+      pnlEl.style.color = pnl >= 0 ? 'var(--green)' : 'var(--red)';
+    }
+  }, 4500);
+})();
 </script>
 
 <script type="module">
