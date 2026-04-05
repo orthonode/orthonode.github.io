@@ -718,7 +718,7 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
     <div class="ticker-item"><span class="lbl">WIN RATE</span><span class="val pos">71.6%</span></div>
     <div class="ticker-item"><span class="lbl">MARKETS BACKTESTED</span><span class="val">194</span></div>
     <div class="ticker-item"><span class="lbl">PRE-SCREEN</span><span class="val">noise filtered · fast-pass gate</span></div>
-    <div class="ticker-item"><span class="lbl">ORACLE CONSENSUS</span><span class="val">triple-AI · deep verify</span></div>
+    <div class="ticker-item"><span class="lbl">ORACLE CONSENSUS</span><span class="val">dual-stage pipeline · deep verify</span></div>
     <div class="ticker-item"><span class="lbl">MAX EXPOSURE</span><span class="val">$40</span></div>
     <div class="ticker-item"><span class="lbl">DAILY LOSS LIMIT</span><span class="val neg">−$15 / day</span></div>
     <div class="ticker-item"><span class="lbl">ORDER LATENCY</span><span class="val pos">&lt; 50ms to CLOB</span></div>
@@ -730,7 +730,7 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
     <div class="ticker-item"><span class="lbl">WIN RATE</span><span class="val pos">71.6%</span></div>
     <div class="ticker-item"><span class="lbl">MARKETS BACKTESTED</span><span class="val">194</span></div>
     <div class="ticker-item"><span class="lbl">PRE-SCREEN</span><span class="val">noise filtered · fast-pass gate</span></div>
-    <div class="ticker-item"><span class="lbl">ORACLE CONSENSUS</span><span class="val">triple-AI · deep verify</span></div>
+    <div class="ticker-item"><span class="lbl">ORACLE CONSENSUS</span><span class="val">dual-stage pipeline · deep verify</span></div>
     <div class="ticker-item"><span class="lbl">MAX EXPOSURE</span><span class="val">$40</span></div>
     <div class="ticker-item"><span class="lbl">DAILY LOSS LIMIT</span><span class="val neg">−$15 / day</span></div>
     <div class="ticker-item"><span class="lbl">ORDER LATENCY</span><span class="val pos">&lt; 50ms to CLOB</span></div>
@@ -779,7 +779,7 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
 <section id="ai-engine">
   <div class="section-label reveal">Signal Generation</div>
   <h2 class="section-h2 reveal">The Signal <span class="hl">Pipeline.</span></h2>
-  <p class="section-desc reveal">Three AI stages. Each eliminates noise before the next fires. Only the highest-confidence signals reach execution — edge maximised, capital protected.</p>
+  <p class="section-desc reveal">Two AI stages in the normal path. Each eliminates noise before the next fires. Only the highest-confidence signals reach execution — edge maximised, capital protected.</p>
 
   <div class="pipeline-container" id="pipeline">
     <div class="pnode" id="pn0">
@@ -789,35 +789,35 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
           <div class="pnode-name" style="color:var(--gold)">Pre-Screen Fast-Pass</div>
           <div class="pnode-thresh pre">Low-signal markets filtered</div>
         </div>
-        <div class="pnode-desc">Sub-100ms inference. Acts as the cost and latency gate — eliminates low-signal markets before the expensive deep-verify stage runs. Scores question clarity, price edge, and time-to-resolve. Only strong candidates advance.</div>
+        <div class="pnode-desc">Sub-100ms inference. Acts as the cost and latency gate — eliminates low-signal markets before the expensive deep-verify stage runs. Scores question clarity, price edge, and time-to-resolve. Only strong candidates advance to Oracle.</div>
         <div class="pnode-model">Fast-pass · Stage 1</div>
         <div class="pnode-tags"><span class="ptag">LPU Inference</span><span class="ptag">&lt;100ms</span><span class="ptag">Noise Filter</span><span class="ptag">Rate-limited</span></div>
       </div>
     </div>
 
     <div class="pnode" id="pn1">
-      <div class="pnode-icon"><div class="pnode-circle res">RES</div></div>
-      <div class="pnode-body">
-        <div class="pnode-head">
-          <div class="pnode-name" style="color:var(--cyan)">Resilience Layer</div>
-          <div class="pnode-thresh res">Emergency fallback only</div>
-        </div>
-        <div class="pnode-desc">A secondary AI layer activates automatically when the primary deep-verify stage is unreachable. Provides category-aware context and domain base rates. The normal path is Pre-Screen → Oracle; this layer ensures zero signal loss during outages.</div>
-        <div class="pnode-model">Redundant AI · Fail-Safe</div>
-        <div class="pnode-tags"><span class="ptag">Auto-Activate</span><span class="ptag">Category Context</span><span class="ptag">Zero Signal Loss</span><span class="ptag">Fail-Safe Bypass</span></div>
-      </div>
-    </div>
-
-    <div class="pnode" id="pn2">
       <div class="pnode-icon"><div class="pnode-circle orc">ORC</div></div>
       <div class="pnode-body">
         <div class="pnode-head">
           <div class="pnode-name" style="color:var(--purple)">Oracle Deep-Verify</div>
           <div class="pnode-thresh orc">High conviction threshold to trade</div>
         </div>
-        <div class="pnode-desc">The primary decision stage carries dominant consensus weight. Applies category-aware reasoning rules and fee awareness. Consensus scoring combines Oracle and Pre-Screen outputs. Prompt caching cuts input cost significantly.</div>
+        <div class="pnode-desc">The primary decision stage. Carries dominant consensus weight. Applies category-aware reasoning rules and fee awareness. Consensus combines Oracle and Pre-Screen scores. Prompt caching keeps input costs minimal. Normal path: Pre-Screen → Oracle → Risk Gate.</div>
         <div class="pnode-model">Deep-verify · Stage 2 · Primary</div>
         <div class="pnode-tags"><span class="ptag">Primary Weight</span><span class="ptag">Prompt Caching</span><span class="ptag">Category Rules</span><span class="ptag">Weighted Consensus</span></div>
+      </div>
+    </div>
+
+    <div class="pnode" id="pn2">
+      <div class="pnode-icon"><div class="pnode-circle res">RES</div></div>
+      <div class="pnode-body">
+        <div class="pnode-head">
+          <div class="pnode-name" style="color:var(--cyan)">Resilience Layer</div>
+          <div class="pnode-thresh res">Emergency fallback — Oracle offline only</div>
+        </div>
+        <div class="pnode-desc">Activates automatically only when the Oracle stage is unreachable. Not part of the normal execution path. Provides category-aware context and domain base rates as a substitute. Ensures zero signal loss during outages — the pipeline never fully goes dark.</div>
+        <div class="pnode-model">Emergency fallback · Not in normal path</div>
+        <div class="pnode-tags"><span class="ptag">Auto-Activate</span><span class="ptag">Oracle Offline Only</span><span class="ptag">Zero Signal Loss</span><span class="ptag">Fail-Safe</span></div>
       </div>
     </div>
 
@@ -828,7 +828,7 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
           <div class="pnode-name" style="color:var(--green)">Risk Gate → CLOB Execution</div>
           <div class="pnode-thresh trade">8 rules · Kelly sizing</div>
         </div>
-        <div class="pnode-desc">Every passing signal passes 8 hard risk rules before any order reaches the CLOB. Fail-closed — a single violation drops the trade entirely. Kelly-based sizing scales per-market risk dynamically. No exceptions, no workarounds.</div>
+        <div class="pnode-desc">Every passing signal clears 8 hard risk rules before any order reaches the CLOB. Fail-closed — a single violation drops the trade entirely. Kelly-based sizing scales per-market risk dynamically. No exceptions, no workarounds.</div>
         <div class="pnode-model">Polymarket CLOB REST + WebSocket</div>
         <div class="pnode-tags"><span class="ptag">Kelly Criterion</span><span class="ptag">8 Risk Rules</span><span class="ptag">Fail-Closed</span><span class="ptag">&lt;50ms Order</span></div>
       </div>
@@ -934,7 +934,7 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
 <section id="live-terminal">
   <div class="section-label reveal">Signal Intelligence</div>
   <h2 class="section-h2 reveal">MANTIS <span class="hl">Online.</span></h2>
-  <p class="section-desc reveal">Running 24/7 on EU infrastructure. Every 60 seconds, active markets are screened. Positions held until signal degrades or target hits. No manual intervention required.</p>
+  <p class="section-desc reveal">Running 24/7 on EU infrastructure. Every 5 minutes, active markets are evaluated through the AI pipeline. Positions held until signal degrades or target hits. No manual intervention required.</p>
 
   <div class="tui-outer reveal">
     <!-- macOS-style title bar -->
