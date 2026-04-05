@@ -198,8 +198,8 @@ h2.section-h2 .hl{background:linear-gradient(135deg,var(--green),var(--cyan));-w
 #backtest{background:var(--bg)}
 .backtest-grid{display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:start}
 .win-rate-wrap{display:flex;flex-direction:column;align-items:center;gap:20px}
-.win-donut{position:relative;width:220px;height:220px}
-.win-donut svg{transform:rotate(-90deg)}
+.win-donut{position:relative;width:220px;height:220px;flex-shrink:0}
+.win-donut svg{display:block;transform:rotate(-90deg);width:100%!important;height:100%!important}
 .donut-track{fill:none;stroke:rgba(255,255,255,.06);stroke-width:16}
 .donut-fill{fill:none;stroke:url(#donutGrad);stroke-width:16;stroke-linecap:round;stroke-dasharray:566;stroke-dashoffset:566;transition:stroke-dashoffset 2s cubic-bezier(.4,0,.2,1)}
 .donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
@@ -221,8 +221,9 @@ h2.section-h2 .hl{background:linear-gradient(135deg,var(--green),var(--cyan));-w
 
 /* P&L Table */
 .pnl-table-wrap{margin-top:60px}
+.th-short{display:none}
 .pnl-table{width:100%;border-collapse:collapse}
-.pnl-table th{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;padding:12px 20px;text-align:left;border-bottom:1px solid var(--border)}
+.pnl-table th{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;padding:12px 20px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
 .pnl-table td{padding:16px 20px;border-bottom:1px solid var(--border);font-size:14px;color:var(--text2)}
 .pnl-table tr:hover td{background:rgba(255,255,255,.02)}
 .pnl-table td.month{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:13px}
@@ -387,7 +388,9 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
 @media(max-width:768px){
   .tui-statusbar{gap:12px}
   .win-donut{width:180px;height:180px}
-  .win-donut svg{width:180px!important;height:180px!important}
+  /* win-rate-wrap: row on ≥480, column on narrow */
+  .win-rate-wrap{flex-direction:row;align-items:flex-start;flex-wrap:wrap;justify-content:center;gap:24px}
+  .win-stats{max-width:260px}
 }
 @media(max-width:640px){
   .metrics-grid{grid-template-columns:1fr}
@@ -405,14 +408,24 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
   .tui-stats{grid-template-columns:repeat(3,1fr);gap:6px}
   .tui-stat-v{font-size:12px}
   .tui-bottombar{flex-direction:column;gap:4px;align-items:flex-start}
+  /* pnl-table: mobile-friendly headers + compact cells */
   .pnl-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-  .pnl-table{min-width:480px}
+  .th-long{display:none}
+  .th-short{display:inline}
+  .pnl-table{min-width:0;width:100%}
+  .pnl-table th{padding:10px 12px;font-size:10px;letter-spacing:.06em}
+  .pnl-table td{padding:12px 12px;font-size:13px}
   h2.section-h2{font-size:clamp(26px,7vw,40px)}
   .section-desc{font-size:15px;margin-bottom:40px}
   .win-donut{width:160px!important;height:160px!important}
-  .win-donut svg{width:160px!important;height:160px!important}
+  .donut-pct{font-size:28px}
+  .win-rate-wrap{flex-direction:column;align-items:center;gap:20px}
+  .win-stats{max-width:100%;width:100%}
   .hero-badge{font-size:10px;padding:6px 12px}
   .btn-primary,.btn-ghost{padding:12px 20px;font-size:13px}
+  .pnl-table-wrap{margin-top:40px}
+  .ws-item{padding:12px}
+  .ws-val{font-size:17px}
 }
 @media(max-width:400px){
   section{padding:48px 14px}
@@ -423,6 +436,11 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
   .tui-stat-b:last-child{grid-column:1/-1}
   .hero-metrics{gap:12px}
   .hm-val{font-size:22px}
+  .win-donut{width:140px!important;height:140px!important}
+  .donut-pct{font-size:24px}
+  .pnl-table th{padding:8px 8px;font-size:9px}
+  .pnl-table td{padding:10px 8px;font-size:12px}
+  .cat-bars{gap:14px}
 }
 
 /* ═══════════════════════════════════════════
@@ -848,7 +866,7 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
     <div>
       <div class="win-rate-wrap">
         <div class="win-donut">
-          <svg width="220" height="220" viewBox="0 0 220 220">
+          <svg width="220" height="220" viewBox="0 0 220 220" preserveAspectRatio="xMidYMid meet">
             <defs>
               <linearGradient id="donutGrad" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="#00ff88"/>
@@ -910,9 +928,9 @@ footer{border-top:1px solid var(--border);padding:40px 80px;display:flex;align-i
           <thead>
             <tr>
               <th>Month</th>
-              <th>Conservative (+10%/mo)</th>
-              <th>Target (+20%/mo)</th>
-              <th>Stretch (+30%/mo)</th>
+              <th><span class="th-long">Conservative (+10%/mo)</span><span class="th-short">Cons.</span></th>
+              <th><span class="th-long">Target (+20%/mo)</span><span class="th-short">Target</span></th>
+              <th><span class="th-long">Stretch (+30%/mo)</span><span class="th-short">Stretch</span></th>
             </tr>
           </thead>
           <tbody>
